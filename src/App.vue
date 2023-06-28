@@ -2,17 +2,20 @@
 import { useScoresStore } from "@/stores/scores";
 import Rounds from "@/components/Rounds.vue";
 import ScoreButtons from "@/components/ScoreButtons.vue";
+import GameTypeSelector from "@/components/GameTypeSelector.vue";
 
-const store = useScoresStore();
+const scores = useScoresStore();
+
 </script>
 
 <template>
   <main>
     <div class="wrapper">
       <h1>Fast!</h1>
-      <ScoreButtons @score="store.add" />
-      <button @click="store.clear()">Clear data</button>
-      <Rounds v-bind:rounds="store.rounds" />
+      <GameTypeSelector v-bind:gameType="scores.gameType" @changeGameType="scores.setGameType" />
+      <ScoreButtons @score="scores.add" />
+      <button @click="scores.clear()">Clear data</button>
+      <Rounds v-bind:rounds="scores.rounds" />
     </div>
   </main>
 </template>
