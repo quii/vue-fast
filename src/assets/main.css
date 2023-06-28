@@ -2,5 +2,12 @@
 
 table, tr, td, th {
     border: 1px solid black;
-    padding: 5px;
+    padding: 0.2em;
+}
+table {
+    width: 100%;
+}
+
+main {
+    max-width: 600px;
 }

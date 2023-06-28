@@ -11,7 +11,7 @@ export const useScoresStore = defineStore("scores",
     const runningTotal = computed(() => calculateTotal(state.value));
     const totalGolds = computed(() => calculateGoldCount(state.value));
     const totalHits = computed(() => calculateHitsCount(state.value));
-    const rounds = computed(() => calculateRounds(state.value));
+    const rounds = computed(() => calculateRounds(state.value, gameType.value));
 
     function add(value) {
       state.value.push(value);

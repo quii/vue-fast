@@ -10,19 +10,28 @@ const scores = useScoresStore();
 
 <template>
   <main>
-    <div class="wrapper">
-      <h1>Fast!</h1>
-      <GameTypeSelector v-bind:gameType="scores.gameType" @changeGameType="scores.setGameType" />
+    <div class="score-buttons">
       <ScoreButtons @score="scores.add" />
-      <button @click="scores.clear()">Clear data</button>
-      <Rounds v-bind:rounds="scores.rounds" />
     </div>
+    <div class="controls">
+      <GameTypeSelector v-bind:gameType="scores.gameType" @changeGameType="scores.setGameType" />
+      <button @click="scores.clear()">Clear data</button>
+    </div>
+    <Rounds v-bind:rounds="scores.rounds"
+            v-bind:runningTotal="scores.runningTotal"
+            v-bind:totalGolds="scores.totalGolds"
+            v-bind:totalHits="scores.totalHits"
+    />
   </main>
 </template>
 
 <style scoped>
-h1 {
-    color: tomato;
-    font-family: "Comic Sans MS";
+.controls {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.controls button {
+    flex: 1 1 0px;
 }
 </style>
