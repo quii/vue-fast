@@ -17,7 +17,7 @@ function parseAndRenderDate(date) {
     <thead>
       <tr>
         <th>Date</th>
-        <th>Running total</th>
+        <th>Score</th>
         <th>Distance (yards)</th>
         <th>Game type</th>
         <th></th>

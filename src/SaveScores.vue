@@ -20,7 +20,19 @@ function saveScores(event) {
     <label for="date">Date</label>
     <input type="date" id="date" name="date" v-model="date">
     <label for="distance1">Distance</label>
-    <input type="number" id="distance" name="distance" min="20" max="100" step="10" v-model="distance">
+    <input type="number" id="distance" name="distance" min="20" max="100" step="10" v-model="distance" list="distances">
     <button type="submit" @click="saveScores">Save scores</button>
   </form>
+
+  <datalist id="distances">
+    <option value="20" />
+    <option value="30" />
+    <option value="40" />
+    <option value="50" />
+    <option value="60" />
+    <option value="70" />
+    <option value="80" />
+    <option value="90" />
+    <option value="100" />
+  </datalist>
 </template>
