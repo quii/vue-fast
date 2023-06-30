@@ -1,7 +1,7 @@
 <script setup>
 import { validScores } from "@/domain/scores";
 
-defineEmits(["score"]);
+defineEmits(["score", "undo"]);
 </script>
 
 <template>
@@ -10,6 +10,7 @@ defineEmits(["score"]);
             :key="score"
             @click="$emit('score', score)">{{ score }}
     </button>
+    <button @click="$emit('undo')">↩️</button>
   </div>
 </template>
 
@@ -18,6 +19,9 @@ div {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    position: sticky;
+    top: 0;
+    align-self: flex-start
 }
 
 button {

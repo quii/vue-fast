@@ -25,5 +25,9 @@ export const useScoresStore = defineStore("scores",
       state.value = [];
     }
 
-    return { scores: state, gameType, setGameType, add, clear, runningTotal, totalGolds, totalHits, rounds };
+    function undo() {
+      state.value.pop();
+    }
+
+    return { scores: state, gameType, setGameType, add, clear, runningTotal, totalGolds, totalHits, rounds, undo };
   })

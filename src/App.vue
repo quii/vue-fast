@@ -9,20 +9,18 @@ const scores = useScoresStore();
 </script>
 
 <template>
-  <main>
-    <div class="score-buttons">
-      <ScoreButtons @score="scores.add" />
-    </div>
-    <div class="controls">
-      <GameTypeSelector v-bind:gameType="scores.gameType" @changeGameType="scores.setGameType" />
-      <button @click="scores.clear()">Clear data</button>
-    </div>
+
+  <ScoreButtons @score="scores.add"
+                @undo="scores.undo" />
     <Rounds v-bind:rounds="scores.rounds"
             v-bind:runningTotal="scores.runningTotal"
             v-bind:totalGolds="scores.totalGolds"
             v-bind:totalHits="scores.totalHits"
     />
-  </main>
+    <div class="controls">
+      <GameTypeSelector v-bind:gameType="scores.gameType" @changeGameType="scores.setGameType" />
+      <button @click="scores.clear()">Clear data</button>
+    </div>
 </template>
 
 <style scoped>
@@ -31,6 +29,7 @@ const scores = useScoresStore();
     display: flex;
     justify-content: space-between;
 }
+
 .controls button {
     flex: 1 1 0px;
 }

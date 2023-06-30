@@ -6,6 +6,7 @@ defineProps({
     required: true
   }
 });
+defineEmits(["changeGameType"]);
 </script>
 
 <template>

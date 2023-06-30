@@ -41,9 +41,15 @@ defineProps({
       <td>{{ round.subTotals.golds }}</td>
       <td>{{ round.subTotals.runningTotal }}</td>
     </tr>
+
     <tr class="round-subtotal">
-      <td colspan="18">I don't know what goes here</td>
+      <td colspan="14"></td>
+      <td>{{ rounds.firstDistanceSubtotals.hits }}</td>
+      <td>{{ rounds.firstDistanceSubtotals.totalScore }}</td>
+      <td>{{ rounds.firstDistanceSubtotals.golds }}</td>
+      <td>{{ rounds.firstDistanceSubtotals.totalScore }}</td>
     </tr>
+
     <tr v-for="round in rounds.secondDistance" :key="round.id">
       <End v-bind:scores="round.firstEnd" />
       <End v-bind:scores="round.secondEnd" />
@@ -52,6 +58,15 @@ defineProps({
       <td>{{ round.subTotals.golds }}</td>
       <td>{{ round.subTotals.runningTotal }}</td>
     </tr>
+
+    <tr class="round-subtotal">
+      <td colspan="14"></td>
+      <td>{{ rounds.secondDistanceSubtotals.hits }}</td>
+      <td>{{ rounds.secondDistanceSubtotals.totalScore }}</td>
+      <td>{{ rounds.secondDistanceSubtotals.golds }}</td>
+      <td>{{ rounds.secondDistanceSubtotals.totalScore }}</td>
+    </tr>
+
     <tr class="grand-totals">
       <td colspan="14"></td>
       <td>{{ totalHits }}</td>
@@ -64,19 +79,12 @@ defineProps({
 </template>
 
 <style scoped>
-table {
-    text-align: center;
-}
-
-.round-subtotal {
-    text-align: right;
-}
-
 .grand-totals, td:first-child {
     border: none;
 }
 
-.grand-totals {
+.grand-totals td, .round-subtotal td {
     font-weight: bold;
+    color: var(--color-heading);
 }
 </style>
