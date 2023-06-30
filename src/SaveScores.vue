@@ -15,14 +15,14 @@ function saveScores(event) {
 }
 </script>
 <template>
-  <form>
-<!--    date picker-->
-    <label for="date">Date</label>
-    <input type="date" id="date" name="date" v-model="date">
-    <label for="distance1">Distance</label>
+  <div>
+    <label for="date">Date <input type="date" id="date" name="date" v-model="date"> </label>
+
+    <label for="distance1">Distance
     <input type="number" id="distance" name="distance" min="20" max="100" step="10" v-model="distance" list="distances">
-    <button type="submit" @click="saveScores">Save scores</button>
-  </form>
+      </label>
+    <button type="submit" @click="saveScores">💾 Save score of {{scores.runningTotal}} ({{scores.gameType}})</button>
+  </div>
 
   <datalist id="distances">
     <option value="20" />
@@ -36,3 +36,28 @@ function saveScores(event) {
     <option value="100" />
   </datalist>
 </template>
+
+<style scoped>
+  div {
+    display: flex;
+    flex-direction: column;
+      /* vertical space between items */
+      gap: 1em;
+      padding: 1em;
+  }
+
+  input {
+      font-size: 1.5em;
+  }
+
+  label {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5em;
+  }
+
+  button {
+      font-size: 1.5em;
+      padding: 0.5em;
+  }
+</style>
