@@ -17,3 +17,32 @@ html {
     width: 100vw;
     touch-action: manipulation
 }
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+/* style nav a to look like buttons with visited styles */
+nav a {
+    display: inline-block;
+    padding: 0.5em 3em;
+    border: 1px solid #e5e5e5;
+    background-color: #fff;
+    color: #000;
+    text-decoration: none;
+    flex: 1 1 0px;
+    text-align: center;
+}
+
+nav a:visited {
+    color: #000;
+}
+
+.router-link-active {
+    background-color: #e5e5e5;
+}

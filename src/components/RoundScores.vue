@@ -1,5 +1,5 @@
 <script setup>
-import End from "@/components/End.vue";
+import EndScores from "@/components/EndScores.vue";
 
 defineProps({
   rounds: {
@@ -34,8 +34,8 @@ defineProps({
     </thead>
     <tbody>
     <tr v-for="round in rounds.firstDistance" :key="round.id">
-      <End v-bind:scores="round.firstEnd" />
-      <End v-bind:scores="round.secondEnd" />
+      <EndScores v-bind:scores="round.firstEnd" />
+      <EndScores v-bind:scores="round.secondEnd" />
       <td>{{ round.subTotals.hits }}</td>
       <td>{{ round.subTotals.score }}</td>
       <td>{{ round.subTotals.golds }}</td>
@@ -51,8 +51,8 @@ defineProps({
     </tr>
 
     <tr v-for="round in rounds.secondDistance" :key="round.id">
-      <End v-bind:scores="round.firstEnd" />
-      <End v-bind:scores="round.secondEnd" />
+      <EndScores v-bind:scores="round.firstEnd" />
+      <EndScores v-bind:scores="round.secondEnd" />
       <td>{{ round.subTotals.hits }}</td>
       <td>{{ round.subTotals.score }}</td>
       <td>{{ round.subTotals.golds }}</td>

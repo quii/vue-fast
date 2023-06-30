@@ -1,0 +1,44 @@
+<script setup>
+import { useHistoryStore } from "@/stores/history";
+const store = useHistoryStore()
+
+function parseAndRenderDate(date) {
+  return new Date(date).toLocaleDateString("en-GB", {
+    weekday: "short",
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+}
+</script>
+
+<template>
+  <table>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Running total</th>
+        <th>Distance (yards)</th>
+        <th>Game type</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="item in store.history" :key="item.date">
+        <td>{{ parseAndRenderDate(item.date) }}</td>
+        <td>{{ item.score }}</td>
+        <td>{{ item.distance }}</td>
+        <td>{{ item.gameType }}</td>
+        <td>
+          <button @click="store.remove(item.id)">❌</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</template>
+
+<style scoped>
+  td {
+      text-transform: capitalize;
+  }
+</style>

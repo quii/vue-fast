@@ -28,8 +28,4 @@ button {
     flex: 1 1 0px;
     font-size: 2em;
 }
-
-button {
-    flex: 1 1 0px;
-}
 </style>

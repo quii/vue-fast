@@ -1,6 +1,6 @@
 <script setup>
 import { useScoresStore } from "@/stores/scores";
-import Rounds from "@/components/Rounds.vue";
+import RoundScores from "@/components/RoundScores.vue";
 import ScoreButtons from "@/components/ScoreButtons.vue";
 import GameTypeSelector from "@/components/GameTypeSelector.vue";
 
@@ -9,10 +9,9 @@ const scores = useScoresStore();
 </script>
 
 <template>
-
   <ScoreButtons @score="scores.add"
                 @undo="scores.undo" />
-    <Rounds v-bind:rounds="scores.rounds"
+    <RoundScores v-bind:rounds="scores.rounds"
             v-bind:runningTotal="scores.runningTotal"
             v-bind:totalGolds="scores.totalGolds"
             v-bind:totalHits="scores.totalHits"
