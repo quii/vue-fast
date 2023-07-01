@@ -24,4 +24,8 @@ defineEmits(["changeGameType"]);
 .active {
   background-color: #f00;
 }
+button {
+    font-size: 1.5em;
+    text-transform: capitalize;
+}
 </style>

@@ -30,6 +30,8 @@ const scores = useScoresStore();
 }
 
 .controls button {
+    padding: 0.5em;
+    font-size: 1.5em;
     flex: 1 1 0px;
 }
 </style>

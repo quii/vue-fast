@@ -7,21 +7,41 @@ const history = useHistoryStore()
 const scores = useScoresStore();
 
 const distance = ref(40);
+const importData = ref("");
 const date = ref(new Date().toISOString().substr(0, 10));
 
 function saveScores(event) {
   event.preventDefault();
-  history.add(date.value, scores.runningTotal, distance.value, scores.gameType)
+  history.add(date.value, scores.runningTotal, distance.value, scores.gameType, scores.scores)
 }
+
+function copyHistory() {
+  navigator.clipboard.writeText(JSON.stringify(history.history))
+}
+
+function importHistory() {
+  history.importHistory(JSON.parse(importData.value))
+}
+
 </script>
 <template>
   <div>
+    <h1>Save scores</h1>
     <label for="date">Date <input type="date" id="date" name="date" v-model="date"> </label>
 
     <label for="distance1">Distance
     <input type="number" id="distance" name="distance" min="20" max="100" step="10" v-model="distance" list="distances">
       </label>
     <button type="submit" @click="saveScores">💾 Save score of {{scores.runningTotal}} ({{scores.gameType}})</button>
+  </div>
+  <div>
+    <h1>Export data</h1>
+    <button type="button" @click="copyHistory">📤 Copy history to clipboard</button>
+  </div>
+  <div>
+    <h1>Import data</h1>
+    <textarea v-model="importData" rows="10"></textarea>
+    <button type="button" @click="importHistory">📥 Import history</button>
   </div>
 
   <datalist id="distances">
