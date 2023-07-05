@@ -4,18 +4,21 @@ import { useRoute } from "vue-router";
 import { useHistoryStore } from "@/stores/history";
 
 const route = useRoute()
-
-const id = route.params.id
 const scores = useHistoryStore()
-scores.setShootToView(id)
 
+scores.setShootToView(route.params.id)
 
 </script>
 
 <template>
-  <RoundScores v-bind:rounds="scores.rounds"
-               v-bind:runningTotal="scores.runningTotal"
-               v-bind:totalGolds="scores.totalGolds"
-               v-bind:totalHits="scores.totalHits"
-  />
+  <h1>{{scores.selectedShoot.gameType}} - {{scores.selectedShoot.date}}</h1>
+  <RoundScores v-bind:scores="scores.selectedShoot.scores" />
+  <router-link to="/history">Back</router-link>
 </template>
+
+<style scoped>
+h1 {
+    text-transform: capitalize;
+    text-align: center;
+}
+</style>

@@ -1,20 +1,18 @@
 <script setup>
 import EndScores from "@/components/EndScores.vue";
+import { computed } from "vue";
+import { calculateGoldCount, calculateHitsCount, calculateRounds, calculateTotal } from "@/domain/scores";
 
-defineProps({
-  rounds: {
-    required: true
-  },
-  runningTotal: {
-    required: true
-  },
-  totalGolds: {
-    required: true
-  },
-  totalHits: {
-    required: true
+const props = defineProps({
+  scores: {
+    required: true,
   }
 });
+
+const runningTotal = computed(() => calculateTotal(props.scores));
+const totalGolds = computed(() => calculateGoldCount(props.scores));
+const totalHits = computed(() => calculateHitsCount(props.scores));
+const rounds = computed(() => calculateRounds(props.scores));
 
 </script>
 
@@ -69,9 +67,9 @@ defineProps({
 
     <tr class="grand-totals">
       <td colspan="14"></td>
-      <td>{{ totalHits }}</td>
-      <td>{{ runningTotal }}</td>
-      <td>{{ totalGolds }}</td>
+      <td data-test="totalHits">{{ totalHits }}</td>
+      <td data-test="totalScore">{{ runningTotal }}</td>
+      <td data-test="totalGolds">{{ totalGolds }}</td>
       <td>{{ runningTotal }}</td>
     </tr>
     </tbody>

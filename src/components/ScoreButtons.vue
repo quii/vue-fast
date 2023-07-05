@@ -1,5 +1,11 @@
 <script setup>
-import { validScores } from "@/domain/scores";
+
+defineProps({
+  validScores: {
+    type: Array,
+    required: true,
+  },
+});
 
 defineEmits(["score", "undo"]);
 </script>
@@ -8,6 +14,7 @@ defineEmits(["score", "undo"]);
   <div class="score-buttons">
     <button v-for="score in validScores"
             :key="score"
+            :data-test="`score-${score}`"
             @click="$emit('score', score)">{{ score }}
     </button>
     <button @click="$emit('undo')">↩️</button>

@@ -2,7 +2,6 @@ import { defineStore } from "pinia";
 import { useLocalStorage, useStorage } from "@vueuse/core";
 import { computed } from "vue";
 import { calculateGoldCount, calculateHitsCount, calculateRounds, calculateTotal } from "@/domain/scores";
-import { gameTypes } from "@/domain/game_types";
 
 export const useHistoryStore = defineStore("history",
   () => {
