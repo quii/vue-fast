@@ -17,6 +17,6 @@ https://winter-feather-5776.fly.dev
 
 - [Vue](https://vuejs.org/) - A progressive, incrementally-adoptable JavaScript framework for building UI on the web.
 
-Whilst I am a huge [HTMX](https://quii.com/htmx_is_the_future) fan, for this I wanted a static website, so that I wouldn't have to pay for a database, and I can keep the hosting cheap. I also wanted to try out Vue, so this was a good opportunity to do so. 
+Whilst I am a huge [HTMX](https://quii.dev/HTMX_is_the_Future) fan, for this I wanted a static website, so that I wouldn't have to pay for a database, and I can keep the hosting cheap. I also wanted to try out Vue, so this was a good opportunity to do so. 
 
 It's been a lot of fun, the event system and reactivity is simple and I find it more intuitive than React. If I were to start a project where I knew I'd need something very client-side heavy, which wouldn't be appropriate for HTMX, I'd definitely consider Vue.
