@@ -14,7 +14,7 @@ function parseAndRenderDate(date) {
 }
 
 function view(index) {
-  router.push({ path: `/history/${index}`});
+  router.push({ name: 'viewHistory', params: { id: index }})
 }
 </script>
 

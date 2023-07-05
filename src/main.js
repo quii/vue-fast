@@ -15,7 +15,7 @@ const routes = [
   { path: '/', component: ScoreCard },
   { path: '/history', component: ScoreHistory },
   { path: '/data', component: DataManagement },
-  { path: '/history/:id', component: ViewShoot },
+  { path: '/history/:id', name: 'viewHistory', component: ViewShoot },
 ]
 
 const router = VueRouter.createRouter({
