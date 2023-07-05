@@ -1,57 +1,20 @@
-# vue-project
+# fast
 
-This template should help get you started developing with Vue 3 in Vite.
+> [When shooting is taking place, it will be under the control of a Field Captain who will indicate when it is safe to shoot, but every archer can play a part in this. If you see anything that gives a cause for concern, then call out “FAST” and all shooting will cease, even if an archer is at full draw they must let down the bow and wait.](http://bowmenofardleigh.com/shooting/glossary-of-archery-terms/#:~:text=SAFETY,on%20the%20bow.)
 
-## Recommended IDE Setup
+**Fast**, is a webapp that allows an archer to record their scores as they go through their ends, rounds and shoots. Calculates running totals, hits e.t.c. on the fly.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+https://winter-feather-5776.fly.dev
 
-## Customize configuration
+- It's a [PWA](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps), so it can be installed on your phone and used offline
+- It keeps all state in local storage, you don't need to worry about navigating away and losing your data
+  - It has the capability to export and import the data, so you can move it between devices
+- Allows you to record a history of your shoots to track your progression
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## Tech choices
 
-## Project Setup
+- [Vue](https://vuejs.org/) - A progressive, incrementally-adoptable JavaScript framework for building UI on the web.
 
-```sh
-npm install
-```
+Whilst I am a huge [HTMX](https://quii.com/htmx_is_the_future) fan, for this I wanted a static website, so that I wouldn't have to pay for a database, and I can keep the hosting cheap. I also wanted to try out Vue, so this was a good opportunity to do so. 
 
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
-
-```sh
-npm run test:e2e:dev
-```
-
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
-
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
-
-```sh
-npm run build
-npm run test:e2e
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+It's been a lot of fun, the event system and reactivity is simple and I find it more intuitive than React. If I were to start a project where I knew I'd need something very client-side heavy, which wouldn't be appropriate for HTMX, I'd definitely consider Vue.
