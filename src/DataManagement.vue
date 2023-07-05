@@ -2,9 +2,11 @@
 import { ref } from "vue";
 import { useHistoryStore } from "@/stores/history";
 import { useScoresStore } from "@/stores/scores";
+import { useToast } from "vue-toastification";
 
 const history = useHistoryStore()
 const scores = useScoresStore();
+const toast = useToast();
 
 const distance = ref(40);
 const importData = ref("");
@@ -13,14 +15,17 @@ const date = ref(new Date().toISOString().substr(0, 10));
 function saveScores(event) {
   event.preventDefault();
   history.add(date.value, scores.runningTotal, distance.value, scores.gameType, scores.scores)
+  toast.success("Scores saved")
 }
 
 function copyHistory() {
   navigator.clipboard.writeText(JSON.stringify(history.history))
+  toast.success("History copied to clipboard")
 }
 
 function importHistory() {
   history.importHistory(JSON.parse(importData.value))
+  toast.success("History imported")
 }
 
 </script>
@@ -61,7 +66,6 @@ function importHistory() {
   div {
     display: flex;
     flex-direction: column;
-      /* vertical space between items */
       gap: 1em;
       padding: 1em;
   }

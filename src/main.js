@@ -6,6 +6,9 @@ import { createPinia } from 'pinia'
 import ScoreCard from './ScoreCard.vue'
 import ScoreHistory from './ScoreHistory.vue'
 import DataManagement from "@/DataManagement.vue";
+import Toast from "vue-toastification";
+
+import "vue-toastification/dist/index.css";
 
 const routes = [
   { path: '/', component: ScoreCard },
@@ -22,5 +25,6 @@ const app = createApp({})
 app.use(router)
 
 app.use(createPinia())
+app.use(Toast, {})
 
 app.mount('#app')

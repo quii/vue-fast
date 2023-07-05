@@ -33,13 +33,13 @@ defineProps({
     </tr>
     </thead>
     <tbody>
-    <tr v-for="round in rounds.firstDistance" :key="round.id">
+    <tr v-for="(round, index) in rounds.firstDistance" :key="round.id">
       <EndScores v-bind:scores="round.firstEnd" />
       <EndScores v-bind:scores="round.secondEnd" />
       <td>{{ round.subTotals.hits }}</td>
       <td>{{ round.subTotals.score }}</td>
       <td>{{ round.subTotals.golds }}</td>
-      <td>{{ round.subTotals.runningTotal }}</td>
+      <td :class="{twoFiveTwo: index===2 && round.subTotals.runningTotal>=252}">{{ round.subTotals.runningTotal }}</td>
     </tr>
 
     <tr class="round-subtotal">
@@ -86,5 +86,11 @@ defineProps({
 .grand-totals td, .round-subtotal td {
     font-weight: bold;
     color: var(--color-heading);
+}
+
+.twoFiveTwo {
+    color: gold;
+    background: #2c3e50;
+    font-weight: bold;
 }
 </style>
