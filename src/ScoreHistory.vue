@@ -1,6 +1,8 @@
 <script setup>
 import { useHistoryStore } from "@/stores/history";
+import { useRouter } from "vue-router";
 const store = useHistoryStore()
+const router = useRouter()
 
 function parseAndRenderDate(date) {
   return new Date(date).toLocaleDateString("en-GB", {
@@ -9,6 +11,10 @@ function parseAndRenderDate(date) {
     month: "short",
     year: "numeric",
   });
+}
+
+function view(index) {
+  router.push({ path: `/history/${index}`});
 }
 </script>
 
@@ -24,7 +30,7 @@ function parseAndRenderDate(date) {
       </tr>
     </thead>
     <tbody>
-      <tr v-for="item in store.history" :key="item.date">
+      <tr @click="view(index)" v-for="(item, index) in store.history" :key="item.date">
         <td>{{ parseAndRenderDate(item.date) }}</td>
         <td>{{ item.score }}</td>
         <td>{{ item.distance }}</td>

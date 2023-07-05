@@ -18,7 +18,7 @@ export const useScoresStore = defineStore("scores",
     }
 
     function setGameType(value) {
-      gameType.value = value
+      gameType.value = value;
     }
 
     function clear() {
@@ -29,5 +29,16 @@ export const useScoresStore = defineStore("scores",
       state.value.pop();
     }
 
-    return { scores: state, gameType, setGameType, add, clear, runningTotal, totalGolds, totalHits, rounds, undo };
+    return {
+      scores: state,
+      gameType,
+      setGameType,
+      add,
+      clear,
+      runningTotal,
+      totalGolds,
+      totalHits,
+      rounds,
+      undo,
+    };
   })

@@ -9,11 +9,13 @@ import DataManagement from "@/DataManagement.vue";
 import Toast from "vue-toastification";
 
 import "vue-toastification/dist/index.css";
+import ViewShoot from "@/ViewShoot.vue";
 
 const routes = [
   { path: '/', component: ScoreCard },
   { path: '/history', component: ScoreHistory },
   { path: '/data', component: DataManagement },
+  { path: '/history/:id', component: ViewShoot },
 ]
 
 const router = VueRouter.createRouter({
