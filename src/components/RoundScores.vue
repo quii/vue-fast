@@ -77,6 +77,9 @@ const rounds = computed(() => calculateRounds(props.scores));
 </template>
 
 <style scoped>
+table {
+  table-layout: fixed;
+}
 .grand-totals, td:first-child {
     border: none;
 }

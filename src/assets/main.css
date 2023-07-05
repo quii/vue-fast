@@ -46,3 +46,26 @@ nav a:visited {
 .router-link-active {
     background-color: #e5e5e5;
 }
+
+.score9 {
+    background-color: yellow;
+}
+
+.score7 {
+    background-color: red;
+    color: white;
+}
+
+.score5 {
+    background-color: blue;
+    color: white;
+}
+
+.score3 {
+    background-color: black;
+    color: white;
+}
+
+.score1 {
+    background-color: white;
+}

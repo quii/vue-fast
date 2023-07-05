@@ -11,12 +11,16 @@ defineProps({
 </script>
 
 <template>
-    <td v-for="i in scoresPerEnd" :key="i">{{scores[i-1]}}</td>
+    <td :class="'score'+scores[i-1]" class="score" v-for="i in scoresPerEnd" :key="i">{{scores[i-1]}}</td>
     <td class="et">{{calculateTotal(scores)}}</td>
 </template>
 
 <style scoped>
 .et {
     font-weight: bold;
+}
+
+.score{
+  font-weight: bold;
 }
 </style>

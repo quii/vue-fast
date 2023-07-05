@@ -14,6 +14,7 @@ defineEmits(["score", "undo"]);
   <div class="score-buttons">
     <button v-for="score in validScores"
             :key="score"
+            :class="'score'+score"
             :data-test="`score-${score}`"
             @click="$emit('score', score)">{{ score }}
     </button>
