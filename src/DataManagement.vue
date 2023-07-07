@@ -17,6 +17,7 @@ const importData = ref("");
 const date = ref(new Date().toISOString().substr(0, 10));
 
 const runningTotal = computed(() => calculateTotal(scores.scores));
+const maxDate = new Date().toLocaleDateString('fr-ca')
 
 function saveScores(event) {
   event.preventDefault();
@@ -38,7 +39,7 @@ function importHistory() {
 <template>
   <div>
     <h1>Save scores</h1>
-    <label for="date">Date <input type="date" id="date" name="date" v-model="date"> </label>
+    <label for="date">Date <input type="date" id="date" name="date" v-model="date" :max="maxDate"> </label>
 
     <label for="distance1">Distance
     <input type="number" id="distance" name="distance" min="20" max="100" step="10" v-model="distance" list="distances">

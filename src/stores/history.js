@@ -5,7 +5,6 @@ import { ref } from "vue";
 export const useHistoryStore = defineStore("history",
   () => {
     const state = useLocalStorage("history", []);
-
     const selectedShoot = ref(state.value[0]);
 
     function add(date, score, distance, gameType, scores) {
