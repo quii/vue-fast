@@ -1,6 +1,7 @@
 <script setup>
 import { useHistoryStore } from "@/stores/history";
 import { useRouter } from "vue-router";
+import {computed} from "vue";
 const store = useHistoryStore()
 const router = useRouter()
 
@@ -16,6 +17,12 @@ function parseAndRenderDate(date) {
 function view(index) {
   router.push({ name: 'viewHistory', params: { id: index }})
 }
+
+const sortedHistory = computed(() => {
+  const sortingFunction = (a, b) => new Date(b.date) - new Date(a.date)
+
+  return [...store.history].sort(sortingFunction)
+})
 </script>
 
 <template>
@@ -30,7 +37,7 @@ function view(index) {
       </tr>
     </thead>
     <tbody>
-      <tr @click="view(index)" v-for="(item, index) in store.history" :key="item.date">
+      <tr @click="view(index)" v-for="(item, index) in sortedHistory" :key="item.date">
         <td>{{ parseAndRenderDate(item.date) }}</td>
         <td>{{ item.score }}</td>
         <td>{{ item.distance }}</td>
