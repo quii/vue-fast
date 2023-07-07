@@ -2,6 +2,7 @@
 import EndScores from "@/components/EndScores.vue";
 import { computed } from "vue";
 import { calculateGoldCount, calculateHitsCount, calculateRounds, calculateTotal } from "@/domain/scores";
+import { useGameTypeStore } from "@/stores/game_type";
 
 const props = defineProps({
   scores: {
@@ -9,10 +10,12 @@ const props = defineProps({
   }
 });
 
+const gameTypeStore = useGameTypeStore();
+
 const runningTotal = computed(() => calculateTotal(props.scores));
 const totalGolds = computed(() => calculateGoldCount(props.scores));
 const totalHits = computed(() => calculateHitsCount(props.scores));
-const rounds = computed(() => calculateRounds(props.scores));
+const rounds = computed(() => calculateRounds(props.scores, gameTypeStore.type));
 
 </script>
 
