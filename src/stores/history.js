@@ -1,7 +1,6 @@
 import { defineStore } from "pinia";
-import { useLocalStorage, useStorage } from "@vueuse/core";
-import { computed, ref } from "vue";
-import { calculateGoldCount, calculateHitsCount, calculateRounds, calculateTotal } from "@/domain/scores";
+import { useLocalStorage } from "@vueuse/core";
+import { ref } from "vue";
 
 export const useHistoryStore = defineStore("history",
   () => {
@@ -32,22 +31,12 @@ export const useHistoryStore = defineStore("history",
       return selectedShoot.value = state.value[index];
     }
 
-    const runningTotal = computed(() => calculateTotal(selectedShoot.value.scores));
-    const totalGolds = computed(() => calculateGoldCount(selectedShoot.value.scores));
-    const totalHits = computed(() => calculateHitsCount(selectedShoot.value.scores));
-    const rounds = computed(() => calculateRounds(selectedShoot.value.scores, selectedShoot.value.gameType));
-
-
     return {
       history: state,
       add,
       remove,
       importHistory,
       setShootToView,
-      runningTotal,
-      totalGolds,
-      totalHits,
-      rounds,
       selectedShoot,
     };
   })
