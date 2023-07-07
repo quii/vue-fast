@@ -13,7 +13,6 @@ scores.setShootToView(route.params.id)
 <template>
   <h1>{{scores.selectedShoot.gameType}} - {{scores.selectedShoot.date}}</h1>
   <RoundScores v-bind:scores="scores.selectedShoot.scores" />
-  <router-link to="/history">Back</router-link>
 </template>
 
 <style scoped>

@@ -1,13 +1,13 @@
 import { defineStore } from "pinia";
 import { useLocalStorage, useStorage } from "@vueuse/core";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { calculateGoldCount, calculateHitsCount, calculateRounds, calculateTotal } from "@/domain/scores";
 
 export const useHistoryStore = defineStore("history",
   () => {
     const state = useLocalStorage("history", []);
 
-    const selectedShoot = useStorage("selectedShoot", state.value[0]);
+    const selectedShoot = ref(state.value[0]);
 
     function add(date, score, distance, gameType, scores) {
       state.value.push({

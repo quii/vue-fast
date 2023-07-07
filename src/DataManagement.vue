@@ -1,20 +1,26 @@
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useHistoryStore } from "@/stores/history";
 import { useScoresStore } from "@/stores/scores";
 import { useToast } from "vue-toastification";
+import { useGameTypeStore } from "@/stores/game_type";
+import { calculateTotal } from "@/domain/scores";
 
 const history = useHistoryStore()
 const scores = useScoresStore();
+const gameTypeStore = useGameTypeStore()
+
 const toast = useToast();
 
 const distance = ref(40);
 const importData = ref("");
 const date = ref(new Date().toISOString().substr(0, 10));
 
+const runningTotal = computed(() => calculateTotal(scores.scores));
+
 function saveScores(event) {
   event.preventDefault();
-  history.add(date.value, scores.runningTotal, distance.value, scores.gameType, scores.scores)
+  history.add(date.value, runningTotal, distance.value, gameTypeStore.type, scores.scores)
   toast.success("Scores saved")
 }
 
@@ -37,7 +43,7 @@ function importHistory() {
     <label for="distance1">Distance
     <input type="number" id="distance" name="distance" min="20" max="100" step="10" v-model="distance" list="distances">
       </label>
-    <button type="submit" @click="saveScores">💾 Save score of {{scores.runningTotal}} ({{scores.gameType}})</button>
+    <button type="submit" @click="saveScores">💾 Save score {{runningTotal}}</button>
   </div>
   <div>
     <h1>Export data</h1>
