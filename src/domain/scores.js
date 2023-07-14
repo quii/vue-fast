@@ -1,4 +1,5 @@
 import { gameTypeConfig } from "@/domain/game_types";
+import splitIntoChunksofSizes from "@/domain/splitter";
 
 const GOLD = 9;
 export const MISS = "M";
@@ -7,82 +8,80 @@ export const scoresPerEnd = 6;
 export const endsPerRound = 2;
 
 export function calculateTotal(scores) {
-    return getHits(scores).reduce((totalScore, score) => totalScore + score, 0)
+  return getHits(scores).reduce((totalScore, score) => totalScore + score, 0);
 
 }
+
 export function calculateHitsCount(scores) {
-    return getHits(scores).length
+  return getHits(scores).length;
 }
+
 export function calculateGoldCount(scores) {
-    return scores.reduce((total, score) => {
-        if (score === GOLD) {
-            return total + 1;
-        }
-        return total;
-    }, 0);
+  return scores.reduce((total, score) => {
+    if (score === GOLD) {
+      return total + 1;
+    }
+    return total;
+  }, 0);
 }
 
 function splitIntoChunks(array, chunkSize) {
-    return array.reduce((resultArray, item, index) => {
-        const chunkIndex = Math.floor(index / chunkSize);
+  return array.reduce((resultArray, item, index) => {
+    const chunkIndex = Math.floor(index / chunkSize);
 
-        if (!resultArray[chunkIndex]) {
-            resultArray[chunkIndex] = []; // start a new chunk
-        }
+    if (!resultArray[chunkIndex]) {
+      resultArray[chunkIndex] = []; // start a new chunk
+    }
 
-        resultArray[chunkIndex].push(item);
+    resultArray[chunkIndex].push(item);
 
-        return resultArray;
-    }, []);
+    return resultArray;
+  }, []);
 }
 
-export function calculateRounds(scores, gameType = 'national') {
-    const ends = splitIntoChunks(scores, scoresPerEnd);
-    const roundScores = splitIntoChunks(ends, endsPerRound);
-    const {firstDistance} = gameTypeConfig[gameType]
+export function calculateRounds(scores, gameType = "national") {
+  const ends = splitIntoChunks(scores, scoresPerEnd);
+  const roundScores = splitIntoChunks(ends, endsPerRound);
+  const { distancesRoundSizes } = gameTypeConfig[gameType];
 
-    // roundScores is an array of "roundScores" (which are just arrays)
-    // therefore we need to return an array of objects instead
-    let rt = 0;
+  // roundScores is an array of "roundScores" (which are just arrays)
+  // therefore we need to return an array of objects instead
+  let rt = 0;
 
-    const rounds =  roundScores.map((e) => {
-        // figure out subtotals
-        const flatted = e.flat();
-        let roundScore = calculateTotal(flatted);
-        const subTotals = {
-            hits: calculateHitsCount(flatted),
-            golds: calculateGoldCount(flatted),
-            score: roundScore,
-            runningTotal: rt + roundScore,
-        };
-        rt = subTotals.runningTotal;
+  const rounds = roundScores.map((e) => {
+    // figure out subtotals
+    const flatted = e.flat();
+    let roundScore = calculateTotal(flatted);
+    const subTotals = {
+      hits: calculateHitsCount(flatted),
+      golds: calculateGoldCount(flatted),
+      score: roundScore,
+      runningTotal: rt + roundScore
+    };
+    rt = subTotals.runningTotal;
 
-        return {firstEnd: e[0] ?? [], secondEnd: e[1] ?? [], subTotals};
-    });
+    return { firstEnd: e[0] ?? [], secondEnd: e[1] ?? [], subTotals };
+  });
 
-    const roundBreakdown = splitIntoChunks(rounds, firstDistance);
+  const roundBreakdown = splitIntoChunksofSizes(rounds, distancesRoundSizes);
 
-    const distanceScores = splitIntoChunks(scores, firstDistance*endsPerRound*scoresPerEnd)
-    const firstDistanceScores = distanceScores[0] ?? []
-    const secondDistanceScores = distanceScores[1] ?? []
+  const distanceScores = splitIntoChunksofSizes(scores, distancesRoundSizes.map((e) => e * endsPerRound * scoresPerEnd));
 
+  return [...Array(distancesRoundSizes.length).keys()].map(i => {
+    const round = roundBreakdown[i];
+    const distanceScore = distanceScores[i] ?? [];
     return {
-        firstDistance: roundBreakdown[0] ?? [],
-        firstDistanceSubtotals: {
-            hits: calculateHitsCount(firstDistanceScores),
-            totalScore: calculateTotal(firstDistanceScores),
-            golds: calculateGoldCount(firstDistanceScores),
-        },
-        secondDistance : roundBreakdown[1] ?? [],
-        secondDistanceSubtotals: {
-            hits: calculateHitsCount(secondDistanceScores),
-            totalScore: calculateTotal(secondDistanceScores),
-            golds: calculateGoldCount(secondDistanceScores),
-        }
+      roundBreakdown: round ?? [],
+      subTotals: {
+        hits: calculateHitsCount(distanceScore),
+        totalScore: calculateTotal(distanceScore),
+        golds: calculateGoldCount(distanceScore)
+      }
     }
+  })
 }
 
 function getHits(scores) {
-    return scores.filter((score) => score !== MISS);
+  return scores.filter((score) => score !== MISS);
 }
 

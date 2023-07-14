@@ -1,15 +1,15 @@
-export const gameTypes = ['national', 'warwick', 'western']
+export const gameTypes = ['national', 'warwick', 'western', 'windsor']
 export const gameTypeConfig = {
     national: {
-      firstDistance: 4,
-      secondDistance: 2
+      distancesRoundSizes : [4, 2],
     },
     warwick: {
-      firstDistance: 2,
-      secondDistance: 2
+      distancesRoundSizes: [2, 2],
     },
     western: {
-      firstDistance: 4,
-      secondDistance: 4
+      distancesRoundSizes: [4, 4],
+    },
+    windsor: {
+      distancesRoundSizes: [3, 3, 3],
     }
 }

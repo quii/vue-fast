@@ -1,8 +1,8 @@
 <script setup>
-import EndScores from "@/components/EndScores.vue";
 import { computed } from "vue";
 import { calculateGoldCount, calculateHitsCount, calculateRounds, calculateTotal } from "@/domain/scores";
 import { useGameTypeStore } from "@/stores/game_type";
+import RoundTable from "@/components/RoundTable.vue";
 
 const props = defineProps({
   scores: {
@@ -16,7 +16,6 @@ const runningTotal = computed(() => calculateTotal(props.scores));
 const totalGolds = computed(() => calculateGoldCount(props.scores));
 const totalHits = computed(() => calculateHitsCount(props.scores));
 const rounds = computed(() => calculateRounds(props.scores, gameTypeStore.type));
-
 </script>
 
 <template>
@@ -34,40 +33,7 @@ const rounds = computed(() => calculateRounds(props.scores, gameTypeStore.type))
     </tr>
     </thead>
     <tbody>
-    <tr v-for="(round, index) in rounds.firstDistance" :key="round.id">
-      <EndScores v-bind:scores="round.firstEnd" />
-      <EndScores v-bind:scores="round.secondEnd" />
-      <td>{{ round.subTotals.hits }}</td>
-      <td>{{ round.subTotals.score }}</td>
-      <td>{{ round.subTotals.golds }}</td>
-      <td :class="{twoFiveTwo: index===2 && round.subTotals.runningTotal>=252}">{{ round.subTotals.runningTotal }}</td>
-    </tr>
-
-    <tr class="round-subtotal">
-      <td colspan="14"></td>
-      <td>{{ rounds.firstDistanceSubtotals.hits }}</td>
-      <td>{{ rounds.firstDistanceSubtotals.totalScore }}</td>
-      <td>{{ rounds.firstDistanceSubtotals.golds }}</td>
-      <td>{{ rounds.firstDistanceSubtotals.totalScore }}</td>
-    </tr>
-
-    <tr v-for="round in rounds.secondDistance" :key="round.id">
-      <EndScores v-bind:scores="round.firstEnd" />
-      <EndScores v-bind:scores="round.secondEnd" />
-      <td>{{ round.subTotals.hits }}</td>
-      <td>{{ round.subTotals.score }}</td>
-      <td>{{ round.subTotals.golds }}</td>
-      <td>{{ round.subTotals.runningTotal }}</td>
-    </tr>
-
-    <tr class="round-subtotal">
-      <td colspan="14"></td>
-      <td>{{ rounds.secondDistanceSubtotals.hits }}</td>
-      <td>{{ rounds.secondDistanceSubtotals.totalScore }}</td>
-      <td>{{ rounds.secondDistanceSubtotals.golds }}</td>
-      <td>{{ rounds.secondDistanceSubtotals.totalScore }}</td>
-    </tr>
-
+    <RoundTable v-for="(round, index) in rounds" :key="index" :subtotals="round.subTotals" :rounds="round.roundBreakdown" />
     <tr class="grand-totals">
       <td colspan="14"></td>
       <td data-test="totalHits">{{ totalHits }}</td>
@@ -90,11 +56,5 @@ table {
 .grand-totals td, .round-subtotal td {
     font-weight: bold;
     color: var(--color-heading);
-}
-
-.twoFiveTwo {
-    color: gold;
-    background: #2c3e50;
-    font-weight: bold;
 }
 </style>
