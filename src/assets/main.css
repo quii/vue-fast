@@ -48,16 +48,17 @@ nav a:visited {
 }
 
 .score9 {
-    background-color: yellow;
+    background-color: #FEFC2A;
+    color: black;
 }
 
 .score7 {
-    background-color: red;
+    background-color: #FC2E2A;
     color: white;
 }
 
 .score5 {
-    background-color: blue;
+    background-color: #2790F9;
     color: white;
 }
 
@@ -68,4 +69,5 @@ nav a:visited {
 
 .score1 {
     background-color: white;
+    color: black;
 }
