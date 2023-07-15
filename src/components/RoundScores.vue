@@ -1,11 +1,8 @@
 <script setup>
 import { computed } from 'vue'
 import {
-  calculateGoldCount,
-  calculateHitsCount,
-  calculateRounds,
-  calculateTotal
-} from '@/domain/scores'
+  calculateRounds, calculateSubtotals
+} from "@/domain/scores";
 import RoundTable from '@/components/RoundTable.vue'
 
 const props = defineProps({
@@ -17,9 +14,7 @@ const props = defineProps({
   }
 })
 
-const runningTotal = computed(() => calculateTotal(props.scores))
-const totalGolds = computed(() => calculateGoldCount(props.scores))
-const totalHits = computed(() => calculateHitsCount(props.scores))
+const totals = computed(() => calculateSubtotals(props.scores))
 const rounds = computed(() => calculateRounds(props.scores, props.gameType))
 </script>
 
@@ -46,10 +41,10 @@ const rounds = computed(() => calculateRounds(props.scores, props.gameType))
       />
       <tr class="grand-totals">
         <td colspan="14"></td>
-        <td data-test="totalHits">{{ totalHits }}</td>
-        <td data-test="totalScore">{{ runningTotal }}</td>
-        <td data-test="totalGolds">{{ totalGolds }}</td>
-        <td>{{ runningTotal }}</td>
+        <td data-test="totalHits">{{ totals.hits }}</td>
+        <td data-test="totalScore">{{ totals.totalScore }}</td>
+        <td data-test="totalGolds">{{ totals.golds }}</td>
+        <td>{{ totals.totalScore }}</td>
       </tr>
     </tbody>
   </table>

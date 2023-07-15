@@ -39,6 +39,14 @@ export function calculateRounds(scores, gameType = 'national') {
   })
 }
 
+export function calculateSubtotals(scores) {
+  return {
+    hits: calculateHitsCount(scores),
+    totalScore: calculateTotal(scores),
+    golds: calculateGoldCount(scores)
+  };
+}
+
 function getHits(scores) {
   return scores.filter((score) => score !== MISS)
 }
@@ -56,14 +64,6 @@ function calculateRoundSummaries(scores) {
 
     return { firstEnd: e[0] ?? [], secondEnd: e[1] ?? [], subTotals, scores };
   });
-}
-
-function calculateSubtotals(scores) {
-  return {
-    hits: calculateHitsCount(scores),
-    totalScore: calculateTotal(scores),
-    golds: calculateGoldCount(scores)
-  };
 }
 
 function flattenScoresInRounds(rounds) {
