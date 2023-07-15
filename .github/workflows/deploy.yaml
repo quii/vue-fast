@@ -1,7 +1,7 @@
 name: Node.js CI
 
 on:
-  pull_request:
+  push:
     branches: [ main ]
 
 jobs:
@@ -17,4 +17,13 @@ jobs:
       - run: npm ci
       - run: npm run build --if-present
       - run: npm test
+
+      - name: Deploy to Fly
+        uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+      - name: Check live works
+        run: npm run test:e2e:live
 
