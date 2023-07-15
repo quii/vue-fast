@@ -1,9 +1,8 @@
 <script setup>
-import { computed } from 'vue'
-import {
-  calculateRounds, calculateSubtotals
-} from "@/domain/scores";
-import RoundTable from '@/components/RoundTable.vue'
+import { computed } from "vue";
+import RoundTable from "@/components/RoundTable.vue";
+import { calculateSubtotals } from "@/domain/subtotals";
+import { calculateRounds } from "@/domain/rounds";
 
 const props = defineProps({
   scores: {
@@ -12,7 +11,7 @@ const props = defineProps({
   gameType: {
     required: true
   }
-})
+});
 
 const totals = computed(() => calculateSubtotals(props.scores))
 const rounds = computed(() => calculateRounds(props.scores, props.gameType))

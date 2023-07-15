@@ -1,20 +1,21 @@
 <script setup>
-import { computed, ref } from 'vue'
-import { useHistoryStore } from '@/stores/history'
-import { useScoresStore } from '@/stores/scores'
-import { useToast } from 'vue-toastification'
-import { useGameTypeStore } from '@/stores/game_type'
-import { calculateTotal } from '@/domain/scores'
+import { computed, ref } from "vue";
+import { useHistoryStore } from "@/stores/history";
+import { useScoresStore } from "@/stores/scores";
+import { useToast } from "vue-toastification";
+import { useGameTypeStore } from "@/stores/game_type";
 
-const history = useHistoryStore()
-const scores = useScoresStore()
-const gameTypeStore = useGameTypeStore()
+import { calculateTotal } from "@/domain/subtotals";
 
-const toast = useToast()
+const history = useHistoryStore();
+const scores = useScoresStore();
+const gameTypeStore = useGameTypeStore();
 
-const distance = ref(40)
-const importData = ref('')
-const date = ref(new Date().toISOString().substr(0, 10))
+const toast = useToast();
+
+const distance = ref(40);
+const importData = ref("");
+const date = ref(new Date().toISOString().substr(0, 10));
 
 const runningTotal = computed(() => calculateTotal(scores.scores))
 const maxDate = new Date().toLocaleDateString('fr-ca')

@@ -1,12 +1,13 @@
 <script setup>
-import { calculateTotal, scoresPerEnd } from "@/domain/scores"
+import { scoresPerEnd } from "@/domain/scores";
+import { calculateTotal } from "@/domain/subtotals";
 
 defineProps({
   scores: {
     type: Array,
     required: true
   }
-})
+});
 </script>
 
 <template>

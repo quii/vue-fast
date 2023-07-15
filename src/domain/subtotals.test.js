@@ -1,19 +1,18 @@
 import {
-  calculateRounds, calculateSubtotals,
   validScores
 } from "./scores";
-import { test, expect, describe } from 'vitest'
-import { justStartedANational, ruthsGame } from "@/domain/test_data";
+import { test, expect } from "vitest";
+import { calculateSubtotals } from "@/domain/subtotals";
 
 // note to ruth: https://vitest.dev/
-test('it knows the valid scores of imperial archery', () => {
-  expect(validScores).toEqual([9, 7, 5, 3, 1, 'M'])
-})
+test("it knows the valid scores of imperial archery", () => {
+  expect(validScores).toEqual([9, 7, 5, 3, 1, "M"]);
+});
 
 test.each([
   [[], 0],
   [[1, 3], 4],
-  [[1, 3, 5, 7, 9, 'M'], 25],
+  [[1, 3, 5, 7, 9, "M"], 25],
   [[1, 3, 5, 7, 9, 1], 26],
   [[1, 3, 5, 7, 9, 3], 28],
   [[1, 3, 5, 7, 9, 5], 30],
@@ -46,23 +45,4 @@ test.each([
   [[1, 3, 5, 'M', 1, 7], 0]
 ])('it can calculate golds', (scores, expectedGoldsCount) => {
   expect(calculateSubtotals(scores).golds).toEqual(expectedGoldsCount)
-})
-
-describe('calculateRounds', () => {
-  test('snapshot test of ruths first competition', () => {
-    const gameType = 'windsor'
-    const result = calculateRounds(ruthsGame, gameType)
-
-    expect(JSON.stringify(result, null, 2)).toMatchFileSnapshot(
-      './__snapshots__/ruths_first_competition.json'
-    )
-  })
-  test('snapshot of a national round that has had 3 ends', () => {
-    const gameType = 'national'
-    const result = calculateRounds(justStartedANational, gameType)
-
-    expect(JSON.stringify(result, null, 2)).toMatchFileSnapshot(
-      './__snapshots__/just_started_a_national.json'
-    )
-  })
 })
