@@ -2,14 +2,14 @@ import { GOLD, MISS } from "@/domain/scores";
 
 export function calculateSubtotals(scores) {
   return {
-    hits: calculateHitsCount(scores),
+    hits: scores.filter((score) => score !== MISS).length,
     totalScore: calculateTotal(scores),
     golds: calculateGoldCount(scores)
   };
 }
 
 export function calculateTotal(scores) {
-  return getHits(scores).reduce((totalScore, score) => totalScore + score, 0);
+  return scores.filter((score) => score !== MISS).reduce((totalScore, score) => totalScore + score, 0);
 }
 
 function calculateGoldCount(scores) {
@@ -21,10 +21,3 @@ function calculateGoldCount(scores) {
   }, 0);
 }
 
-function calculateHitsCount(scores) {
-  return getHits(scores).length;
-}
-
-function getHits(scores) {
-  return scores.filter((score) => score !== MISS);
-}
