@@ -30,22 +30,20 @@ export function calculateRounds(scores, gameType = 'national') {
 
   const roundsPerDistance = splitIntoChunksofSizes(rounds, distancesRoundSizes)
 
-  return [...Array(distancesRoundSizes.length).keys()].map((i) => {
-    const round = roundsPerDistance[i]
-
-    const distanceScores = round.reduce((scores, round) => {
+  return roundsPerDistance.map(rounds => {
+    const scoresForDistance = rounds.reduce((scores, round) => {
       scores.push(...round.scores)
       return scores
     }, [])
 
-    round.forEach((e) => delete e.scores)
+    rounds.forEach((e) => delete e.scores)
 
     return {
-      roundBreakdown: round ?? [],
+      roundBreakdown: rounds ?? [],
       subTotals: {
-        hits: calculateHitsCount(distanceScores),
-        totalScore: calculateTotal(distanceScores),
-        golds: calculateGoldCount(distanceScores)
+        hits: calculateHitsCount(scoresForDistance),
+        totalScore: calculateTotal(scoresForDistance),
+        golds: calculateGoldCount(scoresForDistance)
       }
     }
   })
