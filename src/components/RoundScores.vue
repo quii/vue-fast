@@ -27,9 +27,9 @@ const rounds = computed(() => calculateRounds(props.scores, props.gameType))
   <table>
     <thead>
       <tr>
-        <th className="spanningColumn" colSpan="6">🎯 scores</th>
+        <th colSpan="6">🎯 scores</th>
         <th>E/T</th>
-        <th className="spanningColumn" colSpan="6">🎯 scores</th>
+        <th colSpan="6">🎯 scores</th>
         <th>E/T</th>
         <th>H</th>
         <th>S</th>

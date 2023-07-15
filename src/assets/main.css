@@ -36,7 +36,7 @@ nav a {
   background-color: #fff;
   color: #000;
   text-decoration: none;
-  flex: 1 1 0px;
+  flex: 1 1 0;
   text-align: center;
 }
 

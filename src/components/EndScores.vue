@@ -1,5 +1,5 @@
 <script setup>
-import { calculateTotal, scoresPerEnd } from '../domain/scores'
+import { calculateTotal, scoresPerEnd } from "@/domain/scores"
 
 defineProps({
   scores: {

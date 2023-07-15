@@ -35,7 +35,7 @@ div {
 }
 
 button {
-  flex: 1 1 0px;
+  flex: 1 1 0;
   font-size: 2em;
 }
 </style>
