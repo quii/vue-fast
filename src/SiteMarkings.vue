@@ -37,7 +37,7 @@ function addMarking(event) {
     <div>
       <label>Distance <input type="number" id="distance" name="distance" min="20" max="100" step="10" v-model="distance" list="distances" />
       </label>
-      <label>Reading <input type="number" id="reading" name="reading" min="0" max="10" step="0.1" v-model="reading" /></label>
+      <label>Reading <input type="text" id="reading" name="reading" v-model="reading" /></label>
       <button @click="addMarking">Add</button>
     </div>
   </div>
