@@ -1,5 +1,5 @@
 import { gameTypeConfig } from "@/domain/game_types";
-import splitIntoChunksofSizes from "@/domain/splitter";
+import splitIntoChunksofSizes, { splitIntoChunks } from "@/domain/splitter";
 
 const GOLD = 9;
 export const MISS = "M";
@@ -9,7 +9,6 @@ export const endsPerRound = 2;
 
 export function calculateTotal(scores) {
   return getHits(scores).reduce((totalScore, score) => totalScore + score, 0);
-
 }
 
 export function calculateHitsCount(scores) {
@@ -23,20 +22,6 @@ export function calculateGoldCount(scores) {
     }
     return total;
   }, 0);
-}
-
-function splitIntoChunks(array, chunkSize) {
-  return array.reduce((resultArray, item, index) => {
-    const chunkIndex = Math.floor(index / chunkSize);
-
-    if (!resultArray[chunkIndex]) {
-      resultArray[chunkIndex] = []; // start a new chunk
-    }
-
-    resultArray[chunkIndex].push(item);
-
-    return resultArray;
-  }, []);
 }
 
 export function calculateRounds(scores, gameType = "national") {
