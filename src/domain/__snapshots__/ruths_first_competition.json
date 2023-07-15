@@ -2,8 +2,22 @@
   {
     "roundBreakdown": [
       {
-        "firstEnd": [9, 9, 7, 7, 3, 3],
-        "secondEnd": [9, 9, 7, 5, 5, 1],
+        "firstEnd": [
+          9,
+          9,
+          7,
+          7,
+          3,
+          3
+        ],
+        "secondEnd": [
+          9,
+          9,
+          7,
+          5,
+          5,
+          1
+        ],
         "subTotals": {
           "hits": 12,
           "golds": 4,
@@ -12,8 +26,22 @@
         }
       },
       {
-        "firstEnd": [9, 7, 7, 7, 5, 5],
-        "secondEnd": [7, 7, 7, 5, 5, 1],
+        "firstEnd": [
+          9,
+          7,
+          7,
+          7,
+          5,
+          5
+        ],
+        "secondEnd": [
+          7,
+          7,
+          7,
+          5,
+          5,
+          1
+        ],
         "subTotals": {
           "hits": 12,
           "golds": 1,
@@ -22,8 +50,22 @@
         }
       },
       {
-        "firstEnd": [9, 7, 7, 3, 3, 1],
-        "secondEnd": [9, 9, 7, 7, 5, 3],
+        "firstEnd": [
+          9,
+          7,
+          7,
+          3,
+          3,
+          1
+        ],
+        "secondEnd": [
+          9,
+          9,
+          7,
+          7,
+          5,
+          3
+        ],
         "subTotals": {
           "hits": 12,
           "golds": 3,
@@ -41,8 +83,22 @@
   {
     "roundBreakdown": [
       {
-        "firstEnd": [9, 7, 7, 5, 5, 5],
-        "secondEnd": [9, 9, 9, 7, 7, 7],
+        "firstEnd": [
+          9,
+          7,
+          7,
+          5,
+          5,
+          5
+        ],
+        "secondEnd": [
+          9,
+          9,
+          9,
+          7,
+          7,
+          7
+        ],
         "subTotals": {
           "hits": 12,
           "golds": 4,
@@ -51,8 +107,22 @@
         }
       },
       {
-        "firstEnd": [9, 9, 9, 9, 7, 7],
-        "secondEnd": [9, 9, 9, 9, 9, 7],
+        "firstEnd": [
+          9,
+          9,
+          9,
+          9,
+          7,
+          7
+        ],
+        "secondEnd": [
+          9,
+          9,
+          9,
+          9,
+          9,
+          7
+        ],
         "subTotals": {
           "hits": 12,
           "golds": 9,
@@ -61,8 +131,22 @@
         }
       },
       {
-        "firstEnd": [9, 7, 7, 7, 7, 5],
-        "secondEnd": [9, 7, 7, 7, 7, 3],
+        "firstEnd": [
+          9,
+          7,
+          7,
+          7,
+          7,
+          5
+        ],
+        "secondEnd": [
+          9,
+          7,
+          7,
+          7,
+          7,
+          3
+        ],
         "subTotals": {
           "hits": 12,
           "golds": 2,
@@ -80,8 +164,22 @@
   {
     "roundBreakdown": [
       {
-        "firstEnd": [9, 9, 9, 9, 7, 7],
-        "secondEnd": [9, 9, 9, 9, 9, 9],
+        "firstEnd": [
+          9,
+          9,
+          9,
+          9,
+          7,
+          7
+        ],
+        "secondEnd": [
+          9,
+          9,
+          9,
+          9,
+          9,
+          9
+        ],
         "subTotals": {
           "hits": 12,
           "golds": 10,
@@ -90,8 +188,22 @@
         }
       },
       {
-        "firstEnd": [9, 9, 9, 9, 9, 7],
-        "secondEnd": [9, 9, 9, 9, 9, 9],
+        "firstEnd": [
+          9,
+          9,
+          9,
+          9,
+          9,
+          7
+        ],
+        "secondEnd": [
+          9,
+          9,
+          9,
+          9,
+          9,
+          9
+        ],
         "subTotals": {
           "hits": 12,
           "golds": 11,
@@ -100,8 +212,22 @@
         }
       },
       {
-        "firstEnd": [9, 9, 9, 9, 9, 9],
-        "secondEnd": [9, 9, 9, 9, 9, 9],
+        "firstEnd": [
+          9,
+          9,
+          9,
+          9,
+          9,
+          9
+        ],
+        "secondEnd": [
+          9,
+          9,
+          9,
+          9,
+          9,
+          9
+        ],
         "subTotals": {
           "hits": 12,
           "golds": 12,
