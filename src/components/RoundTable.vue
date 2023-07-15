@@ -16,7 +16,7 @@ defineProps({
     <EndScores v-bind:scores="round.firstEnd" />
     <EndScores v-bind:scores="round.secondEnd" />
     <td>{{ round.subTotals.hits }}</td>
-    <td>{{ round.subTotals.score }}</td>
+    <td>{{ round.subTotals.totalScore }}</td>
     <td>{{ round.subTotals.golds }}</td>
     <td :class="{ twoFiveTwo: index === 2 && round.subTotals.runningTotal >= 252 }">
       {{ round.subTotals.runningTotal }}

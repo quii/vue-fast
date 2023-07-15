@@ -24,27 +24,24 @@ export function calculateGoldCount(scores) {
   }, 0)
 }
 
+function flattenScoresInRounds(rounds) {
+  return rounds.reduce((scores, round) => {
+    scores.push(...round.scores);
+    return scores;
+  }, []);
+}
+
 export function calculateRounds(scores, gameType = 'national') {
   const rounds = calculateRoundSummaries(scores);
-  const { distancesRoundSizes } = gameTypeConfig[gameType]
-
-  const roundsPerDistance = splitIntoChunksofSizes(rounds, distancesRoundSizes)
+  const roundsPerDistance = splitIntoChunksofSizes(rounds, gameTypeConfig[gameType].distancesRoundSizes)
 
   return roundsPerDistance.map(rounds => {
-    const scoresForDistance = rounds.reduce((scores, round) => {
-      scores.push(...round.scores)
-      return scores
-    }, [])
-
+    const scoresForDistance = flattenScoresInRounds(rounds)
     rounds.forEach((e) => delete e.scores)
 
     return {
       roundBreakdown: rounds ?? [],
-      subTotals: {
-        hits: calculateHitsCount(scoresForDistance),
-        totalScore: calculateTotal(scoresForDistance),
-        golds: calculateGoldCount(scoresForDistance)
-      }
+      subTotals: calculateSubtotals(scoresForDistance)
     }
   })
 }
@@ -59,17 +56,19 @@ function calculateRoundSummaries(scores) {
   const scoresPerRound = splitIntoChunks(splitIntoChunks(scores, scoresPerEnd), endsPerRound);
 
   return scoresPerRound.map((e) => {
-    // figure out subtotals
-    const flatted = e.flat();
-    let roundScore = calculateTotal(flatted);
-    const subTotals = {
-      hits: calculateHitsCount(flatted),
-      golds: calculateGoldCount(flatted),
-      score: roundScore,
-      runningTotal: runningTotal + roundScore
-    };
+    const scores = e.flat();
+    const subTotals = calculateSubtotals(scores);
+    subTotals.runningTotal = runningTotal + subTotals.totalScore;
     runningTotal = subTotals.runningTotal;
 
-    return { firstEnd: e[0] ?? [], secondEnd: e[1] ?? [], subTotals, scores: flatted };
+    return { firstEnd: e[0] ?? [], secondEnd: e[1] ?? [], subTotals, scores };
   });
+}
+
+function calculateSubtotals(scores) {
+  return {
+    hits: calculateHitsCount(scores),
+    totalScore: calculateTotal(scores),
+    golds: calculateGoldCount(scores)
+  };
 }
