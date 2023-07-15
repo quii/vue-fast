@@ -30,20 +30,22 @@ export function calculateRounds(scores, gameType = 'national') {
 
   const roundsPerDistance = splitIntoChunksofSizes(rounds, distancesRoundSizes)
 
-  const distanceScores = splitIntoChunksofSizes(
-    scores,
-    distancesRoundSizes.map((e) => e * endsPerRound * scoresPerEnd)
-  )
-
   return [...Array(distancesRoundSizes.length).keys()].map((i) => {
     const round = roundsPerDistance[i]
-    const distanceScore = distanceScores[i] ?? []
+
+    const distanceScores = round.reduce((scores, round) => {
+      scores.push(...round.scores)
+      return scores
+    }, [])
+
+    round.forEach((e) => delete e.scores)
+
     return {
       roundBreakdown: round ?? [],
       subTotals: {
-        hits: calculateHitsCount(distanceScore),
-        totalScore: calculateTotal(distanceScore),
-        golds: calculateGoldCount(distanceScore)
+        hits: calculateHitsCount(distanceScores),
+        totalScore: calculateTotal(distanceScores),
+        golds: calculateGoldCount(distanceScores)
       }
     }
   })
@@ -70,6 +72,6 @@ function calculateRoundSummaries(scores) {
     };
     runningTotal = subTotals.runningTotal;
 
-    return { firstEnd: e[0] ?? [], secondEnd: e[1] ?? [], subTotals };
+    return { firstEnd: e[0] ?? [], secondEnd: e[1] ?? [], subTotals, scores: flatted };
   });
 }
