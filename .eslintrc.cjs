@@ -24,5 +24,6 @@ module.exports = {
   ],
   parserOptions: {
     ecmaVersion: 'latest'
-  }
+  },
+  "ignorePatterns": ["**/dev-dist/*.js"],
 }
