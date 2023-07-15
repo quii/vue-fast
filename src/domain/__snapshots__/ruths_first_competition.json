@@ -1,0 +1,245 @@
+[
+  {
+    "roundBreakdown": [
+      {
+        "firstEnd": [
+          9,
+          9,
+          7,
+          7,
+          3,
+          3
+        ],
+        "secondEnd": [
+          9,
+          9,
+          7,
+          5,
+          5,
+          1
+        ],
+        "subTotals": {
+          "hits": 12,
+          "golds": 4,
+          "score": 74,
+          "runningTotal": 74
+        }
+      },
+      {
+        "firstEnd": [
+          9,
+          7,
+          7,
+          7,
+          5,
+          5
+        ],
+        "secondEnd": [
+          7,
+          7,
+          7,
+          5,
+          5,
+          1
+        ],
+        "subTotals": {
+          "hits": 12,
+          "golds": 1,
+          "score": 72,
+          "runningTotal": 146
+        }
+      },
+      {
+        "firstEnd": [
+          9,
+          7,
+          7,
+          3,
+          3,
+          1
+        ],
+        "secondEnd": [
+          9,
+          9,
+          7,
+          7,
+          5,
+          3
+        ],
+        "subTotals": {
+          "hits": 12,
+          "golds": 3,
+          "score": 70,
+          "runningTotal": 216
+        }
+      }
+    ],
+    "subTotals": {
+      "hits": 36,
+      "totalScore": 216,
+      "golds": 8
+    }
+  },
+  {
+    "roundBreakdown": [
+      {
+        "firstEnd": [
+          9,
+          7,
+          7,
+          5,
+          5,
+          5
+        ],
+        "secondEnd": [
+          9,
+          9,
+          9,
+          7,
+          7,
+          7
+        ],
+        "subTotals": {
+          "hits": 12,
+          "golds": 4,
+          "score": 86,
+          "runningTotal": 302
+        }
+      },
+      {
+        "firstEnd": [
+          9,
+          9,
+          9,
+          9,
+          7,
+          7
+        ],
+        "secondEnd": [
+          9,
+          9,
+          9,
+          9,
+          9,
+          7
+        ],
+        "subTotals": {
+          "hits": 12,
+          "golds": 9,
+          "score": 102,
+          "runningTotal": 404
+        }
+      },
+      {
+        "firstEnd": [
+          9,
+          7,
+          7,
+          7,
+          7,
+          5
+        ],
+        "secondEnd": [
+          9,
+          7,
+          7,
+          7,
+          7,
+          3
+        ],
+        "subTotals": {
+          "hits": 12,
+          "golds": 2,
+          "score": 82,
+          "runningTotal": 486
+        }
+      }
+    ],
+    "subTotals": {
+      "hits": 36,
+      "totalScore": 270,
+      "golds": 15
+    }
+  },
+  {
+    "roundBreakdown": [
+      {
+        "firstEnd": [
+          9,
+          9,
+          9,
+          9,
+          7,
+          7
+        ],
+        "secondEnd": [
+          9,
+          9,
+          9,
+          9,
+          9,
+          9
+        ],
+        "subTotals": {
+          "hits": 12,
+          "golds": 10,
+          "score": 104,
+          "runningTotal": 590
+        }
+      },
+      {
+        "firstEnd": [
+          9,
+          9,
+          9,
+          9,
+          9,
+          7
+        ],
+        "secondEnd": [
+          9,
+          9,
+          9,
+          9,
+          9,
+          9
+        ],
+        "subTotals": {
+          "hits": 12,
+          "golds": 11,
+          "score": 106,
+          "runningTotal": 696
+        }
+      },
+      {
+        "firstEnd": [
+          9,
+          9,
+          9,
+          9,
+          9,
+          9
+        ],
+        "secondEnd": [
+          9,
+          9,
+          9,
+          9,
+          9,
+          9
+        ],
+        "subTotals": {
+          "hits": 12,
+          "golds": 12,
+          "score": 108,
+          "runningTotal": 804
+        }
+      }
+    ],
+    "subTotals": {
+      "hits": 36,
+      "totalScore": 318,
+      "golds": 33
+    }
+  }
+]
