@@ -6,6 +6,7 @@ import {
   validScores
 } from './scores'
 import { test, expect, describe } from 'vitest'
+import { ruthsGame } from "@/domain/test_data";
 
 // note to ruth: https://vitest.dev/
 test('it knows the valid scores of imperial archery', () => {
@@ -52,14 +53,8 @@ test.each([
 
 describe('calculateRounds', () => {
   test('snapshot test of ruths first competition', () => {
-    const scores = [
-      9, 9, 7, 7, 3, 3, 9, 9, 7, 5, 5, 1, 9, 7, 7, 7, 5, 5, 7, 7, 7, 5, 5, 1, 9, 7, 7, 3, 3, 1, 9,
-      9, 7, 7, 5, 3, 9, 7, 7, 5, 5, 5, 9, 9, 9, 7, 7, 7, 9, 9, 9, 9, 7, 7, 9, 9, 9, 9, 9, 7, 9, 7,
-      7, 7, 7, 5, 9, 7, 7, 7, 7, 3, 9, 9, 9, 9, 7, 7, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 7, 9, 9, 9,
-      9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9
-    ]
     const gameType = 'windsor'
-    const result = calculateRounds(scores, gameType)
+    const result = calculateRounds(ruthsGame, gameType)
 
     expect(JSON.stringify(result, null, 2)).toMatchFileSnapshot(
       './__snapshots__/ruths_first_competition.json'
