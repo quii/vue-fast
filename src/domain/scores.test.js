@@ -1,10 +1,7 @@
 import {
-  calculateGoldCount,
-  calculateHitsCount,
-  calculateRounds,
-  calculateTotal,
+  calculateRounds, calculateSubtotals,
   validScores
-} from './scores'
+} from "./scores";
 import { test, expect, describe } from 'vitest'
 import { justStartedANational, ruthsGame } from "@/domain/test_data";
 
@@ -23,7 +20,7 @@ test.each([
   [[1, 3, 5, 7, 9, 7], 32],
   [[1, 3, 5, 7, 9, 9], 34]
 ])('it can calculate totals', (scores, expectedTotal) => {
-  expect(calculateTotal(scores)).toEqual(expectedTotal)
+  expect(calculateSubtotals(scores).totalScore).toEqual(expectedTotal)
 })
 
 test.each([
@@ -36,7 +33,7 @@ test.each([
   [[1, 'M', 'M', 'M', 'M', 'M'], 1],
   [['M', 'M', 'M', 'M', 'M', 'M'], 0]
 ])('it can calculate hits', (scores, expectedHitCount) => {
-  expect(calculateHitsCount(scores)).toEqual(expectedHitCount)
+  expect(calculateSubtotals(scores).hits).toEqual(expectedHitCount)
 })
 
 test.each([
@@ -48,7 +45,7 @@ test.each([
   [[1, 3, 5, 'M', 1, 9], 1],
   [[1, 3, 5, 'M', 1, 7], 0]
 ])('it can calculate golds', (scores, expectedGoldsCount) => {
-  expect(calculateGoldCount(scores)).toEqual(expectedGoldsCount)
+  expect(calculateSubtotals(scores).golds).toEqual(expectedGoldsCount)
 })
 
 describe('calculateRounds', () => {
