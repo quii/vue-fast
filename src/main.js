@@ -10,12 +10,14 @@ import Toast from 'vue-toastification'
 
 import 'vue-toastification/dist/index.css'
 import ViewShoot from '@/ViewShoot.vue'
+import SiteMarkings from "@/SiteMarkings.vue";
 
 const routes = [
   { path: '/', component: ScoreCard },
   { path: '/history', component: ScoreHistory },
   { path: '/data', component: DataManagement },
-  { path: '/history/:id', name: 'viewHistory', component: ViewShoot }
+  { path: '/history/:id', name: 'viewHistory', component: ViewShoot },
+  { path: '/markings', name: 'markings', component: SiteMarkings }
 ]
 
 const router = VueRouter.createRouter({
