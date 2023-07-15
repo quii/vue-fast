@@ -1,0 +1,60 @@
+[
+  {
+    "roundBreakdown": [
+      {
+        "firstEnd": [
+          9,
+          9,
+          7,
+          7,
+          3,
+          3
+        ],
+        "secondEnd": [
+          9,
+          9,
+          7,
+          5,
+          5,
+          1
+        ],
+        "subTotals": {
+          "hits": 12,
+          "totalScore": 74,
+          "golds": 4,
+          "runningTotal": 74
+        }
+      },
+      {
+        "firstEnd": [
+          9,
+          7,
+          7,
+          7,
+          5,
+          5
+        ],
+        "secondEnd": [],
+        "subTotals": {
+          "hits": 6,
+          "totalScore": 40,
+          "golds": 1,
+          "runningTotal": 114
+        }
+      }
+    ],
+    "subTotals": {
+      "hits": 18,
+      "totalScore": 114,
+      "golds": 5
+    }
+  },
+  {
+    "roundBreakdown": [],
+    "subTotals": {
+      "hits": 0,
+      "totalScore": 0,
+      "golds": 0
+    }
+  }
+]

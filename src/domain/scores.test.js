@@ -6,7 +6,7 @@ import {
   validScores
 } from './scores'
 import { test, expect, describe } from 'vitest'
-import { ruthsGame } from "@/domain/test_data";
+import { justStartedANational, ruthsGame } from "@/domain/test_data";
 
 // note to ruth: https://vitest.dev/
 test('it knows the valid scores of imperial archery', () => {
@@ -58,6 +58,14 @@ describe('calculateRounds', () => {
 
     expect(JSON.stringify(result, null, 2)).toMatchFileSnapshot(
       './__snapshots__/ruths_first_competition.json'
+    )
+  })
+  test('snapshot of a national round that has had 3 ends', () => {
+    const gameType = 'national'
+    const result = calculateRounds(justStartedANational, gameType)
+
+    expect(JSON.stringify(result, null, 2)).toMatchFileSnapshot(
+      './__snapshots__/just_started_a_national.json'
     )
   })
 })

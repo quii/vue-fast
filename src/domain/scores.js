@@ -24,13 +24,6 @@ export function calculateGoldCount(scores) {
   }, 0)
 }
 
-function flattenScoresInRounds(rounds) {
-  return rounds.reduce((scores, round) => {
-    scores.push(...round.scores);
-    return scores;
-  }, []);
-}
-
 export function calculateRounds(scores, gameType = 'national') {
   const rounds = calculateRoundSummaries(scores);
   const roundsPerDistance = splitIntoChunksofSizes(rounds, gameTypeConfig[gameType].distancesRoundSizes)
@@ -71,4 +64,11 @@ function calculateSubtotals(scores) {
     totalScore: calculateTotal(scores),
     golds: calculateGoldCount(scores)
   };
+}
+
+function flattenScoresInRounds(rounds) {
+  return rounds.reduce((scores, round) => {
+    scores.push(...round.scores);
+    return scores;
+  }, []);
 }
