@@ -1,73 +1,74 @@
 @import './base.css';
 
-td, th {
-    border: 1px solid black;
-    padding: 0.2em;
-    text-align: center;
+td,
+th {
+  border: 1px solid black;
+  padding: 0.2em;
+  text-align: center;
 }
 table {
-    width: 100%;
+  width: 100%;
 }
 
 th {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 html {
-    width: 100vw;
-    touch-action: manipulation
+  width: 100vw;
+  touch-action: manipulation;
 }
 
 nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5em;
-    background-color: #f5f5f5;
-    border-bottom: 1px solid #e5e5e5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 /* style nav a to look like buttons with visited styles */
 nav a {
-    display: inline-block;
-    padding: 0.5em 3em;
-    border: 1px solid #e5e5e5;
-    background-color: #fff;
-    color: #000;
-    text-decoration: none;
-    flex: 1 1 0px;
-    text-align: center;
+  display: inline-block;
+  padding: 0.5em 3em;
+  border: 1px solid #e5e5e5;
+  background-color: #fff;
+  color: #000;
+  text-decoration: none;
+  flex: 1 1 0px;
+  text-align: center;
 }
 
 nav a:visited {
-    color: #000;
+  color: #000;
 }
 
 .router-link-active {
-    background-color: #e5e5e5;
+  background-color: #e5e5e5;
 }
 
 .score9 {
-    background-color: #FEFC2A;
-    color: black;
+  background-color: #fefc2a;
+  color: black;
 }
 
 .score7 {
-    background-color: #FC2E2A;
-    color: white;
+  background-color: #fc2e2a;
+  color: white;
 }
 
 .score5 {
-    background-color: #2790F9;
-    color: white;
+  background-color: #2790f9;
+  color: white;
 }
 
 .score3 {
-    background-color: black;
-    color: white;
+  background-color: black;
+  color: white;
 }
 
 .score1 {
-    background-color: white;
-    color: black;
+  background-color: white;
+  color: black;
 }

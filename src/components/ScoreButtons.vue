@@ -1,22 +1,24 @@
 <script setup>
-
 defineProps({
   validScores: {
     type: Array,
-    required: true,
-  },
-});
+    required: true
+  }
+})
 
-defineEmits(["score", "undo"]);
+defineEmits(['score', 'undo'])
 </script>
 
 <template>
   <div class="score-buttons">
-    <button v-for="score in validScores"
-            :key="score"
-            :class="'score'+score"
-            :data-test="`score-${score}`"
-            @click="$emit('score', score)">{{ score }}
+    <button
+      v-for="score in validScores"
+      :key="score"
+      :class="'score' + score"
+      :data-test="`score-${score}`"
+      @click="$emit('score', score)"
+    >
+      {{ score }}
     </button>
     <button @click="$emit('undo')">↩️</button>
   </div>
@@ -24,16 +26,16 @@ defineEmits(["score", "undo"]);
 
 <style scoped>
 div {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    align-self: flex-start
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
 }
 
 button {
-    flex: 1 1 0px;
-    font-size: 2em;
+  flex: 1 1 0px;
+  font-size: 2em;
 }
 </style>

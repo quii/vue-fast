@@ -1,5 +1,5 @@
 <script setup>
-import EndScores from "@/components/EndScores.vue";
+import EndScores from '@/components/EndScores.vue'
 
 defineProps({
   rounds: {
@@ -8,7 +8,7 @@ defineProps({
   subtotals: {
     required: true
   }
-});
+})
 </script>
 
 <template>
@@ -18,7 +18,9 @@ defineProps({
     <td>{{ round.subTotals.hits }}</td>
     <td>{{ round.subTotals.score }}</td>
     <td>{{ round.subTotals.golds }}</td>
-    <td :class="{twoFiveTwo: index===2 && round.subTotals.runningTotal>=252}">{{ round.subTotals.runningTotal }}</td>
+    <td :class="{ twoFiveTwo: index === 2 && round.subTotals.runningTotal >= 252 }">
+      {{ round.subTotals.runningTotal }}
+    </td>
   </tr>
 
   <tr class="round-subtotal">

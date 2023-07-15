@@ -1,11 +1,11 @@
 import { describe, it, expect } from 'vitest'
 
 import { mount } from '@vue/test-utils'
-import ScoreButtons from "@/components/ScoreButtons.vue";
+import ScoreButtons from '@/components/ScoreButtons.vue'
 
 describe('RoundScores', () => {
   it('renders buttons for each type of score, and emits an event when clicked', () => {
-    const validScores = [9, 7, 'M'];
+    const validScores = [9, 7, 'M']
     const wrapper = mount(ScoreButtons, { props: { validScores: validScores } })
 
     wrapper.find('[data-test="score-9"]').trigger('click')

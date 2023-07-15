@@ -1,21 +1,21 @@
 <script setup>
-import { useHistoryStore } from "@/stores/history";
-import { useRouter } from "vue-router";
-import {computed} from "vue";
+import { useHistoryStore } from '@/stores/history'
+import { useRouter } from 'vue-router'
+import { computed } from 'vue'
 const store = useHistoryStore()
 const router = useRouter()
 
 function parseAndRenderDate(date) {
-  return new Date(date).toLocaleDateString("en-GB", {
-    weekday: "short",
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  });
+  return new Date(date).toLocaleDateString('en-GB', {
+    weekday: 'short',
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric'
+  })
 }
 
 function view(index) {
-  router.push({ name: 'viewHistory', params: { id: index }})
+  router.push({ name: 'viewHistory', params: { id: index } })
 }
 
 const sortedHistory = computed(() => {
@@ -51,7 +51,7 @@ const sortedHistory = computed(() => {
 </template>
 
 <style scoped>
-  td {
-      text-transform: capitalize;
-  }
+td {
+  text-transform: capitalize;
+}
 </style>

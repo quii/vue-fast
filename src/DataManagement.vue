@@ -1,50 +1,61 @@
 <script setup>
-import { computed, ref } from "vue";
-import { useHistoryStore } from "@/stores/history";
-import { useScoresStore } from "@/stores/scores";
-import { useToast } from "vue-toastification";
-import { useGameTypeStore } from "@/stores/game_type";
-import { calculateTotal } from "@/domain/scores";
+import { computed, ref } from 'vue'
+import { useHistoryStore } from '@/stores/history'
+import { useScoresStore } from '@/stores/scores'
+import { useToast } from 'vue-toastification'
+import { useGameTypeStore } from '@/stores/game_type'
+import { calculateTotal } from '@/domain/scores'
 
 const history = useHistoryStore()
-const scores = useScoresStore();
+const scores = useScoresStore()
 const gameTypeStore = useGameTypeStore()
 
-const toast = useToast();
+const toast = useToast()
 
-const distance = ref(40);
-const importData = ref("");
-const date = ref(new Date().toISOString().substr(0, 10));
+const distance = ref(40)
+const importData = ref('')
+const date = ref(new Date().toISOString().substr(0, 10))
 
-const runningTotal = computed(() => calculateTotal(scores.scores));
+const runningTotal = computed(() => calculateTotal(scores.scores))
 const maxDate = new Date().toLocaleDateString('fr-ca')
 
 function saveScores(event) {
-  event.preventDefault();
+  event.preventDefault()
   history.add(date.value, runningTotal, distance.value, gameTypeStore.type, scores.scores)
-  toast.success("Scores saved")
+  toast.success('Scores saved')
 }
 
 function copyHistory() {
   navigator.clipboard.writeText(JSON.stringify(history.history))
-  toast.success("History copied to clipboard")
+  toast.success('History copied to clipboard')
 }
 
 function importHistory() {
   history.importHistory(JSON.parse(importData.value))
-  toast.success("History imported")
+  toast.success('History imported')
 }
-
 </script>
 <template>
   <div>
     <h1>Save scores</h1>
-    <label for="date">Date <input type="date" id="date" name="date" v-model="date" :max="maxDate"> </label>
+    <label for="date"
+      >Date <input type="date" id="date" name="date" v-model="date" :max="maxDate" />
+    </label>
 
-    <label for="distance1">Distance
-    <input type="number" id="distance" name="distance" min="20" max="100" step="10" v-model="distance" list="distances">
-      </label>
-    <button type="submit" @click="saveScores">💾 Save score {{runningTotal}}</button>
+    <label for="distance1"
+      >Distance
+      <input
+        type="number"
+        id="distance"
+        name="distance"
+        min="20"
+        max="100"
+        step="10"
+        v-model="distance"
+        list="distances"
+      />
+    </label>
+    <button type="submit" @click="saveScores">💾 Save score {{ runningTotal }}</button>
   </div>
   <div>
     <h1>Export data</h1>
@@ -70,25 +81,25 @@ function importHistory() {
 </template>
 
 <style scoped>
-  div {
-    display: flex;
-    flex-direction: column;
-      gap: 1em;
-      padding: 1em;
-  }
+div {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 1em;
+}
 
-  input {
-      font-size: 1.5em;
-  }
+input {
+  font-size: 1.5em;
+}
 
-  label {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5em;
-  }
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
 
-  button {
-      font-size: 1.5em;
-      padding: 0.5em;
-  }
+button {
+  font-size: 1.5em;
+  padding: 0.5em;
+}
 </style>
