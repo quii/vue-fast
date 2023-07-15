@@ -4,7 +4,7 @@
 
 **Fast**, is a webapp that allows an archer to record their scores as they go through their ends, rounds and shoots. Calculates running totals, hits e.t.c. on the fly.
 
-![Screenshot of the app](https://i.imgur.com/T5OlvVP.png)
+![Screenshot of the app](https://i.imgur.com/SOKQTMA.png)
 
 https://winter-feather-5776.fly.dev
 
