@@ -29,7 +29,6 @@ button {
   text-transform: capitalize;
   font-family: Helvetica, Arial, sans-serif;
   background-color: white;
-  border-right: 0;
   border-color: lightgray;
 }
 </style>
