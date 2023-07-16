@@ -22,10 +22,14 @@ defineEmits(['changeGameType'])
 
 <style scoped>
 .active {
-  background-color: #f00;
+  font-weight: bold;
 }
 button {
-  font-size: 1.5em;
+  font-size: 1.3em;
   text-transform: capitalize;
+  font-family: Helvetica, Arial, sans-serif;
+  background-color: white;
+  border-right: 0;
+  border-color: lightgray;
 }
 </style>

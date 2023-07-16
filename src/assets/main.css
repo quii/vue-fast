@@ -2,7 +2,7 @@
 
 td,
 th {
-  border: 1px solid black;
+  border: 1px solid lightgray;
   padding: 0.2em;
   text-align: center;
 }
@@ -50,25 +50,30 @@ nav a:visited {
 
 .score9 {
   background-color: #fefc2a;
+  border-color: #fefc2a;
   color: black;
 }
 
 .score7 {
   background-color: #fc2e2a;
+  border-color: #fc2e2a;
   color: white;
 }
 
 .score5 {
   background-color: #2790f9;
+  border-color: #2790f9;
   color: white;
 }
 
 .score3 {
   background-color: black;
+  border-color: black;
   color: white;
 }
 
 .score1 {
   background-color: white;
+  border-color: lightgray;
   color: black;
 }
