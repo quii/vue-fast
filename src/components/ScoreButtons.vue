@@ -3,6 +3,10 @@ defineProps({
   validScores: {
     type: Array,
     required: true
+  },
+  lowestScore: {
+    type: Number,
+    required: true
   }
 })
 
@@ -14,6 +18,7 @@ defineEmits(['score', 'undo'])
     <button
       v-for="score in validScores"
       :key="score"
+      :disabled="score>lowestScore"
       :class="'score' + score"
       :data-test="`score-${score}`"
       @click="$emit('score', score)"
@@ -37,5 +42,9 @@ div {
 button {
   flex: 1 1 0;
   font-size: 2em;
+}
+
+button:disabled {
+  visibility: hidden;
 }
 </style>
