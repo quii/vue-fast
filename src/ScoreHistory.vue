@@ -2,6 +2,7 @@
 import { useHistoryStore } from '@/stores/history'
 import { useRouter } from 'vue-router'
 import { computed } from 'vue'
+import {addTopScoreIndicator} from "@/domain/topscores";
 const store = useHistoryStore()
 const router = useRouter()
 
@@ -21,8 +22,9 @@ function view(index) {
 const sortedHistory = computed(() => {
   const sortingFunction = (a, b) => new Date(b.date) - new Date(a.date)
 
-  return [...store.history].sort(sortingFunction)
+  return addTopScoreIndicator(store.history).sort(sortingFunction)
 })
+
 </script>
 
 <template>
@@ -39,7 +41,7 @@ const sortedHistory = computed(() => {
     <tbody>
       <tr @click="view(index)" v-for="(item, index) in sortedHistory" :key="item.date">
         <td>{{ parseAndRenderDate(item.date) }}</td>
-        <td>{{ item.score }}</td>
+        <td :class="{pb: item.topScore}">{{ item.score }}</td>
         <td>{{ item.distance }}</td>
         <td>{{ item.gameType }}</td>
         <td>
@@ -53,5 +55,11 @@ const sortedHistory = computed(() => {
 <style scoped>
 td {
   text-transform: capitalize;
+}
+
+.pb {
+  color: gold;
+  background: #2c3e50;
+  font-weight: bold;
 }
 </style>
