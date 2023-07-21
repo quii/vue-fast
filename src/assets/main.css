@@ -83,3 +83,11 @@ nav a:visited {
   background: #2c3e50;
   font-weight: bold;
 }
+
+.onTrack {
+  color: lightseagreen;
+}
+
+.offTrack {
+  color: darkred;
+}

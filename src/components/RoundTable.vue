@@ -9,6 +9,9 @@ defineProps({
     required: true
   }
 })
+
+const onTrackFor252 = 84
+
 </script>
 
 <template>
@@ -16,9 +19,12 @@ defineProps({
     <EndScores v-bind:scores="round.firstEnd" />
     <EndScores v-bind:scores="round.secondEnd" />
     <td>{{ round.subTotals.hits }}</td>
-    <td>{{ round.subTotals.totalScore }}</td>
+    <td :class="{onTrack: round.subTotals.totalScore >=onTrackFor252, offTrack: round.subTotals.totalScore > 0 && round.subTotals.totalScore <onTrackFor252}">{{ round.subTotals.totalScore }}</td>
     <td>{{ round.subTotals.golds }}</td>
-    <td :class="{ highlight: index === 2 && round.subTotals.runningTotal >= 252 }">
+    <td :class="{
+      onTrack: index===0 && round.subTotals.runningTotal >= onTrackFor252 || index===1 && round.subTotals.runningTotal >= onTrackFor252*2,
+      highlight: index === 2 && round.subTotals.runningTotal >= onTrackFor252*3,
+    }">
       {{ round.subTotals.runningTotal }}
     </td>
   </tr>
@@ -31,11 +37,3 @@ defineProps({
     <td>{{ subtotals.totalScore }}</td>
   </tr>
 </template>
-
-<style scoped>
-.twoFiveTwo {
-  color: gold;
-  background: #2c3e50;
-  font-weight: bold;
-}
-</style>
