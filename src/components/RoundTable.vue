@@ -18,7 +18,7 @@ defineProps({
     <td>{{ round.subTotals.hits }}</td>
     <td>{{ round.subTotals.totalScore }}</td>
     <td>{{ round.subTotals.golds }}</td>
-    <td :class="{ twoFiveTwo: index === 2 && round.subTotals.runningTotal >= 252 }">
+    <td :class="{ highlight: index === 2 && round.subTotals.runningTotal >= 252 }">
       {{ round.subTotals.runningTotal }}
     </td>
   </tr>

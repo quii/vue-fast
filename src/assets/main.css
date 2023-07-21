@@ -77,3 +77,9 @@ nav a:visited {
   border-color: lightgray;
   color: black;
 }
+
+.highlight {
+  color: gold;
+  background: #2c3e50;
+  font-weight: bold;
+}

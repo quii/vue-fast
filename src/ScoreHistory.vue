@@ -41,7 +41,7 @@ const sortedHistory = computed(() => {
     <tbody>
       <tr @click="view(index)" v-for="(item, index) in sortedHistory" :key="item.date">
         <td>{{ parseAndRenderDate(item.date) }}</td>
-        <td :class="{pb: item.topScore}">{{ item.score }}</td>
+        <td :class="{highlight: item.topScore}">{{ item.score }}</td>
         <td>{{ item.distance }}</td>
         <td>{{ item.gameType }}</td>
         <td>
@@ -55,11 +55,5 @@ const sortedHistory = computed(() => {
 <style scoped>
 td {
   text-transform: capitalize;
-}
-
-.pb {
-  color: gold;
-  background: #2c3e50;
-  font-weight: bold;
 }
 </style>
