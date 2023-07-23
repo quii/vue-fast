@@ -45,6 +45,8 @@ button {
 }
 
 button:disabled {
-  visibility: hidden;
+  border: 0.35rem inset dimgray;
+  background-color: grey;
+  color: darkgray;
 }
 </style>
