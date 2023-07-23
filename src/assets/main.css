@@ -85,9 +85,9 @@ nav a:visited {
 }
 
 .onTrack {
-  color: lightseagreen;
+  color: var(--color-on-track);
 }
 
 .offTrack {
-  color: darkred;
+  color: var(--color-off-track);
 }
