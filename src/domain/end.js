@@ -6,7 +6,10 @@ export function getLowestScoreForRecentEnd(scores) {
         return Infinity
     }
 
-    const recentEndScores = scores.slice(-recentEndIndex);
+    const recentEndScores = scores.slice(-recentEndIndex).map((arrow) => {
+        if (arrow === "M") return 0
+        return arrow
+    })
 
     let minScore = Infinity;
     for (let i = 0; i < recentEndScores.length; i++) {

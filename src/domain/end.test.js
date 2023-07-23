@@ -33,4 +33,11 @@ describe('getLowestScoreForRecentEnd', () => {
         ]
         expect(getLowestScoreForRecentEnd(scores)).toEqual(9)
     })
+
+    test('M is 0', () => {
+        const scores = [
+            1, "M"
+        ]
+        expect(getLowestScoreForRecentEnd(scores)).toEqual(0)
+    })
 })
