@@ -39,7 +39,7 @@ const sortedHistory = computed(() => {
       </tr>
     </thead>
     <tbody>
-    <tr @click="view(item.id)" v-for="(item, index) in sortedHistory" :key="item.date">
+    <tr @click="view(item.id)" v-for="item in sortedHistory" :key="item.date">
       <td>{{ parseAndRenderDate(item.date) }}</td>
       <td :class="{highlight: item.topScore}">{{ item.score }}</td>
       <td>{{ item.distance }}</td>
