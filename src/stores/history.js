@@ -18,15 +18,16 @@ export const useHistoryStore = defineStore('history', () => {
   }
 
   function remove(id) {
-    state.value = state.value.filter((item) => item.id !== id)
+    state.value = state.value.filter((item) => item.id !== id);
   }
 
   function importHistory(history) {
-    state.value = history
+    state.value = history;
   }
 
-  function setShootToView(index) {
-    return (selectedShoot.value = state.value[index])
+  function setShootToView(id) {
+    id = parseInt(id);
+    return (selectedShoot.value = state.value.find((shoot) => shoot.id == id));
   }
 
   return {
@@ -36,5 +37,5 @@ export const useHistoryStore = defineStore('history', () => {
     importHistory,
     setShootToView,
     selectedShoot
-  }
+  };
 })

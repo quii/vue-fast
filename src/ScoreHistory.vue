@@ -15,8 +15,8 @@ function parseAndRenderDate(date) {
   })
 }
 
-function view(index) {
-  router.push({ name: 'viewHistory', params: { id: index } })
+function view(id) {
+  router.push({ name: "viewHistory", params: { id } });
 }
 
 const sortedHistory = computed(() => {
@@ -39,15 +39,15 @@ const sortedHistory = computed(() => {
       </tr>
     </thead>
     <tbody>
-      <tr @click="view(index)" v-for="(item, index) in sortedHistory" :key="item.date">
-        <td>{{ parseAndRenderDate(item.date) }}</td>
-        <td :class="{highlight: item.topScore}">{{ item.score }}</td>
-        <td>{{ item.distance }}</td>
-        <td>{{ item.gameType }}</td>
-        <td>
-          <button @click="store.remove(item.id)">❌</button>
-        </td>
-      </tr>
+    <tr @click="view(item.id)" v-for="(item, index) in sortedHistory" :key="item.date">
+      <td>{{ parseAndRenderDate(item.date) }}</td>
+      <td :class="{highlight: item.topScore}">{{ item.score }}</td>
+      <td>{{ item.distance }}</td>
+      <td>{{ item.gameType }}</td>
+      <td>
+        <button @click="store.remove(item.id)">❌</button>
+      </td>
+    </tr>
     </tbody>
   </table>
 </template>
