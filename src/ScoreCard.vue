@@ -3,7 +3,7 @@ import { useScoresStore } from '@/stores/scores'
 import RoundScores from '@/components/RoundScores.vue'
 import ScoreButtons from '@/components/ScoreButtons.vue'
 import GameTypeSelector from '@/components/GameTypeSelector.vue'
-import { validScores } from '@/domain/scores'
+import { validImperialScores } from "@/domain/scores";
 import { useGameTypeStore } from '@/stores/game_type'
 import {computed} from "vue";
 import {getLowestScoreForRecentEnd} from "@/domain/end";
@@ -14,7 +14,8 @@ const lowestScore = computed(() => getLowestScoreForRecentEnd(scoresStore.scores
 </script>
 
 <template>
-  <ScoreButtons :validScores="validScores" :lowestScore="lowestScore" @score="scoresStore.add" @undo="scoresStore.undo" />
+  <ScoreButtons :validScores="validImperialScores" :lowestScore="lowestScore" @score="scoresStore.add"
+                @undo="scoresStore.undo" />
   <RoundScores :scores="scoresStore.scores" :game-type="gameTypeStore.type" />
   <div class="controls">
     <GameTypeSelector :gameType="gameTypeStore.type" @changeGameType="gameTypeStore.setGameType" />

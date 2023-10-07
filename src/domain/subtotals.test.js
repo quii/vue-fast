@@ -1,12 +1,12 @@
 import {
-  validScores
+  validImperialScores
 } from "./scores";
 import { test, expect } from "vitest";
 import { calculateSubtotals } from "@/domain/subtotals";
 
 // note to ruth: https://vitest.dev/
 test("it knows the valid scores of imperial archery", () => {
-  expect(validScores).toEqual([9, 7, 5, 3, 1, "M"]);
+  expect(validImperialScores).toEqual([9, 7, 5, 3, 1, "M"]);
 });
 
 test.each([
