@@ -54,25 +54,25 @@ nav a:visited {
   color: black;
 }
 
-.score7 {
+.score7, .score8 {
   background-color: #fc2e2a;
   border-color: #fc2e2a;
   color: white;
 }
 
-.score5 {
+.score5, .score6 {
   background-color: #2790f9;
   border-color: #2790f9;
   color: white;
 }
 
-.score3 {
+.score3, .score4 {
   background-color: black;
   border-color: black;
   color: white;
 }
 
-.score1 {
+.score1, .score2 {
   background-color: white;
   border-color: lightgray;
   color: black;
