@@ -21,7 +21,7 @@ function calculateHits(scores) {
 
 function calculateGoldCount(scores) {
   return scores.reduce((total, score) => {
-    if (score === GOLD) {
+    if (score === GOLD || score === "X" || score === 10) {
       return total + 1;
     }
     return total;
