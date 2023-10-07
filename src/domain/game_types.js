@@ -1,4 +1,4 @@
-import { validImperialScores, validMetricScores } from "@/domain/scores";
+import { indoorMetricScores, validImperialScores, validMetricScores } from "@/domain/scores";
 
 export const gameTypeConfig = {
   national: {
@@ -24,6 +24,11 @@ export const gameTypeConfig = {
   frostbite: {
     distancesRoundSizes: [3],
     scores: validMetricScores,
+    unit: "m"
+  },
+  postsmouth: {
+    distancesRoundSizes: [5],
+    scores: indoorMetricScores,
     unit: "m"
   }
 };
