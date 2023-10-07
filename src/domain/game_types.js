@@ -1,6 +1,5 @@
 import { validImperialScores, validMetricScores } from "@/domain/scores";
 
-export const gameTypes = ["national", "warwick", "western", "windsor", "frostbite"];
 export const gameTypeConfig = {
   national: {
     distancesRoundSizes: [4, 2],
@@ -27,4 +26,7 @@ export const gameTypeConfig = {
     scores: validMetricScores,
     unit: "m"
   }
-}
+};
+
+export const gameTypes = Object.keys(gameTypeConfig);
+
