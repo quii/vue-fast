@@ -1,15 +1,16 @@
+import { convertToValue } from "@/domain/scores";
+
 export function getLowestScoreForRecentEnd(scores) {
+    const scoresAsValues = scores.map(convertToValue);
+    console.log("xx", scores, scoresAsValues);
     const endSize = 6;
-    const recentEndIndex = scores.length % endSize
+    const recentEndIndex = scoresAsValues.length % endSize;
 
     if(recentEndIndex===0) {
         return Infinity
     }
 
-    const recentEndScores = scores.slice(-recentEndIndex).map((arrow) => {
-        if (arrow === "M") return 0
-        return arrow
-    })
+    const recentEndScores = scoresAsValues.slice(-recentEndIndex);
 
     let minScore = Infinity;
     for (let i = 0; i < recentEndScores.length; i++) {

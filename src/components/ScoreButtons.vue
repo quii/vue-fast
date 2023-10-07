@@ -1,4 +1,6 @@
 <script setup>
+import { convertToValue } from "@/domain/scores";
+
 defineProps({
   validScores: {
     type: Array,
@@ -18,7 +20,7 @@ defineEmits(['score', 'undo'])
     <button
       v-for="score in validScores"
       :key="score"
-      :disabled="score>lowestScore"
+      :disabled="convertToValue(score)>lowestScore"
       :class="'score' + score"
       :data-test="`score-${score}`"
       @click="$emit('score', score)"

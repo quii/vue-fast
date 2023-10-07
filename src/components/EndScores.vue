@@ -1,7 +1,7 @@
 <script setup>
-import { scoresPerEnd } from "@/domain/scores";
 import { calculateTotal } from "@/domain/subtotals";
 import {computed} from "vue";
+import { scoresPerEnd } from "@/domain/rounds";
 
 const props = defineProps({
   scores: {

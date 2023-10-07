@@ -1,7 +1,9 @@
 import splitIntoChunksofSizes, { splitIntoChunks } from "@/domain/splitter";
 import { gameTypeConfig } from "@/domain/game_types";
 import { calculateSubtotals } from "@/domain/subtotals";
-import { endsPerRound, scoresPerEnd } from "@/domain/scores";
+
+export const scoresPerEnd = 6;
+const endsPerRound = 2;
 
 export function calculateRounds(scores, gameType = "national") {
   const rounds = calculateRoundSummaries(scores);
