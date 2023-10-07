@@ -37,6 +37,7 @@ div {
   position: sticky;
   top: 0;
   align-self: flex-start;
+  max-width: 100%;
 }
 
 button {
