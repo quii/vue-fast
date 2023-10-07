@@ -17,6 +17,7 @@ test.each([
   [[1, 3, 5, 7, 9, 3], 28],
   [[1, 3, 5, 7, 9, 5], 30],
   [[1, 3, 5, 7, 9, 7], 32],
+  [["X", "X", "X", "X"], 40],
   [[1, 3, 5, 7, 9, 9], 34]
 ])('it can calculate totals', (scores, expectedTotal) => {
   expect(calculateSubtotals(scores).totalScore).toEqual(expectedTotal)

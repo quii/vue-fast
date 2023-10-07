@@ -9,7 +9,12 @@ export function calculateSubtotals(scores) {
 }
 
 export function calculateTotal(scores) {
-  return scores.filter((score) => score !== MISS).reduce((totalScore, score) => totalScore + score, 0);
+  return scores.map((score) => {
+    if (score === "X") {
+      return 10;
+    }
+    return score;
+  }).filter((score) => score !== MISS).reduce((totalScore, score) => totalScore + score, 0);
 }
 
 function calculateHits(scores) {

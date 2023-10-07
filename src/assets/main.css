@@ -48,7 +48,7 @@ nav a:visited {
   background-color: #e5e5e5;
 }
 
-.score9 {
+.score9, .score10, .scoreX {
   background-color: #fefc2a;
   border-color: #fefc2a;
   color: black;

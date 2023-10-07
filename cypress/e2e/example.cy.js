@@ -1,8 +1,7 @@
-
-import { ruthsGame } from "../../src/domain/test_data";
+import { ruthsFrostbiteGame, ruthsGame } from "../../src/domain/test_data";
 
 describe(`Smoke test using Ruth's game`, () => {
-  it('records all the scores and calculates the totals', () => {
+  it("records all the scores and calculates the totals for an imperial game", () => {
     cy.visit('/')
     cy.get('button').contains('windsor').click()
 
@@ -15,4 +14,15 @@ describe(`Smoke test using Ruth's game`, () => {
     cy.get('[data-test="totalScore"]').contains('804')
     cy.get('[data-test="totalGolds"]').contains('56')
   })
+
+  it("records ruths first frostbite game", () => {
+    cy.visit("/");
+    cy.get("button").contains("frostbite").click();
+
+    ruthsFrostbiteGame.forEach((score) => {
+      cy.get("button").contains(score).click();
+    });
+
+    cy.get("[data-test=\"totalScore\"]").contains("254");
+  });
 })

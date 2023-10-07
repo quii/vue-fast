@@ -6,14 +6,15 @@ export const useHistoryStore = defineStore('history', () => {
   const state = useLocalStorage('history', [])
   const selectedShoot = ref(state.value[0])
 
-  function add(date, score, distance, gameType, scores) {
+  function add(date, score, distance, gameType, scores, unit) {
     state.value.push({
       id: state.value.length + 1,
       date,
       score,
       distance,
       gameType,
-      scores
+      scores,
+      unit
     })
   }
 

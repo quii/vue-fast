@@ -33,7 +33,7 @@ const sortedHistory = computed(() => {
       <tr>
         <th>Date</th>
         <th>Score</th>
-        <th>Distance (yards)</th>
+        <th>Distance</th>
         <th>Game type</th>
         <th></th>
       </tr>
@@ -42,7 +42,7 @@ const sortedHistory = computed(() => {
     <tr @click="view(item.id)" v-for="item in sortedHistory" :key="item.date">
       <td>{{ parseAndRenderDate(item.date) }}</td>
       <td :class="{highlight: item.topScore}">{{ item.score }}</td>
-      <td>{{ item.distance }}</td>
+      <td>{{ item.distance }} {{ item.unit || "yd" }}</td>
       <td>{{ item.gameType }}</td>
       <td>
         <button @click="store.remove(item.id)">❌</button>

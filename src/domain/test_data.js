@@ -5,6 +5,12 @@ export const ruthsGame = [
   9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9
 ]
 
+export const ruthsFrostbiteGame = [
+  10, 8, 8, 8, 7, 6, 9, 7, 6, 6, 6, 4,
+  "X", 8, 6, 5, 3, 2, "X", 10, 8, 8, 8, 6,
+  9, 9, 8, 6, 5, 5, 9, 8, 7, 7, 6, 6
+];
+
 export const justStartedANational = [
   9, 9, 7, 7, 3, 3,
   9, 9, 7, 5, 5, 1,
