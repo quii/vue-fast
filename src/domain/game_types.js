@@ -30,6 +30,11 @@ export const gameTypeConfig = {
     distancesRoundSizes: [5],
     scores: indoorMetricScores,
     unit: "m"
+  },
+  bray1: {
+    distancesRoundSizes: [3],
+    scores: indoorMetricScores,
+    unit: "m"
   }
 };
 
