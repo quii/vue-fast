@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import { calculateRounds } from "@/domain/rounds";
-import { justStartedANational, ruthsGame } from "@/domain/test_data";
+import { justStartedANational, ruthsFrostbiteGame, ruthsGame } from "@/domain/test_data";
 
 describe("calculateRounds", () => {
   test("snapshot test of ruths first competition", () => {
@@ -17,6 +17,14 @@ describe("calculateRounds", () => {
 
     expect(JSON.stringify(result, null, 2)).toMatchFileSnapshot(
       "./__snapshots__/just_started_a_national.json"
+    );
+  });
+  test("snapshot test of ruths first competition", () => {
+    const gameType = "frostbite";
+    const result = calculateRounds(ruthsFrostbiteGame, gameType);
+
+    expect(JSON.stringify(result, null, 2)).toMatchFileSnapshot(
+      "./__snapshots__/ruths_first_frostbite.json"
     );
   });
 });

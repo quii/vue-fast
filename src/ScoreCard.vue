@@ -7,20 +7,28 @@ import { useGameTypeStore } from "@/stores/game_type";
 import { computed } from "vue";
 import { getLowestScoreForRecentEnd } from "@/domain/end";
 import { gameTypeConfig } from "@/domain/game_types";
+import { X } from "@/domain/scores";
 
-const scoresStore = useScoresStore()
-const gameTypeStore = useGameTypeStore()
+const scoresStore = useScoresStore();
+const gameTypeStore = useGameTypeStore();
 const lowestScore = computed(() => getLowestScoreForRecentEnd(scoresStore.scores, gameTypeConfig[gameTypeStore.type].endSize));
 const validScores = computed(() => gameTypeConfig[gameTypeStore.type].scores);
 
 </script>
 
 <template>
-  <ScoreButtons :validScores="validScores" :lowestScore="lowestScore" @score="scoresStore.add"
+  <ScoreButtons :validScores="validScores"
+                :lowestScore="lowestScore"
+                @score="scoresStore.add"
                 @undo="scoresStore.undo" />
-  <RoundScores :scores="scoresStore.scores" :game-type="gameTypeStore.type" :hasX="validScores.includes('X')" />
+
+  <RoundScores :scores="scoresStore.scores"
+               :game-type="gameTypeStore.type"
+               :hasX="validScores.includes(X)" />
+
   <div class="controls">
-    <GameTypeSelector :gameType="gameTypeStore.type" @changeGameType="gameTypeStore.setGameType" />
+    <GameTypeSelector :gameType="gameTypeStore.type"
+                      @changeGameType="gameTypeStore.setGameType" />
     <button @click="scoresStore.clear()">Clear data</button>
   </div>
 </template>
