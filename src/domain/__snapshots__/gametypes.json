@@ -1,0 +1,128 @@
+{
+  "national": {
+    "distancesRoundSizes": [
+      4,
+      2
+    ],
+    "scores": [
+      9,
+      7,
+      5,
+      3,
+      1,
+      "M"
+    ],
+    "unit": "yd",
+    "endSize": 6
+  },
+  "warwick": {
+    "distancesRoundSizes": [
+      2,
+      2
+    ],
+    "scores": [
+      9,
+      7,
+      5,
+      3,
+      1,
+      "M"
+    ],
+    "unit": "yd",
+    "endSize": 6
+  },
+  "western": {
+    "distancesRoundSizes": [
+      4,
+      4
+    ],
+    "scores": [
+      9,
+      7,
+      5,
+      3,
+      1,
+      "M"
+    ],
+    "unit": "yd",
+    "endSize": 6
+  },
+  "windsor": {
+    "distancesRoundSizes": [
+      3,
+      3,
+      3
+    ],
+    "scores": [
+      9,
+      7,
+      5,
+      3,
+      1,
+      "M"
+    ],
+    "unit": "yd",
+    "endSize": 6
+  },
+  "frostbite": {
+    "distancesRoundSizes": [
+      3
+    ],
+    "scores": [
+      "X",
+      10,
+      9,
+      8,
+      7,
+      6,
+      5,
+      4,
+      3,
+      2,
+      1,
+      "M"
+    ],
+    "unit": "m",
+    "endSize": 6
+  },
+  "portsmouth": {
+    "distancesRoundSizes": [
+      5
+    ],
+    "scores": [
+      10,
+      9,
+      8,
+      7,
+      6,
+      5,
+      4,
+      3,
+      2,
+      1,
+      "M"
+    ],
+    "unit": "m",
+    "endSize": 3
+  },
+  "bray1": {
+    "distancesRoundSizes": [
+      3
+    ],
+    "scores": [
+      10,
+      9,
+      8,
+      7,
+      6,
+      5,
+      4,
+      3,
+      2,
+      1,
+      "M"
+    ],
+    "unit": "m",
+    "endSize": 3
+  }
+}
