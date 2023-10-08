@@ -19,7 +19,6 @@ describe(`Smoke test using Ruth's game`, () => {
     cy.get("button").contains("frostbite").click();
 
     ruthsFrostbiteGame.forEach((score) => {
-      console.log("clicking", score);
       cy.get("button").contains(score).click();
     });
 

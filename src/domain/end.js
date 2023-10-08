@@ -1,8 +1,7 @@
 import { convertToValue } from "@/domain/scores";
 
-export function getLowestScoreForRecentEnd(scores) {
+export function getLowestScoreForRecentEnd(scores, endSize = 6) {
     const scoresAsValues = scores.map(convertToValue);
-    const endSize = 6;
     const recentEndIndex = scoresAsValues.length % endSize;
 
     if(recentEndIndex===0) {

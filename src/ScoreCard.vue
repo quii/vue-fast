@@ -10,7 +10,7 @@ import { gameTypeConfig } from "@/domain/game_types";
 
 const scoresStore = useScoresStore()
 const gameTypeStore = useGameTypeStore()
-const lowestScore = computed(() => getLowestScoreForRecentEnd(scoresStore.scores))
+const lowestScore = computed(() => getLowestScoreForRecentEnd(scoresStore.scores, gameTypeConfig[gameTypeStore.type].endSize));
 const validScores = computed(() => gameTypeConfig[gameTypeStore.type].scores);
 
 </script>
