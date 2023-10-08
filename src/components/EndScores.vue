@@ -2,6 +2,7 @@
 import { calculateTotal } from "@/domain/subtotals";
 import {computed} from "vue";
 import { scoresPerEnd } from "@/domain/rounds";
+import { convertToValues } from "@/domain/scores";
 
 const props = defineProps({
   scores: {
@@ -11,7 +12,7 @@ const props = defineProps({
 });
 
 const onTrackFor252 = 42
-const total = computed(() => calculateTotal(props.scores))
+const total = computed(() => calculateTotal(convertToValues(props.scores)));
 const onTrack = computed(() => total.value >=onTrackFor252)
 const offTrack = computed(() => total.value > 0 && total.value < onTrackFor252)
 
