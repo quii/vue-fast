@@ -48,3 +48,11 @@ test.each([
 ])('it can calculate golds', (scores, expectedGoldsCount) => {
   expect(calculateSubtotals(scores).golds).toEqual(expectedGoldsCount)
 })
+
+test.each([
+  [[9, 9, 9, 9, 9, 9], 0],
+  [["X", 9, 9, 9, 9, 9], 1],
+  [["X", "X", 9, 9, 9, 9], 2]
+])("it can calculate X", (scores, expectedXCount) => {
+  expect(calculateSubtotals(scores).X).toEqual(expectedXCount);
+});

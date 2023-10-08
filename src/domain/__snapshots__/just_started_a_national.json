@@ -22,6 +22,7 @@
           "hits": 12,
           "totalScore": 74,
           "golds": 4,
+          "X": 0,
           "runningTotal": 74
         }
       },
@@ -39,6 +40,7 @@
           "hits": 6,
           "totalScore": 40,
           "golds": 1,
+          "X": 0,
           "runningTotal": 114
         }
       }
@@ -46,7 +48,8 @@
     "subTotals": {
       "hits": 18,
       "totalScore": 114,
-      "golds": 5
+      "golds": 5,
+      "X": 0
     }
   },
   {
@@ -54,7 +57,8 @@
     "subTotals": {
       "hits": 0,
       "totalScore": 0,
-      "golds": 0
+      "golds": 0,
+      "X": 0
     }
   }
 ]
