@@ -6,28 +6,24 @@ import {addTopScoreIndicator} from "@/domain/topscores";
 const store = useHistoryStore()
 const router = useRouter()
 
+const sortByDate = (a, b) => new Date(b.date) - new Date(a.date);
+const dateFormat = {
+  weekday: "short",
+  day: "numeric",
+  month: "short",
+  year: "numeric"
+};
+
 function parseAndRenderDate(date) {
-  return new Date(date).toLocaleDateString('en-GB', {
-    weekday: 'short',
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric'
-  })
+  return new Date(date).toLocaleDateString("en-GB", dateFormat);
 }
 
 function view(id) {
   router.push({ name: "viewHistory", params: { id } });
 }
 
-const sortedHistory = computed(() => {
-  const sortingFunction = (a, b) => new Date(b.date) - new Date(a.date)
-
-  return addTopScoreIndicator(store.history).sort(sortingFunction)
-})
-
-const totalArrows = computed(() => {
-  return store.history.reduce((acc, item) => acc + item.scores.length, 0);
-});
+const sortedHistory = computed(() => addTopScoreIndicator(store.history).sort(sortByDate));
+const totalArrows = computed(() => store.history.reduce((acc, item) => acc + item.scores.length, 0));
 
 </script>
 
