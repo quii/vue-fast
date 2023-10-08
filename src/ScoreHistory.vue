@@ -25,6 +25,10 @@ const sortedHistory = computed(() => {
   return addTopScoreIndicator(store.history).sort(sortingFunction)
 })
 
+const totalArrows = computed(() => {
+  return store.history.reduce((acc, item) => acc + item.scores.length, 0);
+});
+
 </script>
 
 <template>
@@ -50,10 +54,15 @@ const sortedHistory = computed(() => {
     </tr>
     </tbody>
   </table>
+  <p>You have recorded {{ totalArrows }} arrows shot!</p>
 </template>
 
 <style scoped>
 td {
   text-transform: capitalize;
+}
+
+p {
+  text-align: center;
 }
 </style>
