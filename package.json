@@ -25,7 +25,7 @@
     "@dagger.io/dagger": "^0.8.7",
     "@rushstack/eslint-patch": "^1.5.1",
     "@vitejs/plugin-vue": "^4.2.3",
-    "@vitejs/plugin-vue-jsx": "^3.0.1",
+    "@vitejs/plugin-vue-jsx": "^3.0.2",
     "@vue/eslint-config-prettier": "^8.0.0",
     "@vue/test-utils": "^2.4.1",
     "cypress": "13.3.0",
