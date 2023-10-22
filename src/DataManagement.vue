@@ -7,6 +7,7 @@ import { useGameTypeStore } from "@/stores/game_type";
 
 import { calculateTotal } from "@/domain/subtotals";
 import { gameTypeConfig } from "@/domain/game_types";
+import { convertToValues } from "@/domain/scores";
 
 const history = useHistoryStore();
 const scores = useScoresStore();
@@ -18,7 +19,7 @@ const distance = ref(40);
 const importData = ref("");
 const date = ref(new Date().toISOString().substr(0, 10));
 
-const runningTotal = computed(() => calculateTotal(scores.scores))
+const runningTotal = computed(() => calculateTotal(convertToValues(scores.scores)));
 const maxDate = new Date().toLocaleDateString('fr-ca')
 
 function saveScores(event) {
