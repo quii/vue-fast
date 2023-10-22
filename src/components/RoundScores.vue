@@ -11,21 +11,24 @@ const props = defineProps({
   gameType: {
     required: true
   },
+  endSize: {
+    required: true
+  },
   hasX: {
     default: false
   }
 });
 const totals = computed(() => calculateSubtotals(props.scores))
-const rounds = computed(() => calculateRounds(props.scores, props.gameType))
+const rounds = computed(() => calculateRounds(props.scores, props.gameType, props.endSize));
 </script>
 
 <template>
   <table>
     <thead>
       <tr>
-        <th colSpan="6">🎯 scores</th>
+        <th :colSpan="endSize">🎯 scores</th>
         <th>E/T</th>
-        <th colSpan="6">🎯 scores</th>
+        <th :colSpan="endSize">🎯 scores</th>
         <th>E/T</th>
         <th>H</th>
         <th>S</th>
@@ -40,6 +43,7 @@ const rounds = computed(() => calculateRounds(props.scores, props.gameType))
         :key="index"
         :subtotals="round.subTotals"
         :rounds="round.roundBreakdown"
+        :endSize="endSize"
         :hasX="hasX"
       />
       <tr class="grand-totals">

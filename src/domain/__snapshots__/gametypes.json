@@ -124,5 +124,20 @@
     ],
     "unit": "m",
     "endSize": 3
+  },
+  "worcester": {
+    "distancesRoundSizes": [
+      6
+    ],
+    "scores": [
+      5,
+      4,
+      3,
+      2,
+      1,
+      "M"
+    ],
+    "unit": "m",
+    "endSize": 5
   }
 }

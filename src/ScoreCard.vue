@@ -24,6 +24,7 @@ const validScores = computed(() => gameTypeConfig[gameTypeStore.type].scores);
 
   <RoundScores :scores="scoresStore.scores"
                :game-type="gameTypeStore.type"
+               :endSize="gameTypeConfig[gameTypeStore.type].endSize"
                :hasX="validScores.includes(X)" />
 
   <div class="controls">

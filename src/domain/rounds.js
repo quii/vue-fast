@@ -2,11 +2,10 @@ import splitIntoChunksofSizes, { splitIntoChunks } from "@/domain/splitter";
 import { gameTypeConfig } from "@/domain/game_types";
 import { calculateSubtotals } from "@/domain/subtotals";
 
-export const scoresPerEnd = 6;
 const endsPerRound = 2;
 
-export function calculateRounds(scores, gameType = "national") {
-  const rounds = calculateRoundSummaries(scores);
+export function calculateRounds(scores, gameType = "national", endSize) {
+  const rounds = calculateRoundSummaries(scores, endSize);
   const roundsPerDistance = splitIntoChunksofSizes(rounds, gameTypeConfig[gameType].distancesRoundSizes);
 
   return roundsPerDistance.map(rounds => {
@@ -20,10 +19,10 @@ export function calculateRounds(scores, gameType = "national") {
   });
 }
 
-function calculateRoundSummaries(scores) {
+function calculateRoundSummaries(scores, endSize) {
   let runningTotal = 0;
 
-  const scoresPerRound = splitIntoChunks(splitIntoChunks(scores, scoresPerEnd), endsPerRound);
+  const scoresPerRound = splitIntoChunks(splitIntoChunks(scores, endSize), endsPerRound);
 
   return scoresPerRound.map((e) => {
     const scores = e.flat();

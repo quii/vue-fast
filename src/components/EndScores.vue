@@ -1,12 +1,15 @@
 <script setup>
 import { calculateTotal } from "@/domain/subtotals";
 import {computed} from "vue";
-import { scoresPerEnd } from "@/domain/rounds";
 import { convertToValues } from "@/domain/scores";
 
 const props = defineProps({
   scores: {
     type: Array,
+    required: true
+  },
+  endSize: {
+    type: Number,
     required: true
   }
 });
@@ -19,7 +22,7 @@ const offTrack = computed(() => total.value > 0 && total.value < onTrackFor252)
 </script>
 
 <template>
-  <td :class="'score' + scores[i - 1]" class="score" v-for="i in scoresPerEnd" :key="i">
+  <td :class="'score' + scores[i - 1]" class="score" v-for="i in endSize" :key="i">
     {{ scores[i - 1] }}
   </td>
   <td :class="{onTrack, offTrack}">{{ total }}</td>
