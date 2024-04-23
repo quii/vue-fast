@@ -22,8 +22,8 @@ const onTrackFor252 = 84
 
 <template>
   <tr v-for="(round, index) in rounds" :key="round.id">
-    <EndScores v-bind:scores="round.firstEnd" :endSize="endSize" />
-    <EndScores v-bind:scores="round.secondEnd" :endSize="endSize" />
+    <EndScores :scores="round.firstEnd" :endSize="endSize" />
+    <EndScores :scores="round.secondEnd" :endSize="endSize" />
     <td>{{ round.subTotals.hits }}</td>
     <td :class="{onTrack: round.subTotals.totalScore >=onTrackFor252, offTrack: round.subTotals.totalScore > 0 && round.subTotals.totalScore <onTrackFor252}">{{ round.subTotals.totalScore }}</td>
     <td>{{ round.subTotals.golds }}</td>

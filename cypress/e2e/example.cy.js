@@ -4,7 +4,7 @@ describe(`Smoke test using Ruth's game`, () => {
   it("records all the scores and calculates the totals for an imperial game", () => {
     cy.visit('/')
     cy.get("button").contains("Clear data").click();
-    cy.get('button').contains('windsor').click()
+    cy.get('select').select('WINDSOR')
 
     ruthsGame.forEach((score) => {
       // press button with text value score
@@ -16,8 +16,9 @@ describe(`Smoke test using Ruth's game`, () => {
     cy.get('[data-test="totalGolds"]').contains('56')
 
     cy.get("button").contains("Clear data").click();
-    cy.get("button").contains("frostbite").click();
 
+    // next game
+    cy.get("select").select("FROSTBITE");
     ruthsFrostbiteGame.forEach((score) => {
       cy.get("button").contains(score).click();
     });

@@ -41,7 +41,7 @@ const validScores = computed(() => gameTypeConfig[gameTypeStore.type].scores);
   justify-content: space-between;
 }
 
-.controls button {
+.controls select {
   padding: 0.5em;
   font-size: 1.5em;
   flex: 1 1 0;
