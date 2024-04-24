@@ -34,7 +34,7 @@ const totalArrows = computed(() => store.history.reduce((acc, item) => acc + ite
         <th>Date</th>
         <th>Score</th>
         <th>Distance</th>
-        <th>Game type</th>
+        <th>Round</th>
         <th></th>
       </tr>
     </thead>
