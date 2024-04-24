@@ -17,6 +17,7 @@ const validScores = computed(() => gameTypeConfig[gameTypeStore.type].scores);
 </script>
 
 <template>
+  <div class="page">
   <ScoreButtons :validScores="validScores"
                 :lowestScore="lowestScore"
                 @score="scoresStore.add"
@@ -26,6 +27,7 @@ const validScores = computed(() => gameTypeConfig[gameTypeStore.type].scores);
                :game-type="gameTypeStore.type"
                :endSize="gameTypeConfig[gameTypeStore.type].endSize"
                :hasX="validScores.includes(X)" />
+  </div>
 
   <div class="controls">
     <GameTypeSelector :gameType="gameTypeStore.type"
@@ -45,5 +47,9 @@ const validScores = computed(() => gameTypeConfig[gameTypeStore.type].scores);
   padding: 0.5em;
   font-size: 1.5em;
   flex: 1 1 0;
+}
+
+.page {
+  width: 100vw;
 }
 </style>

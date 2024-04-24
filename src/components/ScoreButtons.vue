@@ -37,9 +37,9 @@ div {
   display: flex;
   justify-content: space-between;
   position: sticky;
+  flex-wrap: wrap;
   top: 0;
   align-self: flex-start;
-  max-width: 100%;
 }
 
 button {
