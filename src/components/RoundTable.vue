@@ -1,5 +1,6 @@
 <script setup>
 import EndScores from '@/components/EndScores.vue'
+import { useScreenOrientation } from "@vueuse/core";
 
 defineProps({
   rounds: {
@@ -17,6 +18,9 @@ defineProps({
 })
 
 const onTrackFor252 = 84
+const {
+  orientation
+} = useScreenOrientation();
 
 </script>
 
@@ -24,11 +28,14 @@ const onTrackFor252 = 84
   <tr v-for="(round, index) in rounds" :key="round.id">
     <EndScores :scores="round.firstEnd" :endSize="endSize" />
     <EndScores :scores="round.secondEnd" :endSize="endSize" />
-    <td>{{ round.subTotals.hits }}</td>
-    <td :class="{onTrack: round.subTotals.totalScore >=onTrackFor252, offTrack: round.subTotals.totalScore > 0 && round.subTotals.totalScore <onTrackFor252}">{{ round.subTotals.totalScore }}</td>
-    <td>{{ round.subTotals.golds }}</td>
-    <td v-if="hasX">{{ round.subTotals.X }}</td>
-    <td :class="{
+    <td v-if="orientation==='landscape-primary'">{{ round.subTotals.hits }}</td>
+    <td v-if="orientation==='landscape-primary'"
+        :class="{onTrack: round.subTotals.totalScore >=onTrackFor252, offTrack: round.subTotals.totalScore > 0 && round.subTotals.totalScore <onTrackFor252}">
+      {{ round.subTotals.totalScore }}
+    </td>
+    <td v-if="orientation==='landscape-primary'">{{ round.subTotals.golds }}</td>
+    <td v-if="orientation==='landscape-primary' && hasX">{{ round.subTotals.X }}</td>
+    <td v-if="orientation==='landscape-primary'" :class="{
       onTrack: index===0 && round.subTotals.runningTotal >= onTrackFor252 || index===1 && round.subTotals.runningTotal >= onTrackFor252*2,
       highlight: index === 2 && round.subTotals.runningTotal >= onTrackFor252*3,
     }">
@@ -36,7 +43,7 @@ const onTrackFor252 = 84
     </td>
   </tr>
 
-  <tr class="round-subtotal">
+  <tr v-if="orientation==='landscape-primary'" class="round-subtotal">
     <td colspan="14"></td>
     <td>{{ subtotals.hits }}</td>
     <td>{{ subtotals.totalScore }}</td>

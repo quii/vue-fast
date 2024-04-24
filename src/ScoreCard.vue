@@ -8,17 +8,11 @@ import { computed } from "vue";
 import { getLowestScoreForRecentEnd } from "@/domain/end";
 import { gameTypeConfig } from "@/domain/game_types";
 import { X } from "@/domain/scores";
-import { useScreenOrientation } from "@vueuse/core";
 
 const scoresStore = useScoresStore();
 const gameTypeStore = useGameTypeStore();
 const lowestScore = computed(() => getLowestScoreForRecentEnd(scoresStore.scores, gameTypeConfig[gameTypeStore.type].endSize));
 const validScores = computed(() => gameTypeConfig[gameTypeStore.type].scores);
-const {
-  lockOrientation
-} = useScreenOrientation();
-
-lockOrientation("landscape");
 
 </script>
 
