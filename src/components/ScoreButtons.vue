@@ -45,11 +45,14 @@ div {
 button {
   flex: 1 1 0;
   font-size: 2em;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box; /* Firefox, other Gecko */
+  box-sizing: border-box; /* Opera/IE 8+ */
 }
 
 button:disabled {
-  border: 0.35rem inset dimgray;
   background-color: grey;
+  border-color: grey;
   color: darkgray;
 }
 </style>
