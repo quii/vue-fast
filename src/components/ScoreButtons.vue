@@ -48,7 +48,7 @@ button {
   -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
   -moz-box-sizing: border-box; /* Firefox, other Gecko */
   box-sizing: border-box; /* Opera/IE 8+ */
-  height: 8vh;
+  height: 15vh;
 }
 
 button:disabled {
