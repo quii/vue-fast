@@ -59,6 +59,14 @@ const {
         <td v-if="hasX" data-test="totalXs">{{ totals.X }}</td>
         <td>{{ totals.totalScore }}</td>
       </tr>
+      <tr v-else>
+        <td colspan="2">Hits</td>
+        <td colspan="2" data-test="totalHits">{{ totals.hits }}</td>
+        <td colspan="3">Golds</td>
+        <td colspan="2" data-test="totalGolds">{{ totals.golds }}</td>
+        <td colspan="3">Total</td>
+        <td colspan="2">{{ totals.totalScore }}</td>
+      </tr>
     </tbody>
   </table>
 </template>

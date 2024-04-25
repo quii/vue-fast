@@ -51,4 +51,7 @@ const {
     <td v-if="hasX">{{ subtotals.X }}</td>
     <td>{{ subtotals.totalScore }}</td>
   </tr>
+  <tr v-else>
+    <td colspan="13"></td>
+  </tr>
 </template>
