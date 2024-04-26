@@ -8,12 +8,17 @@ import { computed } from "vue";
 import { getLowestScoreForRecentEnd } from "@/domain/end";
 import { gameTypeConfig } from "@/domain/game_types";
 import { X } from "@/domain/scores";
+import { useScreenOrientation } from "@vueuse/core";
+import RoundScoresPortrait from "@/components/RoundScoresPortrait.vue";
 
 const scoresStore = useScoresStore();
 const gameTypeStore = useGameTypeStore();
 const lowestScore = computed(() => getLowestScoreForRecentEnd(scoresStore.scores, gameTypeConfig[gameTypeStore.type].endSize));
 const validScores = computed(() => gameTypeConfig[gameTypeStore.type].scores);
 
+const {
+  orientation
+} = useScreenOrientation();
 </script>
 
 <template>
@@ -23,10 +28,14 @@ const validScores = computed(() => gameTypeConfig[gameTypeStore.type].scores);
                 @score="scoresStore.add"
                 @undo="scoresStore.undo" />
 
-  <RoundScores :scores="scoresStore.scores"
+    <RoundScores v-if="orientation==='landscape-primary'" :scores="scoresStore.scores"
                :game-type="gameTypeStore.type"
                :endSize="gameTypeConfig[gameTypeStore.type].endSize"
                :hasX="validScores.includes(X)" />
+    <RoundScoresPortrait v-else :scores="scoresStore.scores"
+                         :game-type="gameTypeStore.type"
+                         :endSize="gameTypeConfig[gameTypeStore.type].endSize"
+                         :hasX="validScores.includes(X)" />
   </div>
 
   <div class="controls">
