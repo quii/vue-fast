@@ -19,9 +19,13 @@ const props = defineProps({
 
 const ends = computed(() => {
   return props.rounds.reduce((acc, cur) => {
+    console.log(cur);
     return [...acc, cur.firstEnd, cur.secondEnd];
   }, []);
+
 });
+
+console.log(ends);
 
 </script>
 
@@ -30,7 +34,7 @@ const ends = computed(() => {
     <EndScores :scores="end" :endSize="endSize" />
   </tr>
 
-  <tr class="round-subtotal">
+  <tr v-if="ends.length > 0" class="round-subtotal">
     <td>Hits</td>
     <td>{{ subtotals.hits }}</td>
     <td>Golds</td>

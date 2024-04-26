@@ -3,6 +3,7 @@ import { useHistoryStore } from '@/stores/history'
 import { useRouter } from 'vue-router'
 import { computed } from 'vue'
 import {addTopScoreIndicator} from "@/domain/topscores";
+import { gameTypeConfig } from "@/domain/game_types";
 const store = useHistoryStore()
 const router = useRouter()
 
@@ -25,6 +26,7 @@ function view(id) {
 const sortedHistory = computed(() => addTopScoreIndicator(store.history).sort(sortByDate));
 const totalArrows = computed(() => store.history.reduce((acc, item) => acc + item.scores.length, 0));
 
+console.log(sortedHistory);
 </script>
 
 <template>
@@ -39,7 +41,8 @@ const totalArrows = computed(() => store.history.reduce((acc, item) => acc + ite
       </tr>
     </thead>
     <tbody>
-    <tr @click="view(item.id)" v-for="item in sortedHistory" :key="item.date">
+    <tr :class="{outdoor: gameTypeConfig[item.gameType].isOutdoor}" @click="view(item.id)" v-for="item in sortedHistory"
+        :key="item.date">
       <td>{{ parseAndRenderDate(item.date) }}</td>
       <td :class="{highlight: item.topScore}">{{ item.score }}</td>
       <td>{{ item.distance }} {{ item.unit || "yd" }}</td>
@@ -60,5 +63,13 @@ td {
 
 p {
   text-align: center;
+}
+
+tbody tr.outdoor {
+  background-color: lightyellow;
+}
+
+tbody tr {
+  background-color: lightblue;
 }
 </style>

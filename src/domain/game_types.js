@@ -14,7 +14,8 @@ function calculateConfigFromBase(base) {
       distancesRoundSizes: gameType.distancesRoundSizes,
       scores: gameType.scores || calculateScoresForGame(gameType),
       unit: gameType.isImperial ? "yd" : "m",
-      endSize: calculateEndSize(gameType.endSize, gameType.isOutdoor)
+      endSize: calculateEndSize(gameType.endSize, gameType.isOutdoor),
+      isOutdoor: gameType.isOutdoor
     }
   }), {});
 }

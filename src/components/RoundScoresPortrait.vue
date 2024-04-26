@@ -33,18 +33,21 @@ const rounds = computed(() => calculateRounds(props.scores, props.gameType, prop
     <tbody>
     <RoundTablePortrait
       v-for="(round, index) in rounds"
-      :key="index"
+      :key="index+'portrait'"
       :subtotals="round.subTotals"
       :rounds="round.roundBreakdown"
       :endSize="endSize"
       :hasX="hasX"
     />
-    <tr>
+    <tr class="grand-totals">
+      <td colspan="7">Grand totals</td>
+    </tr>
+    <tr class="grand-totals">
       <td>Hits</td>
       <td data-test="totalHits">{{ totals.hits }}</td>
       <td>Golds</td>
       <td data-test="totalGolds">{{ totals.golds }}</td>
-      <td>Total</td>
+      <td>Score</td>
       <td colspan="2">{{ totals.totalScore }}</td>
     </tr>
     </tbody>
