@@ -16,7 +16,7 @@ export default defineConfig({
         enabled: true
       },
       manifest: {
-        name: "Archery Score Keeper v2",
+        name: "Archery Score Keeper v3",
         short_name: "Archery Score Keeper",
         description: "A simple score keeper for archery",
         theme_color: "teal",
