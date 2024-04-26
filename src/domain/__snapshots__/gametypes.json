@@ -13,7 +13,8 @@
       "M"
     ],
     "unit": "yd",
-    "endSize": 6
+    "endSize": 6,
+    "isOutdoor": true
   },
   "warwick": {
     "distancesRoundSizes": [
@@ -29,7 +30,8 @@
       "M"
     ],
     "unit": "yd",
-    "endSize": 6
+    "endSize": 6,
+    "isOutdoor": true
   },
   "western": {
     "distancesRoundSizes": [
@@ -45,7 +47,8 @@
       "M"
     ],
     "unit": "yd",
-    "endSize": 6
+    "endSize": 6,
+    "isOutdoor": true
   },
   "windsor": {
     "distancesRoundSizes": [
@@ -62,7 +65,8 @@
       "M"
     ],
     "unit": "yd",
-    "endSize": 6
+    "endSize": 6,
+    "isOutdoor": true
   },
   "frostbite": {
     "distancesRoundSizes": [
@@ -83,7 +87,8 @@
       "M"
     ],
     "unit": "m",
-    "endSize": 6
+    "endSize": 6,
+    "isOutdoor": true
   },
   "portsmouth": {
     "distancesRoundSizes": [
@@ -103,7 +108,8 @@
       "M"
     ],
     "unit": "m",
-    "endSize": 3
+    "endSize": 3,
+    "isOutdoor": false
   },
   "bray1": {
     "distancesRoundSizes": [
@@ -123,7 +129,8 @@
       "M"
     ],
     "unit": "m",
-    "endSize": 3
+    "endSize": 3,
+    "isOutdoor": false
   },
   "worcester": {
     "distancesRoundSizes": [
@@ -138,6 +145,7 @@
       "M"
     ],
     "unit": "m",
-    "endSize": 5
+    "endSize": 5,
+    "isOutdoor": false
   }
 }
