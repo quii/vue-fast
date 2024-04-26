@@ -64,12 +64,4 @@ td {
 p {
   text-align: center;
 }
-
-tbody tr.outdoor {
-  background-color: lightyellow;
-}
-
-tbody tr {
-  background-color: lightblue;
-}
 </style>
