@@ -53,6 +53,7 @@ button {
   -moz-box-sizing: border-box; /* Firefox, other Gecko */
   box-sizing: border-box; /* Opera/IE 8+ */
   height: 15vh;
+  min-width: 10vh;
 }
 
 button:disabled {
