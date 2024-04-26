@@ -9,6 +9,10 @@ defineProps({
   lowestScore: {
     type: Number,
     required: true
+  },
+  maxReached: {
+    type: Boolean,
+    required: true
   }
 })
 
@@ -20,7 +24,7 @@ defineEmits(['score', 'undo'])
     <button
       v-for="score in validScores"
       :key="score"
-      :disabled="convertToValue(score)>lowestScore"
+      :disabled="convertToValue(score)>lowestScore || maxReached"
       :class="'score' + score"
       :data-test="`score-${score}`"
       @click="$emit('score', score)"

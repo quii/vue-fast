@@ -15,7 +15,9 @@ const scoresStore = useScoresStore();
 const gameTypeStore = useGameTypeStore();
 const lowestScore = computed(() => getLowestScoreForRecentEnd(scoresStore.scores, gameTypeConfig[gameTypeStore.type].endSize));
 const validScores = computed(() => gameTypeConfig[gameTypeStore.type].scores);
-
+const maxReached = computed(() => {
+  return scoresStore.scores.length >= gameTypeConfig[gameTypeStore.type].maxArrows;
+});
 const {
   orientation
 } = useScreenOrientation();
@@ -26,6 +28,7 @@ const {
   <ScoreButtons :validScores="validScores"
                 :lowestScore="lowestScore"
                 @score="scoresStore.add"
+                :max-reached="maxReached"
                 @undo="scoresStore.undo" />
 
     <RoundScores v-if="orientation==='landscape-primary'" :scores="scoresStore.scores"

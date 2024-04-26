@@ -9,15 +9,26 @@ export const gameTypeConfig = calculateConfigFromBase(baseConfig);
 export const gameTypes = Object.keys(gameTypeConfig);
 
 function calculateConfigFromBase(base) {
-  return base.reduce((acc, gameType) => ({
-    ...acc, [gameType.name]: {
-      distancesRoundSizes: gameType.distancesRoundSizes,
-      scores: gameType.scores || calculateScoresForGame(gameType),
-      unit: gameType.isImperial ? "yd" : "m",
-      endSize: calculateEndSize(gameType.endSize, gameType.isOutdoor),
-      isOutdoor: gameType.isOutdoor
-    }
-  }), {});
+  return base.reduce((acc, gameType) => {
+    const endSize = calculateEndSize(gameType.endSize, gameType.isOutdoor);
+    return ({
+      ...acc, [gameType.name]: {
+        distancesRoundSizes: gameType.distancesRoundSizes,
+        scores: gameType.scores || calculateScoresForGame(gameType),
+        unit: gameType.isImperial ? "yd" : "m",
+        endSize: endSize,
+        isOutdoor: gameType.isOutdoor,
+        maxArrows: calculateMaxArrows(gameType, endSize)
+      }
+    });
+  }, {});
+}
+
+function calculateMaxArrows(gameType, endSize) {
+  const max = gameType.distancesRoundSizes.reduce((total, roundSize) => {
+    return total + roundSize * endSize * 2;
+  }, 0);
+  return max;
 }
 
 function calculateEndSize(endSize, isOutdoor) {
