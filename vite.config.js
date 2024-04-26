@@ -20,7 +20,6 @@ export default defineConfig({
         short_name: "Archery Score Keeper",
         description: "A simple score keeper for archery",
         theme_color: "teal",
-        orientation: "landscape-primary",
         icons: [
           {
             src: "/public/icon.png",
