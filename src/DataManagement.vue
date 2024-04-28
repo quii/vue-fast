@@ -37,8 +37,12 @@ function copyHistory() {
 }
 
 function importHistory() {
-  history.importHistory(JSON.parse(importData.value))
-  toast.success('History imported')
+  try {
+    history.importHistory(JSON.parse(importData.value));
+    toast.success("History imported");
+  } catch (error) {
+    toast.error("Error importing History", error);
+  }
 }
 
 function hardReset() {
