@@ -19,13 +19,10 @@ const props = defineProps({
 
 const ends = computed(() => {
   return props.rounds.reduce((acc, cur) => {
-    console.log(cur);
     return [...acc, cur.firstEnd, cur.secondEnd];
   }, []);
 
 });
-
-console.log(ends);
 
 </script>
 

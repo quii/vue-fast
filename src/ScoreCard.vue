@@ -21,6 +21,7 @@ const maxReached = computed(() => {
 const {
   orientation
 } = useScreenOrientation();
+
 </script>
 
 <template>

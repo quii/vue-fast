@@ -3,6 +3,9 @@ import { computed } from "vue";
 import { calculateSubtotals } from "@/domain/subtotals";
 import { calculateRounds } from "@/domain/rounds";
 import RoundTablePortrait from "@/components/RoundTablePortrait.vue";
+import { useUserStore } from "@/stores/user";
+import { useGameTypeStore } from "@/stores/game_type";
+import { newClassificationCalculator } from "@/domain/classification";
 
 const props = defineProps({
   scores: {
@@ -20,6 +23,16 @@ const props = defineProps({
 });
 const totals = computed(() => calculateSubtotals(props.scores));
 const rounds = computed(() => calculateRounds(props.scores, props.gameType, props.endSize));
+const userStore = useUserStore();
+const gameTypeStore = useGameTypeStore();
+
+const classification = computed(() => {
+  const calculator = newClassificationCalculator(gameTypeStore.type, userStore.user.gender, userStore.user.ageGroup, userStore.user.bowType);
+  if (calculator) {
+    return calculator(totals.value.totalScore);
+  }
+  return undefined;
+});
 </script>
 
 <template>
@@ -52,6 +65,22 @@ const rounds = computed(() => calculateRounds(props.scores, props.gameType, prop
     </tr>
     </tbody>
   </table>
+  <div v-if="classification">
+    <table>
+      <thead>
+      <th>Current classification</th>
+      <th>Next classification</th>
+      <th>Short by</th>
+      </thead>
+      <tbody>
+      <tr>
+        <td>{{ classification.classification }}</td>
+        <td>{{ classification.next }}</td>
+        <td>{{ classification.shortBy }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <style scoped>

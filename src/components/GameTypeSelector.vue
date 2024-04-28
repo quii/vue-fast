@@ -13,6 +13,7 @@ defineEmits(['changeGameType'])
   <select @change="event => $emit('changeGameType', event.target.value)">
     <option :key="type"
             :value="type"
+            :selected="gameType===type"
             @change="$emit('changeGameType', type)"
             v-for="type in gameTypes">
       {{ type.toUpperCase() }}

@@ -3,7 +3,7 @@ import { newClassificationCalculator } from "@/domain/classification";
 
 describe("classification", () => {
   test("can fetch classification when it exists", () => {
-    const calculator = newClassificationCalculator("national50", "men", "senior", "recurve");
+    const calculator = newClassificationCalculator("national 50", "male", "senior", "recurve");
 
     expect(calculator(349)).toEqual({ classification: "Unclassified", next: "A3", shortBy: 1 });
     expect(calculator(350)).toEqual({ classification: "A3", next: "A2", shortBy: 75 });
@@ -16,5 +16,10 @@ describe("classification", () => {
     expect(calculator(486)).toEqual({ classification: "A2", next: "A1", shortBy: 1 });
     expect(calculator(487)).toEqual({ classification: "A1" });
     expect(calculator(488)).toEqual({ classification: "A1" });
+  });
+
+  test("if config does not exist, return undefined", () => {
+    const calculator = newClassificationCalculator("doesnt exist", "men", "senior", "recurve");
+    expect(calculator).toBeUndefined;
   });
 });

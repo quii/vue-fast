@@ -10,12 +10,14 @@ import Toast from 'vue-toastification'
 
 import 'vue-toastification/dist/index.css'
 import ViewShoot from '@/ViewShoot.vue'
+import UserData from "@/UserData.vue";
 
 const routes = [
   { path: '/', component: ScoreCard },
   { path: '/history', component: ScoreHistory },
   { path: '/data', component: DataManagement },
   { path: '/history/:id', name: 'viewHistory', component: ViewShoot },
+  { path: "/you", name: "You", component: UserData }
 ]
 
 const router = VueRouter.createRouter({
