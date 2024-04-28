@@ -7,9 +7,9 @@ const userStore = useUserStore();
 
 const toast = useToast();
 
-const selectedAgeGroup = ref(userStore.user.ageGroup);
-const selectedGender = ref(userStore.user.gender);
-const selectedBowtype = ref(userStore.user.bowType);
+const selectedAgeGroup = ref("");
+const selectedGender = ref("");
+const selectedBowtype = ref("");
 
 function saveUserDetails(event) {
   event.preventDefault();
