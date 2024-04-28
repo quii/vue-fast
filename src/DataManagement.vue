@@ -29,7 +29,7 @@ function saveScores(event) {
   } catch (error) {
     console.log(error);
     document.getElementById("debug").innerHTML = error.message;
-    toast.error("Error saving scores", e);
+    toast.error("Error saving scores", error);
   }
 }
 
