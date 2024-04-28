@@ -54,6 +54,11 @@ function importHistory() {
     <textarea v-model="importData" rows="10"></textarea>
     <button type="button" @click="importHistory">📥 Import history</button>
   </div>
+  <div>
+    <h1>Hard reset</h1>
+    <h2>⚠️ Will remove all data</h2>
+    <button type="button" @click="localStorage.clear()">Reset</button>
+  </div>
 
   <datalist id="distances">
     <option value="20" />
