@@ -23,8 +23,12 @@ const maxDate = new Date().toLocaleDateString('fr-ca')
 
 function saveScores(event) {
   event.preventDefault()
-  history.add(date.value, runningTotal, gameTypeStore.type, scores.scores, gameTypeConfig[gameTypeStore.type].unit);
-  toast.success('Scores saved')
+  try {
+    history.add(date.value, runningTotal, gameTypeStore.type, scores.scores, gameTypeConfig[gameTypeStore.type].unit);
+    toast.success("Scores saved");
+  } catch (e) {
+    toast.error("Error saving scores", e);
+  }
 }
 
 function copyHistory() {
