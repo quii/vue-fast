@@ -36,6 +36,11 @@ function importHistory() {
   history.importHistory(JSON.parse(importData.value))
   toast.success('History imported')
 }
+
+function hardReset() {
+  localStorage.clear();
+  toast.info("Local data removed");
+}
 </script>
 <template>
   <div>
@@ -57,7 +62,7 @@ function importHistory() {
   <div>
     <h1>Hard reset</h1>
     <h2>⚠️ Will remove all data</h2>
-    <button type="button" @click="localStorage.clear()">Reset</button>
+    <button type="button" @click="hardReset">Reset</button>
   </div>
 
   <datalist id="distances">
