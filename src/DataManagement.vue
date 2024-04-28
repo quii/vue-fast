@@ -26,7 +26,9 @@ function saveScores(event) {
   try {
     history.add(date.value, runningTotal, gameTypeStore.type, scores.scores, gameTypeConfig[gameTypeStore.type].unit);
     toast.success("Scores saved");
-  } catch (e) {
+  } catch (error) {
+    console.log(error);
+    document.getElementById("debug").innerHTML = error.message;
     toast.error("Error saving scores", e);
   }
 }
@@ -41,6 +43,7 @@ function importHistory() {
     history.importHistory(JSON.parse(importData.value));
     toast.success("History imported");
   } catch (error) {
+    console.log(error);
     document.getElementById("debug").innerHTML = error.message;
     toast.error("unable to import history");
   }
