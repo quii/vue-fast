@@ -15,7 +15,6 @@ const gameTypeStore = useGameTypeStore();
 
 const toast = useToast();
 
-const distance = ref(40);
 const importData = ref("");
 const date = ref(new Date().toISOString().substr(0, 10));
 
@@ -24,7 +23,7 @@ const maxDate = new Date().toLocaleDateString('fr-ca')
 
 function saveScores(event) {
   event.preventDefault()
-  history.add(date.value, runningTotal, distance.value, gameTypeStore.type, scores.scores, gameTypeConfig[gameTypeStore.type].unit);
+  history.add(date.value, runningTotal, gameTypeStore.type, scores.scores, gameTypeConfig[gameTypeStore.type].unit);
   toast.success('Scores saved')
 }
 
@@ -40,25 +39,11 @@ function importHistory() {
 </script>
 <template>
   <div>
-    <h1>Save scores</h1>
+    <h1>Save score for {{ gameTypeStore.type }}</h1>
     <label for="date"
       >Date <input type="date" id="date" name="date" v-model="date" :max="maxDate" />
     </label>
-
-    <label for="distance1"
-      >Distance
-      <input
-        type="number"
-        id="distance"
-        name="distance"
-        min="20"
-        max="100"
-        step="10"
-        v-model="distance"
-        list="distances"
-      />
-    </label>
-    <button type="submit" @click="saveScores">💾 Save score {{ runningTotal }}</button>
+    <button type="submit" @click="saveScores">💾 Save {{ runningTotal }}</button>
   </div>
   <div>
     <h1>Export data</h1>

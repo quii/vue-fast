@@ -8,24 +8,21 @@ describe("addTopScoreIndicator", () => {
         "id": 1,
         "date": "2023-07-21",
         "score": 299,
-        "distance": 40,
-        "gameType": "warwick",
+        "gameType": "warwick 40",
         "scores": [/* scores here */]
       },
       {
         "id": 2,
         "date": "2023-07-20",
         "score": 242,
-        "distance": 40,
-        "gameType": "warwick",
+        "gameType": "warwick 40",
         "scores": [/* scores here */]
       },
       {
         "id": 3,
         "date": "2023-07-18",
         "score": 242,
-        "distance": 30,
-        "gameType": "warwick",
+        "gameType": "warwick 30",
         "scores": [/* scores here */]
       }
     ];
@@ -44,24 +41,21 @@ describe("addTopScoreIndicator", () => {
         "id": 1,
         "date": "2023-07-21",
         "score": 299,
-        "distance": 40,
-        "gameType": "warwick",
+        "gameType": "warwick 40",
         "scores": [/* scores here */]
       },
       {
         "id": 2,
         "date": "2023-07-20",
         "score": 242,
-        "distance": 40,
-        "gameType": "warwick",
+        "gameType": "warwick 40",
         "scores": [/* scores here */]
       },
       {
         "id": 3,
         "date": "2023-07-18",
         "score": 242,
-        "distance": 40,
-        "gameType": "national",
+        "gameType": "national 40",
         "scores": [/* scores here */]
       }
     ];

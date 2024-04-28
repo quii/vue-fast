@@ -7,7 +7,7 @@ export function addTopScoreIndicator(scoringHistory) {
 
     // Loop through the scoring history data to find the best scores for each distance and game type
     for (const entry of scoringHistoryCopy) {
-        const distance = entry.distance;
+        const distance = 0;
         const gameType = entry.gameType;
         const score = entry.score;
 
@@ -22,7 +22,7 @@ export function addTopScoreIndicator(scoringHistory) {
 
     // Loop through the scoring history data and add the 'topScore' boolean field
     for (const entry of scoringHistoryCopy) {
-        const distance = entry.distance;
+        const distance = 0;
         const gameType = entry.gameType;
         const score = entry.score;
 

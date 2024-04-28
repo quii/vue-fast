@@ -35,7 +35,6 @@ console.log(sortedHistory);
       <tr>
         <th>Date</th>
         <th>Score</th>
-        <th>Distance</th>
         <th>Round</th>
         <th></th>
       </tr>
@@ -45,7 +44,6 @@ console.log(sortedHistory);
         :key="item.date">
       <td>{{ parseAndRenderDate(item.date) }}</td>
       <td :class="{highlight: item.topScore}">{{ item.score }}</td>
-      <td>{{ item.distance }} {{ item.unit || "yd" }}</td>
       <td>{{ item.gameType }}</td>
       <td>
         <button @click="store.remove(item.id)">❌</button>
