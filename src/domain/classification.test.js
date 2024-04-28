@@ -1,6 +1,5 @@
 import { describe, expect, test } from "vitest";
 import { newClassificationCalculator } from "@/domain/classification";
-import { gameTypeConfig } from "@/domain/game_types";
 import { baseConfig } from "@/domain/game_type_config";
 
 describe("classification", () => {
