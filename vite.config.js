@@ -16,8 +16,8 @@ export default defineConfig({
         enabled: true
       },
       manifest: {
-        name: "Archery Score Keeper v6",
-        short_name: "Archery Score Keeper",
+        name: "Fast v6",
+        short_name: "Fast",
         description: "A simple score keeper for archery",
         theme_color: "teal",
         orientation: "any",
@@ -25,6 +25,11 @@ export default defineConfig({
           {
             src: "/public/icon.png",
             sizes: "150x150",
+            type: "image/png",
+          },
+          {
+            src: "/public/icon_small.png",
+            sizes: "48x48",
             type: "image/png",
           }
         ]
