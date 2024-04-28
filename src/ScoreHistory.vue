@@ -23,7 +23,7 @@ function view(id) {
   router.push({ name: "viewHistory", params: { id } });
 }
 
-const scoringHistory = store.history || {};
+const scoringHistory = store.history || [];
 console.log("the scoring history is", scoringHistory);
 const sortedHistory = computed(() => addTopScoreIndicator(scoringHistory).sort(sortByDate));
 const totalArrows = computed(() => store.history.reduce((acc, item) => acc + item.scores.length, 0));
