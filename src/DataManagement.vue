@@ -41,7 +41,8 @@ function importHistory() {
     history.importHistory(JSON.parse(importData.value));
     toast.success("History imported");
   } catch (error) {
-    toast.error("Error importing History", error);
+    document.getElementById("debug").innerHTML = error.message;
+    toast.error("unable to import history");
   }
 }
 
@@ -72,18 +73,9 @@ function hardReset() {
     <h2>⚠️ Will remove all data</h2>
     <button type="button" @click="hardReset">Reset</button>
   </div>
+  <div id="debug">
 
-  <datalist id="distances">
-    <option value="20" />
-    <option value="30" />
-    <option value="40" />
-    <option value="50" />
-    <option value="60" />
-    <option value="70" />
-    <option value="80" />
-    <option value="90" />
-    <option value="100" />
-  </datalist>
+  </div>
 </template>
 
 <style scoped>
