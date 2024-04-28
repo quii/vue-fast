@@ -13,6 +13,7 @@ export function newClassificationCalculator(roundName, sex, age, bowtype) {
   if (sex === "male") {
     sex = "men";
   }
+
   const roundScores = rawClassifications.filter(c => {
     return c.gender.toLowerCase() == sex && c.bowType.toLowerCase() == bowtype && c.age.toLowerCase() == age && c.round.toLowerCase() == roundName;
   }).sort((a, b) => a.score - b.score);
@@ -21,9 +22,6 @@ export function newClassificationCalculator(roundName, sex, age, bowtype) {
   if (!roundScores) {
     return undefined;
   }
-
-  console.log("the round scores are", roundScores);
-
 
   return (score) => {
     return roundScores.reduce((acc, classification, index) => {

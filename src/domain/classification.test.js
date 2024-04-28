@@ -30,4 +30,19 @@ describe("classification", () => {
     const calculator = newClassificationCalculator(classification, "male", "senior", "recurve");
     expect(calculator(10000)).not.toEqual({ classification: "Unclassified" });
   });
+
+  test("can get classified as a recurve woman", () => {
+    const calculator = newClassificationCalculator("windsor 50", "women", "senior", "recurve");
+    expect(calculator(731)).toEqual({ classification: "A1" });
+  });
+
+  test("can get classified as a barebow woman", () => {
+    const calculator = newClassificationCalculator("windsor", "women", "senior", "barebow");
+    expect(calculator(539)).toEqual({ classification: "B3" });
+  });
+
+  test("can get classified as a recurve 50+ man", () => {
+    const calculator = newClassificationCalculator("albion / long windsor", "male", "50+", "recurve");
+    expect(calculator(774)).toEqual({ classification: "B1" });
+  });
 });
