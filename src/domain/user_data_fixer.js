@@ -8,6 +8,7 @@ export function userDataFixer(userData) {
     const gameTypeConfigElement = gameTypeConfig[round.gameType];
     if (!gameTypeConfigElement) {
       console.log("couldnt find gametype", round.gameType);
+      return round;
     }
 
     if (round.distance !== 60 && gameTypeConfigElement.isOutdoor) {
