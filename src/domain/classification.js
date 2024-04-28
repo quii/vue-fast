@@ -14,6 +14,14 @@ const classifications = {
           "A1": 499
         }
       }
+    },
+    "female": {
+      "senior": {
+        "recurve": {
+          "A3": 383,
+          "A2": 453
+        }
+      }
     }
   },
   "national 50": {
@@ -33,6 +41,15 @@ const classifications = {
           "B3": 491
       }
       },
+    },
+    "female": {
+      "senior": {
+        "recurve": {
+          "A3": 294,
+          "A2": 373,
+          "A1": 444
+        }
+      }
     }
   },
   "national": {
@@ -52,6 +69,16 @@ const classifications = {
           "A1": 360,
           "B3": 433,
           "B2": 495
+        }
+      }
+    },
+    "female": {
+      "senior": {
+        "recurve": {
+          "A3": 222,
+          "A2": 298,
+          "A1": 376,
+          "B3": 447
         }
       }
     }
