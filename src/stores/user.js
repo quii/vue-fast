@@ -3,9 +3,6 @@ import { useLocalStorage } from "@vueuse/core";
 
 export const useUserStore = defineStore("user", () => {
   const state = useLocalStorage("user", {
-    ageGroup: "senior",
-    gender: "male",
-    bowType: "recurve"
   });
 
   function save(ageGroup, gender, bowType) {

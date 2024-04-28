@@ -1,5 +1,7 @@
 import { describe, expect, test } from "vitest";
 import { newClassificationCalculator } from "@/domain/classification";
+import { gameTypeConfig } from "@/domain/game_types";
+import { baseConfig } from "@/domain/game_type_config";
 
 describe("classification", () => {
   test("can fetch classification when it exists", () => {
@@ -21,5 +23,11 @@ describe("classification", () => {
   test("if config does not exist, return undefined", () => {
     const calculator = newClassificationCalculator("doesnt exist", "men", "senior", "recurve");
     expect(calculator).toBeUndefined;
+  });
+
+  const outdoorRoundsNotFrostbite = baseConfig.filter(r => r.isOutdoor && r.name !== "frostbite").map(r => r.name);
+  test.each(outdoorRoundsNotFrostbite)("can get classified for (%s)", (classification) => {
+    const calculator = newClassificationCalculator(classification, "male", "senior", "recurve");
+    expect(calculator(10000)).not.toEqual({ classification: "Unclassified" });
   });
 });

@@ -116,7 +116,7 @@ export const baseConfig = [
     distancesRoundSizes: [3, 3, 3]
   },
   {
-    name: "long windsor",
+    name: "albion / long windsor",
     isOutdoor: true,
     isImperial: true,
     distancesRoundSizes: [3, 3, 3]
