@@ -19,7 +19,7 @@ export default defineConfig({
         name: "Fast v6",
         short_name: "Fast",
         description: "A simple score keeper for archery",
-        theme_color: "teal",
+        theme_color: "white",
         orientation: "any",
         icons: [
           {
@@ -31,6 +31,11 @@ export default defineConfig({
             src: "/public/icon_small.png",
             sizes: "48x48",
             type: "image/png",
+          },
+          {
+            src: "/public/icon_large.png",
+            sizes: "512x570",
+            type: "image/png"
           }
         ]
       }
