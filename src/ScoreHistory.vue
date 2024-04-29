@@ -24,7 +24,6 @@ function view(id) {
 }
 
 const scoringHistory = store.history || [];
-console.log("the scoring history is", scoringHistory);
 const sortedHistory = computed(() => addTopScoreIndicator(scoringHistory).sort(sortByDate));
 const totalArrows = computed(() => store.history.reduce((acc, item) => acc + item.scores.length, 0));
 
@@ -45,7 +44,7 @@ console.log(sortedHistory);
     <tr :class="{outdoor: gameTypeConfig[item.gameType].isOutdoor}" @click="view(item.id)" v-for="item in sortedHistory"
         :key="item.date">
       <td>{{ parseAndRenderDate(item.date) }}</td>
-      <td :class="{highlight: item.topScore}">{{ item.score }}</td>
+      <td :class="{highlight: item.topScore}">{{ item.score }} {{ item.id }}</td>
       <td>{{ item.gameType }}</td>
       <td>
         <button @click="store.remove(item.id)">❌</button>

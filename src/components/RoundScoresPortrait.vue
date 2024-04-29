@@ -4,7 +4,6 @@ import { calculateSubtotals } from "@/domain/subtotals";
 import { calculateRounds } from "@/domain/rounds";
 import RoundTablePortrait from "@/components/RoundTablePortrait.vue";
 import { useUserStore } from "@/stores/user";
-import { useGameTypeStore } from "@/stores/game_type";
 import { newClassificationCalculator } from "@/domain/classification";
 
 const props = defineProps({
@@ -24,10 +23,9 @@ const props = defineProps({
 const totals = computed(() => calculateSubtotals(props.scores));
 const rounds = computed(() => calculateRounds(props.scores, props.gameType, props.endSize));
 const userStore = useUserStore();
-const gameTypeStore = useGameTypeStore();
 
 const classification = computed(() => {
-  const calculator = newClassificationCalculator(gameTypeStore.type, userStore.user.gender, userStore.user.ageGroup, userStore.user.bowType);
+  const calculator = newClassificationCalculator(props.gameType, userStore.user.gender, userStore.user.ageGroup, userStore.user.bowType);
   if (calculator) {
     return calculator(totals.value.totalScore);
   }

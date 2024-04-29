@@ -10,8 +10,10 @@ export const useHistoryStore = defineStore('history', () => {
   state.value = userDataFixer(state.value);
 
   function add(date, score, gameType, scores, unit) {
+    const maxId = state.value.map(x => x.id).sort((a, b) => a.score - b.score).slice(-1)[0];
+    const nextId = parseInt(maxId, 10) + 1;
     state.value.push({
-      id: state.value.length + 1,
+      id: nextId,
       date,
       score,
       gameType,
