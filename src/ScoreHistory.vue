@@ -44,7 +44,7 @@ console.log(sortedHistory);
     <tr :class="{outdoor: gameTypeConfig[item.gameType].isOutdoor}" @click="view(item.id)" v-for="item in sortedHistory"
         :key="item.date">
       <td>{{ parseAndRenderDate(item.date) }}</td>
-      <td :class="{highlight: item.topScore}">{{ item.score }} {{ item.id }}</td>
+      <td :class="{highlight: item.topScore}">{{ item.score }}</td>
       <td>{{ item.gameType }}</td>
       <td>
         <button @click="store.remove(item.id)">❌</button>
