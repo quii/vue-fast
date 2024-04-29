@@ -14,35 +14,39 @@ export function newClassificationCalculator(roundName, sex, age, bowtype) {
     sex = "men";
   }
 
-  const roundScores = rawClassifications.filter(c => {
-    return c.gender.toLowerCase() == sex && c.bowType.toLowerCase() == bowtype && c.age.toLowerCase() == age && c.round.toLowerCase() == roundName;
-  }).sort((a, b) => a.score - b.score);
+  const classificationFilter = c => c.gender.toLowerCase() == sex &&
+    c.bowType.toLowerCase() == bowtype &&
+    c.age.toLowerCase() == age &&
+    c.round.toLowerCase() == roundName;
+
+  const roundScores = rawClassifications
+    .filter(c => classificationFilter(c))
+    .sort((a, b) => a.score - b.score);
 
 
   if (!roundScores) {
     return undefined;
   }
 
-  return (score) => {
-    return roundScores.reduce((acc, classification, index) => {
+  return (score) =>
+    roundScores.reduce((acc, classification, index) => {
       if (acc.next) {
         return acc;
       }
-      const currentClassification = classificationList[index];
 
-      const nextRound = roundScores[index];
-      let nextRoundNode = null;
-      if (nextRound) {
-        nextRoundNode = {
-          next: classificationList[index],
-          shortBy: nextRound.score - score
-        };
-      }
+      const classificationLabel = classificationList[index];
 
       if (score >= classification.score) {
-        return { classification: currentClassification };
+        return { classification: classificationLabel };
       }
+
+      const nextRoundNode = roundScores[index] ? {
+        next: classificationLabel,
+        shortBy: roundScores[index].score - score
+      } : {};
+
       return { ...acc, ...nextRoundNode };
-    }, { classification: "Unclassified" });
-  };
+    }, unclassified);
 }
+
+const unclassified = { classification: "Unclassified" };
