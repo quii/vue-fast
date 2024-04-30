@@ -18,10 +18,10 @@ export function newClassificationCalculator(roundName, sex, age, bowtype) {
       sex = 'women'
   }
 
-  const classificationFilter = c => c.gender.toLowerCase() == sex &&
-    c.bowType.toLowerCase() == bowtype &&
-    c.age.toLowerCase() == age &&
-    c.round.toLowerCase() == roundName;
+  const classificationFilter = c => c.gender.toLowerCase() === sex &&
+    c.bowType.toLowerCase() === bowtype &&
+    c.age.toLowerCase() === age &&
+    c.round.toLowerCase() === roundName;
 
   const roundScores = rawClassifications
     .filter(c => classificationFilter(c))
