@@ -5,16 +5,14 @@ import GameTypeSelector from "@/components/GameTypeSelector.vue";
 import { useGameTypeStore } from "@/stores/game_type";
 import { computed } from "vue";
 import { getLowestScoreForRecentEnd } from "@/domain/end";
-import { gameTypeConfig } from "@/domain/game_types";
 import { X } from "@/domain/scores";
 import RoundScores from "@/components/RoundScores.vue";
 
 const scoresStore = useScoresStore();
 const gameTypeStore = useGameTypeStore();
-const currentRound = computed(() => gameTypeConfig[gameTypeStore.type])
-const lowestScore = computed(() => getLowestScoreForRecentEnd(scoresStore.scores, currentRound.value.endSize));
-const validScores = computed(() => currentRound.value.scores);
-const maxReached = computed(() => scoresStore.scores.length >= currentRound.value.maxArrows);
+const lowestScore = computed(() => getLowestScoreForRecentEnd(scoresStore.scores, gameTypeStore.currentRound.endSize));
+const validScores = computed(() => gameTypeStore.currentRound.scores);
+const maxReached = computed(() => scoresStore.scores.length >= gameTypeStore.currentRound.maxArrows);
 
 </script>
 
@@ -28,7 +26,7 @@ const maxReached = computed(() => scoresStore.scores.length >= currentRound.valu
 
     <RoundScores :scores="scoresStore.scores"
                :game-type="gameTypeStore.type"
-               :endSize="currentRound.endSize"
+               :endSize="gameTypeStore.currentRound.endSize"
                :hasX="validScores.includes(X)" />
   </div>
 

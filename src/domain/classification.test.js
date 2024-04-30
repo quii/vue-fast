@@ -31,7 +31,7 @@ describe("classification", () => {
   });
 
   test("can get classified as a recurve woman", () => {
-    const calculator = newClassificationCalculator("windsor 50", "women", "senior", "recurve");
+    const calculator = newClassificationCalculator("windsor 50", "female", "senior", "recurve");
     expect(calculator(731)).toEqual({ classification: "A1" });
   });
 

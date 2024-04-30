@@ -14,6 +14,10 @@ export function newClassificationCalculator(roundName, sex, age, bowtype) {
     sex = "men";
   }
 
+  if(sex==='female') {
+      sex = 'women'
+  }
+
   const classificationFilter = c => c.gender.toLowerCase() == sex &&
     c.bowType.toLowerCase() == bowtype &&
     c.age.toLowerCase() == age &&
