@@ -26,8 +26,6 @@ function view(id) {
 const scoringHistory = store.history || [];
 const sortedHistory = computed(() => addTopScoreIndicator(scoringHistory).sort(sortByDate));
 const totalArrows = computed(() => store.history.reduce((acc, item) => acc + item.scores.length, 0));
-
-console.log(sortedHistory);
 </script>
 
 <template>

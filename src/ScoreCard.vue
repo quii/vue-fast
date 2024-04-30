@@ -1,6 +1,5 @@
 <script setup>
 import { useScoresStore } from "@/stores/scores";
-import RoundScores from "@/components/RoundScores.vue";
 import ScoreButtons from "@/components/ScoreButtons.vue";
 import GameTypeSelector from "@/components/GameTypeSelector.vue";
 import { useGameTypeStore } from "@/stores/game_type";
@@ -8,19 +7,14 @@ import { computed } from "vue";
 import { getLowestScoreForRecentEnd } from "@/domain/end";
 import { gameTypeConfig } from "@/domain/game_types";
 import { X } from "@/domain/scores";
-import { useScreenOrientation } from "@vueuse/core";
-import RoundScoresPortrait from "@/components/RoundScoresPortrait.vue";
+import RoundScores from "@/components/RoundScores.vue";
 
 const scoresStore = useScoresStore();
 const gameTypeStore = useGameTypeStore();
-const lowestScore = computed(() => getLowestScoreForRecentEnd(scoresStore.scores, gameTypeConfig[gameTypeStore.type].endSize));
-const validScores = computed(() => gameTypeConfig[gameTypeStore.type].scores);
-const maxReached = computed(() => {
-  return scoresStore.scores.length >= gameTypeConfig[gameTypeStore.type].maxArrows;
-});
-const {
-  orientation
-} = useScreenOrientation();
+const currentRound = computed(() => gameTypeConfig[gameTypeStore.type])
+const lowestScore = computed(() => getLowestScoreForRecentEnd(scoresStore.scores, currentRound.value.endSize));
+const validScores = computed(() => currentRound.value.scores);
+const maxReached = computed(() => scoresStore.scores.length >= currentRound.value.maxArrows);
 
 </script>
 
@@ -32,14 +26,10 @@ const {
                 :max-reached="maxReached"
                 @undo="scoresStore.undo" />
 
-    <RoundScores v-if="orientation==='landscape-primary'" :scores="scoresStore.scores"
+    <RoundScores :scores="scoresStore.scores"
                :game-type="gameTypeStore.type"
-               :endSize="gameTypeConfig[gameTypeStore.type].endSize"
+               :endSize="currentRound.endSize"
                :hasX="validScores.includes(X)" />
-    <RoundScoresPortrait v-else :scores="scoresStore.scores"
-                         :game-type="gameTypeStore.type"
-                         :endSize="gameTypeConfig[gameTypeStore.type].endSize"
-                         :hasX="validScores.includes(X)" />
   </div>
 
   <div class="controls">

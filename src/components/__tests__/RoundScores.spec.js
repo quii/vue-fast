@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 
 import { mount } from '@vue/test-utils'
-import RoundScores from '@/components/RoundScores.vue'
+import RoundScores from '@/components/RoundScoresLandscape.vue'
 
 describe('RoundScores', () => {
   it.skip("renders totals", () => {
