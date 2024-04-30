@@ -25,7 +25,7 @@ export function newClassificationCalculator(roundName, sex, age, bowtype) {
 
   const roundScores = rawClassifications
     .filter(c => classificationFilter(c))
-    .sort((a, b) => a.score - b.score);
+    .sort(sortByScore);
 
 
   if (!roundScores) {
@@ -54,3 +54,5 @@ export function newClassificationCalculator(roundName, sex, age, bowtype) {
 }
 
 const unclassified = { classification: "Unclassified" };
+
+const sortByScore = (a, b) => a.score - b.score;

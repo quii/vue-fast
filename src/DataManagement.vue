@@ -6,7 +6,6 @@ import { useToast } from "vue-toastification";
 import { useGameTypeStore } from "@/stores/game_type";
 
 import { calculateTotal } from "@/domain/subtotals";
-import { gameTypeConfig } from "@/domain/game_types";
 import { convertToValues } from "@/domain/scores";
 
 const history = useHistoryStore();
@@ -24,7 +23,7 @@ const maxDate = new Date().toLocaleDateString('fr-ca')
 function saveScores(event) {
   event.preventDefault()
   try {
-    history.add(date.value, runningTotal, gameTypeStore.type, scores.scores, gameTypeConfig[gameTypeStore.type].unit);
+    history.add(date.value, runningTotal, gameTypeStore.type, scores.scores, gameTypeStore.currentRound.unit);
     toast.success("Scores saved");
   } catch (error) {
     console.log(error);
