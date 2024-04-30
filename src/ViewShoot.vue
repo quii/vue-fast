@@ -9,25 +9,29 @@ import RoundScoresPortrait from "@/components/RoundScoresPortrait.vue";
 import { computed } from "vue";
 
 const route = useRoute()
-const scores = useHistoryStore()
+const history = useHistoryStore()
 const {
   orientation
 } = useScreenOrientation();
 
 
-scores.setShootToView(route.params.id)
+history.setShootToView(route.params.id)
 
-const validScores = computed(() => gameTypeConfig[scores.selectedShoot.gameType].scores);
+const validScores = computed(() => gameTypeConfig[history.selectedShoot.gameType].scores);
+const endSize = computed(() => gameTypeConfig[history.selectedShoot.gameType].endSize)
+const scores = computed(() => history.selectedShoot.scores)
+const gameType = computed(() => history.selectedShoot.gameType)
+const date = computed(() => history.selectedShoot.date)
 </script>
 
 <template>
-  <h1>{{ scores.selectedShoot.gameType }} - {{ scores.selectedShoot.date }}</h1>
-  <RoundScores v-if="orientation==='landscape-primary'" :scores="scores.selectedShoot.scores"
-               :end-size="gameTypeConfig[scores.selectedShoot.gameType].endSize"
-               :game-type="scores.selectedShoot.gameType" />
-  <RoundScoresPortrait v-else :scores="scores.selectedShoot.scores"
-                       :game-type="scores.selectedShoot.gameType"
-                       :endSize="gameTypeConfig[scores.selectedShoot.gameType].endSize"
+  <h1>{{ gameType }} - {{ date }}</h1>
+  <RoundScores v-if="orientation==='landscape-primary'" :scores="scores"
+               :end-size="endSize"
+               :game-type="gameType" />
+  <RoundScoresPortrait v-else :scores="scores"
+                       :game-type="gameType"
+                       :endSize="endSize"
                        :hasX="validScores.includes(X)" />
 </template>
 
