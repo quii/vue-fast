@@ -39,7 +39,7 @@ const maxReached = computed(() => scoresStore.scores.length >= gameTypeStore.cur
 
 <style scoped>
 .controls {
-  width: 100%;
+  width: 100vw;
   display: flex;
   justify-content: space-between;
 }
@@ -48,8 +48,12 @@ const maxReached = computed(() => scoresStore.scores.length >= gameTypeStore.cur
   padding: 0.5em;
   font-size: 1.5em;
   flex: 1 1 0;
+  max-width: 80vw;
 }
 
+.controls button {
+  max-width: 20vh;
+}
 .page {
   width: 100vw;
 }
