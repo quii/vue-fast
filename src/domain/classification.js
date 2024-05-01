@@ -55,5 +55,8 @@ const classificationList = [
     "A1",
     "B3",
     "B2",
-    "B1"
+    "B1",
+    "MB",
+    "GMB",
+    "EMB"
 ];
