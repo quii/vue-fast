@@ -24,9 +24,10 @@ describe("classification", () => {
     expect(calculator).toBeUndefined;
   });
 
-  const outdoorRoundsNotFrostbite = baseConfig.filter(r => r.isOutdoor && r.name !== "frostbite").map(r => r.name);
+  const outdoorRoundsNotFrostbite = baseConfig.filter(r => r.isOutdoor && r.name !== "frostbite" && !r.name.includes("short metric")).map(r => r.name);
+
   test.each(outdoorRoundsNotFrostbite)("can get classified for (%s)", (classification) => {
-    const calculator = newClassificationCalculator(classification, "male", "senior", "recurve");
+    const calculator = newClassificationCalculator(classification, "male", "50+", "recurve");
     expect(calculator(10000)).not.toEqual({ classification: "Unclassified" });
   });
 

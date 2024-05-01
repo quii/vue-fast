@@ -2,148 +2,358 @@ import { MISS } from "@/domain/scores";
 
 export const baseConfig = [
   {
-    name: "new national",
+    name: 'york',
     isOutdoor: true,
     isImperial: true,
-    distancesRoundSizes: [4, 2]
+    distancesRoundSizes: [ 6, 4, 2 ]
   },
   {
-    name: "long national",
+    name: 'hereford / bristol i',
     isOutdoor: true,
     isImperial: true,
-    distancesRoundSizes: [4, 2]
+    distancesRoundSizes: [ 6, 4, 2 ]
   },
   {
-    name: "national",
+    name: 'bristol ii',
     isOutdoor: true,
     isImperial: true,
-    distancesRoundSizes: [4, 2]
+    distancesRoundSizes: [ 6, 4, 2 ]
   },
   {
-    name: "national 50",
+    name: 'bristol iii',
     isOutdoor: true,
     isImperial: true,
-    distancesRoundSizes: [4, 2]
+    distancesRoundSizes: [ 6, 4, 2 ]
   },
   {
-    name: "national 40",
+    name: 'bristol iv',
     isOutdoor: true,
     isImperial: true,
-    distancesRoundSizes: [4, 2]
+    distancesRoundSizes: [ 6, 4, 2 ]
   },
   {
-    name: "national 30",
+    name: 'bristol v',
     isOutdoor: true,
     isImperial: true,
-    distancesRoundSizes: [4, 2]
+    distancesRoundSizes: [ 6, 4, 2 ]
   },
   {
-    name: "new warwick",
+    name: 'st. george',
     isOutdoor: true,
     isImperial: true,
-    distancesRoundSizes: [2, 2]
+    distancesRoundSizes: [ 3, 3, 3 ]
   },
   {
-    name: "long warwick",
+    name: 'albion / long windsor',
     isOutdoor: true,
     isImperial: true,
-    distancesRoundSizes: [2, 2]
+    distancesRoundSizes: [ 3, 3, 3 ]
   },
   {
-    name: "warwick",
+    name: 'windsor',
     isOutdoor: true,
     isImperial: true,
-    distancesRoundSizes: [2, 2]
+    distancesRoundSizes: [ 3, 3, 3 ]
   },
   {
-    name: "warwick 50",
+    name: 'windsor 50',
     isOutdoor: true,
     isImperial: true,
-    distancesRoundSizes: [2, 2]
+    distancesRoundSizes: [ 3, 3, 3 ]
   },
   {
-    name: "warwick 40",
+    name: 'windsor 40',
     isOutdoor: true,
     isImperial: true,
-    distancesRoundSizes: [2, 2]
+    distancesRoundSizes: [ 3, 3, 3 ]
   },
   {
-    name: "warwick 30",
+    name: 'windsor 30',
     isOutdoor: true,
     isImperial: true,
-    distancesRoundSizes: [2, 2]
+    distancesRoundSizes: [ 3, 3, 3 ]
   },
   {
-    name: "new western",
+    name: 'new western',
     isOutdoor: true,
     isImperial: true,
-    distancesRoundSizes: [4, 4]
+    distancesRoundSizes: [ 4, 4 ]
   },
   {
-    name: "long western",
+    name: 'long western',
     isOutdoor: true,
     isImperial: true,
-    distancesRoundSizes: [4, 4]
+    distancesRoundSizes: [ 4, 4 ]
   },
   {
-    name: "western",
+    name: 'western',
     isOutdoor: true,
     isImperial: true,
-    distancesRoundSizes: [4, 4]
+    distancesRoundSizes: [ 4, 4 ]
   },
   {
-    name: "western 50",
+    name: 'western 50',
     isOutdoor: true,
     isImperial: true,
-    distancesRoundSizes: [4, 4]
+    distancesRoundSizes: [ 4, 4 ]
   },
   {
-    name: "western 40",
+    name: 'western 40',
     isOutdoor: true,
     isImperial: true,
-    distancesRoundSizes: [4, 4]
+    distancesRoundSizes: [ 4, 4 ]
   },
   {
-    name: "western 30",
+    name: 'western 30',
     isOutdoor: true,
     isImperial: true,
-    distancesRoundSizes: [4, 4]
+    distancesRoundSizes: [ 4, 4 ]
   },
   {
-    name: "st. george",
+    name: 'american',
     isOutdoor: true,
     isImperial: true,
-    distancesRoundSizes: [3, 3, 3]
+    distancesRoundSizes: [ 2.5, 2.5, 2.5 ]
   },
   {
-    name: "albion / long windsor",
+    name: 'st. nicholas',
     isOutdoor: true,
     isImperial: true,
-    distancesRoundSizes: [3, 3, 3]
+    distancesRoundSizes: [ 4, 3 ]
   },
   {
-    name: "windsor",
+    name: 'new national',
     isOutdoor: true,
     isImperial: true,
-    distancesRoundSizes: [3, 3, 3]
+    distancesRoundSizes: [ 4, 2 ]
   },
   {
-    name: "windsor 50",
+    name: 'long national',
     isOutdoor: true,
     isImperial: true,
-    distancesRoundSizes: [3, 3, 3]
+    distancesRoundSizes: [ 4, 2 ]
   },
   {
-    name: "windsor 40",
+    name: 'national',
     isOutdoor: true,
     isImperial: true,
-    distancesRoundSizes: [3, 3, 3]
+    distancesRoundSizes: [ 4, 2 ]
   },
   {
-    name: "windsor 30",
+    name: 'national 50',
     isOutdoor: true,
     isImperial: true,
-    distancesRoundSizes: [3, 3, 3]
+    distancesRoundSizes: [ 4, 2 ]
+  },
+  {
+    name: 'national 40',
+    isOutdoor: true,
+    isImperial: true,
+    distancesRoundSizes: [ 4, 2 ]
+  },
+  {
+    name: 'national 30',
+    isOutdoor: true,
+    isImperial: true,
+    distancesRoundSizes: [ 4, 2 ]
+  },
+  {
+    name: 'new warwick',
+    isOutdoor: true,
+    isImperial: true,
+    distancesRoundSizes: [ 2, 2 ]
+  },
+  {
+    name: 'long warwick',
+    isOutdoor: true,
+    isImperial: true,
+    distancesRoundSizes: [ 2, 2 ]
+  },
+  {
+    name: 'warwick',
+    isOutdoor: true,
+    isImperial: true,
+    distancesRoundSizes: [ 2, 2 ]
+  },
+  {
+    name: 'warwick 50',
+    isOutdoor: true,
+    isImperial: true,
+    distancesRoundSizes: [ 2, 2 ]
+  },
+  {
+    name: 'warwick 40',
+    isOutdoor: true,
+    isImperial: true,
+    distancesRoundSizes: [ 2, 2 ]
+  },
+  {
+    name: 'warwick 30',
+    isOutdoor: true,
+    isImperial: true,
+    distancesRoundSizes: [ 2, 2 ]
+  },
+  {
+    name: 'wa 1440 (90m)',
+    isOutdoor: true,
+    isImperial: false,
+    distancesRoundSizes: [ 3, 3, 3, 3 ]
+  },
+  {
+    name: 'wa 1440 (70m) / metric i',
+    isOutdoor: true,
+    isImperial: false,
+    distancesRoundSizes: [ 3,3,3,3 ]
+  },
+  {
+    name: 'wa 1440 (60m) / metric ii',
+    isOutdoor: true,
+    isImperial: false,
+    distancesRoundSizes: [ 3,3,3,3 ]
+  },
+  {
+    name: 'metric iii',
+    isOutdoor: true,
+    isImperial: false,
+    distancesRoundSizes: [ 3,3,3,3 ]
+  },
+  {
+    name: 'metric iv',
+    isOutdoor: true,
+    isImperial: false,
+    distancesRoundSizes: [ 3,3,3,3 ]
+  },
+  {
+    name: 'metric v',
+    isOutdoor: true,
+    isImperial: false,
+    distancesRoundSizes: [ 3,3,3,3 ]
+  },
+  {
+    name: 'long metric (men)',
+    isOutdoor: true,
+    isImperial: false,
+    distancesRoundSizes: [ 3, 3 ]
+  },
+  {
+    name: 'long metric (women) / long metric i',
+    isOutdoor: true,
+    isImperial: false,
+    distancesRoundSizes: [ 3, 3 ]
+  },
+  {
+    name: 'long metric ii',
+    isOutdoor: true,
+    isImperial: false,
+    distancesRoundSizes: [ 3, 3 ]
+  },
+  {
+    name: 'long metric iii',
+    isOutdoor: true,
+    isImperial: false,
+    distancesRoundSizes: [ 3, 3 ]
+  },
+  {
+    name: 'long metric iv',
+    isOutdoor: true,
+    isImperial: false,
+    distancesRoundSizes: [ 3, 3 ]
+  },
+  {
+    name: 'long metric v',
+    isOutdoor: true,
+    isImperial: false,
+    distancesRoundSizes: [ 3, 3 ]
+  },
+  {
+    name: 'short metric / short metric i',
+    isOutdoor: true,
+    isImperial: false,
+    distancesRoundSizes: [ 3, 3 ]
+  },
+  {
+    name: 'short metric ii',
+    isOutdoor: true,
+    isImperial: false,
+    distancesRoundSizes: [ 3, 3 ]
+  },
+  {
+    name: 'short metric iii',
+    isOutdoor: true,
+    isImperial: false,
+    distancesRoundSizes: [ 3, 3 ]
+  },
+  {
+    name: 'short metric iv',
+    isOutdoor: true,
+    isImperial: false,
+    distancesRoundSizes: [ 3, 3 ]
+  },
+  {
+    name: 'wa standard bow',
+    isOutdoor: true,
+    isImperial: false,
+    distancesRoundSizes: [ 3, 3 ]
+  },
+  {
+    name: 'wa 900',
+    isOutdoor: true,
+    isImperial: false,
+    distancesRoundSizes: [ 2.5, 2.5, 2.5 ]
+  },
+  {
+    name: 'wa 70m',
+    isOutdoor: true,
+    isImperial: false,
+    distancesRoundSizes: [ 6 ]
+  },
+  {
+    name: 'wa 60m',
+    isOutdoor: true,
+    isImperial: false,
+    distancesRoundSizes: [ 6 ]
+  },
+  {
+    name: 'wa 50m (barebow) / metric 122-50',
+    isOutdoor: true,
+    isImperial: false,
+    distancesRoundSizes: [ 6 ]
+  },
+  {
+    name: 'metric 122-40',
+    isOutdoor: true,
+    isImperial: false,
+    distancesRoundSizes: [ 6 ]
+  },
+  {
+    name: 'metric 122-30',
+    isOutdoor: true,
+    isImperial: false,
+    distancesRoundSizes: [ 6 ]
+  },
+  {
+    name: 'wa 50m (compound)',
+    isOutdoor: true,
+    isImperial: false,
+    distancesRoundSizes: [ 6 ]
+  },
+  {
+    name: 'metric 80-40',
+    isOutdoor: true,
+    isImperial: false,
+    distancesRoundSizes: [ 6 ]
+  },
+  {
+    name: 'metric 80-30',
+    isOutdoor: true,
+    isImperial: false,
+    distancesRoundSizes: [ 6 ]
+  },
+  {
+    name: 'short metric v',
+    isOutdoor: true,
+    isImperial: true,
+    distancesRoundSizes: [ 3, 3 ]
   },
   {
     name: "frostbite",

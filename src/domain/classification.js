@@ -1,16 +1,8 @@
 import { rawClassifications } from "@/domain/raw_classifications";
 
-const classificationList = [
-  "A3",
-  "A2",
-  "A1",
-  "B3",
-  "B2",
-  "B1"
-];
 
 export function newClassificationCalculator(roundName, sex, age, bowtype) {
-  if (sex === "male") {
+    if (sex === "male") {
     sex = "men";
   }
 
@@ -56,3 +48,12 @@ export function newClassificationCalculator(roundName, sex, age, bowtype) {
 const unclassified = { classification: "Unclassified" };
 
 const sortByScore = (a, b) => a.score - b.score;
+
+const classificationList = [
+    "A3",
+    "A2",
+    "A1",
+    "B3",
+    "B2",
+    "B1"
+];

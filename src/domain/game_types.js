@@ -1,5 +1,5 @@
-import { MISS } from "@/domain/scores";
-import { baseConfig } from "@/domain/game_type_config";
+import {MISS} from "@/domain/scores";
+import {baseConfig} from "@/domain/game_type_config";
 
 const imperialScores = [9, 7, 5, 3, 1, MISS];
 const outdoorMetricScores = ["X", 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, MISS];
@@ -25,10 +25,9 @@ function calculateConfigFromBase(base) {
 }
 
 function calculateMaxArrows(gameType, endSize) {
-  const max = gameType.distancesRoundSizes.reduce((total, roundSize) => {
+  return gameType.distancesRoundSizes.reduce((total, roundSize) => {
     return total + roundSize * endSize * 2;
   }, 0);
-  return max;
 }
 
 function calculateEndSize(endSize, isOutdoor) {
