@@ -3,16 +3,37 @@ import { useScoresStore } from "@/stores/scores";
 import ScoreButtons from "@/components/ScoreButtons.vue";
 import GameTypeSelector from "@/components/GameTypeSelector.vue";
 import { useGameTypeStore } from "@/stores/game_type";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { getLowestScoreForRecentEnd } from "@/domain/end";
-import { X } from "@/domain/scores";
+import { convertToValues, X } from "@/domain/scores";
 import RoundScores from "@/components/RoundScores.vue";
+import { calculateTotal } from "@/domain/subtotals";
+import { useToast } from "vue-toastification";
+import { useHistoryStore } from "@/stores/history";
 
 const scoresStore = useScoresStore();
 const gameTypeStore = useGameTypeStore();
 const lowestScore = computed(() => getLowestScoreForRecentEnd(scoresStore.scores, gameTypeStore.currentRound.endSize));
 const validScores = computed(() => gameTypeStore.currentRound.scores);
 const maxReached = computed(() => scoresStore.scores.length >= gameTypeStore.currentRound.maxArrows);
+
+//todo: this is copied from data management, DRY it up
+const history = useHistoryStore();
+const toast = useToast();
+const date = ref(new Date().toISOString().substr(0, 10));
+const runningTotal = computed(() => calculateTotal(convertToValues(scoresStore.scores)));
+
+
+function saveScores(event) {
+  event.preventDefault();
+  try {
+    history.add(date.value, runningTotal, gameTypeStore.type, scoresStore.scores, gameTypeStore.currentRound.unit);
+    toast.success("Scores saved");
+  } catch (error) {
+    console.log(error);
+    toast.error("Error saving scores", error);
+  }
+}
 
 </script>
 
@@ -23,6 +44,9 @@ const maxReached = computed(() => scoresStore.scores.length >= gameTypeStore.cur
                 @score="scoresStore.add"
                 :max-reached="maxReached"
                 @undo="scoresStore.undo" />
+
+    <button class="save" v-if="maxReached" @click="saveScores">💾 Save score to history</button>
+
 
     <RoundScores :scores="scoresStore.scores"
                :game-type="gameTypeStore.type"
@@ -56,5 +80,11 @@ const maxReached = computed(() => scoresStore.scores.length >= gameTypeStore.cur
 }
 .page {
   width: 100vw;
+}
+
+.save {
+  width: 100%;
+  font-size: 1.5em;
+  height: 15vh
 }
 </style>

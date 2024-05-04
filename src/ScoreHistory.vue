@@ -1,7 +1,7 @@
 <script setup>
 import { useHistoryStore } from '@/stores/history'
 import { useRouter } from 'vue-router'
-import { computed } from 'vue'
+import { computed } from "vue";
 import {addTopScoreIndicator} from "@/domain/topscores";
 import { gameTypeConfig } from "@/domain/game_types";
 const store = useHistoryStore()
