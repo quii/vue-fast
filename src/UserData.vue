@@ -20,6 +20,8 @@ function saveUserDetails(event) {
 <template>
   <div>
     <h1>Your details</h1>
+    <p>These details are used by the app to tell you your progress on classifications while you're shooting.</p>
+    <p>This app is not an official record! You will have to report your scores to your records officer in the usual way.</p>
     <select v-model="selectedAgeGroup">
       <option disabled value="">Select age group</option>
       <option>50+</option>
@@ -39,6 +41,10 @@ function saveUserDetails(event) {
       <option value="compound">Compound</option>
     </select>
     <button type="submit" @click="saveUserDetails">💾 Save</button>
+  </div>
+
+  <div class="buymeacoffee">
+    <p>Happy for you to use this for free, but if you wish to show appreciation, <a href="https://buymeacoffee.com/quii">feel free to tap here and buy me a coffee ☕️ 🥰</a></p>
   </div>
 
 </template>
