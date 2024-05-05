@@ -3,11 +3,13 @@ import { convertToValues } from "@/domain/scores";
 export function calculateSubtotals(scores) {
   const scoreValues = convertToValues(scores);
 
+  const totalScore = calculateTotal(scoreValues);
   return {
     hits: scoreValues.length,
-    totalScore: calculateTotal(scoreValues),
+    totalScore: totalScore,
     golds: calculateGoldCount(scoreValues),
-    X: calculateXCount(scores)
+    X: calculateXCount(scores),
+    onTrackFor252: totalScore >= 84
   };
 }
 

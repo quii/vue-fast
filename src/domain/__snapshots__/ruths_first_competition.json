@@ -23,6 +23,7 @@
           "totalScore": 74,
           "golds": 4,
           "X": 0,
+          "onTrackFor252": false,
           "runningTotal": 74
         }
       },
@@ -48,6 +49,7 @@
           "totalScore": 72,
           "golds": 1,
           "X": 0,
+          "onTrackFor252": false,
           "runningTotal": 146
         }
       },
@@ -73,6 +75,7 @@
           "totalScore": 70,
           "golds": 3,
           "X": 0,
+          "onTrackFor252": false,
           "runningTotal": 216
         }
       }
@@ -81,7 +84,8 @@
       "hits": 36,
       "totalScore": 216,
       "golds": 8,
-      "X": 0
+      "X": 0,
+      "onTrackFor252": true
     }
   },
   {
@@ -108,6 +112,7 @@
           "totalScore": 86,
           "golds": 4,
           "X": 0,
+          "onTrackFor252": true,
           "runningTotal": 302
         }
       },
@@ -133,6 +138,7 @@
           "totalScore": 102,
           "golds": 9,
           "X": 0,
+          "onTrackFor252": true,
           "runningTotal": 404
         }
       },
@@ -158,6 +164,7 @@
           "totalScore": 82,
           "golds": 2,
           "X": 0,
+          "onTrackFor252": false,
           "runningTotal": 486
         }
       }
@@ -166,7 +173,8 @@
       "hits": 36,
       "totalScore": 270,
       "golds": 15,
-      "X": 0
+      "X": 0,
+      "onTrackFor252": true
     }
   },
   {
@@ -193,6 +201,7 @@
           "totalScore": 104,
           "golds": 10,
           "X": 0,
+          "onTrackFor252": true,
           "runningTotal": 590
         }
       },
@@ -218,6 +227,7 @@
           "totalScore": 106,
           "golds": 11,
           "X": 0,
+          "onTrackFor252": true,
           "runningTotal": 696
         }
       },
@@ -243,6 +253,7 @@
           "totalScore": 108,
           "golds": 12,
           "X": 0,
+          "onTrackFor252": true,
           "runningTotal": 804
         }
       }
@@ -251,7 +262,8 @@
       "hits": 36,
       "totalScore": 318,
       "golds": 33,
-      "X": 0
+      "X": 0,
+      "onTrackFor252": true
     }
   }
 ]

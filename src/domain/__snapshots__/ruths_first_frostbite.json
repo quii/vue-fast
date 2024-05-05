@@ -23,6 +23,7 @@
           "totalScore": 85,
           "golds": 2,
           "X": 0,
+          "onTrackFor252": true,
           "runningTotal": 85
         }
       },
@@ -48,6 +49,7 @@
           "totalScore": 84,
           "golds": 3,
           "X": 2,
+          "onTrackFor252": true,
           "runningTotal": 169
         }
       },
@@ -73,6 +75,7 @@
           "totalScore": 85,
           "golds": 3,
           "X": 0,
+          "onTrackFor252": true,
           "runningTotal": 254
         }
       }
@@ -81,7 +84,8 @@
       "hits": 36,
       "totalScore": 254,
       "golds": 8,
-      "X": 2
+      "X": 2,
+      "onTrackFor252": true
     }
   }
 ]

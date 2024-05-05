@@ -28,6 +28,7 @@ function calculateRoundSummaries(scores, endSize) {
     const scores = e.flat();
     const subTotals = calculateSubtotals(scores);
     subTotals.runningTotal = runningTotal + subTotals.totalScore;
+    // subTotals.onTrackFor252 = subTotals.runningTotal >= (index+1)*84
     runningTotal = subTotals.runningTotal;
 
     return { firstEnd: e[0] ?? [], secondEnd: e[1] ?? [], subTotals, scores };
