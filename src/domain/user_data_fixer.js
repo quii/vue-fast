@@ -1,7 +1,12 @@
 import { gameTypeConfig } from "@/domain/game_types";
 
 export function userDataFixer(userData) {
+  let someId = 0;
   return userData.map(round => {
+    if (round.id === null) {
+      round.id = someId;
+      someId++;
+    }
     if (!round.distance) {
       return round;
     }
