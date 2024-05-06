@@ -1,4 +1,4 @@
-import { ruthsFrostbiteGame, ruthsGame } from "../../src/domain/test_data";
+import { cjSave, ruthsFrostbiteGame, ruthsGame } from "../../src/domain/test_data";
 
 describe(`Smoke test using Ruth's game`, () => {
   it("records all the scores and calculates the totals for an imperial game", () => {
@@ -26,5 +26,15 @@ describe(`Smoke test using Ruth's game`, () => {
     cy.get(`[data-test="totalScore"]`).contains("254");
     cy.get("[data-test=\"totalGolds\"]").contains("8");
 
+    // cant do this as separate tests i dont know why
+    cy.get("a").contains("Data").click();
+    cy.get("button").contains("Reset").click();
+
+    const rawCJData = JSON.stringify(cjSave);
+    cy.get("textarea").type(rawCJData, { parseSpecialCharSequences: false, delay: 0 });
+    cy.get("button").contains("Import").click();
+    cy.get("a").contains("History").click();
+    cy.get("td").contains("Sat, 20 Apr 2024").click();
+    cy.get("[data-test=\"totalGolds\"]").contains("19");
   })
 })

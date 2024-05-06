@@ -26,6 +26,15 @@ function view(id) {
 const scoringHistory = store.history || [];
 const sortedHistory = computed(() => addTopScoreIndicator(scoringHistory).sort(sortByDate));
 const totalArrows = computed(() => store.history.reduce((acc, item) => acc + item.scores.length, 0));
+
+function isOutdoor(gameType) {
+  const config = gameTypeConfig[gameType];
+  if (!config) {
+    console.log("could not find config for", gameType);
+  }
+  return config?.isOutdoor;
+}
+
 </script>
 
 <template>
@@ -39,7 +48,7 @@ const totalArrows = computed(() => store.history.reduce((acc, item) => acc + ite
       </tr>
     </thead>
     <tbody>
-    <tr :class="{outdoor: gameTypeConfig[item.gameType].isOutdoor}" @click="view(item.id)" v-for="item in sortedHistory"
+    <tr :class="{outdoor: isOutdoor(item.gameType)}" @click="view(item.id)" v-for="item in sortedHistory"
         :key="item.date">
       <td>{{ parseAndRenderDate(item.date) }}</td>
       <td :class="{highlight: item.topScore}">{{ item.score }}</td>

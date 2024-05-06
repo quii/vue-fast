@@ -16,12 +16,12 @@ export function userDataFixer(userData) {
       return round;
     }
 
-    if (round.distance !== 60 && gameTypeConfigElement.isOutdoor) {
-      round.gameType = round.gameType + " " + round.distance;
-    }
     if (round.gameType === "frostbite" || round.gameType === "frostbite 30") {
       round.gameType = "frostbite";
+    } else if (round.distance !== 60 && gameTypeConfigElement.isOutdoor) {
+      round.gameType = round.gameType + " " + round.distance;
     }
+
     delete round.distance;
 
     return round;
