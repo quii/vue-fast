@@ -2,7 +2,11 @@ import { ruthsFrostbiteGame, ruthsGame } from "../../src/domain/test_data";
 
 describe(`Smoke test using Ruth's game`, () => {
   it("records all the scores and calculates the totals for an imperial game", () => {
-    cy.visit('/')
+    cy.visit("/", {
+      onBeforeLoad(win) {
+        delete win.navigator.__proto__.serviceWorker;
+      }
+    });
     cy.get("button").contains("Clear data").click();
     cy.get('select').select('WINDSOR')
 

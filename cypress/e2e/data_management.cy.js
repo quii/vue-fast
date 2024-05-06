@@ -1,8 +1,14 @@
 import { cjSave, mallySave } from "../../src/domain/test_data";
 
+//service worker nonsense: https://github.com/cypress-io/cypress/issues/27501
+
 describe("data management", () => {
   it("import cj save and view history", () => {
-    cy.visit("/");
+    cy.visit("/", {
+      onBeforeLoad(win) {
+        delete win.navigator.__proto__.serviceWorker;
+      }
+    });
     cy.get("a").contains("Data").click();
     cy.get("button").contains("Reset").click();
 
@@ -15,7 +21,11 @@ describe("data management", () => {
   });
 
   it("import Mally's game, view history", () => {
-    cy.visit("/");
+    cy.visit("/", {
+      onBeforeLoad(win) {
+        delete win.navigator.__proto__.serviceWorker;
+      }
+    });
     cy.get("a").contains("Data").click();
     cy.get("button").contains("Reset").click();
 
@@ -27,4 +37,26 @@ describe("data management", () => {
     cy.get("td").contains("Sun, 5 May 2024").click();
     cy.get("[data-test=\"totalGolds\"]").contains("9");
   });
+
+  it("fresh data", () => {
+    cy.visit("/", {
+      onBeforeLoad(win) {
+        delete win.navigator.__proto__.serviceWorker;
+      }
+    });
+    cy.get("a").contains("Data").click();
+    cy.get("button").contains("Reset").click();
+
+    cy.get("a").contains("📝 Scoring").click();
+    cy.get("select").select("WINDSOR");
+
+    Cypress._.times(12 * 9, () => {
+      cy.get("button").contains("9").click();
+    });
+
+    cy.get("button").contains("Save").click();
+    cy.get("a").contains("History").click();
+    cy.get("td").contains("windsor").click();
+    cy.get("[data-test=\"totalGolds\"]").contains("108");
+  })
 });
