@@ -32,7 +32,7 @@ describe("data management", () => {
     const rawMallyData = JSON.stringify(mallySave);
     cy.get("textarea").type(rawMallyData, { parseSpecialCharSequences: false, delay: 0 });
     cy.get("button").contains("Import").click();
-    cy.visit("/"); //let the data fixer do its thing
+    // cy.visit("/"); //let the data fixer do its thing
     cy.get("a").contains("History").click();
     cy.get("td").contains("Sun, 5 May 2024").click();
     cy.get("[data-test=\"totalGolds\"]").contains("9");

@@ -30,7 +30,7 @@ export const useHistoryStore = defineStore('history', () => {
   }
 
   function importHistory(history) {
-    state.value = history;
+    state.value = userDataFixer(history);
   }
 
   function setShootToView(id) {
