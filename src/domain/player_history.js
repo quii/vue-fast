@@ -37,6 +37,9 @@ export function NewPlayerHistory(storage) {
     pointsPerEnd(round, endSize) {
       const pb = this.personalBest(round);
       return Math.trunc((pb / endSize) / 2);
+    },
+    totalArrows() {
+      return storage.value.reduce((acc, item) => acc + item.scores.length, 0);
     }
   };
 }

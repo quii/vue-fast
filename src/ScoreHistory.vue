@@ -2,7 +2,6 @@
 import { useHistoryStore } from '@/stores/history'
 import { useRouter } from 'vue-router'
 import { computed } from "vue";
-import { gameTypeConfig } from "@/domain/game_types";
 const store = useHistoryStore()
 const router = useRouter()
 
@@ -21,15 +20,7 @@ function view(id) {
   router.push({ name: "viewHistory", params: { id } });
 }
 
-const totalArrows = computed(() => store.history.reduce((acc, item) => acc + item.scores.length, 0));
-
-function isOutdoor(gameType) {
-  const config = gameTypeConfig[gameType];
-  if (!config) {
-    console.log("could not find config for", gameType);
-  }
-  return config?.isOutdoor;
-}
+const totalArrows = computed(() => store.totalArrows());
 
 </script>
 
@@ -44,7 +35,7 @@ function isOutdoor(gameType) {
       </tr>
     </thead>
     <tbody>
-    <tr :class="{outdoor: isOutdoor(item.gameType)}" @click="view(item.id)" v-for="item in store.sortedHistory()"
+    <tr @click="view(item.id)" v-for="item in store.sortedHistory()"
         :key="item.date">
       <td>{{ parseAndRenderDate(item.date) }}</td>
       <td :class="{highlight: item.topScore}">{{ item.score }}</td>

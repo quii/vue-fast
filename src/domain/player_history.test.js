@@ -31,4 +31,8 @@ describe("player history", () => {
     expect(playerHistory.personalBest("windsor 50")).toEqual(826);
     expect(playerHistory.personalBest("frostbite")).toBeUndefined();
   });
+
+  test("it can total up the number of arrows shot", () => {
+    expect(playerHistory.totalArrows()).toEqual(12);
+  });
 });
