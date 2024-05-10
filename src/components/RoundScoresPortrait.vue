@@ -5,6 +5,7 @@ import { calculateRounds } from "@/domain/rounds";
 import RoundTablePortrait from "@/components/RoundTablePortrait.vue";
 import { useUserStore } from "@/stores/user";
 import { newClassificationCalculator } from "@/domain/classification";
+import { useHistoryStore } from "@/stores/history";
 
 const props = defineProps({
   scores: {
@@ -23,6 +24,8 @@ const props = defineProps({
 const totals = computed(() => calculateSubtotals(props.scores));
 const rounds = computed(() => calculateRounds(props.scores, props.gameType, props.endSize));
 const userStore = useUserStore();
+const history = useHistoryStore();
+const pb = computed(() => history.personalBest(props.gameType));
 
 const classification = computed(() => {
   const calculator = newClassificationCalculator(props.gameType, userStore.user.gender, userStore.user.ageGroup, userStore.user.bowType);
@@ -69,12 +72,14 @@ const classification = computed(() => {
       <th>Current classification</th>
       <th>Next classification</th>
       <th>Short by</th>
+      <th v-if="pb">Personal Best</th>
       </thead>
       <tbody>
       <tr>
         <td>{{ classification.classification }}</td>
         <td>{{ classification.next }}</td>
         <td>{{ classification.shortBy }}</td>
+        <td v-if="pb">{{ pb }}</td>
       </tr>
       </tbody>
     </table>
