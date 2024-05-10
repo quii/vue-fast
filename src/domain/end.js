@@ -1,6 +1,14 @@
 import { convertToValue } from "@/domain/scores";
 
-export function getLowestScoreForRecentEnd(scores, endSize = 6) {
+export function calculateScoreIsValidForEnd(scores, endSize) {
+    return (score) => {
+        const lowestScore = getLowestScoreForRecentEnd(scores, endSize);
+        const scoreValue = convertToValue(score);
+        return scoreValue <= lowestScore;
+    };
+}
+
+function getLowestScoreForRecentEnd(scores, endSize = 6) {
     const scoresAsValues = scores.map(convertToValue);
     const recentEndIndex = scoresAsValues.length % endSize;
 
@@ -19,5 +27,3 @@ export function getLowestScoreForRecentEnd(scores, endSize = 6) {
 
     return minScore;
 }
-
-

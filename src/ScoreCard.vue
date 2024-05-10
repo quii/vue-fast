@@ -4,7 +4,6 @@ import ScoreButtons from "@/components/ScoreButtons.vue";
 import GameTypeSelector from "@/components/GameTypeSelector.vue";
 import { useGameTypeStore } from "@/stores/game_type";
 import { computed, ref } from "vue";
-import { getLowestScoreForRecentEnd } from "@/domain/end";
 import { convertToValues, X } from "@/domain/scores";
 import RoundScores from "@/components/RoundScores.vue";
 import { calculateTotal } from "@/domain/subtotals";
@@ -13,7 +12,6 @@ import { useHistoryStore } from "@/stores/history";
 
 const scoresStore = useScoresStore();
 const gameTypeStore = useGameTypeStore();
-const lowestScore = computed(() => getLowestScoreForRecentEnd(scoresStore.scores, gameTypeStore.currentRound.endSize));
 const validScores = computed(() => gameTypeStore.currentRound.scores);
 const maxReached = computed(() => scoresStore.scores.length >= gameTypeStore.currentRound.maxArrows);
 
@@ -22,7 +20,6 @@ const history = useHistoryStore();
 const toast = useToast();
 const date = ref(new Date().toISOString().substr(0, 10));
 const runningTotal = computed(() => calculateTotal(convertToValues(scoresStore.scores)));
-
 
 function saveScores(event) {
   event.preventDefault();
@@ -40,9 +37,10 @@ function saveScores(event) {
 <template>
   <div class="page">
   <ScoreButtons :validScores="validScores"
-                :lowestScore="lowestScore"
                 @score="scoresStore.add"
                 :max-reached="maxReached"
+                :scores="scoresStore.scores"
+                :endSize="gameTypeStore.currentRound.endSize"
                 @undo="scoresStore.undo" />
 
     <button class="save" v-if="maxReached" @click="saveScores">💾 Save score to history</button>

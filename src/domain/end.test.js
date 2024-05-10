@@ -1,11 +1,15 @@
-import {describe, expect, test} from "vitest";
-import {getLowestScoreForRecentEnd} from "@/domain/end";
+import { describe, expect, test } from "vitest";
+import { calculateScoreIsValidForEnd } from "@/domain/end";
 
-describe('getLowestScoreForRecentEnd', () => {
+describe("calculateScoreIsHigherThanPreviousInEnd", () => {
+    test("example scenario", () => {
+        const scores = [7, 5, 5];
+        const isHigherOrEqual = calculateScoreIsValidForEnd(scores, 6);
 
-    test('Test lowest score for recent end with small array', () => {
-        const scores = [8, 9, 10];
-        expect(getLowestScoreForRecentEnd(scores)).toEqual(8)
+        expect(isHigherOrEqual(9)).toBeFalsy();
+        expect(isHigherOrEqual(7)).toBeFalsy();
+        expect(isHigherOrEqual(5)).toBeTruthy();
+        expect(isHigherOrEqual(3)).toBeTruthy();
     });
 
     test('Test lowest score for recent end with multiple ends', () => {
@@ -14,30 +18,33 @@ describe('getLowestScoreForRecentEnd', () => {
             10, 9, 9, 8, 6, 7,
             10, 9, 9, 10, 6
         ];
-        expect(getLowestScoreForRecentEnd(scores)).toEqual(6)
+        const isHigherOrEqual = calculateScoreIsValidForEnd(scores, 6);
+
+        expect(isHigherOrEqual(11)).toBeFalsy();
+        expect(isHigherOrEqual(7)).toBeFalsy();
+        expect(isHigherOrEqual(6)).toBeTruthy();
+        expect(isHigherOrEqual(5)).toBeTruthy();
     });
 
-    test('if there are no scores this end, the lowest score is infinity', () => {
+    test("if there are no scores this end, any number is valid", () => {
         const scores = [
             8, 9, 10, 7, 6, 8,
             10, 9, 9, 8, 6, 3
         ];
-        expect(getLowestScoreForRecentEnd(scores)).toEqual(Infinity)
-    });
+        const isHigherOrEqual = calculateScoreIsValidForEnd(scores, 6);
 
-    test('another scenario', () => {
-        const scores = [
-            7,5,5,3,1,1,
-            1,1,1,1,1,1,
-            9
-        ]
-        expect(getLowestScoreForRecentEnd(scores)).toEqual(9)
-    })
+        expect(isHigherOrEqual(5)).toBeTruthy();
+        expect(isHigherOrEqual(1)).toBeTruthy();
+
+    });
 
     test('M is 0', () => {
         const scores = [
             1, "M"
         ]
-        expect(getLowestScoreForRecentEnd(scores)).toEqual(0)
+        const isHigherOrEqual = calculateScoreIsValidForEnd(scores, 6);
+
+        expect(isHigherOrEqual(1)).toBeFalsy();
+        expect(isHigherOrEqual("M")).toBeTruthy();
     })
 })

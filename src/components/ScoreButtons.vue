@@ -1,26 +1,28 @@
 <script setup>
-import { convertToValue } from "@/domain/scores";
 
-const props = defineProps({
+import { calculateScoreIsValidForEnd } from "@/domain/end";
+
+defineProps({
   validScores: {
     type: Array,
     required: true
   },
-  lowestScore: {
-    type: Number,
-    required: true
-  },
   maxReached: {
     type: Boolean,
+    required: true
+  },
+  scores: {
+    required: true
+  },
+  endSize: {
+    type: Number,
     required: true
   }
 })
 
 defineEmits(['score', 'undo'])
 
-function scoreIsHigherThanPreviousInEnd(score) {
-  return convertToValue(score) > props.lowestScore;
-}
+
 </script>
 
 <template>
@@ -28,7 +30,7 @@ function scoreIsHigherThanPreviousInEnd(score) {
     <button
       v-for="score in validScores"
       :key="score"
-      :disabled="scoreIsHigherThanPreviousInEnd(score) || maxReached"
+      :disabled="!calculateScoreIsValidForEnd(scores, endSize)(score) || maxReached"
       :class="'score' + score"
       :data-test="`score-${score}`"
       @click="$emit('score', score)"
