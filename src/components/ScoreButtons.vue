@@ -1,7 +1,7 @@
 <script setup>
 import { convertToValue } from "@/domain/scores";
 
-defineProps({
+const props = defineProps({
   validScores: {
     type: Array,
     required: true
@@ -17,6 +17,10 @@ defineProps({
 })
 
 defineEmits(['score', 'undo'])
+
+function scoreIsHigherThanPreviousInEnd(score) {
+  return convertToValue(score) > props.lowestScore;
+}
 </script>
 
 <template>
@@ -24,7 +28,7 @@ defineEmits(['score', 'undo'])
     <button
       v-for="score in validScores"
       :key="score"
-      :disabled="convertToValue(score)>lowestScore || maxReached"
+      :disabled="scoreIsHigherThanPreviousInEnd(score) || maxReached"
       :class="'score' + score"
       :data-test="`score-${score}`"
       @click="$emit('score', score)"
