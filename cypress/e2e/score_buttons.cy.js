@@ -32,7 +32,7 @@ describe("score buttons", () => {
     cy.get("button").contains("9").should("be.enabled");
   });
 
-  it.skip("when a 10 is scored with a metric, you can no longer score an X", () => {
+  it("when a 10 is scored with a metric, you can no longer score an X", () => {
     cy.visit("/", {
       onBeforeLoad(win) {
         delete win.navigator.__proto__.serviceWorker;
