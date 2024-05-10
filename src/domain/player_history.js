@@ -33,6 +33,10 @@ export function NewPlayerHistory(storage) {
       const recordsForRound = storage.value.filter(byRound(round)).map(x => x.score);
       recordsForRound?.sort(byScore);
       return recordsForRound?.[0];
+    },
+    pointsPerEnd(round, endSize) {
+      const pb = this.personalBest(round);
+      return Math.trunc((pb / endSize) / 2);
     }
   };
 }

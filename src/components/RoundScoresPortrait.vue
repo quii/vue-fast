@@ -26,6 +26,7 @@ const rounds = computed(() => calculateRounds(props.scores, props.gameType, prop
 const userStore = useUserStore();
 const history = useHistoryStore();
 const pb = computed(() => history.personalBest(props.gameType));
+const pointsPerEnd = computed(() => history.pointsPerEnd(props.gameType, props.endSize));
 
 const classification = computed(() => {
   const calculator = newClassificationCalculator(props.gameType, userStore.user.gender, userStore.user.ageGroup, userStore.user.bowType);
@@ -79,7 +80,7 @@ const classification = computed(() => {
         <td>{{ classification.classification }}</td>
         <td>{{ classification.next }}</td>
         <td>{{ classification.shortBy }}</td>
-        <td v-if="pb">{{ pb }}</td>
+        <td v-if="pb">{{ pb }}<br />Avg. {{ pointsPerEnd }} per end</td>
       </tr>
       </tbody>
     </table>
