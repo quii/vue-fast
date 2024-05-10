@@ -30,6 +30,18 @@ describe("score buttons", () => {
     });
 
     cy.get("button").contains("9").should("be.enabled");
+  });
 
+  it.skip("when a 10 is scored with a metric, you can no longer score an X", () => {
+    cy.visit("/", {
+      onBeforeLoad(win) {
+        delete win.navigator.__proto__.serviceWorker;
+      }
+    });
+    cy.get("button").contains("Clear data").click();
+    cy.get("select").select("WA 70M");
+
+    cy.get("button").contains("10").click();
+    cy.get("button").contains("X").should("be.disabled");
   });
 });
