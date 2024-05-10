@@ -71,10 +71,15 @@ const classification = computed(() => {
   <div v-if="classification">
     <table>
       <thead>
-      <th>Current classification</th>
-      <th>Next classification</th>
-      <th>Short by</th>
-      <th v-if="pb">Personal Best</th>
+      <tr>
+        <th colspan="3">Classification</th>
+        <th v-if="pb" rowspan="2">Personal best</th>
+      </tr>
+      <tr>
+        <th>Current</th>
+        <th>Next</th>
+        <th>Short by</th>
+      </tr>
       </thead>
       <tbody>
       <tr>
