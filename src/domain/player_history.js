@@ -34,9 +34,10 @@ export function NewPlayerHistory(storage) {
       recordsForRound?.sort(byScore);
       return recordsForRound?.[0];
     },
-    pointsPerEnd(round, endSize) {
+    pointsPerEnd(round, numberOfRounds, endSize) {
       const pb = this.personalBest(round);
-      return Math.trunc((pb / endSize) / 2);
+      const totalArrows = numberOfRounds * endSize;
+      return Math.trunc(pb / totalArrows);
     },
     totalArrows() {
       return storage.value.reduce((acc, item) => acc + item.scores.length, 0);
