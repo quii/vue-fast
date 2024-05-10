@@ -6,6 +6,7 @@ import RoundTablePortrait from "@/components/RoundTablePortrait.vue";
 import { useUserStore } from "@/stores/user";
 import { newClassificationCalculator } from "@/domain/classification";
 import { useHistoryStore } from "@/stores/history";
+import { gameTypeConfig } from "@/domain/game_types";
 
 const props = defineProps({
   scores: {
@@ -26,6 +27,7 @@ const rounds = computed(() => calculateRounds(props.scores, props.gameType, prop
 const userStore = useUserStore();
 const history = useHistoryStore();
 const pb = computed(() => history.personalBest(props.gameType));
+const pointsPerEnd = computed(() => history.pointsPerEnd(props.gameType, gameTypeConfig[props.gameType].maxArrows, props.endSize));
 
 const classification = computed(() => {
   const calculator = newClassificationCalculator(props.gameType, userStore.user.gender, userStore.user.ageGroup, userStore.user.bowType);
@@ -79,7 +81,7 @@ const classification = computed(() => {
         <td>{{ classification.classification }}</td>
         <td>{{ classification.next }}</td>
         <td>{{ classification.shortBy }}</td>
-        <td v-if="pb">{{ pb }}</td>
+        <td v-if="pb">{{ pb }}<br />Avg. {{ pointsPerEnd }}/end</td>
       </tr>
       </tbody>
     </table>
