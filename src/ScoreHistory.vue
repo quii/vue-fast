@@ -35,11 +35,11 @@ const totalArrows = computed(() => store.totalArrows());
       </tr>
     </thead>
     <tbody>
-    <tr @click="view(item.id)" v-for="item in store.sortedHistory()"
+    <tr v-for="item in store.sortedHistory()"
         :key="item.date">
-      <td>{{ parseAndRenderDate(item.date) }}</td>
-      <td :class="{highlight: item.topScore}">{{ item.score }}</td>
-      <td>{{ item.gameType }}</td>
+      <td @click="view(item.id)">{{ parseAndRenderDate(item.date) }}</td>
+      <td @click="view(item.id)" :class="{highlight: item.topScore}">{{ item.score }}</td>
+      <td @click="view(item.id)">{{ item.gameType }}</td>
       <td>
         <button @click="store.remove(item.id)">❌</button>
       </td>
