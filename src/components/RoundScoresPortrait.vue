@@ -34,7 +34,7 @@ const classification = computed(() => {
   if (calculator) {
     return calculator(totals.value.totalScore);
   }
-  return undefined;
+  return null;
 });
 </script>
 

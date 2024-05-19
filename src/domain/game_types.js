@@ -1,11 +1,12 @@
 import {MISS} from "@/domain/scores";
-import {baseConfig} from "@/domain/game_type_config";
+import { baseConfig, imperialPractices, metricPractices } from "@/domain/game_type_config";
 
 const imperialScores = [9, 7, 5, 3, 1, MISS];
 const outdoorMetricScores = ["X", 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, MISS];
 const indoorMetricScores = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, MISS];
 
-export const gameTypeConfig = calculateConfigFromBase(baseConfig);
+const allRounds = [...baseConfig, ...imperialPractices, ...metricPractices];
+export const gameTypeConfig = calculateConfigFromBase(allRounds);
 export const gameTypes = Object.keys(gameTypeConfig);
 
 function calculateConfigFromBase(base) {

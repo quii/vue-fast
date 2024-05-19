@@ -19,8 +19,7 @@ export function newClassificationCalculator(roundName, sex, age, bowtype) {
     .filter(c => classificationFilter(c))
     .sort(sortByScore);
 
-
-  if (!roundScores) {
+  if (roundScores.length === 0) {
     return undefined;
   }
 

@@ -1,5 +1,23 @@
 import { MISS } from "@/domain/scores";
 
+const standardDistances = [
+  "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"
+];
+
+export const imperialPractices = standardDistances.filter(x => x !== "70").map(distance => ({
+  name: `practice ${distance}yd`,
+  isOutdoor: true,
+  isImperial: true,
+  distancesRoundSizes: [100]
+}));
+
+export const metricPractices = standardDistances.map(distance => ({
+  name: `practice ${distance}m`,
+  isOutdoor: true,
+  isImperial: false,
+  distancesRoundSizes: [100, 100]
+}));
+
 export const baseConfig = [
   {
     name: 'york',
