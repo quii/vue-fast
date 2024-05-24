@@ -6,7 +6,8 @@ import ScoreButtons from '@/components/ScoreButtons.vue'
 describe('RoundScores', () => {
   it('renders buttons for each type of score, and emits an event when clicked', () => {
     const validScores = [9, 7, 'M']
-    const wrapper = mount(ScoreButtons, { props: { validScores: validScores, scores: [], endSize: 6 } });
+    const wrapper = mount(ScoreButtons,
+      { props: { validScores: validScores, scores: [], endSize: 6, maxReached: false } });
 
     wrapper.find('[data-test="score-9"]').trigger('click')
     expect(wrapper.emitted()).toHaveProperty('score', [[9]])
@@ -20,7 +21,8 @@ describe('RoundScores', () => {
 
   it("disables buttons higher than the lowest score", () => {
     const validScores = [9, 7, "M"];
-    const wrapper = mount(ScoreButtons, { props: { validScores: validScores, scores: [7], endSize: 6 } });
+    const wrapper = mount(ScoreButtons,
+      { props: { validScores: validScores, scores: [7], endSize: 6, maxReached: false } });
 
     expect(wrapper.find("[data-test=\"score-9\"]").attributes("disabled")).toBeDefined();
     expect(wrapper.find("[data-test=\"score-7\"]").attributes("disabled")).toBeUndefined();
