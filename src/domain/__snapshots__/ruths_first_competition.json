@@ -86,7 +86,8 @@
       "golds": 8,
       "X": 0,
       "onTrackFor252": true
-    }
+    },
+    "avgScorePerEnd": 44.666666666666664
   },
   {
     "roundBreakdown": [
@@ -175,7 +176,8 @@
       "golds": 15,
       "X": 0,
       "onTrackFor252": true
-    }
+    },
+    "avgScorePerEnd": 44.666666666666664
   },
   {
     "roundBreakdown": [
@@ -264,6 +266,7 @@
       "golds": 33,
       "X": 0,
       "onTrackFor252": true
-    }
+    },
+    "avgScorePerEnd": 44.666666666666664
   }
 ]

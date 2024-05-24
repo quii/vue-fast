@@ -1,6 +1,6 @@
 import splitIntoChunksofSizes, { splitIntoChunks } from "@/domain/splitter";
 import { gameTypeConfig } from "@/domain/game_types";
-import { calculateSubtotals } from "@/domain/subtotals";
+import { calculateSubtotals, calculateTotal } from "@/domain/subtotals";
 
 const endsPerRound = 2;
 
@@ -14,9 +14,17 @@ export function calculateRounds(scores, gameType = "national", endSize) {
 
     return {
       roundBreakdown: rounds ?? [],
-      subTotals: calculateSubtotals(scoresForDistance)
+      subTotals: calculateSubtotals(scoresForDistance),
+      avgScorePerEnd: calculateAverageScorePerEnd(scores, endSize)
     };
   });
+}
+
+function calculateAverageScorePerEnd(scores, endSize) {
+  const chunks = splitIntoChunks(scores, endSize);
+  const wholeChunks = chunks.filter(c => c.length === endSize);
+  const avg = calculateTotal(wholeChunks.map(end => calculateTotal(end))) / wholeChunks.length;
+  return avg;
 }
 
 function calculateRoundSummaries(scores, endSize) {
