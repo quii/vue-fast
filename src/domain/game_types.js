@@ -12,6 +12,7 @@ export const gameTypes = Object.keys(gameTypeConfig);
 function calculateConfigFromBase(base) {
   const rounds = base.reduce((acc, gameType) => {
     const endSize = calculateEndSize(gameType.endSize, gameType.isOutdoor);
+    const maxArrows = calculateMaxArrows(gameType, endSize);
     return ({
       ...acc, [gameType.name]: {
         distancesRoundSizes: gameType.distancesRoundSizes,
@@ -19,7 +20,8 @@ function calculateConfigFromBase(base) {
         unit: gameType.isImperial ? "yd" : "m",
         endSize: endSize,
         isOutdoor: gameType.isOutdoor,
-        maxArrows: calculateMaxArrows(gameType, endSize)
+        maxArrows,
+        numberOfEnds: maxArrows / endSize
       }
     });
   }, {});

@@ -90,6 +90,7 @@ const availableClassifications = computed(() =>
       <tr>
         <th>Classification</th>
         <th>Required score</th>
+        <th>Avg. per end</th>
       </tr>
       </thead>
       <tbody>
@@ -98,6 +99,7 @@ const availableClassifications = computed(() =>
         <td>{{ classification.name }}</td>
         <td>{{ classification.score }} <span class="short"
                                              v-if="classification.shortBy"> (-{{ classification.shortBy }})</span></td>
+        <td>{{ classification.scorePerEnd }}</td>
       </tr>
       </tbody>
     </table>

@@ -16,7 +16,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 108
+    "maxArrows": 108,
+    "numberOfEnds": 18
   },
   "american": {
     "distancesRoundSizes": [
@@ -35,7 +36,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 90
+    "maxArrows": 90,
+    "numberOfEnds": 15
   },
   "bray1": {
     "distancesRoundSizes": [
@@ -57,7 +59,8 @@
     "unit": "m",
     "endSize": 3,
     "isOutdoor": false,
-    "maxArrows": 18
+    "maxArrows": 18,
+    "numberOfEnds": 6
   },
   "bristol ii": {
     "distancesRoundSizes": [
@@ -76,7 +79,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 144
+    "maxArrows": 144,
+    "numberOfEnds": 24
   },
   "bristol iii": {
     "distancesRoundSizes": [
@@ -95,7 +99,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 144
+    "maxArrows": 144,
+    "numberOfEnds": 24
   },
   "bristol iv": {
     "distancesRoundSizes": [
@@ -114,7 +119,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 144
+    "maxArrows": 144,
+    "numberOfEnds": 24
   },
   "bristol v": {
     "distancesRoundSizes": [
@@ -133,7 +139,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 144
+    "maxArrows": 144,
+    "numberOfEnds": 24
   },
   "frostbite": {
     "distancesRoundSizes": [
@@ -156,7 +163,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 36
+    "maxArrows": 36,
+    "numberOfEnds": 6
   },
   "hereford / bristol i": {
     "distancesRoundSizes": [
@@ -175,7 +183,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 144
+    "maxArrows": 144,
+    "numberOfEnds": 24
   },
   "long metric (men)": {
     "distancesRoundSizes": [
@@ -199,7 +208,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 72
+    "maxArrows": 72,
+    "numberOfEnds": 12
   },
   "long metric (women) / long metric i": {
     "distancesRoundSizes": [
@@ -223,7 +233,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 72
+    "maxArrows": 72,
+    "numberOfEnds": 12
   },
   "long metric ii": {
     "distancesRoundSizes": [
@@ -247,7 +258,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 72
+    "maxArrows": 72,
+    "numberOfEnds": 12
   },
   "long metric iii": {
     "distancesRoundSizes": [
@@ -271,7 +283,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 72
+    "maxArrows": 72,
+    "numberOfEnds": 12
   },
   "long metric iv": {
     "distancesRoundSizes": [
@@ -295,7 +308,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 72
+    "maxArrows": 72,
+    "numberOfEnds": 12
   },
   "long metric v": {
     "distancesRoundSizes": [
@@ -319,7 +333,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 72
+    "maxArrows": 72,
+    "numberOfEnds": 12
   },
   "long national": {
     "distancesRoundSizes": [
@@ -337,7 +352,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 72
+    "maxArrows": 72,
+    "numberOfEnds": 12
   },
   "long warwick": {
     "distancesRoundSizes": [
@@ -355,7 +371,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 48
+    "maxArrows": 48,
+    "numberOfEnds": 8
   },
   "long western": {
     "distancesRoundSizes": [
@@ -373,7 +390,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 96
+    "maxArrows": 96,
+    "numberOfEnds": 16
   },
   "metric 122-30": {
     "distancesRoundSizes": [
@@ -396,7 +414,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 72
+    "maxArrows": 72,
+    "numberOfEnds": 12
   },
   "metric 122-40": {
     "distancesRoundSizes": [
@@ -419,7 +438,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 72
+    "maxArrows": 72,
+    "numberOfEnds": 12
   },
   "metric 80-30": {
     "distancesRoundSizes": [
@@ -442,7 +462,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 72
+    "maxArrows": 72,
+    "numberOfEnds": 12
   },
   "metric 80-40": {
     "distancesRoundSizes": [
@@ -465,7 +486,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 72
+    "maxArrows": 72,
+    "numberOfEnds": 12
   },
   "metric iii": {
     "distancesRoundSizes": [
@@ -491,7 +513,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 144
+    "maxArrows": 144,
+    "numberOfEnds": 24
   },
   "metric iv": {
     "distancesRoundSizes": [
@@ -517,7 +540,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 144
+    "maxArrows": 144,
+    "numberOfEnds": 24
   },
   "metric v": {
     "distancesRoundSizes": [
@@ -543,7 +567,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 144
+    "maxArrows": 144,
+    "numberOfEnds": 24
   },
   "national": {
     "distancesRoundSizes": [
@@ -561,7 +586,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 72
+    "maxArrows": 72,
+    "numberOfEnds": 12
   },
   "national 30": {
     "distancesRoundSizes": [
@@ -579,7 +605,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 72
+    "maxArrows": 72,
+    "numberOfEnds": 12
   },
   "national 40": {
     "distancesRoundSizes": [
@@ -597,7 +624,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 72
+    "maxArrows": 72,
+    "numberOfEnds": 12
   },
   "national 50": {
     "distancesRoundSizes": [
@@ -615,7 +643,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 72
+    "maxArrows": 72,
+    "numberOfEnds": 12
   },
   "new national": {
     "distancesRoundSizes": [
@@ -633,7 +662,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 72
+    "maxArrows": 72,
+    "numberOfEnds": 12
   },
   "new warwick": {
     "distancesRoundSizes": [
@@ -651,7 +681,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 48
+    "maxArrows": 48,
+    "numberOfEnds": 8
   },
   "new western": {
     "distancesRoundSizes": [
@@ -669,7 +700,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 96
+    "maxArrows": 96,
+    "numberOfEnds": 16
   },
   "portsmouth": {
     "distancesRoundSizes": [
@@ -691,7 +723,8 @@
     "unit": "m",
     "endSize": 3,
     "isOutdoor": false,
-    "maxArrows": 30
+    "maxArrows": 30,
+    "numberOfEnds": 10
   },
   "practice 100m": {
     "distancesRoundSizes": [
@@ -715,7 +748,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 2400
+    "maxArrows": 2400,
+    "numberOfEnds": 400
   },
   "practice 100yd": {
     "distancesRoundSizes": [
@@ -732,7 +766,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 1200
+    "maxArrows": 1200,
+    "numberOfEnds": 200
   },
   "practice 10m": {
     "distancesRoundSizes": [
@@ -756,7 +791,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 2400
+    "maxArrows": 2400,
+    "numberOfEnds": 400
   },
   "practice 10yd": {
     "distancesRoundSizes": [
@@ -773,7 +809,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 1200
+    "maxArrows": 1200,
+    "numberOfEnds": 200
   },
   "practice 20m": {
     "distancesRoundSizes": [
@@ -797,7 +834,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 2400
+    "maxArrows": 2400,
+    "numberOfEnds": 400
   },
   "practice 20yd": {
     "distancesRoundSizes": [
@@ -814,7 +852,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 1200
+    "maxArrows": 1200,
+    "numberOfEnds": 200
   },
   "practice 30m": {
     "distancesRoundSizes": [
@@ -838,7 +877,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 2400
+    "maxArrows": 2400,
+    "numberOfEnds": 400
   },
   "practice 30yd": {
     "distancesRoundSizes": [
@@ -855,7 +895,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 1200
+    "maxArrows": 1200,
+    "numberOfEnds": 200
   },
   "practice 40m": {
     "distancesRoundSizes": [
@@ -879,7 +920,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 2400
+    "maxArrows": 2400,
+    "numberOfEnds": 400
   },
   "practice 40yd": {
     "distancesRoundSizes": [
@@ -896,7 +938,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 1200
+    "maxArrows": 1200,
+    "numberOfEnds": 200
   },
   "practice 50m": {
     "distancesRoundSizes": [
@@ -920,7 +963,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 2400
+    "maxArrows": 2400,
+    "numberOfEnds": 400
   },
   "practice 50yd": {
     "distancesRoundSizes": [
@@ -937,7 +981,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 1200
+    "maxArrows": 1200,
+    "numberOfEnds": 200
   },
   "practice 60m": {
     "distancesRoundSizes": [
@@ -961,7 +1006,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 2400
+    "maxArrows": 2400,
+    "numberOfEnds": 400
   },
   "practice 60yd": {
     "distancesRoundSizes": [
@@ -978,7 +1024,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 1200
+    "maxArrows": 1200,
+    "numberOfEnds": 200
   },
   "practice 70m": {
     "distancesRoundSizes": [
@@ -1002,7 +1049,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 2400
+    "maxArrows": 2400,
+    "numberOfEnds": 400
   },
   "practice 80m": {
     "distancesRoundSizes": [
@@ -1026,7 +1074,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 2400
+    "maxArrows": 2400,
+    "numberOfEnds": 400
   },
   "practice 80yd": {
     "distancesRoundSizes": [
@@ -1043,7 +1092,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 1200
+    "maxArrows": 1200,
+    "numberOfEnds": 200
   },
   "practice 90m": {
     "distancesRoundSizes": [
@@ -1067,7 +1117,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 2400
+    "maxArrows": 2400,
+    "numberOfEnds": 400
   },
   "practice 90yd": {
     "distancesRoundSizes": [
@@ -1084,7 +1135,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 1200
+    "maxArrows": 1200,
+    "numberOfEnds": 200
   },
   "short metric / short metric i": {
     "distancesRoundSizes": [
@@ -1108,7 +1160,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 72
+    "maxArrows": 72,
+    "numberOfEnds": 12
   },
   "short metric ii": {
     "distancesRoundSizes": [
@@ -1132,7 +1185,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 72
+    "maxArrows": 72,
+    "numberOfEnds": 12
   },
   "short metric iii": {
     "distancesRoundSizes": [
@@ -1156,7 +1210,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 72
+    "maxArrows": 72,
+    "numberOfEnds": 12
   },
   "short metric iv": {
     "distancesRoundSizes": [
@@ -1180,7 +1235,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 72
+    "maxArrows": 72,
+    "numberOfEnds": 12
   },
   "short metric v": {
     "distancesRoundSizes": [
@@ -1198,7 +1254,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 72
+    "maxArrows": 72,
+    "numberOfEnds": 12
   },
   "st. george": {
     "distancesRoundSizes": [
@@ -1217,7 +1274,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 108
+    "maxArrows": 108,
+    "numberOfEnds": 18
   },
   "st. nicholas": {
     "distancesRoundSizes": [
@@ -1235,7 +1293,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 84
+    "maxArrows": 84,
+    "numberOfEnds": 14
   },
   "wa 1440 (60m) / metric ii": {
     "distancesRoundSizes": [
@@ -1261,7 +1320,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 144
+    "maxArrows": 144,
+    "numberOfEnds": 24
   },
   "wa 1440 (70m) / metric i": {
     "distancesRoundSizes": [
@@ -1287,7 +1347,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 144
+    "maxArrows": 144,
+    "numberOfEnds": 24
   },
   "wa 1440 (90m)": {
     "distancesRoundSizes": [
@@ -1313,7 +1374,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 144
+    "maxArrows": 144,
+    "numberOfEnds": 24
   },
   "wa 50m (barebow) / metric 122-50": {
     "distancesRoundSizes": [
@@ -1336,7 +1398,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 72
+    "maxArrows": 72,
+    "numberOfEnds": 12
   },
   "wa 50m (compound)": {
     "distancesRoundSizes": [
@@ -1359,7 +1422,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 72
+    "maxArrows": 72,
+    "numberOfEnds": 12
   },
   "wa 60m": {
     "distancesRoundSizes": [
@@ -1382,7 +1446,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 72
+    "maxArrows": 72,
+    "numberOfEnds": 12
   },
   "wa 70m": {
     "distancesRoundSizes": [
@@ -1405,7 +1470,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 72
+    "maxArrows": 72,
+    "numberOfEnds": 12
   },
   "wa 900": {
     "distancesRoundSizes": [
@@ -1430,7 +1496,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 90
+    "maxArrows": 90,
+    "numberOfEnds": 15
   },
   "wa standard bow": {
     "distancesRoundSizes": [
@@ -1454,7 +1521,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 72
+    "maxArrows": 72,
+    "numberOfEnds": 12
   },
   "warwick": {
     "distancesRoundSizes": [
@@ -1472,7 +1540,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 48
+    "maxArrows": 48,
+    "numberOfEnds": 8
   },
   "warwick 30": {
     "distancesRoundSizes": [
@@ -1490,7 +1559,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 48
+    "maxArrows": 48,
+    "numberOfEnds": 8
   },
   "warwick 40": {
     "distancesRoundSizes": [
@@ -1508,7 +1578,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 48
+    "maxArrows": 48,
+    "numberOfEnds": 8
   },
   "warwick 50": {
     "distancesRoundSizes": [
@@ -1526,7 +1597,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 48
+    "maxArrows": 48,
+    "numberOfEnds": 8
   },
   "western": {
     "distancesRoundSizes": [
@@ -1544,7 +1616,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 96
+    "maxArrows": 96,
+    "numberOfEnds": 16
   },
   "western 30": {
     "distancesRoundSizes": [
@@ -1562,7 +1635,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 96
+    "maxArrows": 96,
+    "numberOfEnds": 16
   },
   "western 40": {
     "distancesRoundSizes": [
@@ -1580,7 +1654,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 96
+    "maxArrows": 96,
+    "numberOfEnds": 16
   },
   "western 50": {
     "distancesRoundSizes": [
@@ -1598,7 +1673,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 96
+    "maxArrows": 96,
+    "numberOfEnds": 16
   },
   "windsor": {
     "distancesRoundSizes": [
@@ -1617,7 +1693,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 108
+    "maxArrows": 108,
+    "numberOfEnds": 18
   },
   "windsor 30": {
     "distancesRoundSizes": [
@@ -1636,7 +1713,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 108
+    "maxArrows": 108,
+    "numberOfEnds": 18
   },
   "windsor 40": {
     "distancesRoundSizes": [
@@ -1655,7 +1733,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 108
+    "maxArrows": 108,
+    "numberOfEnds": 18
   },
   "windsor 50": {
     "distancesRoundSizes": [
@@ -1674,7 +1753,8 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 108
+    "maxArrows": 108,
+    "numberOfEnds": 18
   },
   "worcester": {
     "distancesRoundSizes": [
@@ -1691,7 +1771,8 @@
     "unit": "m",
     "endSize": 5,
     "isOutdoor": false,
-    "maxArrows": 60
+    "maxArrows": 60,
+    "numberOfEnds": 12
   },
   "york": {
     "distancesRoundSizes": [
@@ -1710,6 +1791,7 @@
     "unit": "yd",
     "endSize": 6,
     "isOutdoor": true,
-    "maxArrows": 144
+    "maxArrows": 144,
+    "numberOfEnds": 24
   }
 }

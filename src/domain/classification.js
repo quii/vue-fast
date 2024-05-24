@@ -1,4 +1,5 @@
 import { rawClassifications } from "@/domain/raw_classifications";
+import { gameTypeConfig } from "@/domain/game_types";
 const sortByScore = (a, b) => a.score - b.score;
 
 const classificationList = [
@@ -16,6 +17,8 @@ const classificationList = [
 export function calculateClassifications(roundName, sex, age, bowtype, score) {
   const roundScores = calculateRoundScores(sex, bowtype, age, roundName);
 
+  const numberOfEnds = gameTypeConfig[roundName].numberOfEnds;
+
   if (roundScores.length === 0) {
     return undefined;
   }
@@ -27,7 +30,9 @@ export function calculateClassifications(roundName, sex, age, bowtype, score) {
     if (!achieved) {
       shortBy = classification.score - score;
     }
-    return [...acc, { name, score: classification.score, achieved, shortBy }];
+    const scorePerEnd = Math.ceil(classification.score / numberOfEnds);
+    const item = { name, score: classification.score, achieved, shortBy, scorePerEnd };
+    return [...acc, item];
   }, []);
 
 }
