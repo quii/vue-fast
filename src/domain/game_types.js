@@ -10,7 +10,7 @@ export const gameTypeConfig = calculateConfigFromBase(allRounds);
 export const gameTypes = Object.keys(gameTypeConfig);
 
 function calculateConfigFromBase(base) {
-  return base.reduce((acc, gameType) => {
+  const rounds = base.reduce((acc, gameType) => {
     const endSize = calculateEndSize(gameType.endSize, gameType.isOutdoor);
     return ({
       ...acc, [gameType.name]: {
@@ -23,6 +23,14 @@ function calculateConfigFromBase(base) {
       }
     });
   }, {});
+
+  return Object.keys(rounds).sort().reduce(
+    (obj, key) => {
+      obj[key] = rounds[key];
+      return obj;
+    },
+    {}
+  );
 }
 
 function calculateMaxArrows(gameType, endSize) {
