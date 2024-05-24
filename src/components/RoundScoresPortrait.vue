@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from "vue";
 import { calculateSubtotals } from "@/domain/subtotals";
-import { calculateRounds } from "@/domain/rounds";
+import { calculateAverageScorePerEnd, calculateRounds } from "@/domain/rounds";
 import RoundTablePortrait from "@/components/RoundTablePortrait.vue";
 import { useUserStore } from "@/stores/user";
 import { calculateClassifications } from "@/domain/classification";
@@ -28,14 +28,17 @@ const userStore = useUserStore();
 const history = useHistoryStore();
 const pb = computed(() => history.personalBest(props.gameType));
 const pointsPerEnd = computed(() => history.pointsPerEnd(props.gameType, gameTypeConfig[props.gameType].maxArrows, props.endSize));
+const averageScoresPerEnd = computed(() => calculateAverageScorePerEnd(props.scores, props.endSize));
 
 const availableClassifications = computed(() =>
   calculateClassifications(props.gameType,
     userStore.user.gender,
     userStore.user.ageGroup,
     userStore.user.bowType,
-    totals.value.totalScore
+    totals.value.totalScore,
+    averageScoresPerEnd.value
   ));
+
 </script>
 
 <template>
@@ -99,7 +102,9 @@ const availableClassifications = computed(() =>
         <td>{{ classification.name }}</td>
         <td>{{ classification.score }} <span class="short"
                                              v-if="classification.shortBy"> (-{{ classification.shortBy }})</span></td>
-        <td>{{ classification.scorePerEnd }}</td>
+        <td>{{ classification.scorePerEnd }} <span class="avgOnTrack"
+                                                   v-if="classification.perEndDiff>=0">(+{{ classification.perEndDiff }})</span><span
+          class="avgOffTrack" v-if="classification.perEndDiff<0">({{ classification.perEndDiff }})</span></td>
       </tr>
       </tbody>
     </table>
@@ -117,11 +122,11 @@ table {
   color: var(--color-heading);
 }
 
-.achieved {
+.achieved, .avgOnTrack {
   color: green;
 }
 
-.short {
+.short, .avgOffTrack {
   color: red;
 }
 </style>

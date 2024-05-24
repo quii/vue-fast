@@ -14,7 +14,7 @@ const classificationList = [
   "EMB"
 ];
 
-export function calculateClassifications(roundName, sex, age, bowtype, score) {
+export function calculateClassifications(roundName, sex, age, bowtype, score, avgPerEnd) {
   const roundScores = calculateRoundScores(sex, bowtype, age, roundName);
 
   const numberOfEnds = gameTypeConfig[roundName].numberOfEnds;
@@ -31,7 +31,8 @@ export function calculateClassifications(roundName, sex, age, bowtype, score) {
       shortBy = classification.score - score;
     }
     const scorePerEnd = Math.ceil(classification.score / numberOfEnds);
-    const item = { name, score: classification.score, achieved, shortBy, scorePerEnd };
+    const perEndDiff = avgPerEnd - scorePerEnd;
+    const item = { name, score: classification.score, achieved, shortBy, scorePerEnd, perEndDiff };
     return [...acc, item];
   }, []);
 

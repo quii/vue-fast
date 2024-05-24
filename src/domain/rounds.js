@@ -14,17 +14,16 @@ export function calculateRounds(scores, gameType = "national", endSize) {
 
     return {
       roundBreakdown: rounds ?? [],
-      subTotals: calculateSubtotals(scoresForDistance),
-      avgScorePerEnd: calculateAverageScorePerEnd(scores, endSize)
+      subTotals: calculateSubtotals(scoresForDistance)
     };
   });
 }
 
-function calculateAverageScorePerEnd(scores, endSize) {
+export function calculateAverageScorePerEnd(scores, endSize) {
   const chunks = splitIntoChunks(scores, endSize);
   const wholeChunks = chunks.filter(c => c.length === endSize);
   const avg = calculateTotal(wholeChunks.map(end => calculateTotal(end))) / wholeChunks.length;
-  return avg;
+  return Math.ceil(avg);
 }
 
 function calculateRoundSummaries(scores, endSize) {
