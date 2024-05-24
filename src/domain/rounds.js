@@ -1,7 +1,6 @@
 import splitIntoChunksofSizes, { splitIntoChunks } from "@/domain/splitter";
 import { gameTypeConfig } from "@/domain/game_types";
 import { calculateSubtotals, calculateTotal } from "@/domain/subtotals";
-import { convertToValues } from "@/domain/scores";
 
 const endsPerRound = 2;
 
@@ -23,7 +22,7 @@ export function calculateRounds(scores, gameType = "national", endSize) {
 export function calculateAverageScorePerEnd(scores, endSize) {
   const chunks = splitIntoChunks(scores, endSize);
   const wholeChunks = chunks.filter(c => c.length === endSize);
-  const avg = calculateTotal(wholeChunks.map(end => calculateTotal(convertToValues(end)))) / wholeChunks.length;
+  const avg = calculateTotal(wholeChunks.map(end => calculateTotal(end))) / wholeChunks.length;
   return Math.ceil(avg);
 }
 
