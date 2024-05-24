@@ -4,7 +4,7 @@ import { calculateSubtotals } from "@/domain/subtotals";
 import { calculateAverageScorePerEnd, calculateRounds } from "@/domain/rounds";
 import RoundTablePortrait from "@/components/RoundTablePortrait.vue";
 import { useUserStore } from "@/stores/user";
-import { calculateClassifications } from "@/domain/classification";
+import { createClassificationCalculator } from "@/domain/classification";
 import { useHistoryStore } from "@/stores/history";
 import { gameTypeConfig } from "@/domain/game_types";
 
@@ -30,11 +30,15 @@ const pb = computed(() => history.personalBest(props.gameType));
 const pointsPerEnd = computed(() => history.pointsPerEnd(props.gameType, gameTypeConfig[props.gameType].maxArrows, props.endSize));
 const averageScoresPerEnd = computed(() => calculateAverageScorePerEnd(props.scores, props.endSize));
 
+const classificationCalculator = computed(() => createClassificationCalculator(
+  props.gameType,
+  userStore.user.gender,
+  userStore.user.ageGroup,
+  userStore.user.bowType
+));
+
 const availableClassifications = computed(() =>
-  calculateClassifications(props.gameType,
-    userStore.user.gender,
-    userStore.user.ageGroup,
-    userStore.user.bowType,
+  classificationCalculator.value(
     totals.value.totalScore,
     averageScoresPerEnd.value
   ));

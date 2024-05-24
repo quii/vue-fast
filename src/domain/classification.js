@@ -14,7 +14,7 @@ const classificationList = [
   "EMB"
 ];
 
-export function calculateClassifications(roundName, sex, age, bowtype, score, avgPerEnd) {
+export function createClassificationCalculator(roundName, sex, age, bowtype) {
   const roundScores = calculateRoundScores(sex, bowtype, age, roundName);
 
   const numberOfEnds = gameTypeConfig[roundName].numberOfEnds;
@@ -23,19 +23,19 @@ export function calculateClassifications(roundName, sex, age, bowtype, score, av
     return undefined;
   }
 
-  return roundScores.reduce((acc, classification, index) => {
-    const name = classificationList[index];
-    const achieved = score >= classification.score;
-    let shortBy = null;
-    if (!achieved) {
-      shortBy = classification.score - score;
-    }
-    const scorePerEnd = Math.ceil(classification.score / numberOfEnds);
-    const perEndDiff = avgPerEnd - scorePerEnd;
-    const item = { name, score: classification.score, achieved, shortBy, scorePerEnd, perEndDiff };
-    return [...acc, item];
-  }, []);
-
+  return (score, avgPerEnd) =>
+    roundScores.reduce((acc, classification, index) => {
+      const name = classificationList[index];
+      const achieved = score >= classification.score;
+      let shortBy = null;
+      if (!achieved) {
+        shortBy = classification.score - score;
+      }
+      const scorePerEnd = Math.ceil(classification.score / numberOfEnds);
+      const perEndDiff = avgPerEnd - scorePerEnd;
+      const item = { name, score: classification.score, achieved, shortBy, scorePerEnd, perEndDiff };
+      return [...acc, item];
+    }, []);
 }
 
 function calculateRoundScores(sex, bowtype, age, roundName) {
