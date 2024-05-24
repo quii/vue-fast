@@ -37,6 +37,6 @@ const ends = computed(() => {
     <td>Golds</td>
     <td>{{ subtotals.golds }}</td>
     <td>Score</td>
-    <td colspan="2">{{ subtotals.totalScore }}</td>
+    <td :class="{highlight: subtotals.totalScore>=252}" colspan="2">{{ subtotals.totalScore }}</td>
   </tr>
 </template>
