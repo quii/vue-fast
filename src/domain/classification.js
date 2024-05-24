@@ -45,7 +45,7 @@ const classificationList = [
   "EMB"
 ];
 
-export function calculateClassifications(roundName, sex, age, bowtype) {
+export function calculateClassifications(roundName, sex, age, bowtype, score) {
   const roundScores = calculateRoundScores(sex, bowtype, age, roundName);
 
   if (roundScores.length === 0) {
@@ -53,8 +53,13 @@ export function calculateClassifications(roundName, sex, age, bowtype) {
   }
 
   return roundScores.reduce((acc, classification, index) => {
-    const classificationLabel = classificationList[index];
-    return [...acc, { [classificationLabel]: classification.score }];
+    const name = classificationList[index];
+    const achieved = score >= classification.score;
+    let shortBy = null;
+    if (!achieved) {
+      shortBy = classification.score - score;
+    }
+    return [...acc, { name, score: classification.score, achieved, shortBy }];
   }, []);
 
 }

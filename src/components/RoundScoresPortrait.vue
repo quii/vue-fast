@@ -4,7 +4,7 @@ import { calculateSubtotals } from "@/domain/subtotals";
 import { calculateRounds } from "@/domain/rounds";
 import RoundTablePortrait from "@/components/RoundTablePortrait.vue";
 import { useUserStore } from "@/stores/user";
-import { newClassificationCalculator } from "@/domain/classification";
+import { calculateClassifications } from "@/domain/classification";
 import { useHistoryStore } from "@/stores/history";
 import { gameTypeConfig } from "@/domain/game_types";
 
@@ -29,13 +29,13 @@ const history = useHistoryStore();
 const pb = computed(() => history.personalBest(props.gameType));
 const pointsPerEnd = computed(() => history.pointsPerEnd(props.gameType, gameTypeConfig[props.gameType].maxArrows, props.endSize));
 
-const classification = computed(() => {
-  const calculator = newClassificationCalculator(props.gameType, userStore.user.gender, userStore.user.ageGroup, userStore.user.bowType);
-  if (calculator) {
-    return calculator(totals.value.totalScore);
-  }
-  return null;
-});
+const availableClassifications = computed(() =>
+  calculateClassifications(props.gameType,
+    userStore.user.gender,
+    userStore.user.ageGroup,
+    userStore.user.bowType,
+    totals.value.totalScore
+  ));
 </script>
 
 <template>
@@ -68,25 +68,36 @@ const classification = computed(() => {
     </tr>
     </tbody>
   </table>
-  <div v-if="classification">
+  <div v-if="pb">
     <table>
       <thead>
       <tr>
-        <th colspan="3">Classification</th>
-        <th v-if="pb" rowspan="2">Personal best</th>
-      </tr>
-      <tr>
-        <th>Current</th>
-        <th>Next</th>
-        <th>Short by</th>
+        <th>Personal best</th>
+        <th>Avg. per end</th>
       </tr>
       </thead>
       <tbody>
       <tr>
-        <td>{{ classification.classification }}</td>
-        <td>{{ classification.next }}</td>
-        <td>{{ classification.shortBy }}</td>
-        <td v-if="pb">{{ pb }}<br />Avg. {{ pointsPerEnd }}/end</td>
+        <td>{{ pb }}</td>
+        <td>{{ pointsPerEnd }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div v-if="availableClassifications">
+    <table>
+      <thead>
+      <tr>
+        <th>Classification</th>
+        <th>Required score</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr :key="index+'class'" v-for="(classification, index) in availableClassifications"
+          :class="{ achieved: classification.achieved }">
+        <td>{{ classification.name }}</td>
+        <td>{{ classification.score }} <span class="short"
+                                             v-if="classification.shortBy"> (-{{ classification.shortBy }})</span></td>
       </tr>
       </tbody>
     </table>
@@ -102,5 +113,13 @@ table {
 .round-subtotal td {
   font-weight: bold;
   color: var(--color-heading);
+}
+
+.achieved {
+  color: green;
+}
+
+.short {
+  color: red;
 }
 </style>
