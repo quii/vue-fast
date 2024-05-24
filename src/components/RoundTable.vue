@@ -33,7 +33,7 @@ const onTrackFor252 = 84
     <td v-if="hasX">{{ round.subTotals.X }}</td>
     <td :class="{
       onTrack: index===0 && round.subTotals.runningTotal >= onTrackFor252 || index===1 && round.subTotals.runningTotal >= onTrackFor252*2,
-      highlight: index === 2 && round.subTotals.runningTotal >= onTrackFor252*3,
+      highlight: index === 2 && subtotals.totalScore >= onTrackFor252*3,
     }">
       {{ round.subTotals.runningTotal }}
     </td>
