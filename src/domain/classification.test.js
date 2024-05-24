@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { newClassificationCalculator } from "@/domain/classification";
+import { calculateClassifications, newClassificationCalculator } from "@/domain/classification";
 import { baseConfig } from "@/domain/game_type_config";
 
 describe("classification", () => {
@@ -44,5 +44,15 @@ describe("classification", () => {
   test("can get classified as a recurve 50+ man", () => {
     const calculator = newClassificationCalculator("albion / long windsor", "male", "50+", "recurve");
     expect(calculator(774)).toEqual({ classification: "B1" });
+  });
+
+  test("can get classifications available for a round and given person", () => {
+    const classifications = calculateClassifications("windsor", "male", "senior", "recurve");
+    expect(classifications).toEqual([
+      { "A3": 490 },
+      { "A2": 602 },
+      { "A1": 701 },
+      { "B3": 782 }
+    ]);
   });
 });
