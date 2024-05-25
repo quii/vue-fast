@@ -68,5 +68,14 @@ describe("calculateScoreIsHigherThanPreviousInEnd", () => {
             expect(isValid("10")).toBeTruthy();
             expect(isValid("9")).toBeTruthy();
         });
+
+        test("worcester ignores the arrows at a time rule", () => {
+            const scores = ["3", "3", "2"];
+            const isValid = calculateScoreIsValidForEnd(scores, "worcester");
+
+            expect(isValid("2")).toBeTruthy();
+            expect(isValid("3")).toBeFalsy();
+            expect(isValid("3")).toBeFalsy();
+        });
     });
 })

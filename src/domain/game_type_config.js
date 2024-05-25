@@ -409,7 +409,7 @@ export const baseConfig = [
     isImperial: false,
     endSize: 5,
     scores: [5, 4, 3, 2, 1, MISS],
-    distancesRoundSizes: [6]
+    distancesRoundSizes: [5]
   },
   {
     name: "vegas 300",

@@ -5,7 +5,7 @@ export function calculateScoreIsValidForEnd(scores, gameType) {
     return (score) => {
         const gameTypeConf = gameTypeConfig[gameType];
         let endSize = gameTypeConf.endSize;
-        if (!gameTypeConf?.isOutdoor) {
+        if (!gameTypeConf?.isOutdoor && gameType !== "worcester") {
             endSize = 3;
         }
 

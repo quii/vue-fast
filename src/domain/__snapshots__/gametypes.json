@@ -1843,7 +1843,7 @@
   },
   "worcester": {
     "distancesRoundSizes": [
-      6
+      5
     ],
     "scores": [
       5,
@@ -1856,8 +1856,8 @@
     "unit": "m",
     "endSize": 5,
     "isOutdoor": false,
-    "maxArrows": 60,
-    "numberOfEnds": 12
+    "maxArrows": 50,
+    "numberOfEnds": 10
   },
   "york": {
     "distancesRoundSizes": [
