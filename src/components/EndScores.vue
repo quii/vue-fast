@@ -2,6 +2,7 @@
 import { calculateTotal } from "@/domain/subtotals";
 import {computed} from "vue";
 import { convertToValues } from "@/domain/scores";
+import { useGameTypeStore } from "@/stores/game_type";
 
 const props = defineProps({
   scores: {
@@ -11,8 +12,26 @@ const props = defineProps({
   endSize: {
     type: Number,
     required: true
-  }
+  },
 });
+
+const gameTypeStore = useGameTypeStore();
+
+function scoreButtonClass(score) {
+  if (gameTypeStore.type === "worcester") {
+    if (score === 5) {
+      return {
+        "worcester5": true
+      };
+    }
+    return {
+      "worcesterRest": true
+    };
+  }
+  return {
+    [`score${score}`]: true
+  };
+}
 
 const onTrackFor252 = 42
 const total = computed(() => calculateTotal(convertToValues(props.scores)));
@@ -22,7 +41,7 @@ const offTrack = computed(() => total.value > 0 && total.value < onTrackFor252)
 </script>
 
 <template>
-  <td :class="'score' + scores[i - 1]" class="score" v-for="i in endSize" :key="i">
+  <td :class="scoreButtonClass(scores[i - 1])" class="score" v-for="i in endSize" :key="i">
     {{ scores[i - 1] }}
   </td>
   <td :class="{onTrack, offTrack}">{{ total }}</td>

@@ -20,6 +20,7 @@ const props = defineProps({
 });
 const totals = computed(() => calculateSubtotals(props.scores))
 const rounds = computed(() => calculateRounds(props.scores, props.gameType, props.endSize));
+const colspan = computed(() => (props.endSize * 2) + 2);
 </script>
 
 <template>
@@ -47,7 +48,7 @@ const rounds = computed(() => calculateRounds(props.scores, props.gameType, prop
         :hasX="hasX"
       />
       <tr class="grand-totals">
-        <td colspan="14"></td>
+        <td :colspan="colspan"></td>
         <td data-test="totalHits">{{ totals.hits }}</td>
         <td data-test="totalScore">{{ totals.totalScore }}</td>
         <td data-test="totalGolds">{{ totals.golds }}</td>

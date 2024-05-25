@@ -77,6 +77,16 @@ nav a:visited {
   color: black;
 }
 
+.worcester5 {
+  color: black;
+  background-color: white;
+}
+
+.worcesterRest {
+  color: white;
+  background-color: black;
+}
+
 .highlight {
   color: gold;
   background: #2c3e50;

@@ -21,8 +21,9 @@ const ends = computed(() => {
   return props.rounds.reduce((acc, cur) => {
     return [...acc, cur.firstEnd, cur.secondEnd];
   }, []);
-
 });
+
+const totalColspan = computed(() => props.endSize === 5 ? 1 : 2);
 
 </script>
 
@@ -37,6 +38,6 @@ const ends = computed(() => {
     <td>Golds</td>
     <td>{{ subtotals.golds }}</td>
     <td>Score</td>
-    <td colspan="2">{{ subtotals.totalScore }}</td>
+    <td :colspan="totalColspan">{{ subtotals.totalScore }}</td>
   </tr>
 </template>

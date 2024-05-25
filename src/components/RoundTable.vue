@@ -1,7 +1,8 @@
 <script setup>
 import EndScores from '@/components/EndScores.vue'
+import { computed } from "vue";
 
-defineProps({
+const props = defineProps({
   rounds: {
     required: true
   },
@@ -17,6 +18,8 @@ defineProps({
 })
 
 const onTrackFor252 = 84
+const colspan = computed(() => (props.endSize * 2) + 2);
+
 
 </script>
 
@@ -40,7 +43,7 @@ const onTrackFor252 = 84
   </tr>
 
   <tr class="round-subtotal">
-    <td colspan="14"></td>
+    <td :colspan="colspan"></td>
     <td>{{ subtotals.hits }}</td>
     <td>{{ subtotals.totalScore }}</td>
     <td>{{ subtotals.golds }}</td>

@@ -43,13 +43,17 @@ const availableClassifications = computed(() =>
     averageScoresPerEnd.value
   ));
 
+const colspan = computed(() => props.endSize);
+
+const totalColspan = computed(() => props.endSize === 5 ? 1 : 2);
+
 </script>
 
 <template>
   <table>
     <thead>
     <tr>
-      <th :colSpan="endSize">🎯 scores</th>
+      <th :colSpan="colspan">🎯 scores</th>
       <th>E/T</th>
     </tr>
     </thead>
@@ -63,7 +67,7 @@ const availableClassifications = computed(() =>
       :hasX="hasX"
     />
     <tr class="grand-totals">
-      <td colspan="7">Grand totals</td>
+      <td :colSpan="colspan+1">Grand totals</td>
     </tr>
     <tr class="grand-totals">
       <td>Hits</td>
@@ -71,7 +75,7 @@ const availableClassifications = computed(() =>
       <td>Golds</td>
       <td data-test="totalGolds">{{ totals.golds }}</td>
       <td>Score</td>
-      <td colspan="2">{{ totals.totalScore }}</td>
+      <td :colspan="totalColspan">{{ totals.totalScore }}</td>
     </tr>
     </tbody>
   </table>
