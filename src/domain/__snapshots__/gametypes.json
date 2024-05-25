@@ -41,7 +41,7 @@
   },
   "bray i": {
     "distancesRoundSizes": [
-      3
+      2.5
     ],
     "scores": [
       "X",
@@ -60,12 +60,12 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": false,
-    "maxArrows": 36,
-    "numberOfEnds": 6
+    "maxArrows": 30,
+    "numberOfEnds": 5
   },
   "bray ii": {
     "distancesRoundSizes": [
-      3
+      2.5
     ],
     "scores": [
       "X",
@@ -84,8 +84,8 @@
     "unit": "m",
     "endSize": 6,
     "isOutdoor": false,
-    "maxArrows": 36,
-    "numberOfEnds": 6
+    "maxArrows": 30,
+    "numberOfEnds": 5
   },
   "bristol ii": {
     "distancesRoundSizes": [

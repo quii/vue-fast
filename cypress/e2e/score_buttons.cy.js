@@ -44,4 +44,20 @@ describe("score buttons", () => {
     cy.get("button").contains("10").click();
     cy.get("button").contains("X").should("be.disabled");
   });
+
+  it("works with wonky 2.5 round length games like Bray I", () => {
+    cy.visit("/", {
+      onBeforeLoad(win) {
+        delete win.navigator.__proto__.serviceWorker;
+      }
+    });
+    cy.get("button").contains("Clear data").click();
+    cy.get("select").select("BRAY I");
+
+    Cypress._.times(30, () => {
+      cy.get("button").contains("X").click();
+    });
+
+    cy.get("button").contains("X").should("be.disabled");
+  });
 });

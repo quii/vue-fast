@@ -389,13 +389,13 @@ export const baseConfig = [
     name: "bray i",
     isOutdoor: false,
     isImperial: false,
-    distancesRoundSizes: [3]
+    distancesRoundSizes: [2.5]
   },
   {
     name: "bray ii",
     isOutdoor: false,
     isImperial: false,
-    distancesRoundSizes: [3]
+    distancesRoundSizes: [2.5]
   },
   {
     name: "stafford",
