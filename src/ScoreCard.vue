@@ -40,7 +40,6 @@ function saveScores(event) {
                 @score="scoresStore.add"
                 :max-reached="maxReached"
                 :scores="scoresStore.scores"
-                :endSize="gameTypeStore.currentRound.endSize"
                 :game-type="gameTypeStore.type"
                 @undo="scoresStore.undo" />
 

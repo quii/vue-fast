@@ -1,12 +1,14 @@
 import { convertToValue } from "@/domain/scores";
 import { gameTypeConfig } from "@/domain/game_types";
 
-export function calculateScoreIsValidForEnd(scores, endSize, gameType) {
+export function calculateScoreIsValidForEnd(scores, gameType) {
     return (score) => {
-        const isIndoor = !gameTypeConfig[gameType]?.isOutdoor;
-        if (isIndoor) {
+        const gameTypeConf = gameTypeConfig[gameType];
+        let endSize = gameTypeConf.endSize;
+        if (!gameTypeConf?.isOutdoor) {
             endSize = 3;
         }
+
         const lowestScore = getLowestScoreForRecentEnd(scores, endSize);
         if (score === "X" && lowestScore <= 10) {
             return false;
