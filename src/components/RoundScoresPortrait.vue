@@ -5,8 +5,6 @@ import { calculateAverageScorePerEnd, calculateRounds } from "@/domain/rounds";
 import RoundTablePortrait from "@/components/RoundTablePortrait.vue";
 import { useUserStore } from "@/stores/user";
 import { createClassificationCalculator } from "@/domain/classification";
-import { useHistoryStore } from "@/stores/history";
-import { gameTypeConfig } from "@/domain/game_types";
 
 const props = defineProps({
   scores: {
@@ -25,9 +23,6 @@ const props = defineProps({
 const totals = computed(() => calculateSubtotals(props.scores));
 const rounds = computed(() => calculateRounds(props.scores, props.gameType, props.endSize));
 const userStore = useUserStore();
-const history = useHistoryStore();
-const pb = computed(() => history.personalBest(props.gameType));
-const pointsPerEnd = computed(() => history.pointsPerEnd(props.gameType, gameTypeConfig[props.gameType].maxArrows, props.endSize));
 const averageScoresPerEnd = computed(() => calculateAverageScorePerEnd(props.scores, props.endSize));
 
 const classificationCalculator = computed(() => createClassificationCalculator(
@@ -79,22 +74,6 @@ const totalColspan = computed(() => props.endSize === 5 ? 1 : 2);
     </tr>
     </tbody>
   </table>
-  <div v-if="pb">
-    <table>
-      <thead>
-      <tr>
-        <th>Personal best</th>
-        <th>Avg. per end</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td>{{ pb }}</td>
-        <td>{{ pointsPerEnd }}</td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
   <div v-if="availableClassifications">
     <table>
       <thead>
