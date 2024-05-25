@@ -4,9 +4,11 @@ import { calculateScoreIsValidForEnd } from "@/domain/end";
 //todo: custom matchers maybe?
 
 describe("calculateScoreIsHigherThanPreviousInEnd", () => {
+    const someRoundName = "national";
+
     test("example scenario", () => {
         const scores = [7, 5, 5];
-        const isValid = calculateScoreIsValidForEnd(scores, 6);
+        const isValid = calculateScoreIsValidForEnd(scores, 6, someRoundName);
 
         expect(isValid(9)).toBeFalsy();
         expect(isValid(7)).toBeFalsy();
@@ -20,7 +22,7 @@ describe("calculateScoreIsHigherThanPreviousInEnd", () => {
             10, 9, 9, 8, 6, 7,
             10, 9, 9, 10, 6
         ];
-        const isValid = calculateScoreIsValidForEnd(scores, 6);
+        const isValid = calculateScoreIsValidForEnd(scores, 6, someRoundName);
 
         expect(isValid(11)).toBeFalsy();
         expect(isValid(7)).toBeFalsy();
@@ -33,7 +35,7 @@ describe("calculateScoreIsHigherThanPreviousInEnd", () => {
             8, 9, 10, 7, 6, 8,
             10, 9, 9, 8, 6, 3
         ];
-        const isValid = calculateScoreIsValidForEnd(scores, 6);
+        const isValid = calculateScoreIsValidForEnd(scores, 6, someRoundName);
 
         expect(isValid(5)).toBeTruthy();
         expect(isValid(1)).toBeTruthy();
@@ -43,7 +45,7 @@ describe("calculateScoreIsHigherThanPreviousInEnd", () => {
         const scores = [
             1, "M"
         ]
-        const isValid = calculateScoreIsValidForEnd(scores, 6);
+        const isValid = calculateScoreIsValidForEnd(scores, 6, someRoundName);
 
         expect(isValid(1)).toBeFalsy();
         expect(isValid("M")).toBeTruthy();
@@ -51,10 +53,20 @@ describe("calculateScoreIsHigherThanPreviousInEnd", () => {
 
     test("X is greater than 10 (even though in scores terms it isnt)", () => {
         const scores = ["10"];
-        const isValid = calculateScoreIsValidForEnd(scores, 6);
+        const isValid = calculateScoreIsValidForEnd(scores, 6, someRoundName);
 
-        // expect(isValid('X')).toBeFalsy()
-        // expect(isValid('10')).toBeTruthy()
         expect(isValid("9")).toBeTruthy();
+    });
+
+    describe("indoor", () => {
+        const indoorRoundName = "wa 25m";
+        test("shots in groups of 3", () => {
+            const scores = ["10", "9", "8"];
+            const isValid = calculateScoreIsValidForEnd(scores, 6, indoorRoundName);
+
+            expect(isValid("X")).toBeTruthy();
+            expect(isValid("10")).toBeTruthy();
+            expect(isValid("9")).toBeTruthy();
+        });
     });
 })

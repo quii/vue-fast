@@ -17,6 +17,10 @@ defineProps({
   endSize: {
     type: Number,
     required: true
+  },
+  gameType: {
+    type: String,
+    required: true
   }
 })
 
@@ -30,7 +34,7 @@ defineEmits(['score', 'undo'])
     <button
       v-for="score in validScores"
       :key="score"
-      :disabled="!calculateScoreIsValidForEnd(scores, endSize)(score) || maxReached"
+      :disabled="!calculateScoreIsValidForEnd(scores, endSize, gameType)(score) || maxReached"
       :class="'score' + score"
       :data-test="`score-${score}`"
       @click="$emit('score', score)"

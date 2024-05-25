@@ -29,7 +29,7 @@
       },
       {
         "firstEnd": [
-          "X",
+          10,
           8,
           6,
           5,
@@ -37,7 +37,7 @@
           2
         ],
         "secondEnd": [
-          "X",
+          10,
           10,
           8,
           8,
@@ -48,7 +48,7 @@
           "hits": 12,
           "totalScore": 84,
           "golds": 3,
-          "X": 2,
+          "X": 0,
           "onTrackFor252": true,
           "runningTotal": 169
         }
@@ -84,7 +84,7 @@
       "hits": 36,
       "totalScore": 254,
       "golds": 8,
-      "X": 2,
+      "X": 0,
       "onTrackFor252": true
     }
   }

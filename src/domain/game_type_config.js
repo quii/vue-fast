@@ -386,10 +386,22 @@ export const baseConfig = [
     distancesRoundSizes: [5]
   },
   {
-    name: "bray1",
+    name: "bray i",
     isOutdoor: false,
     isImperial: false,
     distancesRoundSizes: [3]
+  },
+  {
+    name: "bray ii",
+    isOutdoor: false,
+    isImperial: false,
+    distancesRoundSizes: [3]
+  },
+  {
+    name: "stafford",
+    isOutdoor: false,
+    isImperial: false,
+    distancesRoundSizes: [6]
   },
   {
     name: "worcester",
@@ -398,5 +410,23 @@ export const baseConfig = [
     endSize: 5,
     scores: [5, 4, 3, 2, 1, MISS],
     distancesRoundSizes: [6]
+  },
+  {
+    name: "vegas 300",
+    isOutdoor: false,
+    isImperial: false,
+    distancesRoundSizes: [2.5]
+  },
+  {
+    name: "wa 18m",
+    isOutdoor: false,
+    isImperial: false,
+    distancesRoundSizes: [5]
+  },
+  {
+    name: "wa 25m",
+    isOutdoor: false,
+    isImperial: false,
+    distancesRoundSizes: [5]
   }
 ];

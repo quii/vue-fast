@@ -2,8 +2,8 @@ import {MISS} from "@/domain/scores";
 import { baseConfig, imperialPractices, metricPractices } from "@/domain/game_type_config";
 
 const imperialScores = [9, 7, 5, 3, 1, MISS];
-const outdoorMetricScores = ["X", 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, MISS];
-const indoorMetricScores = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, MISS];
+const outdoorMetricScores = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, MISS];
+const indoorMetricScores = ["X", 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, MISS];
 
 const allRounds = [...baseConfig, ...imperialPractices, ...metricPractices];
 export const gameTypeConfig = calculateConfigFromBase(allRounds);
@@ -11,7 +11,7 @@ export const gameTypes = Object.keys(gameTypeConfig);
 
 function calculateConfigFromBase(base) {
   const rounds = base.reduce((acc, gameType) => {
-    const endSize = calculateEndSize(gameType.endSize, gameType.isOutdoor);
+    const endSize = calculateEndSize(gameType.endSize);
     const maxArrows = calculateMaxArrows(gameType, endSize);
     return ({
       ...acc, [gameType.name]: {
@@ -41,11 +41,11 @@ function calculateMaxArrows(gameType, endSize) {
   }, 0);
 }
 
-function calculateEndSize(endSize, isOutdoor) {
+function calculateEndSize(endSize) {
   if (endSize) {
     return endSize;
   }
-  return isOutdoor ? 6 : 3;
+  return 6;
 }
 
 function calculateScoresForGame({ isImperial, isOutdoor }) {

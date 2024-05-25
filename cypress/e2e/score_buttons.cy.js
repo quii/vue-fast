@@ -39,7 +39,7 @@ describe("score buttons", () => {
       }
     });
     cy.get("button").contains("Clear data").click();
-    cy.get("select").select("WA 70M");
+    cy.get("select").select("WA 25M");
 
     cy.get("button").contains("10").click();
     cy.get("button").contains("X").should("be.disabled");

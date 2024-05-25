@@ -41,6 +41,7 @@ function saveScores(event) {
                 :max-reached="maxReached"
                 :scores="scoresStore.scores"
                 :endSize="gameTypeStore.currentRound.endSize"
+                :game-type="gameTypeStore.type"
                 @undo="scoresStore.undo" />
 
     <button class="save" v-if="maxReached" @click="saveScores">💾 Save score to history</button>

@@ -39,11 +39,12 @@
     "maxArrows": 90,
     "numberOfEnds": 15
   },
-  "bray1": {
+  "bray i": {
     "distancesRoundSizes": [
       3
     ],
     "scores": [
+      "X",
       10,
       9,
       8,
@@ -57,9 +58,33 @@
       "M"
     ],
     "unit": "m",
-    "endSize": 3,
+    "endSize": 6,
     "isOutdoor": false,
-    "maxArrows": 18,
+    "maxArrows": 36,
+    "numberOfEnds": 6
+  },
+  "bray ii": {
+    "distancesRoundSizes": [
+      3
+    ],
+    "scores": [
+      "X",
+      10,
+      9,
+      8,
+      7,
+      6,
+      5,
+      4,
+      3,
+      2,
+      1,
+      "M"
+    ],
+    "unit": "m",
+    "endSize": 6,
+    "isOutdoor": false,
+    "maxArrows": 36,
     "numberOfEnds": 6
   },
   "bristol ii": {
@@ -147,7 +172,6 @@
       3
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -192,7 +216,6 @@
       3
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -217,7 +240,6 @@
       3
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -242,7 +264,6 @@
       3
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -267,7 +288,6 @@
       3
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -292,7 +312,6 @@
       3
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -317,7 +336,6 @@
       3
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -398,7 +416,6 @@
       6
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -422,7 +439,6 @@
       6
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -446,7 +462,6 @@
       6
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -470,7 +485,6 @@
       6
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -497,7 +511,6 @@
       3
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -524,7 +537,6 @@
       3
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -551,7 +563,6 @@
       3
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -708,6 +719,7 @@
       5
     ],
     "scores": [
+      "X",
       10,
       9,
       8,
@@ -721,9 +733,9 @@
       "M"
     ],
     "unit": "m",
-    "endSize": 3,
+    "endSize": 6,
     "isOutdoor": false,
-    "maxArrows": 30,
+    "maxArrows": 60,
     "numberOfEnds": 10
   },
   "practice 100m": {
@@ -732,7 +744,6 @@
       100
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -775,7 +786,6 @@
       100
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -818,7 +828,6 @@
       100
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -861,7 +870,6 @@
       100
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -904,7 +912,6 @@
       100
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -947,7 +954,6 @@
       100
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -990,7 +996,6 @@
       100
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -1033,7 +1038,6 @@
       100
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -1058,7 +1062,6 @@
       100
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -1101,7 +1104,6 @@
       100
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -1144,7 +1146,6 @@
       3
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -1169,7 +1170,6 @@
       3
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -1194,7 +1194,6 @@
       3
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -1219,7 +1218,6 @@
       3
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -1296,6 +1294,54 @@
     "maxArrows": 84,
     "numberOfEnds": 14
   },
+  "stafford": {
+    "distancesRoundSizes": [
+      6
+    ],
+    "scores": [
+      "X",
+      10,
+      9,
+      8,
+      7,
+      6,
+      5,
+      4,
+      3,
+      2,
+      1,
+      "M"
+    ],
+    "unit": "m",
+    "endSize": 6,
+    "isOutdoor": false,
+    "maxArrows": 72,
+    "numberOfEnds": 12
+  },
+  "vegas 300": {
+    "distancesRoundSizes": [
+      2.5
+    ],
+    "scores": [
+      "X",
+      10,
+      9,
+      8,
+      7,
+      6,
+      5,
+      4,
+      3,
+      2,
+      1,
+      "M"
+    ],
+    "unit": "m",
+    "endSize": 6,
+    "isOutdoor": false,
+    "maxArrows": 30,
+    "numberOfEnds": 5
+  },
   "wa 1440 (60m) / metric ii": {
     "distancesRoundSizes": [
       3,
@@ -1304,7 +1350,6 @@
       3
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -1331,7 +1376,6 @@
       3
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -1358,7 +1402,6 @@
       3
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -1377,12 +1420,59 @@
     "maxArrows": 144,
     "numberOfEnds": 24
   },
+  "wa 18m": {
+    "distancesRoundSizes": [
+      5
+    ],
+    "scores": [
+      "X",
+      10,
+      9,
+      8,
+      7,
+      6,
+      5,
+      4,
+      3,
+      2,
+      1,
+      "M"
+    ],
+    "unit": "m",
+    "endSize": 6,
+    "isOutdoor": false,
+    "maxArrows": 60,
+    "numberOfEnds": 10
+  },
+  "wa 25m": {
+    "distancesRoundSizes": [
+      5
+    ],
+    "scores": [
+      "X",
+      10,
+      9,
+      8,
+      7,
+      6,
+      5,
+      4,
+      3,
+      2,
+      1,
+      "M"
+    ],
+    "unit": "m",
+    "endSize": 6,
+    "isOutdoor": false,
+    "maxArrows": 60,
+    "numberOfEnds": 10
+  },
   "wa 50m (barebow) / metric 122-50": {
     "distancesRoundSizes": [
       6
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -1406,7 +1496,6 @@
       6
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -1430,7 +1519,6 @@
       6
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -1454,7 +1542,6 @@
       6
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -1480,7 +1567,6 @@
       2.5
     ],
     "scores": [
-      "X",
       10,
       9,
       8,
@@ -1505,7 +1591,6 @@
       3
     ],
     "scores": [
-      "X",
       10,
       9,
       8,

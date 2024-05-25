@@ -147830,5 +147830,36781 @@ export const rawClassifications = [
     "age": "U12",
     "round": "Metric 80-30",
     "score": 63
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 101
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 139
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 176
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 209
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 235
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 254
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 270
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 281
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 123
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 161
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 196
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 224
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 246
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 262
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 276
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 285
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 316
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 387
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 444
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 488
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 522
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 549
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 569
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 583
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 288
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 380
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 463
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 532
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 584
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 625
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 657
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 681
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 114
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 154
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 193
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 225
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 250
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 270
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 284
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 294
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 125
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 191
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 276
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 369
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 451
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 507
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 540
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 563
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 101
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 139
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 176
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 209
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 235
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 254
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 270
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 281
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 206
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 282
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 357
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 421
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 472
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 511
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 540
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 563
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 217
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 293
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 366
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 428
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 476
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 513
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 541
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 563
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 134
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 172
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 205
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 232
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 252
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 268
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 280
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 289
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 156
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 191
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 221
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 243
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 260
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 274
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 284
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 292
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 378
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 437
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 483
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 518
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 546
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 566
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 582
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 593
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 368
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 453
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 523
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 578
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 620
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 653
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 678
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 697
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 149
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 188
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 221
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 247
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 267
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 282
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 293
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 299
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 181
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 263
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 357
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 442
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 501
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 537
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 560
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 578
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 134
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 172
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 205
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 232
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 252
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 268
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 280
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 289
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 272
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 347
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 413
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 466
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 506
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 537
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 560
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 578
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 283
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 357
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 420
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 470
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 508
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 538
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 561
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 578
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 101
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 139
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 176
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 209
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 235
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 254
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 270
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 281
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 123
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 161
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 196
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 224
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 246
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 262
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 276
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 285
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 316
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 387
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 444
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 488
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 522
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 549
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 569
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 583
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 288
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 380
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 463
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 532
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 584
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 625
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 657
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 681
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 114
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 154
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 193
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 225
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 250
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 270
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 284
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 294
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 125
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 191
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 276
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 369
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 451
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 507
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 540
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 563
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 101
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 139
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 176
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 209
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 235
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 254
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 270
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 281
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 206
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 282
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 357
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 421
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 472
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 511
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 540
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 563
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 217
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 293
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 366
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 428
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 476
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 513
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 541
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 563
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 73
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 106
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 144
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 181
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 213
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 238
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 257
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 271
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 92
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 128
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 166
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 200
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 227
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 248
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 264
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 277
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 250
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 326
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 395
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 450
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 493
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 526
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 552
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 571
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 214
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 300
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 391
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 473
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 539
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 591
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 630
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 660
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 84
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 120
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 160
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 198
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 229
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 253
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 272
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 286
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 84
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 133
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 201
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 288
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 381
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 460
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 512
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 544
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 73
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 106
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 144
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 181
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 213
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 238
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 257
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 271
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 149
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 216
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 292
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 366
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 429
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 477
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 515
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 544
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 159
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 227
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 303
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 375
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 435
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 481
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 517
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 545
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 51
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 77
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 111
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 149
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 186
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 216
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 240
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 259
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 65
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 96
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 133
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 171
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 204
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 230
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 251
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 266
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 187
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 260
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 336
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 403
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 457
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 498
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 530
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 555
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 152
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 225
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 313
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 403
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 483
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 547
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 596
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 634
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 59
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 88
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 125
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 165
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 202
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 233
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 256
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 274
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 56
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 90
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 141
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 212
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 300
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 393
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 469
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 517
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 51
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 77
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 111
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 149
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 186
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 216
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 240
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 259
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 104
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 157
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 226
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 302
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 375
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 436
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 483
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 519
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 111
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 167
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 237
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 313
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 384
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 442
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 487
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 521
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 34
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 54
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 81
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 116
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 154
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 190
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 220
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 243
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 45
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 69
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 101
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 138
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 176
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 208
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 233
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 253
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 134
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 196
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 271
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 346
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 411
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 463
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 503
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 534
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 105
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 161
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 236
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 325
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 415
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 493
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 554
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 602
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 40
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 62
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 92
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 130
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 170
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 207
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 236
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 259
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 37
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 60
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 96
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 149
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 223
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 313
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 405
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 477
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 34
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 54
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 81
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 116
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 154
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 190
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 220
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 243
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 71
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 110
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 166
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 236
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 313
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 384
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 443
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 488
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 76
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 118
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 176
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 247
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 323
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 392
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 448
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 492
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 23
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 37
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 57
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 85
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 121
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 159
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 195
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 223
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 31
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 48
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 73
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 106
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 143
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 180
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 212
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 236
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 92
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 141
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 206
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 281
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 355
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 419
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 469
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 508
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 70
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 111
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 170
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 247
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 337
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 426
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 502
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 561
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 27
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 42
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 66
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 97
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 136
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 176
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 211
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 240
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 24
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 39
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 64
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 102
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 158
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 234
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 326
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 416
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 23
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 37
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 57
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 85
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 121
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 159
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 195
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 223
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 47
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 75
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 117
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 174
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 246
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 323
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 393
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 450
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 51
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 81
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 125
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 184
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 257
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 333
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 401
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 455
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 15
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 25
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 39
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 60
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 90
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 126
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 164
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 199
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 20
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 32
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 51
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 77
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 110
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 148
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 185
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 215
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 62
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 98
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 149
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 215
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 291
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 364
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 426
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 475
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 47
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 75
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 118
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 179
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 259
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 349
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 437
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 511
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 18
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 29
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 45
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 69
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 102
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 141
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 181
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 215
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 16
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 26
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 42
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 68
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 108
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 167
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 246
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 338
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 15
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 25
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 39
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 60
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 90
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 126
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 164
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 199
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 31
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 50
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 80
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 123
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 183
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 256
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 333
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 401
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 33
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 54
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 85
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 132
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 194
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 267
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 343
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 409
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 79
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 113
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 152
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 188
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 218
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 242
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 260
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 274
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 99
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 136
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 173
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 206
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 232
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 252
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 267
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 279
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 265
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 341
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 407
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 460
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 501
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 532
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 556
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 574
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 231
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 319
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 409
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 488
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 551
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 599
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 637
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 665
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 90
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 128
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 168
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 205
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 234
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 257
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 275
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 288
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 93
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 145
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 217
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 307
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 399
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 473
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 520
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 549
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 79
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 113
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 152
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 188
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 218
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 242
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 260
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 274
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 162
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 231
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 308
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 380
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 439
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 486
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 521
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 549
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 171
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 242
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 318
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 388
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 445
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 489
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 523
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 549
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 108
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 146
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 183
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 215
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 239
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 258
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 272
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 283
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 131
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 168
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 202
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 229
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 249
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 265
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 278
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 287
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 331
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 399
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 454
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 496
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 528
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 553
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 572
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 586
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 307
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 397
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 478
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 543
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 594
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 632
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 662
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 685
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 122
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 162
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 200
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 231
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 255
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 273
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 286
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 296
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 137
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 206
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 294
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 387
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 465
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 515
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 545
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 567
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 108
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 146
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 183
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 215
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 239
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 258
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 272
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 283
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 221
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 297
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 371
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 432
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 480
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 517
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 545
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 567
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 232
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 308
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 380
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 438
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 484
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 519
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 546
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 567
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 79
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 113
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 152
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 188
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 218
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 242
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 260
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 274
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 99
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 136
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 173
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 206
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 232
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 252
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 267
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 279
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 265
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 341
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 407
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 460
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 501
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 532
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 556
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 574
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 231
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 319
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 409
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 488
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 551
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 599
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 637
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 665
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 90
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 128
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 168
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 205
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 234
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 257
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 275
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 288
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 93
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 145
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 217
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 307
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 399
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 473
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 520
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 549
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 79
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 113
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 152
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 188
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 218
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 242
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 260
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 274
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 162
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 231
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 308
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 380
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 439
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 486
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 521
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 549
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 171
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 242
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 318
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 388
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 445
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 489
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 523
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 549
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 55
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 83
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 118
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 157
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 192
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 222
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 244
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 262
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 71
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 103
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 141
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 178
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 210
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 235
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 254
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 269
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 201
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 276
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 350
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 415
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 466
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 505
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 536
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 559
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 165
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 242
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 331
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 420
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 497
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 558
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 605
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 641
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 64
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 95
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 133
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 173
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 209
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 238
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 260
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 277
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 62
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 98
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 153
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 228
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 319
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 410
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 481
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 524
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 55
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 83
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 118
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 157
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 192
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 222
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 244
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 262
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 113
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 170
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 241
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 318
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 389
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 446
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 491
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 525
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 121
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 180
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 252
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 328
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 397
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 452
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 494
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 527
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 38
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 59
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 87
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 123
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 162
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 197
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 225
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 247
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 49
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 75
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 108
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 146
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 183
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 213
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 238
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 256
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 145
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 211
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 286
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 360
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 423
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 472
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 510
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 539
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 114
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 175
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 253
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 343
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 432
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 506
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 565
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 610
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 44
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 67
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 100
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 138
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 178
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 213
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 241
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 263
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 41
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 66
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 105
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 162
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 240
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 332
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 421
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 488
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 38
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 59
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 87
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 123
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 162
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 197
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 225
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 247
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 77
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 120
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 179
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 251
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 328
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 397
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 453
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 496
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 83
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 128
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 189
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 262
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 338
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 405
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 458
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 499
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 34
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 54
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 81
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 116
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 154
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 190
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 220
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 243
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 45
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 69
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 101
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 138
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 176
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 208
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 233
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 253
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 134
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 196
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 271
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 346
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 411
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 463
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 503
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 534
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 105
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 161
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 236
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 325
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 415
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 493
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 554
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 602
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 40
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 62
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 92
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 130
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 170
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 207
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 236
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 259
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 37
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 60
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 96
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 149
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 223
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 313
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 405
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 477
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 34
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 54
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 81
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 116
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 154
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 190
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 220
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 243
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 71
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 110
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 166
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 236
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 313
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 384
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 443
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 488
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 76
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 118
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 176
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 247
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 323
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 392
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 448
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 492
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 23
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 37
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 57
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 85
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 121
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 159
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 195
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 223
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 31
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 48
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 73
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 106
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 143
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 180
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 212
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 236
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 92
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 141
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 206
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 281
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 355
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 419
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 469
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 508
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 70
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 111
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 170
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 247
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 337
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 426
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 502
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 561
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 27
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 42
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 66
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 97
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 136
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 176
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 211
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 240
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 24
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 39
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 64
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 102
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 158
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 234
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 326
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 416
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 23
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 37
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 57
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 85
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 121
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 159
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 195
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 223
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 47
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 75
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 117
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 174
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 246
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 323
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 393
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 450
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 51
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 81
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 125
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 184
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 257
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 333
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 401
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 455
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 15
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 25
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 39
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 60
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 90
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 126
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 164
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 199
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 20
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 32
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 51
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 77
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 110
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 148
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 185
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 215
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 62
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 98
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 149
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 215
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 291
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 364
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 426
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 475
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 47
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 75
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 118
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 179
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 259
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 349
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 437
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 511
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 18
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 29
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 45
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 69
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 102
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 141
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 181
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 215
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 16
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 26
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 42
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 68
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 108
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 167
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 246
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 338
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 15
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 25
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 39
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 60
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 90
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 126
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 164
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 199
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 31
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 50
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 80
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 123
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 183
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 256
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 333
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 401
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 33
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 54
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 85
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 132
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 194
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 267
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 343
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Recurve",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 409
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Bray I Compound",
+    "score": 173
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Bray I Compound",
+    "score": 207
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Bray I Compound",
+    "score": 234
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Bray I Compound",
+    "score": 253
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Bray I Compound",
+    "score": 266
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Bray I Compound",
+    "score": 275
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Bray I Compound",
+    "score": 281
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Bray I Compound",
+    "score": 287
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Bray II Compound",
+    "score": 192
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Bray II Compound",
+    "score": 222
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Bray II Compound",
+    "score": 244
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Bray II Compound",
+    "score": 259
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Bray II Compound",
+    "score": 270
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Bray II Compound",
+    "score": 277
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Bray II Compound",
+    "score": 283
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Bray II Compound",
+    "score": 288
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Portsmouth Compound",
+    "score": 437
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Portsmouth Compound",
+    "score": 482
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Portsmouth Compound",
+    "score": 515
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Portsmouth Compound",
+    "score": 537
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Portsmouth Compound",
+    "score": 552
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Portsmouth Compound",
+    "score": 563
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Portsmouth Compound",
+    "score": 574
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Portsmouth Compound",
+    "score": 586
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Stafford Compound",
+    "score": 456
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Stafford Compound",
+    "score": 527
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Stafford Compound",
+    "score": 580
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Stafford Compound",
+    "score": 618
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Stafford Compound",
+    "score": 644
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Stafford Compound",
+    "score": 661
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Stafford Compound",
+    "score": 674
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Stafford Compound",
+    "score": 687
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 191
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 225
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 252
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 272
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 286
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 296
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 268
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 366
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 451
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 504
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 532
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 550
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 563
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 574
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 174
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 209
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 236
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 257
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 272
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 284
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 292
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 298
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "WA 18m Compound",
+    "score": 350
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "WA 18m Compound",
+    "score": 418
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "WA 18m Compound",
+    "score": 469
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "WA 18m Compound",
+    "score": 507
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "WA 18m Compound",
+    "score": 533
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "WA 18m Compound",
+    "score": 550
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "WA 18m Compound",
+    "score": 563
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "WA 18m Compound",
+    "score": 574
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "WA 25m Compound",
+    "score": 360
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "WA 25m Compound",
+    "score": 424
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "WA 25m Compound",
+    "score": 473
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "WA 25m Compound",
+    "score": 508
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "WA 25m Compound",
+    "score": 533
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "WA 25m Compound",
+    "score": 549
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "WA 25m Compound",
+    "score": 561
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "WA 25m Compound",
+    "score": 572
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Bray I Compound",
+    "score": 200
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Bray I Compound",
+    "score": 228
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Bray I Compound",
+    "score": 248
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Bray I Compound",
+    "score": 263
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Bray I Compound",
+    "score": 273
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Bray I Compound",
+    "score": 280
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Bray I Compound",
+    "score": 286
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Bray I Compound",
+    "score": 292
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Bray II Compound",
+    "score": 215
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Bray II Compound",
+    "score": 239
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Bray II Compound",
+    "score": 256
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Bray II Compound",
+    "score": 268
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Bray II Compound",
+    "score": 276
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Bray II Compound",
+    "score": 281
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Bray II Compound",
+    "score": 287
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Bray II Compound",
+    "score": 293
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Portsmouth Compound",
+    "score": 472
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Portsmouth Compound",
+    "score": 508
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Portsmouth Compound",
+    "score": 532
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Portsmouth Compound",
+    "score": 549
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Portsmouth Compound",
+    "score": 560
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Portsmouth Compound",
+    "score": 571
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Portsmouth Compound",
+    "score": 583
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Portsmouth Compound",
+    "score": 594
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Stafford Compound",
+    "score": 511
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Stafford Compound",
+    "score": 569
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Stafford Compound",
+    "score": 610
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Stafford Compound",
+    "score": 639
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Stafford Compound",
+    "score": 658
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Stafford Compound",
+    "score": 671
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Stafford Compound",
+    "score": 684
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Stafford Compound",
+    "score": 698
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 217
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 246
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 267
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 283
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 294
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 300
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 342
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 432
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 494
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 527
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 546
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 560
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 571
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 583
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 201
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 230
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 252
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 269
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 281
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 290
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 297
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 300
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "WA 18m Compound",
+    "score": 403
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "WA 18m Compound",
+    "score": 458
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "WA 18m Compound",
+    "score": 498
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "WA 18m Compound",
+    "score": 527
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "WA 18m Compound",
+    "score": 546
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "WA 18m Compound",
+    "score": 560
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "WA 18m Compound",
+    "score": 571
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "WA 18m Compound",
+    "score": 583
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "WA 25m Compound",
+    "score": 410
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "WA 25m Compound",
+    "score": 462
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "WA 25m Compound",
+    "score": 501
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "WA 25m Compound",
+    "score": 528
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "WA 25m Compound",
+    "score": 546
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "WA 25m Compound",
+    "score": 558
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "WA 25m Compound",
+    "score": 569
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "WA 25m Compound",
+    "score": 581
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Bray I Compound",
+    "score": 173
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Bray I Compound",
+    "score": 207
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Bray I Compound",
+    "score": 234
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Bray I Compound",
+    "score": 253
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Bray I Compound",
+    "score": 266
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Bray I Compound",
+    "score": 275
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Bray I Compound",
+    "score": 281
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Bray I Compound",
+    "score": 287
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Bray II Compound",
+    "score": 192
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Bray II Compound",
+    "score": 222
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Bray II Compound",
+    "score": 244
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Bray II Compound",
+    "score": 259
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Bray II Compound",
+    "score": 270
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Bray II Compound",
+    "score": 277
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Bray II Compound",
+    "score": 283
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Bray II Compound",
+    "score": 288
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Portsmouth Compound",
+    "score": 437
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Portsmouth Compound",
+    "score": 482
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Portsmouth Compound",
+    "score": 515
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Portsmouth Compound",
+    "score": 537
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Portsmouth Compound",
+    "score": 552
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Portsmouth Compound",
+    "score": 563
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Portsmouth Compound",
+    "score": 574
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Portsmouth Compound",
+    "score": 586
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Stafford Compound",
+    "score": 456
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Stafford Compound",
+    "score": 527
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Stafford Compound",
+    "score": 580
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Stafford Compound",
+    "score": 618
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Stafford Compound",
+    "score": 644
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Stafford Compound",
+    "score": 661
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Stafford Compound",
+    "score": 674
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Stafford Compound",
+    "score": 687
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 191
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 225
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 252
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 272
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 286
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 296
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 268
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 366
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 451
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 504
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 532
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 550
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 563
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 574
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 174
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 209
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 236
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 257
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 272
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 284
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 292
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 298
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "WA 18m Compound",
+    "score": 350
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "WA 18m Compound",
+    "score": 418
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "WA 18m Compound",
+    "score": 469
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "WA 18m Compound",
+    "score": 507
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "WA 18m Compound",
+    "score": 533
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "WA 18m Compound",
+    "score": 550
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "WA 18m Compound",
+    "score": 563
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "WA 18m Compound",
+    "score": 574
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "WA 25m Compound",
+    "score": 360
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "WA 25m Compound",
+    "score": 424
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "WA 25m Compound",
+    "score": 473
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "WA 25m Compound",
+    "score": 508
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "WA 25m Compound",
+    "score": 533
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "WA 25m Compound",
+    "score": 549
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "WA 25m Compound",
+    "score": 561
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "WA 25m Compound",
+    "score": 572
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Bray I Compound",
+    "score": 143
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Bray I Compound",
+    "score": 182
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Bray I Compound",
+    "score": 215
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Bray I Compound",
+    "score": 239
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Bray I Compound",
+    "score": 256
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Bray I Compound",
+    "score": 268
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Bray I Compound",
+    "score": 277
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Bray I Compound",
+    "score": 283
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Bray II Compound",
+    "score": 165
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Bray II Compound",
+    "score": 201
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Bray II Compound",
+    "score": 228
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Bray II Compound",
+    "score": 248
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Bray II Compound",
+    "score": 262
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Bray II Compound",
+    "score": 272
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Bray II Compound",
+    "score": 279
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Bray II Compound",
+    "score": 284
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Portsmouth Compound",
+    "score": 393
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Portsmouth Compound",
+    "score": 449
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Portsmouth Compound",
+    "score": 491
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Portsmouth Compound",
+    "score": 521
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Portsmouth Compound",
+    "score": 541
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Portsmouth Compound",
+    "score": 555
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Portsmouth Compound",
+    "score": 566
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Portsmouth Compound",
+    "score": 577
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Stafford Compound",
+    "score": 390
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Stafford Compound",
+    "score": 475
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Stafford Compound",
+    "score": 542
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Stafford Compound",
+    "score": 591
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Stafford Compound",
+    "score": 626
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Stafford Compound",
+    "score": 649
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Stafford Compound",
+    "score": 665
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Stafford Compound",
+    "score": 677
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 160
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 200
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 233
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 257
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 276
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 289
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 298
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 200
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 292
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 390
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 467
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 513
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 538
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 553
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 565
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 144
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 183
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 216
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 242
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 261
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 275
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 286
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 294
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "WA 18m Compound",
+    "score": 291
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "WA 18m Compound",
+    "score": 369
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "WA 18m Compound",
+    "score": 432
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "WA 18m Compound",
+    "score": 480
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "WA 18m Compound",
+    "score": 514
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "WA 18m Compound",
+    "score": 538
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "WA 18m Compound",
+    "score": 553
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "WA 18m Compound",
+    "score": 565
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "WA 25m Compound",
+    "score": 302
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "WA 25m Compound",
+    "score": 377
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "WA 25m Compound",
+    "score": 438
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "WA 25m Compound",
+    "score": 483
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "WA 25m Compound",
+    "score": 515
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "WA 25m Compound",
+    "score": 537
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "WA 25m Compound",
+    "score": 552
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "WA 25m Compound",
+    "score": 563
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Bray I Compound",
+    "score": 113
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Bray I Compound",
+    "score": 153
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Bray I Compound",
+    "score": 191
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Bray I Compound",
+    "score": 221
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Bray I Compound",
+    "score": 244
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Bray I Compound",
+    "score": 260
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Bray I Compound",
+    "score": 271
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Bray I Compound",
+    "score": 278
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Bray II Compound",
+    "score": 135
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Bray II Compound",
+    "score": 175
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Bray II Compound",
+    "score": 208
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Bray II Compound",
+    "score": 234
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Bray II Compound",
+    "score": 252
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Bray II Compound",
+    "score": 265
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Bray II Compound",
+    "score": 274
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Bray II Compound",
+    "score": 280
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Portsmouth Compound",
+    "score": 339
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Portsmouth Compound",
+    "score": 408
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Portsmouth Compound",
+    "score": 461
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Portsmouth Compound",
+    "score": 500
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Portsmouth Compound",
+    "score": 527
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Portsmouth Compound",
+    "score": 545
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Portsmouth Compound",
+    "score": 558
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Portsmouth Compound",
+    "score": 568
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Stafford Compound",
+    "score": 318
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Stafford Compound",
+    "score": 413
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Stafford Compound",
+    "score": 494
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Stafford Compound",
+    "score": 556
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Stafford Compound",
+    "score": 601
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Stafford Compound",
+    "score": 633
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Stafford Compound",
+    "score": 654
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Stafford Compound",
+    "score": 668
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 128
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 170
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 209
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 240
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 263
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 280
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 292
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 299
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 144
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 221
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 317
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 412
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 481
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 520
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 542
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 557
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 113
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 154
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 192
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 223
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 247
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 265
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 278
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 288
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "WA 18m Compound",
+    "score": 230
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "WA 18m Compound",
+    "score": 311
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "WA 18m Compound",
+    "score": 386
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "WA 18m Compound",
+    "score": 446
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "WA 18m Compound",
+    "score": 490
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "WA 18m Compound",
+    "score": 521
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "WA 18m Compound",
+    "score": 542
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "WA 18m Compound",
+    "score": 557
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "WA 25m Compound",
+    "score": 241
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "WA 25m Compound",
+    "score": 322
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "WA 25m Compound",
+    "score": 394
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "WA 25m Compound",
+    "score": 451
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "WA 25m Compound",
+    "score": 492
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "WA 25m Compound",
+    "score": 522
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "WA 25m Compound",
+    "score": 542
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "WA 25m Compound",
+    "score": 555
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Bray I Compound",
+    "score": 85
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Bray I Compound",
+    "score": 123
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Bray I Compound",
+    "score": 163
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Bray I Compound",
+    "score": 200
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Bray I Compound",
+    "score": 228
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Bray I Compound",
+    "score": 248
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Bray I Compound",
+    "score": 263
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Bray I Compound",
+    "score": 273
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Bray II Compound",
+    "score": 105
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Bray II Compound",
+    "score": 145
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Bray II Compound",
+    "score": 184
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Bray II Compound",
+    "score": 215
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Bray II Compound",
+    "score": 239
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Bray II Compound",
+    "score": 256
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Bray II Compound",
+    "score": 268
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Bray II Compound",
+    "score": 276
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Portsmouth Compound",
+    "score": 280
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Portsmouth Compound",
+    "score": 358
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Portsmouth Compound",
+    "score": 423
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Portsmouth Compound",
+    "score": 472
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Portsmouth Compound",
+    "score": 508
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Portsmouth Compound",
+    "score": 532
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Portsmouth Compound",
+    "score": 549
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Portsmouth Compound",
+    "score": 560
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Stafford Compound",
+    "score": 247
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Stafford Compound",
+    "score": 342
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Stafford Compound",
+    "score": 435
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Stafford Compound",
+    "score": 511
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Stafford Compound",
+    "score": 569
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Stafford Compound",
+    "score": 610
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Stafford Compound",
+    "score": 639
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Stafford Compound",
+    "score": 658
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 97
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 138
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 181
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 217
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 246
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 267
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 283
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 294
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 101
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 161
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 244
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 342
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 432
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 494
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 527
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 546
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 85
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 123
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 164
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 201
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 230
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 252
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 269
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 281
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "WA 18m Compound",
+    "score": 174
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "WA 18m Compound",
+    "score": 250
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "WA 18m Compound",
+    "score": 331
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "WA 18m Compound",
+    "score": 403
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "WA 18m Compound",
+    "score": 458
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "WA 18m Compound",
+    "score": 498
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "WA 18m Compound",
+    "score": 527
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "WA 18m Compound",
+    "score": 546
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "WA 25m Compound",
+    "score": 184
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "WA 25m Compound",
+    "score": 261
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "WA 25m Compound",
+    "score": 341
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "WA 25m Compound",
+    "score": 410
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "WA 25m Compound",
+    "score": 462
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "WA 25m Compound",
+    "score": 501
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "WA 25m Compound",
+    "score": 528
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "WA 25m Compound",
+    "score": 546
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Bray I Compound",
+    "score": 62
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Bray I Compound",
+    "score": 94
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Bray I Compound",
+    "score": 133
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Bray I Compound",
+    "score": 173
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Bray I Compound",
+    "score": 207
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Bray I Compound",
+    "score": 234
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Bray I Compound",
+    "score": 253
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Bray I Compound",
+    "score": 266
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Bray II Compound",
+    "score": 79
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Bray II Compound",
+    "score": 115
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Bray II Compound",
+    "score": 155
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Bray II Compound",
+    "score": 192
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Bray II Compound",
+    "score": 222
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Bray II Compound",
+    "score": 244
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Bray II Compound",
+    "score": 259
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Bray II Compound",
+    "score": 270
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Portsmouth Compound",
+    "score": 219
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Portsmouth Compound",
+    "score": 300
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Portsmouth Compound",
+    "score": 376
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Portsmouth Compound",
+    "score": 437
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Portsmouth Compound",
+    "score": 482
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Portsmouth Compound",
+    "score": 515
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Portsmouth Compound",
+    "score": 537
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Portsmouth Compound",
+    "score": 552
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Stafford Compound",
+    "score": 183
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Stafford Compound",
+    "score": 270
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Stafford Compound",
+    "score": 366
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Stafford Compound",
+    "score": 456
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Stafford Compound",
+    "score": 527
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Stafford Compound",
+    "score": 580
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Stafford Compound",
+    "score": 618
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Stafford Compound",
+    "score": 644
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 71
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 107
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 149
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 191
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 225
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 252
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 272
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 286
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 70
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 114
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 180
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 268
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 366
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 451
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 504
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 532
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 62
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 94
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 134
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 174
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 209
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 236
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 257
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 272
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "WA 18m Compound",
+    "score": 127
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "WA 18m Compound",
+    "score": 192
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "WA 18m Compound",
+    "score": 270
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "WA 18m Compound",
+    "score": 350
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "WA 18m Compound",
+    "score": 418
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "WA 18m Compound",
+    "score": 469
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "WA 18m Compound",
+    "score": 507
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "WA 18m Compound",
+    "score": 533
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "WA 25m Compound",
+    "score": 135
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "WA 25m Compound",
+    "score": 202
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "WA 25m Compound",
+    "score": 282
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "WA 25m Compound",
+    "score": 360
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "WA 25m Compound",
+    "score": 424
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "WA 25m Compound",
+    "score": 473
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "WA 25m Compound",
+    "score": 508
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "WA 25m Compound",
+    "score": 533
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Bray I Compound",
+    "score": 44
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Bray I Compound",
+    "score": 69
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Bray I Compound",
+    "score": 103
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Bray I Compound",
+    "score": 143
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Bray I Compound",
+    "score": 182
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Bray I Compound",
+    "score": 215
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Bray I Compound",
+    "score": 239
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Bray I Compound",
+    "score": 256
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Bray II Compound",
+    "score": 57
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Bray II Compound",
+    "score": 87
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Bray II Compound",
+    "score": 125
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Bray II Compound",
+    "score": 165
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Bray II Compound",
+    "score": 201
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Bray II Compound",
+    "score": 228
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Bray II Compound",
+    "score": 248
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Bray II Compound",
+    "score": 262
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Portsmouth Compound",
+    "score": 165
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Portsmouth Compound",
+    "score": 239
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Portsmouth Compound",
+    "score": 320
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Portsmouth Compound",
+    "score": 393
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Portsmouth Compound",
+    "score": 449
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Portsmouth Compound",
+    "score": 491
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Portsmouth Compound",
+    "score": 521
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Portsmouth Compound",
+    "score": 541
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Stafford Compound",
+    "score": 132
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Stafford Compound",
+    "score": 203
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Stafford Compound",
+    "score": 293
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Stafford Compound",
+    "score": 390
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Stafford Compound",
+    "score": 475
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Stafford Compound",
+    "score": 542
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Stafford Compound",
+    "score": 591
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Stafford Compound",
+    "score": 626
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 51
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 79
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 117
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 160
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 200
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 233
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 257
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 276
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 47
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 79
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 128
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 200
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 292
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 390
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 467
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 513
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 44
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 69
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 103
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 144
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 183
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 216
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 242
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 261
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "WA 18m Compound",
+    "score": 90
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "WA 18m Compound",
+    "score": 141
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "WA 18m Compound",
+    "score": 210
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "WA 18m Compound",
+    "score": 291
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "WA 18m Compound",
+    "score": 369
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "WA 18m Compound",
+    "score": 432
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "WA 18m Compound",
+    "score": 480
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "WA 18m Compound",
+    "score": 514
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "WA 25m Compound",
+    "score": 96
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "WA 25m Compound",
+    "score": 150
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "WA 25m Compound",
+    "score": 221
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "WA 25m Compound",
+    "score": 302
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "WA 25m Compound",
+    "score": 377
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "WA 25m Compound",
+    "score": 438
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "WA 25m Compound",
+    "score": 483
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "WA 25m Compound",
+    "score": 515
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Bray I Compound",
+    "score": 153
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Bray I Compound",
+    "score": 191
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Bray I Compound",
+    "score": 221
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Bray I Compound",
+    "score": 244
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Bray I Compound",
+    "score": 260
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Bray I Compound",
+    "score": 271
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Bray I Compound",
+    "score": 278
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Bray I Compound",
+    "score": 284
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Bray II Compound",
+    "score": 175
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Bray II Compound",
+    "score": 208
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Bray II Compound",
+    "score": 234
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Bray II Compound",
+    "score": 252
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Bray II Compound",
+    "score": 265
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Bray II Compound",
+    "score": 274
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Bray II Compound",
+    "score": 280
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Bray II Compound",
+    "score": 286
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Portsmouth Compound",
+    "score": 408
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Portsmouth Compound",
+    "score": 461
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Portsmouth Compound",
+    "score": 500
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Portsmouth Compound",
+    "score": 527
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Portsmouth Compound",
+    "score": 545
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Portsmouth Compound",
+    "score": 558
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Portsmouth Compound",
+    "score": 568
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Portsmouth Compound",
+    "score": 580
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Stafford Compound",
+    "score": 413
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Stafford Compound",
+    "score": 494
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Stafford Compound",
+    "score": 556
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Stafford Compound",
+    "score": 601
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Stafford Compound",
+    "score": 633
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Stafford Compound",
+    "score": 654
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Stafford Compound",
+    "score": 668
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Stafford Compound",
+    "score": 680
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 170
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 209
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 240
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 263
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 280
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 292
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 299
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 221
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 317
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 412
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 481
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 520
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 542
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 557
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 568
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 154
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 192
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 223
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 247
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 265
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 278
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 288
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 295
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "WA 18m Compound",
+    "score": 311
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "WA 18m Compound",
+    "score": 386
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "WA 18m Compound",
+    "score": 446
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "WA 18m Compound",
+    "score": 490
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "WA 18m Compound",
+    "score": 521
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "WA 18m Compound",
+    "score": 542
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "WA 18m Compound",
+    "score": 557
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "WA 18m Compound",
+    "score": 568
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "WA 25m Compound",
+    "score": 322
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "WA 25m Compound",
+    "score": 394
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "WA 25m Compound",
+    "score": 451
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "WA 25m Compound",
+    "score": 492
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "WA 25m Compound",
+    "score": 522
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "WA 25m Compound",
+    "score": 542
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "WA 25m Compound",
+    "score": 555
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "50+",
+    "round": "WA 25m Compound",
+    "score": 566
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Bray I Compound",
+    "score": 182
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Bray I Compound",
+    "score": 215
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Bray I Compound",
+    "score": 239
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Bray I Compound",
+    "score": 256
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Bray I Compound",
+    "score": 268
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Bray I Compound",
+    "score": 277
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Bray I Compound",
+    "score": 283
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Bray I Compound",
+    "score": 289
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Bray II Compound",
+    "score": 201
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Bray II Compound",
+    "score": 228
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Bray II Compound",
+    "score": 248
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Bray II Compound",
+    "score": 262
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Bray II Compound",
+    "score": 272
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Bray II Compound",
+    "score": 279
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Bray II Compound",
+    "score": 284
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Bray II Compound",
+    "score": 290
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Portsmouth Compound",
+    "score": 449
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Portsmouth Compound",
+    "score": 491
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Portsmouth Compound",
+    "score": 521
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Portsmouth Compound",
+    "score": 541
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Portsmouth Compound",
+    "score": 555
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Portsmouth Compound",
+    "score": 566
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Portsmouth Compound",
+    "score": 577
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Portsmouth Compound",
+    "score": 589
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Stafford Compound",
+    "score": 475
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Stafford Compound",
+    "score": 542
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Stafford Compound",
+    "score": 591
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Stafford Compound",
+    "score": 626
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Stafford Compound",
+    "score": 649
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Stafford Compound",
+    "score": 665
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Stafford Compound",
+    "score": 677
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Stafford Compound",
+    "score": 691
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 200
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 233
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 257
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 276
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 289
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 298
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 292
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 390
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 467
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 513
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 538
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 553
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 565
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 577
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 183
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 216
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 242
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 261
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 275
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 286
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 294
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 299
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "WA 18m Compound",
+    "score": 369
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "WA 18m Compound",
+    "score": 432
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "WA 18m Compound",
+    "score": 480
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "WA 18m Compound",
+    "score": 514
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "WA 18m Compound",
+    "score": 538
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "WA 18m Compound",
+    "score": 553
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "WA 18m Compound",
+    "score": 565
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "WA 18m Compound",
+    "score": 577
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "WA 25m Compound",
+    "score": 377
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "WA 25m Compound",
+    "score": 438
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "WA 25m Compound",
+    "score": 483
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "WA 25m Compound",
+    "score": 515
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "WA 25m Compound",
+    "score": 537
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "WA 25m Compound",
+    "score": 552
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "WA 25m Compound",
+    "score": 563
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "Senior",
+    "round": "WA 25m Compound",
+    "score": 575
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Bray I Compound",
+    "score": 153
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Bray I Compound",
+    "score": 191
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Bray I Compound",
+    "score": 221
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Bray I Compound",
+    "score": 244
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Bray I Compound",
+    "score": 260
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Bray I Compound",
+    "score": 271
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Bray I Compound",
+    "score": 278
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Bray I Compound",
+    "score": 284
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Bray II Compound",
+    "score": 175
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Bray II Compound",
+    "score": 208
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Bray II Compound",
+    "score": 234
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Bray II Compound",
+    "score": 252
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Bray II Compound",
+    "score": 265
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Bray II Compound",
+    "score": 274
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Bray II Compound",
+    "score": 280
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Bray II Compound",
+    "score": 286
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Portsmouth Compound",
+    "score": 408
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Portsmouth Compound",
+    "score": 461
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Portsmouth Compound",
+    "score": 500
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Portsmouth Compound",
+    "score": 527
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Portsmouth Compound",
+    "score": 545
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Portsmouth Compound",
+    "score": 558
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Portsmouth Compound",
+    "score": 568
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Portsmouth Compound",
+    "score": 580
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Stafford Compound",
+    "score": 413
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Stafford Compound",
+    "score": 494
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Stafford Compound",
+    "score": 556
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Stafford Compound",
+    "score": 601
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Stafford Compound",
+    "score": 633
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Stafford Compound",
+    "score": 654
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Stafford Compound",
+    "score": 668
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Stafford Compound",
+    "score": 680
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 170
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 209
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 240
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 263
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 280
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 292
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 299
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 221
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 317
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 412
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 481
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 520
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 542
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 557
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 568
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 154
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 192
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 223
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 247
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 265
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 278
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 288
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 295
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "WA 18m Compound",
+    "score": 311
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "WA 18m Compound",
+    "score": 386
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "WA 18m Compound",
+    "score": 446
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "WA 18m Compound",
+    "score": 490
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "WA 18m Compound",
+    "score": 521
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "WA 18m Compound",
+    "score": 542
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "WA 18m Compound",
+    "score": 557
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "WA 18m Compound",
+    "score": 568
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "WA 25m Compound",
+    "score": 322
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "WA 25m Compound",
+    "score": 394
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "WA 25m Compound",
+    "score": 451
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "WA 25m Compound",
+    "score": 492
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "WA 25m Compound",
+    "score": 522
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "WA 25m Compound",
+    "score": 542
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "WA 25m Compound",
+    "score": 555
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U21",
+    "round": "WA 25m Compound",
+    "score": 566
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Bray I Compound",
+    "score": 123
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Bray I Compound",
+    "score": 163
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Bray I Compound",
+    "score": 200
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Bray I Compound",
+    "score": 228
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Bray I Compound",
+    "score": 248
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Bray I Compound",
+    "score": 263
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Bray I Compound",
+    "score": 273
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Bray I Compound",
+    "score": 280
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Bray II Compound",
+    "score": 145
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Bray II Compound",
+    "score": 184
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Bray II Compound",
+    "score": 215
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Bray II Compound",
+    "score": 239
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Bray II Compound",
+    "score": 256
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Bray II Compound",
+    "score": 268
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Bray II Compound",
+    "score": 276
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Bray II Compound",
+    "score": 281
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Portsmouth Compound",
+    "score": 358
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Portsmouth Compound",
+    "score": 423
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Portsmouth Compound",
+    "score": 472
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Portsmouth Compound",
+    "score": 508
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Portsmouth Compound",
+    "score": 532
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Portsmouth Compound",
+    "score": 549
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Portsmouth Compound",
+    "score": 560
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Portsmouth Compound",
+    "score": 571
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Stafford Compound",
+    "score": 342
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Stafford Compound",
+    "score": 435
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Stafford Compound",
+    "score": 511
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Stafford Compound",
+    "score": 569
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Stafford Compound",
+    "score": 610
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Stafford Compound",
+    "score": 639
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Stafford Compound",
+    "score": 658
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Stafford Compound",
+    "score": 671
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 138
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 181
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 217
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 246
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 267
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 283
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 294
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 300
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 161
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 244
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 342
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 432
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 494
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 527
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 546
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 560
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 123
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 164
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 201
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 230
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 252
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 269
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 281
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 290
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "WA 18m Compound",
+    "score": 250
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "WA 18m Compound",
+    "score": 331
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "WA 18m Compound",
+    "score": 403
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "WA 18m Compound",
+    "score": 458
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "WA 18m Compound",
+    "score": 498
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "WA 18m Compound",
+    "score": 527
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "WA 18m Compound",
+    "score": 546
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "WA 18m Compound",
+    "score": 560
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "WA 25m Compound",
+    "score": 261
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "WA 25m Compound",
+    "score": 341
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "WA 25m Compound",
+    "score": 410
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "WA 25m Compound",
+    "score": 462
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "WA 25m Compound",
+    "score": 501
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "WA 25m Compound",
+    "score": 528
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "WA 25m Compound",
+    "score": 546
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U18",
+    "round": "WA 25m Compound",
+    "score": 558
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Bray I Compound",
+    "score": 94
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Bray I Compound",
+    "score": 133
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Bray I Compound",
+    "score": 173
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Bray I Compound",
+    "score": 207
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Bray I Compound",
+    "score": 234
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Bray I Compound",
+    "score": 253
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Bray I Compound",
+    "score": 266
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Bray I Compound",
+    "score": 275
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Bray II Compound",
+    "score": 115
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Bray II Compound",
+    "score": 155
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Bray II Compound",
+    "score": 192
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Bray II Compound",
+    "score": 222
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Bray II Compound",
+    "score": 244
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Bray II Compound",
+    "score": 259
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Bray II Compound",
+    "score": 270
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Bray II Compound",
+    "score": 277
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Portsmouth Compound",
+    "score": 300
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Portsmouth Compound",
+    "score": 376
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Portsmouth Compound",
+    "score": 437
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Portsmouth Compound",
+    "score": 482
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Portsmouth Compound",
+    "score": 515
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Portsmouth Compound",
+    "score": 537
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Portsmouth Compound",
+    "score": 552
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Portsmouth Compound",
+    "score": 563
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Stafford Compound",
+    "score": 270
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Stafford Compound",
+    "score": 366
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Stafford Compound",
+    "score": 456
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Stafford Compound",
+    "score": 527
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Stafford Compound",
+    "score": 580
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Stafford Compound",
+    "score": 618
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Stafford Compound",
+    "score": 644
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Stafford Compound",
+    "score": 661
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 107
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 149
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 191
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 225
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 252
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 272
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 286
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 296
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 114
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 180
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 268
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 366
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 451
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 504
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 532
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 550
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 94
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 134
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 174
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 209
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 236
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 257
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 272
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 284
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "WA 18m Compound",
+    "score": 192
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "WA 18m Compound",
+    "score": 270
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "WA 18m Compound",
+    "score": 350
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "WA 18m Compound",
+    "score": 418
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "WA 18m Compound",
+    "score": 469
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "WA 18m Compound",
+    "score": 507
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "WA 18m Compound",
+    "score": 533
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "WA 18m Compound",
+    "score": 550
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "WA 25m Compound",
+    "score": 202
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "WA 25m Compound",
+    "score": 282
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "WA 25m Compound",
+    "score": 360
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "WA 25m Compound",
+    "score": 424
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "WA 25m Compound",
+    "score": 473
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "WA 25m Compound",
+    "score": 508
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "WA 25m Compound",
+    "score": 533
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U16",
+    "round": "WA 25m Compound",
+    "score": 549
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Bray I Compound",
+    "score": 85
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Bray I Compound",
+    "score": 123
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Bray I Compound",
+    "score": 163
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Bray I Compound",
+    "score": 200
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Bray I Compound",
+    "score": 228
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Bray I Compound",
+    "score": 248
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Bray I Compound",
+    "score": 263
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Bray I Compound",
+    "score": 273
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Bray II Compound",
+    "score": 105
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Bray II Compound",
+    "score": 145
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Bray II Compound",
+    "score": 184
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Bray II Compound",
+    "score": 215
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Bray II Compound",
+    "score": 239
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Bray II Compound",
+    "score": 256
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Bray II Compound",
+    "score": 268
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Bray II Compound",
+    "score": 276
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Portsmouth Compound",
+    "score": 280
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Portsmouth Compound",
+    "score": 358
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Portsmouth Compound",
+    "score": 423
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Portsmouth Compound",
+    "score": 472
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Portsmouth Compound",
+    "score": 508
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Portsmouth Compound",
+    "score": 532
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Portsmouth Compound",
+    "score": 549
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Portsmouth Compound",
+    "score": 560
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Stafford Compound",
+    "score": 247
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Stafford Compound",
+    "score": 342
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Stafford Compound",
+    "score": 435
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Stafford Compound",
+    "score": 511
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Stafford Compound",
+    "score": 569
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Stafford Compound",
+    "score": 610
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Stafford Compound",
+    "score": 639
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Stafford Compound",
+    "score": 658
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 97
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 138
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 181
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 217
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 246
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 267
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 283
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 294
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 101
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 161
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 244
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 342
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 432
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 494
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 527
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 546
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 85
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 123
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 164
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 201
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 230
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 252
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 269
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 281
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "WA 18m Compound",
+    "score": 174
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "WA 18m Compound",
+    "score": 250
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "WA 18m Compound",
+    "score": 331
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "WA 18m Compound",
+    "score": 403
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "WA 18m Compound",
+    "score": 458
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "WA 18m Compound",
+    "score": 498
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "WA 18m Compound",
+    "score": 527
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "WA 18m Compound",
+    "score": 546
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "WA 25m Compound",
+    "score": 184
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "WA 25m Compound",
+    "score": 261
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "WA 25m Compound",
+    "score": 341
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "WA 25m Compound",
+    "score": 410
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "WA 25m Compound",
+    "score": 462
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "WA 25m Compound",
+    "score": 501
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "WA 25m Compound",
+    "score": 528
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U15",
+    "round": "WA 25m Compound",
+    "score": 546
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Bray I Compound",
+    "score": 62
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Bray I Compound",
+    "score": 94
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Bray I Compound",
+    "score": 133
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Bray I Compound",
+    "score": 173
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Bray I Compound",
+    "score": 207
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Bray I Compound",
+    "score": 234
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Bray I Compound",
+    "score": 253
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Bray I Compound",
+    "score": 266
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Bray II Compound",
+    "score": 79
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Bray II Compound",
+    "score": 115
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Bray II Compound",
+    "score": 155
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Bray II Compound",
+    "score": 192
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Bray II Compound",
+    "score": 222
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Bray II Compound",
+    "score": 244
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Bray II Compound",
+    "score": 259
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Bray II Compound",
+    "score": 270
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Portsmouth Compound",
+    "score": 219
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Portsmouth Compound",
+    "score": 300
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Portsmouth Compound",
+    "score": 376
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Portsmouth Compound",
+    "score": 437
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Portsmouth Compound",
+    "score": 482
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Portsmouth Compound",
+    "score": 515
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Portsmouth Compound",
+    "score": 537
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Portsmouth Compound",
+    "score": 552
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Stafford Compound",
+    "score": 183
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Stafford Compound",
+    "score": 270
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Stafford Compound",
+    "score": 366
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Stafford Compound",
+    "score": 456
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Stafford Compound",
+    "score": 527
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Stafford Compound",
+    "score": 580
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Stafford Compound",
+    "score": 618
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Stafford Compound",
+    "score": 644
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 71
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 107
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 149
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 191
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 225
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 252
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 272
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 286
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 70
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 114
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 180
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 268
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 366
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 451
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 504
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 532
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 62
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 94
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 134
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 174
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 209
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 236
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 257
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 272
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "WA 18m Compound",
+    "score": 127
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "WA 18m Compound",
+    "score": 192
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "WA 18m Compound",
+    "score": 270
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "WA 18m Compound",
+    "score": 350
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "WA 18m Compound",
+    "score": 418
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "WA 18m Compound",
+    "score": 469
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "WA 18m Compound",
+    "score": 507
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "WA 18m Compound",
+    "score": 533
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "WA 25m Compound",
+    "score": 135
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "WA 25m Compound",
+    "score": 202
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "WA 25m Compound",
+    "score": 282
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "WA 25m Compound",
+    "score": 360
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "WA 25m Compound",
+    "score": 424
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "WA 25m Compound",
+    "score": 473
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "WA 25m Compound",
+    "score": 508
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U14",
+    "round": "WA 25m Compound",
+    "score": 533
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Bray I Compound",
+    "score": 44
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Bray I Compound",
+    "score": 69
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Bray I Compound",
+    "score": 103
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Bray I Compound",
+    "score": 143
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Bray I Compound",
+    "score": 182
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Bray I Compound",
+    "score": 215
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Bray I Compound",
+    "score": 239
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Bray I Compound",
+    "score": 256
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Bray II Compound",
+    "score": 57
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Bray II Compound",
+    "score": 87
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Bray II Compound",
+    "score": 125
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Bray II Compound",
+    "score": 165
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Bray II Compound",
+    "score": 201
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Bray II Compound",
+    "score": 228
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Bray II Compound",
+    "score": 248
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Bray II Compound",
+    "score": 262
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Portsmouth Compound",
+    "score": 165
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Portsmouth Compound",
+    "score": 239
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Portsmouth Compound",
+    "score": 320
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Portsmouth Compound",
+    "score": 393
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Portsmouth Compound",
+    "score": 449
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Portsmouth Compound",
+    "score": 491
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Portsmouth Compound",
+    "score": 521
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Portsmouth Compound",
+    "score": 541
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Stafford Compound",
+    "score": 132
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Stafford Compound",
+    "score": 203
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Stafford Compound",
+    "score": 293
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Stafford Compound",
+    "score": 390
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Stafford Compound",
+    "score": 475
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Stafford Compound",
+    "score": 542
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Stafford Compound",
+    "score": 591
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Stafford Compound",
+    "score": 626
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 51
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 79
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 117
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 160
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 200
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 233
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 257
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 276
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 47
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 79
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 128
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 200
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 292
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 390
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 467
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Vegas (Triple Face) Compound",
+    "score": 513
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 44
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 69
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 103
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 144
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 183
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 216
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 242
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 261
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "WA 18m Compound",
+    "score": 90
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "WA 18m Compound",
+    "score": 141
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "WA 18m Compound",
+    "score": 210
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "WA 18m Compound",
+    "score": 291
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "WA 18m Compound",
+    "score": 369
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "WA 18m Compound",
+    "score": 432
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "WA 18m Compound",
+    "score": 480
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "WA 18m Compound",
+    "score": 514
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "WA 25m Compound",
+    "score": 96
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "WA 25m Compound",
+    "score": 150
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "WA 25m Compound",
+    "score": 221
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "WA 25m Compound",
+    "score": 302
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "WA 25m Compound",
+    "score": 377
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "WA 25m Compound",
+    "score": 438
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "WA 25m Compound",
+    "score": 483
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Compound",
+    "age": "U12",
+    "round": "WA 25m Compound",
+    "score": 515
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 83
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 111
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 141
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 172
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 199
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 222
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 240
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 256
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 103
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 133
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 164
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 191
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 215
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 235
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 251
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 263
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 276
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 336
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 391
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 437
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 475
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 505
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 530
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 550
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 242
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 313
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 386
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 453
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 511
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 558
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 596
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 628
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 95
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 125
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 157
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 188
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 215
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 238
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 256
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 271
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 98
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 141
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 196
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 263
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 338
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 410
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 469
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 510
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 83
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 111
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 141
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 172
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 199
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 222
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 240
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 256
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 170
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 226
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 287
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 347
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 401
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 446
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 483
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 513
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 180
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 237
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 298
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 357
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 409
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 452
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 487
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 515
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 108
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 139
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 169
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 197
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 220
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 239
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 254
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 267
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 131
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 161
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 189
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 213
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 233
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 249
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 262
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 273
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 331
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 387
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 433
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 472
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 503
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 528
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 549
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 565
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 307
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 380
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 448
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 506
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 554
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 594
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 625
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 651
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 122
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 154
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 186
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 213
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 236
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 255
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 270
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 281
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 137
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 191
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 257
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 332
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 405
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 465
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 507
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 535
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 108
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 139
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 169
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 197
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 220
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 239
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 254
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 267
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 221
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 282
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 343
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 397
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 443
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 480
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 511
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 535
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 232
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 293
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 352
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 405
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 448
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 484
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 513
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 536
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 83
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 111
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 141
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 172
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 199
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 222
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 240
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 256
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 103
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 133
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 164
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 191
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 215
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 235
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 251
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 263
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 276
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 336
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 391
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 437
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 475
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 505
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 530
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 550
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 242
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 313
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 386
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 453
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 511
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 558
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 596
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 628
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 95
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 125
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 157
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 188
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 215
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 238
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 256
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 271
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 98
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 141
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 196
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 263
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 338
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 410
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 469
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 510
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 83
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 111
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 141
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 172
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 199
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 222
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 240
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 256
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 170
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 226
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 287
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 347
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 401
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 446
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 483
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 513
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 180
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 237
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 298
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 357
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 409
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 452
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 487
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 515
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 62
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 85
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 113
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 144
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 174
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 201
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 223
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 242
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 79
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 106
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 136
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 166
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 194
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 217
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 236
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 252
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 220
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 281
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 341
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 395
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 440
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 477
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 508
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 532
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 184
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 247
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 319
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 391
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 458
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 515
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 561
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 599
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 71
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 97
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 128
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 160
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 191
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 217
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 240
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 257
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 70
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 102
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 145
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 201
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 270
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 344
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 416
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 473
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 62
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 85
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 113
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 144
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 174
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 201
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 223
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 242
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 127
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 174
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 231
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 292
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 352
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 405
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 450
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 486
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 135
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 184
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 242
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 303
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 362
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 413
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 455
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 489
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 45
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 64
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 87
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 116
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 146
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 176
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 203
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 225
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 59
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 81
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 108
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 138
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 168
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 196
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 219
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 238
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 170
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 225
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 286
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 346
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 399
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 444
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 480
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 510
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 136
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 189
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 253
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 325
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 397
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 463
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 519
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 565
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 52
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 73
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 100
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 130
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 162
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 193
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 219
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 241
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 49
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 72
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 105
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 149
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 206
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 276
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 351
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 421
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 45
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 64
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 87
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 116
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 146
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 176
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 203
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 225
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 93
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 130
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 179
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 236
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 297
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 357
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 409
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 453
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 99
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 139
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 189
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 247
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 308
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 366
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 416
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 458
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 32
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 47
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 66
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 90
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 118
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 149
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 179
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 205
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 43
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 60
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 83
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 110
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 141
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 171
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 198
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 221
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 127
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 174
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 230
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 291
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 350
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 403
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 447
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 483
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 99
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 140
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 194
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 259
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 331
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 403
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 468
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 523
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 38
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 54
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 75
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 102
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 133
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 165
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 195
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 221
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 34
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 51
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 75
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 108
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 153
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 212
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 282
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 357
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 32
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 47
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 66
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 90
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 118
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 149
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 179
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 205
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 66
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 95
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 134
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 183
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 241
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 302
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 362
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 413
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 71
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 102
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 143
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 194
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 252
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 313
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 371
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 420
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 23
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 33
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 48
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 67
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 92
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 121
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 152
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 181
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 31
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 44
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 62
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 85
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 113
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 143
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 173
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 200
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 92
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 130
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 178
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 235
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 296
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 355
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 407
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 450
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 70
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 102
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 144
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 199
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 265
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 337
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 409
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 473
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 27
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 39
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 55
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 77
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 104
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 136
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 168
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 198
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 24
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 36
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 53
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 77
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 111
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 158
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 217
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 288
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 23
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 33
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 48
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 67
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 92
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 121
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 152
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 181
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 47
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 68
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 98
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 138
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 188
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 246
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 308
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 366
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 51
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 74
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 105
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 147
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 198
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 257
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 318
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 375
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 16
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 24
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 34
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 49
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 69
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 94
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 123
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 154
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 22
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 31
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 45
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 64
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 87
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 115
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 146
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 176
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 66
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 95
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 134
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 183
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 240
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 301
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 360
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 411
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 50
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 73
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 105
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 148
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 204
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 271
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 343
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 415
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 19
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 28
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 40
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 57
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 79
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 107
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 138
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 170
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 17
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 25
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 37
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 54
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 79
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 115
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 162
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 223
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 16
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 24
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 34
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 49
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 69
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 94
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 123
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 154
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 33
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 49
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 71
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 101
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 142
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 192
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 251
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 313
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 36
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 52
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 76
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 108
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 151
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 203
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 262
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 323
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 62
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 85
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 113
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 144
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 174
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 201
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 223
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 242
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 79
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 106
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 136
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 166
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 194
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 217
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 236
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 252
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 220
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 281
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 341
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 395
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 440
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 477
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 508
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 532
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 184
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 247
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 319
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 391
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 458
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 515
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 561
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 599
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 71
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 97
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 128
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 160
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 191
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 217
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 240
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 257
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 70
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 102
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 145
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 201
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 270
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 344
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 416
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 473
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 62
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 85
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 113
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 144
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 174
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 201
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 223
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 242
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 127
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 174
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 231
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 292
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 352
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 405
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 450
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 486
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 135
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 184
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 242
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 303
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 362
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 413
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 455
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 489
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 83
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 111
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 141
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 172
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 199
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 222
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 240
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 256
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 103
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 133
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 164
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 191
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 215
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 235
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 251
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 263
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 276
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 336
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 391
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 437
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 475
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 505
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 530
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 550
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 242
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 313
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 386
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 453
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 511
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 558
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 596
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 628
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 95
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 125
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 157
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 188
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 215
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 238
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 256
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 271
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 98
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 141
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 196
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 263
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 338
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 410
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 469
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 510
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 83
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 111
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 141
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 172
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 199
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 222
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 240
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 256
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 170
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 226
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 287
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 347
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 401
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 446
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 483
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 513
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 180
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 237
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 298
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 357
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 409
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 452
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 487
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 515
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 62
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 85
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 113
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 144
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 174
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 201
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 223
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 242
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 79
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 106
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 136
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 166
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 194
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 217
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 236
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 252
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 220
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 281
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 341
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 395
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 440
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 477
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 508
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 532
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 184
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 247
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 319
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 391
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 458
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 515
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 561
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 599
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 71
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 97
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 128
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 160
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 191
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 217
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 240
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 257
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 70
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 102
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 145
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 201
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 270
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 344
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 416
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 473
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 62
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 85
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 113
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 144
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 174
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 201
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 223
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 242
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 127
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 174
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 231
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 292
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 352
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 405
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 450
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 486
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 135
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 184
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 242
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 303
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 362
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 413
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 455
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 489
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 45
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 64
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 87
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 116
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 146
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 176
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 203
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 225
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 59
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 81
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 108
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 138
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 168
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 196
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 219
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 238
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 170
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 225
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 286
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 346
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 399
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 444
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 480
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 510
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 136
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 189
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 253
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 325
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 397
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 463
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 519
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 565
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 52
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 73
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 100
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 130
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 162
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 193
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 219
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 241
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 49
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 72
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 105
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 149
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 206
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 276
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 351
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 421
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 45
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 64
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 87
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 116
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 146
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 176
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 203
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 225
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 93
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 130
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 179
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 236
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 297
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 357
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 409
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 453
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 99
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 139
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 189
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 247
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 308
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 366
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 416
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 458
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 32
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 47
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 66
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 90
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 118
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 149
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 179
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 205
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 43
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 60
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 83
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 110
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 141
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 171
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 198
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 221
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 127
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 174
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 230
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 291
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 350
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 403
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 447
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 483
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 99
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 140
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 194
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 259
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 331
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 403
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 468
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 523
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 38
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 54
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 75
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 102
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 133
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 165
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 195
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 221
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 34
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 51
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 75
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 108
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 153
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 212
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 282
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 357
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 32
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 47
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 66
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 90
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 118
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 149
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 179
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 205
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 66
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 95
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 134
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 183
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 241
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 302
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 362
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 413
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 71
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 102
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 143
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 194
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 252
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 313
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 371
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 420
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 32
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 47
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 66
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 90
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 118
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 149
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 179
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 205
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 43
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 60
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 83
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 110
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 141
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 171
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 198
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 221
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 127
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 174
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 230
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 291
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 350
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 403
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 447
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 483
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 99
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 140
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 194
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 259
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 331
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 403
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 468
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 523
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 38
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 54
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 75
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 102
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 133
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 165
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 195
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 221
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 34
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 51
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 75
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 108
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 153
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 212
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 282
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 357
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 32
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 47
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 66
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 90
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 118
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 149
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 179
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 205
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 66
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 95
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 134
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 183
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 241
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 302
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 362
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 413
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 71
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 102
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 143
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 194
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 252
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 313
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 371
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 420
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 23
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 33
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 48
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 67
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 92
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 121
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 152
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 181
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 31
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 44
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 62
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 85
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 113
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 143
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 173
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 200
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 92
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 130
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 178
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 235
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 296
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 355
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 407
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 450
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 70
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 102
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 144
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 199
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 265
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 337
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 409
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 473
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 27
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 39
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 55
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 77
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 104
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 136
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 168
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 198
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 24
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 36
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 53
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 77
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 111
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 158
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 217
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 288
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 23
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 33
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 48
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 67
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 92
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 121
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 152
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 181
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 47
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 68
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 98
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 138
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 188
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 246
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 308
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 366
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 51
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 74
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 105
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 147
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 198
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 257
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 318
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 375
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 16
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 24
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 34
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 49
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 69
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 94
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 123
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 154
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 22
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 31
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 45
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 64
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 87
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 115
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 146
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 176
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 66
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 95
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 134
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 183
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 240
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 301
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 360
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 411
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 50
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 73
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 105
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 148
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 204
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 271
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 343
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 415
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 19
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 28
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 40
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 57
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 79
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 107
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 138
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 170
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 17
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 25
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 37
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 54
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 79
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 115
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 162
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 223
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 16
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 24
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 34
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 49
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 69
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 94
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 123
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 154
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 33
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 49
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 71
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 101
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 142
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 192
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 251
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 313
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 36
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 52
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 76
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 108
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 151
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 203
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 262
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Barebow",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 323
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 22
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 33
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 49
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 71
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 99
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 131
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 164
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 195
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 30
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 44
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 64
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 89
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 120
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 154
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 185
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 212
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 90
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 130
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 183
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 245
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 311
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 373
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 426
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 469
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 68
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 102
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 148
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 209
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 282
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 362
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 437
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 502
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 26
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 39
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 57
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 81
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 112
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 146
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 181
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 211
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 23
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 36
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 54
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 82
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 122
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 176
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 246
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 326
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 22
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 33
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 49
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 71
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 99
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 131
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 164
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 195
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 46
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 68
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 101
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 145
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 202
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 266
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 333
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 393
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 49
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 74
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 108
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 155
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 212
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 278
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 343
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 401
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 32
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 48
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 69
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 96
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 128
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 162
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 192
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 218
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 43
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 62
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 87
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 118
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 151
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 183
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 210
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 232
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 127
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 178
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 240
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 306
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 369
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 423
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 466
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 501
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 99
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 144
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 204
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 276
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 355
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 432
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 497
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 551
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 38
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 55
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 79
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 109
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 144
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 178
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 209
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 234
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 34
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 53
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 79
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 118
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 171
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 240
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 319
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 399
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 32
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 48
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 69
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 96
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 128
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 162
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 192
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 218
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 66
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 98
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 142
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 197
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 261
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 328
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 389
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 439
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 71
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 105
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 151
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 208
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 273
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 338
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 397
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 445
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 22
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 33
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 49
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 71
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 99
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 131
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 164
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 195
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 30
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 44
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 64
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 89
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 120
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 154
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 185
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 212
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 90
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 130
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 183
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 245
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 311
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 373
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 426
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 469
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 68
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 102
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 148
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 209
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 282
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 362
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 437
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 502
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 26
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 39
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 57
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 81
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 112
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 146
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 181
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 211
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 23
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 36
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 54
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 82
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 122
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 176
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 246
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 326
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 22
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 33
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 49
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 71
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 99
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 131
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 164
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 195
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 46
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 68
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 101
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 145
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 202
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 266
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 333
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 393
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 49
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 74
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 108
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 155
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 212
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 278
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 343
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 401
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 15
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 23
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 34
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 51
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 73
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 101
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 134
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 167
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 20
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 31
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 45
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 65
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 92
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 123
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 156
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 187
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 62
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 92
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 134
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 187
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 250
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 316
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 378
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 430
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 47
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 70
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 105
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 152
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 214
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 288
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 368
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 442
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 18
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 27
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 40
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 59
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 84
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 114
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 149
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 183
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 16
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 24
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 37
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 56
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 84
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 125
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 181
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 251
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 15
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 23
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 34
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 51
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 73
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 101
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 134
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 167
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 31
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 47
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 71
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 104
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 149
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 206
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 272
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 338
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 33
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 51
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 76
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 111
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 159
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 217
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 283
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 348
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 11
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 16
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 24
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 36
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 52
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 75
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 103
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 136
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 14
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 21
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 31
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 47
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 67
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 94
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 125
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 159
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 43
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 64
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 95
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 137
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 192
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 255
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 321
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 382
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 32
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 48
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 73
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 108
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 157
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 220
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 294
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 374
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 12
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 19
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 28
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 41
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 60
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 86
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 117
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 152
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 11
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 17
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 25
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 38
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 58
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 87
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 129
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 186
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 11
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 16
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 24
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 36
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 52
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 75
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 103
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 136
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 21
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 32
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 49
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 73
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 107
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 153
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 211
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 277
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 23
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 34
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 52
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 78
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 114
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 163
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 222
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 288
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 8
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 11
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 16
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 25
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 37
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 54
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 77
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 106
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 10
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 15
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 22
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 32
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 48
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 69
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 96
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 128
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 29
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 44
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 66
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 98
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 141
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 196
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 260
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 326
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 21
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 33
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 50
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 75
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 111
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 161
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 225
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 300
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 9
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 13
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 19
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 29
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 42
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 62
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 88
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 120
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 8
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 12
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 17
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 26
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 39
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 60
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 90
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 133
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 8
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 11
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 16
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 25
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 37
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 54
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 77
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 106
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 14
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 22
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 33
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 50
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 75
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 110
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 157
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 216
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 15
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 24
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 36
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 54
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 81
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 118
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 167
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 227
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 6
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 8
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 11
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 17
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 25
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 38
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 55
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 79
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 7
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 10
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 15
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 23
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 33
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 49
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 71
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 99
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 20
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 30
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 45
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 68
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 101
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 145
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 201
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 265
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 14
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 22
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 34
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 51
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 77
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 114
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 165
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 231
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 6
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 9
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 13
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 20
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 29
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 44
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 64
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 90
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 6
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 8
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 12
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 18
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 26
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 41
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 62
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 93
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 6
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 8
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 11
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 17
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 25
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 38
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 55
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 79
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 10
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 15
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 22
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 34
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 52
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 77
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 113
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 162
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 11
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 16
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 24
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 37
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 56
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 83
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 121
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 171
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 4
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 6
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 8
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 12
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 17
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 26
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 39
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 57
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 5
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 7
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 10
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 16
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 23
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 34
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 51
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 73
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 13
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 21
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 31
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 47
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 70
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 104
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 149
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 206
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 10
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 15
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 23
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 35
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 53
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 80
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 118
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 170
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 5
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 7
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 9
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 14
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 20
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 30
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 45
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 66
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 4
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 6
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 8
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 12
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 18
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 27
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 42
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 64
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 4
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 6
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 8
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 12
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 17
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 26
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 39
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 57
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 7
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 11
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 15
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 23
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 35
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 53
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 80
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 117
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 8
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 11
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 16
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 25
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 38
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 57
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 85
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 125
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 14
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 22
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 32
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 48
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 69
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 96
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 128
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Bray I",
+    "score": 162
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 19
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 29
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 43
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 62
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 87
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 118
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 151
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Bray II",
+    "score": 183
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 58
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 87
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 127
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 178
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 240
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 306
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 369
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Portsmouth",
+    "score": 423
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 44
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 66
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 99
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 144
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 204
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 276
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 355
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Stafford",
+    "score": 432
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 17
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 25
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 38
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 55
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 79
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 109
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 144
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Worcester",
+    "score": 178
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 15
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 23
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 34
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 53
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 79
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 118
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 171
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Vegas (Triple Face)",
+    "score": 240
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 14
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 22
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 32
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 48
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 69
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 96
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 128
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "Vegas 300",
+    "score": 162
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 29
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 44
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 66
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 98
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 142
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 197
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 261
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "WA 18m",
+    "score": 328
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 31
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 48
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 71
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 105
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 151
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 208
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 273
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "50+",
+    "round": "WA 25m",
+    "score": 338
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 21
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 31
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 47
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 67
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 94
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 126
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 159
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 190
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 28
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 41
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 60
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 85
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 115
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 148
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 180
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 208
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 84
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 123
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 174
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 235
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 301
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 364
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 419
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 463
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 64
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 96
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 140
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 199
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 271
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 349
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 426
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 493
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 24
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 36
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 54
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 77
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 107
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 141
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 176
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 207
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 22
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 33
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 51
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 77
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 115
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 167
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 234
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 313
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 21
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 31
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 47
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 67
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 94
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 126
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 159
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 190
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 43
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 64
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 95
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 138
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 192
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 256
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 323
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 384
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 46
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 69
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 102
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 147
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 203
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 267
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 333
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 392
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 14
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 22
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 32
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 48
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 69
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 96
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 128
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Bray I",
+    "score": 162
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 19
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 29
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 43
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 62
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 87
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 118
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 151
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Bray II",
+    "score": 183
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 58
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 87
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 127
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 178
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 240
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 306
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 369
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Portsmouth",
+    "score": 423
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 44
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 66
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 99
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 144
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 204
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 276
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 355
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Stafford",
+    "score": 432
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 17
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 25
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 38
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 55
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 79
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 109
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 144
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Worcester",
+    "score": 178
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 15
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 23
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 34
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 53
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 79
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 118
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 171
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Vegas (Triple Face)",
+    "score": 240
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 14
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 22
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 32
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 48
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 69
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 96
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 128
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "Vegas 300",
+    "score": 162
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 29
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 44
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 66
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 98
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 142
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 197
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 261
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "WA 18m",
+    "score": 328
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 31
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 48
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 71
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 105
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 151
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 208
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 273
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U21",
+    "round": "WA 25m",
+    "score": 338
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 10
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 15
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 22
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 33
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 49
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 71
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 99
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Bray I",
+    "score": 131
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 13
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 20
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 30
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 44
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 64
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 89
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 120
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Bray II",
+    "score": 154
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 40
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 60
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 90
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 130
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 183
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 245
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 311
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Portsmouth",
+    "score": 373
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 30
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 45
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 68
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 102
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 148
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 209
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 282
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Stafford",
+    "score": 362
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 12
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 18
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 26
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 39
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 57
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 81
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 112
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Worcester",
+    "score": 146
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 10
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 16
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 23
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 36
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 54
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 82
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 122
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Vegas (Triple Face)",
+    "score": 176
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 10
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 15
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 22
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 33
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 49
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 71
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 99
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "Vegas 300",
+    "score": 131
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 20
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 30
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 46
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 68
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 101
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 145
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 202
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "WA 18m",
+    "score": 266
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 21
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 32
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 49
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 74
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 108
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 155
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 212
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U18",
+    "round": "WA 25m",
+    "score": 278
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 7
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 11
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 15
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 23
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 34
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 51
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 73
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Bray I",
+    "score": 101
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 9
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 14
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 20
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 31
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 45
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 65
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 92
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Bray II",
+    "score": 123
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 27
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 41
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 62
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 92
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 134
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 187
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 250
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Portsmouth",
+    "score": 316
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 20
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 31
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 47
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 70
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 105
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 152
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 214
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Stafford",
+    "score": 288
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 8
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 12
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 18
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 27
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 40
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 59
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 84
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Worcester",
+    "score": 114
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 7
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 11
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 16
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 24
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 37
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 56
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 84
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Vegas (Triple Face)",
+    "score": 125
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 7
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 11
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 15
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 23
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 34
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 51
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 73
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "Vegas 300",
+    "score": 101
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 13
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 21
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 31
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 47
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 71
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 104
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 149
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "WA 18m",
+    "score": 206
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 14
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 22
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 33
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 51
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 76
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 111
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 159
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U16",
+    "round": "WA 25m",
+    "score": 217
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 7
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 11
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 15
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 23
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 34
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 51
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 73
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Bray I",
+    "score": 101
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 9
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 14
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 20
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 31
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 45
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 65
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 92
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Bray II",
+    "score": 123
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 27
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 41
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 62
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 92
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 134
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 187
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 250
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Portsmouth",
+    "score": 316
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 20
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 31
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 47
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 70
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 105
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 152
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 214
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Stafford",
+    "score": 288
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 8
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 12
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 18
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 27
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 40
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 59
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 84
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Worcester",
+    "score": 114
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 7
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 11
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 16
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 24
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 37
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 56
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 84
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Vegas (Triple Face)",
+    "score": 125
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 7
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 11
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 15
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 23
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 34
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 51
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 73
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "Vegas 300",
+    "score": 101
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 13
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 21
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 31
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 47
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 71
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 104
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 149
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "WA 18m",
+    "score": 206
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 14
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 22
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 33
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 51
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 76
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 111
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 159
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U15",
+    "round": "WA 25m",
+    "score": 217
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 6
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 8
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 11
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 17
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 25
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 38
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 55
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Bray I",
+    "score": 79
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 7
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 10
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 15
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 23
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 33
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 49
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 71
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Bray II",
+    "score": 99
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 20
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 30
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 45
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 68
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 101
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 145
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 201
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Portsmouth",
+    "score": 265
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 14
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 22
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 34
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 51
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 77
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 114
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 165
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Stafford",
+    "score": 231
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 6
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 9
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 13
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 20
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 29
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 44
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 64
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Worcester",
+    "score": 90
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 6
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 8
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 12
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 18
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 26
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 41
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 62
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Vegas (Triple Face)",
+    "score": 93
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 6
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 8
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 11
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 17
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 25
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 38
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 55
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "Vegas 300",
+    "score": 79
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 10
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 15
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 22
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 34
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 52
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 77
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 113
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "WA 18m",
+    "score": 162
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 11
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 16
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 24
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 37
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 56
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 83
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 121
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U14",
+    "round": "WA 25m",
+    "score": 171
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 4
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 6
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 8
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 12
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 17
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 26
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 39
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Bray I",
+    "score": 57
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 5
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 7
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 10
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 16
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 23
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 34
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 51
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Bray II",
+    "score": 73
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 13
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 21
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 31
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 47
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 70
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 104
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 149
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Portsmouth",
+    "score": 206
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 10
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 15
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 23
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 35
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 53
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 80
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 118
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Stafford",
+    "score": 170
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 5
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 7
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 9
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 14
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 20
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 30
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 45
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Worcester",
+    "score": 66
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 4
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 6
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 8
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 12
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 18
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 27
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 42
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Vegas (Triple Face)",
+    "score": 64
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 4
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 6
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 8
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 12
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 17
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 26
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 39
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "Vegas 300",
+    "score": 57
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 7
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 11
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 15
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 23
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 35
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 53
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 80
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "WA 18m",
+    "score": 117
+  },
+  {
+    "id": 1,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 8
+  },
+  {
+    "id": 2,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 11
+  },
+  {
+    "id": 3,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 16
+  },
+  {
+    "id": 4,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 25
+  },
+  {
+    "id": 5,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 38
+  },
+  {
+    "id": 6,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 57
+  },
+  {
+    "id": 7,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 85
+  },
+  {
+    "id": 8,
+    "gender": "Women",
+    "bowType": "Longbow",
+    "age": "U12",
+    "round": "WA 25m",
+    "score": 125
   }
 ];
