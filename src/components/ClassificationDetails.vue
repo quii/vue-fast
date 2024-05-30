@@ -30,11 +30,12 @@ const totals = computed(() => calculateSubtotals(props.scores));
 const averageScoresPerEnd = computed(() => calculateAverageScorePerEnd(props.scores, props.endSize));
 
 
-const availableClassifications = computed(() =>
-  classificationCalculator.value(
-    totals.value.totalScore,
-    averageScoresPerEnd.value
-  ));
+const availableClassifications = computed(() => {
+  return classificationCalculator.value?.(
+      totals.value.totalScore,
+      averageScoresPerEnd.value
+  );
+});
 </script>
 
 <template>
