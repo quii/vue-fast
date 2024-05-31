@@ -72,12 +72,4 @@ table {
   font-weight: bold;
   color: var(--color-heading);
 }
-
-.achieved, .avgOnTrack {
-  color: green;
-}
-
-.short, .avgOffTrack {
-  color: red;
-}
 </style>

@@ -63,3 +63,14 @@ const availableClassifications = computed(() => {
     </table>
   </div>
 </template>
+
+
+<style scoped>
+.achieved, .avgOnTrack {
+  color: green;
+}
+
+.short, .avgOffTrack {
+  color: red;
+}
+</style>
