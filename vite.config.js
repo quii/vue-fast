@@ -15,6 +15,9 @@ export default defineConfig({
       devOptions: {
         enabled: true
       },
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,ico,png,svg}']
+      },
       manifest: {
         name: "Fast v6",
         short_name: "Fast",
@@ -23,17 +26,17 @@ export default defineConfig({
         orientation: "any",
         icons: [
           {
-            src: "/public/icon.png",
+            src: "icon.png",
             sizes: "150x150",
             type: "image/png",
           },
           {
-            src: "/public/icon_small.png",
+            src: "icon_small.png",
             sizes: "48x48",
             type: "image/png",
           },
           {
-            src: "/public/icon_large.png",
+            src: "icon_large.png",
             sizes: "512x570",
             type: "image/png"
           }
