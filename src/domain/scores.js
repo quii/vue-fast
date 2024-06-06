@@ -1,7 +1,10 @@
 export const MISS = "M";
 export const X = "X";
 
-export function convertToValue(score) {
+export function convertToValue(score, gameType = "national") {
+  if (gameType === "worcester" && score === "X") {
+    return 5;
+  }
   return scoreMappings[score] ?? score;
 }
 

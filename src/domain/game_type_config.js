@@ -408,14 +408,15 @@ export const baseConfig = [
     isOutdoor: false,
     isImperial: false,
     endSize: 5,
-    scores: [5, 4, 3, 2, 1, MISS],
+    scores: ["X", 5, 4, 3, 2, 1, MISS],
     distancesRoundSizes: [5]
   },
   {
     name: "vegas 300",
     isOutdoor: false,
     isImperial: false,
-    distancesRoundSizes: [2.5]
+    distancesRoundSizes: [2.5],
+    scores: ["X", "10", "9", "8", "7", "6", MISS]
   },
   {
     name: "wa 18m",

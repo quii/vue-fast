@@ -24,7 +24,7 @@ defineEmits(['score', 'undo'])
 
 function buttonClass(score, gameType) {
   if (gameType === "worcester") {
-    if (score === 5) {
+    if (score === 5 || score === "X") {
       return {
         "worcester5": true
       };
