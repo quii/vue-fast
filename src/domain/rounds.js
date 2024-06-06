@@ -6,7 +6,7 @@ import { convertToValues } from "@/domain/scores";
 const endsPerRound = 2;
 
 export function calculateRounds(scores, gameType = "national", endSize) {
-  const rounds = calculateRoundSummaries(scores, endSize);
+  const rounds = calculateRoundSummaries(scores, endSize, gameType);
   const roundsPerDistance = splitIntoChunksofSizes(rounds, gameTypeConfig[gameType].distancesRoundSizes);
 
   return roundsPerDistance.map(rounds => {
@@ -15,26 +15,26 @@ export function calculateRounds(scores, gameType = "national", endSize) {
 
     return {
       roundBreakdown: rounds ?? [],
-      subTotals: calculateSubtotals(scoresForDistance)
+      subTotals: calculateSubtotals(scoresForDistance, gameType)
     };
   });
 }
 
-export function calculateAverageScorePerEnd(scores, endSize) {
+export function calculateAverageScorePerEnd(scores, endSize, gameType) {
   const chunks = splitIntoChunks(scores, endSize);
   const wholeChunks = chunks.filter(c => c.length === endSize);
-  const avg = calculateTotal(wholeChunks.map(end => calculateTotal(convertToValues(end)))) / wholeChunks.length;
+  const avg = calculateTotal(wholeChunks.map(end => calculateTotal(convertToValues(end, gameType)))) / wholeChunks.length;
   return Math.ceil(avg);
 }
 
-function calculateRoundSummaries(scores, endSize) {
+function calculateRoundSummaries(scores, endSize, gameType) {
   let runningTotal = 0;
 
   const scoresPerRound = splitIntoChunks(splitIntoChunks(scores, endSize), endsPerRound);
 
   return scoresPerRound.map((e) => {
     const scores = e.flat();
-    const subTotals = calculateSubtotals(scores);
+    const subTotals = calculateSubtotals(scores, gameType);
     subTotals.runningTotal = runningTotal + subTotals.totalScore;
     // subTotals.onTrackFor252 = subTotals.runningTotal >= (index+1)*84
     runningTotal = subTotals.runningTotal;

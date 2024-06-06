@@ -13,13 +13,13 @@ export function calculateScoreIsValidForEnd(scores, gameType) {
         if (score === "X" && lowestScore <= 10) {
             return false;
         }
-        const scoreValue = convertToValue(score);
+        const scoreValue = convertToValue(score, gameType);
         return Number(scoreValue) <= Number(lowestScore);
     };
 }
 
-function getLowestScoreForRecentEnd(scores, endSize = 6) {
-    const scoresAsValues = scores.map(convertXToInfinity).map(convertToValue);
+function getLowestScoreForRecentEnd(scores, endSize = 6, gameType) {
+    const scoresAsValues = scores.map(convertXToInfinity).map(x => convertToValue(x, gameType));
     const recentEndIndex = scoresAsValues.length % endSize;
 
     if(recentEndIndex===0) {

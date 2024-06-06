@@ -19,7 +19,7 @@ const maxReached = computed(() => scoresStore.scores.length >= gameTypeStore.cur
 const history = useHistoryStore();
 const toast = useToast();
 const date = ref(new Date().toISOString().substr(0, 10));
-const runningTotal = computed(() => calculateTotal(convertToValues(scoresStore.scores)));
+const runningTotal = computed(() => calculateTotal(convertToValues(scoresStore.scores, gameTypeStore.type)));
 
 function saveScores(event) {
   event.preventDefault();

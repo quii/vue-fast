@@ -17,7 +17,7 @@ const toast = useToast();
 const importData = ref("");
 const date = ref(new Date().toISOString().substr(0, 10));
 
-const runningTotal = computed(() => calculateTotal(convertToValues(scores.scores)));
+const runningTotal = computed(() => calculateTotal(convertToValues(scores.scores, gameTypeStore.type)));
 const maxDate = new Date().toLocaleDateString('fr-ca')
 
 function saveScores(event) {

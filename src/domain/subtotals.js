@@ -1,7 +1,7 @@
 import { convertToValues } from "@/domain/scores";
 
-export function calculateSubtotals(scores) {
-  const scoreValues = convertToValues(scores);
+export function calculateSubtotals(scores, gameType) {
+  const scoreValues = convertToValues(scores, gameType);
 
   const totalScore = calculateTotal(scoreValues);
   return {

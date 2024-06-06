@@ -2,8 +2,8 @@ import {MISS} from "@/domain/scores";
 import { baseConfig, imperialPractices, metricPractices } from "@/domain/game_type_config";
 
 const imperialScores = [9, 7, 5, 3, 1, MISS];
-const outdoorMetricScores = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, MISS];
-const indoorMetricScores = ["X", 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, MISS];
+const outdoorMetricScores = ["X", 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, MISS];
+const indoorMetricScores = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, MISS];
 
 const allRounds = [...baseConfig, ...imperialPractices, ...metricPractices];
 export const gameTypeConfig = calculateConfigFromBase(allRounds);
@@ -49,14 +49,13 @@ function calculateEndSize(endSize) {
 }
 
 function calculateScoresForGame({ isImperial, isOutdoor }) {
-  let scores = imperialScores;
-  if (!isImperial && isOutdoor) {
-    scores = outdoorMetricScores;
+  if (isImperial) {
+    return imperialScores;
   }
-  if (!isImperial && !isOutdoor) {
-    scores = indoorMetricScores;
+  if (isOutdoor) {
+    return outdoorMetricScores;
   }
-  return scores;
+  return indoorMetricScores;
 }
 
 

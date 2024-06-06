@@ -18,7 +18,7 @@ const props = defineProps({
     default: false
   }
 });
-const totals = computed(() => calculateSubtotals(props.scores))
+const totals = computed(() => calculateSubtotals(props.scores, props.gameType));
 const rounds = computed(() => calculateRounds(props.scores, props.gameType, props.endSize));
 const colspan = computed(() => (props.endSize * 2) + 2);
 </script>

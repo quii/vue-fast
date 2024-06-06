@@ -34,7 +34,7 @@ function scoreButtonClass(score) {
 }
 
 const onTrackFor252 = 42
-const total = computed(() => calculateTotal(convertToValues(props.scores)));
+const total = computed(() => calculateTotal(convertToValues(props.scores, gameTypeStore.type)));
 const onTrack = computed(() => total.value >=onTrackFor252)
 const offTrack = computed(() => total.value > 0 && total.value < onTrackFor252)
 

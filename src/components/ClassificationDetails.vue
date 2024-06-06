@@ -26,8 +26,8 @@ const classificationCalculator = computed(() => createClassificationCalculator(
   userStore.user.bowType
 ));
 
-const totals = computed(() => calculateSubtotals(props.scores));
-const averageScoresPerEnd = computed(() => calculateAverageScorePerEnd(props.scores, props.endSize));
+const totals = computed(() => calculateSubtotals(props.scores, props.gameType));
+const averageScoresPerEnd = computed(() => calculateAverageScorePerEnd(props.scores, props.endSize, props.gameType));
 
 
 const availableClassifications = computed(() => {

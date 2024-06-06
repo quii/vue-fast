@@ -1,4 +1,4 @@
-import { test, expect } from "vitest";
+import { expect, describe, test } from "vitest";
 import { calculateSubtotals } from "@/domain/subtotals";
 
 test.each([
@@ -47,4 +47,10 @@ test.each([
   [["X", "X", 9, 9, 9, 9], 2]
 ])("it can calculate X", (scores, expectedXCount) => {
   expect(calculateSubtotals(scores).X).toEqual(expectedXCount);
+});
+
+describe("worcester", () => {
+  test("X in worcester counts as 5", () => {
+    expect(calculateSubtotals(["X", "X", 5], "worcester").totalScore).toEqual(15);
+  });
 });
