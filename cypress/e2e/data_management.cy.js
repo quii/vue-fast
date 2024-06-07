@@ -9,9 +9,12 @@ describe("data management", () => {
   const historyPage = new HistoryPage();
   const scorePage = new ScorePage();
 
-  it("import cj save and view history", () => {
+  beforeEach(() => {
     dataManagementPage.navigateTo();
     dataManagementPage.resetData();
+  });
+
+  it("import cj save and view history", () => {
     dataManagementPage.importData(cjSave);
 
     historyPage.navigateTo();
@@ -20,8 +23,6 @@ describe("data management", () => {
   });
 
   it("import Mally's game, view history", () => {
-    dataManagementPage.navigateTo();
-    dataManagementPage.resetData();
     dataManagementPage.importData(mallySave);
 
     historyPage.navigateTo();
@@ -30,14 +31,9 @@ describe("data management", () => {
   });
 
   it("fresh data", () => {
-    dataManagementPage.navigateTo();
-    dataManagementPage.resetData();
-
     scorePage.navigateTo();
     scorePage.selectGame("WINDSOR");
-    Cypress._.times(12 * 9, () => {
-      scorePage.score(9);
-    });
+    scorePage.times(12 * 9).score(9);
     scorePage.save();
 
     historyPage.navigateTo();

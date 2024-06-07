@@ -4,9 +4,12 @@ import { ruthsFrostbiteGame, ruthsGame } from "../../src/domain/test_data";
 describe(`Smoke test using Ruth's game`, () => {
   const scorePage = new ScorePage();
 
-  it("records all the scores and calculates the totals for an imperial game", () => {
+  beforeEach(() => {
     scorePage.visit();
     scorePage.clearData();
+  });
+
+  it("records all the scores and calculates the totals for an imperial game", () => {
     scorePage.selectGame("WINDSOR");
 
     ruthsGame.forEach((score) => {
@@ -16,10 +19,9 @@ describe(`Smoke test using Ruth's game`, () => {
     scorePage.checkTotalHits("108");
     scorePage.checkTotalScore("804");
     scorePage.checkTotalGolds("56");
+  });
 
-    scorePage.clearData();
-
-    // next game
+  it("also works for a frostbite game", () => {
     scorePage.selectGame("FROSTBITE");
     ruthsFrostbiteGame.forEach((score) => {
       scorePage.score(score);

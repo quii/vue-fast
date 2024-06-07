@@ -19,6 +19,17 @@ class ScorePage {
     cy.get("button").contains(number.toString()).click();
   }
 
+  times(n) {
+    return {
+      score: (number) => {
+        for (let i = 0; i < n; i++) {
+          this.score(number);
+        }
+        return this;
+      }
+    };
+  }
+
   checkButtonState(number, state) {
     cy.get("button").contains(number.toString()).should(state);
   }
