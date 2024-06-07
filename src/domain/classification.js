@@ -14,8 +14,16 @@ const classificationList = [
   "EMB"
 ];
 
+let roundScoresCache = {};
+
 export function createClassificationCalculator(roundName, sex, age, bowtype) {
-  const roundScores = calculateRoundScores(sex, bowtype, age, roundName);
+  const cacheKey = `${roundName}-${sex}-${age}-${bowtype}`;
+  let roundScores = roundScoresCache[cacheKey];
+
+  if (!roundScores) {
+    roundScores = calculateRoundScores(sex, bowtype, age, roundName);
+    roundScoresCache[cacheKey] = roundScores;
+  }
 
   const numberOfEnds = gameTypeConfig[roundName].numberOfEnds;
 
@@ -23,8 +31,10 @@ export function createClassificationCalculator(roundName, sex, age, bowtype) {
     return undefined;
   }
 
-  return (score, avgPerEnd) =>
-    roundScores.reduce((acc, classification, index) => {
+  return (score, avgPerEnd) => {
+    const result = [];
+    for (let index = 0; index < roundScores.length; index++) {
+      const classification = roundScores[index];
       const name = classificationList[index];
       const achieved = score >= classification.score;
       let shortBy = null;
@@ -34,8 +44,10 @@ export function createClassificationCalculator(roundName, sex, age, bowtype) {
       const scorePerEnd = Math.ceil(classification.score / numberOfEnds);
       const perEndDiff = avgPerEnd - scorePerEnd;
       const item = { name, score: classification.score, achieved, shortBy, scorePerEnd, perEndDiff };
-      return [...acc, item];
-    }, []);
+      result.push(item);
+    }
+    return result;
+  };
 }
 
 function calculateRoundScores(sex, bowtype, age, roundName) {
