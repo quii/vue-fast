@@ -1,11 +1,6 @@
 class ScorePage {
   visit() {
-    cy.visit("/", {
-      onBeforeLoad(win) {
-        //service worker nonsense: https://github.com/cypress-io/cypress/issues/27501
-        delete win.navigator.__proto__.serviceWorker;
-      }
-    });
+    cy.visit("/");
   }
 
   navigateTo() {

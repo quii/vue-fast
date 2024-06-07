@@ -34,3 +34,16 @@
 Cypress.Commands.add("score", (number) => {
   cy.get("button").contains(number.toString()).click();
 });
+
+Cypress.Commands.overwrite("visit", (originalFn, url, options) => {
+  const newOptions = Object.assign({}, options, {
+    onBeforeLoad: (win) => {
+      delete win.navigator.__proto__.serviceWorker;
+      if (options && options.onBeforeLoad) {
+        options.onBeforeLoad(win);
+      }
+    }
+  });
+
+  return originalFn(url, newOptions);
+});

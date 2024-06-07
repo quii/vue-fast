@@ -1,10 +1,6 @@
 class DataManagementPage {
   navigateTo() {
-    cy.visit("/", {
-      onBeforeLoad(win) {
-        delete win.navigator.__proto__.serviceWorker;
-      }
-    });
+    cy.visit("/");
     cy.get("a").contains("Data").click();
   }
 
