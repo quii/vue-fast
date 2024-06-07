@@ -11,8 +11,7 @@ describe(`Smoke test using Ruth's game`, () => {
     cy.get('select').select('WINDSOR')
 
     ruthsGame.forEach((score) => {
-      // press button with text value score
-      cy.get('button').contains(score).click()
+      cy.score(score);
     })
     // get button by data attribute data-test="totalHits"
     cy.get('[data-test="totalHits"]').contains('108')
@@ -24,7 +23,7 @@ describe(`Smoke test using Ruth's game`, () => {
     // next game
     cy.get("select").select("FROSTBITE");
     ruthsFrostbiteGame.forEach((score) => {
-      cy.get("button").contains(score).click();
+      cy.score(score);
     });
 
     cy.get(`[data-test="totalScore"]`).contains("254");

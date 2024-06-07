@@ -6,14 +6,13 @@ describe("practicing", () => {
     cy.visit("/", {
       onBeforeLoad(win) {
         delete win.navigator.__proto__.serviceWorker;
-        console.log("lol");
         Object.defineProperty(win.screen.orientation, "type", { value: "portrait-primary" });
       }
     });
     cy.get("button").contains("Clear data").click();
     cy.get("select").select("PRACTICE 60YD");
 
-    cy.get("button").contains("7").click();
+    cy.score(7);
     cy.get("button").contains("9").should("be.disabled");
     cy.get("button").contains("7").should("be.enabled");
   });

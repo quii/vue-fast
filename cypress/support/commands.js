@@ -23,3 +23,14 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+/**
+ * This command scores a number.
+ * @name score
+ * @function
+ * @param {number} number - The number to score.
+ * @memberof Cypress.Chainable#
+ */
+Cypress.Commands.add("score", (number) => {
+  cy.get("button").contains(number.toString()).click();
+});

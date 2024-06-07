@@ -10,7 +10,8 @@ module.exports = {
   ],
   "env": {
     "browser": true,
-    "node": true
+    "node": true,
+    "cypress/globals": true
   },
   overrides: [
     {

@@ -8,7 +8,7 @@ describe("score buttons", () => {
     cy.get("button").contains("Clear data").click();
     cy.get("select").select("WINDSOR");
 
-    cy.get("button").contains("7").click();
+    cy.score(7);
     cy.get("button").contains("9").should("be.disabled");
     cy.get("button").contains("7").should("be.enabled");
   });
@@ -22,11 +22,11 @@ describe("score buttons", () => {
     cy.get("button").contains("Clear data").click();
     cy.get("select").select("WINDSOR");
 
-    cy.get("button").contains("7").click();
+    cy.score(7);
     cy.get("button").contains("9").should("be.disabled");
 
     Cypress._.times(5, () => {
-      cy.get("button").contains("7").click();
+      cy.score(7);
     });
 
     cy.get("button").contains("9").should("be.enabled");
@@ -41,7 +41,7 @@ describe("score buttons", () => {
     cy.get("button").contains("Clear data").click();
     cy.get("select").select("METRIC III");
 
-    cy.get("button").contains("10").click();
+    cy.score(10);
     cy.get("button").contains("X").should("be.disabled");
   });
 
@@ -55,7 +55,7 @@ describe("score buttons", () => {
     cy.get("select").select("BRAY I");
 
     Cypress._.times(30, () => {
-      cy.get("button").contains("10").click();
+      cy.score(10);
     });
 
     cy.get("button").contains("10").should("be.disabled");
