@@ -48,4 +48,16 @@ describe("score buttons", () => {
 
     scorePage.checkButtonState("10", "be.disabled");
   });
+
+  it("understands worcester rules", () => {
+    scorePage.visit();
+    scorePage.clearData();
+    scorePage.selectGame("WORCESTER");
+
+    scorePage.score("X");
+    scorePage.checkButtonState("X", "be.enabled");
+    scorePage.score("5");
+    scorePage.checkButtonState("X", "be.disabled");
+    scorePage.checkTotalScore("10");
+  });
 });
