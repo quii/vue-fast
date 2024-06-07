@@ -12,39 +12,39 @@ describe("score buttons", () => {
     scorePage.selectGame("WINDSOR");
 
     scorePage.score(7);
-    scorePage.checkButtonState("9", "be.disabled");
-    scorePage.checkButtonState("7", "be.enabled");
+    scorePage.assertButtonIsDisabled("9");
+    scorePage.assertButtonIsEnabled("7");
   });
 
   it("when the end is over, all buttons should be re-enabled", () => {
     scorePage.selectGame("WINDSOR");
 
     scorePage.score(7);
-    scorePage.checkButtonState("9", "be.disabled");
+    scorePage.assertButtonIsDisabled("9");
 
     scorePage.times(5).score(7);
-    scorePage.checkButtonState("9", "be.enabled");
+    scorePage.assertButtonIsEnabled("9");
   });
 
   it("when a 10 is scored with a metric, you can no longer score an X", () => {
     scorePage.selectGame("METRIC III");
     scorePage.score(10);
-    scorePage.checkButtonState("X", "be.disabled");
+    scorePage.assertButtonIsDisabled("X");
   });
 
   it("works with wonky 2.5 round length games like Bray I", () => {
     scorePage.selectGame("BRAY I");
     scorePage.times(30).score(10);
-    scorePage.checkButtonState("10", "be.disabled");
+    scorePage.assertButtonIsDisabled("10");
   });
 
   it("understands worcester rules", () => {
     scorePage.selectGame("WORCESTER");
 
     scorePage.score("X");
-    scorePage.checkButtonState("X", "be.enabled");
+    scorePage.assertButtonIsEnabled("X");
     scorePage.score("5");
-    scorePage.checkButtonState("X", "be.disabled");
+    scorePage.assertButtonIsDisabled("X");
     scorePage.checkTotalScore("10");
   });
 
@@ -52,9 +52,9 @@ describe("score buttons", () => {
     scorePage.selectGame("VEGAS 300");
 
     scorePage.score("X");
-    scorePage.checkButtonState("X", "be.enabled");
+    scorePage.assertButtonIsEnabled("X");
     scorePage.score("10");
-    scorePage.checkButtonState("X", "be.disabled");
+    scorePage.assertButtonIsDisabled("X");
     scorePage.score("6");
     scorePage.checkTotalScore("26");
   });

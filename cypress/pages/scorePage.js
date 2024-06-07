@@ -56,6 +56,14 @@ class ScorePage {
   save() {
     cy.get("button").contains("Save").click();
   }
+
+  assertButtonIsDisabled(buttonValue) {
+    this.checkButtonState(buttonValue, "be.disabled");
+  }
+
+  assertButtonIsEnabled(buttonValue) {
+    this.checkButtonState(buttonValue, "be.enabled");
+  }
 }
 
 export default ScorePage;

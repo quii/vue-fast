@@ -12,7 +12,7 @@ describe("practicing", () => {
     scorePage.selectGame("PRACTICE 60YD");
 
     scorePage.score(7);
-    scorePage.checkButtonState("9", "be.disabled");
-    scorePage.checkButtonState("7", "be.enabled");
+    scorePage.assertButtonIsEnabled("7");
+    scorePage.assertButtonIsDisabled("9");
   });
 });
