@@ -11,10 +11,7 @@ describe(`Smoke test using Ruth's game`, () => {
 
   it("records all the scores and calculates the totals for an imperial game", () => {
     scorePage.selectGame("WINDSOR");
-
-    ruthsGame.forEach((score) => {
-      scorePage.score(score);
-    });
+    scorePage.score(ruthsGame);
 
     scorePage.checkTotalHits("108");
     scorePage.checkTotalScore("804");
@@ -23,9 +20,7 @@ describe(`Smoke test using Ruth's game`, () => {
 
   it("also works for a frostbite game", () => {
     scorePage.selectGame("FROSTBITE");
-    ruthsFrostbiteGame.forEach((score) => {
-      scorePage.score(score);
-    });
+    scorePage.score(ruthsFrostbiteGame);
 
     scorePage.checkTotalScore("254");
     scorePage.checkTotalGolds("8");

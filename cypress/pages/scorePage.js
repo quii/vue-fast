@@ -15,8 +15,15 @@ class ScorePage {
     cy.get("select").select(gameName);
   }
 
-  score(number) {
-    cy.get("button").contains(number.toString()).click();
+  score(input) {
+    if (Array.isArray(input)) {
+      input.forEach(score => {
+        this.score(score);
+      });
+    } else {
+      cy.get("button").contains(input.toString()).click();
+    }
+    return this;
   }
 
   times(n) {
