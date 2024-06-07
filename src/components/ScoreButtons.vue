@@ -1,6 +1,7 @@
 <script setup>
 
 import { calculateScoreIsValidForEnd } from "@/domain/end";
+import useButtonClass from "@/composeaables/useButtonClass";
 
 defineProps({
   validScores: {
@@ -22,23 +23,7 @@ defineProps({
 
 defineEmits(['score', 'undo'])
 
-function buttonClass(score, gameType) {
-  if (gameType === "worcester") {
-    if (score === 5 || score === "X") {
-      return {
-        "worcester5": true
-      };
-    }
-    return {
-      "worcesterRest": true
-    };
-  }
-  return {
-    [`score${score}`]: true
-  };
-}
-
-
+const buttonClass = useButtonClass();
 </script>
 
 <template>
