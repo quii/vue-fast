@@ -416,7 +416,7 @@ export const baseConfig = [
     isOutdoor: false,
     isImperial: false,
     distancesRoundSizes: [2.5],
-    scores: ["X", "10", "9", "8", "7", "6", MISS]
+    scores: ["X", 10, 9, 8, 7, 6, MISS]
   },
   {
     name: "wa 18m",
