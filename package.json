@@ -15,7 +15,7 @@
     "test": "vite build && npm run lint && vitest run && npm run test:e2e"
   },
   "dependencies": {
-    "@vueuse/core": "^10.9.0",
+    "@vueuse/core": "^10.10.1",
     "pinia": "^2.1.7",
     "vue": "^3.4.27",
     "vue-router": "^4.3.2",
