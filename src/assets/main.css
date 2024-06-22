@@ -68,7 +68,7 @@ nav a:visited {
 .score3, .score4 {
   background-color: black;
   border-color: black;
-  color: white;
+  color: white !important;
 }
 
 .score1, .score2 {

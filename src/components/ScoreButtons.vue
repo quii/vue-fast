@@ -55,13 +55,15 @@ div {
 
 button {
   flex: 1 1 0;
-  font-size: 3em;
+  font-size: 2.8em;
   -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
   -moz-box-sizing: border-box; /* Firefox, other Gecko */
   box-sizing: border-box; /* Opera/IE 8+ */
   height: 15vh;
   min-width: 10vh;
   font-weight: bold;
+  text-align: center;
+  color: black;
 }
 
 button:disabled {
