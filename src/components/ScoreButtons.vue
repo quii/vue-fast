@@ -38,7 +38,7 @@ const buttonClass = useButtonClass();
     >
       {{ score }}
     </button>
-    <button @click="$emit('undo')">↩️</button>
+    <button @click="$emit('undo')">⌫</button>
   </div>
 </template>
 
