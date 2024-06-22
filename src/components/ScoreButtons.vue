@@ -67,6 +67,7 @@ button {
   min-width: 10vh;
   font-weight: bold;
   text-align: center;
+  padding: 0;
 }
 
 button:disabled {
