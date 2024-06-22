@@ -34,7 +34,9 @@ function saveScores(event) {
 
 function clearScores() {
   if (confirm("Are you sure you want to clear all data?")) {
-    scoresStore.clear();
+    if (confirm("Yeah but really?")) {
+      scoresStore.clear();
+    }
   }
 }
 
