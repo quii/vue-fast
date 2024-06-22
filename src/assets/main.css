@@ -68,13 +68,18 @@ nav a:visited {
 .score3, .score4 {
   background-color: black;
   border-color: black;
-  color: white !important;
+  color: white;
 }
 
 .score1, .score2 {
   background-color: white;
   border-color: lightgray;
   color: black;
+}
+
+.scoreM {
+  color: black;
+  border-color: lightgray;
 }
 
 .worcester5 {

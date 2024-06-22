@@ -38,7 +38,7 @@ const buttonClass = useButtonClass();
     >
       {{ score }}
     </button>
-    <button @click="$emit('undo')">⌫</button>
+    <button class="undo" @click="$emit('undo')">⌫</button>
   </div>
 </template>
 
@@ -53,6 +53,10 @@ div {
   align-self: flex-start;
 }
 
+.undo {
+  color: black;
+}
+
 button {
   flex: 1 1 0;
   font-size: 2.8em;
@@ -63,7 +67,6 @@ button {
   min-width: 10vh;
   font-weight: bold;
   text-align: center;
-  color: black;
 }
 
 button:disabled {
