@@ -51,7 +51,7 @@ const availableClassifications = computed(() => {
       <tbody>
       <tr :key="index+'class'" v-for="(classification, index) in availableClassifications"
           :class="{ achieved: classification.achieved }">
-        <td>{{ classification.name }}</td>
+        <td><span v-if="classification.achieved">✅ </span>{{ classification.name }}</td>
         <td>{{ classification.score }} <span class="short"
                                              v-if="classification.shortBy"> (-{{ classification.shortBy }})</span></td>
         <td>{{ classification.scorePerEnd }} <span class="avgOnTrack"
