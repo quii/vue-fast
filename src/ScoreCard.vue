@@ -32,6 +32,12 @@ function saveScores(event) {
   }
 }
 
+function clearScores() {
+  if (confirm("Are you sure you want to clear all data?")) {
+    scoresStore.clear();
+  }
+}
+
 </script>
 
 <template>
@@ -55,7 +61,7 @@ function saveScores(event) {
   <div class="controls">
     <GameTypeSelector :gameType="gameTypeStore.type"
                       @changeGameType="gameTypeStore.setGameType" />
-    <button @click="scoresStore.clear()">Clear data</button>
+    <button @click="clearScores">Clear data</button>
   </div>
 </template>
 
