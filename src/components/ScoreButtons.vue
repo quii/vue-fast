@@ -68,6 +68,7 @@ button {
   font-weight: bold;
   text-align: center;
   padding: 0;
+  border: 1px solid white;
 }
 
 button:disabled {
