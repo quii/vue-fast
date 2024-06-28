@@ -1,0 +1,124 @@
+[
+  {
+    "roundBreakdown": [
+      {
+        "firstEnd": [
+          9,
+          9,
+          9,
+          9,
+          9,
+          9
+        ],
+        "secondEnd": [
+          7,
+          7,
+          7,
+          7,
+          7,
+          7
+        ],
+        "subTotals": {
+          "hits": 12,
+          "totalScore": 96,
+          "golds": 6,
+          "X": 0,
+          "onTrackFor252": true,
+          "runningTotal": 96
+        }
+      },
+      {
+        "firstEnd": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "secondEnd": [
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ],
+        "subTotals": {
+          "hits": 12,
+          "totalScore": 48,
+          "golds": 0,
+          "X": 0,
+          "onTrackFor252": false,
+          "runningTotal": 144
+        }
+      },
+      {
+        "firstEnd": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "secondEnd": [],
+        "subTotals": {
+          "hits": 6,
+          "totalScore": 6,
+          "golds": 0,
+          "X": 0,
+          "onTrackFor252": false,
+          "runningTotal": 150
+        }
+      }
+    ],
+    "subTotals": {
+      "hits": 30,
+      "totalScore": 150,
+      "golds": 6,
+      "X": 0,
+      "onTrackFor252": true
+    }
+  },
+  {
+    "roundBreakdown": [
+      {
+        "firstEnd": [
+          5,
+          5,
+          5,
+          5,
+          5,
+          5
+        ],
+        "secondEnd": [],
+        "subTotals": {
+          "hits": 6,
+          "totalScore": 30,
+          "golds": 0,
+          "X": 0,
+          "onTrackFor252": false,
+          "runningTotal": 180
+        }
+      }
+    ],
+    "subTotals": {
+      "hits": 6,
+      "totalScore": 30,
+      "golds": 0,
+      "X": 0,
+      "onTrackFor252": false
+    }
+  },
+  {
+    "roundBreakdown": [],
+    "subTotals": {
+      "hits": 0,
+      "totalScore": 0,
+      "golds": 0,
+      "X": 0,
+      "onTrackFor252": false
+    }
+  }
+]

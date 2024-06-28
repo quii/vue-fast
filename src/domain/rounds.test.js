@@ -27,4 +27,24 @@ describe("calculateRounds", () => {
       "./__snapshots__/ruths_first_frostbite.json"
     );
   });
+  test("american", () => {
+    const gameType = "american";
+    // american has 2.5 ends per distance, so 18 arrows are shot per distance
+    const halfWaythroughSecondDistanceScores = [
+      9, 9, 9, 9, 9, 9,
+      7, 7, 7, 7, 7, 7,
+
+      5, 5, 5, 5, 5, 5,
+      3, 3, 3, 3, 3, 3,
+
+      1, 1, 1, 1, 1, 1,
+
+      // next distance
+      5, 5, 5, 5, 5, 5
+    ];
+    const result = calculateRounds(halfWaythroughSecondDistanceScores, gameType, 6);
+    expect(JSON.stringify(result, null, 2)).toMatchFileSnapshot(
+      "./__snapshots__/american.json"
+    );
+  });
 });

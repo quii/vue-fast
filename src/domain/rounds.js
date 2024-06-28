@@ -1,23 +1,41 @@
-import splitIntoChunksofSizes, { splitIntoChunks } from "@/domain/splitter";
+import { splitIntoChunks } from "@/domain/splitter";
 import { gameTypeConfig } from "@/domain/game_types";
 import { calculateSubtotals, calculateTotal } from "@/domain/subtotals";
 import { convertToValues } from "@/domain/scores";
 
-const endsPerRound = 2;
+export function calculateRounds(scores, gameType = "national", endSize = 6) {
+  const { distancesRoundSizes } = gameTypeConfig[gameType];
+  const rounds = [];
+  let runningTotal = 0;
 
-export function calculateRounds(scores, gameType = "national", endSize) {
-  const rounds = calculateRoundSummaries(scores, endSize, gameType);
-  const roundsPerDistance = splitIntoChunksofSizes(rounds, gameTypeConfig[gameType].distancesRoundSizes);
+  for (const dozens of distancesRoundSizes) {
+    const arrowsPerDistance = Math.round(dozens * 12);
+    const endsForDistance = splitIntoChunks(scores.slice(0, arrowsPerDistance), endSize);
+    scores = scores.slice(arrowsPerDistance);
 
-  return roundsPerDistance.map(rounds => {
-    const scoresForDistance = flattenScoresInRounds(rounds);
-    rounds.forEach((e) => delete e.scores);
+    const roundBreakdown = [];
+    let currentEnd = 0;
 
-    return {
-      roundBreakdown: rounds ?? [],
-      subTotals: calculateSubtotals(scoresForDistance, gameType)
-    };
-  });
+    for (const end of endsForDistance) {
+      if (currentEnd % 2 === 0) {
+        const firstEnd = end;
+        const secondEnd = endsForDistance[currentEnd + 1] || [];
+        const endScores = [...firstEnd, ...secondEnd];
+        const subTotals = calculateSubtotals(endScores, gameType);
+        subTotals.runningTotal = runningTotal + subTotals.totalScore;
+        runningTotal = subTotals.runningTotal;
+        roundBreakdown.push({ firstEnd, secondEnd, subTotals });
+      }
+      currentEnd++;
+    }
+
+    const scoresForDistance = endsForDistance.flat();
+    const subTotals = calculateSubtotals(scoresForDistance, gameType);
+
+    rounds.push({ roundBreakdown, subTotals });
+  }
+
+  return rounds;
 }
 
 export function calculateAverageScorePerEnd(scores, endSize, gameType) {
@@ -25,27 +43,4 @@ export function calculateAverageScorePerEnd(scores, endSize, gameType) {
   const wholeChunks = chunks.filter(c => c.length === endSize);
   const avg = calculateTotal(wholeChunks.map(end => calculateTotal(convertToValues(end, gameType)))) / wholeChunks.length;
   return Math.ceil(avg);
-}
-
-function calculateRoundSummaries(scores, endSize, gameType) {
-  let runningTotal = 0;
-
-  const scoresPerRound = splitIntoChunks(splitIntoChunks(scores, endSize), endsPerRound);
-
-  return scoresPerRound.map((e) => {
-    const scores = e.flat();
-    const subTotals = calculateSubtotals(scores, gameType);
-    subTotals.runningTotal = runningTotal + subTotals.totalScore;
-    // subTotals.onTrackFor252 = subTotals.runningTotal >= (index+1)*84
-    runningTotal = subTotals.runningTotal;
-
-    return { firstEnd: e[0] ?? [], secondEnd: e[1] ?? [], subTotals, scores };
-  });
-}
-
-function flattenScoresInRounds(rounds) {
-  return rounds.reduce((scores, round) => {
-    scores.push(...round.scores);
-    return scores;
-  }, []);
 }
