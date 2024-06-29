@@ -21,7 +21,8 @@ function calculateConfigFromBase(base) {
         endSize: endSize,
         isOutdoor: gameType.isOutdoor,
         maxArrows,
-        numberOfEnds: maxArrows / endSize
+        numberOfEnds: maxArrows / endSize,
+        isImperial: gameType.isImperial
       }
     });
   }, {});

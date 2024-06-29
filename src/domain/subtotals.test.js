@@ -1,6 +1,9 @@
 import { expect, describe, test } from "vitest";
 import { calculateSubtotals } from "@/domain/subtotals";
 
+const imperialRound = "national";
+const metricRound = "wa 70m";
+
 test.each([
   [[], 0],
   [[1, 3], 4],
@@ -12,7 +15,7 @@ test.each([
   [["X", "X", "X", "X"], 40],
   [[1, 3, 5, 7, 9, 9], 34]
 ])('it can calculate totals', (scores, expectedTotal) => {
-  expect(calculateSubtotals(scores).totalScore).toEqual(expectedTotal)
+  expect(calculateSubtotals(scores, imperialRound).totalScore).toEqual(expectedTotal);
 })
 
 test.each([
@@ -25,20 +28,7 @@ test.each([
   [[1, 'M', 'M', 'M', 'M', 'M'], 1],
   [['M', 'M', 'M', 'M', 'M', 'M'], 0]
 ])('it can calculate hits', (scores, expectedHitCount) => {
-  expect(calculateSubtotals(scores).hits).toEqual(expectedHitCount)
-})
-
-test.each([
-  [[9, 9, 9, 9, 9, 9], 6],
-  [[1, 9, 9, 9, 9, 9], 5],
-  [[1, 3, 9, 9, 9, 9], 4],
-  [[1, 3, 5, 9, 9, 9], 3],
-  [[10, "X", 5, 9, 9, 9], 5],
-  [[1, 3, 5, 'M', 9, 9], 2],
-  [[1, 3, 5, 'M', 1, 9], 1],
-  [[1, 3, 5, 'M', 1, 7], 0]
-])('it can calculate golds', (scores, expectedGoldsCount) => {
-  expect(calculateSubtotals(scores).golds).toEqual(expectedGoldsCount)
+  expect(calculateSubtotals(scores, imperialRound).hits).toEqual(expectedHitCount);
 })
 
 test.each([
@@ -46,11 +36,43 @@ test.each([
   [["X", 9, 9, 9, 9, 9], 1],
   [["X", "X", 9, 9, 9, 9], 2]
 ])("it can calculate X", (scores, expectedXCount) => {
-  expect(calculateSubtotals(scores).X).toEqual(expectedXCount);
+  expect(calculateSubtotals(scores, metricRound).X).toEqual(expectedXCount);
 });
 
 describe("worcester", () => {
   test("X in worcester counts as 5", () => {
     expect(calculateSubtotals(["X", "X", 5], "worcester").totalScore).toEqual(15);
+  });
+});
+
+describe("metric golds are only 10 and X", () => {
+
+  test("10 in metric golds counts as 10", () => {
+    expect(calculateSubtotals([10, 10, 10], metricRound).golds).toEqual(3);
+  });
+
+
+  test("X in metric golds counts as 10", () => {
+    expect(calculateSubtotals(["X", "X", 10], metricRound).golds).toEqual(3);
+  });
+
+  test("9 does not count as a gold", () => {
+    expect(calculateSubtotals([9, 9, 9], metricRound).golds).toEqual(0);
+  });
+});
+
+describe("imperial rounds only have 9 as gold", () => {
+
+  test("9 golds as gold", () => {
+    expect(calculateSubtotals([9, 9, 9], imperialRound).golds).toEqual(3);
+  });
+
+
+  test("another example", () => {
+    expect(calculateSubtotals([9, 7, 7], imperialRound).golds).toEqual(1);
+  });
+
+  test("less than 9 does not count as gold", () => {
+    expect(calculateSubtotals([7, 7, 7], imperialRound).golds).toEqual(0);
   });
 });

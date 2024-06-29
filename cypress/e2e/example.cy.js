@@ -23,6 +23,6 @@ describe(`Smoke test using Ruth's game`, () => {
     scorePage.score(ruthsFrostbiteGame);
 
     scorePage.checkTotalScore("254");
-    scorePage.checkTotalGolds("8");
+    scorePage.checkTotalGolds("4");
   });
 });

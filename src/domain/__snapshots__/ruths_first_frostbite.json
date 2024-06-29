@@ -21,7 +21,7 @@
         "subTotals": {
           "hits": 12,
           "totalScore": 85,
-          "golds": 2,
+          "golds": 1,
           "X": 0,
           "onTrackFor252": true,
           "runningTotal": 85
@@ -73,7 +73,7 @@
         "subTotals": {
           "hits": 12,
           "totalScore": 85,
-          "golds": 3,
+          "golds": 0,
           "X": 0,
           "onTrackFor252": true,
           "runningTotal": 254
@@ -83,7 +83,7 @@
     "subTotals": {
       "hits": 36,
       "totalScore": 254,
-      "golds": 8,
+      "golds": 4,
       "X": 0,
       "onTrackFor252": true
     }
