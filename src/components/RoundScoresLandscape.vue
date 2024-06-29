@@ -3,6 +3,7 @@ import { computed } from "vue";
 import RoundTable from "@/components/RoundTable.vue";
 import { calculateSubtotals } from "@/domain/subtotals";
 import { calculateRounds } from "@/domain/rounds";
+import ClassificationDetails from "@/components/ClassificationDetails.vue";
 
 const props = defineProps({
   scores: {
@@ -57,6 +58,8 @@ const colspan = computed(() => (props.endSize * 2) + 2);
       </tr>
     </tbody>
   </table>
+  <ClassificationDetails :end-size="props.endSize" :game-type="props.gameType"
+                         :scores="props.scores"></ClassificationDetails>
 </template>
 
 <style scoped>
