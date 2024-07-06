@@ -66,7 +66,10 @@ const insults = [
   "Have you replaced your button with something from one of your shirts?",
   "It might have been better to dry fire that one",
   "Here's a solution to target panic, stop panicking",
-  "Peter André originally wrote Mysterious girl about you, which is why he pronounced it Miss terious girl"
+  "Peter André originally wrote Mysterious girl about you, which is why he pronounced it Miss terious girl",
+  "If you do that again at the next end, it's you, not the wind",
+  "I thought the sheep had been in this field but it was just your arrow",
+  "I have a joke for you. What's the difference between you and the sheep? Nothing, you both stink at archery"
 ];
 
 function saveScores(event) {
