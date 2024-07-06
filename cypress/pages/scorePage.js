@@ -21,7 +21,7 @@ class ScorePage {
         this.score(score);
       });
     } else {
-      cy.get("button").contains(input.toString()).click();
+      cy.get("button").contains(new RegExp("^" + input.toString() + "$", "g")).click();
     }
     return this;
   }

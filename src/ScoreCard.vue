@@ -10,6 +10,8 @@ import { calculateTotal } from "@/domain/subtotals";
 import { useToast } from "vue-toastification";
 import { useHistoryStore } from "@/stores/history";
 
+const synth = window.speechSynthesis;
+
 const scoresStore = useScoresStore();
 const gameTypeStore = useGameTypeStore();
 const validScores = computed(() => gameTypeStore.currentRound.scores);
@@ -20,6 +22,27 @@ const history = useHistoryStore();
 const toast = useToast();
 const date = ref(new Date().toISOString().substr(0, 10));
 const runningTotal = computed(() => calculateTotal(convertToValues(scoresStore.scores, gameTypeStore.type)));
+
+const insults = [
+  "Dumb ass",
+  "How long have you been shooting?",
+  "Is your site mark set to stupid?",
+  "Maybe you should just go home",
+  "Throw your bow in the bin",
+  "You're not even trying",
+  "You are a danger to yourself and others",
+  "Are your eyes open",
+  "Your aim is as good as your jokes.",
+  "Are you aiming for a different universe?",
+  "You couldn't hit water if you fell out of a boat",
+  "Is this some kind of abstract art?",
+  "Nice shot! For someone who hates hitting the target",
+  "You're redefining what it means to miss",
+  "Is your bow allergic to accuracy?",
+  "There's always next year",
+  "Maybe take up longbow",
+  "Everyone is angry at you, but not saying it out loud"
+];
 
 function saveScores(event) {
   event.preventDefault();
@@ -40,12 +63,23 @@ function clearScores() {
   }
 }
 
+function addScore(score) {
+  console.log(score);
+  if (score === "M") {
+    synth.cancel();
+    const utterance = new SpeechSynthesisUtterance(insults[Math.floor(Math.random() * insults.length)]);
+    utterance.rate = 0.8;
+    synth.speak(utterance);
+  }
+  scoresStore.add(score);
+}
+
 </script>
 
 <template>
   <div class="page">
   <ScoreButtons :validScores="validScores"
-                @score="scoresStore.add"
+                @score="addScore"
                 :max-reached="maxReached"
                 :scores="scoresStore.scores"
                 :game-type="gameTypeStore.type"
