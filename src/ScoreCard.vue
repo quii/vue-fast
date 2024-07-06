@@ -78,7 +78,8 @@ const insults = [
   "Please don't offer advice to anyone, ever",
   "Your boss mate doesn't need to worry about their arrows getting damaged",
   "Nice gear; it's a shame you can't buy talent",
-  "Changing your arrows wont make a difference, because you are very bad"
+  "Changing your arrows wont make a difference, because you are very bad",
+  "Don't bother upgrading your equipment, upgrade your brain"
 ];
 
 function saveScores(event) {
