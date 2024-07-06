@@ -79,7 +79,13 @@ const insults = [
   "Your boss mate doesn't need to worry about their arrows getting damaged",
   "Nice gear; it's a shame you can't buy talent",
   "Changing your arrows wont make a difference, because you are very bad",
-  "Don't bother upgrading your equipment, upgrade your brain"
+  "Don't bother upgrading your equipment, upgrade your brain",
+  "The club members won’t laugh at you, but I will ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha ha",
+  "Thank you for becoming a member of the spider conservation society",
+  "What do you call an archer who never misses? Not you.",
+  "Is your favourite musical artist Missy Elliott?",
+  "Next time shoot your arrow and we'll paint the target around it",
+  "Have you ever tried blind-folded archery? You don't know what you're missing"
 ];
 
 function saveScores(event) {
