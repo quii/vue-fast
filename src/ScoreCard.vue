@@ -41,7 +41,12 @@ const insults = [
   "Is your bow allergic to accuracy?",
   "There's always next year",
   "Maybe take up longbow",
-  "Everyone is angry at you, but not saying it out loud"
+  "Everyone hates finding your arrows but are being too polite about it",
+  "We'd be speaking French if you were at the battle of Agincourt",
+  "You are Tesco value robin hood",
+  "Is your bow upside down?",
+  "Maybe try the beginner's course again",
+  "We cant kick you out of the club for being bad, but we'll find another reason"
 ];
 
 function saveScores(event) {
