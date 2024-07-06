@@ -76,7 +76,9 @@ const insults = [
   "There are no badges for scoring 50 in 3 dozen arrows",
   "That was a good shot, for a longbow, at 200 yards",
   "Please don't offer advice to anyone, ever",
-  "Your boss mate doesn't need to worry about their arrows getting damaged"
+  "Your boss mate doesn't need to worry about their arrows getting damaged",
+  "Nice gear; it's a shame you can't buy talent",
+  "Changing your arrows wont make a difference, because you are very bad"
 ];
 
 function saveScores(event) {
