@@ -46,7 +46,27 @@ const insults = [
   "You are Tesco value robin hood",
   "Is your bow upside down?",
   "Maybe try the beginner's course again",
-  "We cant kick you out of the club for being bad, but we'll find another reason"
+  "We cant kick you out of the club for being bad, but we'll find another reason",
+  "Did you know you are supposed to hit the target?",
+  "Maybe next time",
+  "I could aim better than that and I am only a computer",
+  "Did you trip over the line when you were at full draw?",
+  "I've seen better shooting by a 2 week old baby.",
+  "We've had to check with the farm how much it would cost to replace ao sheep because of your shooting.",
+  "It's very kind of you to save the target face from wear and tear.",
+  "That was not very good.",
+  "Maybe you should sit down and take a break.",
+  "I hope you shoot better photos than you do arrows",
+  "When you went to draw your bow, did you take out a crayon?",
+  "Is your anchor at your arse?",
+  "We all have off days.",
+  "Did you find your anchor on a boat?",
+  "Are the limbs the right way round?",
+  "Is your bracing height a negative number?",
+  "Have you replaced your button with something from one of your shirts?",
+  "It might have been better to dry fire that one",
+  "Here's a solution to target panic, stop panicking",
+  "Peter André originally wrote Mysterious girl about you, which is why he pronounced it Miss terious girl"
 ];
 
 function saveScores(event) {
