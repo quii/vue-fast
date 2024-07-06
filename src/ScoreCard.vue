@@ -74,7 +74,9 @@ const insults = [
   "I'm not sure the metal detectors can find your arrows, because you are shooting poops",
   "Archery GB are introducing archer 4 classification, just for you",
   "There are no badges for scoring 50 in 3 dozen arrows",
-  "That was a good shot, for a longbow, at 200 yards"
+  "That was a good shot, for a longbow, at 200 yards",
+  "Please don't offer advice to anyone, ever",
+  "Your boss mate doesn't need to worry about their arrows getting damaged"
 ];
 
 function saveScores(event) {
