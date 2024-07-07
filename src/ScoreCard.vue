@@ -51,7 +51,7 @@ const insults = [
   "I shoot better and I am just a phone, with no ability to pick up a bow",
   "Did you trip over the line when you were at full draw?",
   "I've seen better shooting by a 2 week old baby.",
-  "We've had to check with the farm how much it would cost to replace ao sheep because of your shooting.",
+  "We've had to check with the farm how much it would cost to replace a sheep because of your shooting.",
   "It's very kind of you to save the target face from wear and tear.",
   "That was not very good.",
   "I hope you shoot better photos than you do arrows",
@@ -64,7 +64,7 @@ const insults = [
   "Have you replaced your button with the button from your shirt",
   "It might have been better to dry fire that one",
   "Here's a solution to target panic, stop panicking",
-  "Peter André originally wrote Mysterious girl about you, which is why he pronounced it Miss terious girl",
+  "Peter André wrote Mysterious girl about you, because you keep missing",
   "If you do that again at the next end, it's you",
   "I thought the sheep had been in this field but it was just your arrow",
   "I have a joke for you. What's the difference between you and the sheep? Nothing, you both stink at archery",
@@ -74,7 +74,7 @@ const insults = [
   "I'm not sure the metal detectors can find your arrows, because you are shooting poops",
   "Archery GB are introducing archer 4 classification, just for you",
   "There are no badges for scoring 50 in 3 dozen arrows",
-  "That was a good shot, for a longbow, at 200 yards",
+  "That was a good shot, for a longbow, at 200 yards, in the dark, during an earthquake",
   "Please don't offer advice to anyone, ever",
   "Your boss mate doesn't need to worry about their arrows getting damaged",
   "Nice gear; it's a shame you can't buy talent",
@@ -85,7 +85,8 @@ const insults = [
   "What do you call an archer who never misses? Not you.",
   "Is your favourite musical artist Missy Elliott?",
   "Next time shoot your arrow and we'll paint the target around it",
-  "Have you ever tried blind-folded archery? You don't know what you're missing"
+  "Have you ever tried blind-folded archery? You don't know what you're missing",
+  "Your favourite Mister men character is Mister miss"
 ];
 
 function saveScores(event) {
