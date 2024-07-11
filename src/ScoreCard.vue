@@ -43,7 +43,6 @@ const insults = [
   "Everyone hates finding your arrows but are being too polite about it",
   "We'd be speaking French if you were at the battle of Agincourt",
   "You are Tesco value robin hood",
-  "Is your bow upside down?",
   "Maybe try the beginner's course again",
   "We cant kick you out of the club for being bad, but we'll find another reason",
   "Did you know you are supposed to hit the target?",
@@ -57,7 +56,7 @@ const insults = [
   "I hope you shoot better photos than you do arrows",
   "When you went to draw your bow, did you take out a crayon?",
   "Is your anchor at your arse?",
-  "We all have off days.",
+  "We all have off days. But you seem to have off years.",
   "Did you find your anchor on a boat?",
   "Are the limbs the right way round?",
   "Is your bracing height a negative number?",
@@ -69,8 +68,9 @@ const insults = [
   "I thought the sheep had been in this field but it was just your arrow",
   "I have a joke for you. What's the difference between you and the sheep? Nothing, you both stink at archery",
   "Did you tune your bow with a banana?",
+  "I want to be a positive coach, but i just cant with you",
   "Your bow is so out of tune I thought it was a sheep coughing.",
-  "You're not supposed to tune your bow to F",
+  "You're not supposed to tune your bow to D sharp",
   "I'm not sure the metal detectors can find your arrows, because you are shooting poops",
   "Archery GB are introducing archer 4 classification, just for you",
   "There are no badges for scoring 50 in 3 dozen arrows",
@@ -86,7 +86,15 @@ const insults = [
   "Is your favourite musical artist Missy Elliott?",
   "Next time shoot your arrow and we'll paint the target around it",
   "Have you ever tried blind-folded archery? You don't know what you're missing",
-  "Your favourite Mister men character is Mister miss"
+  "Your favourite Mister men character is Mister miss",
+  "Nice try! Were you aiming for the moon?",
+  "You should change your name to Robin Hoodwinked.",
+  "I thought this was archery, not a comedy show.",
+  "If you aimed for disappointment, then congratulations!",
+  "Even a stopped clock hits the target twice a day.",
+  "You’re shooting blanks with actual arrows.",
+  "You’re the Picasso of archery – abstract and confusing.",
+  "Your arrows are writing their own adventure stories."
 ];
 
 function saveScores(event) {
