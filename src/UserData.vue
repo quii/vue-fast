@@ -13,8 +13,8 @@ const toast = useToast();
 const selectedAgeGroup = ref(userStore.user.ageGroup);
 const selectedGender = ref(userStore.user.gender);
 const selectedBowtype = ref(userStore.user.bowType);
-const selectedClassification = ref(userStore.user.classification) || classificationList[0];
-const maxYards = ref(userStore.user.maxYards) || 100;
+const selectedClassification = ref(userStore.user.classification || classificationList[0]);
+const maxYards = ref(userStore.user.maxYards || 100);
 
 const suitableRounds = computed(() => {
   if (selectedClassification.value) {
