@@ -10,6 +10,14 @@ const allRounds = [...baseConfig, ...imperialPractices, ...metricPractices];
 export const gameTypeConfig = calculateConfigFromBase(allRounds);
 export const gameTypes = Object.keys(gameTypeConfig);
 
+function convertToMeters(yards) {
+  return yards / 1.094;
+}
+
+function convertToYards(metres) {
+  return metres * 1.094;
+}
+
 function calculateConfigFromBase(base) {
   const rounds = base.reduce((acc, gameType) => {
     const endSize = calculateEndSize(gameType.endSize);
@@ -23,7 +31,9 @@ function calculateConfigFromBase(base) {
         isOutdoor: gameType.isOutdoor,
         maxArrows,
         numberOfEnds: maxArrows / endSize,
-        isImperial: gameType.isImperial
+        isImperial: gameType.isImperial,
+        maxDistanceMetres: gameType.maxDistanceMeters || convertToMeters(gameType.maxDistanceYards),
+        maxDistanceYards: gameType.maxDistanceYards || convertToYards(gameType.maxDistanceMetres)
       }
     });
   }, {});
