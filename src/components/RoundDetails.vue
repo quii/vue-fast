@@ -12,7 +12,7 @@ defineProps({
     <thead>
     <tr>
       <th>Round name</th>
-      <th>Number of ends</th>
+      <th># of dozens</th>
       <th>Max Distance</th>
     </tr>
     </thead>
