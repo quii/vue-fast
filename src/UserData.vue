@@ -1,7 +1,9 @@
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useToast } from "vue-toastification";
 import { useUserStore } from "@/stores/user";
+import { classificationList } from "@/domain/classification";
+import { calculateAppropriateRounds } from "@/domain/game_types";
 
 const userStore = useUserStore();
 
@@ -10,10 +12,23 @@ const toast = useToast();
 const selectedAgeGroup = ref(userStore.user.ageGroup);
 const selectedGender = ref(userStore.user.gender);
 const selectedBowtype = ref(userStore.user.bowType);
+const selectedClassification = ref(userStore.user.classification);
+
+const suitableRounds = computed(() => {
+  if (selectedClassification.value) {
+    const rounds = calculateAppropriateRounds(selectedClassification.value,
+      selectedAgeGroup.value,
+      selectedGender.value,
+      selectedBowtype.value);
+    console.log(rounds);
+    return rounds;
+  }
+  return undefined;
+});
 
 function saveUserDetails(event) {
   event.preventDefault();
-  userStore.save(selectedAgeGroup, selectedGender, selectedBowtype);
+  userStore.save(selectedAgeGroup, selectedGender, selectedBowtype, selectedClassification);
   toast.success("Details saved");
 }
 </script>
@@ -40,7 +55,41 @@ function saveUserDetails(event) {
       <option value="longbow">Longbow</option>
       <option value="compound">Compound</option>
     </select>
+
+    <select v-model="selectedClassification">
+      <option v-for="option in classificationList" :value="option" v-bind:key="option">
+        {{ option }}
+      </option>
+    </select>
     <button type="submit" @click="saveUserDetails">💾 Save</button>
+  </div>
+
+  <div v-if="suitableRounds">
+    <h1>Outdoor rounds to improve your classification</h1>
+    <div v-if="suitableRounds.short">
+      <h2>Short</h2>
+      <ul>
+        <li v-for="round in suitableRounds.short" :key="round">
+          {{ round.round }} ({{ round.numberOfEnds }} ends)
+        </li>
+      </ul>
+    </div>
+    <div v-if="suitableRounds.medium">
+      <h2>Medium</h2>
+      <ul>
+        <li v-for="round in suitableRounds.medium" :key="round">
+          {{ round.round }} ({{ round.numberOfEnds }} ends)
+        </li>
+      </ul>
+    </div>
+    <div v-if="suitableRounds.long">
+      <h2>Long</h2>
+      <ul>
+        <li v-for="round in suitableRounds.long" :key="round">
+          {{ round.round }} ({{ round.numberOfEnds }} ends)
+        </li>
+      </ul>
+    </div>
   </div>
 
   <div class="buymeacoffee">

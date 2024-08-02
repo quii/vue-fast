@@ -2,7 +2,7 @@ import { rawClassifications } from "@/domain/raw_classifications";
 import { gameTypeConfig } from "@/domain/game_types";
 const sortByScore = (a, b) => a.score - b.score;
 
-const classificationList = [
+export const classificationList = [
   "A3",
   "A2",
   "A1",
@@ -50,7 +50,7 @@ export function createClassificationCalculator(roundName, sex, age, bowtype) {
   };
 }
 
-function calculateRoundScores(sex, bowtype, age, roundName) {
+export function calculateRoundScores(sex, bowtype, age, roundName) {
   if (sex === "male") {
     sex = "men";
   }
