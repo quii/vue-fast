@@ -32,7 +32,7 @@ function calculateConfigFromBase(base) {
         maxArrows,
         numberOfEnds: maxArrows / endSize,
         isImperial: gameType.isImperial,
-        maxDistanceMetres: gameType.maxDistanceMeters || convertToMeters(gameType.maxDistanceYards),
+        maxDistanceMetres: gameType.maxDistanceMetres || convertToMeters(gameType.maxDistanceYards),
         maxDistanceYards: gameType.maxDistanceYards || convertToYards(gameType.maxDistanceMetres)
       }
     });
@@ -70,14 +70,25 @@ function calculateScoresForGame({ isImperial, isOutdoor }) {
   return indoorMetricScores;
 }
 
-export function calculateAppropriateRounds(classification, age, sex, bowtype) {
+function calculateDistanceLabel(config) {
+  if (config.isImperial) {
+    return `${config.maxDistanceYards}yd`;
+  }
+  return `${config.maxDistanceMetres}m`;
+}
+
+export function calculateAppropriateRounds(classification, age, sex, bowtype, maxYards) {
   const classificationNumber = classificationList.indexOf(classification);
   const outdoorRounds = gameTypes.filter(x => gameTypeConfig[x].isOutdoor);
 
   const improvementRounds = outdoorRounds.reduce((acc, round) => {
     const scores = calculateRoundScores(sex, bowtype, age, round);
-    if (scores.length > (classificationNumber + 1)) {
-      return [...acc, { round, numberOfEnds: gameTypeConfig[round].distancesRoundSizes.reduce((a, b) => a + b) }];
+    const config = gameTypeConfig[round];
+    const distance = calculateDistanceLabel(config);
+
+    if (scores.length > (classificationNumber + 1) && config.maxDistanceYards <= maxYards) {
+      const numberOfEnds = config.distancesRoundSizes.reduce((a, b) => a + b);
+      return [...acc, { round, numberOfEnds, distance }];
     } else {
       return acc;
     }

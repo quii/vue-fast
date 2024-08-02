@@ -213,7 +213,7 @@
     "maxArrows": 36,
     "numberOfEnds": 6,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": 30,
     "maxDistanceYards": 32.82
   },
   "hereford / bristol i": {
@@ -264,7 +264,7 @@
     "maxArrows": 72,
     "numberOfEnds": 12,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": 90,
     "maxDistanceYards": 98.46000000000001
   },
   "long metric (women) / long metric i": {
@@ -292,7 +292,7 @@
     "maxArrows": 72,
     "numberOfEnds": 12,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": 70,
     "maxDistanceYards": 76.58000000000001
   },
   "long metric ii": {
@@ -320,7 +320,7 @@
     "maxArrows": 72,
     "numberOfEnds": 12,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": 60,
     "maxDistanceYards": 65.64
   },
   "long metric iii": {
@@ -348,7 +348,7 @@
     "maxArrows": 72,
     "numberOfEnds": 12,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": 50,
     "maxDistanceYards": 54.7
   },
   "long metric iv": {
@@ -376,7 +376,7 @@
     "maxArrows": 72,
     "numberOfEnds": 12,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": 40,
     "maxDistanceYards": 43.760000000000005
   },
   "long metric v": {
@@ -404,7 +404,7 @@
     "maxArrows": 72,
     "numberOfEnds": 12,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": 30,
     "maxDistanceYards": 32.82
   },
   "long national": {
@@ -497,7 +497,7 @@
     "maxArrows": 72,
     "numberOfEnds": 12,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": 30,
     "maxDistanceYards": 32.82
   },
   "metric 122-40": {
@@ -524,7 +524,7 @@
     "maxArrows": 72,
     "numberOfEnds": 12,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": 40,
     "maxDistanceYards": 43.760000000000005
   },
   "metric 80-30": {
@@ -551,7 +551,7 @@
     "maxArrows": 72,
     "numberOfEnds": 12,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": 30,
     "maxDistanceYards": 32.82
   },
   "metric 80-40": {
@@ -578,7 +578,7 @@
     "maxArrows": 72,
     "numberOfEnds": 12,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": 40,
     "maxDistanceYards": 43.760000000000005
   },
   "metric iii": {
@@ -608,7 +608,7 @@
     "maxArrows": 144,
     "numberOfEnds": 24,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": 50,
     "maxDistanceYards": 54.7
   },
   "metric iv": {
@@ -638,7 +638,7 @@
     "maxArrows": 144,
     "numberOfEnds": 24,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": 40,
     "maxDistanceYards": 43.760000000000005
   },
   "metric v": {
@@ -668,7 +668,7 @@
     "maxArrows": 144,
     "numberOfEnds": 24,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": 30,
     "maxDistanceYards": 32.82
   },
   "national": {
@@ -876,7 +876,7 @@
     "maxArrows": 2400,
     "numberOfEnds": 400,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": "100",
     "maxDistanceYards": 109.4
   },
   "practice 100yd": {
@@ -925,7 +925,7 @@
     "maxArrows": 2400,
     "numberOfEnds": 400,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": "10",
     "maxDistanceYards": 10.940000000000001
   },
   "practice 10yd": {
@@ -974,7 +974,7 @@
     "maxArrows": 2400,
     "numberOfEnds": 400,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": "20",
     "maxDistanceYards": 21.880000000000003
   },
   "practice 20yd": {
@@ -1023,7 +1023,7 @@
     "maxArrows": 2400,
     "numberOfEnds": 400,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": "30",
     "maxDistanceYards": 32.82
   },
   "practice 30yd": {
@@ -1072,7 +1072,7 @@
     "maxArrows": 2400,
     "numberOfEnds": 400,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": "40",
     "maxDistanceYards": 43.760000000000005
   },
   "practice 40yd": {
@@ -1121,7 +1121,7 @@
     "maxArrows": 2400,
     "numberOfEnds": 400,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": "50",
     "maxDistanceYards": 54.7
   },
   "practice 50yd": {
@@ -1170,7 +1170,7 @@
     "maxArrows": 2400,
     "numberOfEnds": 400,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": "60",
     "maxDistanceYards": 65.64
   },
   "practice 60yd": {
@@ -1219,7 +1219,7 @@
     "maxArrows": 2400,
     "numberOfEnds": 400,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": "70",
     "maxDistanceYards": 76.58000000000001
   },
   "practice 80m": {
@@ -1247,7 +1247,7 @@
     "maxArrows": 2400,
     "numberOfEnds": 400,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": "80",
     "maxDistanceYards": 87.52000000000001
   },
   "practice 80yd": {
@@ -1296,7 +1296,7 @@
     "maxArrows": 2400,
     "numberOfEnds": 400,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": "90",
     "maxDistanceYards": 98.46000000000001
   },
   "practice 90yd": {
@@ -1345,7 +1345,7 @@
     "maxArrows": 72,
     "numberOfEnds": 12,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": 50,
     "maxDistanceYards": 54.7
   },
   "short metric ii": {
@@ -1373,7 +1373,7 @@
     "maxArrows": 72,
     "numberOfEnds": 12,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": 40,
     "maxDistanceYards": 43.760000000000005
   },
   "short metric iii": {
@@ -1401,7 +1401,7 @@
     "maxArrows": 72,
     "numberOfEnds": 12,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": 30,
     "maxDistanceYards": 32.82
   },
   "short metric iv": {
@@ -1429,7 +1429,7 @@
     "maxArrows": 72,
     "numberOfEnds": 12,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": 20,
     "maxDistanceYards": 21.880000000000003
   },
   "short metric v": {
@@ -1451,7 +1451,7 @@
     "maxArrows": 72,
     "numberOfEnds": 12,
     "isImperial": true,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": 15,
     "maxDistanceYards": 16.41
   },
   "st. george": {
@@ -1522,7 +1522,7 @@
     "maxArrows": 72,
     "numberOfEnds": 12,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": 30,
     "maxDistanceYards": 32.82
   },
   "vegas 300": {
@@ -1574,7 +1574,7 @@
     "maxArrows": 144,
     "numberOfEnds": 24,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": 60,
     "maxDistanceYards": 65.64
   },
   "wa 1440 (70m) / metric i": {
@@ -1604,7 +1604,7 @@
     "maxArrows": 144,
     "numberOfEnds": 24,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": 70,
     "maxDistanceYards": 76.58000000000001
   },
   "wa 1440 (90m)": {
@@ -1634,7 +1634,7 @@
     "maxArrows": 144,
     "numberOfEnds": 24,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": 90,
     "maxDistanceYards": 98.46000000000001
   },
   "wa 18m": {
@@ -1660,7 +1660,7 @@
     "maxArrows": 60,
     "numberOfEnds": 10,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": 18,
     "maxDistanceYards": 19.692
   },
   "wa 25m": {
@@ -1686,7 +1686,7 @@
     "maxArrows": 60,
     "numberOfEnds": 10,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": 25,
     "maxDistanceYards": 27.35
   },
   "wa 50m (barebow) / metric 122-50": {
@@ -1713,7 +1713,7 @@
     "maxArrows": 72,
     "numberOfEnds": 12,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": 50,
     "maxDistanceYards": 54.7
   },
   "wa 50m (compound)": {
@@ -1740,7 +1740,7 @@
     "maxArrows": 72,
     "numberOfEnds": 12,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": 50,
     "maxDistanceYards": 54.7
   },
   "wa 60m": {
@@ -1767,7 +1767,7 @@
     "maxArrows": 72,
     "numberOfEnds": 12,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": 60,
     "maxDistanceYards": 65.64
   },
   "wa 70m": {
@@ -1794,7 +1794,7 @@
     "maxArrows": 72,
     "numberOfEnds": 12,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": 70,
     "maxDistanceYards": 76.58000000000001
   },
   "wa 900": {
@@ -1823,7 +1823,7 @@
     "maxArrows": 90,
     "numberOfEnds": 15,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": 60,
     "maxDistanceYards": 65.64
   },
   "wa standard bow": {
@@ -1851,7 +1851,7 @@
     "maxArrows": 72,
     "numberOfEnds": 12,
     "isImperial": false,
-    "maxDistanceMetres": null,
+    "maxDistanceMetres": 50,
     "maxDistanceYards": 54.7
   },
   "warwick": {
