@@ -22,6 +22,12 @@ function view(id) {
 
 const totalArrows = computed(() => store.totalArrows());
 
+function deleteRecord(id, gameType, score) {
+  if (confirm(`Are you sure you want to delete the record for ${gameType} (Score: ${score})`)) {
+    store.remove(id);
+  }
+}
+
 </script>
 
 <template>
@@ -41,7 +47,7 @@ const totalArrows = computed(() => store.totalArrows());
       <td @click="view(item.id)" :class="{highlight: item.topScore}">{{ item.score }}</td>
       <td @click="view(item.id)">{{ item.gameType }}</td>
       <td>
-        <button @click="store.remove(item.id)">❌</button>
+        <button @click="deleteRecord(item.id, item.gameType, item.score)">❌</button>
       </td>
     </tr>
     </tbody>

@@ -100,8 +100,10 @@ const insults = [
 function saveScores(event) {
   event.preventDefault();
   try {
-    history.add(date.value, runningTotal, gameTypeStore.type, scoresStore.scores, gameTypeStore.currentRound.unit);
-    toast.success("Scores saved");
+    history.add(date.value, runningTotal.value, gameTypeStore.type, [...scoresStore.scores], gameTypeStore.currentRound.unit);
+    scoresStore.clear();
+    toast.success("Scores saved, please find them in the history");
+
   } catch (error) {
     console.log(error);
     toast.error("Error saving scores", error);
@@ -117,7 +119,6 @@ function clearScores() {
 }
 
 function addScore(score) {
-  console.log(score);
   if (score === "M") {
     synth.cancel();
     const utterance = new SpeechSynthesisUtterance(insults[Math.floor(Math.random() * insults.length)]);
