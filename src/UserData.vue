@@ -30,7 +30,7 @@ const suitableRounds = computed(() => {
 });
 
 const hasSuitableRounds = computed(() => {
-  return suitableRounds.value.short.length > 0 && suitableRounds.value.long.length > 0 && suitableRounds.value.medium.length > 0;
+  return suitableRounds.value.short.length > 0 || suitableRounds.value.long.length > 0 || suitableRounds.value.medium.length > 0;
 });
 
 function saveUserDetails(event) {
