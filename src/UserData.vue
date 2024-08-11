@@ -49,7 +49,12 @@ function saveUserDetails(event) {
       <option disabled value="">Select age group</option>
       <option>50+</option>
       <option value="senior">Senior</option>
-      <option value="u14">U14</option>
+      <option value="u21">Under 21</option>
+      <option value="u18">Under 18</option>
+      <option value="u16">Under 16</option>
+      <option value="u15">Under 15</option>
+      <option value="u14">Under 14</option>
+      <option value="u12">Under 12</option>
     </select>
 
     <select v-model="selectedGender">
