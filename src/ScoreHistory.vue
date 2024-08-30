@@ -29,6 +29,10 @@ function deleteRecord(id, gameType, score) {
   }
 }
 
+function classForClassification(item) {
+  return item.classification;
+}
+
 </script>
 
 <template>
@@ -46,7 +50,7 @@ function deleteRecord(id, gameType, score) {
         :key="item.date">
       <td @click="view(item.id)">{{ parseAndRenderDate(item.date) }}</td>
       <td @click="view(item.id)" :class="{highlight: item.topScore}">{{ item.score }}</td>
-      <td :class="{bowmen: item.classification?.includes('B'), archer: item.classification?.includes('A')}"
+      <td :class="item.classification"
           @click="view(item.id)">{{ item.classification }}
       </td>
       <td @click="view(item.id)">{{ item.gameType }}</td>
@@ -68,17 +72,37 @@ p {
   text-align: center;
 }
 
-.bowmen, .archer {
+.B3, .B2, .B1, .A3, .A2, .A1, .MB, .GMB, .EMB {
   text-align: center;
   font-weight: bold;
   color: white;
 }
 
-.bowmen {
-  background-color: #A9170F;
+.B1 {
+  background-color: hsl(3, 84%, 36%);
 }
 
-.archer {
-  background-color: #7CBFF4;
+.B2 {
+  background-color: hsl(3, 84%, 46%);
+}
+
+.B3 {
+  background-color: hsl(3, 84%, 56%);
+}
+
+.A3 {
+  background-color: hsl(207, 85%, 90%);
+}
+
+.A2 {
+  background-color: hsl(207, 85%, 80%);
+}
+
+.A1 {
+  background-color: hsl(207, 85%, 72%);
+}
+
+.MB, .GMB, .EMB {
+  background-color: rebeccapurple;
 }
 </style>
