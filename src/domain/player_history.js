@@ -1,5 +1,6 @@
 import { userDataFixer } from "@/domain/user_data_fixer";
 import { addTopScoreIndicator } from "@/domain/topscores";
+import { addClassificationsToHistory } from "@/domain/classification";
 
 export function NewPlayerHistory(storage) {
   storage.value = userDataFixer(storage.value);
@@ -26,8 +27,10 @@ export function NewPlayerHistory(storage) {
     importHistory: (history) => {
       storage.value = userDataFixer(history);
     },
-    sortedHistory() {
-      return addTopScoreIndicator(storage.value).sort(sortByDate);
+    sortedHistory(gender, age, bowType) {
+      const scoresWithIndicator = addTopScoreIndicator(storage.value);
+      const scoresWithClassification = addClassificationsToHistory(gender, age, bowType, scoresWithIndicator);
+      return scoresWithClassification.sort(sortByDate);
     },
     personalBest(round) {
       const recordsForRound = storage.value.filter(byRound(round)).map(x => x.score);

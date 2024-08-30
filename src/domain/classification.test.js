@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { createClassificationCalculator } from "@/domain/classification";
+import { calculateClassification, createClassificationCalculator } from "@/domain/classification";
 
 describe("classification", () => {
   const calculator = createClassificationCalculator("windsor", "male", "senior", "recurve");
@@ -28,5 +28,15 @@ describe("classification", () => {
       { name: "A1", score: 701, achieved: true, shortBy: null, scorePerEnd: 39, perEndDiff: -9 },
       { name: "B3", score: 782, achieved: false, shortBy: 10, scorePerEnd: 44, perEndDiff: -14 }
     ]);
+  });
+});
+
+describe("calculateClassification", () => {
+  test("calculates what classification you got from a score", () => {
+    const calculator = calculateClassification("male", "senior", "recurve");
+    expect(calculator("windsor", 489)).toEqual("U/C");
+    expect(calculator("windsor", 490)).toEqual("A3");
+    expect(calculator("windsor", 602)).toEqual("A2");
+    expect(calculator("windsor", 701)).toEqual("A1");
   });
 });

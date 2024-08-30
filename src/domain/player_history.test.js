@@ -17,7 +17,7 @@ describe("player history", () => {
   playerHistory.add(new Date().addDays(10), 826, "windsor 50", [1, 2, 3], "yd");
 
   test("keeps records sorted and adds top score indicator", () => {
-    const sortedHistory = playerHistory.sortedHistory();
+    const sortedHistory = playerHistory.sortedHistory("male", "senior", "recurve");
     expect(sortedHistory).toHaveLength(4);
     expect(sortedHistory[0].score).toEqual(123);
     expect(sortedHistory[0].topScore).toBeFalsy();
