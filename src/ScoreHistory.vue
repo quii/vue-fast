@@ -100,4 +100,9 @@ p {
 .MB, .GMB, .EMB {
   background-color: rebeccapurple;
 }
+
+.A1, .A2, .A3 {
+  color: #061345;
+}
+
 </style>
