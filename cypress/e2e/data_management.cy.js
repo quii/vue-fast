@@ -18,7 +18,7 @@ describe("data management", () => {
     dataManagementPage.importData(cjSave);
 
     historyPage.navigateTo();
-    historyPage.selectHistoryItem("Sat, 20 Apr 2024");
+    historyPage.selectHistoryItem("20/04/2024");
     historyPage.checkTotalGolds("19");
   });
 
@@ -26,7 +26,7 @@ describe("data management", () => {
     dataManagementPage.importData(mallySave);
 
     historyPage.navigateTo();
-    historyPage.selectHistoryItem("Sun, 5 May 2024");
+    historyPage.selectHistoryItem("05/05/2024");
     historyPage.checkTotalGolds("9");
   });
 
