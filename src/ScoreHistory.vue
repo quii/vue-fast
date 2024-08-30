@@ -28,11 +28,6 @@ function deleteRecord(id, gameType, score) {
     store.remove(id);
   }
 }
-
-function classForClassification(item) {
-  return item.classification;
-}
-
 </script>
 
 <template>
