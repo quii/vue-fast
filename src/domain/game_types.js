@@ -100,7 +100,6 @@ export function calculateAppropriateRounds(classification, age, sex, bowtype, ma
   }, []);
 
   return improvementRounds.reduce((acc, round) => {
-    console.log(round);
     if (round.numberOfEnds <= 4) {
       return { ...acc, short: [...acc.short, round].sort(sortByNumberOfEndsAndDistance) };
     } else if (round.numberOfEnds <= 8) {
