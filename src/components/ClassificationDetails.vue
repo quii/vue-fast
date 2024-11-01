@@ -30,9 +30,11 @@ const classificationCalculator = computed(() => createClassificationCalculator(
 const totals = computed(() => calculateSubtotals(props.scores, props.gameType));
 const averageScoresPerEnd = computed(() => calculateAverageScorePerEnd(props.scores, props.endSize, props.gameType));
 const arrowsRemaining = computed(() => gameTypeConfig[props.gameType].maxArrows-props.scores.length)
-const maxPossibleScore = computed(() => totals.value.totalScore + (arrowsRemaining.value*gameTypeConfig[props.gameType].scores[0]))
-
-
+let maxPossibleArrowScore = gameTypeConfig[props.gameType].scores[0];
+if (maxPossibleArrowScore == 'X') {
+  maxPossibleArrowScore = 10;
+}
+const maxPossibleScore = computed(() => totals.value.totalScore + (arrowsRemaining.value*maxPossibleArrowScore));
 
 const availableClassifications = computed(() => {
   return classificationCalculator.value?.(
@@ -43,7 +45,9 @@ const availableClassifications = computed(() => {
 </script>
 
 <template>
-  <div v-if="availableClassifications">
+  <details claas="dropdown">
+    <summary>View Classification Calculation</summary>
+    <div v-if="availableClassifications">
     <table>
       <thead>
       <tr>
@@ -76,6 +80,7 @@ const availableClassifications = computed(() => {
       </tbody>
     </table>
   </div>
+  </details>
 </template>
 
 
@@ -89,6 +94,6 @@ const availableClassifications = computed(() => {
 }
 
 .failed {
-  text-decoration: line-through
+  text-decoration: line-through;
 }
 </style>

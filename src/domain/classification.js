@@ -1,5 +1,6 @@
 import { rawClassifications } from "@/domain/raw_classifications";
 import { gameTypeConfig } from "@/domain/game_types";
+import { useHistoryStore } from "../stores/history";
 
 const sortByScore = (a, b) => a.score - b.score;
 
@@ -12,7 +13,8 @@ export const classificationList = [
   "B1",
   "MB",
   "GMB",
-  "EMB"
+  "EMB",
+  "PB"
 ];
 
 let roundScoresCache = {};
@@ -34,19 +36,18 @@ export function createClassificationCalculator(roundName, sex, age, bowtype) {
 
   return (score, avgPerEnd) => {
     const result = [];
-    for (let index = 0; index < roundScores.length; index++) {
-      const classification = roundScores[index];
-      const name = classificationList[index];
-      const achieved = score >= classification.score;
+    roundScores.map((classification) => {
+      const name = classificationList[classification['id']-1]
+      const achieved = score >= classification['score']
       let shortBy = null;
       if (!achieved) {
-        shortBy = classification.score - score;
+        shortBy = classification['score'] - score;
       }
-      const scorePerEnd = Math.ceil(classification.score / numberOfEnds);
+      const scorePerEnd = Math.ceil(classification['score'] / numberOfEnds);
       const perEndDiff = avgPerEnd - scorePerEnd;
       const item = { name, score: classification.score, achieved, shortBy, scorePerEnd, perEndDiff };
       result.push(item);
-    }
+    })
     return result;
   };
 }
@@ -68,6 +69,9 @@ export function calculateRoundScores(sex, bowtype, age, roundName) {
   const roundScores = rawClassifications
     .filter(c => classificationFilter(c))
     .sort(sortByScore);
+
+  const personalBest = calculatePersonalBest(roundName);
+  roundScores.push({id: 10, gender: sex, bowType: bowtype, age: age, round: roundName, score: personalBest})
   return roundScores;
 }
 
@@ -91,4 +95,18 @@ export function addClassificationsToHistory(sex, age, bowType, scoringHistory) {
     const classification = classificationCalculator(x.gameType, x.score);
     return { ...x, classification };
   });
+}
+
+function calculatePersonalBest(roundName) {
+  const historyStore = useHistoryStore();
+  const filteredHistory = [];
+  historyStore.history.map((shoot)=>{
+    if (shoot['gameType'] === roundName)  {
+      filteredHistory.push(shoot['score']) 
+    }
+  });
+  if (filteredHistory.length == 0) {
+    return 0
+  }
+  return Math.max(...filteredHistory)
 }
