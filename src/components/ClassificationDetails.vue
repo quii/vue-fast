@@ -5,6 +5,8 @@ import { createClassificationCalculator } from "@/domain/classification";
 import { calculateSubtotals } from "@/domain/subtotals";
 import { calculateAverageScorePerEnd } from "@/domain/rounds";
 import {gameTypeConfig} from "@/domain/game_types";
+import {convertToValue} from "@/domain/scores";
+import { useHistoryStore } from "@/stores/history";
 
 const props = defineProps({
   scores: {
@@ -19,22 +21,20 @@ const props = defineProps({
 });
 
 const userStore = useUserStore();
-
+const historyStore = useHistoryStore();
+const personalBest = computed(()=> historyStore.personalBest(props.gameType))
 const classificationCalculator = computed(() => createClassificationCalculator(
   props.gameType,
   userStore.user.gender,
   userStore.user.ageGroup,
-  userStore.user.bowType
+  userStore.user.bowType,
+  personalBest.value
 ));
 
 const totals = computed(() => calculateSubtotals(props.scores, props.gameType));
 const averageScoresPerEnd = computed(() => calculateAverageScorePerEnd(props.scores, props.endSize, props.gameType));
 const arrowsRemaining = computed(() => gameTypeConfig[props.gameType].maxArrows-props.scores.length)
-let maxPossibleArrowScore = gameTypeConfig[props.gameType].scores[0];
-if (maxPossibleArrowScore == 'X') {
-  maxPossibleArrowScore = 10;
-}
-const maxPossibleScore = computed(() => totals.value.totalScore + (arrowsRemaining.value*maxPossibleArrowScore));
+const maxPossibleScore = computed(() => totals.value.totalScore + (arrowsRemaining.value*convertToValue(gameTypeConfig[props.gameType].scores[0])));
 
 const availableClassifications = computed(() => {
   return classificationCalculator.value?.(
