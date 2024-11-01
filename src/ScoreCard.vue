@@ -59,6 +59,7 @@ function addScore(score) {
 
 <template>
   <div class="page">
+    <p>Number of arrows left: {{arrowsRemaining}}</p>
   <ScoreButtons :validScores="validScores"
                 @score="addScore"
                 :max-reached="maxReached"

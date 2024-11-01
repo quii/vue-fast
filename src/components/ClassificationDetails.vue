@@ -4,6 +4,7 @@ import { computed } from "vue";
 import { createClassificationCalculator } from "@/domain/classification";
 import { calculateSubtotals } from "@/domain/subtotals";
 import { calculateAverageScorePerEnd } from "@/domain/rounds";
+import {gameTypeConfig} from "@/domain/game_types";
 
 const props = defineProps({
   scores: {
@@ -28,6 +29,9 @@ const classificationCalculator = computed(() => createClassificationCalculator(
 
 const totals = computed(() => calculateSubtotals(props.scores, props.gameType));
 const averageScoresPerEnd = computed(() => calculateAverageScorePerEnd(props.scores, props.endSize, props.gameType));
+const arrowsRemaining = computed(() => gameTypeConfig[props.gameType].maxArrows-props.scores.length)
+const maxPossibleScore = computed(() => totals.value.totalScore + (arrowsRemaining.value*gameTypeConfig[props.gameType].scores[0]))
+
 
 
 const availableClassifications = computed(() => {
@@ -50,7 +54,9 @@ const availableClassifications = computed(() => {
       </thead>
       <tbody>
       <tr :key="index+'class'" v-for="(classification, index) in availableClassifications"
-          :class="{ achieved: classification.achieved }">
+          :class="{ achieved: classification.achieved, failed: classification.score>maxPossibleScore }"
+
+      >
         <td><span v-if="classification.achieved">✅ </span>{{ classification.name }}</td>
         <td>{{ classification.score }} <span class="short"
                                              v-if="classification.shortBy"> (-{{ classification.shortBy }})</span></td>
@@ -58,6 +64,14 @@ const availableClassifications = computed(() => {
                                                    v-if="classification.perEndDiff>=0">(+{{ classification.perEndDiff
           }})</span><span
           class="avgOffTrack" v-if="classification.perEndDiff<0">({{ classification.perEndDiff }})</span></td>
+      </tr>
+      <tr>
+        <td colspan="2">Arrows remaining</td>
+        <td>{{arrowsRemaining}}</td>
+      </tr>
+      <tr>
+        <td colspan="2">Max possible score</td>
+        <td>{{maxPossibleScore}}</td>
       </tr>
       </tbody>
     </table>
@@ -72,5 +86,9 @@ const availableClassifications = computed(() => {
 
 .short, .avgOffTrack {
   color: red;
+}
+
+.failed {
+  text-decoration: line-through
 }
 </style>
