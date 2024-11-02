@@ -12,17 +12,18 @@ export const classificationList = [
   "B1",
   "MB",
   "GMB",
-  "EMB"
+  "EMB",
+  "PB"
 ];
 
 let roundScoresCache = {};
 
-export function createClassificationCalculator(roundName, sex, age, bowtype) {
+export function createClassificationCalculator(roundName, sex, age, bowtype, personalBest) {
   const cacheKey = `${roundName}-${sex}-${age}-${bowtype}`;
   let roundScores = roundScoresCache[cacheKey];
 
   if (!roundScores) {
-    roundScores = calculateRoundScores(sex, bowtype, age, roundName);
+    roundScores = calculateRoundScores(sex, bowtype, age, roundName, personalBest);
     roundScoresCache[cacheKey] = roundScores;
   }
 
@@ -34,24 +35,23 @@ export function createClassificationCalculator(roundName, sex, age, bowtype) {
 
   return (score, avgPerEnd) => {
     const result = [];
-    for (let index = 0; index < roundScores.length; index++) {
-      const classification = roundScores[index];
-      const name = classificationList[index];
-      const achieved = score >= classification.score;
+    roundScores.map((classification) => {
+      const name = classificationList[classification['id']-1]
+      const achieved = score >= classification['score']
       let shortBy = null;
       if (!achieved) {
-        shortBy = classification.score - score;
+        shortBy = classification['score'] - score;
       }
-      const scorePerEnd = Math.ceil(classification.score / numberOfEnds);
+      const scorePerEnd = Math.ceil(classification['score'] / numberOfEnds);
       const perEndDiff = avgPerEnd - scorePerEnd;
-      const item = { name, score: classification.score, achieved, shortBy, scorePerEnd, perEndDiff };
+      const item = { name, score: classification['score'], achieved, shortBy, scorePerEnd, perEndDiff };
       result.push(item);
-    }
+    })
     return result;
   };
 }
 
-export function calculateRoundScores(sex, bowtype, age, roundName) {
+export function calculateRoundScores(sex, bowtype, age, roundName, personalBest) {
   if (sex === "male") {
     sex = "men";
   }
@@ -68,6 +68,9 @@ export function calculateRoundScores(sex, bowtype, age, roundName) {
   const roundScores = rawClassifications
     .filter(c => classificationFilter(c))
     .sort(sortByScore);
+  if (personalBest) {
+    roundScores.push({id: 10, gender: sex, bowType: bowtype, age: age, round: roundName, score: personalBest ?? 0});
+  } 
   return roundScores;
 }
 
@@ -79,7 +82,7 @@ export function calculateClassification(sex, age, bowtype) {
       const sorted = classifications.sort((a, b) => {
         return b.score - a.score;
       });
-      const wat = sorted.find(x => x.score <= score);
+      const wat = sorted.find(x => x.score <= score && x.name !=='PB');
       return wat?.name ?? "U/C";
     }
   };
@@ -92,3 +95,4 @@ export function addClassificationsToHistory(sex, age, bowType, scoringHistory) {
     return { ...x, classification };
   });
 }
+
