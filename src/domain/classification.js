@@ -68,7 +68,7 @@ export function calculateRoundScores(sex, bowtype, age, roundName, personalBest)
   const roundScores = rawClassifications
     .filter(c => classificationFilter(c))
     .sort(sortByScore);
-  roundScores.push({id: 10, gender: sex, bowType: bowtype, age: age, round: roundName, score: personalBest});
+  roundScores.push({id: 10, gender: sex, bowType: bowtype, age: age, round: roundName, score: personalBest ?? 0});
   return roundScores;
 }
 
@@ -80,7 +80,7 @@ export function calculateClassification(sex, age, bowtype) {
       const sorted = classifications.sort((a, b) => {
         return b.score - a.score;
       });
-      const wat = sorted.find(x => x.score <= score);
+      const wat = sorted.find(x => x.score <= score && x.name !=='PB');
       return wat?.name ?? "U/C";
     }
   };
