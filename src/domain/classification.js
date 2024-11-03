@@ -67,10 +67,10 @@ export function calculateRoundScores(sex, bowtype, age, roundName, personalBest)
 
   const roundScores = rawClassifications
     .filter(c => classificationFilter(c))
-    .sort(sortByScore);
   if (personalBest) {
     roundScores.push({id: 10, gender: sex, bowType: bowtype, age: age, round: roundName, score: personalBest ?? 0});
   } 
+  roundScores.sort(sortByScore);
   return roundScores;
 }
 
