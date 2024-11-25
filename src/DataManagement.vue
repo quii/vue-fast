@@ -49,8 +49,13 @@ function importHistory() {
 }
 
 function hardReset() {
-  localStorage.clear();
-  toast.info("Local data removed");
+  if (confirm("Are you sure you want to clear all your data?")) {
+    if (confirm("Yeah but really? This cannot be reversed")) {
+      localStorage.clear();
+      toast.info("Local data removed");
+    }
+  }
+
 }
 </script>
 <template>
