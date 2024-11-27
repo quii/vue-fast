@@ -45,7 +45,7 @@ const availableClassifications = computed(() => {
 </script>
 
 <template>
-  <details claas="dropdown">
+  <details class="dropdown" id="classification">
     <summary>View Classification Calculation</summary>
     <div v-if="availableClassifications">
     <table>

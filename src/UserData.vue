@@ -13,6 +13,7 @@ const toast = useToast();
 const selectedAgeGroup = ref(userStore.user.ageGroup);
 const selectedGender = ref(userStore.user.gender);
 const selectedBowtype = ref(userStore.user.bowType);
+const name = ref(userStore.user.name) || "";
 const selectedClassification = ref(userStore.user.classification || classificationList[0]);
 const maxYards = ref(userStore.user.maxYards || 100);
 
@@ -35,7 +36,7 @@ const hasSuitableRounds = computed(() => {
 
 function saveUserDetails(event) {
   event.preventDefault();
-  userStore.save(selectedAgeGroup, selectedGender, selectedBowtype, selectedClassification, maxYards);
+  userStore.save(selectedAgeGroup, selectedGender, selectedBowtype, selectedClassification, maxYards, name);
   toast.success("Details saved");
 }
 </script>
@@ -44,6 +45,8 @@ function saveUserDetails(event) {
     <h1>Your details</h1>
     <p>These details are used by the app to tell you your progress on classifications while you're shooting.</p>
     <p>This app is not an official record! You will have to report your scores to your records officer in the usual way.</p>
+
+    <label>Name <input type="text" v-model="name" /></label>
 
     <select v-model="selectedAgeGroup">
       <option disabled value="">Select age group</option>
