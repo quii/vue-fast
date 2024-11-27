@@ -5,6 +5,7 @@ import { gameTypeConfig } from "@/domain/game_types";
 import { computed } from "vue";
 import RoundScores from "@/components/RoundScores.vue";
 import { useUserStore } from "@/stores/user";
+import html2pdf from 'html2pdf.js';
 
 const route = useRoute();
 const history = useHistoryStore();
@@ -41,6 +42,7 @@ function convertToPDF() {
 
 <template>
   <div id="scores">
+
     <h1>{{ gameType }} - {{ date }}</h1>
     <table class="details">
       <thead>
@@ -64,15 +66,14 @@ function convertToPDF() {
                  :end-size="endSize"
                  :game-type="gameType" />
 
-    <!--    cant get below to render in the pdf for some reason-->
-    <!--    <div>-->
-    <!--    <h2>Archer's signature</h2>-->
-    <!--    <p class="signature">.........................................................</p>-->
-    <!--    <p>{{userStore.user.name}}</p>-->
-    <!--    <h2>Target Captain</h2>-->
-    <!--    <p class="signature">.........................................................</p>-->
-    <!--    <input type="text" placeholder="Put name here">-->
-    <!--    </div>-->
+        <div>
+        <h2>Archer's signature</h2>
+        <p class="signature">.........................................................</p>
+        <p>{{userStore.user.name}}</p>
+        <h2>Target Captain</h2>
+        <p class="signature">.........................................................</p>
+        <input type="text" placeholder="Put name here">
+        </div>
 
   </div>
 
