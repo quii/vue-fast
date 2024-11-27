@@ -21,7 +21,7 @@ const date = computed(() => history.selectedShoot.date);
 function convertToPDF() {
   const style = document.createElement("style");
   style.textContent = `
-  body { background: #fff; color: #000; border:1px solid red; height:100% }
+  body { background: #fff; color: #000; }
   #classification { display:none;}
   `;
   document.head.appendChild(style);
@@ -66,7 +66,7 @@ function convertToPDF() {
                  :end-size="endSize"
                  :game-type="gameType" />
 
-        <div>
+    <div class="signatures">
         <h2>Archer's signature</h2>
         <p class="signature">.........................................................</p>
         <p>{{userStore.user.name}}</p>
@@ -91,7 +91,20 @@ h1 {
   text-transform: capitalize;
 }
 
-.signature {
-  padding-top: 2em;
+.signatures {
+  padding: 2em;
+}
+
+.signatures p {
+  padding-top: 5em;
+}
+
+.signatures input {
+  padding: 1em 1em 2em 1em;
+}
+
+button {
+  margin-left: 1em;
+  font-size: 1.5em;
 }
 </style>
