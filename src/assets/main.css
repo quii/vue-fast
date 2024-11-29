@@ -82,6 +82,12 @@ nav a:visited {
   border-color: lightgray;
 }
 
+@media (prefers-color-scheme: dark) {
+  .scoreM {
+    color: white;
+  }
+}
+
 .worcester5 {
   color: black;
   background-color: white;
