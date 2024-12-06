@@ -23,10 +23,12 @@ function convertToPDF() {
   style.textContent = `
   body { background: #fff; color: #000; }
   #classification { display:none;}
+  input[type="text"] {border:none;}
   `;
-  document.head.appendChild(style);
+  // document.head.appendChild(style);
 
-  const element = document.querySelector("#scores");
+  const element = document.querySelector("#scores").cloneNode(true);
+  element.append(style);
   const opt = {
     margin: 1,
     filename: `${gameType.value}-${date.value}.pdf`,
