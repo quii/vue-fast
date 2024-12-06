@@ -31,6 +31,8 @@ const classificationCalculator = computed(() => createClassificationCalculator(
   personalBest.value
 ));
 
+const userDetailsSaved = computed(() => userStore.user.gender && userStore.user.ageGroup && userStore.user.bowType);
+
 const totals = computed(() => calculateSubtotals(props.scores, props.gameType));
 const averageScoresPerEnd = computed(() => calculateAverageScorePerEnd(props.scores, props.endSize, props.gameType));
 const arrowsRemaining = computed(() => gameTypeConfig[props.gameType].maxArrows - props.scores.length);
@@ -45,7 +47,12 @@ const availableClassifications = computed(() => {
 </script>
 
 <template>
-  <details class="dropdown" id="classification" v-if="availableClassifications">
+  <div class="detailsHint" v-if="!userDetailsSaved">
+    <p>👋 Before shooting, please consider entering your details in the <em>You</em> tab at the top right.</p>
+    <p>Fast will work better if you do 🥳, and will be able to help you better track your progress</p>
+    <p>Don't forget to press the <em>save button</em></p>
+  </div>
+  <details class="dropdown" id="classification" v-if="availableClassifications && userDetailsSaved">
     <summary>Tap to view classification calculations</summary>
     <div>
       <table>
@@ -86,6 +93,10 @@ const availableClassifications = computed(() => {
 
 
 <style scoped>
+.detailsHint p {
+  padding: 0.5em;
+  font-size: 1.1em
+}
 .achieved, .avgOnTrack {
   color: green;
 }
