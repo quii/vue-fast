@@ -28,15 +28,13 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #f5f5f5;
-  border-bottom: 1px solid #e5e5e5;
 }
 
 /* style nav a to look like buttons with visited styles */
 nav a {
   display: inline-block;
   padding: 0.5em 0;
-  border: 1px solid #e5e5e5;
+  border: 1px solid var(--color-background-mute);;
   background-color: var(--color-background);
   color: var(--color-text);
   text-decoration: none;
