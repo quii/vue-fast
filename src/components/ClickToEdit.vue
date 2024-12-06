@@ -3,11 +3,10 @@
     <input type="text"
            v-if="edit"
            :value="valueLocal"
-           @blur.native="valueLocal = $event.target.value; edit = false; $emit('input', valueLocal);"
-           @keyup.enter.native="valueLocal = $event.target.value; edit = false; $emit('input', valueLocal);"
-           v-focus=""
+           @blur="valueLocal = $event.target.value; edit = false; $emit('input', valueLocal);"
+           @keyup.enter="valueLocal = $event.target.value; edit = false; $emit('input', valueLocal);"
     />
-    <span v-else="" @click="edit = true;">
+    <span @click="edit = true;">
       {{ valueLocal }}
     </span>
   </div>
