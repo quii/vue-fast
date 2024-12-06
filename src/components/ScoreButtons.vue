@@ -54,7 +54,7 @@ div {
 }
 
 .undo {
-  color: black;
+  color: var(--color-text);
 }
 
 button {
@@ -68,7 +68,7 @@ button {
   font-weight: bold;
   text-align: center;
   padding: 0;
-  border: 1px solid white;
+  border: 1px solid var(--color-background-mute);
 }
 
 button:disabled {

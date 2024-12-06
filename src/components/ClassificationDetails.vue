@@ -98,39 +98,6 @@ const availableClassifications = computed(() => {
   text-decoration: line-through;
 }
 
-summary {
-  position: relative;
-}
-
-summary::marker {
-  content: none;
-}
-
-summary::before,
-summary::after {
-  content: '';
-}
-
-summary::before,
-summary::after {
-  width: .75em;
-  height: 0;
-  border-bottom: 2px solid;
-  position: absolute;
-  top: calc(50% - 1px);
-  right: 10px;
-  transform: translateY(-50%);
-}
-
-summary::after {
-  transform: rotate(90deg);
-  transform-origin: 50% 50%;
-}
-
-[open] summary::after {
-  transform: rotate(0deg);
-}
-
 details + details {
   border-top: none;
 }
@@ -140,8 +107,8 @@ details[open] {
 }
 
 summary {
-  padding: 1rem 1em 1rem 1rem;
-  font-size: 1.25rem;
+  padding: 1rem 1em 1rem 0.7rem;
+  font-size: 1.2rem;
   font-weight: bold;
   cursor: pointer;
 }

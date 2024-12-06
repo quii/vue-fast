@@ -28,9 +28,9 @@ const colspan = computed(() => (props.endSize * 2) + 2);
   <table>
     <thead>
       <tr>
-        <th :colSpan="endSize">🎯 scores</th>
+        <th :colSpan="endSize">🎯 Scores</th>
         <th>E/T</th>
-        <th :colSpan="endSize">🎯 scores</th>
+        <th :colSpan="endSize">🎯 Scores</th>
         <th>E/T</th>
         <th>H</th>
         <th>S</th>
@@ -69,11 +69,5 @@ table {
 .grand-totals,
 td:first-child {
   border: none;
-}
-
-.grand-totals td,
-.round-subtotal td {
-  font-weight: bold;
-  color: var(--color-heading);
 }
 </style>

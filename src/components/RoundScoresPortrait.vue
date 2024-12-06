@@ -32,7 +32,7 @@ const totalColspan = computed(() => props.endSize === 5 ? 1 : 2);
   <table>
     <thead>
     <tr>
-      <th :colSpan="colspan">🎯 scores</th>
+      <th :colSpan="colspan">🎯 Scores</th>
       <th>E/T</th>
     </tr>
     </thead>
@@ -65,11 +65,5 @@ const totalColspan = computed(() => props.endSize === 5 ? 1 : 2);
 <style scoped>
 table {
   table-layout: fixed;
-}
-
-.grand-totals td,
-.round-subtotal td {
-  font-weight: bold;
-  color: var(--color-heading);
 }
 </style>
