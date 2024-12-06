@@ -75,34 +75,39 @@ function addScore(score) {
                :hasX="validScores.includes(X)" />
   </div>
 
+  <hr />
+  <p class="selectHint">Select the round you're shooting 👇</p>
   <div class="controls">
     <GameTypeSelector :gameType="gameTypeStore.type"
                       @changeGameType="gameTypeStore.setGameType" />
-    <button @click="clearScores">Clear data</button>
   </div>
+  <hr />
+  <p class="selectHint">Danger zone</p>
+
+  <button @click="clearScores">⚠️ Clear data for this shoot ⚠️</button>
+
 </template>
 
 <style scoped>
-.controls {
-  width: 100vw;
-  display: flex;
-  justify-content: space-between;
+.selectHint {
+  padding: 0.5em;
+  font-size: 1.1em;
 }
 
 .controls select {
   padding: 0.5em;
   font-size: 1.2em;
-  flex: 1 1 0;
-  max-width: 75vw;
+  width: 100vw;
   height: 5vh;
   color: var(--color-text);
   border: 1px solid var(--color-background-mute);
   border-radius: 0;
 }
 
-.controls button {
-  max-width: 25vh;
+button {
   font-size: 1.2em;
+  width: 100vw;
+
   height: 5vh;
   color: var(--color-text);
   border: 1px solid var(--color-background-mute);
