@@ -100,7 +100,8 @@ h1 {
 }
 
 .signatures input {
-  padding: 1em 1em 2em 1em;
+  height: 3em;
+  padding-left: 1em;
 }
 
 button {
