@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.actor == 'dependabot[bot]' }}
     steps:
+      - uses: actions/checkout@v3
       - name: Test and build
         uses: actions/setup-node@v3
         with:
