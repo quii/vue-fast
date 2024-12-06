@@ -7,6 +7,7 @@ import RoundScores from "@/components/RoundScores.vue";
 import { useUserStore } from "@/stores/user";
 import html2pdf from "html2pdf.js";
 import { useScreenOrientation } from "@vueuse/core";
+import ClickToEdit from "@/components/ClickToEdit.vue";
 
 const route = useRoute();
 const history = useHistoryStore();
@@ -71,9 +72,9 @@ function convertToPDF() {
 
     <div class="signatures" v-if="orientation==='landscape-primary'">
       <p class="signature">.........................................................</p>
-      <h3>Archer's signature: {{ userStore.user.name }}</h3>
+      <h3>Archer's signature: <span class="name">{{ userStore.user.name }}</span></h3>
       <p class="signature">.........................................................</p>
-      <h3>Target Captain: <input type="text" placeholder="Put name here"></h3>
+      <h3>Target Captain: <span class="name"><ClickToEdit value="Tap to edit"></ClickToEdit></span></h3>
     </div>
 
   </div>
@@ -92,6 +93,10 @@ h1 {
 
 .details {
   text-transform: capitalize;
+}
+
+.name {
+  font-weight: bold;
 }
 
 .signatures {
