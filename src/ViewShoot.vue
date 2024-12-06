@@ -5,7 +5,7 @@ import { gameTypeConfig } from "@/domain/game_types";
 import { computed } from "vue";
 import RoundScores from "@/components/RoundScores.vue";
 import { useUserStore } from "@/stores/user";
-import html2pdf from 'html2pdf.js';
+import html2pdf from "html2pdf.js";
 
 const route = useRoute();
 const history = useHistoryStore();
@@ -25,7 +25,6 @@ function convertToPDF() {
   #classification { display:none;}
   input[type="text"] {border:none;}
   `;
-  // document.head.appendChild(style);
 
   const element = document.querySelector("#scores").cloneNode(true);
   element.append(style);
@@ -69,13 +68,11 @@ function convertToPDF() {
                  :game-type="gameType" />
 
     <div class="signatures">
-        <h2>Archer's signature</h2>
-        <p class="signature">.........................................................</p>
-        <p>{{userStore.user.name}}</p>
-        <h2>Target Captain</h2>
-        <p class="signature">.........................................................</p>
-        <input type="text" placeholder="Put name here">
-        </div>
+      <p class="signature">.........................................................</p>
+      <h3>Archer's signature: {{ userStore.user.name }}</h3>
+      <p class="signature">.........................................................</p>
+      <h3>Target Captain: <input type="text" placeholder="Put name here"></h3>
+    </div>
 
   </div>
 
@@ -94,7 +91,7 @@ h1 {
 }
 
 .signatures {
-  padding: 2em;
+  padding: 1em 0 1em 1em;
 }
 
 .signatures p {
