@@ -2,14 +2,17 @@
 
 td,
 th {
-  border: 1px solid var(--color-background-mute);
   padding: 0.2em;
   text-align: center;
 }
+
 table {
   width: 100%;
-  border-width: 1px;
   border-collapse: collapse;
+}
+
+th, td, table {
+  border: 1px solid var(--color-background-mute);
 }
 
 th {
@@ -51,37 +54,31 @@ nav a:visited {
 
 .score9, .score10, .scoreX {
   background-color: #fefc2a;
-  border-color: #fefc2a;
   color: black;
 }
 
 .score7, .score8 {
   background-color: #fc2e2a;
-  border-color: #fc2e2a;
   color: white;
 }
 
 .score5, .score6 {
   background-color: #2790f9;
-  border-color: #2790f9;
   color: white;
 }
 
 .score3, .score4 {
   background-color: black;
-  border-color: black;
   color: white;
 }
 
 .score1, .score2 {
   background-color: white;
-  border-color: lightgray;
   color: black;
 }
 
 .scoreM {
   color: black;
-  border-color: lightgray;
 }
 
 @media (prefers-color-scheme: dark) {
