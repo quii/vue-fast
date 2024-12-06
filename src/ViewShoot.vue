@@ -6,6 +6,7 @@ import { computed } from "vue";
 import RoundScores from "@/components/RoundScores.vue";
 import { useUserStore } from "@/stores/user";
 import html2pdf from "html2pdf.js";
+import { useScreenOrientation } from "@vueuse/core";
 
 const route = useRoute();
 const history = useHistoryStore();
@@ -17,6 +18,9 @@ const endSize = computed(() => gameTypeConfig[history.selectedShoot.gameType].en
 const scores = computed(() => history.selectedShoot.scores);
 const gameType = computed(() => history.selectedShoot.gameType);
 const date = computed(() => history.selectedShoot.date);
+const {
+  orientation
+} = useScreenOrientation();
 
 function convertToPDF() {
   const style = document.createElement("style");
@@ -65,7 +69,7 @@ function convertToPDF() {
                  :end-size="endSize"
                  :game-type="gameType" />
 
-    <div class="signatures">
+    <div class="signatures" v-if="orientation==='landscape-primary'">
       <p class="signature">.........................................................</p>
       <h3>Archer's signature: {{ userStore.user.name }}</h3>
       <p class="signature">.........................................................</p>
@@ -73,7 +77,7 @@ function convertToPDF() {
     </div>
 
   </div>
-  <button @click="convertToPDF">💾 Download score sheet</button>
+  <button v-if="orientation==='landscape-primary'" @click="convertToPDF">💾 Download score sheet</button>
 
 
 </template>
