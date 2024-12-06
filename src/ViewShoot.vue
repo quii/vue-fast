@@ -77,6 +77,8 @@ function convertToPDF() {
     </div>
 
   </div>
+  <p class="tip" v-if="orientation!=='landscape-primary'">💡 Try turning your phone into landscape to see the full
+    scoresheet</p>
   <button v-if="orientation==='landscape-primary'" @click="convertToPDF">💾 Download score sheet</button>
 
 
@@ -104,6 +106,14 @@ h1 {
   height: 1.8em;
   padding-left: 1em;
   border: none;
+}
+
+.tip {
+  text-align: center;
+  font-size: 1.2em;
+  font-style: italic;
+  font-weight: bold;
+  margin-top: 1em;
 }
 
 button {
