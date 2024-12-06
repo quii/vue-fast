@@ -32,19 +32,19 @@ nav a {
   display: inline-block;
   padding: 0.5em 0;
   border: 1px solid #e5e5e5;
-  background-color: #fff;
-  color: #000;
+  background-color: var(--color-background);
+  color: var(--color-text);
   text-decoration: none;
   flex: 1 1 0;
   text-align: center;
 }
 
 nav a:visited {
-  color: #000;
+  color: var(--color-text);
 }
 
 .router-link-active {
-  background-color: #e5e5e5;
+  font-weight: bold;
 }
 
 .score9, .score10, .scoreX {

@@ -127,10 +127,6 @@ div.sub {
   padding: 0;
 }
 
-input {
-  font-size: 1.5em;
-}
-
 label {
   display: flex;
   flex-direction: column;

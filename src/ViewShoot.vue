@@ -23,7 +23,7 @@ function convertToPDF() {
   style.textContent = `
   body { background: #fff; color: #000; }
   #classification { display:none;}
-  input[type="text"] {border:none;}
+  input[type="text"] {border:none; background-color:white; color: #000;}
   `;
 
   const element = document.querySelector("#scores").cloneNode(true);
@@ -32,8 +32,6 @@ function convertToPDF() {
     margin: 1,
     filename: `${gameType.value}-${date.value}.pdf`,
     image: { type: "jpeg", quality: 0.98 },
-    // html2canvas:  { scale: 2 },
-    // jsPDF:        { unit: 'in', format: 'letter', orientation: 'landscape' },
     mode: ["avoid-all"]
   };
 
@@ -75,9 +73,9 @@ function convertToPDF() {
     </div>
 
   </div>
-
-
   <button @click="convertToPDF">💾 Download score sheet</button>
+
+
 </template>
 
 <style scoped>
@@ -99,12 +97,13 @@ h1 {
 }
 
 .signatures input {
-  height: 3em;
+  height: 1.8em;
   padding-left: 1em;
+  border: none;
 }
 
 button {
   margin-left: 1em;
-  font-size: 1.5em;
+  font-size: 1em;
 }
 </style>

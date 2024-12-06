@@ -78,3 +78,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+input, select, button, textarea {
+  background-color: var(--color-background-soft);
+  color: var(--color-heading);
+}
