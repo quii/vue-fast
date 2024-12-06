@@ -91,14 +91,22 @@ function addScore(score) {
 
 .controls select {
   padding: 0.5em;
-  font-size: 1.5em;
+  font-size: 1.2em;
   flex: 1 1 0;
-  max-width: 80vw;
+  max-width: 75vw;
+  height: 5vh;
+  color: var(--color-text);
+  border: 1px solid var(--color-background-mute);
 }
 
 .controls button {
-  max-width: 20vh;
+  max-width: 25vh;
+  font-size: 1.2em;
+  height: 5vh;
+  color: var(--color-text);
+  border: 1px solid var(--color-background-mute);
 }
+
 .page {
   width: 100vw;
 }
