@@ -97,6 +97,7 @@ function addScore(score) {
   height: 5vh;
   color: var(--color-text);
   border: 1px solid var(--color-background-mute);
+  border-radius: 0;
 }
 
 .controls button {
