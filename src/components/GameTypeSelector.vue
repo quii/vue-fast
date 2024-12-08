@@ -25,6 +25,5 @@ defineEmits(['changeGameType'])
 option {
   font-size: 1.3em;
   text-transform: capitalize;
-  font-family: Helvetica, Arial, sans-serif;
 }
 </style>
