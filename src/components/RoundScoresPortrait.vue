@@ -21,7 +21,7 @@ const props = defineProps({
 });
 const totals = computed(() => calculateSubtotals(props.scores, props.gameType));
 const rounds = computed(() => calculateRounds(props.scores, props.gameType, props.endSize));
-
+const oneDistanceShoot = computed(() => rounds.value.length === 1);
 const colspan = computed(() => props.endSize);
 
 const totalColspan = computed(() => props.endSize === 5 ? 1 : 2);
@@ -45,10 +45,10 @@ const totalColspan = computed(() => props.endSize === 5 ? 1 : 2);
       :endSize="endSize"
       :hasX="hasX"
     />
-    <tr class="grand-totals">
+    <tr v-if="!oneDistanceShoot" class="grand-totals">
       <td :colSpan="colspan+1">Grand totals</td>
     </tr>
-    <tr class="grand-totals">
+    <tr v-if="!oneDistanceShoot" class="grand-totals">
       <td>Hits</td>
       <td data-test="totalHits">{{ totals.hits }}</td>
       <td>Golds</td>
