@@ -28,7 +28,6 @@ function convertToPDF() {
   style.textContent = `
   body { background: #fff; color: #000; }
   #classification { display:none;}
-  .scoreM {color: black;}
   input[type="text"] {border:none; background-color:white; color: #000;}
   `;
 

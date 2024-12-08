@@ -80,13 +80,8 @@ nav a:visited {
 }
 
 .scoreM {
-  color: black;
-}
-
-@media (prefers-color-scheme: dark) {
-  .scoreM {
-    color: white;
-  }
+  background-color: darkgreen;
+  color: white;
 }
 
 .worcester5 {
