@@ -23,6 +23,7 @@ const history = useHistoryStore();
 const toast = useToast();
 const date = ref(new Date().toISOString().substr(0, 10));
 const runningTotal = computed(() => calculateTotal(convertToValues(scoresStore.scores, gameTypeStore.type)));
+const hasStarted = computed(() => scoresStore.scores.length > 0);
 
 function saveScores(event) {
   event.preventDefault();
@@ -59,20 +60,20 @@ function addScore(score) {
 
 <template>
   <div class="page">
-  <ScoreButtons :validScores="validScores"
-                @score="addScore"
-                :max-reached="maxReached"
-                :scores="scoresStore.scores"
-                :game-type="gameTypeStore.type"
-                @undo="scoresStore.undo" />
+    <ScoreButtons :validScores="validScores"
+                  @score="addScore"
+                  :max-reached="maxReached"
+                  :scores="scoresStore.scores"
+                  :game-type="gameTypeStore.type"
+                  @undo="scoresStore.undo" />
 
     <button class="save" v-if="maxReached" @click="saveScores">💾 Save score to history</button>
 
 
     <RoundScores :scores="scoresStore.scores"
-               :game-type="gameTypeStore.type"
-               :endSize="gameTypeStore.currentRound.endSize"
-               :hasX="validScores.includes(X)" />
+                 :game-type="gameTypeStore.type"
+                 :endSize="gameTypeStore.currentRound.endSize"
+                 :hasX="validScores.includes(X)" />
   </div>
 
   <hr />
@@ -82,9 +83,10 @@ function addScore(score) {
                       @changeGameType="gameTypeStore.setGameType" />
   </div>
   <hr />
-  <p class="selectHint">Danger zone</p>
-
-  <button @click="clearScores">⚠️ Clear data for this shoot ⚠️</button>
+  <div v-if="hasStarted">
+    <p class="selectHint">Danger zone</p>
+    <button @click="clearScores">⚠️ Clear all scores for this shoot ⚠️</button>
+  </div>
 
 </template>
 
