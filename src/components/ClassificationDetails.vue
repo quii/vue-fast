@@ -32,6 +32,7 @@ const classificationCalculator = computed(() => createClassificationCalculator(
 ));
 
 const userDetailsSaved = computed(() => userStore.user.gender && userStore.user.ageGroup && userStore.user.bowType);
+const hasStarted = computed(() => props.scores.length > 0);
 
 const totals = computed(() => calculateSubtotals(props.scores, props.gameType));
 const averageScoresPerEnd = computed(() => calculateAverageScorePerEnd(props.scores, props.endSize, props.gameType));
@@ -52,7 +53,7 @@ const availableClassifications = computed(() => {
     <p>Fast will work better if you do 🥳, and will be able to help you better track your progress</p>
     <p>Don't forget to press the <em>save button</em></p>
   </div>
-  <details class="dropdown" id="classification" v-if="availableClassifications && userDetailsSaved">
+  <details class="dropdown" id="classification" v-if="availableClassifications && userDetailsSaved && hasStarted">
     <summary>Tap to view classification calculations</summary>
     <div>
       <table>

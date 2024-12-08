@@ -70,7 +70,7 @@ function addScore(score) {
     <button class="save" v-if="maxReached" @click="saveScores">💾 Save score to history</button>
 
 
-    <RoundScores :scores="scoresStore.scores"
+    <RoundScores v-if="hasStarted" :scores="scoresStore.scores"
                  :game-type="gameTypeStore.type"
                  :endSize="gameTypeStore.currentRound.endSize"
                  :hasX="validScores.includes(X)" />
