@@ -53,8 +53,16 @@ class ScorePage {
     cy.get("[data-test=\"totalScore\"]").contains(expectedScore);
   }
 
+  checkSubTotalScore(expectedScore) {
+    cy.get("[data-test=\"subTotalScore\"]").contains(expectedScore);
+  }
+
   checkTotalGolds(expectedGolds) {
     cy.get("[data-test=\"totalGolds\"]").contains(expectedGolds);
+  }
+
+  checkSubTotalGolds(expectedGolds) {
+    cy.get("[data-test=\"subTotalGolds\"]").contains(expectedGolds);
   }
 
   save() {

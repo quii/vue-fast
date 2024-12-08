@@ -34,10 +34,10 @@ const totalColspan = computed(() => props.endSize === 5 ? 1 : 2);
 
   <tr v-if="ends.length > 0" class="round-subtotal">
     <td>Hits</td>
-    <td>{{ subtotals.hits }}</td>
+    <td data-test="subTotalHits">{{ subtotals.hits }}</td>
     <td>Golds</td>
-    <td>{{ subtotals.golds }}</td>
+    <td data-test="subTotalGolds">{{ subtotals.golds }}</td>
     <td>Score</td>
-    <td :colspan="totalColspan">{{ subtotals.totalScore }}</td>
+    <td data-test="subTotalScore" :colspan="totalColspan">{{ subtotals.totalScore }}</td>
   </tr>
 </template>

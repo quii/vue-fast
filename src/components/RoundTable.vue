@@ -44,10 +44,10 @@ const colspan = computed(() => (props.endSize * 2) + 2);
 
   <tr class="round-subtotal">
     <td :colspan="colspan"></td>
-    <td>{{ subtotals.hits }}</td>
+    <td data-test="subTotalHits">{{ subtotals.hits }}</td>
     <td>{{ subtotals.totalScore }}</td>
-    <td>{{ subtotals.golds }}</td>
+    <td data-test="subTotalGolds">{{ subtotals.golds }}</td>
     <td v-if="hasX">{{ subtotals.X }}</td>
-    <td>{{ subtotals.totalScore }}</td>
+    <td data-test="subTotalScore">{{ subtotals.totalScore }}</td>
   </tr>
 </template>

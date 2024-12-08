@@ -25,8 +25,8 @@ describe(`Smoke test using Ruth's game`,
       scorePage.selectGame("FROSTBITE");
       scorePage.score(ruthsFrostbiteGame);
 
-      scorePage.checkTotalScore("254");
-      scorePage.checkTotalGolds("4");
+      scorePage.checkSubTotalScore("254");
+      scorePage.checkSubTotalGolds("4");
     });
 
     const zeroBugScores = [
@@ -109,7 +109,7 @@ describe(`Smoke test using Ruth's game`,
       scorePage.score(zeroBugScores);
 
       const expectedScore = "307";
-      scorePage.checkTotalScore(expectedScore);
+      scorePage.checkSubTotalScore(expectedScore);
       scorePage.save();
 
       historyPage.navigateTo();

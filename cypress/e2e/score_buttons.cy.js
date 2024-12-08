@@ -45,7 +45,7 @@ describe("score buttons", () => {
     scorePage.assertButtonIsEnabled("X");
     scorePage.score("5");
     scorePage.assertButtonIsDisabled("X");
-    scorePage.checkTotalScore("10");
+    scorePage.checkSubTotalScore("10");
   });
 
   it("understands vegas 300 rules, which are 10 to 6", () => {
@@ -56,6 +56,6 @@ describe("score buttons", () => {
     scorePage.score("10");
     scorePage.assertButtonIsDisabled("X");
     scorePage.score("6");
-    scorePage.checkTotalScore("26");
+    scorePage.checkSubTotalScore("26");
   });
 });
