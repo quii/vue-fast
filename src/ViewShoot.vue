@@ -89,6 +89,8 @@ function convertToPDF() {
 h1 {
   text-transform: capitalize;
   text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
 }
 
 .details {
