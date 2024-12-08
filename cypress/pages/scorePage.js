@@ -8,7 +8,11 @@ class ScorePage {
   }
 
   clearData() {
-    cy.get("button").contains("Clear data").click();
+    cy.get("body").then(($body) => {
+      if ($body.find("#clear").length > 0) {
+        cy.get("#clear").click();
+      }
+    });
   }
 
   selectGame(gameName) {

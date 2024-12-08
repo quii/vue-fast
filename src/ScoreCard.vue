@@ -85,7 +85,7 @@ function addScore(score) {
   <hr />
   <div v-if="hasStarted">
     <p class="selectHint">Danger zone</p>
-    <button @click="clearScores">⚠️ Clear all scores for this shoot ⚠️</button>
+    <button id="clear" @click="clearScores">⚠️ Clear all scores for this shoot ⚠️</button>
   </div>
 
 </template>
