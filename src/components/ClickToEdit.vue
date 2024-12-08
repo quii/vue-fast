@@ -6,7 +6,7 @@
            @blur="valueLocal = $event.target.value; edit = false; $emit('input', valueLocal);"
            @keyup.enter="valueLocal = $event.target.value; edit = false; $emit('input', valueLocal);"
     />
-    <span @click="edit = true;">
+    <span v-if="!edit" @click="edit = true;">
       {{ valueLocal }}
     </span>
   </div>
