@@ -27,7 +27,7 @@
     "@rushstack/eslint-patch": "^1.10.4",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vitejs/plugin-vue-jsx": "^3.1.0",
-    "@vue/eslint-config-prettier": "^9.0.0",
+    "@vue/eslint-config-prettier": "^10.1.0",
     "@vue/test-utils": "^2.4.6",
     "cypress": "13.13.3",
     "eslint": "^8.57.0",
