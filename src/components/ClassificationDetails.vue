@@ -1,6 +1,6 @@
 <script setup>
 import { useUserStore } from "@/stores/user";
-import { computed, watch } from "vue";
+import { computed } from "vue";
 import { createClassificationCalculator } from "@/domain/classification";
 import { calculateSubtotals } from "@/domain/subtotals";
 import { calculateAverageScorePerEnd } from "@/domain/rounds";
