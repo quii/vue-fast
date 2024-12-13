@@ -11,6 +11,7 @@ import Toast from 'vue-toastification'
 import 'vue-toastification/dist/index.css'
 import ViewShoot from '@/ViewShoot.vue'
 import UserData from "@/UserData.vue";
+import { registerSW } from "virtual:pwa-register";
 
 const routes = [
   { path: '/', component: ScoreCard },
@@ -24,6 +25,18 @@ const router = VueRouter.createRouter({
   history: VueRouter.createWebHistory(),
   routes
 })
+
+const intervalMS = 60 * 60 * 1000;
+
+if ("serviceWorker" in navigator) {
+  registerSW({
+    onRegistered(r) {
+      r && setInterval(() => {
+        r.update();
+      }, intervalMS);
+    }
+  });
+}
 
 const app = createApp({})
 app.use(router)
