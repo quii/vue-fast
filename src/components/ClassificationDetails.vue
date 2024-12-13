@@ -1,6 +1,6 @@
 <script setup>
 import { useUserStore } from "@/stores/user";
-import { computed } from "vue";
+import { computed, watch } from "vue";
 import { createClassificationCalculator } from "@/domain/classification";
 import { calculateSubtotals } from "@/domain/subtotals";
 import { calculateAverageScorePerEnd } from "@/domain/rounds";
@@ -8,6 +8,7 @@ import { gameTypeConfig } from "@/domain/game_types";
 import { calculateMaxPossibleScore } from "@/domain/scores";
 import { useHistoryStore } from "@/stores/history";
 import ClassificationDetailsTable from "@/components/ClassificationDetailsTable.vue";
+import { useRoute } from "vue-router";
 
 const props = defineProps({
   scores: {
@@ -19,10 +20,11 @@ const props = defineProps({
   endSize: {
     required: true
   },
-  showHide: {
-    default: true
-  }
 });
+const route = useRoute();
+
+console.log(route.name, route.path);
+
 
 const userStore = useUserStore();
 const historyStore = useHistoryStore();
@@ -34,6 +36,8 @@ const classificationCalculator = computed(() => createClassificationCalculator(
   userStore.user.bowType,
   personalBest.value
 ));
+
+const showTableByDefault = computed(() => arrowsRemaining.value === 0);
 
 const userDetailsSaved = computed(() => userStore.user.gender && userStore.user.ageGroup && userStore.user.bowType);
 const hasStarted = computed(() => props.scores.length > 0);
@@ -60,7 +64,7 @@ const availableClassifications = computed(() => {
   </div>
 
   <details class="dropdown" id="classification"
-           v-if="availableClassifications && userDetailsSaved && hasStarted && showHide">
+           v-if="availableClassifications && userDetailsSaved && hasStarted && !showTableByDefault">
     <summary>Tap to view classification calculations</summary>
     <div>
       <ClassificationDetailsTable :max-possible-score=maxPossibleScore
@@ -69,7 +73,7 @@ const availableClassifications = computed(() => {
     </div>
   </details>
 
-  <div v-if="!showHide">
+  <div v-if="showTableByDefault">
     <ClassificationDetailsTable :max-possible-score=maxPossibleScore
                                 :arrows-remaining=arrowsRemaining
                                 :available-classifications=availableClassifications />

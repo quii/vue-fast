@@ -36,11 +36,11 @@ defineProps({
         }})</span><span
         class="avgOffTrack" v-if="classification.perEndDiff<0">({{ classification.perEndDiff }})</span></td>
     </tr>
-    <tr>
+    <tr v-if="arrowsRemaining>0">
       <td colspan="2">Arrows remaining</td>
       <td>{{ arrowsRemaining }}</td>
     </tr>
-    <tr>
+    <tr v-if="arrowsRemaining>0">
       <td colspan="2">Max possible score</td>
       <td>{{ maxPossibleScore }}</td>
     </tr>
