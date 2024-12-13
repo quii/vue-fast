@@ -30,7 +30,7 @@
     "@vue/eslint-config-prettier": "^10.1.0",
     "@vue/test-utils": "^2.4.6",
     "cypress": "13.16.1",
-    "eslint": "^8.57.0",
+    "eslint": "^9.16.0",
     "eslint-plugin-cypress": "^3.6.0",
     "eslint-plugin-vue": "^9.26.0",
     "jsdom": "^25.0.1",
