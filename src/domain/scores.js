@@ -1,7 +1,11 @@
 import { gameTypeConfig } from "@/domain/game_types";
+import { MISS } from "@/domain/game_type_config";
 
-export const MISS = "M";
-export const X = "X";
+const scoreMappings = {
+  X: 10,
+  MISS: 0,
+  "M": 0
+};
 
 export function convertToValue(score, gameType) {
   if (gameType === "worcester" && score === "X") {
@@ -14,12 +18,6 @@ export function convertToValues(scores, gameType = "national") {
   return scores.filter(score => score !== MISS).map(x => convertToValue(x, gameType));
 }
 
-const scoreMappings = {
-  X: 10,
-  MISS: 0,
-  "M": 0
-};
-
-export function calculateMaxPossibleScore(totalScoreSoFar, arrowsRemaining, gameType) {
+export const calculateMaxPossibleScore = (totalScoreSoFar, arrowsRemaining, gameType) => {
   return totalScoreSoFar + (arrowsRemaining * convertToValue(gameTypeConfig[gameType].scores[0]));
 }

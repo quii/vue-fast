@@ -7,6 +7,7 @@ import { calculateAverageScorePerEnd } from "@/domain/rounds";
 import { gameTypeConfig } from "@/domain/game_types";
 import { calculateMaxPossibleScore } from "@/domain/scores";
 import { useHistoryStore } from "@/stores/history";
+import ClassificationDetailsTable from "@/components/ClassificationDetailsTable.vue";
 
 const props = defineProps({
   scores: {
@@ -17,6 +18,9 @@ const props = defineProps({
   },
   endSize: {
     required: true
+  },
+  showHide: {
+    default: true
   }
 });
 
@@ -54,43 +58,22 @@ const availableClassifications = computed(() => {
     <p>Fast will work better if you do 🥳, and will be able to help you better track your progress</p>
     <p>Don't forget to press the <em>save button</em></p>
   </div>
-  <details class="dropdown" id="classification" v-if="availableClassifications && userDetailsSaved && hasStarted">
+
+  <details class="dropdown" id="classification"
+           v-if="availableClassifications && userDetailsSaved && hasStarted && showHide">
     <summary>Tap to view classification calculations</summary>
     <div>
-      <table>
-        <thead>
-        <tr>
-          <th>Classification</th>
-          <th>Required score</th>
-          <th>Avg. per end</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr :key="index+'class'" v-for="(classification, index) in availableClassifications"
-            :class="{ achieved: classification.achieved, failed: classification.score>maxPossibleScore }"
-
-        >
-          <td><span v-if="classification.achieved">✅ </span>{{ classification.name }}</td>
-          <td>{{ classification.score }} <span class="short"
-                                               v-if="classification.shortBy"> (-{{ classification.shortBy }})</span>
-          </td>
-          <td>{{ classification.scorePerEnd }} <span class="avgOnTrack"
-                                                     v-if="classification.perEndDiff>=0">(+{{ classification.perEndDiff
-            }})</span><span
-            class="avgOffTrack" v-if="classification.perEndDiff<0">({{ classification.perEndDiff }})</span></td>
-        </tr>
-        <tr>
-          <td colspan="2">Arrows remaining</td>
-          <td>{{ arrowsRemaining }}</td>
-        </tr>
-        <tr>
-          <td colspan="2">Max possible score</td>
-          <td>{{ maxPossibleScore }}</td>
-        </tr>
-        </tbody>
-      </table>
+      <ClassificationDetailsTable :max-possible-score=maxPossibleScore
+                                  :arrows-remaining=arrowsRemaining
+                                  :available-classifications=availableClassifications />
     </div>
   </details>
+
+  <div v-if="!showHide">
+    <ClassificationDetailsTable :max-possible-score=maxPossibleScore
+                                :arrows-remaining=arrowsRemaining
+                                :available-classifications=availableClassifications />
+  </div>
 </template>
 
 

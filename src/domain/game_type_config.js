@@ -1,5 +1,3 @@
-import { MISS } from "@/domain/scores";
-
 const standardDistances = [
   "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"
 ];
@@ -20,6 +18,8 @@ export const metricPractices = standardDistances.map(distance => ({
   maxDistanceMetres: distance
 }));
 
+export const MISS = "M";
+export const X = "X";
 export const baseConfig = [
   {
     name: 'york',

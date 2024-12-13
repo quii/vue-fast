@@ -4,12 +4,13 @@ import ScoreButtons from "@/components/ScoreButtons.vue";
 import GameTypeSelector from "@/components/GameTypeSelector.vue";
 import { useGameTypeStore } from "@/stores/game_type";
 import { computed, ref } from "vue";
-import { convertToValues, X } from "@/domain/scores";
+import { convertToValues } from "@/domain/scores";
 import RoundScores from "@/components/RoundScores.vue";
 import { calculateTotal } from "@/domain/subtotals";
 import { useToast } from "vue-toastification";
 import { useHistoryStore } from "@/stores/history";
 import { insults } from "@/domain/insults";
+import { X } from "@/domain/game_type_config";
 
 const synth = window.speechSynthesis;
 

@@ -1,5 +1,4 @@
-import {MISS} from "@/domain/scores";
-import { baseConfig, imperialPractices, metricPractices } from "@/domain/game_type_config";
+import { baseConfig, imperialPractices, metricPractices, MISS } from "@/domain/game_type_config";
 import { calculateRoundScores, classificationList } from "@/domain/classification";
 
 const imperialScores = [9, 7, 5, 3, 1, MISS];

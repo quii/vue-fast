@@ -1,10 +1,10 @@
 <script setup>
 import { computed } from "vue";
 import {useScreenOrientation} from "@vueuse/core";
-import {X} from "@/domain/scores";
 import {gameTypeConfig} from "@/domain/game_types";
 import RoundScoresLandscape from "@/components/RoundScoresLandscape.vue";
 import RoundScoresPortrait from "@/components/RoundScoresPortrait.vue";
+import { X } from "@/domain/game_type_config";
 
 const props = defineProps({
   scores: {
