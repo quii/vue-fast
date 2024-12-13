@@ -5,7 +5,7 @@ import { createClassificationCalculator } from "@/domain/classification";
 import { calculateSubtotals } from "@/domain/subtotals";
 import { calculateAverageScorePerEnd } from "@/domain/rounds";
 import { gameTypeConfig } from "@/domain/game_types";
-import { convertToValue } from "@/domain/scores";
+import { calculateMaxPossibleScore } from "@/domain/scores";
 import { useHistoryStore } from "@/stores/history";
 
 const props = defineProps({
@@ -37,7 +37,7 @@ const hasStarted = computed(() => props.scores.length > 0);
 const totals = computed(() => calculateSubtotals(props.scores, props.gameType));
 const averageScoresPerEnd = computed(() => calculateAverageScorePerEnd(props.scores, props.endSize, props.gameType));
 const arrowsRemaining = computed(() => gameTypeConfig[props.gameType].maxArrows - props.scores.length);
-const maxPossibleScore = computed(() => totals.value.totalScore + (arrowsRemaining.value * convertToValue(gameTypeConfig[props.gameType].scores[0])));
+const maxPossibleScore = computed(() => calculateMaxPossibleScore(totals.value.totalScore, arrowsRemaining.value, props.gameType));
 
 const availableClassifications = computed(() => {
   return classificationCalculator.value?.(
@@ -45,6 +45,7 @@ const availableClassifications = computed(() => {
     averageScoresPerEnd.value
   );
 });
+
 </script>
 
 <template>

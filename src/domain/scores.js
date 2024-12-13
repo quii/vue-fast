@@ -1,3 +1,5 @@
+import { gameTypeConfig } from "@/domain/game_types";
+
 export const MISS = "M";
 export const X = "X";
 
@@ -17,3 +19,7 @@ const scoreMappings = {
   MISS: 0,
   "M": 0
 };
+
+export function calculateMaxPossibleScore(totalScoreSoFar, arrowsRemaining, gameType) {
+  return totalScoreSoFar + (arrowsRemaining * convertToValue(gameTypeConfig[gameType].scores[0]));
+}
