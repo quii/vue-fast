@@ -1,5 +1,7 @@
 <script setup>
-defineProps({
+import { computed } from "vue";
+
+const props = defineProps({
   availableClassifications: {
     required: true
   },
@@ -11,6 +13,8 @@ defineProps({
   }
 });
 
+const shootInProgress = computed(() => props.arrowsRemaining > 0);
+
 </script>
 
 <template>
@@ -19,7 +23,7 @@ defineProps({
     <tr>
       <th>Classification</th>
       <th>Required score</th>
-      <th>Avg. per end</th>
+      <th v-if="shootInProgress">Avg. per end</th>
     </tr>
     </thead>
     <tbody>
@@ -31,16 +35,16 @@ defineProps({
       <td>{{ classification.score }} <span class="short"
                                            v-if="classification.shortBy"> (-{{ classification.shortBy }})</span>
       </td>
-      <td>{{ classification.scorePerEnd }} <span class="avgOnTrack"
+      <td v-if="shootInProgress">{{ classification.scorePerEnd }} <span class="avgOnTrack"
                                                  v-if="classification.perEndDiff>=0">(+{{ classification.perEndDiff
         }})</span><span
         class="avgOffTrack" v-if="classification.perEndDiff<0">({{ classification.perEndDiff }})</span></td>
     </tr>
-    <tr v-if="arrowsRemaining>0">
+    <tr v-if="shootInProgress">
       <td colspan="2">Arrows remaining</td>
       <td>{{ arrowsRemaining }}</td>
     </tr>
-    <tr v-if="arrowsRemaining>0">
+    <tr v-if="shootInProgress">
       <td colspan="2">Max possible score</td>
       <td>{{ maxPossibleScore }}</td>
     </tr>
