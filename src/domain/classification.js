@@ -96,3 +96,18 @@ export function addClassificationsToHistory(sex, age, bowType, scoringHistory) {
   });
 }
 
+export function getRelevantClassifications(classifications) {
+  const achieved = classifications.filter(c => c.achieved).sort((a, b) => b.score - a.score);
+  const notAchieved = classifications.filter(c => !c.achieved).sort((a, b) => a.score - b.score);
+
+  const result = [];
+  if (achieved.length > 0) {
+    result.push(achieved[0]); // Highest achieved
+  }
+  if (notAchieved.length > 0) {
+    result.push(notAchieved[0]); // Next unachieved
+  }
+
+  return result;
+}
+

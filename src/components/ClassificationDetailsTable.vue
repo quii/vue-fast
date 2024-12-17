@@ -28,7 +28,7 @@ const shootInProgress = computed(() => props.arrowsRemaining > 0);
     </thead>
     <tbody>
     <tr :key="index+'class'" v-for="(classification, index) in availableClassifications"
-        :class="{ achieved: classification.achieved, failed: classification.score>maxPossibleScore }"
+        :class="{ achieved: classification.achieved, failed: classification.score>maxPossibleScore && shootInProgress }"
 
     >
       <td><span v-if="classification.achieved">✅ </span>{{ classification.name }}</td>

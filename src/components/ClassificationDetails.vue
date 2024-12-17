@@ -1,14 +1,13 @@
 <script setup>
 import { useUserStore } from "@/stores/user";
 import { computed } from "vue";
-import { createClassificationCalculator } from "@/domain/classification";
+import { createClassificationCalculator, getRelevantClassifications } from "@/domain/classification";
 import { calculateSubtotals } from "@/domain/subtotals";
 import { calculateAverageScorePerEnd } from "@/domain/rounds";
 import { gameTypeConfig } from "@/domain/game_types";
 import { calculateMaxPossibleScore } from "@/domain/scores";
 import { useHistoryStore } from "@/stores/history";
 import ClassificationDetailsTable from "@/components/ClassificationDetailsTable.vue";
-import { useRoute } from "vue-router";
 
 const props = defineProps({
   scores: {
@@ -21,10 +20,6 @@ const props = defineProps({
     required: true
   },
 });
-const route = useRoute();
-
-console.log(route.name, route.path);
-
 
 const userStore = useUserStore();
 const historyStore = useHistoryStore();
@@ -76,7 +71,7 @@ const availableClassifications = computed(() => {
   <div v-if="showTableByDefault">
     <ClassificationDetailsTable :max-possible-score=maxPossibleScore
                                 :arrows-remaining=arrowsRemaining
-                                :available-classifications=availableClassifications />
+                                :available-classifications=getRelevantClassifications(availableClassifications) />
   </div>
 </template>
 
