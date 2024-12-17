@@ -11,6 +11,7 @@ import { useToast } from "vue-toastification";
 import { useHistoryStore } from "@/stores/history";
 import { insults } from "@/domain/insults";
 import { X } from "@/domain/game_type_config";
+import { useUserStore } from "@/stores/user";
 
 const synth = window.speechSynthesis;
 
@@ -18,6 +19,7 @@ const scoresStore = useScoresStore();
 const gameTypeStore = useGameTypeStore();
 const validScores = computed(() => gameTypeStore.currentRound.scores);
 const maxReached = computed(() => scoresStore.scores.length >= gameTypeStore.currentRound.maxArrows);
+const userStore = useUserStore();
 
 //todo: this is copied from data management, DRY it up
 const history = useHistoryStore();
@@ -48,7 +50,7 @@ function clearScores() {
 }
 
 function addScore(score) {
-  if (score === "M") {
+  if (score === "M" && userStore.user.constructiveCriticism) {
     synth.cancel();
     const utterance = new SpeechSynthesisUtterance(insults[Math.floor(Math.random() * insults.length)]);
     utterance.rate = 0.8;

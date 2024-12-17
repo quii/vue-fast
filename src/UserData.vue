@@ -15,7 +15,8 @@ const selectedGender = ref(userStore.user.gender);
 const selectedBowtype = ref(userStore.user.bowType);
 const name = ref(userStore.user.name) || "";
 const selectedClassification = ref(userStore.user.classification || classificationList[0]);
-const maxYards = ref(userStore.user.maxYards || 100);
+const maxYards = ref(userStore.user.maxYards ?? 100);
+const constructiveCriticism = ref(userStore.user.constructiveCriticism ?? true);
 
 const suitableRounds = computed(() => {
   if (selectedClassification.value) {
@@ -36,7 +37,14 @@ const hasSuitableRounds = computed(() => {
 
 function saveUserDetails(event) {
   event.preventDefault();
-  userStore.save(selectedAgeGroup, selectedGender, selectedBowtype, selectedClassification, maxYards, name);
+  userStore.save(selectedAgeGroup,
+    selectedGender,
+    selectedBowtype,
+    selectedClassification,
+    maxYards,
+    name,
+    constructiveCriticism
+  );
   toast.success("Details saved");
 }
 </script>
@@ -84,6 +92,10 @@ function saveUserDetails(event) {
     <label>Max shooting distance ({{ maxYards }} yards)</label>
     <input type="range" v-model="maxYards" min="10" max="100" step="10" />
 
+    <label class="inline"><input type="checkbox" v-model="constructiveCriticism" /> Constructive criticism
+      enabled</label>
+
+
     <button type="submit" @click="saveUserDetails">💾 Save</button>
   </div>
 
@@ -125,6 +137,10 @@ div {
 
 div.sub {
   padding: 0;
+}
+
+.inline {
+  display: inline-block;
 }
 
 label {

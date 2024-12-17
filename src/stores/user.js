@@ -5,9 +5,9 @@ export const useUserStore = defineStore("user", () => {
   const state = useLocalStorage("user", {
   });
 
-  function save(ageGroup, gender, bowType, classification, maxYards, name) {
+  function save(ageGroup, gender, bowType, classification, maxYards, name, constructiveCriticism) {
     state.value = {
-      ageGroup, gender, bowType, classification, maxYards, name
+      ageGroup, gender, bowType, classification, maxYards, name, constructiveCriticism
     };
   }
 
