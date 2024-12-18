@@ -45,8 +45,8 @@ function deleteRecord(id, gameType, score) {
         :key="item.date">
       <td @click="view(item.id)">{{ parseAndRenderDate(item.date) }}</td>
       <td @click="view(item.id)" :class="{highlight: item.topScore}">{{ item.score }}</td>
-      <td :class="item.classification"
-          @click="view(item.id)">{{ item.classification }}
+      <td :class="[item.classification?.name, item.classification?.scheme]"
+          @click="view(item.id)">{{ item.classification?.name }}
       </td>
       <td @click="view(item.id)">{{ item.gameType }}</td>
       <td>
@@ -71,6 +71,11 @@ p {
   text-align: center;
   font-weight: bold;
   color: white;
+}
+
+.Frostbite {
+  color: cornflowerblue;
+  font-weight: bold;
 }
 
 .B1 {

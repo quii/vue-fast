@@ -19,6 +19,9 @@ export const classificationList = [
 let roundScoresCache = {};
 
 export function createClassificationCalculator(roundName, sex, age, bowtype, personalBest) {
+  if (roundName === "frostbite") {
+    return createFrostbiteClassificationCalculator(roundName, sex, age, bowtype, personalBest);
+  }
   const cacheKey = `${roundName}-${sex}-${age}-${bowtype}`;
   let roundScores = roundScoresCache[cacheKey];
 
@@ -44,12 +47,60 @@ export function createClassificationCalculator(roundName, sex, age, bowtype, per
       }
       const scorePerEnd = Math.ceil(classification['score'] / numberOfEnds);
       const perEndDiff = avgPerEnd - scorePerEnd;
-      const item = { name, score: classification['score'], achieved, shortBy, scorePerEnd, perEndDiff };
+      const item = { name, score: classification["score"], achieved, shortBy, scorePerEnd, perEndDiff, scheme: "AGB" };
       result.push(item);
     })
     return result;
   };
 }
+
+function createFrostbiteClassificationCalculator(roundName, sex, age, bowtype, personalBest) {
+  const frostbiteBadges = [
+    { id: 1, score: 100, name: "100" },
+    { id: 2, score: 150, name: "150" },
+    { id: 3, score: 200, name: "200" },
+    { id: 4, score: 225, name: "225" },
+    { id: 5, score: 250, name: "250" },
+    { id: 6, score: 275, name: "275" },
+    { id: 7, score: 300, name: "300" },
+    { id: 8, score: 315, name: "315" },
+    { id: 9, score: 330, name: "330" },
+    { id: 10, score: 340, name: "340" },
+    { id: 11, score: 350, name: "350" },
+    { id: 12, score: 355, name: "355" }
+  ];
+
+  const numberOfEnds = gameTypeConfig[roundName].numberOfEnds;
+
+  if (personalBest) {
+    frostbiteBadges.push({ id: 13, score: personalBest, name: "PB" });
+  }
+
+  return (score, avgPerEnd) => {
+    const result = [];
+    frostbiteBadges.map((badge) => {
+      const achieved = score >= badge.score;
+      let shortBy = null;
+      if (!achieved) {
+        shortBy = badge.score - score;
+      }
+      const scorePerEnd = Math.ceil(badge.score / numberOfEnds);
+      const perEndDiff = avgPerEnd - scorePerEnd;
+      const item = {
+        name: badge.name,
+        score: badge.score,
+        achieved,
+        shortBy,
+        scorePerEnd,
+        perEndDiff,
+        scheme: "Frostbite"
+      };
+      result.push(item);
+    });
+    return result;
+  };
+}
+
 
 export function calculateRoundScores(sex, bowtype, age, roundName, personalBest) {
   if (sex === "male") {
@@ -83,7 +134,7 @@ export function calculateClassification(sex, age, bowtype) {
         return b.score - a.score;
       });
       const wat = sorted.find(x => x.score <= score && x.name !=='PB');
-      return wat?.name ?? "U/C";
+      return { name: wat?.name ?? "U/C", scheme: wat?.scheme };
     }
   };
 }
@@ -97,12 +148,16 @@ export function addClassificationsToHistory(sex, age, bowType, scoringHistory) {
 }
 
 export function getRelevantClassifications(classifications) {
-  const achieved = classifications.filter(c => c.achieved).sort((a, b) => b.score - a.score);
-  const notAchieved = classifications.filter(c => !c.achieved).sort((a, b) => a.score - b.score);
+  const achieved = classifications?.filter(c => c.achieved).sort((a, b) => b.score - a.score) ?? [];
+  const notAchieved = classifications?.filter(c => !c.achieved).sort((a, b) => a.score - b.score) ?? [];
 
   const result = [];
   if (achieved.length > 0) {
-    result.push(achieved[0]); // Highest achieved
+    if (achieved[0].name === "PB" && achieved.length > 1) {
+      result.push(achieved[1]);
+    }
+    result.push(achieved[0]);
+
   }
   if (notAchieved.length > 0) {
     result.push(notAchieved[0]); // Next unachieved
