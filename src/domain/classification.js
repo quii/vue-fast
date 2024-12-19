@@ -166,3 +166,24 @@ export function getRelevantClassifications(classifications) {
   return result;
 }
 
+export function calculateIfArcherIsOnTrackForNextClassification(currentEnd, currentClassification, roundName, sex, age, bowtype) {
+  const calculator = createClassificationCalculator(roundName, sex, age, bowtype);
+
+  if (!calculator) {
+    return false;
+  }
+
+  const classifications = calculator(0, currentEnd);
+
+  const currentIndex = classifications.findIndex(c => c.name === currentClassification);
+
+
+  if (currentIndex === -1 || currentIndex === classifications.length - 1) {
+    return undefined;
+  }
+
+  const nextClassification = classifications[currentIndex + 1];
+
+  return currentEnd >= nextClassification.scorePerEnd;
+}
+

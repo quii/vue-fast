@@ -1,8 +1,10 @@
 <script setup>
 import { calculateTotal } from "@/domain/subtotals";
-import {computed} from "vue";
+import { computed } from "vue";
 import { convertToValues } from "@/domain/scores";
 import { useGameTypeStore } from "@/stores/game_type";
+import { useUserStore } from "@/stores/user";
+import { calculateIfArcherIsOnTrackForNextClassification } from "@/domain/classification";
 
 const props = defineProps({
   scores: {
@@ -16,6 +18,7 @@ const props = defineProps({
 });
 
 const gameTypeStore = useGameTypeStore();
+const userStore = useUserStore();
 
 function scoreButtonClass(score) {
   if (gameTypeStore.type === "worcester") {
@@ -33,10 +36,15 @@ function scoreButtonClass(score) {
   };
 }
 
-const onTrackFor252 = 42
 const total = computed(() => calculateTotal(convertToValues(props.scores, gameTypeStore.type)));
-const onTrack = computed(() => total.value >=onTrackFor252)
-const offTrack = computed(() => total.value > 0 && total.value < onTrackFor252)
+
+const onTrack = computed(() => calculateIfArcherIsOnTrackForNextClassification(total.value,
+  userStore.user.classification,
+  gameTypeStore.type,
+  userStore.user.gender,
+  userStore.user.ageGroup,
+  userStore.user.bowType));
+const offTrack = computed(() => onTrack.value === false);
 
 </script>
 
