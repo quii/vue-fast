@@ -1,7 +1,11 @@
 <script setup>
 import { useUserStore } from "@/stores/user";
 import { computed } from "vue";
-import { createClassificationCalculator, getRelevantClassifications } from "@/domain/classification";
+import {
+  calculatePotentialClassificationWithoutOutliers,
+  createClassificationCalculator,
+  getRelevantClassifications
+} from "@/domain/classification";
 import { calculateSubtotals } from "@/domain/subtotals";
 import { calculateAverageScorePerEnd } from "@/domain/rounds";
 import { gameTypeConfig } from "@/domain/game_types";
@@ -18,7 +22,7 @@ const props = defineProps({
   },
   endSize: {
     required: true
-  },
+  }
 });
 
 const userStore = useUserStore();
@@ -49,6 +53,20 @@ const availableClassifications = computed(() => {
   );
 });
 
+const closeToNextClassification = computed(() => {
+  // if we're at the end
+  if (arrowsRemaining.value > 0) {
+    return false;
+  }
+
+  return calculatePotentialClassificationWithoutOutliers(props.scores,
+    userStore.user.classification,
+    props.gameType,
+    userStore.user.gender,
+    userStore.user.ageGroup,
+    userStore.user.bowType);
+});
+
 </script>
 
 <template>
@@ -73,6 +91,12 @@ const availableClassifications = computed(() => {
                                 :arrows-remaining=arrowsRemaining
                                 :available-classifications=getRelevantClassifications(availableClassifications) />
   </div>
+
+  <div class="hint" v-if="closeToNextClassification && closeToNextClassification.achievable">
+    <h3>Better luck next time!</h3>
+    <p>If you tidied up {{ closeToNextClassification.arrowsToImprove }} of your worst shots, you could've achieved a
+      {{ closeToNextClassification.classification }}</p>
+  </div>
 </template>
 
 
@@ -80,17 +104,6 @@ const availableClassifications = computed(() => {
 .detailsHint p {
   padding: 0.5em;
   font-size: 1.1em
-}
-.achieved, .avgOnTrack {
-  color: green;
-}
-
-.short, .avgOffTrack {
-  color: red;
-}
-
-.failed {
-  text-decoration: line-through;
 }
 
 details + details {
@@ -106,5 +119,9 @@ summary {
   font-size: 1.2rem;
   font-weight: bold;
   cursor: pointer;
+}
+
+.hint {
+  padding: 1em;
 }
 </style>

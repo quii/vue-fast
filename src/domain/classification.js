@@ -1,5 +1,6 @@
 import { rawClassifications } from "@/domain/raw_classifications";
 import { gameTypeConfig } from "@/domain/game_types";
+import { convertToValue } from "@/domain/scores";
 
 const sortByScore = (a, b) => a.score - b.score;
 
@@ -185,5 +186,58 @@ export function calculateIfArcherIsOnTrackForNextClassification(currentEnd, curr
   const nextClassification = classifications[currentIndex + 1];
 
   return currentEnd >= nextClassification.scorePerEnd;
+}
+
+export function calculatePotentialClassificationWithoutOutliers(scores, currentClassification, roundName, sex, age, bowtype) {
+  const calculator = createClassificationCalculator(roundName, sex, age, bowtype);
+
+  if (!calculator || scores.length === 0) {
+    return null;
+  }
+
+  const numericScores = scores.map(convertToValue);
+  const sortedScores = [...numericScores].sort((a, b) => a - b);
+
+  const classifications = calculator(0, 0);
+  const currentIndex = classifications.findIndex(c => c.name === currentClassification);
+
+  if (currentIndex === -1 || currentIndex === classifications.length - 1) {
+    return null;
+  }
+
+  const nextClassification = classifications[currentIndex + 1];
+  const targetTotal = nextClassification.score;
+  const currentTotal = sortedScores.reduce((sum, score) => sum + score, 0);
+
+  if (currentTotal >= targetTotal) {
+    return null;
+  }
+
+  let potentialTotal = currentTotal;
+  let arrowsToImprove = 0;
+
+  for (const score of sortedScores) {
+    if (potentialTotal >= targetTotal) {
+      break;
+    }
+
+    const averageScore = Math.floor(currentTotal / scores.length);
+    const reasonableImprovement = score < 5 ? averageScore : Math.min(10, score + 2);
+    const improvement = reasonableImprovement - score;
+
+    if (improvement > 0) {
+      potentialTotal += improvement;
+      arrowsToImprove++;
+    }
+  }
+
+  const percentageOfArrowsToImprove = (arrowsToImprove / scores.length) * 100;
+
+  return {
+    classification: nextClassification.name,
+    potentialScore: Math.round(potentialTotal),
+    arrowsToImprove,
+    achievable: percentageOfArrowsToImprove <= 10
+  };
 }
 
