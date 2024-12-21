@@ -199,13 +199,14 @@ export function calculatePotentialClassificationWithoutOutliers(scores, currentC
   const sortedScores = [...numericScores].sort((a, b) => a - b);
 
   const classifications = calculator(0, 0);
-  const currentIndex = classifications.findIndex(c => c.name === currentClassification);
+  const filteredClassifications = classifications.filter(c => c.name !== "PB");
+  const currentIndex = filteredClassifications.findIndex(c => c.name === currentClassification);
 
-  if (currentIndex === -1 || currentIndex === classifications.length - 1) {
+  if (currentIndex === -1 || currentIndex === filteredClassifications.length - 1) {
     return null;
   }
 
-  const nextClassification = classifications[currentIndex + 1];
+  const nextClassification = filteredClassifications[currentIndex + 1];
   const targetTotal = nextClassification.score;
   const currentTotal = sortedScores.reduce((sum, score) => sum + score, 0);
 
@@ -231,13 +232,14 @@ export function calculatePotentialClassificationWithoutOutliers(scores, currentC
     }
   }
 
-  const percentageOfArrowsToImprove = (arrowsToImprove / scores.length) * 100;
+  const pointsNeeded = targetTotal - currentTotal;
+  const averageImprovementNeeded = pointsNeeded / scores.length;
 
   return {
     classification: nextClassification.name,
     potentialScore: Math.round(potentialTotal),
     arrowsToImprove,
-    achievable: percentageOfArrowsToImprove <= 10
+    achievable: averageImprovementNeeded <= 0.5
   };
 }
 
