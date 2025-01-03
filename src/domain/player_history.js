@@ -20,6 +20,7 @@ export function NewPlayerHistory(storage) {
         scores,
         unit
       });
+      return nextId;
     },
     remove: (id) => {
       storage.value = storage.value.filter(byId(id));
@@ -36,10 +37,6 @@ export function NewPlayerHistory(storage) {
       const recordsForRound = storage.value.filter(byRound(round)).map(x => x.score);
       recordsForRound?.sort(byScore);
       return recordsForRound?.[0];
-    },
-    pointsPerEnd(round, maxArrows, endSize) {
-      const pb = this.personalBest(round);
-      return Math.trunc(pb / (maxArrows / endSize));
     },
     totalArrows() {
       return storage.value.reduce((acc, item) => acc + item.scores.length, 0);

@@ -12,6 +12,8 @@ import { useHistoryStore } from "@/stores/history";
 import { insults } from "@/domain/insults";
 import { X } from "@/domain/game_type_config";
 import { useUserStore } from "@/stores/user";
+import { useNotesStore } from "@/stores/user_notes";
+import UserNotes from "@/components/UserNotes.vue";
 
 const synth = window.speechSynthesis;
 
@@ -20,10 +22,12 @@ const gameTypeStore = useGameTypeStore();
 const validScores = computed(() => gameTypeStore.currentRound.scores);
 const maxReached = computed(() => scoresStore.scores.length >= gameTypeStore.currentRound.maxArrows);
 const userStore = useUserStore();
+const notesStore = useNotesStore();
 
 //todo: this is copied from data management, DRY it up
 const history = useHistoryStore();
 const toast = useToast();
+const noteText = ref("");
 const date = ref(new Date().toISOString().substr(0, 10));
 const runningTotal = computed(() => calculateTotal(convertToValues(scoresStore.scores, gameTypeStore.type)));
 const hasStarted = computed(() => scoresStore.scores.length > 0);
@@ -31,7 +35,8 @@ const hasStarted = computed(() => scoresStore.scores.length > 0);
 function saveScores(event) {
   event.preventDefault();
   try {
-    history.add(date.value, runningTotal.value, gameTypeStore.type, [...scoresStore.scores], gameTypeStore.currentRound.unit);
+    const id = history.add(date.value, runningTotal.value, gameTypeStore.type, [...scoresStore.scores], gameTypeStore.currentRound.unit);
+    notesStore.assignPendingNotesToShoot(id);
     scoresStore.clear();
     toast.success("Scores saved, please find them in the history");
 
@@ -59,6 +64,15 @@ function addScore(score) {
   scoresStore.add(score);
 }
 
+function saveNote() {
+  const completedEnds = Math.floor(scoresStore.scores.length / gameTypeStore.currentRound.endSize);
+  const currentEnd = completedEnds > 0 ? completedEnds : 1;
+  notesStore.addPendingNote(currentEnd, noteText.value);
+  noteText.value = "";
+  document.getElementById("noteTaker").hidePopover();
+  toast.success("Note saved");
+}
+
 </script>
 
 <template>
@@ -72,12 +86,25 @@ function addScore(score) {
 
     <button class="save" v-if="maxReached" @click="saveScores">💾 Save score to history</button>
 
+    <div id="noteTaker" popover>
+      <textarea v-model="noteText" id="noteTakerTextArea" placeholder="Take note of anything here.
+
+Did the end go well?
+
+Why or why not?
+
+Did you follow your process?"></textarea>
+      <button @click="saveNote" :disabled="!noteText.trim()">💾 Save note</button>
+    </div>
 
     <RoundScores v-if="hasStarted" :scores="scoresStore.scores"
                  :game-type="gameTypeStore.type"
                  :endSize="gameTypeStore.currentRound.endSize"
                  :hasX="validScores.includes(X)" />
   </div>
+  <hr />
+  <button class="Take note" popovertarget="noteTaker">📝 Take a note</button>
+  <UserNotes />
 
   <hr />
   <p class="selectHint">Select the round you're shooting 👇</p>
@@ -85,6 +112,7 @@ function addScore(score) {
     <GameTypeSelector :gameType="gameTypeStore.type"
                       @changeGameType="gameTypeStore.setGameType" />
   </div>
+
   <hr />
   <div v-if="hasStarted">
     <p class="selectHint">Danger zone</p>
@@ -126,5 +154,38 @@ button {
   width: 100%;
   font-size: 1.5em;
   height: 15vh
+}
+
+::backdrop {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+#noteTaker {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  height: 70vh;
+}
+
+#noteTaker textarea {
+  width: 100%;
+  height: 90%;
+  resize: none;
+  font-size: 1.5em;
+  padding: 1em;
+  border: none;
+}
+
+#noteTaker button {
+  width: 100%;
+  font-size: 1.5em;
+  height: 10%;
+}
+
+button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
 }
 </style>

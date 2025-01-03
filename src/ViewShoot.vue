@@ -8,6 +8,7 @@ import { useUserStore } from "@/stores/user";
 import html2pdf from "html2pdf.js";
 import { useScreenOrientation } from "@vueuse/core";
 import ClickToEdit from "@/components/ClickToEdit.vue";
+import UserNotes from "@/components/UserNotes.vue";
 
 const route = useRoute();
 const history = useHistoryStore();
@@ -81,7 +82,7 @@ function convertToPDF() {
   <p class="tip" v-if="orientation!=='landscape-primary'">💡 Try turning your phone into landscape to see the full
     scoresheet</p>
   <button v-if="orientation==='landscape-primary'" @click="convertToPDF">💾 Download score sheet</button>
-
+  <UserNotes :shoot-id="history.selectedShoot.id" />
 
 </template>
 
