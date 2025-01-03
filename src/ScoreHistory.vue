@@ -23,36 +23,45 @@ function view(id) {
 
 const totalArrows = computed(() => store.totalArrows());
 
-function deleteRecord(id, gameType, score) {
-  if (confirm(`Are you sure you want to delete the record for ${gameType} (Score: ${score})`)) {
-    store.remove(id);
-  }
-}
+const groupedHistory = computed(() => {
+  const history = store.sortedHistory(user.user.gender, user.user.ageGroup, user.user.bowType);
+  const groups = {};
+
+  history.forEach(item => {
+    const date = item.date.split("T")[0];
+    if (!groups[date]) {
+      groups[date] = { items: [] };
+    }
+    groups[date].items.push(item);
+  });
+
+  return Object.values(groups);
+});
+
 </script>
 
 <template>
   <table>
     <thead>
-      <tr>
-        <th>Date</th>
-        <th colspan="2">Score</th>
-        <th>Round</th>
-        <th></th>
-      </tr>
+    <tr>
+      <th>Date</th>
+      <th colspan="2">Score</th>
+      <th>Round</th>
+    </tr>
     </thead>
     <tbody>
-    <tr v-for="item in store.sortedHistory(user.user.gender, user.user.ageGroup, user.user.bowType)"
-        :key="item.date">
-      <td @click="view(item.id)">{{ parseAndRenderDate(item.date) }}</td>
-      <td @click="view(item.id)" :class="{highlight: item.topScore}">{{ item.score }}</td>
-      <td :class="[item.classification?.name, item.classification?.scheme]"
-          @click="view(item.id)">{{ item.classification?.name }}
-      </td>
-      <td @click="view(item.id)">{{ item.gameType }}</td>
-      <td>
-        <button @click="deleteRecord(item.id, item.gameType, item.score)">❌</button>
-      </td>
-    </tr>
+    <template v-for="(group, index) in groupedHistory" :key="index">
+      <tr v-for="(item, itemIndex) in group.items" :key="item.id">
+        <td v-if="itemIndex === 0" :rowspan="group.items.length" @click="view(item.id)">
+          {{ parseAndRenderDate(item.date) }}
+        </td>
+        <td @click="view(item.id)" :class="{highlight: item.topScore}">{{ item.score }}</td>
+        <td :class="[item.classification?.name, item.classification?.scheme]" @click="view(item.id)">
+          {{ item.classification?.name }}
+        </td>
+        <td @click="view(item.id)">{{ item.gameType }}</td>
+      </tr>
+    </template>
     </tbody>
   </table>
   <p>You have recorded {{ totalArrows }} arrows shot!</p>

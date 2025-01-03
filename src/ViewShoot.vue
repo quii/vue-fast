@@ -1,5 +1,5 @@
 <script setup>
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useHistoryStore } from "@/stores/history";
 import { gameTypeConfig } from "@/domain/game_types";
 import { computed } from "vue";
@@ -11,6 +11,7 @@ import ClickToEdit from "@/components/ClickToEdit.vue";
 import UserNotes from "@/components/UserNotes.vue";
 
 const route = useRoute();
+const router = useRouter();
 const history = useHistoryStore();
 const userStore = useUserStore();
 
@@ -42,6 +43,13 @@ function convertToPDF() {
   };
 
   html2pdf().set(opt).from(element).save();
+}
+
+function deleteShoot() {
+  if (confirm(`Are you sure you want to delete this shoot? This action cannot be undone.`)) {
+    history.remove(history.selectedShoot.id);
+    router.push("/history");
+  }
 }
 </script>
 
@@ -84,6 +92,13 @@ function convertToPDF() {
   <button v-if="orientation==='landscape-primary'" @click="convertToPDF">💾 Download score sheet</button>
   <UserNotes :shoot-id="history.selectedShoot.id" />
 
+  <hr />
+  <div class="danger-zone">
+    <button class="delete-button" @click="deleteShoot">
+      ⚠️ Delete this shoot ⚠️
+    </button>
+  </div>
+
 </template>
 
 <style scoped>
@@ -125,5 +140,15 @@ h1 {
 button {
   margin-left: 1em;
   font-size: 1em;
+}
+
+.delete-button {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.2rem;
+  background-color: var(--color-background);
+  border: 2px solid var(--color-border);
+  color: var(--color-text);
+  margin: 1rem 0;
 }
 </style>
