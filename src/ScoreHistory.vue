@@ -30,9 +30,22 @@ const groupedHistory = computed(() => {
   history.forEach(item => {
     const date = item.date.split("T")[0];
     if (!groups[date]) {
-      groups[date] = { items: [] };
+      groups[date] = {
+        date,
+        rounds: {},
+        totalItems: 0
+      };
     }
-    groups[date].items.push(item);
+
+    if (!groups[date].rounds[item.gameType]) {
+      groups[date].rounds[item.gameType] = {
+        gameType: item.gameType,
+        items: []
+      };
+    }
+
+    groups[date].rounds[item.gameType].items.push(item);
+    groups[date].totalItems++;
   });
 
   return Object.values(groups);
@@ -45,26 +58,34 @@ const groupedHistory = computed(() => {
     <thead>
     <tr>
       <th>Date</th>
-      <th colspan="2">Score</th>
       <th>Round</th>
+      <th colspan="2">Score</th>
     </tr>
     </thead>
     <tbody>
-    <template v-for="(group, index) in groupedHistory" :key="index">
-      <tr v-for="(item, itemIndex) in group.items" :key="item.id">
-        <td v-if="itemIndex === 0" :rowspan="group.items.length" @click="view(item.id)">
-          {{ parseAndRenderDate(item.date) }}
-        </td>
-        <td @click="view(item.id)" :class="{highlight: item.topScore}">{{ item.score }}</td>
-        <td :class="[item.classification?.name, item.classification?.scheme]" @click="view(item.id)">
-          {{ item.classification?.name }}
-        </td>
-        <td @click="view(item.id)">{{ item.gameType }}</td>
-      </tr>
+    <template v-for="dateGroup in groupedHistory" :key="dateGroup.date">
+      <template v-for="roundGroup in dateGroup.rounds" :key="roundGroup.gameType">
+        <tr v-for="(item, itemIndex) in roundGroup.items" :key="item.id">
+          <td v-if="itemIndex === 0 && roundGroup === Object.values(dateGroup.rounds)[0]"
+              :rowspan="dateGroup.totalItems"
+              @click="view(item.id)">
+            {{ parseAndRenderDate(dateGroup.date) }}
+          </td>
+          <td v-if="itemIndex === 0"
+              :rowspan="roundGroup.items.length"
+              @click="view(item.id)">
+            {{ roundGroup.gameType }}
+          </td>
+          <td @click="view(item.id)" :class="{highlight: item.topScore}">{{ item.score }}</td>
+          <td :class="[item.classification?.name, item.classification?.scheme]" @click="view(item.id)">
+            {{ item.classification?.name }}
+          </td>
+        </tr>
+      </template>
     </template>
     </tbody>
   </table>
-  <p>You have recorded {{ totalArrows }} arrows shot!</p>
+  <p>Total arrows: {{ totalArrows }}</p>
 </template>
 
 <style scoped>
