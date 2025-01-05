@@ -157,9 +157,12 @@ p {
   color: #061345;
 }
 
+.diary-entry:first-child {
+  margin-top: 0;
+}
 .diary-entry {
   margin: 1rem;
-  padding: 1rem;
+  padding: 1rem 0.5rem 0 0.5rem;
   border-bottom: 1px solid var(--color-border);
 }
 
