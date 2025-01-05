@@ -29,10 +29,11 @@
     <div v-else class="diary-view">
       <article v-for="shoot in shootsWithNotes"
                :key="shoot.id"
-               class="diary-entry">
+               class="diary-entry"
+               @click="view(shoot.id)">
         <header>
-          <h2>{{ parseAndRenderDate(shoot.date) }} - {{ shoot.gameType.charAt(0).toUpperCase() + shoot.gameType.slice(1)
-            }} - {{ shoot.score }}</h2>
+          <time>{{ parseAndRenderDate(shoot.date) }}</time>
+          <h2>{{ shoot.gameType.charAt(0).toUpperCase() + shoot.gameType.slice(1) }} - {{ shoot.score }}</h2>
         </header>
         <UserNotes :shootId="shoot.id" />
       </article>
@@ -153,23 +154,21 @@ p {
 .diary-entry {
   margin: 1rem;
   padding: 1rem;
-  border-bottom: 1px solid var(--color-border);
 }
 
 .diary-entry header {
   margin-bottom: 1rem;
 }
 
-.diary-entry h2 {
-  margin: 0;
-  font-size: 1.2rem;
-  line-height: 1.5;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+.diary-entry time {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
 }
 
-.fullpage {
-  min-height: 100vh;
+.diary-entry h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  line-height: 1.5;
 }
 </style>
