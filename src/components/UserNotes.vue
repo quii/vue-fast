@@ -4,7 +4,6 @@ import { useNotesStore } from "@/stores/user_notes";
 
 const props = defineProps({
   shootId: {
-    type: String,
     required: false,
     default: null
   }

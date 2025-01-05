@@ -1,11 +1,80 @@
+<template>
+  <div class="fullpage" @touchstart="handleTouchStart"
+       @touchend="handleTouchEnd">
+
+    <div v-if="!isDiaryMode">
+      <table>
+        <thead>
+        <tr>
+          <th>Date</th>
+          <th>Round</th>
+          <th colspan="2">Score</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="item in store.sortedHistory(user.user.gender, user.user.ageGroup, user.user.bowType)"
+            :key="item.id">
+          <td @click="view(item.id)">{{ parseAndRenderDate(item.date) }}</td>
+          <td @click="view(item.id)">{{ item.gameType }}</td>
+          <td @click="view(item.id)" :class="{highlight: item.topScore}">{{ item.score }}</td>
+          <td :class="[item.classification?.name, item.classification?.scheme]" @click="view(item.id)">
+            {{ item.classification?.name }}
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <p>You have recorded {{ totalArrows }} arrows shot!</p>
+    </div>
+
+    <div v-else class="diary-view">
+      <article v-for="shoot in shootsWithNotes"
+               :key="shoot.id"
+               class="diary-entry">
+        <header>
+          <h2>{{ parseAndRenderDate(shoot.date) }} - {{ shoot.gameType.charAt(0).toUpperCase() + shoot.gameType.slice(1)
+            }} - {{ shoot.score }}</h2>
+        </header>
+        <UserNotes :shootId="shoot.id" />
+      </article>
+    </div>
+  </div>
+</template>
+
 <script setup>
-import { useHistoryStore } from '@/stores/history'
-import { useRouter } from 'vue-router'
+import { ref } from "vue";
+import UserNotes from "@/components/UserNotes.vue";
+import { useHistoryStore } from "@/stores/history";
+import { useRouter } from "vue-router";
 import { computed } from "vue";
 import { useUserStore } from "@/stores/user";
-const store = useHistoryStore()
-const router = useRouter()
+import { useNotesStore } from "@/stores/user_notes";
+
+const store = useHistoryStore();
+const router = useRouter();
 const user = useUserStore();
+const notesStore = useNotesStore();
+const isDiaryMode = ref(false);
+
+const startX = ref(0);
+
+function handleTouchStart(e) {
+  startX.value = e.touches[0].screenX;
+}
+
+function handleTouchEnd(e) {
+  const endX = e.changedTouches[0].screenX;
+  const swipeDistance = endX - startX.value;
+  const swipeThreshold = 50;
+
+
+  if (Math.abs(swipeDistance) > swipeThreshold) {
+    if (swipeDistance > 0 && isDiaryMode.value) {
+      isDiaryMode.value = false; // Swipe right to table
+    } else if (swipeDistance < 0 && !isDiaryMode.value && shootsWithNotes.value.length > 0) {
+      isDiaryMode.value = true; // Swipe left to diary
+    }
+  }
+}
 
 const dateFormat = {
   day: "numeric",
@@ -23,60 +92,11 @@ function view(id) {
 
 const totalArrows = computed(() => store.totalArrows());
 
-const groupedHistory = computed(() => {
-  const history = store.sortedHistory(user.user.gender, user.user.ageGroup, user.user.bowType);
-  const groups = {};
-
-  history.forEach(item => {
-    const date = item.date.split("T")[0];
-    if (!groups[date]) {
-      groups[date] = {
-        date,
-        rounds: {},
-        totalItems: 0
-      };
-    }
-
-    if (!groups[date].rounds[item.gameType]) {
-      groups[date].rounds[item.gameType] = {
-        gameType: item.gameType,
-        items: []
-      };
-    }
-
-    groups[date].rounds[item.gameType].items.push(item);
-    groups[date].totalItems++;
-  });
-
-  return Object.values(groups);
+const shootsWithNotes = computed(() => {
+  return store.sortedHistory(user.user.gender, user.user.ageGroup, user.user.bowType)
+    .filter(shoot => notesStore.getNotesByShootId(shoot.id).length > 0);
 });
-
 </script>
-
-<template>
-  <table>
-    <thead>
-    <tr>
-      <th>Date</th>
-      <th>Round</th>
-      <th colspan="2">Score</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr v-for="item in store.sortedHistory(user.user.gender, user.user.ageGroup, user.user.bowType)"
-        :key="item.id">
-      <td @click="view(item.id)">{{ parseAndRenderDate(item.date) }}</td>
-      <td @click="view(item.id)">{{ item.gameType }}</td>
-      <td @click="view(item.id)" :class="{highlight: item.topScore}">{{ item.score }}</td>
-      <td :class="[item.classification?.name, item.classification?.scheme]" @click="view(item.id)">
-        {{ item.classification?.name }}
-      </td>
-    </tr>
-    </tbody>
-  </table>
-  <p>You have recorded {{ totalArrows }} arrows shot!</p>
-</template>
-
 
 <style scoped>
 td {
@@ -130,4 +150,26 @@ p {
   color: #061345;
 }
 
+.diary-entry {
+  margin: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.diary-entry header {
+  margin-bottom: 1rem;
+}
+
+.diary-entry h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.fullpage {
+  min-height: 100vh;
+}
 </style>
