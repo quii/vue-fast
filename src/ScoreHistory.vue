@@ -33,7 +33,13 @@
                @click="view(shoot.id)">
         <header>
           <time>{{ parseAndRenderDate(shoot.date) }}</time>
-          <h2>{{ shoot.gameType.charAt(0).toUpperCase() + shoot.gameType.slice(1) }} - {{ shoot.score }}</h2>
+          <h2>
+            {{ shoot.gameType.charAt(0).toUpperCase() + shoot.gameType.slice(1) }}
+            <span v-if="shoot.classification"
+                  :class="[shoot.classification.name, shoot.classification.scheme, 'classLabel']">
+      {{ shoot.classification.name }} - {{ shoot.score }}
+    </span>
+          </h2>
         </header>
         <UserNotes :shootId="shoot.id" />
       </article>
@@ -154,10 +160,11 @@ p {
 .diary-entry {
   margin: 1rem;
   padding: 1rem;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .diary-entry header {
-  margin-bottom: 1rem;
+  argin-bottom: 0.5rem;
 }
 
 .diary-entry time {
@@ -170,5 +177,21 @@ p {
   margin: 0;
   font-size: 1.4rem;
   line-height: 1.5;
+}
+
+.diary-entry :deep(.notes-container) {
+  padding: 0;
+}
+
+.diary-entry :deep(.note-row) {
+  border-bottom: none;
+}
+
+.classLabel {
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.2rem;
+  margin-left: 0.5rem;
 }
 </style>
