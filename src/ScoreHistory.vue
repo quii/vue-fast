@@ -63,30 +63,20 @@ const groupedHistory = computed(() => {
     </tr>
     </thead>
     <tbody>
-    <template v-for="dateGroup in groupedHistory" :key="dateGroup.date">
-      <template v-for="roundGroup in dateGroup.rounds" :key="roundGroup.gameType">
-        <tr v-for="(item, itemIndex) in roundGroup.items" :key="item.id">
-          <td v-if="itemIndex === 0 && roundGroup === Object.values(dateGroup.rounds)[0]"
-              :rowspan="dateGroup.totalItems"
-              @click="view(item.id)">
-            {{ parseAndRenderDate(dateGroup.date) }}
-          </td>
-          <td v-if="itemIndex === 0"
-              :rowspan="roundGroup.items.length"
-              @click="view(item.id)">
-            {{ roundGroup.gameType }}
-          </td>
-          <td @click="view(item.id)" :class="{highlight: item.topScore}">{{ item.score }}</td>
-          <td :class="[item.classification?.name, item.classification?.scheme]" @click="view(item.id)">
-            {{ item.classification?.name }}
-          </td>
-        </tr>
-      </template>
-    </template>
+    <tr v-for="item in store.sortedHistory(user.user.gender, user.user.ageGroup, user.user.bowType)"
+        :key="item.id">
+      <td @click="view(item.id)">{{ parseAndRenderDate(item.date) }}</td>
+      <td @click="view(item.id)">{{ item.gameType }}</td>
+      <td @click="view(item.id)" :class="{highlight: item.topScore}">{{ item.score }}</td>
+      <td :class="[item.classification?.name, item.classification?.scheme]" @click="view(item.id)">
+        {{ item.classification?.name }}
+      </td>
+    </tr>
     </tbody>
   </table>
-  <p>Total arrows: {{ totalArrows }}</p>
+  <p>You have recorded {{ totalArrows }} arrows shot!</p>
 </template>
+
 
 <style scoped>
 td {
