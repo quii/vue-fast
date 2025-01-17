@@ -71,6 +71,7 @@ function deleteNote(noteId) {
 
 .highlighted {
   background-color: gold;
+  color: black;
 }
 
 .end-number {
