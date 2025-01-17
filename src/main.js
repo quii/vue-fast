@@ -31,6 +31,11 @@ const intervalMS = 60 * 60 * 1000;
 
 if ("serviceWorker" in navigator) {
   registerSW({
+    immediate: true,
+    onNeedRefresh() {
+      // Force refresh when new version is available
+      window.location.reload();
+    },
     onRegistered(r) {
       r && setInterval(() => {
         r.update();
@@ -38,7 +43,6 @@ if ("serviceWorker" in navigator) {
     }
   });
 }
-
 
 const app = createApp({
   template: `
