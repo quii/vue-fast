@@ -104,7 +104,7 @@ Did you follow your process?"></textarea>
   </div>
   <hr />
   <button class="Take note" popovertarget="noteTaker">📝 Take a note</button>
-  <UserNotes />
+  <UserNotes :allow-highlight="true" />
 
   <hr />
   <p class="selectHint">Select the round you're shooting 👇</p>

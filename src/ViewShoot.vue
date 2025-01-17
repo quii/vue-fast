@@ -90,7 +90,7 @@ function deleteShoot() {
   <p class="tip" v-if="orientation!=='landscape-primary'">💡 Try turning your phone into landscape to see the full
     scoresheet</p>
   <button v-if="orientation==='landscape-primary'" @click="convertToPDF">💾 Download score sheet</button>
-  <UserNotes :shoot-id="history.selectedShoot.id" />
+  <UserNotes :shoot-id="history.selectedShoot.id" :allow-highlight="true" />
 
   <hr />
   <div class="danger-zone">
