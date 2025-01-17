@@ -20,7 +20,6 @@ export default defineConfig({
         cleanupOutdatedCaches: true,
         skipWaiting: true,
         clientsClaim: true,
-        disableWebLock: true
       },
       manifest: {
         name: "Fast v6",
