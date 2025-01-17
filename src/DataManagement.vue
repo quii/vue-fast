@@ -52,6 +52,7 @@ function handleFileUpload(event) {
         data.user.name,
         data.user.constructiveCriticism
       );
+      user.updateLastBackupDate();
       toast.success("Data imported successfully");
     } catch (error) {
       console.error(error);
