@@ -4,11 +4,21 @@ import { useHistoryStore } from "@/stores/history";
 import { useNotesStore } from "@/stores/user_notes";
 import { useUserStore } from "@/stores/user";
 import { useToast } from "vue-toastification";
+import { computed } from "vue";
 
 const history = useHistoryStore();
 const notes = useNotesStore();
 const user = useUserStore();
 const toast = useToast();
+
+const backupWarning = computed(() => {
+  const lastBackup = user.getLastBackupDate();
+  if (!lastBackup) return true;
+
+  const monthAgo = new Date();
+  monthAgo.setMonth(monthAgo.getMonth() - 1);
+  return new Date(lastBackup) < monthAgo;
+});
 
 function exportData() {
   const data = {
@@ -26,6 +36,7 @@ function exportData() {
   link.click();
   document.body.removeChild(link);
   URL.revokeObjectURL(url);
+  user.updateLastBackupDate();
 
   toast.success("Data exported successfully");
 }
@@ -70,6 +81,13 @@ function hardReset() {
 
 <template>
   <div class="data-management">
+    <div v-if="backupWarning" class="section warning">
+      <h2>⚠️ Time for a backup!</h2>
+      <p class="explanation">
+        It's been over a month since your last backup. Please save a new backup file to keep your data safe.
+      </p>
+    </div>
+
     <div class="section">
       <h1>Back up your data</h1>
       <p class="explanation">
