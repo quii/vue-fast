@@ -20,15 +20,7 @@ export default defineConfig({
         cleanupOutdatedCaches: true,
         skipWaiting: true,
         clientsClaim: true,
-        navigationPreload: true,
-        runtimeCaching: [{
-          urlPattern: /^https:\/\/.*/,
-          handler: "NetworkFirst",
-          options: {
-            cacheName: "fast-cache",
-            networkTimeoutSeconds: 5
-          }
-        }]
+        disableWebLock: true
       },
       manifest: {
         name: "Fast v6",

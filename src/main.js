@@ -30,21 +30,27 @@ const router = VueRouter.createRouter({
   routes
 })
 
+const intervalMS = 60 * 60 * 1000;
+
+
 if ("serviceWorker" in navigator) {
   registerSW({
+    immediate: true,
     onRegistered(r) {
-      r && r.addEventListener("statechange", (e) => {
-        if (e.target.state === "activated") {
-          toast.info("Downloading update...");
-          window.location.reload();
-        }
-      });
+      r && setInterval(() => {
+        r.update();
+      }, intervalMS);
+    },
+    onOfflineReady() {
+      toast.success("App ready for offline use");
     },
     onNeedRefresh() {
-      toast.info("New version available, updating...");
-      window.location.reload();
+      toast.info("Updating to new version...");
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
     }
-  });
+  })
 }
 
 const app = createApp({
