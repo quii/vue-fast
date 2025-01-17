@@ -40,6 +40,16 @@ export function NewPlayerHistory(storage) {
     },
     totalArrows() {
       return storage.value.reduce((acc, item) => acc + item.scores.length, 0);
+    },
+    getRecentGameTypes() {
+      const sixWeeksAgo = new Date();
+      sixWeeksAgo.setDate(sixWeeksAgo.getDate() - 42);
+
+      const recentGames = storage.value
+        .filter(shoot => new Date(shoot.date) > sixWeeksAgo)
+        .map(shoot => shoot.gameType);
+
+      return [...new Set(recentGames)]; // unique values only
     }
   };
 }

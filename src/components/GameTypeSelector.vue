@@ -1,23 +1,42 @@
 <script setup>
 import { gameTypes } from '@/domain/game_types'
+import { useHistoryStore } from "@/stores/history";
+import { computed } from "vue";
+
 defineProps({
   gameType: {
     type: String,
     required: true
   }
 })
+
+const history = useHistoryStore();
+const recentTypes = computed(() => history.getRecentGameTypes());
+const otherTypes = computed(() =>
+  gameTypes.filter(type => !recentTypes.value.includes(type))
+);
+
 defineEmits(['changeGameType'])
 </script>
 
 <template>
   <select @change="event => $emit('changeGameType', event.target.value)">
-    <option :key="type"
-            :value="type"
-            :selected="gameType===type"
-            @change="$emit('changeGameType', type)"
-            v-for="type in gameTypes">
-      {{ type.toUpperCase() }}
-    </option>
+    <optgroup v-if="recentTypes.length" label="Recent Rounds">
+      <option v-for="type in recentTypes"
+              :key="type"
+              :value="type"
+              :selected="gameType===type">
+        {{ type.toUpperCase() }}
+      </option>
+    </optgroup>
+    <optgroup label="All Rounds">
+      <option v-for="type in otherTypes"
+              :key="type"
+              :value="type"
+              :selected="gameType===type">
+        {{ type.toUpperCase() }}
+      </option>
+    </optgroup>
   </select>
 </template>
 
