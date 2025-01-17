@@ -46,9 +46,10 @@ function deleteNote(noteId) {
     <div v-for="note in notes"
          :key="note.id"
          class="note-row"
+         data-test="note-row"
          v-touch-hold="() => deleteNote(note.id)">
       <div class="end-number">End {{ note.endNumber }}</div>
-      <p class="note-content">{{ note.text }}</p>
+      <p class="note-content" data-test="note-text">{{ note.text }}</p>
     </div>
   </div>
 </template>

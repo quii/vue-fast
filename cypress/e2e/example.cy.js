@@ -115,4 +115,33 @@ describe(`Smoke test using Ruth's game`,
       historyPage.navigateTo();
       historyPage.checkRecordExists(expectedScore);
     });
+
+    it("records scores with notes and persists them", () => {
+      scorePage.selectGame("WINDSOR");
+
+      // First end of 6
+      scorePage.score([9, 9, 7, 7, 5, 5]);
+      scorePage.addNote("Good grouping on the 9s");
+
+      // Second end of 6
+      scorePage.score([9, 7, 7, 5, 5, 3]);
+
+      // Third end of 6
+      scorePage.score([7, 7, 5, 5, 3, 3]);
+      scorePage.addNote("Form getting worse, need to focus");
+
+      // Fill the rest with valid scoring patterns to complete the round
+      for (let i = 0; i < 15; i++) {
+        scorePage.score([9, 9, 7, 7, 5, 5]);
+      }
+
+      scorePage.save();
+
+      historyPage.navigateTo();
+      historyPage.selectHistoryItem("738");
+
+      historyPage.checkNoteExists("Good grouping on the 9s");
+      historyPage.checkNoteExists("Form getting worse, need to focus");
+    });
+
   });

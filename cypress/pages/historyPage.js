@@ -15,6 +15,10 @@ class HistoryPage {
     // get element with class highlight and check it contains score exactly
     cy.get(".highlight").contains(score);
   }
+
+  checkNoteExists(noteText) {
+    cy.get("[data-test=\"note-text\"]").contains(noteText);
+  }
 }
 
 export default HistoryPage;

@@ -76,6 +76,12 @@ class ScorePage {
   assertButtonIsEnabled(buttonValue) {
     this.checkButtonState(buttonValue, "be.enabled");
   }
+
+  addNote(noteText) {
+    cy.get("button").contains("📝 Take a note").click();
+    cy.get("#noteTakerTextArea").type(noteText);
+    cy.get("button").contains("💾 Save note").click();
+  }
 }
 
 export default ScorePage;
