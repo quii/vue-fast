@@ -19,8 +19,13 @@ export const useUserStore = defineStore("user", () => {
     };
   }
 
-  function getLastBackupDate() {
-    return state.value.lastBackupDate;
+  function needsBackup() {
+    const lastBackup = state.value.lastBackupDate;
+    if (!lastBackup) return true;
+
+    const monthAgo = new Date();
+    monthAgo.setMonth(monthAgo.getMonth() - 1);
+    return new Date(lastBackup) < monthAgo;
   }
 
 
@@ -28,6 +33,6 @@ export const useUserStore = defineStore("user", () => {
     user: state,
     save,
     updateLastBackupDate,
-    getLastBackupDate
+    needsBackup
   };
 });

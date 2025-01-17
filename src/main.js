@@ -12,15 +12,16 @@ import 'vue-toastification/dist/index.css'
 import ViewShoot from '@/ViewShoot.vue'
 import UserData from "@/UserData.vue";
 import { registerSW } from "virtual:pwa-register";
+import DataMenuItem from "@/components/DataMenuItem.vue";
+import MainNavigation from "./components/UserNavigation.vue";
 
 const routes = [
   { path: '/', component: ScoreCard },
   { path: '/history', component: ScoreHistory },
-  { path: '/data', component: DataManagement },
+  { path: "/data", component: DataManagement, title: DataMenuItem },
   { path: '/history/:id', name: 'viewHistory', component: ViewShoot },
   { path: "/you", name: "You", component: UserData }
 ]
-
 const router = VueRouter.createRouter({
   history: VueRouter.createWebHistory(),
   routes
@@ -38,10 +39,17 @@ if ("serviceWorker" in navigator) {
   });
 }
 
-const app = createApp({})
-app.use(router)
 
+const app = createApp({
+  template: `
+    <MainNavigation />
+    <router-view></router-view>
+  `
+});
+app.use(router)
+app.component("MainNavigation", MainNavigation);
 app.use(createPinia())
 app.use(Toast, {})
+
 
 app.mount('#app')

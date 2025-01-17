@@ -11,14 +11,7 @@ const notes = useNotesStore();
 const user = useUserStore();
 const toast = useToast();
 
-const backupWarning = computed(() => {
-  const lastBackup = user.getLastBackupDate();
-  if (!lastBackup) return true;
-
-  const monthAgo = new Date();
-  monthAgo.setMonth(monthAgo.getMonth() - 1);
-  return new Date(lastBackup) < monthAgo;
-});
+const backupWarning = computed(() => user.needsBackup());
 
 function exportData() {
   const data = {
