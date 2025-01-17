@@ -11,7 +11,7 @@ export default defineConfig({
     vue(),
     vueJsx(),
     VitePWA({
-      registerType: "prompt",
+      registerType: "autoUpdate",
       devOptions: {
         enabled: true
       },
@@ -19,7 +19,16 @@ export default defineConfig({
         globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
         cleanupOutdatedCaches: true,
         skipWaiting: true,
-        clientsClaim: true
+        clientsClaim: true,
+        navigationPreload: true,
+        runtimeCaching: [{
+          urlPattern: /^https:\/\/.*/,
+          handler: "NetworkFirst",
+          options: {
+            cacheName: "fast-cache",
+            networkTimeoutSeconds: 5
+          }
+        }]
       },
       manifest: {
         name: "Fast v6",

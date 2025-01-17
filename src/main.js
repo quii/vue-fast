@@ -14,6 +14,9 @@ import UserData from "@/UserData.vue";
 import { registerSW } from "virtual:pwa-register";
 import DataMenuItem from "@/components/DataMenuItem.vue";
 import MainNavigation from "./components/UserNavigation.vue";
+import { useToast } from "vue-toastification";
+
+const toast = useToast();
 
 const routes = [
   { path: '/', component: ScoreCard },
@@ -27,19 +30,19 @@ const router = VueRouter.createRouter({
   routes
 })
 
-const intervalMS = 60 * 60 * 1000;
-
 if ("serviceWorker" in navigator) {
   registerSW({
-    immediate: true,
-    onNeedRefresh() {
-      // Force refresh when new version is available
-      window.location.reload();
-    },
     onRegistered(r) {
-      r && setInterval(() => {
-        r.update();
-      }, intervalMS);
+      r && r.addEventListener("statechange", (e) => {
+        if (e.target.state === "activated") {
+          toast.info("Downloading update...");
+          window.location.reload();
+        }
+      });
+    },
+    onNeedRefresh() {
+      toast.info("New version available, updating...");
+      window.location.reload();
     }
   });
 }
