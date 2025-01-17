@@ -82,6 +82,10 @@ class ScorePage {
     cy.get("#noteTakerTextArea").type(noteText);
     cy.get("button").contains("💾 Save note").click();
   }
+
+  highlightNote(noteText) {
+    cy.get("[data-test=\"note-text\"]").contains(noteText).click();
+  }
 }
 
 export default ScorePage;

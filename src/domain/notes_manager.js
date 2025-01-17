@@ -27,6 +27,15 @@ export function NewNotesManager(storage, pendingStorage) {
 
     getNotesByShootId: (shootId) => {
       return storage.value.filter(note => note.shootId === shootId);
+    },
+
+    toggleHighlight: (noteId) => {
+      storage.value = storage.value.map(note =>
+        note.id === noteId ? { ...note, highlighted: !note.highlighted } : note
+      );
+      pendingStorage.value = pendingStorage.value.map(note =>
+        note.id === noteId ? { ...note, highlighted: !note.highlighted } : note
+      );
     }
   };
 }

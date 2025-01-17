@@ -73,4 +73,17 @@ describe("NotesManager", () => {
     expect(notes[0].text).toBe("note 1");
     expect(notes[1].text).toBe("note 3");
   });
+
+  it("toggles note highlight state", () => {
+    const storage = { value: [{ id: "1", text: "note 1", highlighted: false }] };
+    const pendingStorage = { value: [] };
+    const notesManager = NewNotesManager(storage, pendingStorage);
+
+    notesManager.toggleHighlight("1");
+    expect(storage.value[0].highlighted).toBe(true);
+
+    notesManager.toggleHighlight("1");
+    expect(storage.value[0].highlighted).toBe(false);
+  });
+
 });

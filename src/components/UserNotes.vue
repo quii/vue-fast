@@ -46,8 +46,10 @@ function deleteNote(noteId) {
     <div v-for="note in notes"
          :key="note.id"
          class="note-row"
+         :class="{ highlighted: note.highlighted }"
          data-test="note-row"
-         v-touch-hold="() => deleteNote(note.id)">
+         v-touch-hold="() => deleteNote(note.id)"
+         @click="notesStore.toggleHighlight(note.id)">
       <div class="end-number">End {{ note.endNumber }}</div>
       <p class="note-content" data-test="note-text">{{ note.text }}</p>
     </div>
@@ -59,21 +61,23 @@ function deleteNote(noteId) {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
-  padding: 0 1rem;
 }
 
 .note-row {
   display: flex;
   align-items: flex-start;
-  padding: 0.8rem 0;
   border-bottom: 1px solid var(--color-border);
+}
+
+.highlighted {
+  background-color: gold;
 }
 
 .end-number {
   font-size: 1.1rem;
   min-width: 100px;
   font-weight: bold;
-  padding-top: 0.5rem;
+  padding: 0.8rem 1rem;
 }
 
 .note-content {
@@ -82,7 +86,7 @@ function deleteNote(noteId) {
   line-height: 1.5;
   white-space: pre-wrap;
   margin: 0;
-  padding: 0.5rem 1rem 0 1rem;
+  padding: 0.8rem 1rem;
 }
 
 .delete-button {

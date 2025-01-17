@@ -19,6 +19,10 @@ class HistoryPage {
   checkNoteExists(noteText) {
     cy.get("[data-test=\"note-text\"]").contains(noteText);
   }
+
+  checkNoteIsHighlighted(noteText) {
+    cy.get("[data-test=\"note-row\"].highlighted").contains(noteText);
+  }
 }
 
 export default HistoryPage;

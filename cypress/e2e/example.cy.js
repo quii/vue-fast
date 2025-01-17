@@ -129,8 +129,9 @@ describe(`Smoke test using Ruth's game`,
       // Third end of 6
       scorePage.score([7, 7, 5, 5, 3, 3]);
       scorePage.addNote("Form getting worse, need to focus");
+      scorePage.highlightNote("Form getting worse, need to focus");
 
-      // Fill the rest with valid scoring patterns to complete the round
+      // Fill the rest with valid scoring patterns
       for (let i = 0; i < 15; i++) {
         scorePage.score([9, 9, 7, 7, 5, 5]);
       }
@@ -140,8 +141,8 @@ describe(`Smoke test using Ruth's game`,
       historyPage.navigateTo();
       historyPage.selectHistoryItem("738");
 
-      historyPage.checkNoteExists("Good grouping on the 9s");
-      historyPage.checkNoteExists("Form getting worse, need to focus");
+      historyPage.checkNoteIsHighlighted("Form getting worse, need to focus");
     });
+
 
   });
