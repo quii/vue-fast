@@ -67,11 +67,14 @@ function deleteNote(noteId) {
   display: flex;
   align-items: flex-start;
   border-bottom: 1px solid var(--color-border);
+  margin-bottom: 0.5rem;
+  padding: 0.5rem 0;
 }
 
 .highlighted {
   background-color: gold;
   color: black;
+  border-radius: 8px;
 }
 
 .end-number {
@@ -88,23 +91,6 @@ function deleteNote(noteId) {
   white-space: pre-wrap;
   margin: 0;
   padding: 0.8rem 1rem;
-}
-
-.delete-button {
-  font-size: 1.8rem;
-  width: 3rem;
-  height: 3rem;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding-top: 0.5rem;
-}
-
-.delete-button:hover {
-  color: var(--color-border);
 }
 </style>
 
