@@ -45,6 +45,11 @@ Many coaches recommend keeping a diary of your shoots, recording what has gone w
 In Fast you can record notes as you shoot, and then later review them in the diary. You can highlight a note just by
 tapping it.
 
+![img_3.png](img_3.png)
+
+Rotating your phone will show you the full scorecard, automatically calculated. It correctly follows the rules around
+gold counts and Xs depending on the round you are shooting.
+
 ## Tech waffle
 
 - [Vue](https://vuejs.org/) - A progressive, incrementally-adoptable JavaScript framework for building UI on the web.
