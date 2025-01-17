@@ -8,10 +8,8 @@ class DataManagementPage {
     cy.get("button").contains("Reset").click();
   }
 
-  importData(data) {
-    const rawData = JSON.stringify(data);
-    cy.get("textarea").type(rawData, { parseSpecialCharSequences: false, delay: 0 });
-    cy.get("button").contains("Import").click();
+  importData(fixturePath) {
+    cy.get("[data-test=\"file-upload\"]").selectFile(fixturePath);
   }
 }
 

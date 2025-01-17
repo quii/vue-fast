@@ -36,6 +36,11 @@ export function NewNotesManager(storage, pendingStorage) {
       pendingStorage.value = pendingStorage.value.map(note =>
         note.id === noteId ? { ...note, highlighted: !note.highlighted } : note
       );
+    },
+
+    importNotes: (data) => {
+      storage.value = data.notes || [];
+      pendingStorage.value = data.pendingNotes || [];
     }
   };
 }
