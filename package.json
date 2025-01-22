@@ -38,6 +38,6 @@
     "start-server-and-test": "^2.0.10",
     "vite": "^5.4.11",
     "vite-plugin-pwa": "^0.20.0",
-    "vitest": "^3.0.2"
+    "vitest": "^3.0.3"
   }
 }
