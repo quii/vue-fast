@@ -1,6 +1,6 @@
 <script setup>
 import { useUserStore } from "@/stores/user";
-import { computed } from "vue";
+import { computed, ref, watch, watchEffect } from "vue";
 import {
   calculatePotentialClassificationWithoutOutliers,
   createClassificationCalculator,
@@ -28,18 +28,34 @@ const props = defineProps({
 const userStore = useUserStore();
 const historyStore = useHistoryStore();
 const personalBest = computed(() => historyStore.personalBest(props.gameType));
-const classificationCalculator = computed(() => createClassificationCalculator(
-  props.gameType,
-  userStore.user.gender,
-  userStore.user.ageGroup,
-  userStore.user.bowType,
-  personalBest.value
-));
+
+const userDetailsSaved = computed(() =>
+  userStore.user.gender &&
+  userStore.user.ageGroup &&
+  userStore.user.bowType
+);
+
+watch(() => userDetailsSaved.value, (x) => {
+  console.log("user details saved", x);
+});
+
+const classificationCalculator = ref(null);
+
+watchEffect(async () => {
+  if (!userDetailsSaved.value) {
+    classificationCalculator.value = null;
+    return;
+  }
+  classificationCalculator.value = await createClassificationCalculator(
+    props.gameType,
+    userStore.user.gender,
+    userStore.user.ageGroup,
+    userStore.user.bowType,
+    personalBest.value
+  );
+});
 
 const showTableByDefault = computed(() => arrowsRemaining.value === 0);
-
-const userDetailsSaved = computed(() => userStore.user.gender && userStore.user.ageGroup && userStore.user.bowType);
-const hasStarted = computed(() => props.scores.length > 0);
 
 const totals = computed(() => calculateSubtotals(props.scores, props.gameType));
 const averageScoresPerEnd = computed(() => calculateAverageScorePerEnd(props.scores, props.endSize, props.gameType));
@@ -47,7 +63,9 @@ const arrowsRemaining = computed(() => gameTypeConfig[props.gameType].maxArrows 
 const maxPossibleScore = computed(() => calculateMaxPossibleScore(totals.value.totalScore, arrowsRemaining.value, props.gameType));
 
 const availableClassifications = computed(() => {
-  return classificationCalculator.value?.(
+  if (!classificationCalculator.value) return null;
+
+  return classificationCalculator.value(
     totals.value.totalScore,
     averageScoresPerEnd.value
   );
@@ -75,9 +93,8 @@ const closeToNextClassification = computed(() => {
     <p>Fast will work better if you do 🥳, and will be able to help you better track your progress</p>
     <p>Don't forget to press the <em>save button</em></p>
   </div>
-
   <details class="dropdown" id="classification"
-           v-if="availableClassifications && userDetailsSaved && hasStarted && !showTableByDefault">
+           v-if="userDetailsSaved && !showTableByDefault">
     <summary>Tap to view classification calculations</summary>
     <div>
       <ClassificationDetailsTable :max-possible-score=maxPossibleScore
@@ -86,7 +103,7 @@ const closeToNextClassification = computed(() => {
     </div>
   </details>
 
-  <div v-if="showTableByDefault">
+  <div v-if="showTableByDefault" id="classification">
     <ClassificationDetailsTable :max-possible-score=maxPossibleScore
                                 :arrows-remaining=arrowsRemaining
                                 :available-classifications=getRelevantClassifications(availableClassifications) />

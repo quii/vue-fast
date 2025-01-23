@@ -1,0 +1,2154 @@
+export default [
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "York",
+    "score": 278
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "York",
+    "score": 394
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "York",
+    "score": 534
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "York",
+    "score": 684
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "York",
+    "score": 829
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "York",
+    "score": 957
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "York",
+    "score": 1061
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "York",
+    "score": 1142
+  },
+  {
+    "id": 9,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "York",
+    "score": 1205
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Hereford / Bristol I",
+    "score": 427
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Hereford / Bristol I",
+    "score": 571
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Hereford / Bristol I",
+    "score": 721
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Hereford / Bristol I",
+    "score": 863
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Hereford / Bristol I",
+    "score": 985
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bristol II",
+    "score": 602
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bristol II",
+    "score": 755
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bristol II",
+    "score": 895
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bristol II",
+    "score": 1012
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bristol III",
+    "score": 757
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bristol III",
+    "score": 895
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bristol III",
+    "score": 1012
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bristol IV",
+    "score": 924
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bristol IV",
+    "score": 1034
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bristol V",
+    "score": 1088
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "St. George",
+    "score": 248
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "St. George",
+    "score": 344
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "St. George",
+    "score": 452
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "St. George",
+    "score": 562
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "St. George",
+    "score": 665
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "St. George",
+    "score": 752
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Albion / Long Windsor",
+    "score": 363
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Albion / Long Windsor",
+    "score": 474
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Albion / Long Windsor",
+    "score": 585
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Albion / Long Windsor",
+    "score": 685
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Albion / Long Windsor",
+    "score": 769
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Windsor",
+    "score": 490
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Windsor",
+    "score": 602
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Windsor",
+    "score": 701
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Windsor",
+    "score": 782
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Windsor 50",
+    "score": 610
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Windsor 50",
+    "score": 707
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Windsor 50",
+    "score": 787
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Windsor 40",
+    "score": 735
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Windsor 40",
+    "score": 809
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Windsor 30",
+    "score": 854
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "New Western",
+    "score": 163
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "New Western",
+    "score": 238
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "New Western",
+    "score": 330
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "New Western",
+    "score": 433
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "New Western",
+    "score": 535
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "New Western",
+    "score": 623
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long Western",
+    "score": 269
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long Western",
+    "score": 365
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long Western",
+    "score": 468
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long Western",
+    "score": 565
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long Western",
+    "score": 648
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Western",
+    "score": 383
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Western",
+    "score": 488
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Western",
+    "score": 584
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Western",
+    "score": 665
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Western 50",
+    "score": 486
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Western 50",
+    "score": 582
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Western 50",
+    "score": 663
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Western 40",
+    "score": 598
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Western 40",
+    "score": 675
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Western 30",
+    "score": 710
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "American",
+    "score": 408
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "American",
+    "score": 502
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "American",
+    "score": 584
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "American",
+    "score": 652
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "St. Nicholas",
+    "score": 516
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "St. Nicholas",
+    "score": 585
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "New National",
+    "score": 113
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "New National",
+    "score": 166
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "New National",
+    "score": 233
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "New National",
+    "score": 309
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "New National",
+    "score": 386
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "New National",
+    "score": 456
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long National",
+    "score": 185
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long National",
+    "score": 255
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long National",
+    "score": 332
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long National",
+    "score": 407
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long National",
+    "score": 473
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "National",
+    "score": 276
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "National",
+    "score": 354
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "National",
+    "score": 428
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "National",
+    "score": 491
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "National 50",
+    "score": 350
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "National 50",
+    "score": 425
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "National 50",
+    "score": 487
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "National 40",
+    "score": 434
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "National 40",
+    "score": 495
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "National 30",
+    "score": 519
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "New Warwick",
+    "score": 82
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "New Warwick",
+    "score": 119
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "New Warwick",
+    "score": 165
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "New Warwick",
+    "score": 217
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "New Warwick",
+    "score": 268
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "New Warwick",
+    "score": 312
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long Warwick",
+    "score": 135
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long Warwick",
+    "score": 183
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long Warwick",
+    "score": 234
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long Warwick",
+    "score": 283
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long Warwick",
+    "score": 324
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Warwick",
+    "score": 192
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Warwick",
+    "score": 244
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Warwick",
+    "score": 292
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Warwick",
+    "score": 333
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Warwick 50",
+    "score": 243
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Warwick 50",
+    "score": 291
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Warwick 50",
+    "score": 332
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Warwick 40",
+    "score": 299
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Warwick 40",
+    "score": 338
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Warwick 30",
+    "score": 355
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 1440 (90m)",
+    "score": 426
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 1440 (90m)",
+    "score": 566
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 1440 (90m)",
+    "score": 717
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 1440 (90m)",
+    "score": 866
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 1440 (90m)",
+    "score": 999
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 1440 (90m)",
+    "score": 1110
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 1440 (90m)",
+    "score": 1197
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 1440 (90m)",
+    "score": 1266
+  },
+  {
+    "id": 9,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 1440 (90m)",
+    "score": 1320
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 1440 (70m) / Metric I",
+    "score": 493
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 1440 (70m) / Metric I",
+    "score": 648
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 1440 (70m) / Metric I",
+    "score": 806
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 1440 (70m) / Metric I",
+    "score": 951
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 1440 (70m) / Metric I",
+    "score": 1071
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 1440 (60m) / Metric II",
+    "score": 599
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 1440 (60m) / Metric II",
+    "score": 764
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 1440 (60m) / Metric II",
+    "score": 917
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 1440 (60m) / Metric II",
+    "score": 1044
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Metric III",
+    "score": 806
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Metric III",
+    "score": 950
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Metric III",
+    "score": 1071
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Metric IV",
+    "score": 1030
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Metric IV",
+    "score": 1134
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Metric V",
+    "score": 1157
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long Metric (Men)",
+    "score": 147
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long Metric (Men)",
+    "score": 211
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long Metric (Men)",
+    "score": 288
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long Metric (Men)",
+    "score": 370
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long Metric (Men)",
+    "score": 447
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long Metric (Men)",
+    "score": 513
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long Metric (Women) / Long Metric I",
+    "score": 214
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long Metric (Women) / Long Metric I",
+    "score": 293
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long Metric (Women) / Long Metric I",
+    "score": 376
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long Metric (Women) / Long Metric I",
+    "score": 454
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long Metric (Women) / Long Metric I",
+    "score": 519
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long Metric II",
+    "score": 280
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long Metric II",
+    "score": 364
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long Metric II",
+    "score": 443
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long Metric II",
+    "score": 509
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long Metric III",
+    "score": 363
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long Metric III",
+    "score": 442
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long Metric III",
+    "score": 509
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long Metric IV",
+    "score": 456
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long Metric IV",
+    "score": 520
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Long Metric V",
+    "score": 549
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Short Metric / Short Metric I",
+    "score": 279
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Short Metric / Short Metric I",
+    "score": 356
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Short Metric / Short Metric I",
+    "score": 430
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Short Metric II",
+    "score": 320
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Short Metric II",
+    "score": 401
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Short Metric III",
+    "score": 443
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA Standard Bow",
+    "score": 411
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA Standard Bow",
+    "score": 480
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA Standard Bow",
+    "score": 539
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 900",
+    "score": 403
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 900",
+    "score": 504
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 900",
+    "score": 594
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 900",
+    "score": 669
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 70m",
+    "score": 185
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 70m",
+    "score": 259
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 70m",
+    "score": 343
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 70m",
+    "score": 425
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 70m",
+    "score": 496
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 70m",
+    "score": 552
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 70m",
+    "score": 597
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 70m",
+    "score": 631
+  },
+  {
+    "id": 9,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 70m",
+    "score": 659
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 60m",
+    "score": 243
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 60m",
+    "score": 326
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 60m",
+    "score": 409
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 60m",
+    "score": 482
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 50m (Barebow) / Metric 122-50",
+    "score": 318
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 50m (Barebow) / Metric 122-50",
+    "score": 402
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 50m (Barebow) / Metric 122-50",
+    "score": 476
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Metric 122-40",
+    "score": 408
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Metric 122-40",
+    "score": 481
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Metric 122-30",
+    "score": 504
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 50m (Compound)",
+    "score": 182
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 50m (Compound)",
+    "score": 257
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 50m (Compound)",
+    "score": 341
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Metric 80-40",
+    "score": 263
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Metric 80-40",
+    "score": 347
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Metric 80-30",
+    "score": 376
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 134
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 172
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 205
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 232
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 252
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 268
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 280
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 289
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 156
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 191
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 221
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 243
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 260
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 274
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 284
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 292
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 378
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 437
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 483
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 518
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 546
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 566
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 582
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 593
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 368
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 453
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 523
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 578
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 620
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 653
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 678
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 697
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 149
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 188
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 221
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 247
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 267
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 282
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 293
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 299
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 181
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 263
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 357
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 442
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 501
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 537
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 560
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 578
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 134
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 172
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 205
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 232
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 252
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 268
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 280
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 289
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 272
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 347
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 413
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 466
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 506
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 537
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 560
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 578
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 283
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 357
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 420
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 470
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 508
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 538
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 561
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Recurve",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 578
+  }
+];

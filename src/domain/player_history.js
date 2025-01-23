@@ -28,9 +28,9 @@ export function NewPlayerHistory(storage) {
     importHistory: (history) => {
       storage.value = userDataFixer(history);
     },
-    sortedHistory(gender, age, bowType) {
+    async sortedHistory(gender, age, bowType) {
       const scoresWithIndicator = addTopScoreIndicator(storage.value);
-      const scoresWithClassification = addClassificationsToHistory(gender, age, bowType, scoresWithIndicator);
+      const scoresWithClassification = await addClassificationsToHistory(gender, age, bowType, scoresWithIndicator);
       return scoresWithClassification.sort(sortByDate);
     },
     personalBest(round) {

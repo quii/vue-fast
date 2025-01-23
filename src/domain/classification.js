@@ -1,25 +1,16 @@
-import { rawClassifications } from "@/domain/raw_classifications";
 import { gameTypeConfig } from "@/domain/game_types";
 import { convertToValue } from "@/domain/scores";
+import { classificationList } from "@/domain/classificationList";
 
 const sortByScore = (a, b) => a.score - b.score;
 
-export const classificationList = [
-  "A3",
-  "A2",
-  "A1",
-  "B3",
-  "B2",
-  "B1",
-  "MB",
-  "GMB",
-  "EMB",
-  "PB"
-];
-
 let roundScoresCache = {};
 
-export function createClassificationCalculator(roundName, sex, age, bowtype, personalBest) {
+export async function createClassificationCalculator(roundName, sex, age, bowtype, personalBest) {
+  if (!roundName || !sex || !age || !bowtype) {
+    return null;
+  }
+
   if (roundName === "frostbite") {
     return createFrostbiteClassificationCalculator(roundName, sex, age, bowtype, personalBest);
   }
@@ -27,7 +18,7 @@ export function createClassificationCalculator(roundName, sex, age, bowtype, per
   let roundScores = roundScoresCache[cacheKey];
 
   if (!roundScores) {
-    roundScores = calculateRoundScores(sex, bowtype, age, roundName, personalBest);
+    roundScores = await calculateRoundScores(sex, bowtype, age, roundName, personalBest);
     roundScoresCache[cacheKey] = roundScores;
   }
 
@@ -102,33 +93,49 @@ function createFrostbiteClassificationCalculator(roundName, sex, age, bowtype, p
   };
 }
 
-
-export function calculateRoundScores(sex, bowtype, age, roundName, personalBest) {
+export async function calculateRoundScores(sex, bowtype, age, roundName, personalBest) {
   if (sex === "male") {
-    sex = "men";
+    sex = "Men";
   }
 
   if (sex === "female") {
-    sex = "women";
+    sex = "Women";
   }
 
-  const classificationFilter = c => c.gender.toLowerCase() === sex &&
-    c.bowType.toLowerCase() === bowtype &&
-    c.age.toLowerCase() === age &&
-    c.round.toLowerCase() === roundName;
+  const roundScores = await loadClassificationData(sex, bowtype, age);
 
-  const roundScores = rawClassifications
-    .filter(c => classificationFilter(c))
+  const filteredScores = roundScores.filter(c => {
+    return c.round.toLowerCase() === roundName.toLowerCase();
+  });
+
   if (personalBest) {
-    roundScores.push({id: 10, gender: sex, bowType: bowtype, age: age, round: roundName, score: personalBest ?? 0});
-  } 
-  roundScores.sort(sortByScore);
-  return roundScores;
+    filteredScores.push({
+      id: 10,
+      gender: sex,
+      bowType: bowtype,
+      age: age,
+      round: roundName,
+      score: personalBest ?? 0
+    });
+  }
+
+  return filteredScores.sort(sortByScore);
+}
+
+async function loadClassificationData(sex, bowtype, age) {
+  if (sex === "male") sex = "Men";
+  if (sex === "female") sex = "Women";
+
+  bowtype = bowtype.charAt(0).toUpperCase() + bowtype.slice(1);
+  age = age.charAt(0).toUpperCase() + age.slice(1);
+
+  const module = await import(`@/data/classifications/${sex}/${bowtype}/${age}.js`);
+  return module.default;
 }
 
 export function calculateClassification(sex, age, bowtype) {
-  return (roundName, score) => {
-    const calculator = createClassificationCalculator(roundName, sex, age, bowtype);
+  return async (roundName, score) => {
+    const calculator = await createClassificationCalculator(roundName, sex, age, bowtype);
     if (calculator) {
       const classifications = calculator(score, 1);
       const sorted = classifications.sort((a, b) => {
@@ -140,12 +147,19 @@ export function calculateClassification(sex, age, bowtype) {
   };
 }
 
-export function addClassificationsToHistory(sex, age, bowType, scoringHistory) {
+export async function addClassificationsToHistory(sex, age, bowType, scoringHistory) {
+  if (!sex || !age || !bowType) {
+    return scoringHistory;
+  }
   const classificationCalculator = calculateClassification(sex, age, bowType);
-  return scoringHistory.map(x => {
-    const classification = classificationCalculator(x.gameType, x.score);
-    return { ...x, classification };
-  });
+  const updatedHistory = [];
+
+  for (const x of scoringHistory) {
+    const classification = await classificationCalculator(x.gameType, x.score);
+    updatedHistory.push({ ...x, classification });
+  }
+
+  return updatedHistory;
 }
 
 export function getRelevantClassifications(classifications) {
@@ -167,8 +181,8 @@ export function getRelevantClassifications(classifications) {
   return result;
 }
 
-export function calculateIfArcherIsOnTrackForNextClassification(currentEnd, currentClassification, roundName, sex, age, bowtype) {
-  const calculator = createClassificationCalculator(roundName, sex, age, bowtype);
+export async function calculateIfArcherIsOnTrackForNextClassification(currentEnd, currentClassification, roundName, sex, age, bowtype) {
+  const calculator = await createClassificationCalculator(roundName, sex, age, bowtype);
 
   if (!calculator) {
     return false;
@@ -177,7 +191,6 @@ export function calculateIfArcherIsOnTrackForNextClassification(currentEnd, curr
   const classifications = calculator(0, currentEnd);
 
   const currentIndex = classifications.findIndex(c => c.name === currentClassification);
-
 
   if (currentIndex === -1 || currentIndex === classifications.length - 1) {
     return undefined;
@@ -188,8 +201,8 @@ export function calculateIfArcherIsOnTrackForNextClassification(currentEnd, curr
   return currentEnd >= nextClassification.scorePerEnd;
 }
 
-export function calculatePotentialClassificationWithoutOutliers(scores, currentClassification, roundName, sex, age, bowtype) {
-  const calculator = createClassificationCalculator(roundName, sex, age, bowtype);
+export async function calculatePotentialClassificationWithoutOutliers(scores, currentClassification, roundName, sex, age, bowtype) {
+  const calculator = await createClassificationCalculator(roundName, sex, age, bowtype);
 
   if (!calculator || scores.length === 0) {
     return null;
@@ -197,49 +210,51 @@ export function calculatePotentialClassificationWithoutOutliers(scores, currentC
 
   const numericScores = scores.map(convertToValue);
   const sortedScores = [...numericScores].sort((a, b) => a - b);
+  const currentTotal = sortedScores.reduce((sum, score) => sum + score, 0);
 
   const classifications = calculator(0, 0);
   const filteredClassifications = classifications.filter(c => c.name !== "PB");
   const currentIndex = filteredClassifications.findIndex(c => c.name === currentClassification);
 
-  if (currentIndex === -1 || currentIndex === filteredClassifications.length - 1) {
+  if (currentIndex === -1) {
     return null;
   }
 
   const nextClassification = filteredClassifications[currentIndex + 1];
-  const targetTotal = nextClassification.score;
-  const currentTotal = sortedScores.reduce((sum, score) => sum + score, 0);
+  if (!nextClassification) {
+    return null;
+  }
 
+
+  const targetTotal = nextClassification.score;
   if (currentTotal >= targetTotal) {
     return null;
   }
 
+
+  // Find the archer's typical good performance
+  const topQuartileIndex = Math.floor(sortedScores.length * 0.75);
+  const typicalGoodScore = sortedScores[topQuartileIndex];
+
   let potentialTotal = currentTotal;
   let arrowsToImprove = 0;
 
+  // Start with lowest scores and see if improving them to typical good performance would reach target
   for (const score of sortedScores) {
     if (potentialTotal >= targetTotal) {
       break;
     }
-
-    const averageScore = Math.floor(currentTotal / scores.length);
-    const reasonableImprovement = score < 5 ? averageScore : Math.min(10, score + 2);
-    const improvement = reasonableImprovement - score;
-
-    if (improvement > 0) {
+    if (score < typicalGoodScore) {
+      const improvement = typicalGoodScore - score;
       potentialTotal += improvement;
       arrowsToImprove++;
     }
   }
 
-  const pointsNeeded = targetTotal - currentTotal;
-  const averageImprovementNeeded = pointsNeeded / scores.length;
-
   return {
     classification: nextClassification.name,
-    potentialScore: Math.round(potentialTotal),
+    potentialScore: potentialTotal,
     arrowsToImprove,
-    achievable: averageImprovementNeeded <= 0.5
+    achievable: potentialTotal >= targetTotal
   };
 }
-

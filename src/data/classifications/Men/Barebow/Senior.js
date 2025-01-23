@@ -1,0 +1,2146 @@
+export default [
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "York",
+    "score": 178
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "York",
+    "score": 243
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "York",
+    "score": 325
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "York",
+    "score": 423
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "York",
+    "score": 534
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "York",
+    "score": 651
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "York",
+    "score": 768
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "York",
+    "score": 877
+  },
+  {
+    "id": 9,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "York",
+    "score": 973
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Hereford / Bristol I",
+    "score": 287
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Hereford / Bristol I",
+    "score": 380
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Hereford / Bristol I",
+    "score": 487
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Hereford / Bristol I",
+    "score": 603
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Hereford / Bristol I",
+    "score": 721
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bristol II",
+    "score": 432
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bristol II",
+    "score": 547
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bristol II",
+    "score": 668
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bristol II",
+    "score": 787
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bristol III",
+    "score": 584
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bristol III",
+    "score": 703
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bristol III",
+    "score": 818
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bristol IV",
+    "score": 771
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bristol IV",
+    "score": 879
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bristol V",
+    "score": 978
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "St. George",
+    "score": 162
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "St. George",
+    "score": 218
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "St. George",
+    "score": 287
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "St. George",
+    "score": 366
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "St. George",
+    "score": 452
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "St. George",
+    "score": 539
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Albion / Long Windsor",
+    "score": 250
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Albion / Long Windsor",
+    "score": 325
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Albion / Long Windsor",
+    "score": 410
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Albion / Long Windsor",
+    "score": 498
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Albion / Long Windsor",
+    "score": 585
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Windsor",
+    "score": 360
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Windsor",
+    "score": 449
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Windsor",
+    "score": 539
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Windsor",
+    "score": 625
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Windsor 50",
+    "score": 484
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Windsor 50",
+    "score": 572
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Windsor 50",
+    "score": 653
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Windsor 40",
+    "score": 631
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Windsor 40",
+    "score": 705
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Windsor 30",
+    "score": 786
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "New Western",
+    "score": 102
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "New Western",
+    "score": 141
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "New Western",
+    "score": 193
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "New Western",
+    "score": 256
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "New Western",
+    "score": 330
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "New Western",
+    "score": 411
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long Western",
+    "score": 178
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long Western",
+    "score": 238
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long Western",
+    "score": 309
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long Western",
+    "score": 387
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long Western",
+    "score": 468
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Western",
+    "score": 269
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Western",
+    "score": 346
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Western",
+    "score": 428
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Western",
+    "score": 510
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Western 50",
+    "score": 366
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Western 50",
+    "score": 449
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Western 50",
+    "score": 528
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Western 40",
+    "score": 490
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Western 40",
+    "score": 566
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Western 30",
+    "score": 630
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "American",
+    "score": 300
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "American",
+    "score": 374
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "American",
+    "score": 449
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "American",
+    "score": 521
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "St. Nicholas",
+    "score": 421
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "St. Nicholas",
+    "score": 488
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "New National",
+    "score": 70
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "New National",
+    "score": 98
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "New National",
+    "score": 134
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "New National",
+    "score": 179
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "New National",
+    "score": 233
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "New National",
+    "score": 292
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long National",
+    "score": 121
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long National",
+    "score": 163
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long National",
+    "score": 214
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long National",
+    "score": 271
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long National",
+    "score": 332
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "National",
+    "score": 192
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "National",
+    "score": 248
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "National",
+    "score": 309
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "National",
+    "score": 371
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "National 50",
+    "score": 261
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "National 50",
+    "score": 322
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "National 50",
+    "score": 383
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "National 40",
+    "score": 351
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "National 40",
+    "score": 409
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "National 30",
+    "score": 455
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "New Warwick",
+    "score": 51
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "New Warwick",
+    "score": 71
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "New Warwick",
+    "score": 97
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "New Warwick",
+    "score": 128
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "New Warwick",
+    "score": 165
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "New Warwick",
+    "score": 206
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long Warwick",
+    "score": 89
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long Warwick",
+    "score": 119
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long Warwick",
+    "score": 155
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long Warwick",
+    "score": 194
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long Warwick",
+    "score": 234
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Warwick",
+    "score": 135
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Warwick",
+    "score": 173
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Warwick",
+    "score": 214
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Warwick",
+    "score": 255
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Warwick 50",
+    "score": 183
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Warwick 50",
+    "score": 225
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Warwick 50",
+    "score": 264
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Warwick 40",
+    "score": 245
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Warwick 40",
+    "score": 283
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Warwick 30",
+    "score": 315
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 1440 (90m)",
+    "score": 290
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 1440 (90m)",
+    "score": 380
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 1440 (90m)",
+    "score": 484
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 1440 (90m)",
+    "score": 598
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 1440 (90m)",
+    "score": 717
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 1440 (90m)",
+    "score": 835
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 1440 (90m)",
+    "score": 945
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 1440 (90m)",
+    "score": 1042
+  },
+  {
+    "id": 9,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 1440 (90m)",
+    "score": 1124
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 1440 (70m) / Metric I",
+    "score": 338
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 1440 (70m) / Metric I",
+    "score": 441
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 1440 (70m) / Metric I",
+    "score": 558
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 1440 (70m) / Metric I",
+    "score": 682
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 1440 (70m) / Metric I",
+    "score": 806
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 1440 (60m) / Metric II",
+    "score": 422
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 1440 (60m) / Metric II",
+    "score": 541
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 1440 (60m) / Metric II",
+    "score": 670
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 1440 (60m) / Metric II",
+    "score": 799
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Metric III",
+    "score": 624
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Metric III",
+    "score": 750
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Metric III",
+    "score": 870
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Metric IV",
+    "score": 885
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Metric IV",
+    "score": 988
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Metric V",
+    "score": 1043
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long Metric (Men)",
+    "score": 93
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long Metric (Men)",
+    "score": 128
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long Metric (Men)",
+    "score": 172
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long Metric (Men)",
+    "score": 226
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long Metric (Men)",
+    "score": 288
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long Metric (Men)",
+    "score": 352
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long Metric (Women) / Long Metric I",
+    "score": 140
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long Metric (Women) / Long Metric I",
+    "score": 189
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long Metric (Women) / Long Metric I",
+    "score": 246
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long Metric (Women) / Long Metric I",
+    "score": 310
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long Metric (Women) / Long Metric I",
+    "score": 376
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long Metric II",
+    "score": 193
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long Metric II",
+    "score": 252
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long Metric II",
+    "score": 316
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long Metric II",
+    "score": 381
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long Metric III",
+    "score": 269
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long Metric III",
+    "score": 333
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long Metric III",
+    "score": 398
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long Metric IV",
+    "score": 368
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long Metric IV",
+    "score": 430
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Long Metric V",
+    "score": 483
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Short Metric / Short Metric I",
+    "score": 198
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Short Metric / Short Metric I",
+    "score": 253
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Short Metric / Short Metric I",
+    "score": 312
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Short Metric II",
+    "score": 229
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Short Metric II",
+    "score": 290
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Short Metric III",
+    "score": 356
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 900",
+    "score": 291
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 900",
+    "score": 367
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 900",
+    "score": 447
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 900",
+    "score": 524
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 70m",
+    "score": 118
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 70m",
+    "score": 162
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 70m",
+    "score": 215
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 70m",
+    "score": 277
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 70m",
+    "score": 343
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 60m",
+    "score": 162
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 60m",
+    "score": 215
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 60m",
+    "score": 277
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 60m",
+    "score": 344
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 50m (Barebow) / Metric 122-50",
+    "score": 225
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 50m (Barebow) / Metric 122-50",
+    "score": 288
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 50m (Barebow) / Metric 122-50",
+    "score": 354
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 50m (Barebow) / Metric 122-50",
+    "score": 419
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 50m (Barebow) / Metric 122-50",
+    "score": 476
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 50m (Barebow) / Metric 122-50",
+    "score": 525
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 50m (Barebow) / Metric 122-50",
+    "score": 565
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 50m (Barebow) / Metric 122-50",
+    "score": 599
+  },
+  {
+    "id": 9,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 50m (Barebow) / Metric 122-50",
+    "score": 626
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Metric 122-40",
+    "score": 312
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Metric 122-40",
+    "score": 379
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Metric 122-30",
+    "score": 424
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 50m (Compound)",
+    "score": 117
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 50m (Compound)",
+    "score": 159
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 50m (Compound)",
+    "score": 212
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Metric 80-40",
+    "score": 178
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Metric 80-40",
+    "score": 234
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Metric 80-30",
+    "score": 280
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 108
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 139
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 169
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 197
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 220
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 239
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 254
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray I",
+    "score": 267
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 131
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 161
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 189
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 213
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 233
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 249
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 262
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Bray II",
+    "score": 273
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 331
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 387
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 433
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 472
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 503
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 528
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 549
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Portsmouth",
+    "score": 565
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 307
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 380
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 448
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 506
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 554
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 594
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 625
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Stafford",
+    "score": 651
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 122
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 154
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 186
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 213
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 236
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 255
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 270
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Worcester",
+    "score": 281
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 137
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 191
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 257
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 332
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 405
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 465
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 507
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas (Triple Face)",
+    "score": 535
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 108
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 139
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 169
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 197
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 220
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 239
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 254
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "Vegas 300",
+    "score": 267
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 221
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 282
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 343
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 397
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 443
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 480
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 511
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 18m",
+    "score": 535
+  },
+  {
+    "id": 1,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 232
+  },
+  {
+    "id": 2,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 293
+  },
+  {
+    "id": 3,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 352
+  },
+  {
+    "id": 4,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 405
+  },
+  {
+    "id": 5,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 448
+  },
+  {
+    "id": 6,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 484
+  },
+  {
+    "id": 7,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 513
+  },
+  {
+    "id": 8,
+    "gender": "Men",
+    "bowType": "Barebow",
+    "age": "Senior",
+    "round": "WA 25m",
+    "score": 536
+  }
+];

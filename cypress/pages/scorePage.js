@@ -86,6 +86,41 @@ class ScorePage {
   highlightNote(noteText) {
     cy.get("[data-test=\"note-text\"]").contains(noteText).click();
   }
+
+  expandClassificationDetails() {
+    cy.contains("Tap to view classification calculations").click();
+  }
+
+  checkClassificationTable(expectedClassification, shortBy) {
+    cy.get("#classification").within(() => {
+      cy.contains("tr", expectedClassification).within(() => {
+        if (shortBy) {
+          cy.contains(`(-${shortBy})`);
+        }
+      });
+    });
+  }
+
+  checkOnTrackStatus(isOnTrack) {
+    if (isOnTrack) {
+      cy.get(".onTrack").should("exist");
+    } else {
+      cy.get(".offTrack").should("exist");
+    }
+  }
+
+  checkClassificationAchieved(classification) {
+    cy.get("#classification").within(() => {
+      cy.contains("tr", classification).should("have.class", "achieved");
+    });
+  }
+
+  checkClassificationMissed(classification) {
+    cy.get("#classification").within(() => {
+      cy.contains("tr", classification).should("not.have.class", "achieved");
+    });
+  }
 }
 
 export default ScorePage;
+

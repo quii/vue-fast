@@ -25,11 +25,18 @@ const routes = [
   { path: '/history/:id', name: 'viewHistory', component: ViewShoot },
   { path: "/you", name: "You", component: UserData }
 ]
+
 const router = VueRouter.createRouter({
   history: VueRouter.createWebHistory(),
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  if (to.path.startsWith("/data/classifications")) {
+    return false;
+  }
+  next();
+})
 const intervalMS = 60 * 60 * 1000;
 
 

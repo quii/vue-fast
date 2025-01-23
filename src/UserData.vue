@@ -2,9 +2,9 @@
 import { computed, ref } from "vue";
 import { useToast } from "vue-toastification";
 import { useUserStore } from "@/stores/user";
-import { classificationList } from "@/domain/classification";
 import { calculateAppropriateRounds } from "@/domain/game_types";
 import RoundDetails from "@/components/RoundDetails.vue";
+import { classificationList } from "@/domain/classificationList";
 
 const userStore = useUserStore();
 
@@ -18,17 +18,24 @@ const selectedClassification = ref(userStore.user.classification || classificati
 const maxYards = ref(userStore.user.maxYards ?? 100);
 const constructiveCriticism = ref(userStore.user.constructiveCriticism ?? true);
 
+const allArcherDetailsProvided = computed(() =>
+  selectedClassification.value &&
+  selectedAgeGroup.value &&
+  selectedGender.value &&
+  selectedBowtype.value
+);
+
 const suitableRounds = computed(() => {
-  if (selectedClassification.value) {
-    const rounds = calculateAppropriateRounds(selectedClassification.value,
+  if (allArcherDetailsProvided.value) {
+    return calculateAppropriateRounds(
+      selectedClassification.value,
       selectedAgeGroup.value,
       selectedGender.value,
       selectedBowtype.value,
       maxYards.value
     );
-    return rounds;
   }
-  return undefined;
+  return { short: [], medium: [], long: [] };
 });
 
 const hasSuitableRounds = computed(() => {

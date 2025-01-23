@@ -38,12 +38,28 @@ function scoreButtonClass(score) {
 
 const total = computed(() => calculateTotal(convertToValues(props.scores, gameTypeStore.type)));
 
-const onTrack = computed(() => calculateIfArcherIsOnTrackForNextClassification(total.value,
-  userStore.user.classification,
-  gameTypeStore.type,
-  userStore.user.gender,
-  userStore.user.ageGroup,
-  userStore.user.bowType));
+
+const userDetailsExist = computed(() =>
+  userStore.user.gender &&
+  userStore.user.ageGroup &&
+  userStore.user.bowType &&
+  userStore.user.classification
+);
+
+const onTrack = computed(() => {
+  if (!userDetailsExist.value) {
+    return null;
+  }
+  return calculateIfArcherIsOnTrackForNextClassification(
+    total.value,
+    userStore.user.classification,
+    gameTypeStore.type,
+    userStore.user.gender,
+    userStore.user.ageGroup,
+    userStore.user.bowType
+  );
+});
+
 const offTrack = computed(() => onTrack.value === false);
 
 </script>

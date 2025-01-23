@@ -11,13 +11,13 @@ describe("player history", () => {
   const storage = { value: [] };
   const playerHistory = NewPlayerHistory(storage);
 
-  playerHistory.add(new Date().addDays(2), 456, "national 50", [1, 2, 3], "yd");
-  playerHistory.add(new Date().addDays(5), 200, "national 50", [1, 2, 3], "yd");
-  playerHistory.add(new Date().addDays(10), 123, "national 50", [1, 2, 3], "yd");
-  playerHistory.add(new Date().addDays(10), 826, "windsor 50", [1, 2, 3], "yd");
+  test("keeps records sorted and adds top score indicator", async () => {
+    playerHistory.add(new Date().addDays(2), 456, "national 50", [1, 2, 3], "yd");
+    playerHistory.add(new Date().addDays(5), 200, "national 50", [1, 2, 3], "yd");
+    playerHistory.add(new Date().addDays(10), 123, "national 50", [1, 2, 3], "yd");
+    playerHistory.add(new Date().addDays(10), 826, "windsor 50", [1, 2, 3], "yd");
 
-  test("keeps records sorted and adds top score indicator", () => {
-    const sortedHistory = playerHistory.sortedHistory("male", "senior", "recurve");
+    const sortedHistory = await playerHistory.sortedHistory("male", "senior", "recurve");
     expect(sortedHistory).toHaveLength(4);
     expect(sortedHistory[0].score).toEqual(123);
     expect(sortedHistory[0].topScore).toBeFalsy();

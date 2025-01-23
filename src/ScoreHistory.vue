@@ -12,7 +12,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="item in store.sortedHistory(user.user.gender, user.user.ageGroup, user.user.bowType)"
+        <tr v-for="item in sortedHistoryData"
             :key="item.id">
           <td @click="view(item.id)">{{ parseAndRenderDate(item.date) }}</td>
           <td @click="view(item.id)">{{ item.gameType }}</td>
@@ -48,7 +48,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, watchEffect } from "vue";
 import UserNotes from "@/components/UserNotes.vue";
 import { useHistoryStore } from "@/stores/history";
 import { useRouter } from "vue-router";
@@ -63,6 +63,15 @@ const notesStore = useNotesStore();
 const isDiaryMode = ref(false);
 
 const startX = ref(0);
+const sortedHistoryData = ref([]);
+
+watchEffect(async () => {
+  sortedHistoryData.value = await store.sortedHistory(
+    user.user.gender,
+    user.user.ageGroup,
+    user.user.bowType
+  );
+});
 
 function handleTouchStart(e) {
   startX.value = e.touches[0].screenX;
@@ -100,8 +109,7 @@ function view(id) {
 const totalArrows = computed(() => store.totalArrows());
 
 const shootsWithNotes = computed(() => {
-  return store.sortedHistory(user.user.gender, user.user.ageGroup, user.user.bowType)
-    .filter(shoot => notesStore.getNotesByShootId(shoot.id).length > 0);
+  return sortedHistoryData.value.filter(shoot => notesStore.getNotesByShootId(shoot.id).length > 0);
 });
 </script>
 
