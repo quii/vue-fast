@@ -5,7 +5,6 @@ import { gameTypeConfig } from "@/domain/game_types";
 import { computed } from "vue";
 import RoundScores from "@/components/RoundScores.vue";
 import { useUserStore } from "@/stores/user";
-import html2pdf from "html2pdf.js";
 import { useScreenOrientation } from "@vueuse/core";
 import ClickToEdit from "@/components/ClickToEdit.vue";
 import UserNotes from "@/components/UserNotes.vue";
@@ -25,24 +24,25 @@ const {
   orientation
 } = useScreenOrientation();
 
-function convertToPDF() {
+function printScoreSheet() {
+  const printWindow = window.open("", "_blank");
+  const doc = printWindow.document;
+
   const style = document.createElement("style");
   style.textContent = `
-  body { background: #fff; color: #000; }
-  #classification { display:none;}
-  input[type="text"] {border:none; background-color:white; color: #000;}
+    body { font-family: Arial; padding: 20px; }
+    table { border-collapse: collapse; width: 100%; }
+    td, th { border: 1px solid black; padding: 8px; text-align: center; }
+    .score { font-weight: bold; }
   `;
 
-  const element = document.querySelector("#scores").cloneNode(true);
-  element.append(style);
-  const opt = {
-    margin: 1,
-    filename: `${gameType.value}-${date.value}.pdf`,
-    image: { type: "jpeg", quality: 0.98 },
-    mode: ["avoid-all"]
-  };
+  const content = document.querySelector("#scores").cloneNode(true);
+  const printScript = document.createElement("script");
+  printScript.textContent = "window.onload = () => window.print()";
 
-  html2pdf().set(opt).from(element).save();
+  doc.head.appendChild(style);
+  doc.body.appendChild(content);
+  doc.body.appendChild(printScript);
 }
 
 function deleteShoot() {
@@ -89,7 +89,7 @@ function deleteShoot() {
   </div>
   <p class="tip" v-if="orientation!=='landscape-primary'">💡 Try turning your phone into landscape to see the full
     scoresheet</p>
-  <button v-if="orientation==='landscape-primary'" @click="convertToPDF">💾 Download score sheet</button>
+  <button v-if="orientation==='landscape-primary'" @click="printScoreSheet">💾 Download score sheet</button>
   <UserNotes :shoot-id="history.selectedShoot.id" :allow-highlight="true" />
 
   <hr />

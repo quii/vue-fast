@@ -4,13 +4,9 @@ import * as VueRouter from 'vue-router'
 import { createApp } from 'vue/dist/vue.esm-bundler'
 import { createPinia } from 'pinia'
 import ScoreCard from './ScoreCard.vue'
-import ScoreHistory from './ScoreHistory.vue'
-import DataManagement from '@/DataManagement.vue'
 import Toast from 'vue-toastification'
 
 import 'vue-toastification/dist/index.css'
-import ViewShoot from '@/ViewShoot.vue'
-import UserData from "@/UserData.vue";
 import { registerSW } from "virtual:pwa-register";
 import DataMenuItem from "@/components/DataMenuItem.vue";
 import MainNavigation from "./components/UserNavigation.vue";
@@ -20,12 +16,26 @@ const toast = useToast();
 
 const routes = [
   { path: '/', component: ScoreCard },
-  { path: '/history', component: ScoreHistory },
-  { path: "/data", component: DataManagement, title: DataMenuItem },
-  { path: '/history/:id', name: 'viewHistory', component: ViewShoot },
-  { path: "/you", name: "You", component: UserData }
+  {
+    path: "/history",
+    component: () => import("./ScoreHistory.vue")
+  },
+  {
+    path: "/data",
+    component: () => import("./DataManagement.vue"),
+    title: DataMenuItem
+  },
+  {
+    path: "/history/:id",
+    name: "viewHistory",
+    component: () => import("./ViewShoot.vue")
+  },
+  {
+    path: "/you",
+    name: "You",
+    component: () => import("./UserData.vue")
+  }
 ]
-
 const router = VueRouter.createRouter({
   history: VueRouter.createWebHistory(),
   routes
