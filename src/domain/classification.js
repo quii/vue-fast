@@ -122,6 +122,8 @@ export async function calculateRoundScores(sex, bowtype, age, roundName, persona
   return filteredScores.sort(sortByScore);
 }
 
+const classificationDataCache = new Map();
+
 async function loadClassificationData(sex, bowtype, age) {
   if (sex === "male") sex = "men";
   if (sex === "female") sex = "women";
@@ -129,9 +131,16 @@ async function loadClassificationData(sex, bowtype, age) {
   bowtype = bowtype.charAt(0).toUpperCase() + bowtype.slice(1);
   age = age.charAt(0).toUpperCase() + age.slice(1);
 
+  const cacheKey = `${sex}/${bowtype}/${age}`;
+  if (classificationDataCache.has(cacheKey)) {
+    return classificationDataCache.get(cacheKey);
+  }
+
   const path = `/data/classifications/${sex}/${bowtype}/${age}.json`;
   const response = await fetch(path);
-  return response.json();
+  const data = await response.json();
+  classificationDataCache.set(cacheKey, data);
+  return data;
 }
 
 export function calculateClassification(sex, age, bowtype) {

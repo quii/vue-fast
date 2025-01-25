@@ -81,23 +81,22 @@ function sortByNumberOfEndsAndDistance(a, b) {
   return a.numberOfEnds - b.numberOfEnds || a.distanceValue - b.distanceValue;
 }
 
-export function calculateAppropriateRounds(classification, age, sex, bowtype, maxYards) {
+export async function calculateAppropriateRounds(classification, age, sex, bowtype, maxYards) {
   const classificationNumber = classificationList.indexOf(classification);
   const outdoorRounds = gameTypes.filter(x => gameTypeConfig[x].isOutdoor);
 
-  const improvementRounds = outdoorRounds.reduce((acc, round) => {
-    const scores = calculateRoundScores(sex, bowtype, age, round);
+  const improvementRounds = [];
+  for (const round of outdoorRounds) {
+    const scores = await calculateRoundScores(sex, bowtype, age, round);
     const config = gameTypeConfig[round];
     const distance = calculateDistanceLabel(config);
     const distanceValue = config.maxDistanceMetres || convertToMeters(config.maxDistanceYards);
 
     if (scores.length > (classificationNumber + 1) && config.maxDistanceYards <= maxYards) {
       const numberOfEnds = config.distancesRoundSizes.reduce((a, b) => a + b);
-      return [...acc, { round, numberOfEnds, distance, distanceValue }];
-    } else {
-      return acc;
+      improvementRounds.push({ round, numberOfEnds, distance, distanceValue });
     }
-  }, []);
+  }
 
   return improvementRounds.reduce((acc, round) => {
     if (round.numberOfEnds <= 4) {
@@ -109,4 +108,3 @@ export function calculateAppropriateRounds(classification, age, sex, bowtype, ma
     }
   }, { short: [], medium: [], long: [] });
 }
-

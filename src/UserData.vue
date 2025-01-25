@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from "vue";
+import { computed, ref, watchEffect } from "vue";
 import { useToast } from "vue-toastification";
 import { useUserStore } from "@/stores/user";
 import { calculateAppropriateRounds } from "@/domain/game_types";
@@ -25,9 +25,11 @@ const allArcherDetailsProvided = computed(() =>
   selectedBowtype.value
 );
 
-const suitableRounds = computed(() => {
+const suitableRounds = ref({ short: [], medium: [], long: [] });
+
+watchEffect(async () => {
   if (allArcherDetailsProvided.value) {
-    return calculateAppropriateRounds(
+    suitableRounds.value = await calculateAppropriateRounds(
       selectedClassification.value,
       selectedAgeGroup.value,
       selectedGender.value,
@@ -35,7 +37,6 @@ const suitableRounds = computed(() => {
       maxYards.value
     );
   }
-  return { short: [], medium: [], long: [] };
 });
 
 const hasSuitableRounds = computed(() => {
@@ -106,7 +107,7 @@ function saveUserDetails(event) {
     <button type="submit" @click="saveUserDetails">💾 Save</button>
   </div>
 
-  <div v-if="hasSuitableRounds">
+  <div v-if="hasSuitableRounds" class="recommended-rounds">
     <h1>Suggested outdoor rounds</h1>
     <div class="sub" v-if="suitableRounds.short">
       <h2>Short shoot(s)</h2>
