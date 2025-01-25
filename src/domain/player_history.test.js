@@ -1,4 +1,4 @@
-import { describe, expect, test } from "vitest";
+import { beforeEach, describe, expect, test, vi } from "vitest";
 import { NewPlayerHistory } from "@/domain/player_history";
 
 Date.prototype.addDays = function(days) {
@@ -6,6 +6,20 @@ Date.prototype.addDays = function(days) {
   date.setDate(date.getDate() + days);
   return date;
 };
+
+beforeEach(() => {
+  global.fetch = vi.fn(() =>
+    Promise.resolve({
+      json: () => Promise.resolve([
+        { id: 1, gender: "Men", bowType: "Recurve", age: "Senior", round: "windsor", score: 490 },
+        { id: 2, gender: "Men", bowType: "Recurve", age: "Senior", round: "windsor", score: 602 },
+        { id: 3, gender: "Men", bowType: "Recurve", age: "Senior", round: "windsor", score: 701 },
+        { id: 4, gender: "Men", bowType: "Recurve", age: "Senior", round: "windsor", score: 782 }
+      ])
+    })
+  );
+});
+
 
 describe("player history", () => {
   const storage = { value: [] };

@@ -123,14 +123,15 @@ export async function calculateRoundScores(sex, bowtype, age, roundName, persona
 }
 
 async function loadClassificationData(sex, bowtype, age) {
-  if (sex === "male") sex = "Men";
-  if (sex === "female") sex = "Women";
+  if (sex === "male") sex = "men";
+  if (sex === "female") sex = "women";
 
   bowtype = bowtype.charAt(0).toUpperCase() + bowtype.slice(1);
   age = age.charAt(0).toUpperCase() + age.slice(1);
 
-  const module = await import(`@/data/classifications/${sex}/${bowtype}/${age}.js`);
-  return module.default;
+  const path = `/data/classifications/${sex}/${bowtype}/${age}.json`;
+  const response = await fetch(path);
+  return response.json();
 }
 
 export function calculateClassification(sex, age, bowtype) {

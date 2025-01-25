@@ -174,10 +174,6 @@ p {
   border-bottom: 1px solid var(--color-border);
 }
 
-.diary-entry header {
-  argin-bottom: 0.5rem;
-}
-
 .diary-entry time {
   display: block;
   font-size: 0.9rem;
@@ -206,3 +202,13 @@ p {
   margin-left: 0.5rem;
 }
 </style>
+
+async function loadClassificationData(sex, bowtype, age) {
+if (sex === "male") sex = "men";
+if (sex === "female") sex = "women";
+
+const path = `/data/classifications/${sex}/${bowtype}/${age}.json`;
+const module = await import(/* @vite-ignore */ path);
+return module.default;
+}
+

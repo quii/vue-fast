@@ -6,14 +6,21 @@ import {
   calculateIfArcherIsOnTrackForNextClassification,
   calculatePotentialClassificationWithoutOutliers
 } from "@/domain/classification";
-import { testClassifications } from "./test_data/classifications";
 import { calculateTotal } from "@/domain/subtotals";
 
 beforeEach(() => {
-  vi.mock("../data/classifications/men/recurve/senior.json", () => ({
-    default: testClassifications
-  }));
+  global.fetch = vi.fn(() =>
+    Promise.resolve({
+      json: () => Promise.resolve([
+        { id: 1, gender: "Men", bowType: "Recurve", age: "Senior", round: "windsor", score: 490 },
+        { id: 2, gender: "Men", bowType: "Recurve", age: "Senior", round: "windsor", score: 602 },
+        { id: 3, gender: "Men", bowType: "Recurve", age: "Senior", round: "windsor", score: 701 },
+        { id: 4, gender: "Men", bowType: "Recurve", age: "Senior", round: "windsor", score: 782 }
+      ])
+    })
+  );
 });
+
 
 describe("classification for AGB", () => {
   test("can get classifications available for a round and given person who achieved A3", async () => {
@@ -149,16 +156,6 @@ describe("calculateIfArcherIsOnTrackForNextClassification", () => {
 });
 
 describe("calculatePotentialClassificationWithoutOutliers", () => {
-  beforeEach(() => {
-    vi.mock("../data/classifications/men/recurve/senior.json", () => ({
-      default: [
-        { id: 1, gender: "Men", bowType: "Recurve", age: "Senior", round: "windsor", score: 490 },
-        { id: 2, gender: "Men", bowType: "Recurve", age: "Senior", round: "windsor", score: 602 },
-        { id: 3, gender: "Men", bowType: "Recurve", age: "Senior", round: "windsor", score: 701 },
-        { id: 4, gender: "Men", bowType: "Recurve", age: "Senior", round: "windsor", score: 782 }
-      ]
-    }));
-  });
 
   test("returns null for empty scores", async () => {
     const potential = await calculatePotentialClassificationWithoutOutliers(
