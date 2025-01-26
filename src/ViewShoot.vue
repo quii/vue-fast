@@ -2,12 +2,16 @@
 import { useRoute, useRouter } from "vue-router";
 import { useHistoryStore } from "@/stores/history";
 import { gameTypeConfig } from "@/domain/game_types";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import RoundScores from "@/components/RoundScores.vue";
 import { useUserStore } from "@/stores/user";
 import { useScreenOrientation } from "@vueuse/core";
-import ClickToEdit from "@/components/ClickToEdit.vue";
 import UserNotes from "@/components/UserNotes.vue";
+import PrintModal from "./components/PrintModal.vue";
+import ArcherDetails from "@/components/ArcherDetails.vue";
+
+
+const showPrintModal = ref(false);
 
 const route = useRoute();
 const router = useRouter();
@@ -24,26 +28,6 @@ const {
   orientation
 } = useScreenOrientation();
 
-function printScoreSheet() {
-  const printWindow = window.open("", "_blank");
-  const doc = printWindow.document;
-
-  const style = document.createElement("style");
-  style.textContent = `
-    body { font-family: Arial; padding: 20px; }
-    table { border-collapse: collapse; width: 100%; }
-    td, th { border: 1px solid black; padding: 8px; text-align: center; }
-    .score { font-weight: bold; }
-  `;
-
-  const content = document.querySelector("#scores").cloneNode(true);
-  const printScript = document.createElement("script");
-  printScript.textContent = "window.onload = () => window.print()";
-
-  doc.head.appendChild(style);
-  doc.body.appendChild(content);
-  doc.body.appendChild(printScript);
-}
 
 function deleteShoot() {
   if (confirm(`Are you sure you want to delete this shoot? This action cannot be undone.`)) {
@@ -55,41 +39,35 @@ function deleteShoot() {
 
 <template>
   <div id="scores">
-
     <h1>{{ gameType }} - {{ date }}</h1>
-    <table class="details">
-      <thead>
-      <tr>
-        <th>Name</th>
-        <th>Age group</th>
-        <th>Gender</th>
-        <th>Bow type</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td>{{ userStore.user.name }}</td>
-        <td>{{ userStore.user.ageGroup }}</td>
-        <td>{{ userStore.user.gender }}</td>
-        <td>{{ userStore.user.bowType }}</td>
-      </tr>
-      </tbody>
-    </table>
+    <ArcherDetails
+      :name="userStore.user.name"
+      :age-group="userStore.user.ageGroup"
+      :gender="userStore.user.gender"
+      :bow-type="userStore.user.bowType"
+    />
     <RoundScores :scores="scores"
                  :end-size="endSize"
                  :game-type="gameType" />
 
-    <div class="signatures" v-if="orientation==='landscape-primary'">
-      <p class="signature">.........................................................</p>
-      <h3>Archer's signature: <span class="name">{{ userStore.user.name }}</span></h3>
-      <p class="signature">.........................................................</p>
-      <h3>Target Captain: <span class="name"><ClickToEdit value="Tap to edit"></ClickToEdit></span></h3>
-    </div>
-
   </div>
   <p class="tip" v-if="orientation!=='landscape-primary'">💡 Try turning your phone into landscape to see the full
     scoresheet</p>
-  <button v-if="orientation==='landscape-primary'" @click="printScoreSheet">💾 Download score sheet</button>
+  <button class="download-button" @click="showPrintModal = true">
+    Download Score Sheet 💾
+  </button>
+  <PrintModal
+    v-if="showPrintModal"
+    :shoot="history.selectedShoot"
+    :archer-name="userStore.user.name"
+    :age-group="userStore.user.ageGroup"
+    :gender="userStore.user.gender"
+    :bow-type="userStore.user.bowType"
+    :end-size="endSize"
+    :game-type="gameType"
+    :date="date"
+    @close="showPrintModal = false"
+  />
   <UserNotes :shoot-id="history.selectedShoot.id" :allow-highlight="true" />
 
   <hr />
@@ -102,6 +80,22 @@ function deleteShoot() {
 </template>
 
 <style scoped>
+.download-button {
+  display: block;
+  margin: 2rem auto;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.download-button:hover {
+  background: #45a049;
+}
 h1 {
   text-transform: capitalize;
   text-align: center;
@@ -109,14 +103,6 @@ h1 {
 
 .details {
   text-transform: capitalize;
-}
-
-.name {
-  font-weight: bold;
-}
-
-.signatures {
-  padding: 1em 0 1em 1em;
 }
 
 .signatures p {
@@ -152,3 +138,14 @@ button {
   margin: 1rem 0;
 }
 </style>
+
+const style = document.createElement('style');
+style.textContent = `
+body { font-family: Arial; padding: 20px; }
+table { border-collapse: collapse; width: 100%; }
+td, th { border: 1px solid black; padding: 8px; text-align: center; }
+.score { font-weight: bold; }
+.signatures { margin-top: 2em; }
+#classification { display: none; }
+`;
+

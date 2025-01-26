@@ -18,23 +18,30 @@ const props = defineProps({
   },
   hasX: {
     default: false
+  },
+  forceLandscape: {
+    default: false
   }
 });
-
 const {
   orientation
 } = useScreenOrientation();
 const validScores = computed(() => gameTypeConfig[props.gameType].scores);
 
 </script>
-
 <template>
-  <RoundScoresLandscape v-if="orientation==='landscape-primary'" :scores="scores"
+  <RoundScoresLandscape
+    v-if="forceLandscape || orientation==='landscape-primary'"
+    :scores="scores"
                         :end-size="endSize"
                         :hasX="validScores.includes(X)"
-                        :game-type="gameType" />
-  <RoundScoresPortrait v-else :scores="scores"
-                       :game-type="gameType"
-                       :endSize="endSize"
-                       :hasX="validScores.includes(X)" />
+    :game-type="gameType"
+  />
+  <RoundScoresPortrait
+    v-else
+    :scores="scores"
+    :game-type="gameType"
+    :endSize="endSize"
+    :hasX="validScores.includes(X)"
+  />
 </template>
