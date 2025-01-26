@@ -37,6 +37,7 @@ describe("Print scoresheet", () => {
 
     historyPage.navigateTo();
     historyPage.selectHistoryItem("bray i");
+    cy.contains("Got it!").click();
 
     cy.window().then((win) => {
       cy.stub(win, "open").callsFake(() => {
@@ -44,10 +45,11 @@ describe("Print scoresheet", () => {
       });
     });
 
-    cy.contains("Download Score Sheet").click();
+    cy.get("[data-test=\"view-shoot-save\"]").click();
     cy.get("#captain").type("John Smith");
     cy.get("#location").type("Sherwood Forest");
-    cy.contains("Save Score Sheet").click();
+    cy.get("[data-test=\"view-shoot-save2\"]").click();
+
 
     cy.get("h1").should("contain", "bray i");
     cy.get("h2").should("contain", "Shot at Sherwood Forest");

@@ -8,7 +8,12 @@ defineProps({
 </script>
 
 <template>
-  <button class="save-button" :disabled="disabled" @click="$emit('click')">
+  <button
+    class="save-button"
+    :data-test="$attrs['data-test']"
+    @click="$emit('click')"
+    :disabled="disabled"
+  >
     Save Score Sheet 💾
   </button>
 </template>

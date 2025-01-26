@@ -5,14 +5,22 @@ import { gameTypeConfig } from "@/domain/game_types";
 import { computed, ref } from "vue";
 import RoundScores from "@/components/RoundScores.vue";
 import { useUserStore } from "@/stores/user";
-import { useScreenOrientation } from "@vueuse/core";
+import TipModal from "@/components/TipModal.vue";
 import UserNotes from "@/components/UserNotes.vue";
 import PrintModal from "./components/PrintModal.vue";
 import ArcherDetails from "@/components/ArcherDetails.vue";
 import SaveScoreSheetButton from "@/components/SaveScoreSheetButton.vue";
+import { usePreferencesStore } from "@/stores/preferences";
 
+const preferences = usePreferencesStore();
 
 const showPrintModal = ref(false);
+const showTip = ref(!preferences.hasSeenPrintTip);
+
+function dismissTip() {
+  preferences.dismissPrintTip();
+  showTip.value = false;
+}
 
 const route = useRoute();
 const router = useRouter();
@@ -25,10 +33,6 @@ const endSize = computed(() => gameTypeConfig[history.selectedShoot.gameType].en
 const scores = computed(() => history.selectedShoot.scores);
 const gameType = computed(() => history.selectedShoot.gameType);
 const date = computed(() => history.selectedShoot.date);
-const {
-  orientation
-} = useScreenOrientation();
-
 
 function deleteShoot() {
   if (confirm(`Are you sure you want to delete this shoot? This action cannot be undone.`)) {
@@ -52,9 +56,7 @@ function deleteShoot() {
                  :game-type="gameType" />
 
   </div>
-  <p class="tip" v-if="orientation!=='landscape-primary'">💡 Try turning your phone into landscape to see the full
-    scoresheet</p>
-  <SaveScoreSheetButton @click="showPrintModal = true" />
+  <TipModal v-if="showTip" @close="dismissTip" />
   <PrintModal
     v-if="showPrintModal"
     :shoot="history.selectedShoot"
@@ -66,6 +68,10 @@ function deleteShoot() {
     :game-type="gameType"
     :date="date"
     @close="showPrintModal = false"
+  />
+  <SaveScoreSheetButton
+    data-test="view-shoot-save"
+    @click="showPrintModal = true"
   />
   <UserNotes :shoot-id="history.selectedShoot.id" :allow-highlight="true" />
 
@@ -95,14 +101,6 @@ h1 {
   height: 1.8em;
   padding-left: 1em;
   border: none;
-}
-
-.tip {
-  text-align: center;
-  font-size: 1.2em;
-  font-style: italic;
-  font-weight: bold;
-  margin-top: 1em;
 }
 
 button {

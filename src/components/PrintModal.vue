@@ -129,7 +129,7 @@ function print() {
 
         <div class="button-group">
           <button type="button" @click="emit('close')">Cancel</button>
-          <SaveScoreSheetButton @click="print" :disabled="!targetCaptain.trim()" />
+          <SaveScoreSheetButton @click="print" data-test="view-shoot-save2" :disabled="!targetCaptain.trim()" />
         </div>
       </form>
     </div>
