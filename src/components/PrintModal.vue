@@ -4,6 +4,7 @@ import RoundScores from "./RoundScores.vue";
 import RoundScoresLandscape from "./RoundScoresLandscape.vue";
 import RoundScoresPortrait from "./RoundScoresPortrait.vue";
 import ArcherDetails from "@/components/ArcherDetails.vue";
+import SaveScoreSheetButton from "@/components/SaveScoreSheetButton.vue";
 
 const props = defineProps(["shoot", "archerName", "endSize", "ageGroup", "gender", "bowType", "gameType", "date"]);
 const emit = defineEmits(["close"]);
@@ -128,19 +129,12 @@ function print() {
 
         <div class="button-group">
           <button type="button" @click="emit('close')">Cancel</button>
-          <button
-            type="submit"
-            class="primary"
-            :disabled="!targetCaptain.trim()"
-          >
-            Save Score Sheet 💾
-          </button>
+          <SaveScoreSheetButton @click="print" :disabled="!targetCaptain.trim()" />
         </div>
       </form>
     </div>
   </div>
 </template>
-
 <style scoped>
 .modal-overlay {
   position: fixed;
@@ -155,7 +149,8 @@ function print() {
 }
 
 .modal-content {
-  background: white;
+  background: var(--color-background);
+  color: var(--color-text);
   padding: 2.5rem;
   border-radius: 12px;
   min-width: 400px;
@@ -181,6 +176,9 @@ input {
   width: 100%;
   padding: 0.5rem;
   font-size: 1rem;
+  background-color: var(--color-background-soft);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
 }
 
 .button-group {
@@ -188,29 +186,5 @@ input {
   justify-content: center;
   gap: 1.5rem;
   margin-top: 2rem;
-}
-
-button {
-  padding: 0.5rem 1rem;
-}
-
-button.primary {
-  background: #4CAF50;
-  color: white;
-  border: none;
-  padding: 0.8rem 1.5rem;
-  border-radius: 6px;
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-button.primary:hover {
-  background: #45a049;
-}
-
-button.primary:disabled {
-  background: #cccccc;
-  cursor: not-allowed;
 }
 </style>

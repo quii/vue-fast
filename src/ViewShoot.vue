@@ -9,6 +9,7 @@ import { useScreenOrientation } from "@vueuse/core";
 import UserNotes from "@/components/UserNotes.vue";
 import PrintModal from "./components/PrintModal.vue";
 import ArcherDetails from "@/components/ArcherDetails.vue";
+import SaveScoreSheetButton from "@/components/SaveScoreSheetButton.vue";
 
 
 const showPrintModal = ref(false);
@@ -53,9 +54,7 @@ function deleteShoot() {
   </div>
   <p class="tip" v-if="orientation!=='landscape-primary'">💡 Try turning your phone into landscape to see the full
     scoresheet</p>
-  <button class="download-button" @click="showPrintModal = true">
-    Download Score Sheet 💾
-  </button>
+  <SaveScoreSheetButton @click="showPrintModal = true" />
   <PrintModal
     v-if="showPrintModal"
     :shoot="history.selectedShoot"
@@ -80,29 +79,12 @@ function deleteShoot() {
 </template>
 
 <style scoped>
-.download-button {
-  display: block;
+.save-button {
   margin: 2rem auto;
-  padding: 1rem 2rem;
-  font-size: 1.2rem;
-  background: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.download-button:hover {
-  background: #45a049;
 }
 h1 {
   text-transform: capitalize;
   text-align: center;
-}
-
-.details {
-  text-transform: capitalize;
 }
 
 .signatures p {
@@ -138,14 +120,3 @@ button {
   margin: 1rem 0;
 }
 </style>
-
-const style = document.createElement('style');
-style.textContent = `
-body { font-family: Arial; padding: 20px; }
-table { border-collapse: collapse; width: 100%; }
-td, th { border: 1px solid black; padding: 8px; text-align: center; }
-.score { font-weight: bold; }
-.signatures { margin-top: 2em; }
-#classification { display: none; }
-`;
-
