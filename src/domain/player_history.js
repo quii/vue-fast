@@ -2,6 +2,12 @@ import { userDataFixer } from "@/domain/user_data_fixer";
 import { addTopScoreIndicator } from "@/domain/topscores";
 import { addClassificationsToHistory } from "@/domain/classification";
 
+Date.prototype.addDays = function(days) {
+  var date = new Date(this.valueOf());
+  date.setDate(date.getDate() + days);
+  return date;
+};
+
 export function NewPlayerHistory(storage) {
   storage.value = userDataFixer(storage.value);
 
@@ -42,14 +48,17 @@ export function NewPlayerHistory(storage) {
       return storage.value.reduce((acc, item) => acc + item.scores.length, 0);
     },
     getRecentGameTypes() {
-      const sixWeeksAgo = new Date();
-      sixWeeksAgo.setDate(sixWeeksAgo.getDate() - 42);
+      const sixWeeksAgo = new Date().addDays(-42);
+      const gameTypes = new Set();
 
-      const recentGames = storage.value
-        .filter(shoot => new Date(shoot.date) > sixWeeksAgo)
-        .map(shoot => shoot.gameType);
+      for (let i = storage.value.length - 1; i >= 0; i--) {
+        const game = storage.value[i];
+        if (new Date(game.date) > sixWeeksAgo) {
+          gameTypes.add(game.gameType);
+        }
+      }
 
-      return [...new Set(recentGames)]; // unique values only
+      return Array.from(gameTypes);
     }
   };
 }
