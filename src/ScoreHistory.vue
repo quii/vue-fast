@@ -25,8 +25,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="item in filteredHistory"
-            :key="item.id">
+        <tr v-for="item in filteredHistory" :key="`${item.id}-${item.date}-${item.gameType}-${item.score}`">
           <td @click="view(item.id)">{{ parseAndRenderDate(item.date) }}</td>
           <td @click="view(item.id)">{{ item.gameType }}</td>
           <td @click="view(item.id)" :class="{highlight: item.topScore}">{{ item.score }}</td>
@@ -105,7 +104,7 @@ watchEffect(async () => {
     dateRange: dateFilter.value,
     classification: classificationFilter.value
   }, user.user);
-})
+});
 
 function handleClassificationFilter(classification) {
   classificationFilter.value = classification;
@@ -225,6 +224,7 @@ p {
 .diary-entry:first-child {
   margin-top: 0;
 }
+
 .diary-entry {
   margin: 1rem;
   padding: 1rem 0.5rem 0 0.5rem;
