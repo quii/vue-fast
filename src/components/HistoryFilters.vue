@@ -1,27 +1,43 @@
 <script setup>
 import RoundFilterModal from "./RoundFilterModal.vue";
+import DateRangeFilterModal from "./DateRangeFilterModal.vue";
+import ClassificationFilterModal from "./ClassificationFilterModal.vue";
 import { ref } from "vue";
 
-const props = defineProps({
+defineProps({
   pbFilterActive: Boolean,
   roundFilterActive: Boolean,
+  dateFilterActive: Boolean,
+  classificationFilterActive: Boolean,
   availableRounds: Array
 });
 
 const showRoundModal = ref(false);
+const showDateModal = ref(false);
+const showClassificationModal = ref(false);
 const emit = defineEmits(["filterDate", "filterRound", "filterClassification", "toggle-pb"]);
 </script>
 
 <template>
   <div class="filters">
-    <button class="filter-button" @click="emit('filterDate')">📅</button>
+    <button
+      class="filter-button"
+      :class="{ active: dateFilterActive }"
+      @click="showDateModal = true"
+    >📅
+    </button>
     <button
       class="filter-button"
       :class="{ active: roundFilterActive }"
       @click="showRoundModal = true"
     >🏹
     </button>
-    <button class="filter-button" @click="emit('filterClassification')">🏅</button>
+    <button
+      class="filter-button"
+      :class="{ active: classificationFilterActive }"
+      @click="showClassificationModal = true"
+    >🏅
+    </button>
     <button
       class="filter-button"
       :class="{ active: pbFilterActive }"
@@ -35,6 +51,18 @@ const emit = defineEmits(["filterDate", "filterRound", "filterClassification", "
     :rounds="availableRounds"
     @close="showRoundModal = false"
     @select="round => emit('filterRound', round)"
+  />
+
+  <DateRangeFilterModal
+    v-if="showDateModal"
+    @close="showDateModal = false"
+    @select="dates => emit('filterDate', dates)"
+  />
+
+  <ClassificationFilterModal
+    v-if="showClassificationModal"
+    @close="showClassificationModal = false"
+    @select="classification => emit('filterClassification', classification)"
   />
 </template>
 

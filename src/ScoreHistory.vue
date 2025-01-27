@@ -6,10 +6,15 @@
       <HistoryFilters
         :pb-filter-active="pbFilterActive"
         :round-filter-active="roundFilterActive"
+        :date-filter-active="dateFilterActive"
+        :classification-filter-active="classificationFilterActive"
         :available-rounds="availableRounds"
         @toggle-pb="handlePBToggle"
         @filter-round="handleRoundFilter"
+        @filter-date="handleDateFilter"
+        @filter-classification="handleClassificationFilter"
       />
+
       <table>
         <thead>
         <tr>
@@ -72,7 +77,11 @@ const isDiaryMode = ref(false);
 
 const roundFilter = ref("");
 const roundFilterActive = computed(() => roundFilter.value !== "");
-
+const dateFilter = ref({ startDate: "", endDate: "" });
+const dateFilterActive = computed(() => Boolean(dateFilter.value.startDate || dateFilter.value.endDate));
+const classificationFilter = ref("");
+const classificationFilterActive = computed(() => Boolean(classificationFilter.value));
+const pbFilterActive = ref(false);
 const startX = ref(0);
 const sortedHistoryData = ref([]);
 
@@ -86,8 +95,6 @@ watchEffect(async () => {
 
 const availableRounds = computed(() => [...new Set(sortedHistoryData.value.map(h => h.gameType))]);
 
-
-const pbFilterActive = ref(false);
 const filteredHistory = computed(() => {
   let result = sortedHistoryData.value;
 
@@ -99,8 +106,33 @@ const filteredHistory = computed(() => {
     result = result.filter(shoot => shoot.gameType === roundFilter.value);
   }
 
+  if (dateFilter.value.startDate || dateFilter.value.endDate) {
+    result = result.filter(shoot => {
+      const shootDate = new Date(shoot.date);
+      if (dateFilter.value.startDate && shootDate < new Date(dateFilter.value.startDate)) {
+        return false;
+      }
+      if (dateFilter.value.endDate && shootDate > new Date(dateFilter.value.endDate)) {
+        return false;
+      }
+      return true;
+    })
+  }
+
+  if (classificationFilter.value) {
+    result = result.filter(shoot => shoot.classification?.name === classificationFilter.value);
+  }
+
   return result;
 })
+
+function handleClassificationFilter(classification) {
+  classificationFilter.value = classification;
+}
+
+function handleDateFilter(dates) {
+  dateFilter.value = dates;
+}
 
 function handleRoundFilter(round) {
   roundFilter.value = round;
