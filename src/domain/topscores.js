@@ -7,6 +7,9 @@ export function addTopScoreIndicator(scoringHistory) {
 
     // Loop through the scoring history data to find the best scores for each distance and game type
     for (const entry of scoringHistoryCopy) {
+        if (entry.gameType.toLowerCase().includes("practice")) {
+            continue;
+        }
         const distance = 0;
         const gameType = entry.gameType;
         const score = entry.score;
