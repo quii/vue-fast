@@ -60,6 +60,9 @@ export function NewPlayerHistory(storage) {
 
       return Array.from(gameTypes);
     },
+    getAvailableRounds() {
+      return [...new Set(storage.value.map(h => h.gameType))];
+    },
     async getFilteredHistory(filters, user) {
       let result = await this.sortedHistory(user.gender, user.ageGroup, user.bowType);
 

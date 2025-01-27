@@ -83,17 +83,7 @@ const classificationFilter = ref("");
 const classificationFilterActive = computed(() => Boolean(classificationFilter.value));
 const pbFilterActive = ref(false);
 const startX = ref(0);
-
-//todo: this should all be moved into the store too
-const sortedHistoryData = ref([]);
-watchEffect(async () => {
-  sortedHistoryData.value = await store.sortedHistory(
-    user.user.gender,
-    user.user.ageGroup,
-    user.user.bowType
-  );
-});
-const availableRounds = computed(() => [...new Set(sortedHistoryData.value.map(h => h.gameType))]);
+const availableRounds = computed(() => store.getAvailableRounds());
 
 const filteredHistory = ref([]);
 
@@ -105,6 +95,10 @@ watchEffect(async () => {
     classification: classificationFilter.value
   }, user.user);
 });
+
+const totalArrows = computed(() => store.totalArrows());
+
+const shootsWithNotes = computed(() => filteredHistory.value.filter(shoot => notesStore.getNotesByShootId(shoot.id).length > 0));
 
 function handleClassificationFilter(classification) {
   classificationFilter.value = classification;
@@ -161,12 +155,6 @@ function parseAndRenderDate(date) {
 function view(id) {
   router.push({ name: "viewHistory", params: { id } });
 }
-
-const totalArrows = computed(() => store.totalArrows());
-
-const shootsWithNotes = computed(() => {
-  return sortedHistoryData.value.filter(shoot => notesStore.getNotesByShootId(shoot.id).length > 0);
-});
 </script>
 
 <style scoped>
