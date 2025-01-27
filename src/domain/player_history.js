@@ -59,8 +59,40 @@ export function NewPlayerHistory(storage) {
       }
 
       return Array.from(gameTypes);
+    },
+    async getFilteredHistory(filters, user) {
+      let result = await this.sortedHistory(user.gender, user.ageGroup, user.bowType);
+
+      if (filters.pbOnly) {
+        result = result.filter(shoot => shoot.topScore);
+      }
+
+      if (filters.round) {
+        result = result.filter(shoot => shoot.gameType === filters.round);
+      }
+
+      if (filters.dateRange.startDate || filters.dateRange.endDate) {
+        result = result.filter(shoot => {
+          const shootDate = new Date(shoot.date);
+          if (filters.dateRange.startDate && shootDate < new Date(filters.dateRange.startDate)) {
+            return false;
+          }
+          if (filters.dateRange.endDate && shootDate > new Date(filters.dateRange.endDate)) {
+            return false;
+          }
+          return true;
+        });
+      }
+
+      if (filters.classification) {
+        result = result.filter(shoot => shoot.classification?.name === filters.classification);
+      }
+
+      return result;
     }
+
   };
+
 }
 
 const byId = id => (item) => item.id !== id;
