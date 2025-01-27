@@ -6,6 +6,8 @@ import { classificationList } from "@/domain/classificationList";
 const emit = defineEmits(["close", "select"]);
 const selectedClassification = ref("");
 
+const filteredClassifications = classificationList.filter(c => c !== "PB");
+
 function handleSelect() {
   emit("select", selectedClassification.value);
   emit("close");
@@ -18,7 +20,7 @@ function handleSelect() {
 
     <select v-model="selectedClassification" class="classification-select">
       <option value="">All Classifications</option>
-      <option v-for="classification in classificationList" :key="classification" :value="classification">
+      <option v-for="classification in filteredClassifications" :key="classification" :value="classification">
         {{ classification }}
       </option>
     </select>
