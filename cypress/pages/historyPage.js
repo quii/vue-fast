@@ -1,6 +1,12 @@
 class HistoryPage {
   navigateTo() {
     cy.get("a").contains("History").click();
+    // If the tip modal exists, dismiss it
+    cy.get("body").then($body => {
+      if ($body.find("button:contains(\"Got it!\")").length > 0) {
+        cy.contains("button", "Got it!").click();
+      }
+    });
   }
 
   selectHistoryItem(item) {

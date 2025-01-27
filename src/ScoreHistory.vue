@@ -1,4 +1,5 @@
 <template>
+  <HistoryTipModal v-if="showTip" @close="dismissTip" />
   <div class="fullpage" @touchstart="handleTouchStart"
        @touchend="handleTouchEnd">
 
@@ -68,11 +69,14 @@ import { computed } from "vue";
 import { useUserStore } from "@/stores/user";
 import { useNotesStore } from "@/stores/user_notes";
 import HistoryFilters from "@/components/HistoryFilters.vue";
+import { usePreferencesStore } from "@/stores/preferences";
+import HistoryTipModal from "@/components/HistoryTipModal.vue";
 
 const store = useHistoryStore();
 const router = useRouter();
 const user = useUserStore();
 const notesStore = useNotesStore();
+const preferences = usePreferencesStore();
 
 const isDiaryMode = ref(false);
 const roundFilter = ref("");
@@ -84,6 +88,7 @@ const classificationFilterActive = computed(() => Boolean(classificationFilter.v
 const pbFilterActive = ref(false);
 const startX = ref(0);
 const availableRounds = computed(() => store.getAvailableRounds());
+const showTip = ref(!preferences.hasSeenHistoryTip);
 
 const filteredHistory = ref([]);
 
@@ -125,6 +130,11 @@ function handleReset() {
   roundFilter.value = "";
   dateFilter.value = { startDate: "", endDate: "" };
   classificationFilter.value = "";
+}
+
+function dismissTip() {
+  preferences.dismissHistoryTip();
+  showTip.value = false;
 }
 
 function handleTouchEnd(e) {
