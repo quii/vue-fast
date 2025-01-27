@@ -13,6 +13,7 @@
         @filter-round="handleRoundFilter"
         @filter-date="handleDateFilter"
         @filter-classification="handleClassificationFilter"
+        @reset="handleReset"
       />
 
       <table>
@@ -124,6 +125,13 @@ function handlePBToggle() {
 
 function handleTouchStart(e) {
   startX.value = e.touches[0].screenX;
+}
+
+function handleReset() {
+  pbFilterActive.value = false;
+  roundFilter.value = "";
+  dateFilter.value = { startDate: "", endDate: "" };
+  classificationFilter.value = "";
 }
 
 function handleTouchEnd(e) {

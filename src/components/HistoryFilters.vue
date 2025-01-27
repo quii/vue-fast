@@ -15,7 +15,7 @@ defineProps({
 const showRoundModal = ref(false);
 const showDateModal = ref(false);
 const showClassificationModal = ref(false);
-const emit = defineEmits(["filterDate", "filterRound", "filterClassification", "toggle-pb"]);
+const emit = defineEmits(["filterDate", "filterRound", "filterClassification", "toggle-pb", "reset"]);
 </script>
 
 <template>
@@ -43,6 +43,11 @@ const emit = defineEmits(["filterDate", "filterRound", "filterClassification", "
       :class="{ active: pbFilterActive }"
       @click="emit('toggle-pb')"
     >🌟
+    </button>
+    <button
+      class="filter-button"
+      @click="emit('reset')"
+    >🔄
     </button>
   </div>
 
