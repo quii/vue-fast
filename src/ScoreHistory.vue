@@ -3,6 +3,13 @@
        @touchend="handleTouchEnd">
 
     <div v-if="!isDiaryMode">
+      <HistoryFilters
+        :pb-filter-active="pbFilterActive"
+        :round-filter-active="roundFilterActive"
+        :available-rounds="availableRounds"
+        @toggle-pb="handlePBToggle"
+        @filter-round="handleRoundFilter"
+      />
       <table>
         <thead>
         <tr>
@@ -12,7 +19,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="item in sortedHistoryData"
+        <tr v-for="item in filteredHistory"
             :key="item.id">
           <td @click="view(item.id)">{{ parseAndRenderDate(item.date) }}</td>
           <td @click="view(item.id)">{{ item.gameType }}</td>
@@ -55,12 +62,16 @@ import { useRouter } from "vue-router";
 import { computed } from "vue";
 import { useUserStore } from "@/stores/user";
 import { useNotesStore } from "@/stores/user_notes";
+import HistoryFilters from "@/components/HistoryFilters.vue";
 
 const store = useHistoryStore();
 const router = useRouter();
 const user = useUserStore();
 const notesStore = useNotesStore();
 const isDiaryMode = ref(false);
+
+const roundFilter = ref("");
+const roundFilterActive = computed(() => roundFilter.value !== "");
 
 const startX = ref(0);
 const sortedHistoryData = ref([]);
@@ -72,6 +83,32 @@ watchEffect(async () => {
     user.user.bowType
   );
 });
+
+const availableRounds = computed(() => [...new Set(sortedHistoryData.value.map(h => h.gameType))]);
+
+
+const pbFilterActive = ref(false);
+const filteredHistory = computed(() => {
+  let result = sortedHistoryData.value;
+
+  if (pbFilterActive.value) {
+    result = result.filter(shoot => shoot.topScore);
+  }
+
+  if (roundFilter.value) {
+    result = result.filter(shoot => shoot.gameType === roundFilter.value);
+  }
+
+  return result;
+})
+
+function handleRoundFilter(round) {
+  roundFilter.value = round;
+}
+
+function handlePBToggle() {
+  pbFilterActive.value = !pbFilterActive.value;
+}
 
 function handleTouchStart(e) {
   startX.value = e.touches[0].screenX;
@@ -202,13 +239,3 @@ p {
   margin-left: 0.5rem;
 }
 </style>
-
-async function loadClassificationData(sex, bowtype, age) {
-if (sex === "male") sex = "men";
-if (sex === "female") sex = "women";
-
-const path = `/data/classifications/${sex}/${bowtype}/${age}.json`;
-const module = await import(/* @vite-ignore */ path);
-return module.default;
-}
-
