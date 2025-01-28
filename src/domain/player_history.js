@@ -1,6 +1,7 @@
 import { userDataFixer } from "@/domain/user_data_fixer";
 import { addTopScoreIndicator } from "@/domain/topscores";
 import { addClassificationsToHistory } from "@/domain/classification";
+import {addHandicapToHistory} from "@/domain/handicap";
 
 Date.prototype.addDays = function(days) {
   var date = new Date(this.valueOf());
@@ -37,7 +38,8 @@ export function NewPlayerHistory(storage) {
     async sortedHistory(gender, age, bowType) {
       const scoresWithIndicator = addTopScoreIndicator(storage.value);
       const scoresWithClassification = await addClassificationsToHistory(gender, age, bowType, scoresWithIndicator);
-      return scoresWithClassification.sort(sortByDate);
+      const scoresWithHandicap = await addHandicapToHistory(scoresWithClassification);
+      return scoresWithHandicap.sort(sortByDate);
     },
     personalBest(round) {
       const recordsForRound = storage.value.filter(byRound(round)).map(x => x.score);
