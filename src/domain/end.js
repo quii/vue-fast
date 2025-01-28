@@ -1,46 +1,46 @@
 import { convertToValue } from "@/domain/scores";
 import { gameTypeConfig } from "@/domain/game_types";
 
-export function calculateScoreIsValidForEnd(scores, gameType) {
-    return (score) => {
-        const gameTypeConf = gameTypeConfig[gameType];
-        let endSize = gameTypeConf.endSize;
-        if (!gameTypeConf?.isOutdoor && gameType !== "worcester") {
-            endSize = 3;
-        }
+const MAX_SCORE = Infinity;
 
+function convertScore(score, round) {
+    if (score === "X") {
+        return MAX_SCORE;
+    }
+    return convertToValue(score, round);
+}
+
+function getEndSize(round) {
+    const roundConfig = gameTypeConfig[round];
+    if (!roundConfig?.isOutdoor && round !== "worcester") {
+        return 3;
+    }
+    return roundConfig.endSize;
+}
+
+function getLowestScoreForRecentEnd(scores, endSize = 6, round) {
+    const scoresAsValues = scores.map(score => convertScore(score, round));
+    const recentEndIndex = scoresAsValues.length % endSize;
+
+    if (recentEndIndex === 0) {
+        return MAX_SCORE;
+    }
+
+    return scoresAsValues
+      .slice(-recentEndIndex)
+      .reduce((min, score) => Math.min(min, score), MAX_SCORE);
+}
+
+export function calculateScoreIsValidForEnd(scores, round) {
+    return (score) => {
+        const endSize = getEndSize(round);
         const lowestScore = getLowestScoreForRecentEnd(scores, endSize);
+
         if (score === "X" && lowestScore <= 10) {
             return false;
         }
-        const scoreValue = convertToValue(score, gameType);
-        return Number(scoreValue) <= Number(lowestScore);
+
+        const scoreValue = convertScore(score, round);
+        return scoreValue <= lowestScore;
     };
-}
-
-function getLowestScoreForRecentEnd(scores, endSize = 6, gameType) {
-    const scoresAsValues = scores.map(convertXToInfinity).map(x => convertToValue(x, gameType));
-    const recentEndIndex = scoresAsValues.length % endSize;
-
-    if(recentEndIndex===0) {
-        return Infinity
-    }
-
-    const recentEndScores = scoresAsValues.slice(-recentEndIndex);
-
-    let minScore = Infinity;
-    for (let i = 0; i < recentEndScores.length; i++) {
-        if (recentEndScores[i] < minScore) {
-            minScore = recentEndScores[i];
-        }
-    }
-
-    return minScore;
-}
-
-function convertXToInfinity(score) {
-    if (score === "X") {
-        return Infinity;
-    }
-    return score;
 }

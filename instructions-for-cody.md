@@ -49,6 +49,8 @@ rules; this app also takes care of this complexity for the archer.
 - I expect us to think about the "API" of our domain, to not expose unnecessary details, keep things private when
   possible.
 - I prefer to have public functions at the top of the file, and private functions at the bottom.
+- I want consistency with respect to defining functions. Arrow functions are fine for small lambdas within functions, or
+  for returning functions within a function, but for top-level, please prefer the function syntax
 
 ## General rules around archery to keep in mind
 
