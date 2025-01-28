@@ -2,8 +2,9 @@ import { userDataFixer } from "@/domain/user_data_fixer";
 import { addTopScoreIndicator } from "@/domain/topscores";
 import { addClassificationsToHistory } from "@/domain/classification";
 import { filterByClassification, filterByDateRange, filterByPB, filterByRound } from "@/domain/history_filters";
+import { addHandicapToHistory } from "@/domain/handicap";
 
-Date.prototype.addDays = function(days) {
+Date.prototype.addDays = function (days) {
   var date = new Date(this.valueOf());
   date.setDate(date.getDate() + days);
   return date;
@@ -39,7 +40,8 @@ export class PlayerHistory {
   async sortedHistory(gender, age, bowType) {
     const scoresWithIndicator = addTopScoreIndicator(this.storage.value);
     const scoresWithClassification = await addClassificationsToHistory(gender, age, bowType, scoresWithIndicator);
-    return scoresWithClassification.sort((a, b) => new Date(b.date) - new Date(a.date));
+    const scoresWithHandicaps = await addHandicapToHistory(scoresWithClassification)
+    return scoresWithHandicaps.sort((a, b) => new Date(b.date) - new Date(a.date));
   }
 
   personalBest(round) {
