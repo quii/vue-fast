@@ -1,6 +1,7 @@
 import { userDataFixer } from "@/domain/user_data_fixer";
 import { addTopScoreIndicator } from "@/domain/topscores";
 import { addClassificationsToHistory } from "@/domain/classification";
+import { filterByClassification, filterByDateRange, filterByPB, filterByRound } from "@/domain/history_filters";
 
 Date.prototype.addDays = function(days) {
   var date = new Date(this.valueOf());
@@ -8,97 +9,92 @@ Date.prototype.addDays = function(days) {
   return date;
 };
 
-export function NewPlayerHistory(storage) {
-  storage.value = userDataFixer(storage.value);
+export class PlayerHistory {
+  constructor(storage) {
+    this.storage = storage;
+    this.storage.value = userDataFixer(this.storage.value);
+  }
 
-  return {
-    add: (date, score, gameType, scores, unit) => {
-      let maxId = storage.value.map(x => x.id).sort((a, b) => a.score - b.score).slice(-1)[0];
-      if (!maxId) {
-        maxId = 0;
-      }
-      const nextId = parseInt(maxId, 10) + 1;
-      storage.value.push({
-        id: nextId,
-        date,
-        score,
-        gameType,
-        scores,
-        unit
-      });
-      return nextId;
-    },
-    remove: (id) => {
-      storage.value = storage.value.filter(byId(id));
-    },
-    importHistory: (history) => {
-      storage.value = userDataFixer(history);
-    },
-    async sortedHistory(gender, age, bowType) {
-      const scoresWithIndicator = addTopScoreIndicator(storage.value);
-      const scoresWithClassification = await addClassificationsToHistory(gender, age, bowType, scoresWithIndicator);
-      return scoresWithClassification.sort(sortByDate);
-    },
-    personalBest(round) {
-      const recordsForRound = storage.value.filter(byRound(round)).map(x => x.score);
-      recordsForRound?.sort(byScore);
-      return recordsForRound?.[0];
-    },
-    totalArrows() {
-      return storage.value.reduce((acc, item) => acc + item.scores.length, 0);
-    },
-    getRecentGameTypes() {
-      const sixWeeksAgo = new Date().addDays(-42);
-      const gameTypes = new Set();
+  add(date, score, gameType, scores, unit) {
+    const nextId = generateNextId(this.storage.value);
+    this.storage.value.push({
+      id: nextId,
+      date,
+      score,
+      gameType,
+      scores,
+      unit
+    });
+    return nextId;
+  }
 
-      for (let i = storage.value.length - 1; i >= 0; i--) {
-        const game = storage.value[i];
-        if (new Date(game.date) > sixWeeksAgo) {
-          gameTypes.add(game.gameType);
-        }
-      }
+  remove(id) {
+    this.storage.value = this.storage.value.filter(item => item.id !== id);
+  }
 
-      return Array.from(gameTypes);
-    },
-    getAvailableRounds() {
-      return [...new Set(storage.value.map(h => h.gameType))];
-    },
-    async getFilteredHistory(filters, user) {
-      let result = await this.sortedHistory(user.gender, user.ageGroup, user.bowType);
+  importHistory(history) {
+    this.storage.value = userDataFixer(history);
+  }
 
-      if (filters.pbOnly) {
-        result = result.filter(shoot => shoot.topScore);
-      }
+  async sortedHistory(gender, age, bowType) {
+    const scoresWithIndicator = addTopScoreIndicator(this.storage.value);
+    const scoresWithClassification = await addClassificationsToHistory(gender, age, bowType, scoresWithIndicator);
+    return scoresWithClassification.sort((a, b) => new Date(b.date) - new Date(a.date));
+  }
 
-      if (filters.round) {
-        result = result.filter(shoot => shoot.gameType === filters.round);
-      }
+  personalBest(round) {
+    const roundScores = getScoresForRound(this.storage.value, round);
+    return getHighestScore(roundScores);
+  }
 
-      if (filters.dateRange?.startDate || filters.dateRange?.endDate) {
-        result = result.filter(shoot => {
-          const shootDate = new Date(shoot.date);
-          if (filters.dateRange.startDate && shootDate < new Date(filters.dateRange.startDate)) {
-            return false;
-          }
-          if (filters.dateRange.endDate && shootDate > new Date(filters.dateRange.endDate)) {
-            return false;
-          }
-          return true;
-        });
-      }
+  totalArrows() {
+    return this.storage.value.reduce((acc, item) => acc + item.scores.length, 0);
+  }
 
-      if (filters.classification) {
-        result = result.filter(shoot => shoot.classification?.name === filters.classification);
-      }
+  getRecentGameTypes() {
+    const recentGames = this.storage.value.filter(game => isWithinLastSixWeeks(game.date));
+    return getUniqueGameTypes(recentGames);
+  }
 
-      return result;
-    }
+  getAvailableRounds() {
+    return [...new Set(this.storage.value.map(h => h.gameType))];
+  }
 
-  };
+  async getFilteredHistory(filters, user) {
+    const baseHistory = await this.sortedHistory(user.gender, user.ageGroup, user.bowType);
+    const filteredByPB = filterByPB(baseHistory, filters.pbOnly);
+    const filteredByRound = filterByRound(filteredByPB, filters.round);
+    const filteredByDateRange = filterByDateRange(filteredByRound, filters.dateRange);
+    const filteredByClassification = filterByClassification(filteredByDateRange, filters.classification);
 
+    return filteredByClassification;
+  }
 }
 
-const byId = id => (item) => item.id !== id;
-const byRound = round => x => x.gameType === round;
-const byScore = (a, b) => b - a;
-const sortByDate = (a, b) => new Date(b.date) - new Date(a.date);
+function generateNextId(history) {
+  const maxId = history
+    .map(x => x.id)
+    .sort((a, b) => a.score - b.score)
+    .slice(-1)[0] || 0;
+  return parseInt(maxId, 10) + 1;
+}
+
+function isWithinLastSixWeeks(date) {
+  const sixWeeksAgo = new Date().addDays(-42);
+  return new Date(date) > sixWeeksAgo;
+}
+
+function getUniqueGameTypes(history) {
+  return [...new Set(history.map(game => game.gameType))];
+}
+
+function getScoresForRound(history, round) {
+  return history
+    .filter(x => x.gameType === round)
+    .map(x => x.score);
+}
+
+function getHighestScore(scores) {
+  const sortedScores = scores.sort((a, b) => b - a);
+  return sortedScores[0];
+}

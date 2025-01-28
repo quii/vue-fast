@@ -32,6 +32,16 @@ rules; this app also takes care of this complexity for the archer.
 - End-to-end tests using cypress should keep in mind the test pyramid. We use these for smoke tests of key journeys,
   feel free to suggest cheaper unit tests to exercise other parts of the code.
 - We use page objects with our end-to-end tests to simplify writing and reading them, and promote re-use
+- When dealing with a chain of operations, prefer explicit, well-named intermediate variables over nested function
+  calls. Each step should be clear and readable on its own line, showing the transformation of data through your
+  program. This makes the code's intent obvious and easier to debug.
+- Public methods should read like a high-level description of what the code does, not how it does it. For example,
+  getFilteredHistory inside @player_history shows a clear sequence of filter operations being applied, while the
+  implementation details of how each filter works live elsewhere. This separation makes the code's intent clear at each
+  level - the public API tells a story of what happens, while the implementation details are encapsulated in well-named,
+  focused functions.
+  - This principle is exemplified in how getFilteredHistory reads like a clear set of steps (filterByPB, filterByRound,
+    etc) while the actual filtering logic lives in the history_filters.js module.
 
 ## Some TDD principles
 
@@ -51,6 +61,9 @@ rules; this app also takes care of this complexity for the archer.
 - I prefer to have public functions at the top of the file, and private functions at the bottom.
 - I want consistency with respect to defining functions. Arrow functions are fine for small lambdas within functions, or
   for returning functions within a function, but for top-level, please prefer the function syntax
+- Whilst we enjoy using pure functions to calculate things, sometimes we want to use JavaScript classes to encapsulate
+  quering and managing state, usually with our Pinia stores. Don't make a function that returns an object with a bunch
+  of methods, this is hard to read. Use a class.
 
 ## General rules around archery to keep in mind
 

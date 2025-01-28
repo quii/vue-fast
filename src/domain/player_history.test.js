@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { NewPlayerHistory } from "@/domain/player_history";
+import { PlayerHistory } from "@/domain/player_history";
 
 beforeEach(() => {
   global.fetch = vi.fn(() =>
@@ -17,7 +17,7 @@ beforeEach(() => {
 describe("player history", () => {
   test("keeps records sorted and adds top score indicator", async () => {
     const storage = { value: [] };
-    const playerHistory = NewPlayerHistory(storage);
+    const playerHistory = new PlayerHistory(storage);
 
     playerHistory.add(new Date().addDays(2), 456, "national 50", [1, 2, 3], "yd");
     playerHistory.add(new Date().addDays(5), 200, "national 50", [1, 2, 3], "yd");
@@ -35,7 +35,7 @@ describe("player history", () => {
 
   test("it can retrieve your personal best for a round", () => {
     const storage = { value: [] };
-    const playerHistory = NewPlayerHistory(storage);
+    const playerHistory = new PlayerHistory(storage);
 
     playerHistory.add(new Date(), 456, "national 50", [1, 2, 3], "yd");
     playerHistory.add(new Date(), 826, "windsor 50", [1, 2, 3], "yd");
@@ -47,7 +47,7 @@ describe("player history", () => {
 
   test("it can total up the number of arrows shot", () => {
     const storage = { value: [] };
-    const playerHistory = NewPlayerHistory(storage);
+    const playerHistory = new PlayerHistory(storage);
 
     playerHistory.add(new Date(), 456, "national 50", [1, 2, 3], "yd");
     expect(playerHistory.totalArrows()).toEqual(3);
@@ -55,7 +55,7 @@ describe("player history", () => {
 
   test("gets unique game types from recent games, ordered by most recent first", () => {
     const storage = { value: [] };
-    const playerHistory = NewPlayerHistory(storage);
+    const playerHistory = new PlayerHistory(storage);
 
     const now = new Date();
     const oneWeekAgo = new Date().addDays(-7);
@@ -73,7 +73,7 @@ describe("player history", () => {
 
   test("filtered history - personal bests only", async () => {
     const storage = { value: [] };
-    const playerHistory = NewPlayerHistory(storage);
+    const playerHistory = new PlayerHistory(storage);
     const user = { gender: "male", ageGroup: "senior", bowType: "recurve" };
 
     playerHistory.add(new Date(), 100, "national", [1, 2, 3], "yd");
@@ -89,7 +89,7 @@ describe("player history", () => {
 
   test("filtered history - by round", async () => {
     const storage = { value: [] };
-    const playerHistory = NewPlayerHistory(storage);
+    const playerHistory = new PlayerHistory(storage);
     const user = { gender: "male", ageGroup: "senior", bowType: "recurve" };
 
     playerHistory.add(new Date(), 100, "national", [1, 2, 3], "yd");
@@ -104,7 +104,7 @@ describe("player history", () => {
 
   test("filtered history - by date range", async () => {
     const storage = { value: [] };
-    const playerHistory = NewPlayerHistory(storage);
+    const playerHistory = new PlayerHistory(storage);
     const user = { gender: "male", ageGroup: "senior", bowType: "recurve" };
 
     const today = new Date();
@@ -128,7 +128,7 @@ describe("player history", () => {
 
   test("filtered history - by classification", async () => {
     const storage = { value: [] };
-    const playerHistory = NewPlayerHistory(storage);
+    const playerHistory = new PlayerHistory(storage);
     const user = { gender: "male", ageGroup: "senior", bowType: "recurve" };
 
     playerHistory.add(new Date(), 490, "windsor", [1, 2, 3], "yd");
@@ -150,7 +150,7 @@ describe("player history", () => {
 
   test("filtered history - combining multiple filters", async () => {
     const storage = { value: [] };
-    const playerHistory = NewPlayerHistory(storage);
+    const playerHistory = new PlayerHistory(storage);
     const user = { gender: "male", ageGroup: "senior", bowType: "recurve" };
 
     const today = new Date();
