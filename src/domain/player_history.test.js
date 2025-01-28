@@ -70,4 +70,114 @@ describe("player history", () => {
     const recentTypes = playerHistory.getRecentGameTypes();
     expect(recentTypes).toEqual(["national", "windsor"]);
   });
+
+  test("filtered history - personal bests only", async () => {
+    const storage = { value: [] };
+    const playerHistory = NewPlayerHistory(storage);
+    const user = { gender: "male", ageGroup: "senior", bowType: "recurve" };
+
+    playerHistory.add(new Date(), 100, "national", [1, 2, 3], "yd");
+    playerHistory.add(new Date(), 200, "national", [1, 2, 3], "yd");
+    playerHistory.add(new Date(), 150, "windsor", [1, 2, 3], "yd");
+
+    const filters = { pbOnly: true };
+    const filtered = await playerHistory.getFilteredHistory(filters, user);
+
+    expect(filtered.length).toBe(2);
+    expect(filtered.every(score => score.topScore)).toBe(true);
+  });
+
+  test("filtered history - by round", async () => {
+    const storage = { value: [] };
+    const playerHistory = NewPlayerHistory(storage);
+    const user = { gender: "male", ageGroup: "senior", bowType: "recurve" };
+
+    playerHistory.add(new Date(), 100, "national", [1, 2, 3], "yd");
+    playerHistory.add(new Date(), 200, "windsor", [1, 2, 3], "yd");
+
+    const filters = { round: "national" };
+    const filtered = await playerHistory.getFilteredHistory(filters, user);
+
+    expect(filtered.length).toBe(1);
+    expect(filtered[0].gameType).toBe("national");
+  });
+
+  test("filtered history - by date range", async () => {
+    const storage = { value: [] };
+    const playerHistory = NewPlayerHistory(storage);
+    const user = { gender: "male", ageGroup: "senior", bowType: "recurve" };
+
+    const today = new Date();
+    const lastWeek = new Date().addDays(-7);
+    const twoWeeksAgo = new Date().addDays(-14);
+
+    playerHistory.add(today, 100, "national", [1, 2, 3], "yd");
+    playerHistory.add(lastWeek, 200, "national", [1, 2, 3], "yd");
+    playerHistory.add(twoWeeksAgo, 300, "national", [1, 2, 3], "yd");
+
+    const filters = {
+      dateRange: {
+        startDate: lastWeek,
+        endDate: today
+      }
+    };
+    const filtered = await playerHistory.getFilteredHistory(filters, user);
+
+    expect(filtered.length).toBe(2);
+  });
+
+  test("filtered history - by classification", async () => {
+    const storage = { value: [] };
+    const playerHistory = NewPlayerHistory(storage);
+    const user = { gender: "male", ageGroup: "senior", bowType: "recurve" };
+
+    playerHistory.add(new Date(), 490, "windsor", [1, 2, 3], "yd");
+    playerHistory.add(new Date(), 100, "windsor", [1, 2, 3], "yd");
+
+    const filters = { classification: "A3" };
+    const filtered = await playerHistory.getFilteredHistory(filters, user);
+
+    expect(filtered.length).toBe(1,
+      `Expected to find 1 score with A3 classification. Found ${filtered.length} scores instead. Scores: ${JSON.stringify(filtered, null, 2)}`
+    );
+
+    if (filtered.length > 0) {
+      expect(filtered[0].classification?.name).toBe("A3",
+        `Expected classification A3 but got ${filtered[0].classification?.name}`
+      );
+    }
+  });
+
+  test("filtered history - combining multiple filters", async () => {
+    const storage = { value: [] };
+    const playerHistory = NewPlayerHistory(storage);
+    const user = { gender: "male", ageGroup: "senior", bowType: "recurve" };
+
+    const today = new Date();
+
+    playerHistory.add(today, 490, "windsor", [1, 2, 3], "yd");
+    playerHistory.add(today, 490, "national", [1, 2, 3], "yd");
+    playerHistory.add(today, 100, "windsor", [1, 2, 3], "yd");
+
+    const filters = {
+      round: "windsor",
+      classification: "A3"
+    };
+
+    const filtered = await playerHistory.getFilteredHistory(filters, user);
+
+    expect(filtered.length).toEqual(1,
+      `Expected to find 1 score matching windsor round and A3 classification. Found ${filtered.length} scores instead. Scores: ${JSON.stringify(filtered, null, 2)}`
+    );
+
+    if (filtered.length > 0) {
+      expect(filtered[0].gameType).toBe("windsor",
+        `Expected round windsor but got ${filtered[0].gameType}`
+      );
+      expect(filtered[0].classification?.name).toBe("A3",
+        `Expected classification A3 but got ${filtered[0].classification?.name}`
+      );
+    }
+  });
+
 });

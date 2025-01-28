@@ -74,7 +74,7 @@ export function NewPlayerHistory(storage) {
         result = result.filter(shoot => shoot.gameType === filters.round);
       }
 
-      if (filters.dateRange.startDate || filters.dateRange.endDate) {
+      if (filters.dateRange?.startDate || filters.dateRange?.endDate) {
         result = result.filter(shoot => {
           const shootDate = new Date(shoot.date);
           if (filters.dateRange.startDate && shootDate < new Date(filters.dateRange.startDate)) {
