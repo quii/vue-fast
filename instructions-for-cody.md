@@ -12,7 +12,7 @@ rules; this app also takes care of this complexity for the archer.
 
 ## Architecture
 
-- This is a PWA, used by people on their mobile phones, typically in landscape. So we need to favour simple, mobile
+- This is a PWA, used by people on their mobile phones, typically in portrait. So we need to favour simple, mobile
   first UI and be sympathetic to network conditions and mobile phones that may not be very powerful.
 - It should work offline once it is downloaded, this is why we favour local storage and not calling APIs to get data. An
   exception for this could be made for non-essential, value-add functionality.
@@ -23,6 +23,7 @@ rules; this app also takes care of this complexity for the archer.
   processing data or making decisions. I expect the script tags in a vue component to only contain references to stores
   to manage data, and obviously local refs and functions to manipulate the UI. Computed refs are fine in simple cases,
   but if we find ourselves with complex computed refs, we should perhaps instead have this calculated in the domain.
+- Domain logic should be written with pure, low-dependency JavaScript, completely decoupled from Vue. In theory we should be able to take this code into another framework with no changes to it
 - We use pinia stores to manage state, which should use local storage to persist the data. Domain logic should also be
   separated from this code, and instead delegate to a class that takes the storage as a dependency to use. Take a look
   at src/domain/notes_manager.js for an example.
