@@ -1,14 +1,21 @@
 class HistoryPage {
   navigateTo() {
     cy.get("a").contains("History").click();
-    // If the tip modal exists, dismiss it
-    cy.get("body").then($body => {
-      if ($body.find("button:contains(\"Got it!\")").length > 0) {
-        cy.contains("button", "Got it!").click();
-      }
-    });
-  }
 
+    // Try multiple times to dismiss modal if it exists
+    const maxAttempts = 3;
+    const attemptDismissModal = (attempt = 0) => {
+      cy.get("body").then($body => {
+        if ($body.find("button:contains(\"Got it!\")").length > 0) {
+          cy.contains("button", "Got it!").click();
+        } else if (attempt < maxAttempts) {
+          cy.wait(100);
+          attemptDismissModal(attempt + 1);
+        }
+      });
+    };
+    attemptDismissModal();
+  }
   selectHistoryItem(item) {
     cy.get("td").contains(item).click();
   }
