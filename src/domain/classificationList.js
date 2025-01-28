@@ -10,3 +10,19 @@ export const classificationList = [
   "EMB",
   "PB"
 ];
+
+export function getClassificationIndex(classification) {
+  return classificationList.indexOf(classification);
+}
+
+export function isHigherOrEqualClassification(classification1, classification2) {
+  return getClassificationIndex(classification1) >= getClassificationIndex(classification2);
+}
+
+export function getNextClassification(currentClassification) {
+  const currentIndex = getClassificationIndex(currentClassification);
+  if (currentIndex < classificationList.length - 1) {
+    return classificationList[currentIndex + 1];
+  }
+  return currentClassification;
+}

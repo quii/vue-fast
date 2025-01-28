@@ -48,6 +48,7 @@ rules; this app also takes care of this complexity for the archer.
 - I like to have functions that are small and focused.
 - I expect us to think about the "API" of our domain, to not expose unnecessary details, keep things private when
   possible.
+- I prefer to have public functions at the top of the file, and private functions at the bottom.
 
 ## General rules around archery to keep in mind
 

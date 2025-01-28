@@ -1,6 +1,6 @@
 import { gameTypeConfig } from "@/domain/game_types";
 import { convertToValue } from "@/domain/scores";
-import { classificationList } from "@/domain/classificationList";
+import { classificationList, getNextClassification, isHigherOrEqualClassification } from "@/domain/classificationList";
 
 const sortByScore = (a, b) => a.score - b.score;
 
@@ -173,22 +173,26 @@ export async function addClassificationsToHistory(sex, age, bowType, scoringHist
 }
 
 export function getRelevantClassifications(classifications) {
-  const achieved = classifications?.filter(c => c.achieved).sort((a, b) => b.score - a.score) ?? [];
-  const notAchieved = classifications?.filter(c => !c.achieved).sort((a, b) => a.score - b.score) ?? [];
-
-  const result = [];
-  if (achieved.length > 0) {
-    if (achieved[0].name === "PB" && achieved.length > 1) {
-      result.push(achieved[1]);
-    }
-    result.push(achieved[0]);
-
-  }
-  if (notAchieved.length > 0) {
-    result.push(notAchieved[0]); // Next unachieved
+  if (!classifications?.length) {
+    return [];
   }
 
-  return result;
+  const achieved = classifications
+    .filter(c => c.achieved)
+    .sort((a, b) => isHigherOrEqualClassification(a.name, b.name) ? -1 : 1);
+
+  const notAchieved = classifications
+    .filter(c => !c.achieved)
+    .sort((a, b) => isHigherOrEqualClassification(a.name, b.name) ? 1 : -1);
+
+  const highestNonPB = achieved[0]?.name === "PB" ? achieved[1] : achieved[0];
+  const nextUnachieved = notAchieved[0];
+
+  return [
+    highestNonPB,
+    achieved[0]?.name === "PB" ? achieved[0] : null,
+    nextUnachieved
+  ].filter(Boolean);
 }
 
 export async function calculateIfArcherIsOnTrackForNextClassification(currentEnd, currentClassification, roundName, sex, age, bowtype) {
@@ -199,16 +203,18 @@ export async function calculateIfArcherIsOnTrackForNextClassification(currentEnd
   }
 
   const classifications = calculator(0, currentEnd);
+  const nextClassification = getNextClassification(currentClassification);
 
-  const currentIndex = classifications.findIndex(c => c.name === currentClassification);
-
-  if (currentIndex === -1 || currentIndex === classifications.length - 1) {
+  if (nextClassification === currentClassification) {
     return undefined;
   }
 
-  const nextClassification = classifications[currentIndex + 1];
+  const nextClassificationData = classifications.find(c => c.name === nextClassification);
+  if (!nextClassificationData) {
+    return undefined;
+  }
 
-  return currentEnd >= nextClassification.scorePerEnd;
+  return currentEnd >= nextClassificationData.scorePerEnd;
 }
 
 export async function calculatePotentialClassificationWithoutOutliers(scores, currentClassification, roundName, sex, age, bowtype) {
@@ -222,49 +228,45 @@ export async function calculatePotentialClassificationWithoutOutliers(scores, cu
   const sortedScores = [...numericScores].sort((a, b) => a - b);
   const currentTotal = sortedScores.reduce((sum, score) => sum + score, 0);
 
-  const classifications = calculator(0, 0);
-  const filteredClassifications = classifications.filter(c => c.name !== "PB");
-  const currentIndex = filteredClassifications.findIndex(c => c.name === currentClassification);
+  const classifications = calculator(0, 0)
+    .filter(c => c.name !== "PB")
+    .sort((a, b) => isHigherOrEqualClassification(a.name, b.name) ? 1 : -1);
 
-  if (currentIndex === -1) {
-    return null;
-  }
+  const nextClassification = classifications
+    .find(c => isHigherOrEqualClassification(c.name, currentClassification) && c.name !== currentClassification);
 
-  const nextClassification = filteredClassifications[currentIndex + 1];
   if (!nextClassification) {
     return null;
   }
-
 
   const targetTotal = nextClassification.score;
   if (currentTotal >= targetTotal) {
     return null;
   }
 
-
-  // Find the archer's typical good performance
   const topQuartileIndex = Math.floor(sortedScores.length * 0.75);
   const typicalGoodScore = sortedScores[topQuartileIndex];
 
-  let potentialTotal = currentTotal;
-  let arrowsToImprove = 0;
-
-  // Start with lowest scores and see if improving them to typical good performance would reach target
-  for (const score of sortedScores) {
-    if (potentialTotal >= targetTotal) {
-      break;
-    }
-    if (score < typicalGoodScore) {
-      const improvement = typicalGoodScore - score;
-      potentialTotal += improvement;
-      arrowsToImprove++;
-    }
-  }
+  const { potentialTotal, arrowCount } = sortedScores.reduce(
+    (acc, score) => {
+      if (acc.potentialTotal >= targetTotal) {
+        return acc;
+      }
+      if (score < typicalGoodScore) {
+        return {
+          potentialTotal: acc.potentialTotal + (typicalGoodScore - score),
+          arrowCount: acc.arrowCount + 1
+        };
+      }
+      return acc;
+    },
+    { potentialTotal: currentTotal, arrowCount: 0 }
+  );
 
   return {
     classification: nextClassification.name,
     potentialScore: potentialTotal,
-    arrowsToImprove,
+    arrowsToImprove: arrowCount,
     achievable: potentialTotal >= targetTotal
   };
 }
