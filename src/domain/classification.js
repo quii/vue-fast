@@ -4,8 +4,6 @@ import { classificationList, getNextClassification, isHigherOrEqualClassificatio
 
 const sortByScore = (a, b) => a.score - b.score;
 
-let roundScoresCache = {};
-
 export async function createClassificationCalculator(roundName, sex, age, bowtype, personalBest) {
   if (!roundName || !sex || !age || !bowtype) {
     return null;
@@ -14,14 +12,8 @@ export async function createClassificationCalculator(roundName, sex, age, bowtyp
   if (roundName === "frostbite") {
     return createFrostbiteClassificationCalculator(roundName, sex, age, bowtype, personalBest);
   }
-  const cacheKey = `${roundName}-${sex}-${age}-${bowtype}`;
-  let roundScores = roundScoresCache[cacheKey];
 
-  if (!roundScores) {
-    roundScores = await calculateRoundScores(sex, bowtype, age, roundName, personalBest);
-    roundScoresCache[cacheKey] = roundScores;
-  }
-
+  const roundScores = await calculateRoundScores(sex, bowtype, age, roundName, personalBest);
   const numberOfEnds = gameTypeConfig[roundName].numberOfEnds;
 
   if (roundScores.length === 0) {
