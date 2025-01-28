@@ -22,7 +22,7 @@
         <tr>
           <th>Date</th>
           <th>Round</th>
-          <th colspan="2">Score</th>
+          <th colspan="3">Score</th>
         </tr>
         </thead>
         <tbody>
@@ -33,6 +33,7 @@
           <td :class="[item.classification?.name, item.classification?.scheme]" @click="view(item.id)">
             {{ item.classification?.name }}
           </td>
+          <td @click="view(item.id)">{{ item.handicap }}</td>
         </tr>
         </tbody>
       </table>
