@@ -6,7 +6,16 @@ When archers are shooting, they need to calculate their scores to submit to the 
 arithmetic which just isn't fun, so this app takes care of it. The way to calculate the scores also depends on the type
 of game or "round" they play, which this app also takes care of.
 
-In addition, it is there to store an archer's scores so they can monitor their progress. Archers hope to achieve
+The typical workflow is
+- Archer choose a round, such as "National", which defines how many arrows to shoot, at what distances.
+- The archer shoots 6 arrows, this is described as an "end".
+- The archer approaches the target, and checks which score each arrow achieved.
+- They work from the centre (the highest score), tapping the number of the score into the app.
+- The archer expects the total score of the end to be automatically calculated
+- The archer repeats this process until the shoot is finished, and expects things like total hits, the end totals and grand totals to be automatically calculated
+- Once the shoot is finished, they can save it into their records, to view later in their history
+
+Archer store scores so they can monitor their progress over time. Archers hope to achieve
 classifications and handicaps, both of which require relatively complex understanding and looking up of scores and
 rules; this app also takes care of this complexity for the archer.
 
