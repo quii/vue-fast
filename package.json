@@ -2,6 +2,7 @@
   "name": "vue-project",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -10,12 +11,13 @@
     "test:e2e": "start-server-and-test preview http://localhost:4173 'cypress run --config video=false'",
     "test:e2e:dev": "start-server-and-test 'vite dev --port 4173' http://localhost:4173 'cypress open --e2e '",
     "test:e2e:live": "CYPRESS_BASE_URL=https://winter-feather-5776.fly.dev cypress run --config video=false",
-    "lint": "eslint src",
+    "lint": "eslint . --fix",
     "format": "prettier --write src/",
     "test": "vite build && npm run lint && vitest run && npm run test:e2e",
     "ship": "npm run test && git push"
   },
   "dependencies": {
+    "@vitest/eslint-plugin": "^1.1.25",
     "@vueuse/core": "^12.5.0",
     "pinia": "^2.3.1",
     "vue": "^3.4.27",
@@ -24,6 +26,7 @@
   },
   "devDependencies": {
     "@dagger.io/dagger": "^0.15.2",
+    "@eslint/eslintrc": "^3.2.0",
     "@rushstack/eslint-patch": "^1.10.5",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vitejs/plugin-vue-jsx": "^4.1.1",
