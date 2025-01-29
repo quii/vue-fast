@@ -1,12 +1,13 @@
-const fs = require("fs").promises;
-const path = require("path");
+import { promises as fs } from "fs";
+
+import path from "path";
 
 async function splitClassifications() {
-  const fileContent = await fs.readFile(path.join(__dirname, "../src/domain/raw_classifications.js"), "utf8");
+  const fileContent = await fs.readFile(path.join(path.__dirname, "../src/domain/raw_classifications.js"), "utf8");
   const arrayContent = fileContent.match(/\[([\s\S]*)\]/)[0];
   const rawClassifications = JSON.parse(arrayContent);
 
-  const baseDir = path.join(__dirname, "../public/data/classifications");
+  const baseDir = path.join(path.__dirname, "../public/data/classifications");
   await fs.mkdir(baseDir, { recursive: true });
 
   const grouped = rawClassifications.reduce((acc, item) => {
