@@ -15,6 +15,12 @@ module.exports = {
   },
   overrides: [
     {
+      files: ["**/*.js", "**/*.vue"],
+      rules: {
+        // Add any specific rules for these files here
+      }
+    },
+    {
       files: [
         'cypress/e2e/**/*.{cy,spec}.{js,ts,jsx,tsx}'
       ],
