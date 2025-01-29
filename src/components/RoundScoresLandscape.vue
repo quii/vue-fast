@@ -2,7 +2,7 @@
 import { computed } from "vue";
 import RoundTable from "@/components/RoundTable.vue";
 import { calculateSubtotals } from "@/domain/subtotals";
-import { calculateRounds } from "@/domain/rounds";
+import { calculateDistanceTotals } from "@/domain/distance_totals";
 import ClassificationDetails from "@/components/ClassificationDetails.vue";
 
 const props = defineProps({
@@ -20,7 +20,7 @@ const props = defineProps({
   }
 });
 const totals = computed(() => calculateSubtotals(props.scores, props.gameType));
-const rounds = computed(() => calculateRounds(props.scores, props.gameType, props.endSize));
+const rounds = computed(() => calculateDistanceTotals(props.scores, props.gameType, props.endSize));
 const colspan = computed(() => (props.endSize * 2) + 2);
 const oneDistanceShoot = computed(() => rounds.value.length === 1);
 

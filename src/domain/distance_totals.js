@@ -3,7 +3,7 @@ import { gameTypeConfig } from "@/domain/game_types";
 import { calculateSubtotals, calculateTotal } from "@/domain/subtotals";
 import { convertToValues } from "@/domain/scores";
 
-export function calculateRounds(scores, gameType = "national", endSize = 6) {
+export function calculateDistanceTotals(scores, gameType = "national", endSize = 6) {
   const { distancesRoundSizes } = gameTypeConfig[gameType];
   const rounds = [];
   let runningTotal = 0;

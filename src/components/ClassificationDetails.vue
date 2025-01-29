@@ -7,7 +7,7 @@ import {
   getRelevantClassifications
 } from "@/domain/classification";
 import { calculateSubtotals } from "@/domain/subtotals";
-import { calculateAverageScorePerEnd } from "@/domain/rounds";
+import { calculateAverageScorePerEnd } from "@/domain/distance_totals";
 import { gameTypeConfig } from "@/domain/game_types";
 import { calculateMaxPossibleScore } from "@/domain/scores";
 import { useHistoryStore } from "@/stores/history";
