@@ -13,6 +13,6 @@ const needsBackup = computed(() => user.needsBackup());
     <router-link to="/history">📚 History</router-link>
     <router-link to="/data">💾 Data {{ needsBackup ? "⚠️" : "" }}</router-link>
     <router-link to="/you">👤 You</router-link>
-    <!--    <router-link to="/sight-marks">📐</router-link>-->
+    <router-link to="/sight-marks">📐</router-link>
   </nav>
 </template>

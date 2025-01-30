@@ -60,6 +60,21 @@ rules; this app also takes care of this complexity for the archer.
   the tests. I had to correct you, and instead fix the production code to not need the parameter. In short, if tests are
   complicated to write, I'd rather you suggest ways to improve the design of the code under test.
 
+## End-to-end Testing Workflow
+
+- Page objects live in cypress/pages and encapsulate all the ways to interact with a page
+- Each page object should have methods for:
+  - Navigation to the page
+  - Actions users can take (clicking buttons, filling forms etc)
+  - Assertions about what should be visible
+- End-to-end tests live in cypress/e2e and use page objects to create readable test scenarios
+- Tests should verify complete user workflows rather than isolated features
+- Follow the pattern from sight_marks.cy.js where we test the full lifecycle: create, edit, delete
+- Keep page object methods focused and well-named to make test scenarios read like user stories
+- When asserting elements don't exist, use cy.contains(selector, text).should('not.exist') rather than trying to assert
+  on content that may never be found
+- This pattern ensures Cypress properly handles non-existent elements without timing out
+
 ## JavaScript
 
 - I prefer functional programming, pure functions, and immutable data.

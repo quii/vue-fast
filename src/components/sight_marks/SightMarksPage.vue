@@ -1,6 +1,5 @@
 <template>
   <div class="sight-marks">
-    <h1>Sight Marks</h1>
     <button class="add-button" @click="showAddMark = true">Add Sight Mark</button>
 
     <div v-if="showAddMark" class="fullscreen-dialog">
@@ -19,32 +18,28 @@
         <div class="notches-control control-group">
           <label>Extension</label>
           <div class="slider-value">{{ displayNotches }} notches</div>
-          <div class="slider-container">
-            <input
-              type="range"
-              v-model="notchesValue"
-              min="0"
-              max="15"
-              step="1"
-              class="horizontal-slider"
-            />
-          </div>
+          <input
+            type="range"
+            v-model="notchesValue"
+            min="0"
+            max="15"
+            step="1"
+            class="horizontal-slider"
+          />
         </div>
 
         <div class="vertical-control">
           <label>Height: {{ formatVertical(newMark.vertical) }}</label>
-          <div class="vertical-slider-container">
-            <input
-              type="range"
-              v-model="verticalValue"
-              min="0"
-              max="1000"
-              step="1"
-              class="vertical-slider"
-              orient="vertical"
-              style="transform: rotate(180deg)"
-            />
-          </div>
+          <input
+            type="range"
+            v-model="verticalValue"
+            min="0"
+            max="1000"
+            step="1"
+            class="vertical-slider"
+            orient="vertical"
+            style="transform: rotate(180deg)"
+          />
         </div>
 
         <div class="dialog-actions">
@@ -54,8 +49,26 @@
       </div>
     </div>
 
+    <div v-if="showDeleteConfirm" class="fullscreen-dialog">
+      <div class="dialog-content">
+        <h2>Delete Sight Mark?</h2>
+        <p>Are you sure you want to delete {{ markToDelete.distance }}{{ markToDelete.unit }}?</p>
+        <div class="dialog-actions">
+          <button class="secondary" @click="cancelDelete">Cancel</button>
+          <button class="primary" @click="confirmDelete">Delete</button>
+        </div>
+      </div>
+    </div>
+
     <div class="marks-list">
-      <div v-for="mark in marks" :key="`${mark.distance}${mark.unit}`" class="mark-card">
+      <div
+        v-for="mark in marks"
+        :key="`${mark.distance}${mark.unit}`"
+        class="mark-card"
+        @click="editMark(mark)"
+        @touchstart="startLongPress(mark)"
+        @touchend="cancelLongPress"
+      >
         <div class="mark-distance">{{ mark.distance }}{{ mark.unit }}</div>
         <div class="mark-details">
           <div>Extension: {{ mark.notches }} notches</div>
@@ -68,9 +81,16 @@
 
 <script setup>
 import { computed, ref } from "vue";
+import { useSightMarksStore } from "@/stores/sight_marks";
+
+const store = useSightMarksStore();
+const marks = computed(() => store.getMarks());
 
 const showAddMark = ref(false);
-const marks = ref([]);
+const showDeleteConfirm = ref(false);
+const markToDelete = ref(null);
+const longPressTimer = ref(null);
+
 const newMark = ref({
   distance: 20,
   unit: "m",
@@ -80,7 +100,7 @@ const newMark = ref({
     minor: 6,
     micro: 2
   }
-});
+})
 
 const verticalValue = computed({
   get() {
@@ -93,7 +113,7 @@ const verticalValue = computed({
     const micro = value % 10;
     newMark.value.vertical = { major, minor, micro };
   }
-});
+})
 
 const notchesValue = computed({
   get() {
@@ -102,7 +122,7 @@ const notchesValue = computed({
   set(value) {
     newMark.value.notches = 15 - value;
   }
-});
+})
 
 const displayNotches = computed(() => newMark.value.notches);
 
@@ -111,8 +131,43 @@ function formatVertical(vertical) {
 }
 
 function saveMark() {
-  marks.value.push({ ...newMark.value });
+  const { distance, unit, notches, vertical } = newMark.value;
+  if (marks.value.some(m => m.distance === distance && m.unit === unit)) {
+    store.updateMark(distance, unit, notches, vertical);
+  } else {
+    store.addMark(distance, unit, notches, vertical);
+  }
   showAddMark.value = false;
+}
+
+function editMark(mark) {
+  newMark.value = { ...mark };
+  showAddMark.value = true;
+}
+
+function startLongPress(mark) {
+  longPressTimer.value = setTimeout(() => {
+    markToDelete.value = mark;
+    showDeleteConfirm.value = true;
+  }, 500);
+}
+
+function cancelLongPress() {
+  if (longPressTimer.value) {
+    clearTimeout(longPressTimer.value);
+    longPressTimer.value = null;
+  }
+}
+
+function confirmDelete() {
+  store.deleteMark(markToDelete.value.distance, markToDelete.value.unit);
+  showDeleteConfirm.value = false;
+  markToDelete.value = null;
+}
+
+function cancelDelete() {
+  showDeleteConfirm.value = false;
+  markToDelete.value = null;
 }
 </script>
 
@@ -120,7 +175,6 @@ function saveMark() {
 .sight-marks {
   padding: 1rem;
 }
-
 .fullscreen-dialog {
   position: fixed;
   top: 0;
@@ -129,6 +183,12 @@ function saveMark() {
   bottom: 0;
   background: #fff;
   z-index: 1000;
+}
+
+.dialog-header {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+  text-align: center;
 }
 
 .dialog-content {
@@ -169,20 +229,6 @@ function saveMark() {
   margin: 0.5rem 0;
 }
 
-.slider-container {
-  position: relative;
-  padding: 0.5rem 0;
-}
-
-.slider-ticks {
-  display: flex;
-  justify-content: space-between;
-  padding: 0 10px;
-  margin-top: 5px;
-  color: #666;
-  font-size: 0.8rem;
-}
-
 .vertical-control {
   flex: 1;
   display: flex;
@@ -191,33 +237,46 @@ function saveMark() {
   justify-content: center;
   padding: 1rem;
   text-align: center;
+  min-height: 30vh;
 }
-
-.vertical-slider-container {
-  display: flex;
-  align-items: center;
-  height: 50vh;
-  margin: 1rem 0;
-}
-
-.vertical-ticks {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 10px 0;
-  margin-right: 10px;
-  color: #666;
-  font-size: 0.8rem;
-  height: 100%;
-}
-
 .vertical-slider {
-  width: 8px;
-  height: 100%;
+  width: 0.5rem;
+  height: 25vh;
+  margin: 1rem 0;
   writing-mode: bt-lr;
   -webkit-appearance: slider-vertical;
 }
 
+@media (orientation: portrait) {
+  .vertical-slider {
+    height: 45vh;
+  }
+}
+
+/* Add these vendor prefixes for better mobile support */
+input[type="range"][orient="vertical"] {
+  writing-mode: bt-lr;
+  -webkit-appearance: slider-vertical;
+}
+
+.dialog-content {
+  height: 100vh;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.dialog-actions {
+  position: sticky;
+  bottom: 0;
+  background: white;
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  border-top: 1px solid #eee;
+}
 .horizontal-slider {
   width: 100%;
   height: 32px;
