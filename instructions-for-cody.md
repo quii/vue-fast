@@ -74,6 +74,18 @@ rules; this app also takes care of this complexity for the archer.
   quering and managing state, usually with our Pinia stores. Don't make a function that returns an object with a bunch
   of methods, this is hard to read. Use a class.
 
+## CSS Principles
+
+- Use relative units (vh, vw, rem) over fixed pixel values to ensure layouts adapt across different device sizes
+- Favor viewport units (vh) for vertical measurements to maintain proportional sizing across different mobile screens
+- Use rem units for typography and padding to maintain consistent spacing relative to root font size
+- Keep layouts flexible using flex and relative sizing to accommodate varying screen dimensions
+- Consider the full range of mobile viewport sizes when designing components
+- Leverage the global styles defined in base.css and main.css for consistent theming
+- Use CSS variables defined in base.css for colors, spacing, and other design tokens
+- Only add component-specific styles in scoped blocks when the styling truly needs to be unique to that component
+- Inherit global styles for common elements like buttons, inputs, and typography to maintain visual consistency
+
 ## General rules around archery to keep in mind
 
 - Round or gameType are used synonymously in the codebase due to historical knowledge changes, but the canonical word

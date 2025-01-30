@@ -34,6 +34,11 @@ const routes = [
     path: "/you",
     name: "You",
     component: () => import("./UserData.vue")
+  },
+  {
+    path: "/sight-marks",
+    name: "sight-marks",
+    component: () => import("./components/sight_marks/SightMarksPage.vue")
   }
 ]
 const router = VueRouter.createRouter({
