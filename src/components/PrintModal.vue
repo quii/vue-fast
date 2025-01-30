@@ -19,7 +19,7 @@ function print() {
   style.textContent = `
     body { font-family: Arial; padding: 20px; }
     table { border-collapse: collapse; width: 100%; }
-    td, th { border: 1px solid black; padding: 8px; text-align: center; }
+    td, th { border: 1px solid black; padding: 8px; text-align: center; text-transform: capitalize; }
     .score { font-weight: bold; }
     .signatures { margin-top: 2em; }
     h1 { text-transform: capitalize; text-align: center; }
