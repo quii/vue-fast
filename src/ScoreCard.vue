@@ -109,7 +109,6 @@ Did you follow your process?"></textarea>
   <UserNotes :allow-highlight="true" />
 
   <hr />
-  <p class="selectHint">Select the round you're shooting 👇</p>
   <div class="controls">
     <GameTypeSelector :gameType="gameTypeStore.type"
                       @changeGameType="gameTypeStore.setGameType" />
@@ -118,18 +117,12 @@ Did you follow your process?"></textarea>
 
   <hr />
   <div v-if="hasStarted">
-    <p class="selectHint">Danger zone</p>
     <button id="clear" @click="clearScores">⚠️ Clear all scores for this shoot ⚠️</button>
   </div>
 
 </template>
 
 <style scoped>
-.selectHint {
-  padding: 0.5em;
-  font-size: 1.1em;
-}
-
 .controls select {
   padding: 0.5em;
   font-size: 1.2em;

@@ -18,9 +18,9 @@ const otherTypes = computed(() =>
 
 defineEmits(['changeGameType'])
 </script>
-
 <template>
   <select @change="event => $emit('changeGameType', event.target.value)">
+    <option value="" disabled selected>Select the round you're shooting</option>
     <optgroup v-if="recentTypes.length" label="Recent Rounds">
       <option v-for="type in recentTypes"
               :key="type"
@@ -39,7 +39,6 @@ defineEmits(['changeGameType'])
     </optgroup>
   </select>
 </template>
-
 <style scoped>
 option {
   font-size: 1.3em;
