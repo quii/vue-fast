@@ -11,6 +11,7 @@
 
     <!-- Multiple marks table view -->
     <table v-else>
+      <caption>Sight marks</caption>
       <thead>
       <tr>
         <th>Distance</th>
@@ -79,6 +80,10 @@ function formatVertical(vertical) {
 </script>
 
 <style scoped>
+caption {
+  font-weight: bold;
+  padding: 0.5rem;
+}
 
 .mark-label {
   font-size: 0.8rem;
