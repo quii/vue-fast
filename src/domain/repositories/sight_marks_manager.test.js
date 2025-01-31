@@ -9,18 +9,25 @@ describe("SightMarksManager", () => {
     manager.add(20, "m", 5, { major: 5, minor: 6, micro: 2 });
 
     expect(storage.value).toHaveLength(1);
-    expect(storage.value[0]).toEqual({
+    expect(storage.value[0]).toMatchObject({
       distance: 20,
       unit: "m",
       notches: 5,
-      priority: false,
-      vertical: { major: 5, minor: 6, micro: 2 }
-    });
+      vertical: {
+        major: 5,
+        minor: 6,
+        micro: 2
+      },
+      priority: false
+    })
+    expect(storage.value[0].id).toBeTruthy();
   });
 
   it("updates existing sight marks", () => {
+    const id = "123";
     const storage = {
       value: [{
+        id,
         distance: 20,
         unit: "m",
         notches: 5,
@@ -29,7 +36,7 @@ describe("SightMarksManager", () => {
     };
     const manager = new SightMarksManager(storage);
 
-    manager.update(20, "m", 6, { major: 5, minor: 7, micro: 2 });
+    manager.update(id, 20, "m", 6, { major: 5, minor: 7, micro: 2 });
 
     expect(storage.value).toHaveLength(1);
     expect(storage.value[0].notches).toBe(6);
@@ -37,9 +44,11 @@ describe("SightMarksManager", () => {
   });
 
   it("deletes sight marks", () => {
+    const id = "123";
     const storage = {
       value: [{
         distance: 20,
+        id,
         unit: "m",
         notches: 5,
         vertical: { major: 5, minor: 6, micro: 2 }
@@ -47,7 +56,7 @@ describe("SightMarksManager", () => {
     };
     const manager = new SightMarksManager(storage);
 
-    manager.delete(20, "m");
+    manager.delete(id);
 
     expect(storage.value).toHaveLength(0);
   });

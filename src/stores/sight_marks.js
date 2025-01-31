@@ -1,5 +1,4 @@
 import { defineStore } from "pinia";
-
 import { useLocalStorage } from "@vueuse/core";
 import { SightMarksManager } from "@/domain/repositories/sight_marks_manager.js";
 
@@ -7,24 +6,24 @@ export const useSightMarksStore = defineStore("sight_marks", () => {
   const sightMarks = useLocalStorage("sight-marks", []);
   const manager = new SightMarksManager(sightMarks);
 
-  function addMark(distance, unit, notches, vertical) {
-    manager.add(distance, unit, notches, vertical);
+  function addMark(distance, unit, notches, vertical, label) {
+    manager.add(distance, unit, notches, vertical, label);
   }
 
-  function updateMark(distance, unit, notches, vertical) {
-    manager.update(distance, unit, notches, vertical);
+  function updateMark(id, distance, unit, notches, vertical, label) {
+    manager.update(id, distance, unit, notches, vertical, label);
   }
 
-  function deleteMark(distance, unit) {
-    manager.delete(distance, unit);
+  function deleteMark(id) {
+    manager.delete(id);
   }
 
   function togglePriority(distance, unit) {
     manager.togglePriority(distance, unit);
   }
 
-  function findMarkForDistance(distanceMetres, distanceYards) {
-    return manager.findMarkForDistance(distanceMetres, distanceYards);
+  function findMarksForDistance(distanceMetres, distanceYards) {
+    return manager.findMarksForDistance(distanceMetres, distanceYards);
   }
 
   function getMarks() {
@@ -36,7 +35,7 @@ export const useSightMarksStore = defineStore("sight_marks", () => {
     updateMark,
     deleteMark,
     togglePriority,
-    findMarkForDistance,
+    findMarksForDistance,
     getMarks
   };
 })

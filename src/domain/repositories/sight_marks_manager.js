@@ -1,35 +1,55 @@
 export class SightMarksManager {
   constructor(storage) {
     this.storage = storage;
+    this.migrateExistingData();
   }
 
-  add(distance, unit, notches, vertical) {
-    const mark = { distance, unit, notches, vertical, priority: false };
-    this.storage.value.push(mark);
+  migrateExistingData() {
+    this.storage.value = this.storage.value.map(mark => {
+      if (!mark.id) {
+        mark.id = generateId();
+      }
+      if (!mark.label) {
+        mark.label = "";
+      }
+      return mark;
+    });
   }
 
-  update(distance, unit, notches, vertical) {
-    const index = this.storage.value.findIndex(
-      m => m.distance === distance && m.unit === unit
-    );
+  add(distance, unit, notches, vertical, label = "") {
+    const mark = {
+      id: generateId(),
+      distance,
+      unit,
+      notches,
+      vertical,
+      priority: false,
+      label
+    };
+    this.storage.value = [...this.storage.value, mark];
+  }
+
+  update(id, distance, unit, notches, vertical, label) {
+    const index = this.storage.value.findIndex(m => m.id === id);
     if (index >= 0) {
       const currentPriority = this.storage.value[index].priority;
-      this.storage.value[index] = { distance, unit, notches, vertical, priority: currentPriority };
+      this.storage.value[index] = {
+        id,
+        distance,
+        unit,
+        notches,
+        vertical,
+        priority: currentPriority,
+        label
+      };
     }
   }
 
-  togglePriority(distance, unit) {
-    const index = this.storage.value.findIndex(
-      m => m.distance === distance && m.unit === unit
-    );
-    if (index >= 0) {
-      this.storage.value[index].priority = !this.storage.value[index].priority;
-    }
-  }
-
-  delete(distance, unit) {
-    this.storage.value = this.storage.value.filter(
-      mark => !(mark.distance === distance && mark.unit === unit)
+  findMarksForDistance(distanceMetres, distanceYards) {
+    const marks = this.getAll();
+    return marks.filter(mark =>
+      (mark.unit === "m" && mark.distance === distanceMetres) ||
+      (mark.unit === "yd" && mark.distance === distanceYards)
     );
   }
 
@@ -44,14 +64,24 @@ export class SightMarksManager {
     });
   }
 
-  findMarkForDistance(distanceMetres, distanceYards) {
-    const marks = this.getAll();
-    return marks.find(mark =>
-      (mark.unit === "m" && mark.distance === distanceMetres) ||
-      (mark.unit === "yd" && mark.distance === distanceYards)
+  togglePriority(distance, unit) {
+    const index = this.storage.value.findIndex(
+      m => m.distance === distance && m.unit === unit
     );
+    if (index >= 0) {
+      this.storage.value[index].priority = !this.storage.value[index].priority;
+    }
+  }
+
+  delete(id) {
+    this.storage.value = this.storage.value.filter(mark => mark.id !== id);
   }
 }
+
+function generateId() {
+  return Date.now().toString(36) + Math.random().toString(36).substr(2);
+}
+
 function convertToMetres(distance, unit) {
   return unit === "yd" ? distance * 0.9144 : distance;
 }

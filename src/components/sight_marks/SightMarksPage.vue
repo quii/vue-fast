@@ -4,6 +4,14 @@
 
     <BaseModal v-if="showAddMark">
       <div class="form-group">
+        <label>Label (optional)</label>
+        <input
+          type="text"
+          v-model="newMark.label"
+          maxlength="100"
+          class="label-input"
+          placeholder="pink arrows"
+        />
         <label>Distance</label>
         <div class="distance-inputs">
           <input type="number" v-model="newMark.distance" class="distance-number" />
@@ -104,9 +112,11 @@ const markToDelete = ref(null);
 const longPressTimer = ref(null);
 
 const newMark = ref({
+  id: null,
   distance: 20,
   unit: "m",
   notches: 2,
+  label: "",
   vertical: {
     major: 5,
     minor: 6,
@@ -130,19 +140,32 @@ function formatVertical(vertical) {
 }
 
 function saveMark() {
-  const { distance, unit, notches, vertical } = newMark.value;
-  if (marks.value.some(m => m.distance === distance && m.unit === unit)) {
-    store.updateMark(distance, unit, notches, vertical);
+  const { id, distance, unit, notches, vertical, label } = newMark.value;
+  console.log("saving", newMark.value);
+  if (id) {
+    store.updateMark(id, distance, unit, notches, vertical, label);
   } else {
-    store.addMark(distance, unit, notches, vertical);
+    store.addMark(distance, unit, notches, vertical, label);
   }
   showAddMark.value = false;
 }
 
 function editMark(mark) {
-  newMark.value = { ...mark };
+  newMark.value = {
+    id: mark.id,
+    distance: mark.distance,
+    unit: mark.unit,
+    notches: mark.notches,
+    label: mark.label || "",
+    vertical: {
+      major: mark.vertical.major,
+      minor: mark.vertical.minor,
+      micro: mark.vertical.micro
+    }
+  };
   showAddMark.value = true;
 }
+
 
 function startLongPress(mark) {
   longPressTimer.value = setTimeout(() => {
@@ -159,7 +182,7 @@ function cancelLongPress() {
 }
 
 function confirmDelete() {
-  store.deleteMark(markToDelete.value.distance, markToDelete.value.unit);
+  store.deleteMark(markToDelete.value.id);
   showDeleteConfirm.value = false;
   markToDelete.value = null;
 }
