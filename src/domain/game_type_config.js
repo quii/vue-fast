@@ -180,7 +180,8 @@ export const baseConfig = [
     isOutdoor: true,
     isImperial: true,
     distancesRoundSizes: [4, 2],
-    maxDistanceYards: 60
+    maxDistanceYards: 60,
+    otherDistancesYards: [50]
   },
   {
     name: 'national 50',

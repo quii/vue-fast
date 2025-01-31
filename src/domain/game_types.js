@@ -33,7 +33,9 @@ function calculateConfigFromBase(base) {
         numberOfEnds: maxArrows / endSize,
         isImperial: gameType.isImperial,
         maxDistanceMetres: gameType.maxDistanceMetres || convertToMeters(gameType.maxDistanceYards),
-        maxDistanceYards: gameType.maxDistanceYards || convertToYards(gameType.maxDistanceMetres)
+        maxDistanceYards: gameType.maxDistanceYards || convertToYards(gameType.maxDistanceMetres),
+        otherDistancesYards: gameType.otherDistancesYards,
+        otherDistancesMetres: gameType.otherDistancesMetres
       }
     });
   }, {});

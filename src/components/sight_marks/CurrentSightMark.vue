@@ -2,7 +2,7 @@
   <div v-if="currentMarks.length" class="sight-marks-display">
     <div v-for="mark in currentMarks" :key="mark.id" class="sight-mark-container">
       <span class="label">
-        sight mark ({{ mark.distance }}{{ mark.unit }})
+        Sight mark ({{ mark.distance }}{{ mark.unit }})
         <span v-if="mark.label" class="mark-label">{{ mark.label }}</span>
       </span>
       <span class="value">{{ formatVertical(mark.vertical) }}</span>
@@ -20,10 +20,37 @@ const sightMarksStore = useSightMarksStore();
 
 const currentMarks = computed(() => {
   const round = gameTypeStore.currentRound;
-  return sightMarksStore.findMarksForDistance(
+  let marks = [];
+
+  // Get marks for max distance
+  const maxDistanceMarks = sightMarksStore.findMarksForDistance(
     round.maxDistanceMetres,
     round.maxDistanceYards
   )
+  marks.push(...maxDistanceMarks);
+
+  // Get marks for other distances if they exist
+  if (round.otherDistancesYards) {
+    round.otherDistancesYards.forEach(distance => {
+      const otherMarks = sightMarksStore.findMarksForDistance(
+        null,
+        distance
+      );
+      marks.push(...otherMarks);
+    });
+  }
+
+  if (round.otherDistancesMetres) {
+    round.otherDistancesMetres.forEach(distance => {
+      const otherMarks = sightMarksStore.findMarksForDistance(
+        distance,
+        null
+      );
+      marks.push(...otherMarks);
+    });
+  }
+
+  return marks;
 })
 
 function formatVertical(vertical) {
