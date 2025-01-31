@@ -170,7 +170,6 @@ function cancelDelete() {
   markToDelete.value = null;
 }
 </script>
-
 <style scoped>
 .sight-marks {
   padding: 1rem;
@@ -181,13 +180,14 @@ function cancelDelete() {
   left: 0;
   right: 0;
   bottom: 0;
-  background: #fff;
+  background: var(--color-background);
+  color: var(--color-text);
   z-index: 1000;
 }
 
 .dialog-header {
   padding: 1rem;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--color-border);
   text-align: center;
 }
 
@@ -199,7 +199,7 @@ function cancelDelete() {
 
 .control-group {
   padding: 0.8rem;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .distance-inputs {
@@ -212,14 +212,18 @@ function cancelDelete() {
   font-size: 1.2rem;
   width: 4rem;
   padding: 0.4rem;
-  border: 2px solid #ddd;
+  background: var(--color-background-soft);
+  color: var(--color-text);
+  border: 2px solid var(--color-border);
   border-radius: 8px;
 }
 
 .unit-select {
   font-size: 1rem;
   padding: 0.4rem;
-  border: 2px solid #ddd;
+  background: var(--color-background-soft);
+  color: var(--color-text);
+  border: 2px solid var(--color-border);
   border-radius: 8px;
 }
 
@@ -270,24 +274,16 @@ input[type="range"][orient="vertical"] {
 .dialog-actions {
   position: sticky;
   bottom: 0;
-  background: white;
+  background: var(--color-background);
   padding: 1rem;
   display: flex;
   gap: 1rem;
   justify-content: flex-end;
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--color-border);
 }
 .horizontal-slider {
   width: 100%;
   height: 32px;
-}
-
-.dialog-actions {
-  padding: 1rem;
-  display: flex;
-  gap: 1rem;
-  justify-content: flex-end;
-  border-top: 1px solid #eee;
 }
 
 .add-button {
@@ -309,21 +305,21 @@ input[type="range"][orient="vertical"] {
   border-radius: 8px;
   font-size: 1rem;
 }
-
 .secondary {
-  background: #f5f5f5;
-  border: none;
+  background: var(--color-background-soft);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
   padding: 0.8rem 1.5rem;
   border-radius: 8px;
   font-size: 1rem;
 }
-
 .marks-list {
   margin-top: 1rem;
 }
 
 .mark-card {
-  background: white;
+  background: var(--color-background-soft);
+  color: var(--color-text);
   padding: 1rem;
   margin: 1rem 0;
   border-radius: 12px;
@@ -337,7 +333,7 @@ input[type="range"][orient="vertical"] {
 }
 
 .mark-details {
-  color: #666;
+  color: var(--color-text);
   line-height: 1.4;
 }
 </style>
