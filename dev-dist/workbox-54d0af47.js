@@ -1,9 +1,9 @@
-define(["exports"], (function(exports) {
-  "use strict";
+define(['exports'], (function(exports) {
+  'use strict';
 
   // @ts-ignore
   try {
-    self["workbox:core:7.2.0"] && _();
+    self['workbox:core:7.2.0'] && _();
   } catch (e) {
   }
 
@@ -21,7 +21,7 @@ define(["exports"], (function(exports) {
    * @memberof workbox-core
    */
   function clientsClaim() {
-    self.addEventListener("activate", () => self.clients.claim());
+    self.addEventListener('activate', () => self.clients.claim());
   }
 
   /*
@@ -33,7 +33,7 @@ define(["exports"], (function(exports) {
   const logger = (() => {
     // Don't overwrite this value if it's already set.
     // See https://github.com/GoogleChrome/workbox/pull/2284#issuecomment-560470923
-    if (!("__WB_DISABLE_DEV_LOGS" in globalThis)) {
+    if (!('__WB_DISABLE_DEV_LOGS' in globalThis)) {
       self.__WB_DISABLE_DEV_LOGS = false;
     }
     let inGroup = false;
@@ -49,7 +49,7 @@ define(["exports"], (function(exports) {
       if (self.__WB_DISABLE_DEV_LOGS) {
         return;
       }
-      if (method === "groupCollapsed") {
+      if (method === 'groupCollapsed') {
         // Safari doesn't print all console.groupCollapsed() arguments:
         // https://bugs.webkit.org/show_bug.cgi?id=182754
         if (/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
@@ -59,12 +59,12 @@ define(["exports"], (function(exports) {
       }
       const styles = [`background: ${methodToColorMap[method]}`, `border-radius: 0.5em`, `color: white`, `font-weight: bold`, `padding: 2px 0.5em`];
       // When in a group, the workbox prefix is not displayed.
-      const logPrefix = inGroup ? [] : ["%cworkbox", styles.join(";")];
+      const logPrefix = inGroup ? [] : ['%cworkbox', styles.join(';')];
       console[method](...logPrefix, ...args);
-      if (method === "groupCollapsed") {
+      if (method === 'groupCollapsed') {
         inGroup = true;
       }
-      if (method === "groupEnd") {
+      if (method === 'groupEnd') {
         inGroup = false;
       }
     };
@@ -88,7 +88,7 @@ define(["exports"], (function(exports) {
       https://opensource.org/licenses/MIT.
     */
   const messages = {
-    "invalid-value": ({
+    'invalid-value': ({
                         paramName,
                         validValueDescription,
                         value
@@ -98,7 +98,7 @@ define(["exports"], (function(exports) {
       }
       return `The '${paramName}' parameter was given a value with an ` + `unexpected value. ${validValueDescription} Received a value of ` + `${JSON.stringify(value)}.`;
     },
-    "not-an-array": ({
+    'not-an-array': ({
                        moduleName,
                        className,
                        funcName,
@@ -109,7 +109,7 @@ define(["exports"], (function(exports) {
       }
       return `The parameter '${paramName}' passed into ` + `'${moduleName}.${className}.${funcName}()' must be an array.`;
     },
-    "incorrect-type": ({
+    'incorrect-type': ({
                          expectedType,
                          paramName,
                          moduleName,
@@ -119,10 +119,10 @@ define(["exports"], (function(exports) {
       if (!expectedType || !paramName || !moduleName || !funcName) {
         throw new Error(`Unexpected input to 'incorrect-type' error.`);
       }
-      const classNameStr = className ? `${className}.` : "";
+      const classNameStr = className ? `${className}.` : '';
       return `The parameter '${paramName}' passed into ` + `'${moduleName}.${classNameStr}` + `${funcName}()' must be of type ${expectedType}.`;
     },
-    "incorrect-class": ({
+    'incorrect-class': ({
                           expectedClassName,
                           paramName,
                           moduleName,
@@ -133,13 +133,13 @@ define(["exports"], (function(exports) {
       if (!expectedClassName || !moduleName || !funcName) {
         throw new Error(`Unexpected input to 'incorrect-class' error.`);
       }
-      const classNameStr = className ? `${className}.` : "";
+      const classNameStr = className ? `${className}.` : '';
       if (isReturnValueProblem) {
         return `The return value from ` + `'${moduleName}.${classNameStr}${funcName}()' ` + `must be an instance of class ${expectedClassName}.`;
       }
       return `The parameter '${paramName}' passed into ` + `'${moduleName}.${classNameStr}${funcName}()' ` + `must be an instance of class ${expectedClassName}.`;
     },
-    "missing-a-method": ({
+    'missing-a-method': ({
                            expectedMethod,
                            paramName,
                            moduleName,
@@ -151,12 +151,12 @@ define(["exports"], (function(exports) {
       }
       return `${moduleName}.${className}.${funcName}() expected the ` + `'${paramName}' parameter to expose a '${expectedMethod}' method.`;
     },
-    "add-to-cache-list-unexpected-type": ({
+    'add-to-cache-list-unexpected-type': ({
                                             entry
                                           }) => {
       return `An unexpected entry was passed to ` + `'workbox-precaching.PrecacheController.addToCacheList()' The entry ` + `'${JSON.stringify(entry)}' isn't supported. You must supply an array of ` + `strings with one or more characters, objects with a url property or ` + `Request objects.`;
     },
-    "add-to-cache-list-conflicting-entries": ({
+    'add-to-cache-list-conflicting-entries': ({
                                                 firstEntry,
                                                 secondEntry
                                               }) => {
@@ -165,7 +165,7 @@ define(["exports"], (function(exports) {
       }
       return `Two of the entries passed to ` + `'workbox-precaching.PrecacheController.addToCacheList()' had the URL ` + `${firstEntry} but different revision details. Workbox is ` + `unable to cache and version the asset correctly. Please remove one ` + `of the entries.`;
     },
-    "plugin-error-request-will-fetch": ({
+    'plugin-error-request-will-fetch': ({
                                           thrownErrorMessage
                                         }) => {
       if (!thrownErrorMessage) {
@@ -173,7 +173,7 @@ define(["exports"], (function(exports) {
       }
       return `An error was thrown by a plugins 'requestWillFetch()' method. ` + `The thrown error message was: '${thrownErrorMessage}'.`;
     },
-    "invalid-cache-name": ({
+    'invalid-cache-name': ({
                              cacheNameId,
                              value
                            }) => {
@@ -182,7 +182,7 @@ define(["exports"], (function(exports) {
       }
       return `You must provide a name containing at least one character for ` + `setCacheDetails({${cacheNameId}: '...'}). Received a value of ` + `'${JSON.stringify(value)}'`;
     },
-    "unregister-route-but-not-found-with-method": ({
+    'unregister-route-but-not-found-with-method': ({
                                                      method
                                                    }) => {
       if (!method) {
@@ -190,26 +190,26 @@ define(["exports"], (function(exports) {
       }
       return `The route you're trying to unregister was not  previously ` + `registered for the method type '${method}'.`;
     },
-    "unregister-route-route-not-registered": () => {
+    'unregister-route-route-not-registered': () => {
       return `The route you're trying to unregister was not previously ` + `registered.`;
     },
-    "queue-replay-failed": ({
+    'queue-replay-failed': ({
                               name
                             }) => {
       return `Replaying the background sync queue '${name}' failed.`;
     },
-    "duplicate-queue-name": ({
+    'duplicate-queue-name': ({
                                name
                              }) => {
       return `The Queue name '${name}' is already being used. ` + `All instances of backgroundSync.Queue must be given unique names.`;
     },
-    "expired-test-without-max-age": ({
+    'expired-test-without-max-age': ({
                                        methodName,
                                        paramName
                                      }) => {
       return `The '${methodName}()' method can only be used when the ` + `'${paramName}' is used in the constructor.`;
     },
-    "unsupported-route-type": ({
+    'unsupported-route-type': ({
                                  moduleName,
                                  className,
                                  funcName,
@@ -217,7 +217,7 @@ define(["exports"], (function(exports) {
                                }) => {
       return `The supplied '${paramName}' parameter was an unsupported type. ` + `Please check the docs for ${moduleName}.${className}.${funcName} for ` + `valid input types.`;
     },
-    "not-array-of-class": ({
+    'not-array-of-class': ({
                              value,
                              expectedClass,
                              moduleName,
@@ -227,21 +227,21 @@ define(["exports"], (function(exports) {
                            }) => {
       return `The supplied '${paramName}' parameter must be an array of ` + `'${expectedClass}' objects. Received '${JSON.stringify(value)},'. ` + `Please check the call to ${moduleName}.${className}.${funcName}() ` + `to fix the issue.`;
     },
-    "max-entries-or-age-required": ({
+    'max-entries-or-age-required': ({
                                       moduleName,
                                       className,
                                       funcName
                                     }) => {
       return `You must define either config.maxEntries or config.maxAgeSeconds` + `in ${moduleName}.${className}.${funcName}`;
     },
-    "statuses-or-headers-required": ({
+    'statuses-or-headers-required': ({
                                        moduleName,
                                        className,
                                        funcName
                                      }) => {
       return `You must define either config.statuses or config.headers` + `in ${moduleName}.${className}.${funcName}`;
     },
-    "invalid-string": ({
+    'invalid-string': ({
                          moduleName,
                          funcName,
                          paramName
@@ -251,16 +251,16 @@ define(["exports"], (function(exports) {
       }
       return `When using strings, the '${paramName}' parameter must start with ` + `'http' (for cross-origin matches) or '/' (for same-origin matches). ` + `Please see the docs for ${moduleName}.${funcName}() for ` + `more info.`;
     },
-    "channel-name-required": () => {
+    'channel-name-required': () => {
       return `You must provide a channelName to construct a ` + `BroadcastCacheUpdate instance.`;
     },
-    "invalid-responses-are-same-args": () => {
+    'invalid-responses-are-same-args': () => {
       return `The arguments passed into responsesAreSame() appear to be ` + `invalid. Please ensure valid Responses are used.`;
     },
-    "expire-custom-caches-only": () => {
+    'expire-custom-caches-only': () => {
       return `You must provide a 'cacheName' property when using the ` + `expiration plugin with a runtime caching strategy.`;
     },
-    "unit-must-be-bytes": ({
+    'unit-must-be-bytes': ({
                              normalizedRangeHeader
                            }) => {
       if (!normalizedRangeHeader) {
@@ -268,7 +268,7 @@ define(["exports"], (function(exports) {
       }
       return `The 'unit' portion of the Range header must be set to 'bytes'. ` + `The Range header provided was "${normalizedRangeHeader}"`;
     },
-    "single-range-only": ({
+    'single-range-only': ({
                             normalizedRangeHeader
                           }) => {
       if (!normalizedRangeHeader) {
@@ -276,7 +276,7 @@ define(["exports"], (function(exports) {
       }
       return `Multiple ranges are not supported. Please use a  single start ` + `value, and optional end value. The Range header provided was ` + `"${normalizedRangeHeader}"`;
     },
-    "invalid-range-values": ({
+    'invalid-range-values': ({
                                normalizedRangeHeader
                              }) => {
       if (!normalizedRangeHeader) {
@@ -284,28 +284,28 @@ define(["exports"], (function(exports) {
       }
       return `The Range header is missing both start and end values. At least ` + `one of those values is needed. The Range header provided was ` + `"${normalizedRangeHeader}"`;
     },
-    "no-range-header": () => {
+    'no-range-header': () => {
       return `No Range header was found in the Request provided.`;
     },
-    "range-not-satisfiable": ({
+    'range-not-satisfiable': ({
                                 size,
                                 start,
                                 end
                               }) => {
       return `The start (${start}) and end (${end}) values in the Range are ` + `not satisfiable by the cached response, which is ${size} bytes.`;
     },
-    "attempt-to-cache-non-get-request": ({
+    'attempt-to-cache-non-get-request': ({
                                            url,
                                            method
                                          }) => {
       return `Unable to cache '${url}' because it is a '${method}' request and ` + `only 'GET' requests can be cached.`;
     },
-    "cache-put-with-no-response": ({
+    'cache-put-with-no-response': ({
                                      url
                                    }) => {
       return `There was an attempt to cache '${url}' but the response was not ` + `defined.`;
     },
-    "no-response": ({
+    'no-response': ({
                       url,
                       error
                     }) => {
@@ -315,38 +315,38 @@ define(["exports"], (function(exports) {
       }
       return message;
     },
-    "bad-precaching-response": ({
+    'bad-precaching-response': ({
                                   url,
                                   status
                                 }) => {
       return `The precaching request for '${url}' failed` + (status ? ` with an HTTP status of ${status}.` : `.`);
     },
-    "non-precached-url": ({
+    'non-precached-url': ({
                             url
                           }) => {
       return `createHandlerBoundToURL('${url}') was called, but that URL is ` + `not precached. Please pass in a URL that is precached instead.`;
     },
-    "add-to-cache-list-conflicting-integrities": ({
+    'add-to-cache-list-conflicting-integrities': ({
                                                     url
                                                   }) => {
       return `Two of the entries passed to ` + `'workbox-precaching.PrecacheController.addToCacheList()' had the URL ` + `${url} with different integrity values. Please remove one of them.`;
     },
-    "missing-precache-entry": ({
+    'missing-precache-entry': ({
                                  cacheName,
                                  url
                                }) => {
       return `Unable to find a precached response in ${cacheName} for ${url}.`;
     },
-    "cross-origin-copy-response": ({
+    'cross-origin-copy-response': ({
                                      origin
                                    }) => {
       return `workbox-core.copyResponse() can only be used with same-origin ` + `responses. It was passed a response with origin ${origin}.`;
     },
-    "opaque-streams-source": ({
+    'opaque-streams-source': ({
                                 type
                               }) => {
       const message = `One of the workbox-streams sources resulted in an ` + `'${type}' response.`;
-      if (type === "opaqueredirect") {
+      if (type === 'opaqueredirect') {
         return `${message} Please do not use a navigation request that results ` + `in a redirect as a source.`;
       }
       return `${message} Please ensure your sources are CORS-enabled.`;
@@ -417,20 +417,20 @@ define(["exports"], (function(exports) {
      */
   const isArray = (value, details) => {
     if (!Array.isArray(value)) {
-      throw new WorkboxError("not-an-array", details);
+      throw new WorkboxError('not-an-array', details);
     }
   };
   const hasMethod = (object, expectedMethod, details) => {
     const type = typeof object[expectedMethod];
-    if (type !== "function") {
-      details["expectedMethod"] = expectedMethod;
-      throw new WorkboxError("missing-a-method", details);
+    if (type !== 'function') {
+      details['expectedMethod'] = expectedMethod;
+      throw new WorkboxError('missing-a-method', details);
     }
   };
   const isType = (object, expectedType, details) => {
     if (typeof object !== expectedType) {
-      details["expectedType"] = expectedType;
-      throw new WorkboxError("incorrect-type", details);
+      details['expectedType'] = expectedType;
+      throw new WorkboxError('incorrect-type', details);
     }
   };
   const isInstance = (object,
@@ -438,14 +438,14 @@ define(["exports"], (function(exports) {
                       // eslint-disable-next-line @typescript-eslint/ban-types
                       expectedClass, details) => {
     if (!(object instanceof expectedClass)) {
-      details["expectedClassName"] = expectedClass.name;
-      throw new WorkboxError("incorrect-class", details);
+      details['expectedClassName'] = expectedClass.name;
+      throw new WorkboxError('incorrect-class', details);
     }
   };
   const isOneOf = (value, validValues, details) => {
     if (!validValues.includes(value)) {
-      details["validValueDescription"] = `Valid values are ${JSON.stringify(validValues)}.`;
-      throw new WorkboxError("invalid-value", details);
+      details['validValueDescription'] = `Valid values are ${JSON.stringify(validValues)}.`;
+      throw new WorkboxError('invalid-value', details);
     }
   };
   const isArrayOfClass = (value,
@@ -453,7 +453,7 @@ define(["exports"], (function(exports) {
                           expectedClass,
                           // eslint-disable-line
                           details) => {
-    const error = new WorkboxError("not-array-of-class", details);
+    const error = new WorkboxError('not-array-of-class', details);
     if (!Array.isArray(value)) {
       throw error;
     }
@@ -474,7 +474,7 @@ define(["exports"], (function(exports) {
 
   // @ts-ignore
   try {
-    self["workbox:routing:7.2.0"] && _();
+    self['workbox:routing:7.2.0'] && _();
   } catch (e) {
   }
 
@@ -493,7 +493,7 @@ define(["exports"], (function(exports) {
    *
    * @private
    */
-  const defaultMethod = "GET";
+  const defaultMethod = 'GET';
   /**
    * The list of valid HTTP methods associated with requests that could be routed.
    *
@@ -501,7 +501,7 @@ define(["exports"], (function(exports) {
    *
    * @private
    */
-  const validMethods = ["DELETE", "GET", "HEAD", "PATCH", "POST", "PUT"];
+  const validMethods = ['DELETE', 'GET', 'HEAD', 'PATCH', 'POST', 'PUT'];
 
   /*
       Copyright 2018 Google LLC
@@ -518,23 +518,23 @@ define(["exports"], (function(exports) {
    * @private
    */
   const normalizeHandler = handler => {
-    if (handler && typeof handler === "object") {
+    if (handler && typeof handler === 'object') {
       {
-        finalAssertExports.hasMethod(handler, "handle", {
-          moduleName: "workbox-routing",
-          className: "Route",
-          funcName: "constructor",
-          paramName: "handler"
+        finalAssertExports.hasMethod(handler, 'handle', {
+          moduleName: 'workbox-routing',
+          className: 'Route',
+          funcName: 'constructor',
+          paramName: 'handler'
         });
       }
       return handler;
     } else {
       {
-        finalAssertExports.isType(handler, "function", {
-          moduleName: "workbox-routing",
-          className: "Route",
-          funcName: "constructor",
-          paramName: "handler"
+        finalAssertExports.isType(handler, 'function', {
+          moduleName: 'workbox-routing',
+          className: 'Route',
+          funcName: 'constructor',
+          paramName: 'handler'
         });
       }
       return {
@@ -573,15 +573,15 @@ define(["exports"], (function(exports) {
      */
     constructor(match, handler, method = defaultMethod) {
       {
-        finalAssertExports.isType(match, "function", {
-          moduleName: "workbox-routing",
-          className: "Route",
-          funcName: "constructor",
-          paramName: "match"
+        finalAssertExports.isType(match, 'function', {
+          moduleName: 'workbox-routing',
+          className: 'Route',
+          funcName: 'constructor',
+          paramName: 'match'
         });
         if (method) {
           finalAssertExports.isOneOf(method, validMethods, {
-            paramName: "method"
+            paramName: 'method'
           });
         }
       }
@@ -637,10 +637,10 @@ define(["exports"], (function(exports) {
     constructor(regExp, handler, method) {
       {
         finalAssertExports.isInstance(regExp, RegExp, {
-          moduleName: "workbox-routing",
-          className: "RegExpRoute",
-          funcName: "constructor",
-          paramName: "pattern"
+          moduleName: 'workbox-routing',
+          className: 'RegExpRoute',
+          funcName: 'constructor',
+          paramName: 'pattern'
         });
       }
       const match = ({
@@ -682,7 +682,7 @@ define(["exports"], (function(exports) {
     const urlObj = new URL(String(url), location.href);
     // See https://github.com/GoogleChrome/workbox/issues/2323
     // We want to include everything, except for the origin if it's same-origin.
-    return urlObj.href.replace(new RegExp(`^${location.origin}`), "");
+    return urlObj.href.replace(new RegExp(`^${location.origin}`), '');
   };
 
   /*
@@ -733,7 +733,7 @@ define(["exports"], (function(exports) {
      */
     addFetchListener() {
       // See https://github.com/Microsoft/TypeScript/issues/28357#issuecomment-436484705
-      self.addEventListener("fetch", event => {
+      self.addEventListener('fetch', event => {
         const {
           request
         } = event;
@@ -771,10 +771,10 @@ define(["exports"], (function(exports) {
      */
     addCacheListener() {
       // See https://github.com/Microsoft/TypeScript/issues/28357#issuecomment-436484705
-      self.addEventListener("message", event => {
+      self.addEventListener('message', event => {
         // event.data is type 'any'
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        if (event.data && event.data.type === "CACHE_URLS") {
+        if (event.data && event.data.type === 'CACHE_URLS') {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           const {
             payload
@@ -783,7 +783,7 @@ define(["exports"], (function(exports) {
             logger.debug(`Caching URLs from the window`, payload.urlsToCache);
           }
           const requestPromises = Promise.all(payload.urlsToCache.map(entry => {
-            if (typeof entry === "string") {
+            if (typeof entry === 'string') {
               entry = [entry];
             }
             const request = new Request(...entry);
@@ -822,14 +822,14 @@ define(["exports"], (function(exports) {
                   }) {
       {
         finalAssertExports.isInstance(request, Request, {
-          moduleName: "workbox-routing",
-          className: "Router",
-          funcName: "handleRequest",
-          paramName: "options.request"
+          moduleName: 'workbox-routing',
+          className: 'Router',
+          funcName: 'handleRequest',
+          paramName: 'options.request'
         });
       }
       const url = new URL(request.url, location.href);
-      if (!url.protocol.startsWith("http")) {
+      if (!url.protocol.startsWith('http')) {
         {
           logger.debug(`Workbox Router only supports URLs that start with 'http'.`);
         }
@@ -997,7 +997,7 @@ define(["exports"], (function(exports) {
             Object.keys(matchResult).length === 0) {
             // Instead of passing an empty object in as params, use undefined.
             params = undefined;
-          } else if (typeof matchResult === "boolean") {
+          } else if (typeof matchResult === 'boolean') {
             // For the boolean value true (rather than just something truth-y),
             // don't set params.
             // See https://github.com/GoogleChrome/workbox/pull/2134#issuecomment-513924353
@@ -1050,35 +1050,35 @@ define(["exports"], (function(exports) {
      */
     registerRoute(route) {
       {
-        finalAssertExports.isType(route, "object", {
-          moduleName: "workbox-routing",
-          className: "Router",
-          funcName: "registerRoute",
-          paramName: "route"
+        finalAssertExports.isType(route, 'object', {
+          moduleName: 'workbox-routing',
+          className: 'Router',
+          funcName: 'registerRoute',
+          paramName: 'route'
         });
-        finalAssertExports.hasMethod(route, "match", {
-          moduleName: "workbox-routing",
-          className: "Router",
-          funcName: "registerRoute",
-          paramName: "route"
+        finalAssertExports.hasMethod(route, 'match', {
+          moduleName: 'workbox-routing',
+          className: 'Router',
+          funcName: 'registerRoute',
+          paramName: 'route'
         });
-        finalAssertExports.isType(route.handler, "object", {
-          moduleName: "workbox-routing",
-          className: "Router",
-          funcName: "registerRoute",
-          paramName: "route"
+        finalAssertExports.isType(route.handler, 'object', {
+          moduleName: 'workbox-routing',
+          className: 'Router',
+          funcName: 'registerRoute',
+          paramName: 'route'
         });
-        finalAssertExports.hasMethod(route.handler, "handle", {
-          moduleName: "workbox-routing",
-          className: "Router",
-          funcName: "registerRoute",
-          paramName: "route.handler"
+        finalAssertExports.hasMethod(route.handler, 'handle', {
+          moduleName: 'workbox-routing',
+          className: 'Router',
+          funcName: 'registerRoute',
+          paramName: 'route.handler'
         });
-        finalAssertExports.isType(route.method, "string", {
-          moduleName: "workbox-routing",
-          className: "Router",
-          funcName: "registerRoute",
-          paramName: "route.method"
+        finalAssertExports.isType(route.method, 'string', {
+          moduleName: 'workbox-routing',
+          className: 'Router',
+          funcName: 'registerRoute',
+          paramName: 'route.method'
         });
       }
       if (!this._routes.has(route.method)) {
@@ -1096,7 +1096,7 @@ define(["exports"], (function(exports) {
      */
     unregisterRoute(route) {
       if (!this._routes.has(route.method)) {
-        throw new WorkboxError("unregister-route-but-not-found-with-method", {
+        throw new WorkboxError('unregister-route-but-not-found-with-method', {
           method: route.method
         });
       }
@@ -1104,7 +1104,7 @@ define(["exports"], (function(exports) {
       if (routeIndex > -1) {
         this._routes.get(route.method).splice(routeIndex, 1);
       } else {
-        throw new WorkboxError("unregister-route-route-not-registered");
+        throw new WorkboxError('unregister-route-route-not-registered');
       }
     }
   }
@@ -1161,21 +1161,21 @@ define(["exports"], (function(exports) {
    */
   function registerRoute(capture, handler, method) {
     let route;
-    if (typeof capture === "string") {
+    if (typeof capture === 'string') {
       const captureUrl = new URL(capture, location.href);
       {
-        if (!(capture.startsWith("/") || capture.startsWith("http"))) {
-          throw new WorkboxError("invalid-string", {
-            moduleName: "workbox-routing",
-            funcName: "registerRoute",
-            paramName: "capture"
+        if (!(capture.startsWith('/') || capture.startsWith('http'))) {
+          throw new WorkboxError('invalid-string', {
+            moduleName: 'workbox-routing',
+            funcName: 'registerRoute',
+            paramName: 'capture'
           });
         }
         // We want to check if Express-style wildcards are in the pathname only.
         // TODO: Remove this log message in v4.
-        const valueToCheck = capture.startsWith("http") ? captureUrl.pathname : capture;
+        const valueToCheck = capture.startsWith('http') ? captureUrl.pathname : capture;
         // See https://github.com/pillarjs/path-to-regexp#parameters
-        const wildcards = "[*:?+]";
+        const wildcards = '[*:?+]';
         if (new RegExp(`${wildcards}`).exec(valueToCheck)) {
           logger.debug(`The '$capture' parameter contains an Express-style wildcard ` + `character (${wildcards}). Strings are now always interpreted as ` + `exact matches; use a RegExp for partial or wildcard matches.`);
         }
@@ -1195,16 +1195,16 @@ define(["exports"], (function(exports) {
     } else if (capture instanceof RegExp) {
       // If `capture` is a `RegExp` then `handler` and `method` must be present.
       route = new RegExpRoute(capture, handler, method);
-    } else if (typeof capture === "function") {
+    } else if (typeof capture === 'function') {
       // If `capture` is a function then `handler` and `method` must be present.
       route = new Route(capture, handler, method);
     } else if (capture instanceof Route) {
       route = capture;
     } else {
-      throw new WorkboxError("unsupported-route-type", {
-        moduleName: "workbox-routing",
-        funcName: "registerRoute",
-        paramName: "capture"
+      throw new WorkboxError('unsupported-route-type', {
+        moduleName: 'workbox-routing',
+        funcName: 'registerRoute',
+        paramName: 'capture'
       });
     }
     const defaultRouter = getOrCreateDefaultRouter();
@@ -1220,14 +1220,14 @@ define(["exports"], (function(exports) {
       https://opensource.org/licenses/MIT.
     */
   const _cacheNameDetails = {
-    googleAnalytics: "googleAnalytics",
-    precache: "precache-v2",
-    prefix: "workbox",
-    runtime: "runtime",
-    suffix: typeof registration !== "undefined" ? registration.scope : ""
+    googleAnalytics: 'googleAnalytics',
+    precache: 'precache-v2',
+    prefix: 'workbox',
+    runtime: 'runtime',
+    suffix: typeof registration !== 'undefined' ? registration.scope : ''
   };
   const _createCacheName = cacheName => {
-    return [_cacheNameDetails.prefix, cacheName, _cacheNameDetails.suffix].filter(value => value && value.length > 0).join("-");
+    return [_cacheNameDetails.prefix, cacheName, _cacheNameDetails.suffix].filter(value => value && value.length > 0).join('-');
   };
   const eachCacheNameDetail = fn => {
     for (const key of Object.keys(_cacheNameDetails)) {
@@ -1237,7 +1237,7 @@ define(["exports"], (function(exports) {
   const cacheNames = {
     updateDetails: details => {
       eachCacheNameDetail(key => {
-        if (typeof details[key] === "string") {
+        if (typeof details[key] === 'string') {
           _cacheNameDetails[key] = details[key];
         }
       });
@@ -1282,7 +1282,7 @@ define(["exports"], (function(exports) {
 
   // @ts-ignore
   try {
-    self["workbox:precaching:7.2.0"] && _();
+    self['workbox:precaching:7.2.0'] && _();
   } catch (e) {
   }
 
@@ -1294,7 +1294,7 @@ define(["exports"], (function(exports) {
       https://opensource.org/licenses/MIT.
     */
   // Name of the search parameter used to store revision info.
-  const REVISION_SEARCH_PARAM = "__WB_REVISION__";
+  const REVISION_SEARCH_PARAM = '__WB_REVISION__';
 
   /**
    * Converts a manifest entry into a versioned URL suitable for precaching.
@@ -1307,13 +1307,13 @@ define(["exports"], (function(exports) {
    */
   function createCacheKey(entry) {
     if (!entry) {
-      throw new WorkboxError("add-to-cache-list-unexpected-type", {
+      throw new WorkboxError('add-to-cache-list-unexpected-type', {
         entry
       });
     }
     // If a precache manifest entry is a string, it's assumed to be a versioned
     // URL, like '/app.abcd1234.js'. Return as-is.
-    if (typeof entry === "string") {
+    if (typeof entry === 'string') {
       const urlObject = new URL(entry, location.href);
       return {
         cacheKey: urlObject.href,
@@ -1325,7 +1325,7 @@ define(["exports"], (function(exports) {
       url
     } = entry;
     if (!url) {
-      throw new WorkboxError("add-to-cache-list-unexpected-type", {
+      throw new WorkboxError('add-to-cache-list-unexpected-type', {
         entry
       });
     }
@@ -1380,7 +1380,7 @@ define(["exports"], (function(exports) {
                                                state,
                                                cachedResponse
                                              }) => {
-        if (event.type === "install") {
+        if (event.type === 'install') {
           if (state && state.originalRequest && state.originalRequest instanceof Request) {
             // TODO: `state` should never be undefined...
             const url = state.originalRequest.url;
@@ -1459,8 +1459,8 @@ define(["exports"], (function(exports) {
   function printCleanupDetails(deletedURLs) {
     const deletionCount = deletedURLs.length;
     if (deletionCount > 0) {
-      logger.groupCollapsed(`During precaching cleanup, ` + `${deletionCount} cached ` + `request${deletionCount === 1 ? " was" : "s were"} deleted.`);
-      logGroup("Deleted Cache Requests", deletedURLs);
+      logger.groupCollapsed(`During precaching cleanup, ` + `${deletionCount} cached ` + `request${deletionCount === 1 ? ' was' : 's were'} deleted.`);
+      logGroup('Deleted Cache Requests', deletedURLs);
       logger.groupEnd();
     }
   }
@@ -1500,9 +1500,9 @@ define(["exports"], (function(exports) {
     const precachedCount = urlsToPrecache.length;
     const alreadyPrecachedCount = urlsAlreadyPrecached.length;
     if (precachedCount || alreadyPrecachedCount) {
-      let message = `Precaching ${precachedCount} file${precachedCount === 1 ? "" : "s"}.`;
+      let message = `Precaching ${precachedCount} file${precachedCount === 1 ? '' : 's'}.`;
       if (alreadyPrecachedCount > 0) {
-        message += ` ${alreadyPrecachedCount} ` + `file${alreadyPrecachedCount === 1 ? " is" : "s are"} already cached.`;
+        message += ` ${alreadyPrecachedCount} ` + `file${alreadyPrecachedCount === 1 ? ' is' : 's are'} already cached.`;
       }
       logger.groupCollapsed(message);
       _nestedGroup(`View newly precached URLs.`, urlsToPrecache);
@@ -1531,8 +1531,8 @@ define(["exports"], (function(exports) {
    */
   function canConstructResponseFromBodyStream() {
     if (supportStatus === undefined) {
-      const testResponse = new Response("");
-      if ("body" in testResponse) {
+      const testResponse = new Response('');
+      if ('body' in testResponse) {
         try {
           new Response(testResponse.body);
           supportStatus = true;
@@ -1579,7 +1579,7 @@ define(["exports"], (function(exports) {
       origin = responseURL.origin;
     }
     if (origin !== self.location.origin) {
-      throw new WorkboxError("cross-origin-copy-response", {
+      throw new WorkboxError('cross-origin-copy-response', {
         origin
       });
     }
@@ -1705,11 +1705,11 @@ define(["exports"], (function(exports) {
     for (const callback of quotaErrorCallbacks) {
       await callback();
       {
-        logger.log(callback, "is complete.");
+        logger.log(callback, 'is complete.');
       }
     }
     {
-      logger.log("Finished running callbacks.");
+      logger.log('Finished running callbacks.');
     }
   }
 
@@ -1733,7 +1733,7 @@ define(["exports"], (function(exports) {
 
   // @ts-ignore
   try {
-    self["workbox:strategies:7.2.0"] && _();
+    self['workbox:strategies:7.2.0'] && _();
   } catch (e) {
   }
 
@@ -1745,7 +1745,7 @@ define(["exports"], (function(exports) {
       https://opensource.org/licenses/MIT.
     */
   function toRequest(input) {
-    return typeof input === "string" ? new Request(input) : input;
+    return typeof input === 'string' ? new Request(input) : input;
   }
 
   /**
@@ -1815,10 +1815,10 @@ define(["exports"], (function(exports) {
        */
       {
         finalAssertExports.isInstance(options.event, ExtendableEvent, {
-          moduleName: "workbox-strategies",
-          className: "StrategyHandler",
-          funcName: "constructor",
-          paramName: "options.event"
+          moduleName: 'workbox-strategies',
+          className: 'StrategyHandler',
+          funcName: 'constructor',
+          paramName: 'options.event'
         });
       }
       Object.assign(this, options);
@@ -1854,7 +1854,7 @@ define(["exports"], (function(exports) {
         event
       } = this;
       let request = toRequest(input);
-      if (request.mode === "navigate" && event instanceof FetchEvent && event.preloadResponse) {
+      if (request.mode === 'navigate' && event instanceof FetchEvent && event.preloadResponse) {
         const possiblePreloadResponse = await event.preloadResponse;
         if (possiblePreloadResponse) {
           {
@@ -1866,9 +1866,9 @@ define(["exports"], (function(exports) {
       // If there is a fetchDidFail plugin, we need to save a clone of the
       // original request before it's either modified by a requestWillFetch
       // plugin or before the original request's body is consumed via fetch().
-      const originalRequest = this.hasCallback("fetchDidFail") ? request.clone() : null;
+      const originalRequest = this.hasCallback('fetchDidFail') ? request.clone() : null;
       try {
-        for (const cb of this.iterateCallbacks("requestWillFetch")) {
+        for (const cb of this.iterateCallbacks('requestWillFetch')) {
           request = await cb({
             request: request.clone(),
             event
@@ -1876,7 +1876,7 @@ define(["exports"], (function(exports) {
         }
       } catch (err) {
         if (err instanceof Error) {
-          throw new WorkboxError("plugin-error-request-will-fetch", {
+          throw new WorkboxError('plugin-error-request-will-fetch', {
             thrownErrorMessage: err.message
           });
         }
@@ -1888,11 +1888,11 @@ define(["exports"], (function(exports) {
       try {
         let fetchResponse;
         // See https://github.com/GoogleChrome/workbox/issues/1796
-        fetchResponse = await fetch(request, request.mode === "navigate" ? undefined : this._strategy.fetchOptions);
-        if ("development" !== "production") {
+        fetchResponse = await fetch(request, request.mode === 'navigate' ? undefined : this._strategy.fetchOptions);
+        if ("development" !== 'production') {
           logger.debug(`Network request for ` + `'${getFriendlyURL(request.url)}' returned a response with ` + `status '${fetchResponse.status}'.`);
         }
-        for (const callback of this.iterateCallbacks("fetchDidSucceed")) {
+        for (const callback of this.iterateCallbacks('fetchDidSucceed')) {
           fetchResponse = await callback({
             event,
             request: pluginFilteredRequest,
@@ -1907,7 +1907,7 @@ define(["exports"], (function(exports) {
         // `originalRequest` will only exist if a `fetchDidFail` callback
         // is being used (see above).
         if (originalRequest) {
-          await this.runCallbacks("fetchDidFail", {
+          await this.runCallbacks('fetchDidFail', {
             error: error,
             event,
             originalRequest: originalRequest.clone(),
@@ -1954,7 +1954,7 @@ define(["exports"], (function(exports) {
         cacheName,
         matchOptions
       } = this._strategy;
-      const effectiveRequest = await this.getCacheKey(request, "read");
+      const effectiveRequest = await this.getCacheKey(request, 'read');
       const multiMatchOptions = Object.assign(Object.assign({}, matchOptions), {
         cacheName
       });
@@ -1966,7 +1966,7 @@ define(["exports"], (function(exports) {
           logger.debug(`No cached response found in '${cacheName}'.`);
         }
       }
-      for (const callback of this.iterateCallbacks("cachedResponseWillBeUsed")) {
+      for (const callback of this.iterateCallbacks('cachedResponseWillBeUsed')) {
         cachedResponse = (await callback({
           cacheName,
           matchOptions,
@@ -1998,16 +1998,16 @@ define(["exports"], (function(exports) {
       // Run in the next task to avoid blocking other cache reads.
       // https://github.com/w3c/ServiceWorker/issues/1397
       await timeout(0);
-      const effectiveRequest = await this.getCacheKey(request, "write");
+      const effectiveRequest = await this.getCacheKey(request, 'write');
       {
-        if (effectiveRequest.method && effectiveRequest.method !== "GET") {
-          throw new WorkboxError("attempt-to-cache-non-get-request", {
+        if (effectiveRequest.method && effectiveRequest.method !== 'GET') {
+          throw new WorkboxError('attempt-to-cache-non-get-request', {
             url: getFriendlyURL(effectiveRequest.url),
             method: effectiveRequest.method
           });
         }
         // See https://github.com/GoogleChrome/workbox/issues/2818
-        const vary = response.headers.get("Vary");
+        const vary = response.headers.get('Vary');
         if (vary) {
           logger.debug(`The response for ${getFriendlyURL(effectiveRequest.url)} ` + `has a 'Vary: ${vary}' header. ` + `Consider setting the {ignoreVary: true} option on your strategy ` + `to ensure cache matching and deletion works as expected.`);
         }
@@ -2016,7 +2016,7 @@ define(["exports"], (function(exports) {
         {
           logger.error(`Cannot cache non-existent response for ` + `'${getFriendlyURL(effectiveRequest.url)}'.`);
         }
-        throw new WorkboxError("cache-put-with-no-response", {
+        throw new WorkboxError('cache-put-with-no-response', {
           url: getFriendlyURL(effectiveRequest.url)
         });
       }
@@ -2032,12 +2032,12 @@ define(["exports"], (function(exports) {
         matchOptions
       } = this._strategy;
       const cache = await self.caches.open(cacheName);
-      const hasCacheUpdateCallback = this.hasCallback("cacheDidUpdate");
+      const hasCacheUpdateCallback = this.hasCallback('cacheDidUpdate');
       const oldResponse = hasCacheUpdateCallback ? await cacheMatchIgnoreParams(
         // TODO(philipwalton): the `__WB_REVISION__` param is a precaching
         // feature. Consider into ways to only add this behavior if using
         // precaching.
-        cache, effectiveRequest.clone(), ["__WB_REVISION__"], matchOptions) : null;
+        cache, effectiveRequest.clone(), ['__WB_REVISION__'], matchOptions) : null;
       {
         logger.debug(`Updating the '${cacheName}' cache with a new Response ` + `for ${getFriendlyURL(effectiveRequest.url)}.`);
       }
@@ -2046,13 +2046,13 @@ define(["exports"], (function(exports) {
       } catch (error) {
         if (error instanceof Error) {
           // See https://developer.mozilla.org/en-US/docs/Web/API/DOMException#exception-QuotaExceededError
-          if (error.name === "QuotaExceededError") {
+          if (error.name === 'QuotaExceededError') {
             await executeQuotaErrorCallbacks();
           }
           throw error;
         }
       }
-      for (const callback of this.iterateCallbacks("cacheDidUpdate")) {
+      for (const callback of this.iterateCallbacks('cacheDidUpdate')) {
         await callback({
           cacheName,
           oldResponse,
@@ -2079,7 +2079,7 @@ define(["exports"], (function(exports) {
       const key = `${request.url} | ${mode}`;
       if (!this._cacheKeys[key]) {
         let effectiveRequest = request;
-        for (const callback of this.iterateCallbacks("cacheKeyWillBeUsed")) {
+        for (const callback of this.iterateCallbacks('cacheKeyWillBeUsed')) {
           effectiveRequest = toRequest(await callback({
             mode,
             request: effectiveRequest,
@@ -2144,7 +2144,7 @@ define(["exports"], (function(exports) {
      */
     * iterateCallbacks(name) {
       for (const plugin of this._strategy.plugins) {
-        if (typeof plugin[name] === "function") {
+        if (typeof plugin[name] === 'function') {
           const state = this._pluginStateMap.get(plugin);
           const statefulCallback = param => {
             const statefulParam = Object.assign(Object.assign({}, param), {
@@ -2215,7 +2215,7 @@ define(["exports"], (function(exports) {
     async _ensureResponseSafeToCache(response) {
       let responseToCache = response;
       let pluginsUsed = false;
-      for (const callback of this.iterateCallbacks("cacheWillUpdate")) {
+      for (const callback of this.iterateCallbacks('cacheWillUpdate')) {
         responseToCache = (await callback({
           request: this.request,
           response: responseToCache,
@@ -2371,8 +2371,8 @@ define(["exports"], (function(exports) {
         };
       }
       const event = options.event;
-      const request = typeof options.request === "string" ? new Request(options.request) : options.request;
-      const params = "params" in options ? options.params : undefined;
+      const request = typeof options.request === 'string' ? new Request(options.request) : options.request;
+      const params = 'params' in options ? options.params : undefined;
       const handler = new StrategyHandler(this, {
         event,
         request,
@@ -2385,7 +2385,7 @@ define(["exports"], (function(exports) {
     }
 
     async _getResponse(handler, request, event) {
-      await handler.runCallbacks("handlerWillStart", {
+      await handler.runCallbacks('handlerWillStart', {
         event,
         request
       });
@@ -2395,14 +2395,14 @@ define(["exports"], (function(exports) {
         // The "official" Strategy subclasses all throw this error automatically,
         // but in case a third-party Strategy doesn't, ensure that we have a
         // consistent failure when there's no response or an error response.
-        if (!response || response.type === "error") {
-          throw new WorkboxError("no-response", {
+        if (!response || response.type === 'error') {
+          throw new WorkboxError('no-response', {
             url: request.url
           });
         }
       } catch (error) {
         if (error instanceof Error) {
-          for (const callback of handler.iterateCallbacks("handlerDidError")) {
+          for (const callback of handler.iterateCallbacks('handlerDidError')) {
             response = await callback({
               error,
               event,
@@ -2416,10 +2416,10 @@ define(["exports"], (function(exports) {
         if (!response) {
           throw error;
         } else {
-          logger.log(`While responding to '${getFriendlyURL(request.url)}', ` + `an ${error instanceof Error ? error.toString() : ""} error occurred. Using a fallback response provided by ` + `a handlerDidError plugin.`);
+          logger.log(`While responding to '${getFriendlyURL(request.url)}', ` + `an ${error instanceof Error ? error.toString() : ''} error occurred. Using a fallback response provided by ` + `a handlerDidError plugin.`);
         }
       }
-      for (const callback of handler.iterateCallbacks("handlerWillRespond")) {
+      for (const callback of handler.iterateCallbacks('handlerWillRespond')) {
         response = await callback({
           event,
           request,
@@ -2440,7 +2440,7 @@ define(["exports"], (function(exports) {
         // promises passed to `handler.waitUntil()`.
       }
       try {
-        await handler.runCallbacks("handlerDidRespond", {
+        await handler.runCallbacks('handlerDidRespond', {
           event,
           request,
           response
@@ -2451,7 +2451,7 @@ define(["exports"], (function(exports) {
           error = waitUntilError;
         }
       }
-      await handler.runCallbacks("handlerDidComplete", {
+      await handler.runCallbacks('handlerDidComplete', {
         event,
         request,
         response,
@@ -2544,7 +2544,7 @@ define(["exports"], (function(exports) {
       }
       // If this is an `install` event for an entry that isn't already cached,
       // then populate the cache.
-      if (handler.event && handler.event.type === "install") {
+      if (handler.event && handler.event.type === 'install') {
         return await this._handleInstall(request, handler);
       }
       // Getting here means something went wrong. An entry that should have been
@@ -2566,7 +2566,7 @@ define(["exports"], (function(exports) {
         // Do not add integrity if the original request is no-cors
         // See https://github.com/GoogleChrome/workbox/issues/3096
         response = await handler.fetch(new Request(request, {
-          integrity: request.mode !== "no-cors" ? integrityInRequest || integrityInManifest : undefined
+          integrity: request.mode !== 'no-cors' ? integrityInRequest || integrityInManifest : undefined
         }));
         // It's only "safe" to repair the cache if we're using SRI to guarantee
         // that the response matches the precache manifest's expectations,
@@ -2575,7 +2575,7 @@ define(["exports"], (function(exports) {
         // See https://github.com/GoogleChrome/workbox/issues/2858
         // Also if the original request users no-cors we don't use integrity.
         // See https://github.com/GoogleChrome/workbox/issues/3096
-        if (integrityInManifest && noIntegrityConflict && request.mode !== "no-cors") {
+        if (integrityInManifest && noIntegrityConflict && request.mode !== 'no-cors') {
           this._useDefaultCacheabilityPluginIfNeeded();
           const wasCached = await handler.cachePut(request, response.clone());
           {
@@ -2587,13 +2587,13 @@ define(["exports"], (function(exports) {
       } else {
         // This shouldn't normally happen, but there are edge cases:
         // https://github.com/GoogleChrome/workbox/issues/1441
-        throw new WorkboxError("missing-precache-entry", {
+        throw new WorkboxError('missing-precache-entry', {
           cacheName: this.cacheName,
           url: request.url
         });
       }
       {
-        const cacheKey = params.cacheKey || (await handler.getCacheKey(request, "read"));
+        const cacheKey = params.cacheKey || (await handler.getCacheKey(request, 'read'));
         // Workbox is going to handle the route.
         // print the routing details to the console.
         logger.groupCollapsed(`Precaching is responding to: ` + getFriendlyURL(request.url));
@@ -2618,7 +2618,7 @@ define(["exports"], (function(exports) {
       if (!wasCached) {
         // Throwing here will lead to the `install` handler failing, which
         // we want to do if *any* of the responses aren't safe to cache.
-        throw new WorkboxError("bad-precaching-response", {
+        throw new WorkboxError('bad-precaching-response', {
           url: request.url,
           status: response.status
         });
@@ -2761,8 +2761,8 @@ define(["exports"], (function(exports) {
     precache(entries) {
       this.addToCacheList(entries);
       if (!this._installAndActiveListenersAdded) {
-        self.addEventListener("install", this.install);
-        self.addEventListener("activate", this.activate);
+        self.addEventListener('install', this.install);
+        self.addEventListener('activate', this.activate);
         this._installAndActiveListenersAdded = true;
       }
     }
@@ -2777,16 +2777,16 @@ define(["exports"], (function(exports) {
     addToCacheList(entries) {
       {
         finalAssertExports.isArray(entries, {
-          moduleName: "workbox-precaching",
-          className: "PrecacheController",
-          funcName: "addToCacheList",
-          paramName: "entries"
+          moduleName: 'workbox-precaching',
+          className: 'PrecacheController',
+          funcName: 'addToCacheList',
+          paramName: 'entries'
         });
       }
       const urlsToWarnAbout = [];
       for (const entry of entries) {
         // See https://github.com/GoogleChrome/workbox/issues/2259
-        if (typeof entry === "string") {
+        if (typeof entry === 'string') {
           urlsToWarnAbout.push(entry);
         } else if (entry && entry.revision === undefined) {
           urlsToWarnAbout.push(entry.url);
@@ -2795,16 +2795,16 @@ define(["exports"], (function(exports) {
           cacheKey,
           url
         } = createCacheKey(entry);
-        const cacheMode = typeof entry !== "string" && entry.revision ? "reload" : "default";
+        const cacheMode = typeof entry !== 'string' && entry.revision ? 'reload' : 'default';
         if (this._urlsToCacheKeys.has(url) && this._urlsToCacheKeys.get(url) !== cacheKey) {
-          throw new WorkboxError("add-to-cache-list-conflicting-entries", {
+          throw new WorkboxError('add-to-cache-list-conflicting-entries', {
             firstEntry: this._urlsToCacheKeys.get(url),
             secondEntry: cacheKey
           });
         }
-        if (typeof entry !== "string" && entry.integrity) {
+        if (typeof entry !== 'string' && entry.integrity) {
           if (this._cacheKeysToIntegrities.has(cacheKey) && this._cacheKeysToIntegrities.get(cacheKey) !== entry.integrity) {
-            throw new WorkboxError("add-to-cache-list-conflicting-integrities", {
+            throw new WorkboxError('add-to-cache-list-conflicting-integrities', {
               url
             });
           }
@@ -2813,7 +2813,7 @@ define(["exports"], (function(exports) {
         this._urlsToCacheKeys.set(url, cacheKey);
         this._urlsToCacheModes.set(url, cacheMode);
         if (urlsToWarnAbout.length > 0) {
-          const warningMessage = `Workbox is precaching URLs without revision ` + `info: ${urlsToWarnAbout.join(", ")}\nThis is generally NOT safe. ` + `Learn more at https://bit.ly/wb-precache`;
+          const warningMessage = `Workbox is precaching URLs without revision ` + `info: ${urlsToWarnAbout.join(', ')}\nThis is generally NOT safe. ` + `Learn more at https://bit.ly/wb-precache`;
           {
             logger.warn(warningMessage);
           }
@@ -2845,7 +2845,7 @@ define(["exports"], (function(exports) {
           const request = new Request(url, {
             integrity,
             cache: cacheMode,
-            credentials: "same-origin"
+            credentials: 'same-origin'
           });
           await Promise.all(this.strategy.handleAll({
             params: {
@@ -2984,7 +2984,7 @@ define(["exports"], (function(exports) {
     createHandlerBoundToURL(url) {
       const cacheKey = this.getCacheKeyForURL(url);
       if (!cacheKey) {
-        throw new WorkboxError("non-precached-url", {
+        throw new WorkboxError('non-precached-url', {
           url
         });
       }
@@ -3066,23 +3066,23 @@ define(["exports"], (function(exports) {
    */
   function* generateURLVariations(url, {
     ignoreURLParametersMatching = [/^utm_/, /^fbclid$/],
-    directoryIndex = "index.html",
+    directoryIndex = 'index.html',
     cleanURLs = true,
     urlManipulation
   } = {}) {
     const urlObject = new URL(url, location.href);
-    urlObject.hash = "";
+    urlObject.hash = '';
     yield urlObject.href;
     const urlWithoutIgnoredParams = removeIgnoredSearchParams(urlObject, ignoreURLParametersMatching);
     yield urlWithoutIgnoredParams.href;
-    if (directoryIndex && urlWithoutIgnoredParams.pathname.endsWith("/")) {
+    if (directoryIndex && urlWithoutIgnoredParams.pathname.endsWith('/')) {
       const directoryURL = new URL(urlWithoutIgnoredParams.href);
       directoryURL.pathname += directoryIndex;
       yield directoryURL.href;
     }
     if (cleanURLs) {
       const cleanURL = new URL(urlWithoutIgnoredParams.href);
-      cleanURL.pathname += ".html";
+      cleanURL.pathname += '.html';
       yield cleanURL.href;
     }
     if (urlManipulation) {
@@ -3243,7 +3243,7 @@ define(["exports"], (function(exports) {
       license that can be found in the LICENSE file or at
       https://opensource.org/licenses/MIT.
     */
-  const SUBSTRING_TO_FIND = "-precache-";
+  const SUBSTRING_TO_FIND = '-precache-';
   /**
    * Cleans up incompatible precaches that were created by older versions of
    * Workbox, by a service worker registered under the current scope.
@@ -3286,7 +3286,7 @@ define(["exports"], (function(exports) {
    */
   function cleanupOutdatedCaches() {
     // See https://github.com/Microsoft/TypeScript/issues/28357#issuecomment-436484705
-    self.addEventListener("activate", event => {
+    self.addEventListener('activate', event => {
       const cacheName = cacheNames.getPrecacheName();
       event.waitUntil(deleteOutdatedCaches(cacheName).then(cachesDeleted => {
         {
@@ -3351,16 +3351,16 @@ define(["exports"], (function(exports) {
     } = {}) {
       {
         finalAssertExports.isArrayOfClass(allowlist, RegExp, {
-          moduleName: "workbox-routing",
-          className: "NavigationRoute",
-          funcName: "constructor",
-          paramName: "options.allowlist"
+          moduleName: 'workbox-routing',
+          className: 'NavigationRoute',
+          funcName: 'constructor',
+          paramName: 'options.allowlist'
         });
         finalAssertExports.isArrayOfClass(denylist, RegExp, {
-          moduleName: "workbox-routing",
-          className: "NavigationRoute",
-          funcName: "constructor",
-          paramName: "options.denylist"
+          moduleName: 'workbox-routing',
+          className: 'NavigationRoute',
+          funcName: 'constructor',
+          paramName: 'options.denylist'
         });
       }
       super(options => this._match(options), handler);
@@ -3382,7 +3382,7 @@ define(["exports"], (function(exports) {
              url,
              request
            }) {
-      if (request && request.mode !== "navigate") {
+      if (request && request.mode !== 'navigate') {
         return false;
       }
       const pathnameAndSearch = url.pathname + url.search;

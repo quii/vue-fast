@@ -13,6 +13,7 @@ describe("SightMarksManager", () => {
       distance: 20,
       unit: "m",
       notches: 5,
+      priority: false,
       vertical: { major: 5, minor: 6, micro: 2 }
     });
   });
@@ -69,5 +70,47 @@ describe("SightMarksManager", () => {
     expect(sortedMarks[2].distance).toBe(60);
   });
 
-})
+  it("adds new sight marks with priority defaulted to false", () => {
+    const storage = { value: [] };
+    const manager = new SightMarksManager(storage);
 
+    manager.add(20, "m", 5, { major: 5, minor: 6, micro: 2 });
+
+    expect(storage.value[0].priority).toBe(false);
+  });
+
+  it("toggles priority of a sight mark", () => {
+    const storage = {
+      value: [{
+        distance: 20,
+        unit: "m",
+        notches: 5,
+        vertical: { major: 5, minor: 6, micro: 2 },
+        priority: false
+      }]
+    };
+    const manager = new SightMarksManager(storage);
+
+    manager.togglePriority(20, "m");
+
+    expect(storage.value[0].priority).toBe(true);
+  });
+
+  it("sorts by priority first, then by distance", () => {
+    const storage = {
+      value: [
+        { distance: 50, unit: "m", notches: 5, priority: false },
+        { distance: 30, unit: "m", notches: 3, priority: true },
+        { distance: 20, unit: "m", notches: 2, priority: true }
+      ]
+    };
+    const manager = new SightMarksManager(storage);
+
+    const sortedMarks = manager.getAll();
+
+    expect(sortedMarks[0].distance).toBe(20);
+    expect(sortedMarks[1].distance).toBe(30);
+    expect(sortedMarks[2].distance).toBe(50);
+  });
+
+});

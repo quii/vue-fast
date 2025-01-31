@@ -59,6 +59,8 @@ rules; this app also takes care of this complexity for the archer.
   This parameter was logically not needed for this test and was optional, but you suggested adding the parameter to all
   the tests. I had to correct you, and instead fix the production code to not need the parameter. In short, if tests are
   complicated to write, I'd rather you suggest ways to improve the design of the code under test.
+- New test cases should be added inside existing describe blocks, not outside them, to maintain proper test organization
+  and scoping
 
 ## End-to-end Testing Workflow
 
@@ -88,6 +90,7 @@ rules; this app also takes care of this complexity for the archer.
 - Whilst we enjoy using pure functions to calculate things, sometimes we want to use JavaScript classes to encapsulate
   quering and managing state, usually with our Pinia stores. Don't make a function that returns an object with a bunch
   of methods, this is hard to read. Use a class.
+- Functions should be separated by a blank line for readability, whether they are inside a class or at the module level
 
 ## CSS Principles
 

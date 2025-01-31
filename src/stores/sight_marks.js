@@ -1,10 +1,10 @@
 import { defineStore } from "pinia";
-import { useLocalStorage } from "@vueuse/core";
+import { ref } from "vue";
 import { SightMarksManager } from "@/domain/sight_marks_manager";
 
-export const useSightMarksStore = defineStore("sightMarks", () => {
-  const storage = useLocalStorage("sight-marks", []);
-  const manager = new SightMarksManager(storage);
+export const useSightMarksStore = defineStore("sight_marks", () => {
+  const sightMarks = ref([]);
+  const manager = new SightMarksManager(sightMarks);
 
   function addMark(distance, unit, notches, vertical) {
     manager.add(distance, unit, notches, vertical);
@@ -18,14 +18,13 @@ export const useSightMarksStore = defineStore("sightMarks", () => {
     manager.delete(distance, unit);
   }
 
+  function togglePriority(distance, unit) {
+    manager.togglePriority(distance, unit);
+  }
+
   function getMarks() {
     return manager.getAll();
   }
 
-  return {
-    addMark,
-    updateMark,
-    deleteMark,
-    getMarks
-  };
-});
+  return { addMark, updateMark, deleteMark, togglePriority, getMarks };
+})
