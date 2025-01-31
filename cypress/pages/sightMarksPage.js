@@ -21,9 +21,9 @@ class SightMarksPage {
     cy.get(".mark-card").contains(`${distance}${unit}`).click();
     cy.get(".horizontal-slider").invoke("val", 15 - newNotches).trigger("input");
 
-    cy.get(".vertical-inputs .spinner-input").eq(0).clear().type(newVertical.major);
-    cy.get(".vertical-inputs .spinner-input").eq(1).clear().type(newVertical.minor);
-    cy.get(".vertical-inputs .spinner-input").eq(2).clear().type(newVertical.micro);
+    cy.get(".vertical-inputs .spinner-input").eq(0).invoke("val", newVertical.major).trigger("input");
+    cy.get(".vertical-inputs .spinner-input").eq(1).invoke("val", newVertical.minor).trigger("input");
+    cy.get(".vertical-inputs .spinner-input").eq(2).invoke("val", newVertical.micro).trigger("input");
 
     cy.get(".primary").click();
   }

@@ -13,6 +13,7 @@
       class="spinner-input"
       :min="min"
       :max="max"
+      readonly
     />
     <div class="arrows" :class="{ 'arrows-visible': isTouching }">⌄</div>
   </div>
@@ -67,13 +68,13 @@ function endTouch() {
 
 <style scoped>
 .number-spinner {
-  width: 3rem;
-  height: 3rem;
+  width: 6rem; /* Doubled from 3rem */
+  height: 6rem; /* Doubled from 3rem */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
+  font-size: 2.4rem; /* Doubled from 1.2rem */
   background: linear-gradient(
     to bottom,
     var(--color-background-soft) 0%,
@@ -105,14 +106,14 @@ function endTouch() {
 }
 
 .arrows {
-  font-size: 0.8rem;
-  opacity: 0;
+  font-size: 1.6rem;
+  opacity: 0.3;
   transition: opacity 0.2s;
   color: var(--color-text);
   line-height: 0.8;
 }
 
 .arrows-visible {
-  opacity: 0.6;
+  opacity: 0.8;
 }
 </style>
