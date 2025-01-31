@@ -24,6 +24,14 @@ export class SightMarksManager {
   }
 
   getAll() {
-    return [...this.storage.value];
+    return [...this.storage.value].sort((a, b) => {
+      const distanceA = convertToMetres(a.distance, a.unit);
+      const distanceB = convertToMetres(b.distance, b.unit);
+      return distanceA - distanceB;
+    });
   }
+}
+
+function convertToMetres(distance, unit) {
+  return unit === "yd" ? distance * 0.9144 : distance;
 }

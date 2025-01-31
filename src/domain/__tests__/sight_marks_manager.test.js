@@ -51,4 +51,23 @@ describe("SightMarksManager", () => {
     expect(storage.value).toHaveLength(0);
   });
 
-});
+
+  it("returns marks sorted by distance, converting yards to metres", () => {
+    const storage = {
+      value: [
+        { distance: 50, unit: "m", notches: 5 },
+        { distance: 60, unit: "yd", notches: 6 },
+        { distance: 30, unit: "m", notches: 3 }
+      ]
+    };
+    const manager = new SightMarksManager(storage);
+
+    const sortedMarks = manager.getAll();
+
+    expect(sortedMarks[0].distance).toBe(30);
+    expect(sortedMarks[1].distance).toBe(50);
+    expect(sortedMarks[2].distance).toBe(60);
+  });
+
+})
+
