@@ -100,6 +100,9 @@ rules; this app also takes care of this complexity for the archer.
 - Use CSS variables defined in base.css for colors, spacing, and other design tokens
 - Only add component-specific styles in scoped blocks when the styling truly needs to be unique to that component
 - Inherit global styles for common elements like buttons, inputs, and typography to maintain visual consistency
+- Ensure all color-related styles use theme variables to support both light and dark modes
+- Use var(--color-background), var(--color-text), var(--color-border) etc. instead of hardcoded colors
+- Test components in both light and dark modes during development
 
 ## General rules around archery to keep in mind
 
