@@ -61,6 +61,7 @@ rules; this app also takes care of this complexity for the archer.
   complicated to write, I'd rather you suggest ways to improve the design of the code under test.
 - New test cases should be added inside existing describe blocks, not outside them, to maintain proper test organization
   and scoping
+- In domain, the unit tests live in the same directory as the file under test. There is no separate test folder.
 
 ## End-to-end Testing Workflow
 

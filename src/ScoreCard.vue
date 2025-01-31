@@ -14,6 +14,8 @@ import { X } from "@/domain/game_type_config";
 import { useUserStore } from "@/stores/user";
 import { useNotesStore } from "@/stores/user_notes";
 import UserNotes from "@/components/UserNotes.vue";
+import CurrentSightMark from "./components/sight_marks/CurrentSightMark.vue";
+
 
 const synth = window.speechSynthesis;
 
@@ -112,6 +114,7 @@ Did you follow your process?"></textarea>
     <GameTypeSelector :gameType="gameTypeStore.type"
                       @changeGameType="gameTypeStore.setGameType" />
   </div>
+  <CurrentSightMark />
 
   <hr />
   <div v-if="hasStarted">

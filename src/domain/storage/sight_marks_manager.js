@@ -43,6 +43,14 @@ export class SightMarksManager {
       return distanceA - distanceB;
     });
   }
+
+  findMarkForDistance(distanceMetres, distanceYards) {
+    const marks = this.getAll();
+    return marks.find(mark =>
+      (mark.unit === "m" && mark.distance === distanceMetres) ||
+      (mark.unit === "yd" && mark.distance === distanceYards)
+    );
+  }
 }
 function convertToMetres(distance, unit) {
   return unit === "yd" ? distance * 0.9144 : distance;

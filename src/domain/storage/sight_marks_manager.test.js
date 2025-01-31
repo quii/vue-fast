@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { SightMarksManager } from "../sight_marks_manager";
+import { SightMarksManager } from "./sight_marks_manager.js";
 
 describe("SightMarksManager", () => {
   it("adds new sight marks", () => {
