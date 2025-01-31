@@ -318,8 +318,9 @@ input[type="range"][orient="vertical"] {
 }
 
 .mark-card {
+  display: flex;
+  gap: 1rem;
   background: var(--color-background-soft);
-  color: var(--color-text);
   padding: 1rem;
   margin: 1rem 0;
   border-radius: 12px;
@@ -329,10 +330,11 @@ input[type="range"][orient="vertical"] {
 .mark-distance {
   font-size: 1.5rem;
   font-weight: bold;
-  margin-bottom: 0.5rem;
+  min-width: 4rem;
 }
 
 .mark-details {
+  flex: 1;
   color: var(--color-text);
   line-height: 1.4;
 }
