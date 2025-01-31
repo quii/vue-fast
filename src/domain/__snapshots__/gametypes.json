@@ -20,7 +20,11 @@
     "numberOfEnds": 18,
     "isImperial": true,
     "maxDistanceMetres": 73.12614259597805,
-    "maxDistanceYards": 80
+    "maxDistanceYards": 80,
+    "otherDistancesYards": [
+      60,
+      50
+    ]
   },
   "american": {
     "distancesRoundSizes": [
@@ -43,7 +47,11 @@
     "numberOfEnds": 15,
     "isImperial": true,
     "maxDistanceMetres": 54.84460694698354,
-    "maxDistanceYards": 60
+    "maxDistanceYards": 60,
+    "otherDistancesYards": [
+      50,
+      40
+    ]
   },
   "bray i": {
     "distancesRoundSizes": [
@@ -118,7 +126,11 @@
     "numberOfEnds": 24,
     "isImperial": true,
     "maxDistanceMetres": 54.84460694698354,
-    "maxDistanceYards": 60
+    "maxDistanceYards": 60,
+    "otherDistancesYards": [
+      50,
+      40
+    ]
   },
   "bristol iii": {
     "distancesRoundSizes": [
@@ -141,7 +153,11 @@
     "numberOfEnds": 24,
     "isImperial": true,
     "maxDistanceMetres": 45.703839122486286,
-    "maxDistanceYards": 50
+    "maxDistanceYards": 50,
+    "otherDistancesYards": [
+      40,
+      30
+    ]
   },
   "bristol iv": {
     "distancesRoundSizes": [
@@ -164,7 +180,11 @@
     "numberOfEnds": 24,
     "isImperial": true,
     "maxDistanceMetres": 36.563071297989026,
-    "maxDistanceYards": 40
+    "maxDistanceYards": 40,
+    "otherDistancesYards": [
+      30,
+      20
+    ]
   },
   "bristol v": {
     "distancesRoundSizes": [
@@ -187,7 +207,11 @@
     "numberOfEnds": 24,
     "isImperial": true,
     "maxDistanceMetres": 27.42230347349177,
-    "maxDistanceYards": 30
+    "maxDistanceYards": 30,
+    "otherDistancesYards": [
+      20,
+      10
+    ]
   },
   "frostbite": {
     "distancesRoundSizes": [
@@ -237,7 +261,11 @@
     "numberOfEnds": 24,
     "isImperial": true,
     "maxDistanceMetres": 73.12614259597805,
-    "maxDistanceYards": 80
+    "maxDistanceYards": 80,
+    "otherDistancesYards": [
+      60,
+      50
+    ]
   },
   "long metric (men)": {
     "distancesRoundSizes": [
@@ -265,7 +293,10 @@
     "numberOfEnds": 12,
     "isImperial": false,
     "maxDistanceMetres": 90,
-    "maxDistanceYards": 98.46000000000001
+    "maxDistanceYards": 98.46000000000001,
+    "otherDistancesMetres": [
+      70
+    ]
   },
   "long metric (women) / long metric i": {
     "distancesRoundSizes": [
@@ -293,7 +324,10 @@
     "numberOfEnds": 12,
     "isImperial": false,
     "maxDistanceMetres": 70,
-    "maxDistanceYards": 76.58000000000001
+    "maxDistanceYards": 76.58000000000001,
+    "otherDistancesMetres": [
+      60
+    ]
   },
   "long metric ii": {
     "distancesRoundSizes": [
@@ -321,7 +355,10 @@
     "numberOfEnds": 12,
     "isImperial": false,
     "maxDistanceMetres": 60,
-    "maxDistanceYards": 65.64
+    "maxDistanceYards": 65.64,
+    "otherDistancesMetres": [
+      50
+    ]
   },
   "long metric iii": {
     "distancesRoundSizes": [
@@ -349,7 +386,10 @@
     "numberOfEnds": 12,
     "isImperial": false,
     "maxDistanceMetres": 50,
-    "maxDistanceYards": 54.7
+    "maxDistanceYards": 54.7,
+    "otherDistancesMetres": [
+      40
+    ]
   },
   "long metric iv": {
     "distancesRoundSizes": [
@@ -377,7 +417,10 @@
     "numberOfEnds": 12,
     "isImperial": false,
     "maxDistanceMetres": 40,
-    "maxDistanceYards": 43.760000000000005
+    "maxDistanceYards": 43.760000000000005,
+    "otherDistancesMetres": [
+      30
+    ]
   },
   "long metric v": {
     "distancesRoundSizes": [
@@ -405,7 +448,10 @@
     "numberOfEnds": 12,
     "isImperial": false,
     "maxDistanceMetres": 30,
-    "maxDistanceYards": 32.82
+    "maxDistanceYards": 32.82,
+    "otherDistancesMetres": [
+      20
+    ]
   },
   "long national": {
     "distancesRoundSizes": [
@@ -427,7 +473,10 @@
     "numberOfEnds": 12,
     "isImperial": true,
     "maxDistanceMetres": 73.12614259597805,
-    "maxDistanceYards": 80
+    "maxDistanceYards": 80,
+    "otherDistancesYards": [
+      60
+    ]
   },
   "long warwick": {
     "distancesRoundSizes": [
@@ -449,7 +498,10 @@
     "numberOfEnds": 8,
     "isImperial": true,
     "maxDistanceMetres": 73.12614259597805,
-    "maxDistanceYards": 80
+    "maxDistanceYards": 80,
+    "otherDistancesYards": [
+      60
+    ]
   },
   "long western": {
     "distancesRoundSizes": [
@@ -471,7 +523,10 @@
     "numberOfEnds": 16,
     "isImperial": true,
     "maxDistanceMetres": 73.12614259597805,
-    "maxDistanceYards": 80
+    "maxDistanceYards": 80,
+    "otherDistancesYards": [
+      60
+    ]
   },
   "metric 122-30": {
     "distancesRoundSizes": [
@@ -609,7 +664,10 @@
     "numberOfEnds": 24,
     "isImperial": false,
     "maxDistanceMetres": 50,
-    "maxDistanceYards": 54.7
+    "maxDistanceYards": 54.7,
+    "otherDistancesMetres": [
+      40
+    ]
   },
   "metric iv": {
     "distancesRoundSizes": [
@@ -639,7 +697,10 @@
     "numberOfEnds": 24,
     "isImperial": false,
     "maxDistanceMetres": 40,
-    "maxDistanceYards": 43.760000000000005
+    "maxDistanceYards": 43.760000000000005,
+    "otherDistancesMetres": [
+      30
+    ]
   },
   "metric v": {
     "distancesRoundSizes": [
@@ -669,7 +730,10 @@
     "numberOfEnds": 24,
     "isImperial": false,
     "maxDistanceMetres": 30,
-    "maxDistanceYards": 32.82
+    "maxDistanceYards": 32.82,
+    "otherDistancesMetres": [
+      20
+    ]
   },
   "national": {
     "distancesRoundSizes": [
@@ -691,7 +755,10 @@
     "numberOfEnds": 12,
     "isImperial": true,
     "maxDistanceMetres": 54.84460694698354,
-    "maxDistanceYards": 60
+    "maxDistanceYards": 60,
+    "otherDistancesYards": [
+      50
+    ]
   },
   "national 30": {
     "distancesRoundSizes": [
@@ -713,7 +780,10 @@
     "numberOfEnds": 12,
     "isImperial": true,
     "maxDistanceMetres": 27.42230347349177,
-    "maxDistanceYards": 30
+    "maxDistanceYards": 30,
+    "otherDistancesYards": [
+      20
+    ]
   },
   "national 40": {
     "distancesRoundSizes": [
@@ -735,7 +805,10 @@
     "numberOfEnds": 12,
     "isImperial": true,
     "maxDistanceMetres": 36.563071297989026,
-    "maxDistanceYards": 40
+    "maxDistanceYards": 40,
+    "otherDistancesYards": [
+      30
+    ]
   },
   "national 50": {
     "distancesRoundSizes": [
@@ -757,7 +830,10 @@
     "numberOfEnds": 12,
     "isImperial": true,
     "maxDistanceMetres": 45.703839122486286,
-    "maxDistanceYards": 50
+    "maxDistanceYards": 50,
+    "otherDistancesYards": [
+      40
+    ]
   },
   "new national": {
     "distancesRoundSizes": [
@@ -779,7 +855,10 @@
     "numberOfEnds": 12,
     "isImperial": true,
     "maxDistanceMetres": 91.40767824497257,
-    "maxDistanceYards": 100
+    "maxDistanceYards": 100,
+    "otherDistancesYards": [
+      80
+    ]
   },
   "new warwick": {
     "distancesRoundSizes": [
@@ -801,7 +880,10 @@
     "numberOfEnds": 8,
     "isImperial": true,
     "maxDistanceMetres": 91.40767824497257,
-    "maxDistanceYards": 100
+    "maxDistanceYards": 100,
+    "otherDistancesYards": [
+      80
+    ]
   },
   "new western": {
     "distancesRoundSizes": [
@@ -823,7 +905,10 @@
     "numberOfEnds": 16,
     "isImperial": true,
     "maxDistanceMetres": 91.40767824497257,
-    "maxDistanceYards": 100
+    "maxDistanceYards": 100,
+    "otherDistancesYards": [
+      80
+    ]
   },
   "portsmouth": {
     "distancesRoundSizes": [
@@ -1346,7 +1431,10 @@
     "numberOfEnds": 12,
     "isImperial": false,
     "maxDistanceMetres": 50,
-    "maxDistanceYards": 54.7
+    "maxDistanceYards": 54.7,
+    "otherDistancesMetres": [
+      40
+    ]
   },
   "short metric ii": {
     "distancesRoundSizes": [
@@ -1374,7 +1462,10 @@
     "numberOfEnds": 12,
     "isImperial": false,
     "maxDistanceMetres": 40,
-    "maxDistanceYards": 43.760000000000005
+    "maxDistanceYards": 43.760000000000005,
+    "otherDistancesMetres": [
+      30
+    ]
   },
   "short metric iii": {
     "distancesRoundSizes": [
@@ -1402,7 +1493,10 @@
     "numberOfEnds": 12,
     "isImperial": false,
     "maxDistanceMetres": 30,
-    "maxDistanceYards": 32.82
+    "maxDistanceYards": 32.82,
+    "otherDistancesMetres": [
+      20
+    ]
   },
   "short metric iv": {
     "distancesRoundSizes": [
@@ -1430,7 +1524,10 @@
     "numberOfEnds": 12,
     "isImperial": false,
     "maxDistanceMetres": 20,
-    "maxDistanceYards": 21.880000000000003
+    "maxDistanceYards": 21.880000000000003,
+    "otherDistancesMetres": [
+      10
+    ]
   },
   "short metric v": {
     "distancesRoundSizes": [
@@ -1452,7 +1549,10 @@
     "numberOfEnds": 12,
     "isImperial": true,
     "maxDistanceMetres": 15,
-    "maxDistanceYards": 16.41
+    "maxDistanceYards": 16.41,
+    "otherDistancesMetres": [
+      10
+    ]
   },
   "st. george": {
     "distancesRoundSizes": [
@@ -1475,7 +1575,11 @@
     "numberOfEnds": 18,
     "isImperial": true,
     "maxDistanceMetres": 91.40767824497257,
-    "maxDistanceYards": 100
+    "maxDistanceYards": 100,
+    "otherDistancesYards": [
+      80,
+      60
+    ]
   },
   "st. nicholas": {
     "distancesRoundSizes": [
@@ -1497,7 +1601,10 @@
     "numberOfEnds": 14,
     "isImperial": true,
     "maxDistanceMetres": 36.563071297989026,
-    "maxDistanceYards": 40
+    "maxDistanceYards": 40,
+    "otherDistancesYards": [
+      30
+    ]
   },
   "stafford": {
     "distancesRoundSizes": [
@@ -1575,7 +1682,10 @@
     "numberOfEnds": 24,
     "isImperial": false,
     "maxDistanceMetres": 60,
-    "maxDistanceYards": 65.64
+    "maxDistanceYards": 65.64,
+    "otherDistancesMetres": [
+      50
+    ]
   },
   "wa 1440 (70m) / metric i": {
     "distancesRoundSizes": [
@@ -1605,7 +1715,10 @@
     "numberOfEnds": 24,
     "isImperial": false,
     "maxDistanceMetres": 70,
-    "maxDistanceYards": 76.58000000000001
+    "maxDistanceYards": 76.58000000000001,
+    "otherDistancesMetres": [
+      60
+    ]
   },
   "wa 1440 (90m)": {
     "distancesRoundSizes": [
@@ -1635,7 +1748,10 @@
     "numberOfEnds": 24,
     "isImperial": false,
     "maxDistanceMetres": 90,
-    "maxDistanceYards": 98.46000000000001
+    "maxDistanceYards": 98.46000000000001,
+    "otherDistancesMetres": [
+      70
+    ]
   },
   "wa 18m": {
     "distancesRoundSizes": [
@@ -1824,7 +1940,11 @@
     "numberOfEnds": 15,
     "isImperial": false,
     "maxDistanceMetres": 60,
-    "maxDistanceYards": 65.64
+    "maxDistanceYards": 65.64,
+    "otherDistancesMetres": [
+      50,
+      40
+    ]
   },
   "wa standard bow": {
     "distancesRoundSizes": [
@@ -1874,7 +1994,10 @@
     "numberOfEnds": 8,
     "isImperial": true,
     "maxDistanceMetres": 54.84460694698354,
-    "maxDistanceYards": 60
+    "maxDistanceYards": 60,
+    "otherDistancesYards": [
+      50
+    ]
   },
   "warwick 30": {
     "distancesRoundSizes": [
@@ -1896,7 +2019,10 @@
     "numberOfEnds": 8,
     "isImperial": true,
     "maxDistanceMetres": 27.42230347349177,
-    "maxDistanceYards": 30
+    "maxDistanceYards": 30,
+    "otherDistancesYards": [
+      20
+    ]
   },
   "warwick 40": {
     "distancesRoundSizes": [
@@ -1918,7 +2044,10 @@
     "numberOfEnds": 8,
     "isImperial": true,
     "maxDistanceMetres": 36.563071297989026,
-    "maxDistanceYards": 40
+    "maxDistanceYards": 40,
+    "otherDistancesYards": [
+      30
+    ]
   },
   "warwick 50": {
     "distancesRoundSizes": [
@@ -1940,7 +2069,10 @@
     "numberOfEnds": 8,
     "isImperial": true,
     "maxDistanceMetres": 45.703839122486286,
-    "maxDistanceYards": 50
+    "maxDistanceYards": 50,
+    "otherDistancesYards": [
+      40
+    ]
   },
   "western": {
     "distancesRoundSizes": [
@@ -1962,7 +2094,10 @@
     "numberOfEnds": 16,
     "isImperial": true,
     "maxDistanceMetres": 54.84460694698354,
-    "maxDistanceYards": 60
+    "maxDistanceYards": 60,
+    "otherDistancesYards": [
+      50
+    ]
   },
   "western 30": {
     "distancesRoundSizes": [
@@ -1984,7 +2119,10 @@
     "numberOfEnds": 16,
     "isImperial": true,
     "maxDistanceMetres": 27.42230347349177,
-    "maxDistanceYards": 30
+    "maxDistanceYards": 30,
+    "otherDistancesYards": [
+      20
+    ]
   },
   "western 40": {
     "distancesRoundSizes": [
@@ -2006,7 +2144,10 @@
     "numberOfEnds": 16,
     "isImperial": true,
     "maxDistanceMetres": 36.563071297989026,
-    "maxDistanceYards": 40
+    "maxDistanceYards": 40,
+    "otherDistancesYards": [
+      30
+    ]
   },
   "western 50": {
     "distancesRoundSizes": [
@@ -2028,7 +2169,10 @@
     "numberOfEnds": 16,
     "isImperial": true,
     "maxDistanceMetres": 45.703839122486286,
-    "maxDistanceYards": 50
+    "maxDistanceYards": 50,
+    "otherDistancesYards": [
+      40
+    ]
   },
   "windsor": {
     "distancesRoundSizes": [
@@ -2051,7 +2195,11 @@
     "numberOfEnds": 18,
     "isImperial": true,
     "maxDistanceMetres": 54.84460694698354,
-    "maxDistanceYards": 60
+    "maxDistanceYards": 60,
+    "otherDistancesYards": [
+      50,
+      40
+    ]
   },
   "windsor 30": {
     "distancesRoundSizes": [
@@ -2074,7 +2222,11 @@
     "numberOfEnds": 18,
     "isImperial": true,
     "maxDistanceMetres": 27.42230347349177,
-    "maxDistanceYards": 30
+    "maxDistanceYards": 30,
+    "otherDistancesYards": [
+      20,
+      10
+    ]
   },
   "windsor 40": {
     "distancesRoundSizes": [
@@ -2097,7 +2249,11 @@
     "numberOfEnds": 18,
     "isImperial": true,
     "maxDistanceMetres": 36.563071297989026,
-    "maxDistanceYards": 40
+    "maxDistanceYards": 40,
+    "otherDistancesYards": [
+      30,
+      20
+    ]
   },
   "windsor 50": {
     "distancesRoundSizes": [
@@ -2120,7 +2276,11 @@
     "numberOfEnds": 18,
     "isImperial": true,
     "maxDistanceMetres": 45.703839122486286,
-    "maxDistanceYards": 50
+    "maxDistanceYards": 50,
+    "otherDistancesYards": [
+      40,
+      30
+    ]
   },
   "worcester": {
     "distancesRoundSizes": [
@@ -2165,6 +2325,10 @@
     "numberOfEnds": 24,
     "isImperial": true,
     "maxDistanceMetres": 91.40767824497257,
-    "maxDistanceYards": 100
+    "maxDistanceYards": 100,
+    "otherDistancesYards": [
+      80,
+      60
+    ]
   }
 }
