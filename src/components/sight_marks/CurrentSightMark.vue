@@ -1,14 +1,34 @@
 <template>
   <div v-if="currentMarks.length" class="sight-marks-display">
-    <div v-for="mark in currentMarks" :key="mark.id" class="sight-mark-container">
+    <!-- Single mark view -->
+    <div v-if="currentMarks.length === 1" class="sight-mark-container">
       <span class="label">
-        Sight mark ({{ mark.distance }}{{ mark.unit }})
-        <span v-if="mark.label" class="mark-label">{{ mark.label }}</span>
+        Sight mark ({{ currentMarks[0].distance }}{{ currentMarks[0].unit }})
+        <span v-if="currentMarks[0].label" class="mark-label">{{ currentMarks[0].label }}</span>
       </span>
-      <span class="value">{{ formatVertical(mark.vertical) }}</span>
+      <span class="value">{{ formatVertical(currentMarks[0].vertical) }}</span>
     </div>
+
+    <!-- Multiple marks table view -->
+    <table v-else>
+      <thead>
+      <tr>
+        <th>Distance</th>
+        <th>Height</th>
+        <th>Note</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr v-for="mark in currentMarks" :key="mark.id">
+        <td>{{ mark.distance }}{{ mark.unit }}</td>
+        <td>{{ formatVertical(mark.vertical) }}</td>
+        <td v-if="mark.label" class="mark-label">{{ mark.label }}</td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </template>
+
 
 <script setup>
 import { computed } from "vue";
@@ -59,6 +79,7 @@ function formatVertical(vertical) {
 </script>
 
 <style scoped>
+
 .mark-label {
   font-size: 0.8rem;
   font-style: italic;
