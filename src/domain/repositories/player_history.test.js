@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { PlayerHistory } from "@/domain/storage/player_history";
+import { PlayerHistory } from "@/domain/repositories/player_history.js";
 
 beforeEach(() => {
   global.fetch = vi.fn(() =>

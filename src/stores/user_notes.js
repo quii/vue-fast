@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { useLocalStorage } from "@vueuse/core";
-import { NewNotesManager } from "@/domain/notes_manager";
+import { NewNotesManager } from "@/domain/repositories/notes_manager.js";
 
 export const useNotesStore = defineStore("notes", () => {
   const notes = useLocalStorage("notes", []);

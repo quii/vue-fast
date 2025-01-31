@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 
 import { useLocalStorage } from "@vueuse/core";
-import { SightMarksManager } from "../domain/storage/sight_marks_manager.js";
+import { SightMarksManager } from "@/domain/repositories/sight_marks_manager.js";
 
 export const useSightMarksStore = defineStore("sight_marks", () => {
   const sightMarks = useLocalStorage("sight-marks", []);

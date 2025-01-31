@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { useLocalStorage } from "@vueuse/core";
 import { ref } from "vue";
-import { PlayerHistory } from "@/domain/storage/player_history";
+import { PlayerHistory } from "@/domain/repositories/player_history.js";
 
 export const useHistoryStore = defineStore("history", () => {
   const state = useLocalStorage("history", []);
