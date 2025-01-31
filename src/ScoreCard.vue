@@ -85,6 +85,7 @@ function saveNote() {
                   :scores="scoresStore.scores"
                   :game-type="gameTypeStore.type"
                   @undo="scoresStore.undo" />
+    <button class="Take note" popovertarget="noteTaker">📝 Take a note</button>
 
     <button class="save" v-if="maxReached" @click="saveScores">💾 Save score to history</button>
 
@@ -105,7 +106,6 @@ Did you follow your process?"></textarea>
                  :hasX="validScores.includes(X)" />
   </div>
   <hr />
-  <button class="Take note" popovertarget="noteTaker">📝 Take a note</button>
   <UserNotes :allow-highlight="true" />
 
   <hr />

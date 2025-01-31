@@ -84,6 +84,7 @@
           <div class="mark-details">
             <div>Extension: {{ mark.notches }} notches</div>
             <div>Height: {{ formatVertical(mark.vertical) }}</div>
+            <div v-if="mark.label" class="mark-label">{{ mark.label }}</div>
           </div>
         </div>
         <button
@@ -198,6 +199,12 @@ function togglePriority(mark) {
 </script>
 
 <style scoped>
+.mark-label {
+  font-style: italic;
+  color: var(--color-text);
+  opacity: 0.8;
+}
+
 .sight-marks {
   padding: 1rem;
 }
