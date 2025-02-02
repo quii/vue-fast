@@ -1,8 +1,6 @@
 <script setup>
 import { ref, h, createApp } from "vue";
 import RoundScores from "./RoundScores.vue";
-import RoundScoresLandscape from "./RoundScoresLandscape.vue";
-import RoundScoresPortrait from "./RoundScoresPortrait.vue";
 import ArcherDetails from "@/components/ArcherDetails.vue";
 import SaveScoreSheetButton from "@/components/SaveScoreSheetButton.vue";
 
@@ -18,7 +16,7 @@ function print() {
     shotAt.value ? formatTitle(shotAt.value) : ""
   ].filter(Boolean).join("-");
 
-  const printWindow = window.open("", title);
+  const printWindow = window.open("", "_blank", "");
   const doc = printWindow.document;
   doc.title = title;
 
@@ -57,9 +55,6 @@ function print() {
   });
 
   app.component("ArcherDetails", ArcherDetails);
-  app.component("RoundScores", RoundScores);
-  app.component("RoundScoresLandscape", RoundScoresLandscape);
-  app.component("RoundScoresPortrait", RoundScoresPortrait);
   app.mount(container);
 
   const signatures = document.createElement("div");

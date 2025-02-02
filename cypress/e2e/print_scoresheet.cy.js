@@ -40,9 +40,8 @@ describe("Print scoresheet", () => {
     cy.contains("Got it!").click();
 
     cy.window().then((win) => {
-      cy.stub(win, "open").callsFake((url, title) => {
-        expect(title).to.equal("Chris-Sherwood-Forest");
-        return win;
+      cy.stub(win, "open").callsFake(() => {
+        return win;  // Return the actual window for component mounting
       });
     });
 
