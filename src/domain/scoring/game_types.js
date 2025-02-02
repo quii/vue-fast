@@ -1,6 +1,6 @@
-import { baseConfig, imperialPractices, metricPractices, MISS } from "@/domain/game_type_config";
-import { calculateRoundScores } from "@/domain/classification";
-import { classificationList } from "@/domain/classificationList";
+import { baseConfig, imperialPractices, metricPractices, MISS } from "@/domain/scoring/game_type_config";
+import { calculateRoundScores } from "@/domain/scoring/classification";
+import { classificationList } from "@/domain/scoring/classificationList";
 
 const imperialScores = [9, 7, 5, 3, 1, MISS];
 const outdoorMetricScores = ["X", 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, MISS];

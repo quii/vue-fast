@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { useLocalStorage } from '@vueuse/core'
-import {gameTypeConfig, gameTypes} from '@/domain/game_types'
+import { gameTypeConfig, gameTypes } from "@/domain/scoring/game_types";
 import { computed } from "vue";
 
 

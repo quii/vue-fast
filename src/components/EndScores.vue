@@ -1,10 +1,10 @@
 <script setup>
-import { calculateTotal } from "@/domain/subtotals";
+import { calculateTotal } from "@/domain/scoring/subtotals";
 import { computed } from "vue";
-import { convertToValues } from "@/domain/scores";
+import { convertToValues } from "@/domain/scoring/scores";
 import { useGameTypeStore } from "@/stores/game_type";
 import { useUserStore } from "@/stores/user";
-import { calculateIfArcherIsOnTrackForNextClassification } from "@/domain/classification";
+import { calculateIfArcherIsOnTrackForNextClassification } from "@/domain/scoring/classification";
 
 const props = defineProps({
   scores: {

@@ -1,5 +1,5 @@
-import { convertToValues } from "@/domain/scores";
-import { gameTypeConfig } from "@/domain/game_types";
+import { convertToValues } from "@/domain/scoring/scores";
+import { gameTypeConfig } from "@/domain/scoring/game_types";
 
 export function calculateSubtotals(scores, gameType) {
   const scoreValues = convertToValues(scores, gameType);

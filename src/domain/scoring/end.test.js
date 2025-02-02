@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { calculateScoreIsValidForEnd } from "@/domain/end";
+import { calculateScoreIsValidForEnd } from "@/domain/scoring/end";
 
 //todo: custom matchers maybe?
 

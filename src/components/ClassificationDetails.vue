@@ -5,11 +5,11 @@ import {
   calculatePotentialClassificationWithoutOutliers,
   createClassificationCalculator,
   getRelevantClassifications
-} from "@/domain/classification";
-import { calculateSubtotals } from "@/domain/subtotals";
-import { calculateAverageScorePerEnd } from "@/domain/distance_totals";
-import { gameTypeConfig } from "@/domain/game_types";
-import { calculateMaxPossibleScore } from "@/domain/scores";
+} from "@/domain/scoring/classification";
+import { calculateSubtotals } from "@/domain/scoring/subtotals";
+import { calculateAverageScorePerEnd } from "@/domain/scoring/distance_totals";
+import { gameTypeConfig } from "@/domain/scoring/game_types";
+import { calculateMaxPossibleScore } from "@/domain/scoring/scores";
 import { useHistoryStore } from "@/stores/history";
 import ClassificationDetailsTable from "@/components/ClassificationDetailsTable.vue";
 

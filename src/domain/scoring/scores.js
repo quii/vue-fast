@@ -1,5 +1,5 @@
-import { gameTypeConfig } from "@/domain/game_types";
-import { MISS } from "@/domain/game_type_config";
+import { gameTypeConfig } from "@/domain/scoring/game_types";
+import { MISS } from "@/domain/scoring/game_type_config";
 
 const scoreMappings = {
   X: 10,

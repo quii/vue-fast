@@ -1,5 +1,5 @@
 import ScorePage from "../pages/scorePage";
-import { ruthsFrostbiteGame, ruthsGame } from "../../src/domain/test_data";
+import { ruthsFrostbiteGame, ruthsGame } from "../../src/domain/scoring/test_data";
 import HistoryPage from "../pages/historyPage";
 
 describe(`Smoke test using Ruth's game`,

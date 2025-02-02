@@ -1,6 +1,10 @@
-import { gameTypeConfig } from "@/domain/game_types";
-import { convertToValue } from "@/domain/scores";
-import { classificationList, getNextClassification, isHigherOrEqualClassification } from "@/domain/classificationList";
+import { gameTypeConfig } from "@/domain/scoring/game_types";
+import { convertToValue } from "@/domain/scoring/scores";
+import {
+  classificationList,
+  getNextClassification,
+  isHigherOrEqualClassification
+} from "@/domain/scoring/classificationList";
 
 const sortByScore = (a, b) => a.score - b.score;
 

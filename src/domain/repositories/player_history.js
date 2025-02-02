@@ -1,8 +1,8 @@
 import { userDataFixer } from "@/domain/user_data_fixer";
-import { addTopScoreIndicator } from "@/domain/topscores";
-import { addClassificationsToHistory } from "@/domain/classification";
+import { addTopScoreIndicator } from "@/domain/scoring/topscores";
+import { addClassificationsToHistory } from "@/domain/scoring/classification";
 import { filterByClassification, filterByDateRange, filterByPB, filterByRound } from "@/domain/history_filters";
-import { addHandicapToHistory } from "@/domain/handicap";
+import { addHandicapToHistory } from "@/domain/scoring/handicap";
 
 Date.prototype.addDays = function (days) {
   var date = new Date(this.valueOf());

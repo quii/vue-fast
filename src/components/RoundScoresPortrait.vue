@@ -1,9 +1,9 @@
 <script setup>
 import { computed } from "vue";
-import { calculateSubtotals } from "@/domain/subtotals";
+import { calculateSubtotals } from "@/domain/scoring/subtotals";
 import RoundTablePortrait from "@/components/RoundTablePortrait.vue";
 import ClassificationDetails from "@/components/ClassificationDetails.vue";
-import { calculateDistanceTotals } from "@/domain/distance_totals";
+import { calculateDistanceTotals } from "@/domain/scoring/distance_totals";
 
 const props = defineProps({
   scores: {

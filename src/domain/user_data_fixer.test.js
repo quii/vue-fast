@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { cjSave, mallySave } from "@/domain/test_data";
+import { cjSave, mallySave } from "@/domain/scoring/test_data";
 import { userDataFixer } from "@/domain/user_data_fixer";
 
 describe("user data fixer", () => {

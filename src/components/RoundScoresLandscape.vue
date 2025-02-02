@@ -1,8 +1,8 @@
 <script setup>
 import { computed } from "vue";
 import RoundTable from "@/components/RoundTable.vue";
-import { calculateSubtotals } from "@/domain/subtotals";
-import { calculateDistanceTotals } from "@/domain/distance_totals";
+import { calculateSubtotals } from "@/domain/scoring/subtotals";
+import { calculateDistanceTotals } from "@/domain/scoring/distance_totals";
 import ClassificationDetails from "@/components/ClassificationDetails.vue";
 
 const props = defineProps({

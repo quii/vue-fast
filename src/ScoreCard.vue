@@ -4,17 +4,17 @@ import ScoreButtons from "@/components/ScoreButtons.vue";
 import GameTypeSelector from "@/components/GameTypeSelector.vue";
 import { useGameTypeStore } from "@/stores/game_type";
 import { computed, ref } from "vue";
-import { convertToValues } from "@/domain/scores";
 import RoundScores from "@/components/RoundScores.vue";
-import { calculateTotal } from "@/domain/subtotals";
 import { useToast } from "vue-toastification";
 import { useHistoryStore } from "@/stores/history";
 import { insults } from "@/domain/insults";
-import { X } from "@/domain/game_type_config";
 import { useUserStore } from "@/stores/user";
 import { useNotesStore } from "@/stores/user_notes";
 import UserNotes from "@/components/UserNotes.vue";
 import CurrentSightMark from "./components/sight_marks/CurrentSightMark.vue";
+import { convertToValues } from "@/domain/scoring/scores.js";
+import { calculateTotal } from "@/domain/scoring/subtotals.js";
+import { X } from "@/domain/scoring/game_type_config.js";
 
 
 const synth = window.speechSynthesis;

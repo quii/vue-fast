@@ -1,5 +1,5 @@
 import { describe, test, expect } from "vitest";
-import { addTopScoreIndicator } from "@/domain/topscores";
+import { addTopScoreIndicator } from "@/domain/scoring/topscores";
 
 describe("addTopScoreIndicator", () => {
   test("happy path", () => {

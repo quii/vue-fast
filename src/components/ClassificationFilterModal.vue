@@ -1,7 +1,7 @@
 <script setup>
 import BaseModal from "./BaseModal.vue";
 import { ref } from "vue";
-import { classificationList } from "@/domain/classificationList";
+import { classificationList } from "@/domain/scoring/classificationList";
 
 const emit = defineEmits(["close", "select"]);
 const selectedClassification = ref("");

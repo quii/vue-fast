@@ -1,7 +1,7 @@
 <script setup>
 import { useRoute, useRouter } from "vue-router";
 import { useHistoryStore } from "@/stores/history";
-import { gameTypeConfig } from "@/domain/game_types";
+import { gameTypeConfig } from "@/domain/scoring/game_types";
 import { computed, ref } from "vue";
 import RoundScores from "@/components/RoundScores.vue";
 import { useUserStore } from "@/stores/user";

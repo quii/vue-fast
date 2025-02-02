@@ -1,4 +1,4 @@
-import { gameTypeConfig } from "@/domain/game_types";
+import { gameTypeConfig } from "@/domain/scoring/game_types";
 
 export function userDataFixer(userData) {
   let someId = 0;

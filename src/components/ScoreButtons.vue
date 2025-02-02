@@ -1,6 +1,6 @@
 <script setup>
 
-import { calculateScoreIsValidForEnd } from "@/domain/end";
+import { calculateScoreIsValidForEnd } from "@/domain/scoring/end";
 import useButtonClass from "@/composeaables/useButtonClass";
 
 defineProps({

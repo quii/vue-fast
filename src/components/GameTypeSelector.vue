@@ -1,5 +1,5 @@
 <script setup>
-import { gameTypes } from '@/domain/game_types'
+import { gameTypes } from "@/domain/scoring/game_types";
 import { useHistoryStore } from "@/stores/history";
 import { computed } from "vue";
 

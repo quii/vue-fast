@@ -1,5 +1,5 @@
 import { expect, describe, test } from "vitest";
-import { calculateSubtotals } from "@/domain/subtotals";
+import { calculateSubtotals } from "@/domain/scoring/subtotals";
 
 const imperialRound = "national";
 const metricRound = "wa 70m";

@@ -1,7 +1,7 @@
 import { splitIntoChunks } from "@/domain/splitter";
-import { gameTypeConfig } from "@/domain/game_types";
-import { calculateSubtotals, calculateTotal } from "@/domain/subtotals";
-import { convertToValues } from "@/domain/scores";
+import { gameTypeConfig } from "@/domain/scoring/game_types";
+import { calculateSubtotals, calculateTotal } from "@/domain/scoring/subtotals";
+import { convertToValues } from "@/domain/scoring/scores";
 
 export function calculateDistanceTotals(scores, gameType = "national", endSize = 6) {
   const { distancesRoundSizes } = gameTypeConfig[gameType];

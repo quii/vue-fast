@@ -2,9 +2,9 @@
 import { computed, ref, watchEffect } from "vue";
 import { useToast } from "vue-toastification";
 import { useUserStore } from "@/stores/user";
-import { calculateAppropriateRounds } from "@/domain/game_types";
 import RoundDetails from "@/components/RoundDetails.vue";
-import { classificationList } from "@/domain/classificationList";
+import { classificationList } from "@/domain/scoring/classificationList.js";
+import { calculateAppropriateRounds } from "@/domain/scoring/game_types.js";
 
 const userStore = useUserStore();
 
