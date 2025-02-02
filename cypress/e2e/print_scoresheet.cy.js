@@ -12,7 +12,7 @@ describe("Print scoresheet", () => {
     cy.visit("/");
 
     userDataPage.navigateTo();
-    userDataPage.setArcherDetails("male", "recurve", "senior");
+    userDataPage.setArcherDetails("male", "recurve", "senior", "Chris");
 
     scorePage.navigateTo();
     scorePage.selectGame("bray i");
@@ -40,7 +40,8 @@ describe("Print scoresheet", () => {
     cy.contains("Got it!").click();
 
     cy.window().then((win) => {
-      cy.stub(win, "open").callsFake(() => {
+      cy.stub(win, "open").callsFake((url, title) => {
+        expect(title).to.equal("Chris-Sherwood-Forest");
         return win;
       });
     });

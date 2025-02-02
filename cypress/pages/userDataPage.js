@@ -3,7 +3,10 @@ export class UserDataPage {
     cy.get("a").contains("You").click();
   }
 
-  setArcherDetails(gender, bowType, ageGroup) {
+  setArcherDetails(gender, bowType, ageGroup, name = null) {
+    if (name) {
+      cy.get("input[type='text']").type(name);
+    }
     cy.get("select").eq(0).select(ageGroup);
     cy.get("select").eq(1).select(gender);
     cy.get("select").eq(2).select(bowType);

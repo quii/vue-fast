@@ -44,7 +44,7 @@ describe("Notes and Classifications", () => {
     scorePage.save();
 
     historyPage.navigateTo();
-    historyPage.checkClassificationExists("232", "A1");
+    historyPage.checkClassificationExists("227", "A1");
 
     historyPage.selectHistoryItem("227");
     historyPage.checkNoteIsHighlighted("Form getting worse, need to focus");

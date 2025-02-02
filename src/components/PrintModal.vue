@@ -12,8 +12,15 @@ const targetCaptain = ref("");
 const shotAt = ref("");
 
 function print() {
-  const printWindow = window.open("", "_blank");
+  const formatTitle = (str) => str ? str.replace(/[^a-zA-Z0-9\s-]/g, "").replace(/\s+/g, "-") : "";
+  const title = [
+    formatTitle(props.archerName),
+    shotAt.value ? formatTitle(shotAt.value) : ""
+  ].filter(Boolean).join("-");
+
+  const printWindow = window.open("", title);
   const doc = printWindow.document;
+  doc.title = title;
 
   const style = document.createElement("style");
   style.textContent = `
