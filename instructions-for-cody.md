@@ -140,9 +140,11 @@ Imperial rounds have only odd numbered scores.
 
 Metric rounds have 1 to 10, and sometimes X (which is worth 10).
 
-The shortest round (and thus, good for tests where we don't care about the specific round) is a "Bray I". This round is
-an indoor metric round, with no Xs. It has two and a half dozen rounds of shooting. With respect to classifications,
-given a senior, recurve male archer, here are the following scores required to reach each classification:
+The shortest round (and thus, good for tests where we don't care about the specific round) is a "Bray I".
+
+This round is an indoor metric round, with no Xs. It has two and a half dozen rounds of shooting. With respect to
+classifications, given a senior, recurve male archer, here are the following scores required to reach each
+classification:
 
 - A3: 134
 - A2: 172

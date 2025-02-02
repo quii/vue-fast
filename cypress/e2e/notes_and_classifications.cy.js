@@ -16,26 +16,26 @@ describe("Notes and Classifications", () => {
     userDataPage.setArcherDetails("male", "recurve", "senior");
 
     scorePage.navigateTo();
-    scorePage.selectGame("WINDSOR");
+    scorePage.selectGame("BRAY I");
 
     // First end of 6
-    scorePage.score([9, 9, 7, 7, 5, 5]);
+    scorePage.score([10, 9, 9, 8, 8, 7]);
     scorePage.expandClassificationDetails();
-    scorePage.checkClassificationTable("A2", "560");
+    scorePage.checkClassificationTable("A2", "121");
     scorePage.checkOnTrackStatus(true);
     scorePage.addNote("Good grouping on the 9s");
 
     // Second end of 6
-    scorePage.score([9, 7, 7, 5, 5, 3]);
+    scorePage.score([9, 8, 8, 7, 7, 6]);
 
     // Third end of 6
-    scorePage.score([7, 7, 5, 5, 3, 3]);
+    scorePage.score([8, 7, 7, 6, 6, 5]);
     scorePage.addNote("Form getting worse, need to focus");
     scorePage.highlightNote("Form getting worse, need to focus");
 
-    // Fill the rest with valid scoring patterns
-    for (let i = 0; i < 15; i++) {
-      scorePage.score([9, 9, 7, 7, 5, 5]);
+    // Fill remaining ends with consistent scoring pattern
+    for (let i = 0; i < 2; i++) {
+      scorePage.score([10, 9, 9, 8, 8, 2]);
     }
 
     scorePage.checkClassificationAchieved("A1");
@@ -44,10 +44,9 @@ describe("Notes and Classifications", () => {
     scorePage.save();
 
     historyPage.navigateTo();
-    historyPage.checkClassificationExists("738", "A1");
+    historyPage.checkClassificationExists("232", "A1");
 
-    historyPage.selectHistoryItem("738");
-
+    historyPage.selectHistoryItem("227");
     historyPage.checkNoteIsHighlighted("Form getting worse, need to focus");
   });
 
