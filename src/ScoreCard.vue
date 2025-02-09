@@ -97,7 +97,10 @@ Did the end go well?
 Why or why not?
 
 Did you follow your process?"></textarea>
-      <button @click="saveNote" :disabled="!noteText.trim()">💾 Save note</button>
+      <div class="note-actions">
+        <button @click="saveNote" :disabled="!noteText.trim()">💾 Save note</button>
+        <button popovertarget="noteTaker" popovertargetaction="hide">❌ Cancel</button>
+      </div>
     </div>
 
     <RoundScores v-if="hasStarted" :scores="scoresStore.scores"
@@ -123,6 +126,7 @@ Did you follow your process?"></textarea>
 </template>
 
 <style scoped>
+
 .controls select {
   padding: 0.5em;
   font-size: 1.2em;
@@ -175,7 +179,7 @@ button {
 }
 
 #noteTaker button {
-  width: 100%;
+  width: 50%;
   font-size: 1.5em;
   height: 10%;
 }
