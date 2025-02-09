@@ -1,7 +1,7 @@
 <script setup>
-import RoundFilterModal from "./RoundFilterModal.vue";
-import DateRangeFilterModal from "./DateRangeFilterModal.vue";
-import ClassificationFilterModal from "./ClassificationFilterModal.vue";
+import RoundFilterModal from "./modals/RoundFilterModal.vue";
+import DateRangeFilterModal from "./modals/DateRangeFilterModal.vue";
+import ClassificationFilterModal from "./modals/ClassificationFilterModal.vue";
 import { ref } from "vue";
 
 defineProps({

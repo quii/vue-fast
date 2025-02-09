@@ -101,7 +101,7 @@
 <script setup>
 import { computed, ref } from "vue";
 import { useSightMarksStore } from "@/stores/sight_marks";
-import BaseModal from "@/components/BaseModal.vue";
+import BaseModal from "@/components/modals/BaseModal.vue";
 import NumberSpinner from "@/components/common/NumberSpinner.vue";
 
 const store = useSightMarksStore();

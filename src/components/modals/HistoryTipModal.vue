@@ -1,5 +1,5 @@
 <script setup>
-import BaseModal from "./BaseModal.vue";
+import BaseModal from "@/components/modals/BaseModal.vue";
 
 const emit = defineEmits(["close"]);
 </script>

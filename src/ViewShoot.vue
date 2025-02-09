@@ -5,7 +5,7 @@ import { gameTypeConfig } from "@/domain/scoring/game_types";
 import { computed, ref } from "vue";
 import RoundScores from "@/components/RoundScores.vue";
 import { useUserStore } from "@/stores/user";
-import TipModal from "@/components/TipModal.vue";
+import TipModal from "@/components/modals/TipModal.vue";
 import UserNotes from "@/components/UserNotes.vue";
 import ArcherDetails from "@/components/ArcherDetails.vue";
 import SaveScoreSheetButton from "@/components/SaveScoreSheetButton.vue";

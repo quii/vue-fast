@@ -1,5 +1,5 @@
 <script setup>
-import BaseModal from "@/components/BaseModal.vue";
+import BaseModal from "@/components/modals/BaseModal.vue";
 import { ref, h, createApp } from "vue";
 import RoundScores from "@/components/RoundScores.vue";
 import ArcherDetails from "@/components/ArcherDetails.vue";

@@ -71,7 +71,7 @@ import { useUserStore } from "@/stores/user";
 import { useNotesStore } from "@/stores/user_notes";
 import HistoryFilters from "@/components/HistoryFilters.vue";
 import { usePreferencesStore } from "@/stores/preferences";
-import HistoryTipModal from "@/components/HistoryTipModal.vue";
+import HistoryTipModal from "@/components/modals/HistoryTipModal.vue";
 
 const store = useHistoryStore();
 const router = useRouter();
