@@ -1,6 +1,7 @@
 <script setup>
+import BaseModal from "@/components/BaseModal.vue";
 import { ref, h, createApp } from "vue";
-import RoundScores from "./RoundScores.vue";
+import RoundScores from "@/components/RoundScores.vue";
 import ArcherDetails from "@/components/ArcherDetails.vue";
 import SaveScoreSheetButton from "@/components/SaveScoreSheetButton.vue";
 
@@ -102,63 +103,42 @@ function print() {
   emit("close");
 }
 </script>
+
 <template>
-  <div class="modal-overlay">
-    <div class="modal-content">
-      <h2>Download Score Sheet 📄</h2>
+  <BaseModal>
+    <h2>Download Score Sheet 📄</h2>
 
-      <form @submit.prevent="print">
-        <div class="form-group">
-          <label for="captain">Target Captain's Name</label>
-          <input
-            id="captain"
-            v-model="targetCaptain"
-            type="text"
-            placeholder="Enter name"
-            autofocus
-          >
-        </div>
+    <form @submit.prevent="print">
+      <div class="form-group">
+        <label for="captain">Target Captain's Name</label>
+        <input
+          id="captain"
+          v-model="targetCaptain"
+          type="text"
+          placeholder="Enter name"
+          autofocus
+        >
+      </div>
 
-        <div class="form-group">
-          <label for="location">Shot At</label>
-          <input
-            id="location"
-            v-model="shotAt"
-            type="text"
-            placeholder="Enter location (optional)"
-          >
-        </div>
+      <div class="form-group">
+        <label for="location">Shot At</label>
+        <input
+          id="location"
+          v-model="shotAt"
+          type="text"
+          placeholder="Enter location (optional)"
+        >
+      </div>
 
-        <div class="button-group">
-          <button type="button" @click="emit('close')">Cancel</button>
-          <SaveScoreSheetButton @click="print" data-test="view-shoot-save2" :disabled="!targetCaptain.trim()" />
-        </div>
-      </form>
-    </div>
-  </div>
+      <div class="button-group">
+        <button type="button" @click="emit('close')">Cancel</button>
+        <SaveScoreSheetButton @click="print" data-test="view-shoot-save2" :disabled="!targetCaptain.trim()" />
+      </div>
+    </form>
+  </BaseModal>
 </template>
+
 <style scoped>
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal-content {
-  background: var(--color-background);
-  color: var(--color-text);
-  padding: 2.5rem;
-  border-radius: 12px;
-  min-width: 400px;
-  text-align: center;
-}
-
 h2 {
   font-size: 1.5rem;
   margin-bottom: 2rem;
@@ -186,7 +166,7 @@ input {
 .button-group {
   display: flex;
   justify-content: center;
-  gap: 1.5rem;
+  gap: 1rem;
   margin-top: 2rem;
 }
 </style>

@@ -7,10 +7,10 @@ import RoundScores from "@/components/RoundScores.vue";
 import { useUserStore } from "@/stores/user";
 import TipModal from "@/components/TipModal.vue";
 import UserNotes from "@/components/UserNotes.vue";
-import PrintModal from "./components/PrintModal.vue";
 import ArcherDetails from "@/components/ArcherDetails.vue";
 import SaveScoreSheetButton from "@/components/SaveScoreSheetButton.vue";
 import { usePreferencesStore } from "@/stores/preferences";
+import PrintModal from "@/components/modals/PrintModal.vue";
 
 const preferences = usePreferencesStore();
 
