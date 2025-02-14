@@ -35,15 +35,16 @@ function handleScore(event) {
   }
 
   const rect = event.currentTarget.getBoundingClientRect();
-  const position = {
-    x: event.clientX - rect.left,
-    y: event.clientY - rect.top
-  };
-  const score = event.target.dataset.score === "X" ? "X" : Number(event.target.dataset.score);
+  const scale = event.currentTarget.style.transform.match(/scale\((.*?)\)/)?.[1] || 1;
 
+  const position = {
+    x: (event.clientX - rect.left) / scale,
+    y: (event.clientY - rect.top) / scale
+  };
+
+  const score = event.target.dataset.score === "X" ? "X" : Number(event.target.dataset.score);
   emit("score", { score, position });
 }
-
 
 </script>
 
