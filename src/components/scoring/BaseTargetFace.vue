@@ -1,4 +1,5 @@
 <script setup>
+import { calculateScoreIsValidForEnd } from "@/domain/scoring/end.js";
 import { computed } from "vue";
 
 const props = defineProps({
@@ -13,8 +14,22 @@ const props = defineProps({
   gameType: {
     type: String,
     required: true
+  },
+  interactive: {
+    type: Boolean,
+    default: false
+  },
+  scores: {
+    type: Array,
+    default: () => []
   }
 });
+
+function isScoreValidForEnd(score) {
+  if (!props.interactive) return true;
+  return calculateScoreIsValidForEnd(props.scores, props.gameType)(score === "X" ? "X" : Number(score));
+}
+
 
 const rings = computed(() => {
   const validRingScores = props.validScores.filter(score => score !== "M");
@@ -50,10 +65,13 @@ const visibleArrows = computed(() =>
     <div v-for="ring in rings"
          :key="ring.score"
          class="ring"
-         :class="ring.color"
+         :class="[ring.color, { 'invalid-score': !isScoreValidForEnd(ring.score) }]"
          :data-test="`score-${ring.score}`"
          :data-score="ring.score"
-         :style="{ transform: `translate(-50%, -50%) scale(${ring.scale})` }">
+         :style="{
+           transform: `translate(-50%, -50%) scale(${ring.scale})`,
+           zIndex: ring.score === 'X' ? 11 : Number(ring.score)
+         }">
     </div>
 
     <div v-for="arrow in visibleArrows"
@@ -69,6 +87,26 @@ const visibleArrows = computed(() =>
 </template>
 
 <style scoped>
+.invalid-score {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.3),
+    rgba(0, 0, 0, 0.3) 10px,
+    rgba(0, 0, 0, 0.5) 10px,
+    rgba(0, 0, 0, 0.5) 20px
+  );
+}
+
+.black.invalid-score {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.3) 10px,
+    rgba(255, 255, 255, 0.5) 10px,
+    rgba(255, 255, 255, 0.5) 20px
+  );
+}
+
 .target-container {
   position: relative;
   width: 90vmin;
