@@ -38,6 +38,8 @@ const scores = computed(() => history.selectedShoot.scores);
 const gameType = computed(() => history.selectedShoot.gameType);
 const date = computed(() => history.selectedShoot.date);
 
+const validScores = computed(() => gameTypeConfig[gameType.value].scores);
+
 function deleteShoot() {
   if (confirm(`Are you sure you want to delete this shoot? This action cannot be undone.`)) {
     history.remove(history.selectedShoot.id);
@@ -59,6 +61,9 @@ function deleteShoot() {
       v-if="arrows.length > 0"
       :arrows="arrows"
       :readonly="true"
+      :scores="scores"
+      :game-type="gameType"
+      :valid-scores="validScores"
       :current-end="-1"
     />
     <RoundScores :scores="scores"
