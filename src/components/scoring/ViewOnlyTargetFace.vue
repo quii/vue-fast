@@ -25,3 +25,10 @@ defineProps({
     :game-type="gameType"
   />
 </template>
+
+<style scoped>
+:deep(.arrow-marker) {
+  background: #4CAF50 !important;
+  opacity: 1 !important;
+}
+</style>

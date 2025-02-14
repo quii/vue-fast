@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest'
 
 import { mount } from '@vue/test-utils'
-import ScoreButtons from '@/components/ScoreButtons.vue'
+import ScoreButtons from "@/components/scoring/ScoreButtons.vue";
 
 describe('RoundScores', () => {
   it('renders buttons for each type of score, and emits an event when clicked', () => {

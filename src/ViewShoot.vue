@@ -1,5 +1,5 @@
 <script setup>
-import ViewOnlyTargetFace from "@/components/ViewOnlyTargetFace.vue";
+import ViewOnlyTargetFace from "@/components/scoring/ViewOnlyTargetFace.vue";
 import { useRoute, useRouter } from "vue-router";
 import { useHistoryStore } from "@/stores/history";
 import { gameTypeConfig } from "@/domain/scoring/game_types";

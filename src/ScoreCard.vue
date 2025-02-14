@@ -1,8 +1,8 @@
 <script setup>
-import InteractiveTargetFace from "@/components/InteractiveTargetFace.vue";
+import InteractiveTargetFace from "@/components/scoring/InteractiveTargetFace.vue";
 import { useArrowHistoryStore } from "@/stores/arrow_history.js";
 import { useScoresStore } from "@/stores/scores";
-import ScoreButtons from "@/components/ScoreButtons.vue";
+import ScoreButtons from "@/components/scoring/ScoreButtons.vue";
 import GameTypeSelector from "@/components/GameTypeSelector.vue";
 import { useGameTypeStore } from "@/stores/game_type";
 import { computed, ref } from "vue";
