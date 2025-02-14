@@ -1,4 +1,5 @@
 <script setup>
+import TargetFaceScoring from "@/components/TargetFaceScoring.vue";
 import { useRoute, useRouter } from "vue-router";
 import { useHistoryStore } from "@/stores/history";
 import { gameTypeConfig } from "@/domain/scoring/game_types";
@@ -10,9 +11,12 @@ import UserNotes from "@/components/UserNotes.vue";
 import ArcherDetails from "@/components/ArcherDetails.vue";
 import SaveScoreSheetButton from "@/components/SaveScoreSheetButton.vue";
 import { usePreferencesStore } from "@/stores/preferences";
-import PrintModal from "@/components/modals/PrintModal.vue";
+import { useArrowHistoryStore } from "@/stores/arrow_history";
 
+import PrintModal from "@/components/modals/PrintModal.vue";
 const preferences = usePreferencesStore();
+const arrowHistoryStore = useArrowHistoryStore();
+const arrows = computed(() => arrowHistoryStore.getArrowsForShoot(route.params.id));
 
 const showPrintModal = ref(false);
 const showTip = ref(!preferences.hasSeenPrintTip);
@@ -50,6 +54,12 @@ function deleteShoot() {
       :age-group="userStore.user.ageGroup"
       :gender="userStore.user.gender"
       :bow-type="userStore.user.bowType"
+    />
+    <TargetFaceScoring
+      v-if="arrows.length > 0"
+      :arrows="arrows"
+      :readonly="true"
+      :current-end="-1"
     />
     <RoundScores :scores="scores"
                  :end-size="endSize"

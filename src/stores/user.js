@@ -6,9 +6,9 @@ export const useUserStore = defineStore("user", () => {
     lastBackupDate: null
   });
 
-  function save(ageGroup, gender, bowType, classification, maxYards, name, constructiveCriticism) {
+  function save(ageGroup, gender, bowType, classification, maxYards, name, constructiveCriticism, experimentalTargetFace) {
     state.value = {
-      ageGroup, gender, bowType, classification, maxYards, name, constructiveCriticism
+      ageGroup, gender, bowType, classification, maxYards, name, constructiveCriticism, experimentalTargetFace
     };
   }
 
@@ -28,11 +28,15 @@ export const useUserStore = defineStore("user", () => {
     return new Date(lastBackup) < monthAgo;
   }
 
+  function isExperimentalUser() {
+    return state.value.experimentalTargetFace;
+  }
 
   return {
     user: state,
     save,
     updateLastBackupDate,
-    needsBackup
+    needsBackup,
+    isExperimentalUser
   };
 });

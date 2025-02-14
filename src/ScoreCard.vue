@@ -1,4 +1,5 @@
 <script setup>
+import { useArrowHistoryStore } from "@/stores/arrow_history.js";
 import { useScoresStore } from "@/stores/scores";
 import ScoreButtons from "@/components/ScoreButtons.vue";
 import GameTypeSelector from "@/components/GameTypeSelector.vue";
@@ -15,18 +16,18 @@ import CurrentSightMark from "./components/sight_marks/CurrentSightMark.vue";
 import { convertToValues } from "@/domain/scoring/scores.js";
 import { calculateTotal } from "@/domain/scoring/subtotals.js";
 import { X } from "@/domain/scoring/game_type_config.js";
-
-
+import TargetFaceScoring from "@/components/TargetFaceScoring.vue";
 const synth = window.speechSynthesis;
 
 const scoresStore = useScoresStore();
 const gameTypeStore = useGameTypeStore();
+const arrowHistoryStore = useArrowHistoryStore();
+
 const validScores = computed(() => gameTypeStore.currentRound.scores);
 const maxReached = computed(() => scoresStore.scores.length >= gameTypeStore.currentRound.maxArrows);
 const userStore = useUserStore();
 const notesStore = useNotesStore();
 
-//todo: this is copied from data management, DRY it up
 const history = useHistoryStore();
 const toast = useToast();
 const noteText = ref("");
@@ -34,10 +35,13 @@ const date = ref(new Date().toISOString().substr(0, 10));
 const runningTotal = computed(() => calculateTotal(convertToValues(scoresStore.scores, gameTypeStore.type)));
 const hasStarted = computed(() => scoresStore.scores.length > 0);
 
+const currentEnd = computed(() => Math.floor(scoresStore.scores.length / gameTypeStore.currentRound.endSize));
+
 function saveScores(event) {
   event.preventDefault();
   try {
     const id = history.add(date.value, runningTotal.value, gameTypeStore.type, [...scoresStore.scores], gameTypeStore.currentRound.unit);
+    arrowHistoryStore.saveArrowsForShoot(id, [...scoresStore.arrows]);
     notesStore.assignPendingNotesToShoot(id);
     scoresStore.clear();
     toast.success("Scores saved, please find them in the history");
@@ -75,16 +79,37 @@ function saveNote() {
   toast.success("Note saved");
 }
 
-</script>
+function handleTargetScore(scoreData) {
+  scoresStore.addArrow({
+    id: Date.now(),
+    position: scoreData.position,
+    end: currentEnd.value
+  });
+  addScore(scoreData.score);
+}</script>
 
 <template>
   <div class="page">
-    <ScoreButtons :validScores="validScores"
-                  @score="addScore"
-                  :max-reached="maxReached"
-                  :scores="scoresStore.scores"
-                  :game-type="gameTypeStore.type"
-                  @undo="scoresStore.undo" />
+    <TargetFaceScoring
+      v-if="userStore.isExperimentalUser()"
+      :current-end="currentEnd"
+      :arrows="scoresStore.arrows"
+      :scores="scoresStore.scores"
+      :game-type="gameTypeStore.type"
+      :readonly="maxReached"
+      :valid-scores="validScores"
+      @score="handleTargetScore"
+      @undo="scoresStore.undo"
+    />
+    <ScoreButtons
+      v-else
+      :validScores="validScores"
+      @score="addScore"
+      :max-reached="maxReached"
+      :scores="scoresStore.scores"
+      :game-type="gameTypeStore.type"
+      @undo="scoresStore.undo"
+    />
     <button class="Take note" popovertarget="noteTaker">📝 Take a note</button>
 
     <button class="save" v-if="maxReached" @click="saveScores">💾 Save score to history</button>

@@ -17,6 +17,7 @@ const name = ref(userStore.user.name) || "";
 const selectedClassification = ref(userStore.user.classification || classificationList[0]);
 const maxYards = ref(userStore.user.maxYards ?? 100);
 const constructiveCriticism = ref(userStore.user.constructiveCriticism ?? true);
+const experimentalTargetFace = ref(userStore.user.experimentalTargetFace ?? false);
 
 const allArcherDetailsProvided = computed(() =>
   selectedClassification.value &&
@@ -51,7 +52,8 @@ function saveUserDetails(event) {
     selectedClassification,
     maxYards,
     name,
-    constructiveCriticism
+    constructiveCriticism,
+    experimentalTargetFace
   );
   toast.success("Details saved");
 }
@@ -103,6 +105,10 @@ function saveUserDetails(event) {
     <label class="inline"><input type="checkbox" v-model="constructiveCriticism" /> Constructive criticism
       enabled</label>
 
+    <label class="inline">
+      <input type="checkbox" v-model="experimentalTargetFace" />
+      Experimental target face scoring enabled
+    </label>
 
     <button type="submit" @click="saveUserDetails">💾 Save</button>
   </div>
