@@ -1,5 +1,5 @@
 <script setup>
-import { computed, watch } from "vue";
+import { computed } from "vue";
 
 const props = defineProps({
   arrows: {
@@ -47,14 +47,6 @@ const rings = computed(() => {
 const visibleArrows = computed(() =>
   props.arrows.filter(arrow => arrow.position)
 );
-
-console.log("visibleArrows", visibleArrows.value);
-console.log("rings", rings.value);
-
-//watch visible arrows
-watch(visibleArrows, (newArrows, oldArrows) => {
-  console.log("visibleArrows changed", newArrows, oldArrows);
-});
 </script>
 
 <template>
