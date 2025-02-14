@@ -1,4 +1,5 @@
 <script setup>
+import InteractiveTargetFace from "@/components/InteractiveTargetFace.vue";
 import { useArrowHistoryStore } from "@/stores/arrow_history.js";
 import { useScoresStore } from "@/stores/scores";
 import ScoreButtons from "@/components/ScoreButtons.vue";
@@ -16,7 +17,6 @@ import CurrentSightMark from "./components/sight_marks/CurrentSightMark.vue";
 import { convertToValues } from "@/domain/scoring/scores.js";
 import { calculateTotal } from "@/domain/scoring/subtotals.js";
 import { X } from "@/domain/scoring/game_type_config.js";
-import TargetFaceScoring from "@/components/TargetFaceScoring.vue";
 const synth = window.speechSynthesis;
 
 const scoresStore = useScoresStore();
@@ -90,14 +90,14 @@ function handleTargetScore(scoreData) {
 
 <template>
   <div class="page">
-    <TargetFaceScoring
+    <InteractiveTargetFace
       v-if="userStore.isExperimentalUser()"
       :current-end="currentEnd"
       :arrows="scoresStore.arrows"
       :scores="scoresStore.scores"
       :game-type="gameTypeStore.type"
-      :readonly="maxReached"
       :valid-scores="validScores"
+      :max-reached="maxReached"
       @score="handleTargetScore"
       @undo="scoresStore.undo"
     />

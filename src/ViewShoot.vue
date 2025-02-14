@@ -1,5 +1,5 @@
 <script setup>
-import TargetFaceScoring from "@/components/TargetFaceScoring.vue";
+import ViewOnlyTargetFace from "@/components/ViewOnlyTargetFace.vue";
 import { useRoute, useRouter } from "vue-router";
 import { useHistoryStore } from "@/stores/history";
 import { gameTypeConfig } from "@/domain/scoring/game_types";
@@ -37,9 +37,6 @@ const endSize = computed(() => gameTypeConfig[history.selectedShoot.gameType].en
 const scores = computed(() => history.selectedShoot.scores);
 const gameType = computed(() => history.selectedShoot.gameType);
 const date = computed(() => history.selectedShoot.date);
-
-const validScores = computed(() => gameTypeConfig[gameType.value].scores);
-
 function deleteShoot() {
   if (confirm(`Are you sure you want to delete this shoot? This action cannot be undone.`)) {
     history.remove(history.selectedShoot.id);
@@ -57,14 +54,11 @@ function deleteShoot() {
       :gender="userStore.user.gender"
       :bow-type="userStore.user.bowType"
     />
-    <TargetFaceScoring
+    <ViewOnlyTargetFace
       v-if="arrows.length > 0"
       :arrows="arrows"
-      :readonly="true"
-      :scores="scores"
+      :valid-scores="gameTypeConfig[gameType].scores"
       :game-type="gameType"
-      :valid-scores="validScores"
-      :current-end="-1"
     />
     <RoundScores :scores="scores"
                  :end-size="endSize"

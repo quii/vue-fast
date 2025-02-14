@@ -1,0 +1,27 @@
+<script setup>
+import BaseTargetFace from "./BaseTargetFace.vue";
+
+defineProps({
+  arrows: {
+    type: Array,
+    default: () => []
+  },
+  validScores: {
+    type: Array,
+    required: true
+  },
+  gameType: {
+    type: String,
+    required: true
+  }
+});
+</script>
+
+<template>
+  <BaseTargetFace
+    :arrows="arrows"
+    :current-end="-1"
+    :valid-scores="validScores"
+    :game-type="gameType"
+  />
+</template>
