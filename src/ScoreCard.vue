@@ -1,22 +1,23 @@
 <script setup>
-import InteractiveTargetFace from "@/components/scoring/InteractiveTargetFace.vue";
-import { useArrowHistoryStore } from "@/stores/arrow_history.js";
-import { useScoresStore } from "@/stores/scores";
-import ScoreButtons from "@/components/scoring/ScoreButtons.vue";
 import GameTypeSelector from "@/components/GameTypeSelector.vue";
-import { useGameTypeStore } from "@/stores/game_type";
-import { computed, ref } from "vue";
 import RoundScores from "@/components/RoundScores.vue";
-import { useToast } from "vue-toastification";
-import { useHistoryStore } from "@/stores/history";
-import { insults } from "@/domain/insults";
-import { useUserStore } from "@/stores/user";
-import { useNotesStore } from "@/stores/user_notes";
+import InteractiveTargetFace from "@/components/scoring/InteractiveTargetFace.vue";
+import ScoreButtons from "@/components/scoring/ScoreButtons.vue";
 import UserNotes from "@/components/UserNotes.vue";
-import CurrentSightMark from "./components/sight_marks/CurrentSightMark.vue";
+import { insults } from "@/domain/insults";
+import { X } from "@/domain/scoring/game_type_config.js";
 import { convertToValues } from "@/domain/scoring/scores.js";
 import { calculateTotal } from "@/domain/scoring/subtotals.js";
-import { X } from "@/domain/scoring/game_type_config.js";
+import { useArrowHistoryStore } from "@/stores/arrow_history.js";
+import { useGameTypeStore } from "@/stores/game_type";
+import { useHistoryStore } from "@/stores/history";
+import { useScoresStore } from "@/stores/scores";
+import { useUserStore } from "@/stores/user";
+import { useNotesStore } from "@/stores/user_notes";
+import { computed, ref } from "vue";
+import { useToast } from "vue-toastification";
+import CurrentSightMark from "./components/sight_marks/CurrentSightMark.vue";
+
 const synth = window.speechSynthesis;
 
 const scoresStore = useScoresStore();
@@ -60,14 +61,22 @@ function clearScores() {
   }
 }
 
-function addScore(score) {
-  if (score === "M" && userStore.user.constructiveCriticism) {
+function handleScore(scoreData) {
+  if (scoreData.position) {
+    scoresStore.addArrow({
+      id: Date.now(),
+      position: scoreData.position,
+      end: currentEnd.value
+    });
+  }
+
+  if (scoreData.score === "M" && userStore.user.constructiveCriticism) {
     synth.cancel();
     const utterance = new SpeechSynthesisUtterance(insults[Math.floor(Math.random() * insults.length)]);
     utterance.rate = 0.8;
     synth.speak(utterance);
   }
-  scoresStore.add(score);
+  scoresStore.add(scoreData.score);
 }
 
 function saveNote() {
@@ -79,32 +88,24 @@ function saveNote() {
   toast.success("Note saved");
 }
 
-function handleTargetScore(scoreData) {
-  scoresStore.addArrow({
-    id: Date.now(),
-    position: scoreData.position,
-    end: currentEnd.value
-  });
-  addScore(scoreData.score);
-}</script>
+</script>
 
 <template>
   <div class="page">
     <InteractiveTargetFace
       v-if="userStore.isExperimentalUser()"
-      :current-end="currentEnd"
       :arrows="scoresStore.arrows"
       :scores="scoresStore.scores"
       :game-type="gameTypeStore.type"
       :valid-scores="validScores"
       :max-reached="maxReached"
-      @score="handleTargetScore"
+      @score="handleScore"
       @undo="scoresStore.undo"
     />
     <ScoreButtons
       v-else
       :validScores="validScores"
-      @score="addScore"
+      @score="handleScore"
       :max-reached="maxReached"
       :scores="scoresStore.scores"
       :game-type="gameTypeStore.type"

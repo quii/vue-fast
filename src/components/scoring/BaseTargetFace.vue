@@ -6,10 +6,6 @@ const props = defineProps({
     type: Array,
     default: () => []
   },
-  currentEnd: {
-    type: Number,
-    required: true
-  },
   validScores: {
     type: Array,
     required: true
@@ -55,6 +51,7 @@ const visibleArrows = computed(() =>
          :key="ring.score"
          class="ring"
          :class="ring.color"
+         :data-test="`score-${ring.score}`"
          :data-score="ring.score"
          :style="{ transform: `translate(-50%, -50%) scale(${ring.scale})` }">
     </div>

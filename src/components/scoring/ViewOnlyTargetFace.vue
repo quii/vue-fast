@@ -20,7 +20,6 @@ defineProps({
 <template>
   <BaseTargetFace
     :arrows="arrows"
-    :current-end="-1"
     :valid-scores="validScores"
     :game-type="gameType"
   />

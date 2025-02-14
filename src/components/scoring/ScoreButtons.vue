@@ -34,7 +34,7 @@ const buttonClass = useButtonClass();
       :disabled="!calculateScoreIsValidForEnd(scores, gameType)(score) || maxReached"
       :class="buttonClass(score, gameType)"
       :data-test="`score-${score}`"
-      @click="$emit('score', score)"
+      @click="$emit('score', { score, position: null })"
     >
       {{ score }}
     </button>

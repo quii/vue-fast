@@ -9,10 +9,6 @@ const props = defineProps({
     type: Array,
     default: () => []
   },
-  currentEnd: {
-    type: Number,
-    required: true
-  },
   scores: {
     type: Array,
     required: true
@@ -42,7 +38,7 @@ function handleScore(event) {
   const score = event.target.dataset.score === "X" ? "X" : Number(event.target.dataset.score);
 
   if (calculateScoreIsValidForEnd(props.scores, props.gameType)(score)) {
-    emit("score", { score, position, end: props.currentEnd });
+    emit("score", { score, position });
   }
 }
 </script>
@@ -51,21 +47,27 @@ function handleScore(event) {
   <div>
     <BaseTargetFace
       :arrows="arrows"
-      :current-end="currentEnd"
       :valid-scores="validScores"
       :game-type="gameType"
       @click="handleScore"
-    />
+    >
+      <div v-for="ring in rings"
+           :key="ring.score"
+           :data-test="`score-${ring.score}`">
+      </div>
+    </BaseTargetFace>
 
     <div class="controls">
       <button
         class="miss"
+        data-test="score-M"
         :disabled="maxReached || !calculateScoreIsValidForEnd(scores, gameType)('M')"
         @click="emit('score', { score: 'M', position: null, end: currentEnd })">
         Miss
       </button>
       <button
         class="undo"
+        data-test="undo"
         :disabled="maxReached"
         @click="emit('undo')">
         ⌫
@@ -73,6 +75,7 @@ function handleScore(event) {
     </div>
   </div>
 </template>
+
 
 <style scoped>
 .controls {

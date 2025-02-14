@@ -52,6 +52,20 @@ rules; this app also takes care of this complexity for the archer.
   - This principle is exemplified in how getFilteredHistory reads like a clear set of steps (filterByPB, filterByRound,
     etc) while the actual filtering logic lives in the history_filters.js module.
 
+## Component Design Principles
+
+- When a component needs magic numbers (like -1) or boolean flags to handle different modes, it's a signal to split it
+  into more focused components
+- Large numbers of props often indicate a component is doing too much and should be split
+- Prefer creating separate components with clear, single responsibilities over one component that handles multiple modes
+  through props
+- Example: Rather than one target face component that handles both scoring and viewing, create:
+  - A pure presentational target face component
+  - A scoring wrapper for active shooting
+  - A display wrapper for history viewing
+
+This approach leads to cleaner interfaces, less prop drilling, and components that are easier to test and maintain.
+
 ## Some TDD principles
 
 - "Write the test you want to see". We should not write badly written tests due to the code under test being poorly
@@ -154,3 +168,32 @@ classification:
 - B1: 268
 - MB: 280
 - GMB: 289
+
+## Archery Scoring Rules
+
+1. End sizes vary by round type:
+
+- Outdoor rounds (like National): 6 arrows per end
+- Indoor rounds (like Bray I): 3 arrows per end
+
+2. Within an end, scores must be entered in descending order. Once a score is entered (e.g., 7), you cannot enter a
+   higher score (e.g., 9) in that end
+3. When a new end begins, the archer can start scoring from the highest possible score again
+4. Different rounds have different valid scores (e.g., National rounds use odd numbers)
+5. Miss (M) is always a valid score option
+6. Scores are entered from highest to lowest as the archer works their way out from the center of the target
+
+## Target Face Rules
+
+1. Standard target faces:
+
+- Colors from center outwards: gold, red, blue, black, white
+- Some rounds include an X ring in the center of the gold (counts as 10)
+- X counts as a tiebreaker in competitions
+
+2. Worcester target faces:
+
+- Center ring is white
+- All other rings are black
+- Different scoring system from standard faces
+
