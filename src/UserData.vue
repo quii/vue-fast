@@ -1,14 +1,11 @@
 <script setup>
 import { computed, ref, watchEffect } from "vue";
-import { useToast } from "vue-toastification";
 import { useUserStore } from "@/stores/user";
 import RoundDetails from "@/components/RoundDetails.vue";
 import { classificationList } from "@/domain/scoring/classificationList.js";
 import { calculateAppropriateRounds } from "@/domain/scoring/game_types.js";
 
 const userStore = useUserStore();
-
-const toast = useToast();
 
 const selectedAgeGroup = ref(userStore.user.ageGroup);
 const selectedGender = ref(userStore.user.gender);
@@ -44,9 +41,9 @@ const hasSuitableRounds = computed(() => {
   return suitableRounds.value.short.length > 0 || suitableRounds.value.long.length > 0 || suitableRounds.value.medium.length > 0;
 });
 
-function saveUserDetails(event) {
-  event.preventDefault();
-  userStore.save(selectedAgeGroup,
+watchEffect(() => {
+  userStore.save(
+    selectedAgeGroup,
     selectedGender,
     selectedBowtype,
     selectedClassification,
@@ -55,8 +52,7 @@ function saveUserDetails(event) {
     constructiveCriticism,
     experimentalTargetFace
   );
-  toast.success("Details saved");
-}
+});
 </script>
 <template>
   <div>
@@ -109,8 +105,6 @@ function saveUserDetails(event) {
       <input type="checkbox" v-model="experimentalTargetFace" />
       Experimental target face scoring enabled
     </label>
-
-    <button type="submit" @click="saveUserDetails">💾 Save</button>
   </div>
 
   <div v-if="hasSuitableRounds" class="recommended-rounds">

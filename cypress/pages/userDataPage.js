@@ -10,7 +10,6 @@ export class UserDataPage {
     cy.get("select").eq(0).select(ageGroup);
     cy.get("select").eq(1).select(gender);
     cy.get("select").eq(2).select(bowType);
-    cy.get("button").contains("Save").click();
   }
 
   setClassification(classification) {
