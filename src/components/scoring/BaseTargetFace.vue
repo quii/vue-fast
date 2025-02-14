@@ -2,6 +2,33 @@
 import { calculateScoreIsValidForEnd } from "@/domain/scoring/end.js";
 import { computed } from "vue";
 
+import { ref } from "vue";
+
+const scale = ref(1);
+let initialDistance = 0;
+
+function handleTouchStart(event) {
+  if (event.touches.length === 2) {
+    initialDistance = Math.hypot(
+      event.touches[0].clientX - event.touches[1].clientX,
+      event.touches[0].clientY - event.touches[1].clientY
+    );
+  }
+}
+
+function handleTouchMove(event) {
+  if (event.touches.length === 2) {
+    const currentDistance = Math.hypot(
+      event.touches[0].clientX - event.touches[1].clientX,
+      event.touches[0].clientY - event.touches[1].clientY
+    );
+
+    const delta = currentDistance / initialDistance;
+    scale.value = Math.min(Math.max(1, delta), 3);
+  }
+}
+
+
 const props = defineProps({
   arrows: {
     type: Array,
@@ -61,7 +88,10 @@ const visibleArrows = computed(() =>
 </script>
 
 <template>
-  <div class="target-container">
+  <div class="target-container"
+       @touchstart="handleTouchStart"
+       @touchmove="handleTouchMove"
+       :style="{ transform: `scale(${scale})` }">
     <div v-for="ring in rings"
          :key="ring.score"
          class="ring"
