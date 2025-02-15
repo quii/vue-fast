@@ -99,6 +99,7 @@ function saveNote() {
       :game-type="gameTypeStore.type"
       :valid-scores="validScores"
       :max-reached="maxReached"
+      :knock-color="userStore.user.knockColor"
       @score="handleScore"
       @undo="scoresStore.undo"
     />

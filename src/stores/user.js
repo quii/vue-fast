@@ -6,9 +6,17 @@ export const useUserStore = defineStore("user", () => {
     lastBackupDate: null
   });
 
-  function save(ageGroup, gender, bowType, classification, maxYards, name, constructiveCriticism, experimentalTargetFace) {
+  function save(ageGroup, gender, bowType, classification, maxYards, name, constructiveCriticism, experimentalTargetFace, knockColor) {
     state.value = {
-      ageGroup, gender, bowType, classification, maxYards, name, constructiveCriticism, experimentalTargetFace
+      ageGroup,
+      gender,
+      bowType,
+      classification,
+      maxYards,
+      name,
+      constructiveCriticism,
+      experimentalTargetFace,
+      knockColor
     };
   }
 

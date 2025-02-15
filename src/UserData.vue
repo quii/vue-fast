@@ -15,6 +15,7 @@ const selectedClassification = ref(userStore.user.classification || classificati
 const maxYards = ref(userStore.user.maxYards ?? 100);
 const constructiveCriticism = ref(userStore.user.constructiveCriticism ?? true);
 const experimentalTargetFace = ref(userStore.user.experimentalTargetFace ?? false);
+const knockColor = ref(userStore.user.knockColor ?? "#FF69B4"); // Hot pink default
 
 const allArcherDetailsProvided = computed(() =>
   selectedClassification.value &&
@@ -50,7 +51,8 @@ watchEffect(() => {
     maxYards,
     name,
     constructiveCriticism,
-    experimentalTargetFace
+    experimentalTargetFace,
+    knockColor
   );
 });
 </script>
@@ -104,6 +106,8 @@ watchEffect(() => {
     <label class="inline">
       <input type="checkbox" v-model="experimentalTargetFace" />
       Experimental target face scoring enabled
+    </label>
+    <label>Choose knock colour<input type="color" v-model="knockColor" />
     </label>
   </div>
 

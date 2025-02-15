@@ -1,8 +1,34 @@
 <script setup>
 import { calculateScoreIsValidForEnd } from "@/domain/scoring/end.js";
 import { computed } from "vue";
-
 import { ref } from "vue";
+
+const props = defineProps({
+  arrows: {
+    type: Array,
+    default: () => []
+  },
+  validScores: {
+    type: Array,
+    required: true
+  },
+  gameType: {
+    type: String,
+    required: true
+  },
+  interactive: {
+    type: Boolean,
+    default: false
+  },
+  scores: {
+    type: Array,
+    default: () => []
+  },
+  knockColor: {
+    type: String,
+    default: "#FF69B4"
+  }
+});
 
 const scale = ref(1);
 let initialDistance = 0;
@@ -27,30 +53,6 @@ function handleTouchMove(event) {
     scale.value = Math.min(Math.max(1, delta), 3);
   }
 }
-
-
-const props = defineProps({
-  arrows: {
-    type: Array,
-    default: () => []
-  },
-  validScores: {
-    type: Array,
-    required: true
-  },
-  gameType: {
-    type: String,
-    required: true
-  },
-  interactive: {
-    type: Boolean,
-    default: false
-  },
-  scores: {
-    type: Array,
-    default: () => []
-  }
-});
 
 function isScoreValidForEnd(score) {
   if (!props.interactive) return true;
@@ -91,7 +93,7 @@ const visibleArrows = computed(() =>
   <div class="target-container"
        @touchstart="handleTouchStart"
        @touchmove="handleTouchMove"
-       :style="{ transform: `scale(${scale})` }">
+       :style="{ transform: `scale(${scale})`, '--knock-color': knockColor }">
     <div v-for="ring in rings"
          :key="ring.score"
          class="ring"
@@ -185,17 +187,13 @@ const visibleArrows = computed(() =>
   height: 10px;
   border-radius: 50%;
   transform: translate(-50%, -50%);
+  background-color: var(--knock-color) !important;
   pointer-events: none;
   z-index: 1000;
-}
-
-.arrow-marker.current {
-  background: #4CAF50;
-  opacity: 1;
+  border: 1px solid white;
 }
 
 .arrow-marker:not(.current) {
-  background: #666;
-  opacity: 0.5;
+  opacity: 0.7;
 }
 </style>

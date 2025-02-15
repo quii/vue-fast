@@ -59,6 +59,7 @@ function deleteShoot() {
       :arrows="arrows"
       :valid-scores="gameTypeConfig[gameType].scores"
       :game-type="gameType"
+      :knock-color="userStore.user.knockColor"
     />
     <RoundScores :scores="scores"
                  :end-size="endSize"

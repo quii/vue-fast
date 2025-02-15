@@ -24,6 +24,10 @@ const props = defineProps({
   maxReached: {
     type: Boolean,
     required: true
+  },
+  knockColor: {
+    type: String,
+    default: "#FF69B4"
   }
 });
 
@@ -56,6 +60,7 @@ function handleScore(event) {
       :game-type="gameType"
       :scores="scores"
       :interactive="true"
+      :knock-color="props.knockColor"
       @click="handleScore"
     >
     </BaseTargetFace>
