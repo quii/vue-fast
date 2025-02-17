@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@vitest/eslint-plugin": "^1.1.31",
-    "@vueuse/core": "^12.5.0",
+    "@vueuse/core": "^12.7.0",
     "pinia": "^3.0.1",
     "vue": "^3.4.27",
     "vue-router": "^4.5.0",
