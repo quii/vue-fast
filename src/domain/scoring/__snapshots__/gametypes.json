@@ -2284,7 +2284,7 @@
   },
   "worcester": {
     "distancesRoundSizes": [
-      5
+      6
     ],
     "scores": [
       "X",
@@ -2298,8 +2298,8 @@
     "unit": "m",
     "endSize": 5,
     "isOutdoor": false,
-    "maxArrows": 50,
-    "numberOfEnds": 10,
+    "maxArrows": 60,
+    "numberOfEnds": 12,
     "isImperial": false,
     "maxDistanceMetres": 18.281535648994513,
     "maxDistanceYards": 20
