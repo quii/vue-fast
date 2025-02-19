@@ -19,5 +19,5 @@ export function convertToValues(scores, gameType = "national") {
 }
 
 export const calculateMaxPossibleScore = (totalScoreSoFar, arrowsRemaining, gameType) => {
-  return totalScoreSoFar + (arrowsRemaining * convertToValue(gameTypeConfig[gameType].scores[0]));
+  return totalScoreSoFar + (arrowsRemaining * convertToValue(gameTypeConfig[gameType].scores[0], gameType));
 }
