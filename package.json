@@ -18,7 +18,7 @@
     "ship": "npm run test && git push"
   },
   "dependencies": {
-    "@vitest/eslint-plugin": "^1.1.35",
+    "@vitest/eslint-plugin": "^1.1.36",
     "@vueuse/core": "^12.7.0",
     "pinia": "^3.0.1",
     "vue": "^3.4.27",
