@@ -28,7 +28,7 @@
   "devDependencies": {
     "@dagger.io/dagger": "^0.16.2",
     "@eslint/eslintrc": "^3.3.0",
-    "@rushstack/eslint-patch": "^1.10.5",
+    "@rushstack/eslint-patch": "^1.11.0",
     "@vitejs/plugin-vue": "^5.2.1",
     "@vitejs/plugin-vue-jsx": "^4.1.1",
     "@vue/eslint-config-prettier": "^10.2.0",
