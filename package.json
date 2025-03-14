@@ -20,6 +20,7 @@
   "dependencies": {
     "@vitest/eslint-plugin": "^1.1.37",
     "@vueuse/core": "^13.0.0",
+    "chart.js": "^4.4.8",
     "pinia": "^3.0.1",
     "vue": "^3.4.27",
     "vue-router": "^4.5.0",

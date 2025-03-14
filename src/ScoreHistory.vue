@@ -3,6 +3,14 @@
   <div class="fullpage" @touchstart="handleTouchStart"
        @touchend="handleTouchEnd">
 
+    <!-- Graph modal -->
+    <div v-if="showGraph" class="graph-modal">
+      <div class="graph-modal-content">
+        <button class="close-graph" @click="showGraph = false">✕</button>
+        <ScoreHistoryGraph :historyData="graphData" :isHandicapGraph="isHandicapGraph" />
+      </div>
+    </div>
+
     <div v-if="!isDiaryMode">
       <HistoryFilters
         :pb-filter-active="pbFilterActive"
@@ -16,6 +24,18 @@
         @filter-classification="handleClassificationFilter"
         @reset="handleReset"
       />
+
+      <div v-if="showGraphButton" class="graph-button-container">
+        <button class="view-graph-button" @click="openGraph">
+          📈 View {{ capitalizedRoundName }} Graph
+        </button>
+      </div>
+
+      <div v-if="showHandicapGraphButton" class="graph-button-container">
+        <button class="view-graph-button" @click="openHandicapGraph">
+          📉 View Handicap Progress
+        </button>
+      </div>
 
       <table>
         <thead>
@@ -62,16 +82,16 @@
 </template>
 
 <script setup>
-import { ref, watchEffect } from "vue";
+import { ref, watchEffect, computed } from "vue";
 import UserNotes from "@/components/UserNotes.vue";
 import { useHistoryStore } from "@/stores/history";
 import { useRouter } from "vue-router";
-import { computed } from "vue";
 import { useUserStore } from "@/stores/user";
 import { useNotesStore } from "@/stores/user_notes";
 import HistoryFilters from "@/components/HistoryFilters.vue";
 import { usePreferencesStore } from "@/stores/preferences";
 import HistoryTipModal from "@/components/modals/HistoryTipModal.vue";
+import ScoreHistoryGraph from "@/components/ScoreHistoryGraph.vue";
 
 const store = useHistoryStore();
 const router = useRouter();
@@ -91,6 +111,11 @@ const startX = ref(0);
 const availableRounds = computed(() => store.getAvailableRounds());
 const showTip = ref(!preferences.hasSeenHistoryTip);
 
+// Graph related state
+const showGraph = ref(false);
+const graphData = ref([]);
+const isHandicapGraph = ref(false);
+
 const filteredHistory = ref([]);
 
 watchEffect(async () => {
@@ -101,6 +126,59 @@ watchEffect(async () => {
     classification: classificationFilter.value
   }, user.user);
 });
+
+const capitalizedRoundName = computed(() => {
+  if (!roundFilter.value) return "";
+
+  // Split the round name by spaces
+  return roundFilter.value
+    .split(" ")
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+});
+
+const entriesWithHandicap = computed(() => {
+  return filteredHistory.value.filter(item =>
+    item.handicap !== undefined &&
+    item.handicap !== null &&
+    item.handicap !== ""
+  );
+});
+
+const showHandicapGraphButton = computed(() => {
+  // Only show if no round filter is active and we have enough handicap entries
+  return !roundFilterActive.value && entriesWithHandicap.value.length >= 5;
+});
+
+// Computed property to determine if we should show the graph button
+const showGraphButton = computed(() => {
+  if (!roundFilterActive.value) return false;
+
+  // Count entries of the selected round type
+  const roundEntries = filteredHistory.value.filter(
+    item => item.gameType.toLowerCase() === roundFilter.value.toLowerCase()
+  );
+
+  return roundEntries.length > 5;
+});
+
+// Function to open the graph
+function openGraph() {
+  // Filter data for the selected round type
+  graphData.value = filteredHistory.value.filter(
+    item => item.gameType.toLowerCase() === roundFilter.value.toLowerCase()
+  );
+  isHandicapGraph.value = false;
+  showGraph.value = true;
+}
+
+// Function to open the handicap graph
+function openHandicapGraph() {
+  // Use only entries with valid handicap values
+  graphData.value = entriesWithHandicap.value;
+  isHandicapGraph.value = true;
+  showGraph.value = true;
+}
 
 const totalArrows = computed(() => store.totalArrows());
 
@@ -256,5 +334,55 @@ p {
   padding: 0.2rem 0.5rem;
   border-radius: 0.2rem;
   margin-left: 0.5rem;
+}
+
+.graph-button-container {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.view-graph-button {
+  background-color: var(--color-background-soft);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.graph-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.graph-modal-content {
+  background-color: var(--color-background);
+  width: 95%;
+  height: 90%;
+  border-radius: 8px;
+  position: relative;
+  padding: 10px;
+}
+
+.close-graph {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 1001;
+  color: var(--color-text);
 }
 </style>
