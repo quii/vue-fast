@@ -29,6 +29,13 @@ class HistoryPage {
     cy.get(".highlight").contains(score);
   }
 
+  checkScoreExists(score, round) {
+    cy.get("tr")
+      .contains("td", score)
+      .parent()
+      .contains("td", round);
+  }
+
   checkNoteExists(noteText) {
     cy.get("[data-test=\"note-text\"]").contains(noteText);
   }

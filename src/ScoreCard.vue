@@ -24,13 +24,17 @@ const synth = window.speechSynthesis;
 const scoresStore = useScoresStore();
 const gameTypeStore = useGameTypeStore();
 const arrowHistoryStore = useArrowHistoryStore();
-
-const validScores = computed(() => gameTypeStore.currentRound.scores);
-const maxReached = computed(() => scoresStore.scores.length >= gameTypeStore.currentRound.maxArrows);
 const userStore = useUserStore();
 const notesStore = useNotesStore();
-
 const history = useHistoryStore();
+
+const validScores = computed(() => gameTypeStore.currentRound.scores);
+const maxReached = computed(() => {
+  const maxArrows = gameTypeStore.currentRound.maxArrows;
+  // If maxArrows is Infinity, this will never be true
+  return scoresStore.scores.length >= maxArrows && maxArrows !== Infinity;
+});
+
 const toast = useToast();
 const noteText = ref("");
 const date = ref(new Date().toISOString().substr(0, 10));
@@ -40,6 +44,10 @@ const hasStarted = computed(() => scoresStore.scores.length > 0);
 const currentEnd = computed(() => Math.floor(scoresStore.scores.length / gameTypeStore.currentRound.endSize));
 
 const showNoteTaker = ref(false);
+
+const canSaveAnytime = computed(() =>
+  gameTypeStore.currentRound.canSaveAnytime && scoresStore.scores.length > 0
+);
 
 watch(maxReached, (isMaxReached) => {
   if (isMaxReached) {
@@ -126,7 +134,7 @@ function saveNote() {
     />
     <button
       class="save"
-      v-if="maxReached"
+      v-if="maxReached || canSaveAnytime"
       @click="saveScores"
       :class="{ 'pulse-animation': maxReached }">
       💾 Save score to history

@@ -21,7 +21,16 @@ function convertToYards(metres) {
 function calculateConfigFromBase(base) {
   const rounds = base.reduce((acc, gameType) => {
     const endSize = calculateEndSize(gameType.endSize);
-    const maxArrows = calculateMaxArrows(gameType, endSize);
+    const isPracticeRound = !gameType.distancesRoundSizes ||
+      (gameType.distancesRoundSizes.length === 1 &&
+        gameType.distancesRoundSizes[0] === 100);
+
+    const maxArrows = isPracticeRound ?
+      Infinity :
+      calculateMaxArrows(gameType, endSize);
+
+    const canSaveAnytime = isPracticeRound;
+
     return ({
       ...acc, [gameType.name]: {
         distancesRoundSizes: gameType.distancesRoundSizes,
@@ -30,6 +39,7 @@ function calculateConfigFromBase(base) {
         endSize: endSize,
         isOutdoor: gameType.isOutdoor,
         maxArrows,
+        canSaveAnytime,
         numberOfEnds: maxArrows / endSize,
         isImperial: gameType.isImperial,
         maxDistanceMetres: gameType.maxDistanceMetres || convertToMeters(gameType.maxDistanceYards),

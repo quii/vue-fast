@@ -6,7 +6,6 @@ export const imperialPractices = standardDistances.filter(x => x !== "70").map(d
   name: `practice ${distance}yd`,
   isOutdoor: true,
   isImperial: true,
-  distancesRoundSizes: [100],
   maxDistanceYards: distance
 }));
 
@@ -14,7 +13,6 @@ export const metricPractices = standardDistances.map(distance => ({
   name: `practice ${distance}m`,
   isOutdoor: true,
   isImperial: false,
-  distancesRoundSizes: [100, 100],
   maxDistanceMetres: distance
 }));
 

@@ -35,6 +35,10 @@ const userDetailsSaved = computed(() =>
   userStore.user.bowType
 );
 
+const isPracticeRound = computed(() => {
+  return props.gameType.toLowerCase().includes("practice");
+});
+
 watch(() => userDetailsSaved.value, (x) => {
   console.log("user details saved", x);
 });
@@ -42,10 +46,11 @@ watch(() => userDetailsSaved.value, (x) => {
 const classificationCalculator = ref(null);
 
 watchEffect(async () => {
-  if (!userDetailsSaved.value) {
+  if (!userDetailsSaved.value || isPracticeRound.value) {
     classificationCalculator.value = null;
     return;
   }
+
   classificationCalculator.value = await createClassificationCalculator(
     props.gameType,
     userStore.user.gender,
@@ -73,7 +78,7 @@ const availableClassifications = computed(() => {
 
 const closeToNextClassification = computed(() => {
   // if we're at the end
-  if (arrowsRemaining.value > 0) {
+  if (arrowsRemaining.value > 0 || isPracticeRound.value) {
     return false;
   }
 
@@ -88,31 +93,33 @@ const closeToNextClassification = computed(() => {
 </script>
 
 <template>
-  <div class="detailsHint" v-if="!userDetailsSaved">
-    <p>👋 Before shooting, please consider entering your details in the <em>You</em> tab at the top right.</p>
-    <p>Fast will work better if you do 🥳, and will be able to help you better track your progress</p>
-    <p>Don't forget to press the <em>save button</em></p>
-  </div>
-  <details class="dropdown" id="classification"
-           v-if="userDetailsSaved && !showTableByDefault">
-    <summary>Tap to view classification calculations</summary>
-    <div>
+  <div v-if="!isPracticeRound">
+    <div class="detailsHint" v-if="!userDetailsSaved">
+      <p>👋 Before shooting, please consider entering your details in the <em>You</em> tab at the top right.</p>
+      <p>Fast will work better if you do 🥳, and will be able to help you better track your progress</p>
+      <p>Don't forget to press the <em>save button</em></p>
+    </div>
+    <details class="dropdown" id="classification"
+             v-if="userDetailsSaved && !showTableByDefault">
+      <summary>Tap to view classification calculations</summary>
+      <div>
+        <ClassificationDetailsTable :max-possible-score=maxPossibleScore
+                                    :arrows-remaining=arrowsRemaining
+                                    :available-classifications=availableClassifications />
+      </div>
+    </details>
+
+    <div v-if="showTableByDefault" id="classification">
       <ClassificationDetailsTable :max-possible-score=maxPossibleScore
                                   :arrows-remaining=arrowsRemaining
-                                  :available-classifications=availableClassifications />
+                                  :available-classifications=getRelevantClassifications(availableClassifications) />
     </div>
-  </details>
 
-  <div v-if="showTableByDefault" id="classification">
-    <ClassificationDetailsTable :max-possible-score=maxPossibleScore
-                                :arrows-remaining=arrowsRemaining
-                                :available-classifications=getRelevantClassifications(availableClassifications) />
-  </div>
-
-  <div class="hint" v-if="closeToNextClassification && closeToNextClassification.achievable">
-    <h3>Better luck next time!</h3>
-    <p>If you tidied up {{ closeToNextClassification.arrowsToImprove }} of your worst shots, you could've achieved a
-      {{ closeToNextClassification.classification }}</p>
+    <div class="hint" v-if="closeToNextClassification && closeToNextClassification.achievable">
+      <h3>Better luck next time!</h3>
+      <p>If you tidied up {{ closeToNextClassification.arrowsToImprove }} of your worst shots, you could've achieved a
+        {{ closeToNextClassification.classification }}</p>
+    </div>
   </div>
 </template>
 
