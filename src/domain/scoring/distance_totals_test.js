@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { calculateDistanceTotals } from "@/domain/distance_totals";
+import { calculateDistanceTotals } from "@/domain/scoring/distance_totals";
 import { justStartedANational, ruthsFrostbiteGame, ruthsGame } from "@/domain/test_data";
 
 describe("calculateRounds", () => {
