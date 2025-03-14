@@ -17,6 +17,7 @@ import { useNotesStore } from "@/stores/user_notes";
 import { computed, ref } from "vue";
 import { useToast } from "vue-toastification";
 import CurrentSightMark from "./components/sight_marks/CurrentSightMark.vue";
+import { watch } from "vue";
 
 const synth = window.speechSynthesis;
 
@@ -39,6 +40,15 @@ const hasStarted = computed(() => scoresStore.scores.length > 0);
 const currentEnd = computed(() => Math.floor(scoresStore.scores.length / gameTypeStore.currentRound.endSize));
 
 const showNoteTaker = ref(false);
+
+watch(maxReached, (isMaxReached) => {
+  if (isMaxReached) {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    // Optional: Show a toast notification to make it even clearer
+    toast.info("You've completed the shoot! You can now save your scores.");
+  }
+});
 
 function saveScores(event) {
   event.preventDefault();
@@ -114,7 +124,13 @@ function saveNote() {
       :game-type="gameTypeStore.type"
       @undo="scoresStore.undo"
     />
-    <button class="save" v-if="maxReached" @click="saveScores">💾 Save score to history</button>
+    <button
+      class="save"
+      v-if="maxReached"
+      @click="saveScores"
+      :class="{ 'pulse-animation': maxReached }">
+      💾 Save score to history
+    </button>
 
     <button class="Take note" @click="showNoteTaker = true">📝 Take a note</button>
 
@@ -156,6 +172,23 @@ Did you follow your process?"></textarea>
 </template>
 
 <style scoped>
+
+.pulse-animation {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+    background-color: var(--color-highlight, #4CAF50);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 
 .controls select {
   padding: 0.5em;
