@@ -38,6 +38,8 @@ const hasStarted = computed(() => scoresStore.scores.length > 0);
 
 const currentEnd = computed(() => Math.floor(scoresStore.scores.length / gameTypeStore.currentRound.endSize));
 
+const showNoteTaker = ref(false);
+
 function saveScores(event) {
   event.preventDefault();
   try {
@@ -84,7 +86,7 @@ function saveNote() {
   const currentEnd = completedEnds > 0 ? completedEnds : 1;
   notesStore.addPendingNote(currentEnd, noteText.value);
   noteText.value = "";
-  document.getElementById("noteTaker").hidePopover();
+  showNoteTaker.value = false;
   toast.success("Note saved");
 }
 
@@ -112,24 +114,25 @@ function saveNote() {
       :game-type="gameTypeStore.type"
       @undo="scoresStore.undo"
     />
-    <button class="Take note" popovertarget="noteTaker">📝 Take a note</button>
-
     <button class="save" v-if="maxReached" @click="saveScores">💾 Save score to history</button>
 
-    <div id="noteTaker" popover>
-      <textarea v-model="noteText" id="noteTakerTextArea" placeholder="Take note of anything here.
+    <button class="Take note" @click="showNoteTaker = true">📝 Take a note</button>
+
+    <div id="noteTaker" v-if="showNoteTaker" class="modal-overlay">
+      <div class="modal-content">
+        <textarea v-model="noteText" id="noteTakerTextArea" placeholder="Take note of anything here.
 
 Did the end go well?
 
 Why or why not?
 
 Did you follow your process?"></textarea>
-      <div class="note-actions">
-        <button @click="saveNote" :disabled="!noteText.trim()">💾 Save note</button>
-        <button popovertarget="noteTaker" popovertargetaction="hide">❌ Cancel</button>
+        <div class="note-actions">
+          <button @click="saveNote" :disabled="!noteText.trim()">💾 Save note</button>
+          <button @click="showNoteTaker = false">❌ Cancel</button>
+        </div>
       </div>
     </div>
-
     <RoundScores v-if="hasStarted" :scores="scoresStore.scores"
                  :game-type="gameTypeStore.type"
                  :endSize="gameTypeStore.currentRound.endSize"
@@ -187,16 +190,29 @@ button {
   background-color: rgba(0, 0, 0, 0.7);
 }
 
-#noteTaker {
+/* Add these styles to replace the popover styling */
+.modal-overlay {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90vw;
-  height: 70vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
-#noteTaker textarea {
+.modal-content {
+  width: 90vw;
+  height: 70vh;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-content textarea {
   width: 100%;
   height: 90%;
   resize: none;
@@ -205,12 +221,15 @@ button {
   border: none;
 }
 
-#noteTaker button {
-  width: 50%;
-  font-size: 1.5em;
+.note-actions {
+  display: flex;
   height: 10%;
 }
 
+.note-actions button {
+  width: 50%;
+  font-size: 1.5em;
+}
 button:disabled {
   opacity: 0.3;
   cursor: not-allowed;
