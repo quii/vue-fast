@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from "vue";
-import {useScreenOrientation} from "@vueuse/core";
+import { useScreenOrientation } from "@vueuse/core";
 import { gameTypeConfig } from "@/domain/scoring/game_types";
 import RoundScoresLandscape from "@/components/RoundScoresLandscape.vue";
 import RoundScoresPortrait from "@/components/RoundScoresPortrait.vue";
@@ -21,6 +21,10 @@ const props = defineProps({
   },
   forceLandscape: {
     default: false
+  },
+  userProfile: {
+    type: Object,
+    default: null
   }
 });
 const {
@@ -33,9 +37,9 @@ const validScores = computed(() => gameTypeConfig[props.gameType].scores);
   <RoundScoresLandscape
     v-if="forceLandscape || orientation==='landscape-primary'"
     :scores="scores"
-                        :end-size="endSize"
-                        :hasX="validScores.includes(X)"
-    :game-type="gameType"
+    :end-size="endSize"
+    :hasX="validScores.includes(X)"
+    :game-type="gameType" :user-profile="userProfile"
   />
   <RoundScoresPortrait
     v-else
@@ -43,5 +47,6 @@ const validScores = computed(() => gameTypeConfig[props.gameType].scores);
     :game-type="gameType"
     :endSize="endSize"
     :hasX="validScores.includes(X)"
+    :user-profile="userProfile"
   />
 </template>

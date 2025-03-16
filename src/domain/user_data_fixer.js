@@ -27,3 +27,22 @@ export function userDataFixer(userData) {
     return round;
   });
 }
+
+// Add this function to the existing user_data_fixer.js file
+export function backfillUserProfiles(history, currentUserProfile) {
+  if (!currentUserProfile || !history || !Array.isArray(history)) {
+    return history;
+  }
+
+  return history.map(item => {
+    // Only add user profile if it doesn't already exist
+    if (!item.userProfile && currentUserProfile) {
+      return {
+        ...item,
+        userProfile: { ...currentUserProfile }
+      };
+    }
+    return item;
+  });
+}
+

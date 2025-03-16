@@ -22,6 +22,10 @@ const props = defineProps({
   },
   endSize: {
     required: true
+  },
+  userProfile: {
+    type: Object,
+    default: null
   }
 });
 
@@ -29,10 +33,20 @@ const userStore = useUserStore();
 const historyStore = useHistoryStore();
 const personalBest = computed(() => historyStore.personalBest(props.gameType));
 
+// Determine if we should use the provided profile or the current user profile
+const effectiveUserProfile = computed(() => {
+  return props.userProfile || {
+    gender: userStore.user.gender,
+    ageGroup: userStore.user.ageGroup,
+    bowType: userStore.user.bowType,
+    classification: userStore.user.classification
+  };
+});
+
 const userDetailsSaved = computed(() =>
-  userStore.user.gender &&
-  userStore.user.ageGroup &&
-  userStore.user.bowType
+  effectiveUserProfile.value.gender &&
+  effectiveUserProfile.value.ageGroup &&
+  effectiveUserProfile.value.bowType
 );
 
 const isPracticeRound = computed(() => {
@@ -53,9 +67,9 @@ watchEffect(async () => {
 
   classificationCalculator.value = await createClassificationCalculator(
     props.gameType,
-    userStore.user.gender,
-    userStore.user.ageGroup,
-    userStore.user.bowType,
+    effectiveUserProfile.value.gender,
+    effectiveUserProfile.value.ageGroup,
+    effectiveUserProfile.value.bowType,
     personalBest.value
   );
 });
@@ -82,12 +96,13 @@ const closeToNextClassification = computed(() => {
     return false;
   }
 
-  return calculatePotentialClassificationWithoutOutliers(props.scores,
-    userStore.user.classification,
+  return calculatePotentialClassificationWithoutOutliers(
+    props.scores,
+    effectiveUserProfile.value.classification,
     props.gameType,
-    userStore.user.gender,
-    userStore.user.ageGroup,
-    userStore.user.bowType);
+    effectiveUserProfile.value.gender,
+    effectiveUserProfile.value.ageGroup,
+    effectiveUserProfile.value.bowType);
 });
 
 </script>

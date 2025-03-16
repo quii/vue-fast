@@ -1,12 +1,24 @@
+import { useUserStore } from "@/stores/user.js";
 import { defineStore } from "pinia";
 import { useLocalStorage } from "@vueuse/core";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { PlayerHistory } from "@/domain/repositories/player_history.js";
 
 export const useHistoryStore = defineStore("history", () => {
   const state = useLocalStorage("history", []);
   const selectedShoot = ref(state.value[0]);
-  const playerHistory = new PlayerHistory(state);
+
+  const userStore = useUserStore();
+
+  // Get current user profile for backfilling
+  const currentUserProfile = computed(() => ({
+    gender: userStore.user.gender,
+    ageGroup: userStore.user.ageGroup,
+    bowType: userStore.user.bowType,
+    classification: userStore.user.classification
+  }));
+
+  const playerHistory = new PlayerHistory(state, currentUserProfile.value);
 
   return {
     history: state,
@@ -18,7 +30,7 @@ export const useHistoryStore = defineStore("history", () => {
     getAvailableRounds: () => playerHistory.getAvailableRounds(),
     add: (...args) => playerHistory.add(...args),
     remove: (id) => playerHistory.remove(id),
-    importHistory: (history) => playerHistory.importHistory(history),
+    importHistory: (history, userProfile) => playerHistory.importHistory(history, userProfile),
     sortedHistory: (...args) => playerHistory.sortedHistory(...args),
     personalBest: (round) => playerHistory.personalBest(round),
     totalArrows: () => playerHistory.totalArrows(),

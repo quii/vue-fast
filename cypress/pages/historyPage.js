@@ -3,7 +3,7 @@ class HistoryPage {
     cy.get("a").contains("History").click();
 
     // Try multiple times to dismiss modal if it exists
-    const maxAttempts = 3;
+    const maxAttempts = 10;
     const attemptDismissModal = (attempt = 0) => {
       cy.get("body").then($body => {
         if ($body.find("button:contains(\"Got it!\")").length > 0) {

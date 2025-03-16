@@ -50,9 +50,9 @@ function deleteShoot() {
     <h1>{{ gameType }} - {{ date }}</h1>
     <ArcherDetails
       :name="userStore.user.name"
-      :age-group="userStore.user.ageGroup"
-      :gender="userStore.user.gender"
-      :bow-type="userStore.user.bowType"
+      :age-group="history.selectedShoot.userProfile.ageGroup"
+      :gender="history.selectedShoot.userProfile.gender"
+      :bow-type="history.selectedShoot.userProfile.bowType"
     />
     <ViewOnlyTargetFace
       v-if="arrows.length > 0"
@@ -63,6 +63,7 @@ function deleteShoot() {
     />
     <RoundScores :scores="scores"
                  :end-size="endSize"
+                 :user-profile="history.selectedShoot.userProfile"
                  :game-type="gameType" />
 
   </div>

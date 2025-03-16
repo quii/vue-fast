@@ -153,16 +153,27 @@ export function calculateClassification(sex, age, bowtype) {
   };
 }
 
-export async function addClassificationsToHistory(sex, age, bowType, scoringHistory) {
-  if (!sex || !age || !bowType) {
-    return scoringHistory;
-  }
-  const classificationCalculator = calculateClassification(sex, age, bowType);
+export async function addClassificationsToHistory(scoringHistory) {
   const updatedHistory = [];
 
-  for (const x of scoringHistory) {
-    const classification = await classificationCalculator(x.gameType, x.score);
-    updatedHistory.push({ ...x, classification });
+  for (const item of scoringHistory) {
+    // Use the stored user profile if available, otherwise skip classification
+    if (!item.userProfile) {
+      updatedHistory.push(item);
+      continue;
+    }
+
+    const { gender, ageGroup, bowType } = item.userProfile;
+
+    if (!gender || !ageGroup || !bowType) {
+      updatedHistory.push(item);
+      continue;
+    }
+
+    const classificationCalculator = calculateClassification(gender, ageGroup, bowType);
+    const classification = await classificationCalculator(item.gameType, item.score);
+
+    updatedHistory.push({ ...item, classification });
   }
 
   return updatedHistory;

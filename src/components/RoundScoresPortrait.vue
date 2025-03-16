@@ -17,6 +17,10 @@ const props = defineProps({
   },
   hasX: {
     default: false
+  },
+  userProfile: {
+    type: Object,
+    default: null
   }
 });
 const totals = computed(() => calculateSubtotals(props.scores, props.gameType));
@@ -59,7 +63,7 @@ const totalColspan = computed(() => props.endSize === 5 ? 1 : 2);
     </tbody>
   </table>
   <ClassificationDetails :end-size="props.endSize" :game-type="props.gameType"
-                         :scores="props.scores"></ClassificationDetails>
+                         :scores="props.scores" :user-profile="props.userProfile"></ClassificationDetails>
 </template>
 
 <style scoped>

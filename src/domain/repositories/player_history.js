@@ -1,4 +1,4 @@
-import { userDataFixer } from "@/domain/user_data_fixer";
+import { backfillUserProfiles, userDataFixer } from "@/domain/user_data_fixer";
 import { addTopScoreIndicator } from "@/domain/scoring/topscores";
 import { addClassificationsToHistory } from "@/domain/scoring/classification";
 import { filterByClassification, filterByDateRange, filterByPB, filterByRound } from "@/domain/history_filters";
@@ -11,12 +11,12 @@ Date.prototype.addDays = function (days) {
 };
 
 export class PlayerHistory {
-  constructor(storage) {
+  constructor(storage, currentUserProfile = null) {
     this.storage = storage;
-    this.storage.value = userDataFixer(this.storage.value);
+    this.storage.value = prepareHistoryData(this.storage.value, currentUserProfile);
   }
 
-  add(date, score, gameType, scores, unit) {
+  add(date, score, gameType, scores, unit, userProfile) {
     const nextId = generateNextId(this.storage.value);
     this.storage.value.push({
       id: nextId,
@@ -24,7 +24,8 @@ export class PlayerHistory {
       score,
       gameType,
       scores,
-      unit
+      unit,
+      userProfile
     });
     return nextId;
   }
@@ -33,13 +34,14 @@ export class PlayerHistory {
     this.storage.value = this.storage.value.filter(item => item.id !== id);
   }
 
-  importHistory(history) {
-    this.storage.value = userDataFixer(history);
+  importHistory(history, currentUserProfile = null) {
+    // Use the same function here as in the constructor
+    this.storage.value = prepareHistoryData(history, currentUserProfile);
   }
 
-  async sortedHistory(gender, age, bowType) {
+  async sortedHistory() {
     const scoresWithIndicator = addTopScoreIndicator(this.storage.value);
-    const scoresWithClassification = await addClassificationsToHistory(gender, age, bowType, scoresWithIndicator);
+    const scoresWithClassification = await addClassificationsToHistory(scoresWithIndicator);
     const scoresWithHandicaps = await addHandicapToHistory(scoresWithClassification)
     return scoresWithHandicaps.sort((a, b) => new Date(b.date) - new Date(a.date));
   }
@@ -62,8 +64,8 @@ export class PlayerHistory {
     return [...new Set(this.storage.value.map(h => h.gameType))];
   }
 
-  async getFilteredHistory(filters, user) {
-    const baseHistory = await this.sortedHistory(user.gender, user.ageGroup, user.bowType);
+  async getFilteredHistory(filters) {
+    const baseHistory = await this.sortedHistory();
     const filteredByPB = filterByPB(baseHistory, filters.pbOnly);
     const filteredByRound = filterByRound(filteredByPB, filters.round);
     const filteredByDateRange = filterByDateRange(filteredByRound, filters.dateRange);
@@ -99,4 +101,14 @@ function getScoresForRound(history, round) {
 function getHighestScore(scores) {
   const sortedScores = scores.sort((a, b) => b - a);
   return sortedScores[0];
+}
+
+function prepareHistoryData(historyData, currentUserProfile = null) {
+  let fixedData = userDataFixer(historyData);
+
+  if (currentUserProfile) {
+    fixedData = backfillUserProfiles(fixedData, currentUserProfile);
+  }
+
+  return fixedData;
 }

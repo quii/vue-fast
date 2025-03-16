@@ -45,6 +45,15 @@ const currentEnd = computed(() => Math.floor(scoresStore.scores.length / gameTyp
 
 const showNoteTaker = ref(false);
 
+const userProfile = computed(() => {
+  return {
+    gender: userStore.user.gender,
+    ageGroup: userStore.user.ageGroup,
+    bowType: userStore.user.bowType,
+    classification: userStore.user.classification
+  };
+});
+
 const canSaveAnytime = computed(() =>
   gameTypeStore.currentRound.canSaveAnytime && scoresStore.scores.length > 0
 );
@@ -60,8 +69,16 @@ watch(maxReached, (isMaxReached) => {
 
 function saveScores(event) {
   event.preventDefault();
+
   try {
-    const id = history.add(date.value, runningTotal.value, gameTypeStore.type, [...scoresStore.scores], gameTypeStore.currentRound.unit);
+    const id = history.add(date.value,
+      runningTotal.value,
+      gameTypeStore.type,
+      [...scoresStore.scores],
+      gameTypeStore.currentRound.unit,
+      userProfile.value
+    );
+
     arrowHistoryStore.saveArrowsForShoot(id, [...scoresStore.arrows]);
     notesStore.assignPendingNotesToShoot(id);
     scoresStore.clear();
@@ -160,7 +177,9 @@ Did you follow your process?"></textarea>
     <RoundScores v-if="hasStarted" :scores="scoresStore.scores"
                  :game-type="gameTypeStore.type"
                  :endSize="gameTypeStore.currentRound.endSize"
-                 :hasX="validScores.includes(X)" />
+                 :hasX="validScores.includes(X)"
+                 :user-profile="userProfile"
+    />
   </div>
   <hr />
   <UserNotes :allow-highlight="true" />
