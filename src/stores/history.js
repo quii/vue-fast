@@ -1,7 +1,8 @@
+import { mallyMalhamBowTypeFix } from "@/domain/user_data_fixer.js";
 import { useUserStore } from "@/stores/user.js";
 import { defineStore } from "pinia";
 import { useLocalStorage } from "@vueuse/core";
-import { computed, ref } from "vue";
+import { computed, ref, watchEffect } from "vue";
 import { PlayerHistory } from "@/domain/repositories/player_history.js";
 
 export const useHistoryStore = defineStore("history", () => {
@@ -17,6 +18,14 @@ export const useHistoryStore = defineStore("history", () => {
     bowType: userStore.user.bowType,
     classification: userStore.user.classification
   }));
+
+  // Apply Mally's special fix if needed
+  watchEffect(() => {
+    if (userStore.user.name === "Mally Malham") {
+      // Use the separate function from user_data_fixer.js
+      state.value = mallyMalhamBowTypeFix(state.value);
+    }
+  });
 
   const playerHistory = new PlayerHistory(state, currentUserProfile.value);
 

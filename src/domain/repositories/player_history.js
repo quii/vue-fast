@@ -35,7 +35,6 @@ export class PlayerHistory {
   }
 
   importHistory(history, currentUserProfile = null) {
-    // Use the same function here as in the constructor
     this.storage.value = prepareHistoryData(history, currentUserProfile);
   }
 

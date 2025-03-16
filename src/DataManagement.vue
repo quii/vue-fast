@@ -41,7 +41,8 @@ function handleFileUpload(event) {
   reader.onload = (e) => {
     try {
       const data = JSON.parse(e.target.result);
-      history.importHistory(data.history, { ageGroup: data.user.ageGroup, bowType: data.user.bowType });
+      history.importHistory(data.history,
+        { ageGroup: data.user.ageGroup, bowType: data.user.bowType, gender: data.user.gender });
       notes.importNotes(data);
       user.save(
         data.user.ageGroup,

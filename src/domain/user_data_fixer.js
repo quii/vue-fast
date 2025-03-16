@@ -46,3 +46,33 @@ export function backfillUserProfiles(history, currentUserProfile) {
   });
 }
 
+// Add this function to handle Mally's special case
+export function mallyMalhamBowTypeFix(history) {
+  console.log("Applying special bow type fix for Mally Malham");
+
+  // The date when Mally changed from recurve to barebow
+  const bowTypeChangeDate = new Date("2025-02-15");
+
+  return history.map(item => {
+    // Skip items that don't have a date or userProfile
+    if (!item.date || !item.userProfile) {
+      return item;
+    }
+
+    const shootDate = new Date(item.date);
+
+    // For shoots before the change date, set bow type to recurve
+    if (shootDate < bowTypeChangeDate) {
+      return {
+        ...item,
+        userProfile: {
+          ...item.userProfile,
+          bowType: "recurve"
+        }
+      };
+    }
+
+    // For shoots on or after the change date, leave as is
+    return item;
+  });
+}
