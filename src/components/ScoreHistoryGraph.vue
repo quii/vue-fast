@@ -16,6 +16,10 @@ const props = defineProps({
   isHandicapGraph: {
     type: Boolean,
     default: false
+  },
+  graphTitle: {
+    type: String,
+    default: ""
   }
 });
 
@@ -33,8 +37,10 @@ const capitalizedRoundName = computed(() => {
     .join(" ");
 });
 
-// Get the appropriate title for the graph
 const graphTitle = computed(() => {
+  if (props.graphTitle) {
+    return props.graphTitle;
+  }
   return props.isHandicapGraph ? "Handicap Progress" : `${capitalizedRoundName.value} Progress`;
 });
 

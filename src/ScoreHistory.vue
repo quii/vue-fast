@@ -3,11 +3,14 @@
   <div class="fullpage" @touchstart="handleTouchStart"
        @touchend="handleTouchEnd">
 
-    <!-- Graph modal -->
     <div v-if="showGraph" class="graph-modal">
       <div class="graph-modal-content">
         <button class="close-graph" @click="showGraph = false">✕</button>
-        <ScoreHistoryGraph :historyData="graphData" :isHandicapGraph="isHandicapGraph" />
+        <ScoreHistoryGraph
+          :historyData="graphData"
+          :isHandicapGraph="isHandicapGraph"
+          :graphTitle="graphTitle"
+        />
       </div>
     </div>
 
@@ -31,9 +34,19 @@
         </button>
       </div>
 
-      <div v-if="showHandicapGraphButton" class="graph-button-container">
-        <button class="view-graph-button" @click="openHandicapGraph">
-          📉 View Handicap Progress
+      <div v-if="showIndoorHandicapGraphButton || showOutdoorHandicapGraphButton"
+           class="graph-button-container handicap-buttons">
+        <button
+          v-if="showIndoorHandicapGraphButton"
+          class="view-graph-button handicap-button"
+          @click="openIndoorHandicapGraph">
+          📉 Indoor Handicap
+        </button>
+        <button
+          v-if="showOutdoorHandicapGraphButton"
+          class="view-graph-button handicap-button"
+          @click="openOutdoorHandicapGraph">
+          📉 Outdoor Handicap
         </button>
       </div>
 
@@ -82,6 +95,7 @@
 </template>
 
 <script setup>
+import { gameTypeConfig } from "@/domain/scoring/game_types.js";
 import { ref, watchEffect, computed } from "vue";
 import UserNotes from "@/components/UserNotes.vue";
 import { useHistoryStore } from "@/stores/history";
@@ -127,6 +141,38 @@ watchEffect(async () => {
   }, user.user);
 });
 
+// Add these computed properties
+const indoorEntriesWithHandicap = computed(() => {
+  return filteredHistory.value.filter(item =>
+    item.handicap !== undefined &&
+    item.handicap !== null &&
+    item.handicap !== "" &&
+    !gameTypeConfig[item.gameType.toLowerCase()]?.isOutdoor // Check if it's an indoor round
+  );
+});
+
+const outdoorEntriesWithHandicap = computed(() => {
+  return filteredHistory.value.filter(item =>
+    item.handicap !== undefined &&
+    item.handicap !== null &&
+    item.handicap !== "" &&
+    gameTypeConfig[item.gameType.toLowerCase()]?.isOutdoor // Check if it's an outdoor round
+  );
+});
+
+// Update the existing computed property
+const showIndoorHandicapGraphButton = computed(() => {
+  // Only show if no round filter is active and we have enough indoor handicap entries
+  return !roundFilterActive.value && indoorEntriesWithHandicap.value.length >= 5;
+});
+
+// Add a new computed property for outdoor
+const showOutdoorHandicapGraphButton = computed(() => {
+  // Only show if no round filter is active and we have enough outdoor handicap entries
+  return !roundFilterActive.value && outdoorEntriesWithHandicap.value.length >= 5;
+});
+
+
 const capitalizedRoundName = computed(() => {
   if (!roundFilter.value) return "";
 
@@ -135,19 +181,6 @@ const capitalizedRoundName = computed(() => {
     .split(" ")
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
-});
-
-const entriesWithHandicap = computed(() => {
-  return filteredHistory.value.filter(item =>
-    item.handicap !== undefined &&
-    item.handicap !== null &&
-    item.handicap !== ""
-  );
-});
-
-const showHandicapGraphButton = computed(() => {
-  // Only show if no round filter is active and we have enough handicap entries
-  return !roundFilterActive.value && entriesWithHandicap.value.length >= 5;
 });
 
 // Computed property to determine if we should show the graph button
@@ -172,16 +205,24 @@ function openGraph() {
   showGraph.value = true;
 }
 
-// Function to open the handicap graph
-function openHandicapGraph() {
-  // Use only entries with valid handicap values
-  graphData.value = entriesWithHandicap.value;
+function openIndoorHandicapGraph() {
+  // Use only indoor entries with valid handicap values
+  graphData.value = indoorEntriesWithHandicap.value;
   isHandicapGraph.value = true;
+  graphTitle.value = "Indoor Handicap Progress";
   showGraph.value = true;
 }
 
-const totalArrows = computed(() => store.totalArrows());
+function openOutdoorHandicapGraph() {
+  // Use only outdoor entries with valid handicap values
+  graphData.value = outdoorEntriesWithHandicap.value;
+  isHandicapGraph.value = true;
+  graphTitle.value = "Outdoor Handicap Progress";
+  showGraph.value = true;
+}
 
+const graphTitle = ref("");
+const totalArrows = computed(() => store.totalArrows());
 const shootsWithNotes = computed(() => filteredHistory.value.filter(shoot => notesStore.getNotesByShootId(shoot.id).length > 0));
 
 function handleClassificationFilter(classification) {
@@ -385,4 +426,16 @@ p {
   z-index: 1001;
   color: var(--color-text);
 }
+
+.handicap-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Space between buttons */
+}
+
+.handicap-button {
+  width: auto; /* Allow buttons to size to content */
+  max-width: 45%; /* Prevent buttons from getting too wide */
+}
+
 </style>
