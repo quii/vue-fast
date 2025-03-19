@@ -2,24 +2,26 @@ export function addTopScoreIndicator(scoringHistory) {
     // Create a copy of the input object to avoid modifying the original data
     const scoringHistoryCopy = JSON.parse(JSON.stringify(scoringHistory));
 
-    // Create an object to store the best scores for each game type at each distance
-    const bestScoresByDistanceAndGameType = {};
+    // Create an object to store the best scores for each game type and bow type
+    const bestScoresByGameTypeAndBowType = {};
 
-    // Loop through the scoring history data to find the best scores for each distance and game type
+    // Loop through the scoring history data to find the best scores for each game type and bow type
     for (const entry of scoringHistoryCopy) {
         if (entry.gameType.toLowerCase().includes("practice")) {
             continue;
         }
-        const distance = 0;
+
         const gameType = entry.gameType;
         const score = entry.score;
+        const bowType = entry.userProfile?.bowType || "unknown";
 
-        if (!bestScoresByDistanceAndGameType[distance]) {
-            bestScoresByDistanceAndGameType[distance] = {};
+        if (!bestScoresByGameTypeAndBowType[gameType]) {
+            bestScoresByGameTypeAndBowType[gameType] = {};
         }
 
-        if (!bestScoresByDistanceAndGameType[distance][gameType] || score > bestScoresByDistanceAndGameType[distance][gameType]) {
-            bestScoresByDistanceAndGameType[distance][gameType] = score;
+        if (!bestScoresByGameTypeAndBowType[gameType][bowType] ||
+          score > bestScoresByGameTypeAndBowType[gameType][bowType]) {
+            bestScoresByGameTypeAndBowType[gameType][bowType] = score;
         }
     }
 
@@ -28,12 +30,13 @@ export function addTopScoreIndicator(scoringHistory) {
         if (entry.gameType.toLowerCase().includes("practice")) {
             continue;
         }
-        const distance = 0;
+
         const gameType = entry.gameType;
         const score = entry.score;
+        const bowType = entry.userProfile?.bowType || "unknown";
 
-        // Check if the current score is the best score for this distance and game type
-        entry.topScore = score === bestScoresByDistanceAndGameType[distance][gameType];
+        // Check if the current score is the best score for this game type and bow type
+        entry.topScore = score === bestScoresByGameTypeAndBowType[gameType][bowType];
     }
 
     return scoringHistoryCopy;
