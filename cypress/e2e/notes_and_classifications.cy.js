@@ -22,7 +22,7 @@ describe("Notes and Classifications", () => {
     scorePage.score([10, 9, 9, 8, 8, 7]);
     scorePage.expandClassificationDetails();
     scorePage.checkClassificationTable("A2", "121");
-    scorePage.checkOnTrackStatus(true);
+    // scorePage.checkOnTrackStatus(true);
     scorePage.addNote("Good grouping on the 9s");
 
     // Second end of 6

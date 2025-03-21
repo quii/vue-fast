@@ -13,7 +13,26 @@ export class UserDataPage {
   }
 
   setClassification(classification) {
-    cy.get("select").eq(3).select(classification);
+    // Get the currently selected bow type
+    cy.get("select").eq(2).invoke("val").then(bowType => {
+      // Capitalize the first letter of the bow type
+      const capitalizedBowType = bowType.charAt(0).toUpperCase() + bowType.slice(1);
+
+      // Find the bow type section and set both indoor and outdoor classifications
+      cy.contains("h3", capitalizedBowType)
+        .parent()
+        .within(() => {
+          // Set indoor classification
+          cy.contains(".classification-row", "Indoor")
+            .find("select")
+            .select(classification);
+
+          // Set outdoor classification
+          cy.contains(".classification-row", "Outdoor")
+            .find("select")
+            .select(classification);
+        });
+    });
   }
 
   checkRoundRecommendation(roundName, shouldExist = true) {
@@ -28,6 +47,14 @@ export class UserDataPage {
     cy.get("input[type=\"range\"]").invoke("val", yards).trigger("input");
   }
 
+  setSeasonDates(indoorDate, outdoorDate) {
+    cy.get("input[type=\"date\"]").eq(0).invoke("val", indoorDate).trigger("change");
+    cy.get("input[type=\"date\"]").eq(1).invoke("val", outdoorDate).trigger("change");
+  }
+
+  resetSeasonDates() {
+    cy.contains("button", "Reset to Default Dates").click();
+  }
 }
 
 export const userDataPage = new UserDataPage();

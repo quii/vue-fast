@@ -1,5 +1,6 @@
 <script setup>
 
+import { calculateDefaultSeasonDates } from "@/domain/season_dates.js";
 import { useHistoryStore } from "@/stores/history";
 import { useNotesStore } from "@/stores/user_notes";
 import { useUserStore } from "@/stores/user";
@@ -44,14 +45,55 @@ function handleFileUpload(event) {
       history.importHistory(data.history,
         { ageGroup: data.user.ageGroup, bowType: data.user.bowType, gender: data.user.gender });
       notes.importNotes(data);
+
+      // Handle potential missing fields in older backup files
+      let indoorClassifications = data.user.indoorClassifications || {};
+      let outdoorClassifications = data.user.outdoorClassifications || {};
+
+      // Migrate old classification to new schema if needed
+      if (data.user.classification && data.user.bowType &&
+        (!outdoorClassifications[data.user.bowType] || outdoorClassifications[data.user.bowType] === "Unclassified")) {
+        // If we have an old classification and bow type, and no corresponding outdoor classification,
+        // use the old classification as the outdoor classification for that bow type
+        outdoorClassifications = {
+          ...outdoorClassifications,
+          [data.user.bowType]: data.user.classification
+        };
+
+        // If we don't have an indoor classification for this bow type, initialize it as Unclassified
+        if (!indoorClassifications[data.user.bowType]) {
+          indoorClassifications = {
+            ...indoorClassifications,
+            [data.user.bowType]: "Unclassified"
+          };
+        }
+      }
+
+      // Use default season dates if not present in the backup
+      const defaultSeasons = calculateDefaultSeasonDates();
+      const indoorSeasonStartDate = data.user.indoorSeasonStartDate || defaultSeasons.indoor;
+      const outdoorSeasonStartDate = data.user.outdoorSeasonStartDate || defaultSeasons.outdoor;
+
+      // Other fields with defaults
+      const maxYards = data.user.maxYards || 100;
+      const name = data.user.name || "";
+      const constructiveCriticism = data.user.constructiveCriticism !== undefined ? data.user.constructiveCriticism : true;
+      const experimentalTargetFace = data.user.experimentalTargetFace || false;
+      const knockColor = data.user.knockColor || "#FF69B4";
+
       user.save(
         data.user.ageGroup,
         data.user.gender,
         data.user.bowType,
-        data.user.classification,
-        data.user.maxYards,
-        data.user.name,
-        data.user.constructiveCriticism
+        indoorClassifications,
+        outdoorClassifications,
+        indoorSeasonStartDate,
+        outdoorSeasonStartDate,
+        maxYards,
+        name,
+        constructiveCriticism,
+        experimentalTargetFace,
+        knockColor
       );
       user.updateLastBackupDate();
       toast.success("Data imported successfully");
@@ -63,7 +105,6 @@ function handleFileUpload(event) {
 
   reader.readAsText(file);
 }
-
 function hardReset() {
   if (confirm("Are you sure you want to clear all your data?")) {
     if (confirm("Yeah but really? This cannot be reversed")) {
