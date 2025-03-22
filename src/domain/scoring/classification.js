@@ -17,6 +17,10 @@ export async function createClassificationCalculator(roundName, sex, age, bowtyp
     return createFrostbiteClassificationCalculator(roundName, sex, age, bowtype, personalBest);
   }
 
+  if (isPracticeRound(roundName)) {
+    return createPracticeClassificationCalculator(roundName);
+  }
+
   const roundScores = await calculateRoundScores(sex, bowtype, age, roundName, personalBest);
   const numberOfEnds = gameTypeConfig[roundName].numberOfEnds;
 
@@ -40,6 +44,10 @@ export async function createClassificationCalculator(roundName, sex, age, bowtyp
     })
     return result;
   };
+}
+
+function isPracticeRound(roundName) { // regex check for presence of word 'practice'
+  return (roundName.search(/practice/i) != -1);
 }
 
 function createFrostbiteClassificationCalculator(roundName, sex, age, bowtype, personalBest) {
@@ -86,6 +94,27 @@ function createFrostbiteClassificationCalculator(roundName, sex, age, bowtype, p
       result.push(item);
     });
     return result;
+  };
+}
+
+function createPracticeClassificationCalculator(roundName) {
+  const numberOfEnds = gameTypeConfig[roundName].numberOfEnds;
+  
+  // TODO: Get number of arrows shot somehow from somewhere
+  const arrowsShot = numberOfEnds;
+
+  return (score, avgPerEnd) => {
+
+    const scorePerArrow = Math.ceil(score / arrowsShot);
+      const perEndDiff = avgPerEnd - scorePerArrow;
+      const item = {
+        name: scorePerArrow,
+        score: scorePerArrow,
+        scorePerEnd: scorePerArrow,
+        perEndDiff,
+        scheme: roundName
+      };
+    return [item];
   };
 }
 
