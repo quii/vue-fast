@@ -37,6 +37,7 @@ export const useHistoryStore = defineStore("history", () => {
       return (selectedShoot.value = state.value.find((shoot) => shoot.id == id));
     },
     getAvailableRounds: () => playerHistory.getAvailableRounds(),
+    getBowTypesUsed: (currentBowType) => playerHistory.getBowTypesUsed(currentBowType),
     add: (...args) => playerHistory.add(...args),
     remove: (id) => playerHistory.remove(id),
     importHistory: (history, userProfile) => playerHistory.importHistory(history, userProfile),

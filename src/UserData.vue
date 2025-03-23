@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, watchEffect, onMounted } from "vue";
+import { computed, ref, watchEffect } from "vue";
 import { useUserStore } from "@/stores/user";
 import { useHistoryStore } from "@/stores/history";
 import RoundDetails from "@/components/RoundDetails.vue";
@@ -26,50 +26,28 @@ const outdoorSeasonStartDate = ref(userStore.user.outdoorSeasonStartDate);
 const indoorClassifications = ref({ ...(userStore.user.indoorClassifications || {}) });
 const outdoorClassifications = ref({ ...(userStore.user.outdoorClassifications || {}) });
 
-// Bow types the archer has used
-const usedBowTypes = ref([]);
-
-// Get bow types from history
-onMounted(() => {
-  const history = historyStore.history;
-  const bowTypesSet = new Set();
-
-  history.forEach(item => {
-    if (item.userProfile?.bowType) {
-      bowTypesSet.add(item.userProfile.bowType);
-    }
-  });
-
-  // Add current bow type if not in history
-  if (selectedBowtype.value) {
-    bowTypesSet.add(selectedBowtype.value);
-  }
-
-  usedBowTypes.value = Array.from(bowTypesSet);
-
-  // Initialize classifications for bow types if not already set
-  updateClassificationsForBowTypes();
+// Get bow types from history using the domain method
+const usedBowTypes = computed(() => {
+  return historyStore.getBowTypesUsed(selectedBowtype.value);
 });
 
-// Watch for changes to selectedBowtype and update usedBowTypes
+// Initialize classifications for bow types
 watchEffect(() => {
-  if (selectedBowtype.value && !usedBowTypes.value.includes(selectedBowtype.value)) {
-    usedBowTypes.value = [...usedBowTypes.value, selectedBowtype.value];
-    updateClassificationsForBowTypes();
-  }
-});
-
-// Helper function to initialize classifications for bow types
-function updateClassificationsForBowTypes() {
   usedBowTypes.value.forEach(bowType => {
     if (!indoorClassifications.value[bowType]) {
-      indoorClassifications.value[bowType] = "Unclassified";
+      indoorClassifications.value = {
+        ...indoorClassifications.value,
+        [bowType]: "Unclassified"
+      };
     }
     if (!outdoorClassifications.value[bowType]) {
-      outdoorClassifications.value[bowType] = "Unclassified";
+      outdoorClassifications.value = {
+        ...outdoorClassifications.value,
+        [bowType]: "Unclassified"
+      };
     }
   });
-}
+});
 
 const allArcherDetailsProvided = computed(() => selectedAgeGroup.value &&
   selectedGender.value &&

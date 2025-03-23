@@ -72,8 +72,30 @@ export class PlayerHistory {
 
     return filteredByClassification;
   }
-}
 
+  /**
+   * Get all bow types used by the archer, including the current one
+   * @param {string} currentBowType - The currently selected bow type (optional)
+   * @returns {Array} - Array of unique bow types
+   */
+  getBowTypesUsed(currentBowType = null) {
+    const bowTypesSet = new Set();
+
+    // Get bow types from history
+    this.storage.value.forEach(item => {
+      if (item.userProfile?.bowType) {
+        bowTypesSet.add(item.userProfile.bowType);
+      }
+    });
+
+    // Add current bow type if provided and not already in the set
+    if (currentBowType) {
+      bowTypesSet.add(currentBowType);
+    }
+
+    return Array.from(bowTypesSet);
+  }
+}
 function generateNextId(history) {
   const maxId = history
     .map(x => x.id)

@@ -277,3 +277,72 @@ describe("Classification with changing age groups", () => {
     }
   });
 });
+
+describe("getBowTypesUsed", () => {
+  test("returns all bow types from history plus the current one", () => {
+    const storage = { value: [] };
+    const playerHistory = new PlayerHistory(storage);
+
+    // Add scores with recurve bow type
+    playerHistory.add(new Date(), 456, "national", [1, 2, 3], "yd", {
+      gender: "male",
+      ageGroup: "senior",
+      bowType: "recurve"
+    });
+
+    playerHistory.add(new Date(), 500, "windsor", [1, 2, 3], "yd", {
+      gender: "male",
+      ageGroup: "senior",
+      bowType: "recurve"
+    });
+
+    // Test with no current bow type - should only return recurve
+    const bowTypesWithoutCurrent = playerHistory.getBowTypesUsed();
+    expect(bowTypesWithoutCurrent).toEqual(["recurve"]);
+
+    // Test with a different current bow type - should return both
+    const bowTypesWithCurrent = playerHistory.getBowTypesUsed("barebow");
+    expect(bowTypesWithCurrent).toContain("recurve");
+    expect(bowTypesWithCurrent).toContain("barebow");
+    expect(bowTypesWithCurrent.length).toBe(2);
+
+    // Test with the same bow type - should not duplicate
+    const bowTypesWithSame = playerHistory.getBowTypesUsed("recurve");
+    expect(bowTypesWithSame).toEqual(["recurve"]);
+    expect(bowTypesWithSame.length).toBe(1);
+  });
+
+  test("handles empty history", () => {
+    const storage = { value: [] };
+    const playerHistory = new PlayerHistory(storage);
+
+    // With no history and no current bow type
+    const emptyResult = playerHistory.getBowTypesUsed();
+    expect(emptyResult).toEqual([]);
+
+    // With no history but with a current bow type
+    const currentOnlyResult = playerHistory.getBowTypesUsed("compound");
+    expect(currentOnlyResult).toEqual(["compound"]);
+  });
+
+  test("handles missing bow type in history items", () => {
+    const storage = {
+      value: [
+        // Item with no userProfile
+        { id: 1, date: new Date(), score: 100, gameType: "national" },
+        // Item with userProfile but no bowType
+        { id: 2, date: new Date(), score: 200, gameType: "windsor", userProfile: { gender: "male" } },
+        // Item with proper bowType
+        { id: 3, date: new Date(), score: 300, gameType: "york", userProfile: { bowType: "longbow" } }
+      ]
+    };
+
+    const playerHistory = new PlayerHistory(storage);
+    const result = playerHistory.getBowTypesUsed("recurve");
+
+    // Should only include the valid bow type from history plus the current one
+    expect(result).toContain("longbow");
+    expect(result).toContain("recurve");
+    expect(result.length).toBe(2);
+  });
+});
