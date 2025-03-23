@@ -28,6 +28,32 @@
         @reset="handleReset"
       />
 
+      <div v-if="hasClassificationProgress" class="classification-progress-section">
+        <div v-for="(bowProgress, bowType) in classificationProgress" :key="bowType">
+          <!-- In the template, update the ClassificationProgress components -->
+          <ClassificationProgress
+            v-if="bowProgress.indoor.dozenArrowsRequired > 0"
+            :currentClassification="userStore.getIndoorClassification(bowType)"
+            :nextClassification="bowProgress.indoor.nextClassification"
+            :dozenArrowsShot="bowProgress.indoor.dozenArrowsShot"
+            :dozenArrowsRequired="bowProgress.indoor.dozenArrowsRequired"
+            environment="indoor"
+            :bowType="bowType"
+          />
+
+          <ClassificationProgress
+            v-if="bowProgress.outdoor.dozenArrowsRequired > 0"
+            :currentClassification="userStore.getOutdoorClassification(bowType)"
+            :nextClassification="bowProgress.outdoor.nextClassification"
+            :dozenArrowsShot="bowProgress.outdoor.dozenArrowsShot"
+            :dozenArrowsRequired="bowProgress.outdoor.dozenArrowsRequired"
+            environment="outdoor"
+            :bowType="bowType"
+          />
+
+        </div>
+      </div>
+
       <div v-if="showGraphButton" class="graph-button-container">
         <button class="view-graph-button" @click="openGraph">
           📈 View {{ capitalizedRoundName }} Graph
@@ -95,6 +121,7 @@
 </template>
 
 <script setup>
+import { calculateAllClassificationProgress } from "@/domain/scoring/classification_progress.js";
 import { gameTypeConfig } from "@/domain/scoring/game_types.js";
 import { ref, watchEffect, computed } from "vue";
 import UserNotes from "@/components/UserNotes.vue";
@@ -106,11 +133,13 @@ import HistoryFilters from "@/components/HistoryFilters.vue";
 import { usePreferencesStore } from "@/stores/preferences";
 import HistoryTipModal from "@/components/modals/HistoryTipModal.vue";
 import ScoreHistoryGraph from "@/components/ScoreHistoryGraph.vue";
+import ClassificationProgress from "@/components/ClassificationProgress.vue";
 
 const store = useHistoryStore();
 const router = useRouter();
 const user = useUserStore();
 const notesStore = useNotesStore();
+const userStore = useUserStore();
 const preferences = usePreferencesStore();
 
 const isDiaryMode = ref(false);
@@ -131,6 +160,37 @@ const graphData = ref([]);
 const isHandicapGraph = ref(false);
 
 const filteredHistory = ref([]);
+
+// Get bow types used by the archer
+const bowTypesUsed = computed(() => {
+  return store.getBowTypesUsed();
+});
+
+// Calculate classification progress for all bow types
+const classificationProgress = computed(() => {
+  return calculateAllClassificationProgress(
+    filteredHistory.value,
+    userStore.user.indoorClassifications || {},
+    userStore.user.outdoorClassifications || {},
+    userStore.user.indoorSeasonStartDate,
+    userStore.user.outdoorSeasonStartDate,
+    bowTypesUsed.value
+  );
+});
+
+// Check if there's any progress to show
+const hasClassificationProgress = computed(() => {
+  if (!classificationProgress.value) return false;
+
+  for (const bowType in classificationProgress.value) {
+    const progress = classificationProgress.value[bowType];
+    if (progress.indoor.dozenArrowsRequired > 0 || progress.outdoor.dozenArrowsRequired > 0) {
+      return true;
+    }
+  }
+
+  return false;
+});
 
 watchEffect(async () => {
   filteredHistory.value = await store.getFilteredHistory({
@@ -436,6 +496,13 @@ p {
 .handicap-button {
   width: auto; /* Allow buttons to size to content */
   max-width: 45%; /* Prevent buttons from getting too wide */
+}
+
+.classification-progress-section {
+  margin: 0; /* Remove vertical margin */
+  padding: 0 1em; /* Keep horizontal padding (1em on left and right), remove vertical padding */
+  border: none; /* Remove border */
+  background-color: transparent; /* Make background transparent */
 }
 
 </style>
