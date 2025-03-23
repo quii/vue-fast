@@ -61,7 +61,7 @@ const nextClassCss = computed(() => {
 <template>
   <div class="classification-progress">
     <div class="progress-header">
-      <h3>{{ environmentLabel }} {{ bowTypeLabel }} Classification Progress</h3>
+      <h3>{{ environmentLabel }} {{ bowTypeLabel }} Classification</h3>
       <div class="classification-info">
         <span :class="['current-classification', currentClassCss]">{{ currentClassification }}</span>
         <span class="arrow">→</span>

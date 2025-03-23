@@ -1,3 +1,4 @@
+import { gameTypeConfig } from "@/domain/scoring/game_types.js";
 import { backfillUserProfiles, userDataFixer } from "@/domain/user_data_fixer";
 import { addTopScoreIndicator } from "@/domain/scoring/topscores";
 import { addClassificationsToHistory } from "@/domain/scoring/classification";
@@ -41,8 +42,9 @@ export class PlayerHistory {
   async sortedHistory() {
     const scoresWithIndicator = addTopScoreIndicator(this.storage.value);
     const scoresWithClassification = await addClassificationsToHistory(scoresWithIndicator);
-    const scoresWithHandicaps = await addHandicapToHistory(scoresWithClassification)
-    return scoresWithHandicaps.sort((a, b) => new Date(b.date) - new Date(a.date));
+    const scoresWithHandicaps = await addHandicapToHistory(scoresWithClassification);
+    const scoresWithAverages = this.addAverageEndScores(scoresWithHandicaps);
+    return scoresWithAverages.sort((a, b) => new Date(b.date) - new Date(a.date));
   }
 
   personalBest(round) {
@@ -61,6 +63,26 @@ export class PlayerHistory {
 
   getAvailableRounds() {
     return [...new Set(this.storage.value.map(h => h.gameType))];
+  }
+
+  addAverageEndScores(history) {
+    return history.map(item => {
+      // Get the game type configuration
+      const gameType = item.gameType?.toLowerCase();
+      if (!gameType || !gameTypeConfig[gameType]) {
+        return { ...item, averagePerEnd: null };
+      }
+
+      // Get the number of ends for this game type
+      const numberOfEnds = gameTypeConfig[gameType].numberOfEnds;
+      if (!numberOfEnds || numberOfEnds <= 0) {
+        return { ...item, averagePerEnd: null };
+      }
+
+      // Calculate average per end
+      const averagePerEnd = Math.round((item.score / numberOfEnds) * 10) / 10; // Round to 1 decimal place
+      return { ...item, averagePerEnd };
+    });
   }
 
   async getFilteredHistory(filters) {

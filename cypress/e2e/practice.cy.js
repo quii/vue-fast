@@ -36,6 +36,6 @@ describe("practicing", () => {
 
     historyPage.navigateTo();
 
-    historyPage.checkScoreExists(expectedScore, "practice 50m");
+    historyPage.checkScoreExists(expectedScore, "Practice 50m");
   });
 });

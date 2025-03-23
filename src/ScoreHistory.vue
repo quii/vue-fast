@@ -28,6 +28,28 @@
         @reset="handleReset"
       />
 
+      <div v-if="showGraphButton" class="graph-button-container">
+        <button class="view-graph-button" @click="openGraph">
+          📈 View {{ capitalizedRoundName }} Graph
+        </button>
+      </div>
+
+      <div v-if="showIndoorHandicapGraphButton || showOutdoorHandicapGraphButton"
+           class="graph-button-container handicap-buttons">
+        <button
+          v-if="showIndoorHandicapGraphButton"
+          class="view-graph-button handicap-button"
+          @click="openIndoorHandicapGraph">
+          📉 Indoor Handicap
+        </button>
+        <button
+          v-if="showOutdoorHandicapGraphButton"
+          class="view-graph-button handicap-button"
+          @click="openOutdoorHandicapGraph">
+          📉 Outdoor Handicap
+        </button>
+      </div>
+
       <div v-if="hasClassificationProgress" class="classification-progress-section">
         <div v-for="(bowProgress, bowType) in classificationProgress" :key="bowType">
           <!-- In the template, update the ClassificationProgress components -->
@@ -54,48 +76,15 @@
         </div>
       </div>
 
-      <div v-if="showGraphButton" class="graph-button-container">
-        <button class="view-graph-button" @click="openGraph">
-          📈 View {{ capitalizedRoundName }} Graph
-        </button>
+      <div class="history-cards">
+        <div
+          v-for="item in filteredHistory"
+          :key="`${item.id}-${item.date}-${item.gameType}-${item.score}`"
+          @click="view(item.id)"
+        >
+          <HistoryCard :item="item" />
+        </div>
       </div>
-
-      <div v-if="showIndoorHandicapGraphButton || showOutdoorHandicapGraphButton"
-           class="graph-button-container handicap-buttons">
-        <button
-          v-if="showIndoorHandicapGraphButton"
-          class="view-graph-button handicap-button"
-          @click="openIndoorHandicapGraph">
-          📉 Indoor Handicap
-        </button>
-        <button
-          v-if="showOutdoorHandicapGraphButton"
-          class="view-graph-button handicap-button"
-          @click="openOutdoorHandicapGraph">
-          📉 Outdoor Handicap
-        </button>
-      </div>
-
-      <table>
-        <thead>
-        <tr>
-          <th>Date</th>
-          <th>Round</th>
-          <th colspan="3">Score</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr v-for="item in filteredHistory" :key="`${item.id}-${item.date}-${item.gameType}-${item.score}`">
-          <td @click="view(item.id)">{{ parseAndRenderDate(item.date) }}</td>
-          <td @click="view(item.id)">{{ item.gameType }}</td>
-          <td @click="view(item.id)" :class="{highlight: item.topScore}">{{ item.score }}</td>
-          <td :class="[item.classification?.name, item.classification?.scheme]" @click="view(item.id)">
-            {{ item.classification?.name }}
-          </td>
-          <td @click="view(item.id)">{{ item.handicap }}</td>
-        </tr>
-        </tbody>
-      </table>
       <p>You have recorded {{ totalArrows }} arrows shot!</p>
     </div>
 
@@ -121,6 +110,7 @@
 </template>
 
 <script setup>
+import HistoryCard from "@/components/HistoryCard.vue";
 import { calculateAllClassificationProgress } from "@/domain/scoring/classification_progress.js";
 import { gameTypeConfig } from "@/domain/scoring/game_types.js";
 import { ref, watchEffect, computed } from "vue";
@@ -356,49 +346,6 @@ p {
   text-align: center;
 }
 
-.B3, .B2, .B1, .A3, .A2, .A1, .MB, .GMB, .EMB {
-  text-align: center;
-  font-weight: bold;
-  color: white;
-}
-
-.Frostbite {
-  color: cornflowerblue;
-  font-weight: bold;
-}
-
-.B1 {
-  background-color: hsl(3, 84%, 36%);
-}
-
-.B2 {
-  background-color: hsl(3, 84%, 46%);
-}
-
-.B3 {
-  background-color: hsl(3, 84%, 56%);
-}
-
-.A3 {
-  background-color: hsl(207, 85%, 90%);
-}
-
-.A2 {
-  background-color: hsl(207, 85%, 80%);
-}
-
-.A1 {
-  background-color: hsl(207, 85%, 72%);
-}
-
-.MB, .GMB, .EMB {
-  background-color: rebeccapurple;
-}
-
-.A1, .A2, .A3 {
-  color: #061345;
-}
-
 .diary-entry:first-child {
   margin-top: 0;
 }
@@ -437,10 +384,15 @@ p {
   margin-left: 0.5rem;
 }
 
+.fullpage {
+  padding: 0 0.5em; /* Add consistent horizontal padding */
+}
+
 .graph-button-container {
   display: flex;
   justify-content: center;
-  margin: 10px 0;
+  margin: 10px 0; /* Only vertical margin */
+  width: 100%; /* Full width of parent */
 }
 
 .view-graph-button {
@@ -451,6 +403,9 @@ p {
   border-radius: 4px;
   font-size: 1rem;
   cursor: pointer;
+  width: 100%; /* Make buttons take full width of container */
+  max-width: 100%; /* Ensure buttons don't exceed container width */
+  text-align: center; /* Center text in buttons */
 }
 
 .graph-modal {
@@ -489,20 +444,29 @@ p {
 
 .handicap-buttons {
   display: flex;
-  justify-content: center;
-  gap: 10px; /* Space between buttons */
+  justify-content: space-between; /* Change to space-between for better spacing */
+  gap: 10px; /* Keep gap between buttons */
+  width: 100%; /* Ensure full width */
 }
 
 .handicap-button {
-  width: auto; /* Allow buttons to size to content */
-  max-width: 45%; /* Prevent buttons from getting too wide */
+  flex: 1; /* Make buttons share space equally */
+  max-width: calc(50% - 5px); /* Ensure buttons don't get too wide, accounting for gap */
 }
 
 .classification-progress-section {
   margin: 0; /* Remove vertical margin */
-  padding: 0 1em; /* Keep horizontal padding (1em on left and right), remove vertical padding */
   border: none; /* Remove border */
   background-color: transparent; /* Make background transparent */
 }
+
+/* Add new card styles */
+.history-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  margin: 1em 0;
+}
+
 
 </style>

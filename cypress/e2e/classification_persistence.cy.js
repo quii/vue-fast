@@ -31,7 +31,7 @@ describe("Classification Persistence", () => {
     // Step 3: Check the classification in history (should be B2 for 50+)
     historyPage.navigateTo();
 
-    // Since this is the first entry, we can use the existing method
+    // Use the historyPage page object method to check classification
     historyPage.checkClassificationExists("240", "B2");
 
     // Step 4: Change profile to senior
@@ -51,25 +51,33 @@ describe("Classification Persistence", () => {
     // Step 6: Check classifications in history
     historyPage.navigateTo();
 
-    // Check that both B2 and B3 classifications exist for the score 240
-    cy.get("tr").contains("td", "240").should("exist");
-    cy.get("td.B2").should("exist");
-    cy.get("td.B3").should("exist");
+    // Check that both scores exist with their respective classifications
+    historyPage.checkClassificationExists("240", "B2");
 
-    // Verify that we have one row with score 240 and class B2
-    cy.get("tr").each(($row) => {
-      const rowText = $row.text();
-      if (rowText.includes("240") && $row.find(".B2").length > 0) {
-        cy.wrap($row).should("contain", "240").and("contain", "B2");
-      }
-    });
+    // Check that the second entry has B3 classification
+    // We need to add a method to the historyPage object to check for multiple classifications
 
-    // Verify that we have another row with score 240 and class B3
-    cy.get("tr").each(($row) => {
-      const rowText = $row.text();
-      if (rowText.includes("240") && $row.find(".B3").length > 0) {
-        cy.wrap($row).should("contain", "240").and("contain", "B3");
-      }
+    // Check that we have both B2 and B3 classifications for score 240
+    cy.get(".history-card").then($cards => {
+      // Find cards with score 240
+      const scoreCards = $cards.filter((_, card) => {
+        return Cypress.$(card).find(".card-score").text().includes("240");
+      });
+
+      // Verify we have exactly 2 cards with score 240
+      expect(scoreCards.length).to.equal(2);
+
+      // Check that one has B2 and one has B3
+      const b2Cards = scoreCards.filter((_, card) => {
+        return Cypress.$(card).find(".classification-name").text().includes("B2");
+      });
+
+      const b3Cards = scoreCards.filter((_, card) => {
+        return Cypress.$(card).find(".classification-name").text().includes("B3");
+      });
+
+      expect(b2Cards.length).to.equal(1);
+      expect(b3Cards.length).to.equal(1);
     });
   });
 });

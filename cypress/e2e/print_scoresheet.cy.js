@@ -36,7 +36,7 @@ describe("Print scoresheet", () => {
     scorePage.save();
 
     historyPage.navigateTo();
-    historyPage.selectHistoryItem("bray i");
+    historyPage.selectHistoryItem("Bray I");
     cy.contains("Got it!").click();
 
     cy.window().then((win) => {
