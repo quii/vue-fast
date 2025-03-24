@@ -280,9 +280,9 @@ describe("Classification Progress", () => {
           id: 2,
           date: "2023-06-01",
           gameType: "national",
-          scores: Array(48).fill(9),
+          scores: Array(72).fill(9),
           userProfile: { bowType: "barebow" },
-          classification: { name: "B3" }
+          classification: { name: "B2" }
         }
       ];
 
@@ -314,7 +314,7 @@ describe("Classification Progress", () => {
       // Check barebow progress
       expect(result.barebow.indoor.dozenArrowsShot).toBe(0);
       expect(result.barebow.outdoor.nextClassification).toBe("B2");
-      expect(result.barebow.outdoor.dozenArrowsShot).toBe(4);
+      expect(result.barebow.outdoor.dozenArrowsShot).toBe(6);
       expect(result.barebow.outdoor.dozenArrowsRequired).toBe(18);
     });
 

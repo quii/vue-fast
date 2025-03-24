@@ -1,5 +1,5 @@
 import { isIndoorSeason, isOutdoorSeason } from "@/domain/season_dates";
-import { getNextClassification } from "@/domain/scoring/classificationList";
+import { getNextClassification, isHigherOrEqualClassification } from "@/domain/scoring/classificationList";
 import { gameTypeConfig } from "@/domain/scoring/game_types";
 
 /**
@@ -39,25 +39,10 @@ function meetsClassificationStandard(shoot, nextClassification) {
     return false;
   }
 
-  // For next classification B3, B2, B1, need at least B3 standard
-  if (nextClassification.startsWith("B")) {
-    return ["B3", "B2", "B1", "MB", "GMB", "EMB"].includes(shoot.classification.name);
-  }
-
-  // For A2, need at least A2 standard
-  if (nextClassification === "A2") {
-    return ["A2", "A1", "B3", "B2", "B1", "MB", "GMB", "EMB"].includes(shoot.classification.name);
-  }
-
-  // For A1, need at least A1 standard
-  if (nextClassification === "A1") {
-    return ["A1", "B3", "B2", "B1", "MB", "GMB", "EMB"].includes(shoot.classification.name);
-  }
-
-  // For A3, any classification is qualifying
-  return true;
+  // Use the isHigherOrEqualClassification function from classificationList.js
+  // to check if the shoot's classification is at least as high as the next classification
+  return isHigherOrEqualClassification(shoot.classification.name, nextClassification);
 }
-
 /**
  * Calculate classification progress for a specific bow type and environment
  * @param {Array} history - Array of shoot history items
