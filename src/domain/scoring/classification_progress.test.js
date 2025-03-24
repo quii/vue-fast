@@ -13,7 +13,7 @@ describe("Classification Progress", () => {
       expect(result.qualifyingShoots).toEqual([]);
     });
 
-    it("returns zero progress for Unclassified archers", () => {
+    it("calculates progress for Unclassified archers toward A3", () => {
       const history = [
         {
           id: 1,
@@ -21,7 +21,7 @@ describe("Classification Progress", () => {
           gameType: "portsmouth",
           scores: Array(60).fill(9),
           userProfile: { bowType: "recurve" },
-          classification: { name: "A3" }
+          classification: { name: "A3" } // Shot to A3 standard
         }
       ];
 
@@ -29,8 +29,10 @@ describe("Classification Progress", () => {
         history, "recurve", "Unclassified", "indoor", "2023-10-01"
       );
 
-      expect(result.dozenArrowsShot).toBe(0);
-      expect(result.dozenArrowsRequired).toBe(0);
+      expect(result.nextClassification).toBe("A3");
+      expect(result.dozenArrowsShot).toBe(5); // 5 dozen arrows
+      expect(result.dozenArrowsRequired).toBe(10); // Archer tier requires 10 dozen
+      expect(result.qualifyingShoots.length).toBe(1);
     });
 
     it("calculates progress toward next classification (A3 to A2)", () => {

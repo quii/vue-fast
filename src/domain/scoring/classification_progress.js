@@ -80,8 +80,9 @@ export function calculateClassificationProgress(history, bowType, currentClassif
   // Get the next classification to achieve
   const nextClassification = getNextClassification(currentClassification);
 
-  // If there's no next classification (already at highest) or still unclassified
-  if (nextClassification === currentClassification || currentClassification === "Unclassified") {
+  // If there's no next classification (already at highest)
+  // Note: We've removed the "|| currentClassification === "Unclassified"" condition
+  if (nextClassification === currentClassification) {
     return {
       dozenArrowsShot: 0,
       dozenArrowsRequired: 0,
@@ -192,24 +193,52 @@ export function calculateAllClassificationProgress(
   const result = {};
 
   bowTypes.forEach(bowType => {
-    const indoorClassification = indoorClassifications[bowType] || "Unclassified";
-    const outdoorClassification = outdoorClassifications[bowType] || "Unclassified";
+    // Check if classifications exist for this bow type
+    const hasIndoorClassification = indoorClassifications &&
+      Object.keys(indoorClassifications).length > 0 &&
+      indoorClassifications[bowType];
+
+    const hasOutdoorClassification = outdoorClassifications &&
+      Object.keys(outdoorClassifications).length > 0 &&
+      outdoorClassifications[bowType];
+
+    // Get classifications or default to "Unclassified"
+    const indoorClassification = hasIndoorClassification ?
+      indoorClassifications[bowType] : "Unclassified";
+
+    const outdoorClassification = hasOutdoorClassification ?
+      outdoorClassifications[bowType] : "Unclassified";
 
     result[bowType] = {
-      indoor: calculateClassificationProgress(
-        history,
-        bowType,
-        indoorClassification,
-        "indoor",
-        indoorSeasonStartDate
-      ),
-      outdoor: calculateClassificationProgress(
-        history,
-        bowType,
-        outdoorClassification,
-        "outdoor",
-        outdoorSeasonStartDate
-      )
+      indoor: hasIndoorClassification ?
+        calculateClassificationProgress(
+          history,
+          bowType,
+          indoorClassification,
+          "indoor",
+          indoorSeasonStartDate
+        ) :
+        {
+          dozenArrowsShot: 0,
+          dozenArrowsRequired: 0,
+          qualifyingShoots: [],
+          nextClassification: "Unclassified"
+        },
+
+      outdoor: hasOutdoorClassification ?
+        calculateClassificationProgress(
+          history,
+          bowType,
+          outdoorClassification,
+          "outdoor",
+          outdoorSeasonStartDate
+        ) :
+        {
+          dozenArrowsShot: 0,
+          dozenArrowsRequired: 0,
+          qualifyingShoots: [],
+          nextClassification: "Unclassified"
+        }
     };
   });
 
