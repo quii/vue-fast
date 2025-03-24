@@ -1,5 +1,6 @@
 <script setup>
-import { computed } from "vue";
+import { computed, ref } from "vue";
+import EditClassificationModal from "./modals/EditClassificationModal.vue";
 
 const props = defineProps({
   currentClassification: {
@@ -29,6 +30,8 @@ const props = defineProps({
   }
 });
 
+const showEditModal = ref(false);
+
 const progressPercentage = computed(() => {
   if (props.dozenArrowsRequired === 0) return 0;
   const percentage = (props.dozenArrowsShot / props.dozenArrowsRequired) * 100;
@@ -56,10 +59,18 @@ const currentClassCss = computed(() => {
 const nextClassCss = computed(() => {
   return props.nextClassification.replace("/", "");
 });
+
+function openEditModal() {
+  showEditModal.value = true;
+}
+
+function closeEditModal() {
+  showEditModal.value = false;
+}
 </script>
 
 <template>
-  <div class="classification-progress">
+  <div class="classification-progress" @click="openEditModal">
     <div class="progress-header">
       <h3>{{ environmentLabel }} {{ bowTypeLabel }} Classification</h3>
       <div class="classification-info">
@@ -78,7 +89,18 @@ const nextClassCss = computed(() => {
         }} dozen remaining)</span>
       <span>{{ Math.round(progressPercentage) }}% complete</span>
     </div>
+
+    <div class="edit-hint">Tap to edit</div>
   </div>
+
+  <!-- Use the separate modal component -->
+  <EditClassificationModal
+    :show="showEditModal"
+    :current-classification="currentClassification"
+    :environment="environment"
+    :bow-type="bowType"
+    @close="closeEditModal"
+  />
 </template>
 <style scoped>
 .classification-progress {
@@ -87,6 +109,13 @@ const nextClassCss = computed(() => {
   border: 1px solid var(--color-border);
   border-radius: 8px;
   background-color: var(--color-background-soft);
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.classification-progress:hover {
+  background-color: var(--color-background-mute);
 }
 
 .progress-header {
@@ -140,14 +169,14 @@ const nextClassCss = computed(() => {
   border-radius: 4px;
   margin: 0.5em 0;
   overflow: hidden;
-  position: relative; /* Add this to ensure proper positioning */
+  position: relative;
 }
 
 .progress-bar {
   height: 100%;
-  background-color: var(--color-primary, #42b883); /* Add fallback color */
+  background-color: var(--color-primary, #42b883);
   transition: width 0.3s ease;
-  position: absolute; /* Make sure the bar is positioned absolutely */
+  position: absolute;
   left: 0;
   top: 0;
 }
@@ -156,11 +185,21 @@ const nextClassCss = computed(() => {
   display: flex;
   justify-content: space-between;
   font-size: 0.9em;
-  color: var(--color-text-light, #666); /* Add fallback color */
+  color: var(--color-text-light, #666);
+  margin-bottom: 15px;
 }
 
 .arrow {
   font-size: 1.2em;
-  color: var(--color-text, #333); /* Add fallback color */
+  color: var(--color-text, #333);
+}
+
+.edit-hint {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 0.8em;
+  color: var(--color-text-light);
+  opacity: 0.7;
 }
 </style>

@@ -197,3 +197,21 @@ classification:
 - All other rings are black
 - Different scoring system from standard faces
 
+## Component Creation Guidelines
+
+- When adding new functionality that introduces a distinct visual element or interaction pattern, prefer creating a new
+  component rather than extending an existing one
+- Consider component separation when:
+  - A new "visual thing" is being added to a page
+  - The addition would significantly increase the complexity of an existing component
+  - The functionality might be reused elsewhere in the application
+  - The change introduces a new interaction model (like a modal, dropdown, etc.)
+- Breaking changes into separate components helps with:
+  - Maintaining single responsibility principle
+  - Keeping code more readable and maintainable
+  - Managing token limitations in responses
+  - Simplifying testing
+  - Enabling easier reuse across the application
+- Even for seemingly small additions, consider whether they represent a distinct UI concept that deserves its own
+  component
+- When in doubt about whether to extend an existing component or create a new one, prefer creating a new component
