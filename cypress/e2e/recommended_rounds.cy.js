@@ -2,8 +2,8 @@ import { userDataPage } from "../pages/userDataPage";
 
 describe("Round recommendations", () => {
   it("shows appropriate rounds based on archer's max distance", () => {
-    cy.visit("/you");
-    // userDataPage.navigateTo();
+    cy.visit("/");
+    userDataPage.navigateTo();
     userDataPage.setArcherDetails("male", "recurve", "senior");
     userDataPage.setClassification("A1");
     userDataPage.setMaxDistance(50);
