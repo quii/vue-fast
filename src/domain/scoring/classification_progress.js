@@ -2,96 +2,73 @@ import { isIndoorSeason, isOutdoorSeason } from "@/domain/season_dates";
 import { getNextClassification, isHigherOrEqualClassification } from "@/domain/scoring/classificationList";
 import { gameTypeConfig } from "@/domain/scoring/game_types";
 
-/**
- * Calculate the dozen arrows required for the next classification based on tier
- * @param {string} classification - Next classification to achieve
- * @param {string} environment - 'indoor' or 'outdoor'
- * @returns {number} - Number of dozen arrows required
- */
-function getDozenArrowsRequired(classification, environment) {
-  // Unclassified doesn't need any arrows to achieve
-  if (classification === "Unclassified") return 0;
-
-  // Master Bowman and above have special requirements (record status shoots)
-  if (["MB", "GMB", "EMB"].includes(classification)) return 0;
-
-  // Archer tier (A3, A2, A1)
-  if (classification.startsWith("A")) {
-    return environment === "indoor" ? 10 : 12;
-  }
-
-  // Bowmen tier (B3, B2, B1)
-  if (classification.startsWith("B")) {
-    return environment === "indoor" ? 15 : 18;
-  }
-
-  return 0;
+const indoorClassificationRequirements = {
+  "Unclassified": 0,
+  "A1": 10,
+  "A2": 10,
+  "A3": 10,
+  "B3": 15,
+  "B2": 15,
+  "B1": 15
 }
 
-/**
- * Check if a shoot meets the standard for the next classification
- * @param {Object} shoot - Shoot to check
- * @param {string} nextClassification - Next classification to achieve
- * @returns {boolean} - Whether the shoot meets the standard
- */
+const outdoorClassificationRequirements = {
+  "Unclassified": 0,
+  "A1": 12,
+  "A2": 12,
+  "A3": 12,
+  "B3": 18,
+  "B2": 18,
+  "B1": 18
+}
+
+function getDozenArrowsRequired(classification, environment) {
+  // Master Bowman and above have special requirements (record status shoots, which we dont capture yet)
+  if (["MB", "GMB", "EMB"].includes(classification)) return 0;
+
+  if(environment==="indoor") {
+    return indoorClassificationRequirements[classification]
+  }
+
+  return outdoorClassificationRequirements[classification];
+}
+
 function meetsClassificationStandard(shoot, nextClassification) {
   if (!shoot.classification || !shoot.classification.name) {
     return false;
   }
 
-  // Use the isHigherOrEqualClassification function from classificationList.js
-  // to check if the shoot's classification is at least as high as the next classification
   return isHigherOrEqualClassification(shoot.classification.name, nextClassification);
 }
-/**
- * Calculate classification progress for a specific bow type and environment
- * @param {Array} history - Array of shoot history items
- * @param {string} bowType - Bow type to calculate progress for
- * @param {string} currentClassification - Current classification for this bow type
- * @param {string} environment - 'indoor' or 'outdoor'
- * @param {string} seasonStartDate - Start date of the season in ISO format
- * @returns {Object} - Progress information
- */
+
 export function calculateClassificationProgress(history, bowType, currentClassification, environment, seasonStartDate) {
+  const noProgressCanBeMade = {
+    dozenArrowsShot: 0,
+    dozenArrowsRequired: 0,
+    qualifyingShoots: [],
+    nextClassification: currentClassification
+  };
+
   if (!history || !bowType || !currentClassification || !environment || !seasonStartDate) {
-    return {
-      dozenArrowsShot: 0,
-      dozenArrowsRequired: 0,
-      qualifyingShoots: [],
-      nextClassification: currentClassification
-    };
+    return noProgressCanBeMade;
   }
 
-  // Get the next classification to achieve
   const nextClassification = getNextClassification(currentClassification);
 
-  // If there's no next classification (already at highest)
-  // Note: We've removed the "|| currentClassification === "Unclassified"" condition
   if (nextClassification === currentClassification) {
-    return {
-      dozenArrowsShot: 0,
-      dozenArrowsRequired: 0,
-      qualifyingShoots: [],
-      nextClassification: currentClassification
-    };
+    return noProgressCanBeMade
   }
 
   const dozenArrowsRequired = getDozenArrowsRequired(nextClassification, environment);
 
   // If no arrows required, return early
   if (dozenArrowsRequired === 0) {
-    return {
-      dozenArrowsShot: 0,
-      dozenArrowsRequired: 0,
-      qualifyingShoots: [],
-      nextClassification
-    };
+    return noProgressCanBeMade
   }
 
   // Filter shoots by bow type, season, and environment
   const qualifyingShoots = history.filter(shoot => {
-    // Must have the correct bow type
-    if (!shoot.userProfile || shoot.userProfile.bowType !== bowType) {
+    if (shoot?.userProfile?.bowType !==bowType) {
       return false;
     }
 
@@ -107,13 +84,7 @@ export function calculateClassificationProgress(history, bowType, currentClassif
       }
     }
 
-    // Check if the round is appropriate for the environment (indoor/outdoor)
-    const gameType = shoot.gameType?.toLowerCase();
-    if (!gameType || !gameTypeConfig[gameType]) {
-      return false;
-    }
-
-    const isOutdoorRound = gameTypeConfig[gameType].isOutdoor;
+    const isOutdoorRound = gameTypeConfig[shoot.gameType?.toLowerCase()]?.isOutdoor
 
     if (environment === "indoor" && isOutdoorRound) {
       return false;
@@ -123,7 +94,6 @@ export function calculateClassificationProgress(history, bowType, currentClassif
       return false;
     }
 
-    // Check if the shoot meets the standard for the next classification
     return meetsClassificationStandard(shoot, nextClassification);
   });
 
@@ -153,16 +123,6 @@ export function calculateClassificationProgress(history, bowType, currentClassif
   };
 }
 
-/**
- * Calculate classification progress for all bow types and environments
- * @param {Array} history - Array of shoot history items
- * @param {Object} indoorClassifications - Indoor classifications by bow type
- * @param {Object} outdoorClassifications - Outdoor classifications by bow type
- * @param {string} indoorSeasonStartDate - Start date of indoor season
- * @param {string} outdoorSeasonStartDate - Start date of outdoor season
- * @param {Array} bowTypes - Array of bow types to calculate progress for
- * @returns {Object} - Progress information for all bow types and environments
- */
 export function calculateAllClassificationProgress(
   history,
   indoorClassifications,
