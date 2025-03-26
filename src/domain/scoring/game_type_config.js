@@ -289,7 +289,7 @@ export const baseConfig = [
     isImperial: false,
     distancesRoundSizes: [3, 3, 3, 3],
     maxDistanceMetres: 70,
-    otherDistancesMetres: [60]
+    otherDistancesMetres: [60, 50, 30]
   },
   {
     name: 'wa 1440 (60m) / metric ii',
@@ -297,7 +297,7 @@ export const baseConfig = [
     isImperial: false,
     distancesRoundSizes: [3, 3, 3, 3],
     maxDistanceMetres: 60,
-    otherDistancesMetres: [50]
+    otherDistancesMetres: [50, 40, 30]
   },
   {
     name: 'metric iii',
@@ -305,7 +305,7 @@ export const baseConfig = [
     isImperial: false,
     distancesRoundSizes: [3, 3, 3, 3],
     maxDistanceMetres: 50,
-    otherDistancesMetres: [40]
+    otherDistancesMetres: [40, 30, 20]
   },
   {
     name: 'metric iv',
@@ -313,7 +313,7 @@ export const baseConfig = [
     isImperial: false,
     distancesRoundSizes: [3, 3, 3, 3],
     maxDistanceMetres: 40,
-    otherDistancesMetres: [30]
+    otherDistancesMetres: [30, 20, 10]
   },
   {
     name: 'metric v',
@@ -321,7 +321,7 @@ export const baseConfig = [
     isImperial: false,
     distancesRoundSizes: [3, 3, 3, 3],
     maxDistanceMetres: 30,
-    otherDistancesMetres: [20]
+    otherDistancesMetres: [20, 15, 10]
   },
   {
     name: 'long metric (men)',

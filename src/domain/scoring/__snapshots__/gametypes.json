@@ -690,7 +690,9 @@
     "maxDistanceMetres": 50,
     "maxDistanceYards": 54.7,
     "otherDistancesMetres": [
-      40
+      40,
+      30,
+      20
     ]
   },
   "metric iv": {
@@ -724,7 +726,9 @@
     "maxDistanceMetres": 40,
     "maxDistanceYards": 43.760000000000005,
     "otherDistancesMetres": [
-      30
+      30,
+      20,
+      10
     ]
   },
   "metric v": {
@@ -758,7 +762,9 @@
     "maxDistanceMetres": 30,
     "maxDistanceYards": 32.82,
     "otherDistancesMetres": [
-      20
+      20,
+      15,
+      10
     ]
   },
   "national": {
@@ -1680,7 +1686,9 @@
     "maxDistanceMetres": 60,
     "maxDistanceYards": 65.64,
     "otherDistancesMetres": [
-      50
+      50,
+      40,
+      30
     ]
   },
   "wa 1440 (70m) / metric i": {
@@ -1714,7 +1722,9 @@
     "maxDistanceMetres": 70,
     "maxDistanceYards": 76.58000000000001,
     "otherDistancesMetres": [
-      60
+      60,
+      50,
+      30
     ]
   },
   "wa 1440 (90m)": {

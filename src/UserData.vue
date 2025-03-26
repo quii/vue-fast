@@ -56,6 +56,15 @@ const allArcherDetailsProvided = computed(() => selectedAgeGroup.value &&
 
 const suitableRounds = ref({ short: [], medium: [], long: [] });
 
+// Combine all rounds into a single array
+const allSuitableRounds = computed(() => {
+  return [
+    ...suitableRounds.value.short,
+    ...suitableRounds.value.medium,
+    ...suitableRounds.value.long
+  ];
+});
+
 watchEffect(async () => {
   if (allArcherDetailsProvided.value) {
     // Always use the outdoor classification for suitable rounds
@@ -74,6 +83,13 @@ watchEffect(async () => {
 const hasSuitableRounds = computed(() => {
   return suitableRounds.value.short.length > 0 || suitableRounds.value.long.length > 0 || suitableRounds.value.medium.length > 0;
 });
+
+// Function to handle round selection
+function selectRound(roundName) {
+  // You can implement what happens when a round is selected
+  console.log(`Selected round: ${roundName}`);
+  // Perhaps navigate to a new page or open a modal with details
+}
 
 function updateIndoorClassification(bowType, classification) {
   indoorClassifications.value = {
@@ -114,13 +130,9 @@ watchEffect(() => {
 </script>
 <template>
   <div>
-    <h1>Your details</h1>
-    <p>These details are used by the app to tell you your progress on classifications while you're shooting.</p>
-    <p>This app is not an official record! You will have to report your scores to your records officer in the usual way.</p>
-
     <div class="user-details-section">
       <h2>Personal Information</h2>
-      <label>Name <input type="text" v-model="name" /></label>
+      <input type="text" v-model="name" placeholder="Name" />
 
       <select v-model="selectedAgeGroup">
         <option disabled value="">Select age group</option>
@@ -193,9 +205,24 @@ watchEffect(() => {
     </div>
 
     <div class="shooting-preferences">
-      <h2>Shooting Preferences</h2>
+      <h2>Suggested rounds</h2>
       <label>Max shooting distance ({{ maxYards }} yards)</label>
       <input type="range" v-model="maxYards" min="10" max="100" step="10" />
+    </div>
+
+    <RoundDetails
+      :rounds="allSuitableRounds"
+      @select-round="selectRound"
+    ></RoundDetails>
+
+  <div v-if="!hasSuitableRounds">
+    ⚠️ For your classification, your max distance is too short for me to suggest rounds to improve at.
+  </div>
+
+  <hr />
+
+    <div class="shooting-preferences">
+      <h2>Other Preferences</h2>
 
       <label class="inline"><input type="checkbox" v-model="constructiveCriticism" /> Constructive criticism
         enabled</label>
@@ -207,28 +234,6 @@ watchEffect(() => {
       <label>Choose knock colour<input type="color" v-model="knockColor" />
       </label>
     </div>
-
-  <div v-if="hasSuitableRounds" class="recommended-rounds">
-    <h2>Suggested outdoor rounds</h2>
-    <div class="sub" v-if="suitableRounds.short">
-      <h3>Short shoot(s)</h3>
-      <RoundDetails :rounds="suitableRounds.short"></RoundDetails>
-    </div>
-    <div class="sub" v-if="suitableRounds.medium">
-      <h3>Medium shoot(s)</h3>
-      <RoundDetails :rounds="suitableRounds.medium"></RoundDetails>
-    </div>
-    <div class="sub" v-if="suitableRounds.long">
-      <h3>Long shoot(s)</h3>
-      <RoundDetails :rounds="suitableRounds.long"></RoundDetails>
-    </div>
-  </div>
-
-  <div v-if="!hasSuitableRounds">
-    ⚠️ For your classification, your max distance is too short for me to suggest rounds to improve at.
-  </div>
-
-  <hr />
 
   <div class="buymeacoffee">
     <p>Happy for you to use this for free, but if you wish to show appreciation, <a href="https://buymeacoffee.com/quii">feel free to tap here and buy me a coffee ☕️ 🥰</a></p>
@@ -317,7 +322,18 @@ button {
 
 h2 {
   margin-top: 0;
-  margin-bottom: 0.5em;
   font-size: 1.2em;
+}
+
+.recommended-rounds {
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 0em;
+  margin-top: 1em;
+}
+
+.recommended-rounds h2 {
+  margin-top: 0;
+  margin-bottom: 1em;
 }
 </style>

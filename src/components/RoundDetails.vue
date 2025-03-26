@@ -1,33 +1,39 @@
 <script setup>
+import { useGameTypeStore } from "@/stores/game_type.js";
+import { useRouter } from "vue-router";
+import RoundCard from "./RoundCard.vue";
+
 defineProps({
   rounds: {
-    type: Object,
+    type: Array,
     required: true
   }
 });
+
+const gameTypeStore = useGameTypeStore();
+const router = useRouter();
+
+function selectRound(round) {
+  gameTypeStore.setGameType(round);
+  router.push("/");
+}
 </script>
 
 <template>
-  <table>
-    <thead>
-    <tr>
-      <th>Round name</th>
-      <th># of dozens</th>
-      <th>Max Distance</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr v-for="round in rounds" :key="round">
-      <td>{{ round.round }}</td>
-      <td>{{ round.numberOfEnds }}</td>
-      <td>{{ round.distance }}</td>
-    </tr>
-    </tbody>
-  </table>
+  <div class="rounds-container">
+    <RoundCard
+      v-for="round in rounds"
+      :key="round.round"
+      :round="round"
+      @click="selectRound(round.round)"
+    />
+  </div>
 </template>
 
 <style scoped>
-td {
-  text-transform: capitalize;
+.rounds-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
 }
 </style>

@@ -8,12 +8,12 @@ describe("Round recommendations", () => {
     userDataPage.setClassification("A1");
     userDataPage.setMaxDistance(50);
 
-    userDataPage.checkRoundRecommendation("windsor", false);
-    userDataPage.checkRoundRecommendation("national", false);
+    userDataPage.checkRoundRecommendation("Windsor", false);
+    userDataPage.checkRoundRecommendation("National", false);
 
     userDataPage.setMaxDistance(60);
 
-    userDataPage.checkRoundRecommendation("windsor");
-    userDataPage.checkRoundRecommendation("national");
+    userDataPage.checkRoundRecommendation("Windsor");
+    userDataPage.checkRoundRecommendation("National");
   });
 });
