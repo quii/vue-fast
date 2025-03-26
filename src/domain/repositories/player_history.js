@@ -73,13 +73,14 @@ export class PlayerHistory {
         return { ...item, averagePerEnd: null };
       }
 
-      // Get the number of ends for this game type
-      const numberOfEnds = gameTypeConfig[gameType].numberOfEnds;
-      if (!numberOfEnds || numberOfEnds <= 0) {
+      // Get the end size
+      const endSize = gameTypeConfig[gameType].endSize;
+      if (!endSize || endSize <= 0 || item.scores.length === 0) {
         return { ...item, averagePerEnd: null };
       }
 
       // Calculate average per end
+      const numberOfEnds = item.scores.length / endSize;
       const averagePerEnd = Math.round((item.score / numberOfEnds) * 10) / 10; // Round to 1 decimal place
       return { ...item, averagePerEnd };
     });
