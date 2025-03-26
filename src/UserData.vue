@@ -178,28 +178,26 @@ watchEffect(() => {
       <h2>Classifications</h2>
 
       <div v-for="bowType in usedBowTypes" :key="bowType" class="bow-classification">
-        <h3>{{ bowType.charAt(0).toUpperCase() + bowType.slice(1) }}</h3>
-
         <div class="classification-row">
-          <label>Indoor</label>
+          <label>{{ bowType.charAt(0).toUpperCase() + bowType.slice(1) }} Indoor
           <select v-model="indoorClassifications[bowType]"
                   @change="updateIndoorClassification(bowType, indoorClassifications[bowType])">
             <option>Unclassified</option>
             <option v-for="option in classificationList" :value="option" v-bind:key="option">
               {{ option }}
             </option>
-          </select>
+          </select></label>
         </div>
 
         <div class="classification-row">
-          <label>Outdoor</label>
+          <label>{{ bowType.charAt(0).toUpperCase() + bowType.slice(1) }} Outdoor
           <select v-model="outdoorClassifications[bowType]"
                   @change="updateOutdoorClassification(bowType, outdoorClassifications[bowType])">
             <option>Unclassified</option>
             <option v-for="option in classificationList" :value="option" v-bind:key="option">
               {{ option }}
             </option>
-          </select>
+          </select></label>
         </div>
       </div>
     </div>
@@ -218,8 +216,6 @@ watchEffect(() => {
   <div v-if="!hasSuitableRounds">
     ⚠️ For your classification, your max distance is too short for me to suggest rounds to improve at.
   </div>
-
-  <hr />
 
     <div class="shooting-preferences">
       <h2>Other Preferences</h2>
@@ -246,11 +242,11 @@ watchEffect(() => {
 div {
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 0.8em;
   padding: 1em;
 }
 
-div.sub {
+.classification-row, .bow-classification {
   padding: 0;
 }
 
@@ -272,12 +268,10 @@ button {
 .user-details-section,
 .season-dates,
 .classifications,
-.shooting-preferences,
-.recommended-rounds {
+.shooting-preferences {
   border: 1px solid var(--color-border);
   border-radius: 8px;
   padding: 1em;
-  margin-top: 1em;
 }
 
 .bow-classification {
@@ -295,23 +289,6 @@ button {
 .bow-classification h3 {
   margin-top: 0;
   margin-bottom: 0.5em;
-}
-
-.classification-row {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 1em;
-  padding: 0.5em 0;
-}
-
-.classification-row:first-of-type {
-  margin-top: 0;
-}
-
-.classification-row label {
-  width: 80px;
-  flex-direction: row;
 }
 
 .reset-dates-btn {
