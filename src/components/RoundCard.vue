@@ -254,9 +254,10 @@ const hasPB = computed(() => {
   align-items: center;
   margin-top: 0.25em;
   padding: 0.25em 0.5em;
-  background-color: rgba(255, 215, 0, 0.15);
+  background-color: var(--color-background);
   border-radius: 4px;
   min-width: 50px;
+  color: var(--color-text-light, #666);
 }
 
 .pb-score {

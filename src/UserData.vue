@@ -204,7 +204,7 @@ watchEffect(() => {
 
     <div class="shooting-preferences">
       <h2>Suggested rounds</h2>
-      <label>Max shooting distance ({{ maxYards }} yards)</label>
+      <label>Set your maximum shooting distance ({{ maxYards }} yards)</label>
       <input type="range" v-model="maxYards" min="10" max="100" step="10" />
     </div>
 
@@ -312,5 +312,10 @@ h2 {
 .recommended-rounds h2 {
   margin-top: 0;
   margin-bottom: 1em;
+}
+
+input, select {
+  padding: 0.5em;
+  font-size: 1.2em;
 }
 </style>

@@ -15,23 +15,17 @@ export class UserDataPage {
   setClassification(classification) {
     // Get the currently selected bow type
     cy.get("select").eq(2).invoke("val").then(bowType => {
-      // Capitalize the first letter of the bow type
       const capitalizedBowType = bowType.charAt(0).toUpperCase() + bowType.slice(1);
 
-      // Find the bow type section and set both indoor and outdoor classifications
-      cy.contains("h3", capitalizedBowType)
-        .parent()
-        .within(() => {
-          // Set indoor classification
-          cy.contains(".classification-row", "Indoor")
-            .find("select")
-            .select(classification);
+      // Set indoor classification
+      cy.contains(`${capitalizedBowType} Indoor`)
+        .find("select")
+        .select(classification);
 
-          // Set outdoor classification
-          cy.contains(".classification-row", "Outdoor")
-            .find("select")
-            .select(classification);
-        });
+      // Set outdoor classification
+      cy.contains(`${capitalizedBowType} Outdoor`)
+        .find("select")
+        .select(classification);
     });
   }
 
