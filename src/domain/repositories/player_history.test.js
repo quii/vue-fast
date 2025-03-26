@@ -1,6 +1,6 @@
+import { PlayerHistory } from "@/domain/repositories/player_history.js";
 import { classificationList } from "@/domain/scoring/classificationList.js";
 import { beforeEach, describe, expect, test, vi } from "vitest";
-import { PlayerHistory } from "@/domain/repositories/player_history.js";
 
 beforeEach(() => {
   global.fetch = vi.fn((path) => {
@@ -45,6 +45,7 @@ describe("player history", () => {
 
     const sortedHistory = await playerHistory.sortedHistory("male", "senior", "recurve");
     expect(sortedHistory).toHaveLength(4);
+    console.log(sortedHistory);
     expect(sortedHistory[0].score).toEqual(123);
     expect(sortedHistory[0].topScore).toBeFalsy();
     expect(sortedHistory[1].topScore).toBeTruthy();
@@ -57,6 +58,7 @@ describe("player history", () => {
     const playerHistory = new PlayerHistory(storage);
 
     playerHistory.add(new Date(), 456, "national 50", [1, 2, 3], "yd");
+    playerHistory.add(new Date(), 455, "national 50", [1, 2, 3], "yd");
     playerHistory.add(new Date(), 826, "windsor 50", [1, 2, 3], "yd");
 
     expect(playerHistory.personalBest("national 50")).toEqual(456);
@@ -94,16 +96,20 @@ describe("player history", () => {
     const storage = { value: [] };
     const playerHistory = new PlayerHistory(storage);
     const user = { gender: "male", ageGroup: "senior", bowType: "recurve" };
+    const bestNational = 200;
+    const bestWindsor = 150;
 
     playerHistory.add(new Date(), 100, "national", [1, 2, 3], "yd");
-    playerHistory.add(new Date(), 200, "national", [1, 2, 3], "yd");
-    playerHistory.add(new Date(), 150, "windsor", [1, 2, 3], "yd");
+    playerHistory.add(new Date(), bestNational, "national", [1, 2, 3], "yd");
+    playerHistory.add(new Date(), bestWindsor, "windsor", [1, 2, 3], "yd");
 
-    const filters = { pbOnly: true };
-    const filtered = await playerHistory.getFilteredHistory(filters, user);
+    const filtered = await playerHistory.getFilteredHistory({ pbOnly: true }, user);
 
     expect(filtered.length).toBe(2);
     expect(filtered.every(score => score.topScore)).toBe(true);
+    expect(filtered.map(s => ({ round: s.gameType, score: s.score }))).toEqual(
+      expect.arrayContaining([{ round: "national", score: bestNational }, { round: "windsor", score: bestWindsor }])
+    );
   });
 
   test("filtered history - by round", async () => {
