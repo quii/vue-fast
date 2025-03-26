@@ -2,6 +2,7 @@
 import { computed } from "vue";
 import { getRoundDetails, formatRoundName } from "@/domain/round_details";
 import { useHistoryStore } from "@/stores/history";
+import { useSightMarksStore } from "@/stores/sight_marks";
 
 const props = defineProps({
   round: {
@@ -11,6 +12,7 @@ const props = defineProps({
 });
 
 const historyStore = useHistoryStore();
+const sightMarksStore = useSightMarksStore();
 
 // Get round details from the domain layer
 const roundDetails = computed(() => {
@@ -31,6 +33,39 @@ const personalBest = computed(() => {
 const hasPB = computed(() => {
   return personalBest.value !== undefined;
 });
+
+// Get sight marks for each distance in the round
+const distanceInfoWithSightMarks = computed(() => {
+  if (!roundDetails.value || !roundDetails.value.distanceInfo) {
+    return [];
+  }
+
+  return roundDetails.value.distanceInfo.map(info => {
+    // Extract the numeric part and unit from the distance string
+    const match = info.distance.match(/(\d+)(yd|m)/);
+    if (!match) return { ...info, sightMarks: [] };
+
+    const [, distanceValue, unit] = match;
+
+    // Find sight marks for this distance
+    let sightMarks = [];
+    if (unit === "yd") {
+      sightMarks = sightMarksStore.findMarksForDistance(null, parseInt(distanceValue));
+    } else {
+      sightMarks = sightMarksStore.findMarksForDistance(parseInt(distanceValue), null);
+    }
+
+    return {
+      ...info,
+      sightMarks
+    };
+  });
+});
+
+// Format the vertical sight mark value
+function formatVertical(vertical) {
+  return `${vertical.major}.${vertical.minor}.${vertical.micro}`;
+}
 </script>
 <template>
   <div v-if="roundDetails" class="round-card">
@@ -51,9 +86,24 @@ const hasPB = computed(() => {
           </div>
 
           <div class="distance-info">
-            <div v-for="(info, index) in roundDetails.distanceInfo" :key="index" class="distance-row">
+            <div v-for="(info, index) in distanceInfoWithSightMarks" :key="index" class="distance-row">
               <span class="distance-chip" :class="roundDetails.colorScheme">{{ info.distance }}</span>
-              <span class="dozens">{{ info.dozens }} dozen</span>
+              <div class="info-values">
+                <div class="info-row">
+                  <span class="dozens">{{ info.dozens }} dozen</span>
+
+                  <!-- Sight marks for this distance -->
+                  <div v-if="info.sightMarks && info.sightMarks.length > 0" class="sight-marks-inline">
+                    <div v-for="(mark, markIndex) in info.sightMarks" :key="mark.id"
+                         class="sight-mark-inline"
+                         :class="{ 'first-mark': markIndex === 0 }">
+                      <span class="sight-mark-emoji">📏</span>
+                      <span class="sight-value">{{ formatVertical(mark.vertical) }}</span>
+                      <span v-if="mark.label" class="mark-label">{{ mark.label }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -163,7 +213,51 @@ const hasPB = computed(() => {
 
 .distance-row {
   display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.5em;
+}
+
+.info-values {
+  flex-grow: 1;
+}
+
+.info-row {
+  display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75em;
+}
+
+.sight-marks-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+
+.sight-mark-inline {
+  display: flex;
+  align-items: center;
+  gap: 0.25em;
+}
+
+.first-mark {
+  margin-left: 0;
+}
+
+.sight-mark-emoji {
+  font-size: 0.85em;
+}
+
+.sight-value {
+  font-weight: 600;
+  font-size: 0.85em;
+}
+
+.mark-label {
+  font-size: 0.75em;
+  color: var(--color-text-light);
+  font-style: italic;
+  margin-left: 0.25em;
 }
 
 .distance-chip {
@@ -174,6 +268,7 @@ const hasPB = computed(() => {
   font-size: 0.85em;
   min-width: 50px;
   text-align: center;
+  flex-shrink: 0;
 }
 
 .dozens {

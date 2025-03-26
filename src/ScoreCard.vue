@@ -1,5 +1,6 @@
 <script setup>
 import GameTypeSelector from "@/components/GameTypeSelector.vue";
+import RoundCard from "@/components/RoundCard.vue";
 import RoundScores from "@/components/RoundScores.vue";
 import InteractiveTargetFace from "@/components/scoring/InteractiveTargetFace.vue";
 import ScoreButtons from "@/components/scoring/ScoreButtons.vue";
@@ -16,7 +17,6 @@ import { useUserStore } from "@/stores/user";
 import { useNotesStore } from "@/stores/user_notes";
 import { computed, ref } from "vue";
 import { useToast } from "vue-toastification";
-import CurrentSightMark from "./components/sight_marks/CurrentSightMark.vue";
 import { watch } from "vue";
 
 const synth = window.speechSynthesis;
@@ -188,10 +188,12 @@ Did you follow your process?"></textarea>
   <div class="controls">
     <GameTypeSelector :gameType="gameTypeStore.type"
                       @changeGameType="gameTypeStore.setGameType" />
-  </div>
-  <CurrentSightMark />
+    <div class="round-card">
+      <RoundCard :round="{round: gameTypeStore.type}" />
+    </div>
 
-  <hr />
+  </div>
+
   <div v-if="hasStarted">
     <button id="clear" @click="clearScores">⚠️ Clear all scores for this shoot ⚠️</button>
   </div>
@@ -199,6 +201,10 @@ Did you follow your process?"></textarea>
 </template>
 
 <style scoped>
+
+.round-card {
+  margin: 1em 0.5em 1em 0.5em;
+}
 
 .pulse-animation {
   animation: pulse 2s infinite;
