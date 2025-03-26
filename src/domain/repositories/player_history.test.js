@@ -35,8 +35,7 @@ beforeEach(() => {
 
 describe("player history", () => {
   test("keeps records sorted and adds top score indicator", async () => {
-    const storage = { value: [] };
-    const playerHistory = new PlayerHistory(storage);
+    const playerHistory = new PlayerHistory();
 
     playerHistory.add(new Date().addDays(2), 456, "national 50", [1, 2, 3], "yd");
     playerHistory.add(new Date().addDays(5), 200, "national 50", [1, 2, 3], "yd");
@@ -54,8 +53,7 @@ describe("player history", () => {
   });
 
   test("it can retrieve your personal best for a round", () => {
-    const storage = { value: [] };
-    const playerHistory = new PlayerHistory(storage);
+    const playerHistory = new PlayerHistory();
 
     playerHistory.add(new Date(), 456, "national 50", [1, 2, 3], "yd");
     playerHistory.add(new Date(), 455, "national 50", [1, 2, 3], "yd");
@@ -67,16 +65,13 @@ describe("player history", () => {
   });
 
   test("it can total up the number of arrows shot", () => {
-    const storage = { value: [] };
-    const playerHistory = new PlayerHistory(storage);
-
+    const playerHistory = new PlayerHistory();
     playerHistory.add(new Date(), 456, "national 50", [1, 2, 3], "yd");
     expect(playerHistory.totalArrows()).toEqual(3);
   });
 
   test("gets unique game types from recent games, ordered by most recent first", () => {
-    const storage = { value: [] };
-    const playerHistory = new PlayerHistory(storage);
+    const playerHistory = new PlayerHistory();
 
     const now = new Date();
     const oneWeekAgo = new Date().addDays(-7);
@@ -93,8 +88,7 @@ describe("player history", () => {
   });
 
   test("filtered history - personal bests only", async () => {
-    const storage = { value: [] };
-    const playerHistory = new PlayerHistory(storage);
+    const playerHistory = new PlayerHistory();
     const user = { gender: "male", ageGroup: "senior", bowType: "recurve" };
     const bestNational = 200;
     const bestWindsor = 150;
@@ -113,8 +107,7 @@ describe("player history", () => {
   });
 
   test("filtered history - by round", async () => {
-    const storage = { value: [] };
-    const playerHistory = new PlayerHistory(storage);
+    const playerHistory = new PlayerHistory();
     const user = { gender: "male", ageGroup: "senior", bowType: "recurve" };
 
     playerHistory.add(new Date(), 100, "national", [1, 2, 3], "yd");
@@ -128,8 +121,7 @@ describe("player history", () => {
   });
 
   test("filtered history - by date range", async () => {
-    const storage = { value: [] };
-    const playerHistory = new PlayerHistory(storage);
+    const playerHistory = new PlayerHistory();
     const user = { gender: "male", ageGroup: "senior", bowType: "recurve" };
 
     const today = new Date();
@@ -152,9 +144,8 @@ describe("player history", () => {
   });
 
   test("filtered history - by classification", async () => {
-    const storage = { value: [] };
     const user = { gender: "male", ageGroup: "senior", bowType: "recurve" };
-    const playerHistory = new PlayerHistory(storage, user);
+    const playerHistory = new PlayerHistory(undefined, user);
 
     playerHistory.add(new Date(), 490, "windsor", [1, 2, 3], "yd", user);
     playerHistory.add(new Date(), 100, "windsor", [1, 2, 3], "yd", user);
@@ -174,9 +165,8 @@ describe("player history", () => {
   });
 
   test("filtered history - combining multiple filters", async () => {
-    const storage = { value: [] };
     const user = { gender: "male", ageGroup: "senior", bowType: "recurve" };
-    const playerHistory = new PlayerHistory(storage, user);
+    const playerHistory = new PlayerHistory(undefined, user);
 
     const today = new Date();
 
@@ -208,10 +198,7 @@ describe("player history", () => {
 
 describe("Classification with changing age groups", () => {
   test("classifications should be based on historical profile, not current profile", async () => {
-    // Mock storage
-    const storage = { value: [] };
 
-    // Create a player history with a senior archer
     const seniorProfile = {
       gender: "male",
       ageGroup: "senior",
@@ -219,7 +206,7 @@ describe("Classification with changing age groups", () => {
       classification: "B3"
     };
 
-    const playerHistory = new PlayerHistory(storage, seniorProfile);
+    const playerHistory = new PlayerHistory(undefined, seniorProfile);
 
     // Add a shoot as a senior
     const seniorShootId = playerHistory.add(
@@ -245,7 +232,7 @@ describe("Classification with changing age groups", () => {
     };
 
     // Update the player history with the new profile
-    const updatedPlayerHistory = new PlayerHistory(storage, veteranProfile);
+    const updatedPlayerHistory = new PlayerHistory(undefined, veteranProfile);
 
     // Add a shoot as a 50+
     const veteranShootId = updatedPlayerHistory.add(
@@ -286,8 +273,7 @@ describe("Classification with changing age groups", () => {
 
 describe("getBowTypesUsed", () => {
   test("returns all bow types from history plus the current one", () => {
-    const storage = { value: [] };
-    const playerHistory = new PlayerHistory(storage);
+    const playerHistory = new PlayerHistory();
 
     // Add scores with recurve bow type
     playerHistory.add(new Date(), 456, "national", [1, 2, 3], "yd", {
@@ -319,8 +305,7 @@ describe("getBowTypesUsed", () => {
   });
 
   test("handles empty history", () => {
-    const storage = { value: [] };
-    const playerHistory = new PlayerHistory(storage);
+    const playerHistory = new PlayerHistory();
 
     // With no history and no current bow type
     const emptyResult = playerHistory.getBowTypesUsed();

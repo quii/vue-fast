@@ -12,7 +12,7 @@ Date.prototype.addDays = function (days) {
 };
 
 export class PlayerHistory {
-  constructor(storage, currentUserProfile = null) {
+  constructor(storage = { value: [] }, currentUserProfile = null) {
     this.storage = storage;
     this.storage.value = prepareHistoryData(this.storage.value, currentUserProfile);
   }
