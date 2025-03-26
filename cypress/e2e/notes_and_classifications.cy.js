@@ -16,7 +16,7 @@ describe("Notes and Classifications", () => {
     userDataPage.setArcherDetails("male", "recurve", "senior");
 
     scorePage.navigateTo();
-    scorePage.selectGame("BRAY I");
+    scorePage.selectGame("Bray I");
 
     // First end of 6
     scorePage.score([10, 9, 9, 8, 8, 7]);
@@ -55,7 +55,7 @@ describe("Notes and Classifications", () => {
     userDataPage.setArcherDetails("male", "recurve", "senior");
     scorePage.navigateTo();
 
-    scorePage.selectGame("WINDSOR");
+    scorePage.selectGame("Windsor");
     // Enter first score to make classification table visible
     scorePage.score([5, 5, 3, 3, 1, 1]);
 
@@ -90,7 +90,7 @@ describe("Notes and Classifications", () => {
     userDataPage.setArcherDetails("male", "recurve", "senior");
     scorePage.navigateTo();
 
-    scorePage.selectGame("WINDSOR");
+    scorePage.selectGame("Windsor");
     scorePage.score([9, 9, 9, 9, 7, 5]); // Initial score to show classifications
     scorePage.expandClassificationDetails();
 

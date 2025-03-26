@@ -13,7 +13,7 @@ describe(`Smoke test using Ruth's game`,
     });
 
     it("records all the scores and calculates the totals for an imperial game", () => {
-      scorePage.selectGame("WINDSOR");
+      scorePage.selectGame("Windsor");
       scorePage.score(ruthsGame);
 
       scorePage.checkTotalHits("108");
@@ -22,7 +22,7 @@ describe(`Smoke test using Ruth's game`,
     });
 
     it("also works for a frostbite game", () => {
-      scorePage.selectGame("FROSTBITE");
+      scorePage.selectGame("Frostbite");
       scorePage.score(ruthsFrostbiteGame);
 
       scorePage.checkSubTotalScore("254");
@@ -105,7 +105,7 @@ describe(`Smoke test using Ruth's game`,
     ];
 
     it("should record the actual score in the history, not 0", () => {
-      scorePage.selectGame("WA 70M");
+      scorePage.selectGame("Wa 70m");
       scorePage.score(zeroBugScores);
 
       const expectedScore = "307";

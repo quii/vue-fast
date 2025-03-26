@@ -9,24 +9,47 @@ export function getRoundDetails(roundName) {
   // Calculate distances to shoot
   const distances = [];
 
-// Add max distance
-  if (config.isImperial) {
-    distances.push(`${config.maxDistanceYards}yd`);
+  // For indoor rounds, use the original unit regardless of isImperial flag
+  if (!config.isOutdoor) {
+    // Indoor rounds - use the original unit that was specified
+    if (config.maxDistanceYards) {
+      distances.push(`${config.maxDistanceYards}yd`);
+    } else if (config.maxDistanceMetres) {
+      distances.push(`${config.maxDistanceMetres}m`);
+    }
   } else {
-    distances.push(`${config.maxDistanceMetres}m`);
+    // Outdoor rounds - use the unit based on isImperial flag
+    if (config.isImperial) {
+      distances.push(`${config.maxDistanceYards}yd`);
+    } else {
+      distances.push(`${config.maxDistanceMetres}m`);
+    }
   }
 
-// Add other distances
-  if (config.isImperial && config.otherDistancesYards) {
-    config.otherDistancesYards.forEach(distance => {
-      distances.push(`${distance}yd`);
-    });
-  } else if (!config.isImperial && config.otherDistancesMetres) {
-    config.otherDistancesMetres.forEach(distance => {
-      distances.push(`${distance}m`);
-    });
+  // Add other distances with the same logic
+  if (!config.isOutdoor) {
+    // Indoor rounds - use the original unit
+    if (config.otherDistancesYards) {
+      config.otherDistancesYards.forEach(distance => {
+        distances.push(`${distance}yd`);
+      });
+    } else if (config.otherDistancesMetres) {
+      config.otherDistancesMetres.forEach(distance => {
+        distances.push(`${distance}m`);
+      });
+    }
+  } else {
+    // Outdoor rounds - use the unit based on isImperial flag
+    if (config.isImperial && config.otherDistancesYards) {
+      config.otherDistancesYards.forEach(distance => {
+        distances.push(`${distance}yd`);
+      });
+    } else if (!config.isImperial && config.otherDistancesMetres) {
+      config.otherDistancesMetres.forEach(distance => {
+        distances.push(`${distance}m`);
+      });
+    }
   }
-
 
   // Calculate dozens per distance
   const dozensPerDistance = config.distancesRoundSizes ? [...config.distancesRoundSizes] : [];
@@ -50,12 +73,24 @@ export function getRoundDetails(roundName) {
   let maxDistance;
   let unit;
 
-  if (config.maxDistanceYards) {
-    maxDistance = config.maxDistanceYards;
-    unit = "yd";
-  } else if (config.maxDistanceMetres) {
-    maxDistance = config.maxDistanceMetres;
-    unit = "m";
+  // For indoor rounds, use the original unit
+  if (!config.isOutdoor) {
+    if (config.maxDistanceYards) {
+      maxDistance = config.maxDistanceYards;
+      unit = "yd";
+    } else if (config.maxDistanceMetres) {
+      maxDistance = config.maxDistanceMetres;
+      unit = "m";
+    }
+  } else {
+    // For outdoor rounds, use the unit based on isImperial flag
+    if (config.isImperial) {
+      maxDistance = config.maxDistanceYards;
+      unit = "yd";
+    } else {
+      maxDistance = config.maxDistanceMetres;
+      unit = "m";
+    }
   }
 
   return {

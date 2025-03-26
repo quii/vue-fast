@@ -19,7 +19,7 @@ describe("Classification Persistence", () => {
 
     // Step 2: Score a Bray I round with all 8s as a 50+ archer
     scorePage.navigateTo();
-    scorePage.selectGame("BRAY I");
+    scorePage.selectGame("Bray I");
 
     // Bray I has 2.5 dozen arrows (30 arrows)
     const allEights = Array(30).fill(8);
@@ -40,7 +40,7 @@ describe("Classification Persistence", () => {
 
     // Step 5: Score the same Bray I round with all 8s as a senior archer
     scorePage.navigateTo();
-    scorePage.selectGame("BRAY I");
+    scorePage.selectGame("Bray I");
 
     // Score the same 30 arrows with 8s
     scorePage.score(allEights);

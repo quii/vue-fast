@@ -16,7 +16,39 @@ class ScorePage {
   }
 
   selectGame(gameName) {
-    cy.get("select").select(gameName);
+    // Click the select button to open the modal
+    cy.get(".select-button").click();
+
+    // If there's a search input, use it to find the round faster
+    cy.get(".search-container input").then($input => {
+      if ($input.length) {
+        cy.wrap($input).type(gameName);
+      }
+    });
+
+    // Find the round card with the exact matching round name
+    // We need to be more precise to avoid selecting rounds that contain the name as a substring
+    cy.get(".round-name").each(($el) => {
+      const text = $el.text().trim().toLowerCase();
+      const searchName = gameName.toLowerCase();
+
+      // Check for exact match or match with formatting differences
+      if (text === searchName ||
+        text === searchName.charAt(0).toUpperCase() + searchName.slice(1) ||
+        // Handle special case for rounds with roman numerals
+        text.replace(/\s+/g, " ") === searchName.replace(/\s+/g, " ")) {
+        cy.wrap($el).click();
+        return false; // Break the each loop
+      }
+    });
+
+    // If we couldn't find an exact match, try a more lenient approach as fallback
+    cy.get("body").then($body => {
+      if (!$body.find(".select-button").text().includes(gameName)) {
+        // The exact match wasn't found, try a more specific selector
+        cy.contains(".round-name", new RegExp(`^${gameName}`, "i")).click();
+      }
+    });
   }
 
   score(input) {

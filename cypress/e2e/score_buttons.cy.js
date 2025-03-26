@@ -9,7 +9,7 @@ describe("score buttons", () => {
   });
 
   it("when a 7 is scored in an end for imperial, you cannot enter a 9", () => {
-    scorePage.selectGame("WINDSOR");
+    scorePage.selectGame("Windsor");
 
     scorePage.score(7);
     scorePage.assertButtonIsDisabled("9");
@@ -17,7 +17,7 @@ describe("score buttons", () => {
   });
 
   it("when the end is over, all buttons should be re-enabled", () => {
-    scorePage.selectGame("WINDSOR");
+    scorePage.selectGame("Windsor");
 
     scorePage.score(7);
     scorePage.assertButtonIsDisabled("9");
@@ -27,19 +27,19 @@ describe("score buttons", () => {
   });
 
   it("when a 10 is scored with a metric, you can no longer score an X", () => {
-    scorePage.selectGame("METRIC III");
+    scorePage.selectGame("Metric III");
     scorePage.score(10);
     scorePage.assertButtonIsDisabled("X");
   });
 
   it("works with wonky 2.5 round length games like Bray I", () => {
-    scorePage.selectGame("BRAY I");
+    scorePage.selectGame("Bray I");
     scorePage.times(30).score(10);
     scorePage.assertButtonIsDisabled("10");
   });
 
   it("understands worcester rules", () => {
-    scorePage.selectGame("WORCESTER");
+    scorePage.selectGame("Worcester");
 
     scorePage.score("X");
     scorePage.assertButtonIsEnabled("X");
@@ -49,7 +49,7 @@ describe("score buttons", () => {
   });
 
   it("understands vegas 300 rules, which are 10 to 6", () => {
-    scorePage.selectGame("VEGAS 300");
+    scorePage.selectGame("Vegas 300");
 
     scorePage.score("X");
     scorePage.assertButtonIsEnabled("X");

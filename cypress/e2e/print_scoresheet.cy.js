@@ -15,7 +15,7 @@ describe("Print scoresheet", () => {
     userDataPage.setArcherDetails("male", "recurve", "senior", "Chris");
 
     scorePage.navigateTo();
-    scorePage.selectGame("bray i");
+    scorePage.selectGame("Bray i");
 
     // First dozen
     scorePage.score([9, 8, 7]);
