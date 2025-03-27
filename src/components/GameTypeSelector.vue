@@ -3,7 +3,6 @@ import { ref, computed } from "vue";
 import RoundCard from "./RoundCard.vue";
 import { gameTypes } from "@/domain/scoring/game_types";
 import { useHistoryStore } from "@/stores/history";
-import { formatRoundName } from "@/domain/round_details";
 
 defineProps({
   gameType: {
@@ -43,10 +42,16 @@ function selectRound(type) {
 </script>
 <template>
   <div>
-    <button class="select-button" @click="showModal = true">
-      <span v-if="gameType">{{ formatRoundName(gameType) }}</span>
-      <span v-else>Select the round you're shooting</span>
-    </button>
+    <!-- Replace button with RoundCard for the currently selected round -->
+    <div class="current-round-container" @click="showModal = true">
+      <RoundCard
+        v-if="gameType"
+        :round="{ round: gameType }"
+      />
+      <div v-else class="select-placeholder">
+        <span>Select the round you're shooting</span>
+      </div>
+    </div>
 
     <div v-if="showModal" class="modal-overlay">
       <div class="modal-content">
@@ -85,15 +90,26 @@ function selectRound(type) {
   </div>
 </template>
 <style scoped>
-.select-button {
+
+.current-round-container {
+  cursor: pointer;
+  transition: transform 0.1s ease;
+  margin: 1em 0.5em 1em 0.5em;
+}
+
+.current-round-container:active {
+  transform: scale(0.98);
+}
+
+.select-placeholder {
   width: 100%;
-  padding: 0.5em;
+  padding: 1.5em;
   font-size: 1.2em;
-  text-align: left;
+  text-align: center;
   background-color: var(--color-background-soft);
   border: 1px solid var(--color-border);
-  border-radius: 4px;
-  cursor: pointer;
+  border-radius: 8px;
+  color: var(--color-text-light);
 }
 
 .modal-overlay {
@@ -150,6 +166,8 @@ function selectRound(type) {
   font-size: 1em;
   border: 1px solid var(--color-border);
   border-radius: 4px;
+  background-color: var(--color-background-soft);
+  color: var(--color-text);
 }
 
 .rounds-container {

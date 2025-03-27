@@ -1,6 +1,5 @@
 <script setup>
 import GameTypeSelector from "@/components/GameTypeSelector.vue";
-import RoundCard from "@/components/RoundCard.vue";
 import RoundScores from "@/components/RoundScores.vue";
 import InteractiveTargetFace from "@/components/scoring/InteractiveTargetFace.vue";
 import ScoreButtons from "@/components/scoring/ScoreButtons.vue";
@@ -188,10 +187,6 @@ Did you follow your process?"></textarea>
   <div class="controls">
     <GameTypeSelector :gameType="gameTypeStore.type"
                       @changeGameType="gameTypeStore.setGameType" />
-    <div class="round-card">
-      <RoundCard :round="{round: gameTypeStore.type}" />
-    </div>
-
   </div>
 
   <div v-if="hasStarted">
@@ -201,10 +196,6 @@ Did you follow your process?"></textarea>
 </template>
 
 <style scoped>
-
-.round-card {
-  margin: 1em 0.5em 1em 0.5em;
-}
 
 .pulse-animation {
   animation: pulse 2s infinite;

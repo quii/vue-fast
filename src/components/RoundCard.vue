@@ -99,7 +99,6 @@ function formatVertical(vertical) {
                          :class="{ 'first-mark': markIndex === 0 }">
                       <span class="sight-mark-emoji">📏</span>
                       <span class="sight-value">{{ formatVertical(mark.vertical) }}</span>
-                      <span v-if="mark.label" class="mark-label">{{ mark.label }}</span>
                     </div>
                   </div>
                 </div>
