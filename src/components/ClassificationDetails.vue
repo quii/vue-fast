@@ -116,7 +116,7 @@ const closeToNextClassification = computed(() => {
       <p>Don't forget to press the <em>save button</em></p>
     </div>
 
-    <div v-if="userDetailsSaved && !showTableByDefault" class="classification-collapsible">
+    <div v-if="userDetailsSaved && !showTableByDefault" class="classification-collapsible" id="classification">
       <div class="collapsible-header" @click="isDetailsOpen = !isDetailsOpen">
         <div class="header-info">
           <h3>Classification Details</h3>

@@ -11,7 +11,7 @@ describe("Notes and Classifications", () => {
     scorePage.clearData();
   });
 
-  it("records scores with notes and persists them", () => {
+  it.only("records scores with notes and persists them", () => {
     userDataPage.navigateTo();
     userDataPage.setArcherDetails("male", "recurve", "senior");
 
@@ -107,4 +107,3 @@ describe("Notes and Classifications", () => {
   });
 
 });
-

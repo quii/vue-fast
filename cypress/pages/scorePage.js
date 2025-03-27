@@ -117,11 +117,15 @@ class ScorePage {
 
   checkClassificationTable(expectedClassification, shortBy) {
     cy.get(".classification-table-container").within(() => {
-      cy.contains("div", expectedClassification).within(() => {
-        if (shortBy) {
-          cy.contains(`(-${shortBy})`);
-        }
-      });
+      // Find the row containing the classification
+      cy.contains(".classification-badge", expectedClassification)
+        .closest(".table-row")
+        .within(() => {
+          if (shortBy) {
+            // Look for the shortBy value in the score cell
+            cy.get(".score-cell").contains(`(-${shortBy})`);
+          }
+        });
     });
   }
 
@@ -135,13 +139,17 @@ class ScorePage {
 
   checkClassificationAchieved(classification) {
     cy.get("#classification").within(() => {
-      cy.contains("tr", classification).should("have.class", "achieved");
+      cy.contains(".classification-badge", classification)
+        .closest(".table-row")
+        .should("have.class", "achieved");
     });
   }
 
   checkClassificationMissed(classification) {
     cy.get("#classification").within(() => {
-      cy.contains("tr", classification).should("not.have.class", "achieved");
+      cy.contains(".classification-badge", classification)
+        .closest(".table-row")
+        .should("not.have.class", "achieved");
     });
   }
 }
