@@ -32,6 +32,7 @@ const props = defineProps({
 const userStore = useUserStore();
 const historyStore = useHistoryStore();
 const personalBest = computed(() => historyStore.personalBest(props.gameType));
+const isDetailsOpen = ref(false);
 
 // Determine if we should use the provided profile or the current user profile
 const effectiveUserProfile = computed(() => {
@@ -109,25 +110,47 @@ const closeToNextClassification = computed(() => {
 
 <template>
   <div v-if="!isPracticeRound">
-    <div class="detailsHint" v-if="!userDetailsSaved">
+    <div class="details-hint" v-if="!userDetailsSaved">
       <p>👋 Before shooting, please consider entering your details in the <em>You</em> tab at the top right.</p>
       <p>Fast will work better if you do 🥳, and will be able to help you better track your progress</p>
       <p>Don't forget to press the <em>save button</em></p>
     </div>
-    <details class="dropdown" id="classification"
-             v-if="userDetailsSaved && !showTableByDefault">
-      <summary>Tap to view classification calculations</summary>
-      <div>
-        <ClassificationDetailsTable :max-possible-score=maxPossibleScore
-                                    :arrows-remaining=arrowsRemaining
-                                    :available-classifications=availableClassifications />
+
+    <div v-if="userDetailsSaved && !showTableByDefault" class="classification-collapsible">
+      <div class="collapsible-header" @click="isDetailsOpen = !isDetailsOpen">
+        <div class="header-info">
+          <h3>Classification Details</h3>
+          <div class="header-stats">
+            <div class="stat-item">
+              <span class="stat-label">Arrows remaining:</span>
+              <span class="stat-value">{{ arrowsRemaining }}</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Max possible:</span>
+              <span class="stat-value">{{ maxPossibleScore }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="toggle-icon">
+          {{ isDetailsOpen ? "▲" : "▼" }}
+        </div>
       </div>
-    </details>
+
+      <div v-if="isDetailsOpen" class="collapsible-content">
+        <ClassificationDetailsTable
+          :max-possible-score="maxPossibleScore"
+          :arrows-remaining="arrowsRemaining"
+          :available-classifications="availableClassifications"
+        />
+      </div>
+    </div>
 
     <div v-if="showTableByDefault" id="classification">
-      <ClassificationDetailsTable :max-possible-score=maxPossibleScore
-                                  :arrows-remaining=arrowsRemaining
-                                  :available-classifications=getRelevantClassifications(availableClassifications) />
+      <ClassificationDetailsTable
+        :max-possible-score="maxPossibleScore"
+        :arrows-remaining="arrowsRemaining"
+        :available-classifications="getRelevantClassifications(availableClassifications)"
+      />
     </div>
 
     <div class="hint" v-if="closeToNextClassification && closeToNextClassification.achievable">
@@ -138,29 +161,80 @@ const closeToNextClassification = computed(() => {
   </div>
 </template>
 
-
 <style scoped>
-.detailsHint p {
+.details-hint p {
   padding: 0.5em;
-  font-size: 1.1em
+  font-size: 1.1em;
 }
 
-details + details {
-  border-top: none;
+.classification-collapsible {
+  margin: 1em 0.5em 0 0.5em;
+  padding-bottom: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: var(--color-background-soft);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-details[open] {
-  padding-bottom: 1em;
-}
-
-summary {
-  padding: 1rem 1em 1rem 0.7rem;
-  font-size: 1.2rem;
-  font-weight: bold;
+.collapsible-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em;
   cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin: 0;
+}
+
+.collapsible-header:hover {
+  background-color: rgba(var(--color-background-mute-rgb), 0.5);
+}
+
+.header-info {
+  flex-grow: 1;
+}
+
+.header-info h3 {
+  margin: 0 0 0.5em 0;
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+.header-stats {
+  display: flex;
+  gap: 1.5em;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.stat-label {
+  font-size: 0.9em;
+  color: var(--color-text-light);
+}
+
+.stat-value {
+  font-weight: 600;
+}
+
+.toggle-icon {
+  font-size: 1em;
+  color: var(--color-text-light);
 }
 
 .hint {
+  margin-top: 1em;
   padding: 1em;
+  background-color: var(--color-background-soft);
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.hint h3 {
+  margin-top: 0;
+  font-size: 1.2em;
 }
 </style>

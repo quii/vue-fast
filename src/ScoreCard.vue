@@ -180,10 +180,8 @@ Did you follow your process?"></textarea>
                  :user-profile="userProfile"
     />
   </div>
-  <hr />
   <UserNotes :allow-highlight="true" />
 
-  <hr />
   <div class="controls">
     <GameTypeSelector :gameType="gameTypeStore.type"
                       @changeGameType="gameTypeStore.setGameType" />

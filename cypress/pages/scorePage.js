@@ -112,12 +112,12 @@ class ScorePage {
   }
 
   expandClassificationDetails() {
-    cy.contains("Tap to view classification calculations").click();
+    cy.contains("Classification Details").click();
   }
 
   checkClassificationTable(expectedClassification, shortBy) {
-    cy.get("#classification").within(() => {
-      cy.contains("tr", expectedClassification).within(() => {
+    cy.get(".classification-table-container").within(() => {
+      cy.contains("div", expectedClassification).within(() => {
         if (shortBy) {
           cy.contains(`(-${shortBy})`);
         }
