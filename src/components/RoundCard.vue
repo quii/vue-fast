@@ -273,6 +273,7 @@ function formatVertical(vertical) {
 .dozens {
   font-size: 0.85em;
   color: var(--color-text-light, #666);
+  padding-top: 0.15em;
 }
 
 .arrows-container {
