@@ -35,7 +35,7 @@ class ScorePage {
     // If there's a search input, use it to find the round faster
     cy.get(".search-container input").then($input => {
       if ($input.length) {
-        cy.wrap($input).type(gameName);
+        cy.wrap($input).clear().type(gameName);
       }
     });
 
@@ -73,7 +73,7 @@ class ScorePage {
     // If there's a search input, use it to find the round faster
     cy.get(".search-container input").then($input => {
       if ($input.length) {
-        cy.wrap($input).type(gameName);
+        cy.wrap($input).clear().type(gameName);
       }
     });
 

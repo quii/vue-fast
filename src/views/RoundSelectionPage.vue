@@ -2,6 +2,7 @@
 import { ref, computed, watchEffect } from "vue";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/user";
+import { useSearchPreferencesStore } from "@/stores/searchPreferences";
 import { calculateAppropriateRounds, gameTypes } from "@/domain/scoring/game_types";
 import { filterGameTypes } from "@/domain/scoring/round_filters";
 import RoundCard from "@/components/RoundCard.vue";
@@ -20,6 +21,7 @@ defineProps({
 
 const router = useRouter();
 const userStore = useUserStore();
+const searchPreferencesStore = useSearchPreferencesStore();
 
 // User profile state
 const selectedAgeGroup = ref(userStore.user.ageGroup || "");
@@ -30,16 +32,44 @@ const selectedBowtype = ref(userStore.user.bowType || "");
 const indoorClassifications = ref({ ...(userStore.user.indoorClassifications || {}) });
 const outdoorClassifications = ref({ ...(userStore.user.outdoorClassifications || {}) });
 
-// Filter state - all unselected by default
-const indoorSelected = ref(false);
-const outdoorSelected = ref(false);
-const metricSelected = ref(false);
-const imperialSelected = ref(false);
-const practiceSelected = ref(false);
+// Use the stored preferences for filter state
+const indoorSelected = computed({
+  get: () => searchPreferencesStore.preferences.indoorSelected,
+  set: (value) => searchPreferencesStore.updatePreferences({ indoorSelected: value })
+});
+
+const outdoorSelected = computed({
+  get: () => searchPreferencesStore.preferences.outdoorSelected,
+  set: (value) => searchPreferencesStore.updatePreferences({ outdoorSelected: value })
+});
+
+const metricSelected = computed({
+  get: () => searchPreferencesStore.preferences.metricSelected,
+  set: (value) => searchPreferencesStore.updatePreferences({ metricSelected: value })
+});
+
+const imperialSelected = computed({
+  get: () => searchPreferencesStore.preferences.imperialSelected,
+  set: (value) => searchPreferencesStore.updatePreferences({ imperialSelected: value })
+});
+
+const practiceSelected = computed({
+  get: () => searchPreferencesStore.preferences.practiceSelected,
+  set: (value) => searchPreferencesStore.updatePreferences({ practiceSelected: value })
+});
+
+const challengingRoundsOnly = computed({
+  get: () => searchPreferencesStore.preferences.challengingRoundsOnly,
+  set: (value) => searchPreferencesStore.updatePreferences({ challengingRoundsOnly: value })
+});
+
+const searchQuery = computed({
+  get: () => searchPreferencesStore.preferences.searchQuery,
+  set: (value) => searchPreferencesStore.updatePreferences({ searchQuery: value })
+});
 
 // Max distance from user preferences
 const maxDistance = ref(userStore.user.maxYards || 100);
-const searchQuery = ref("");
 
 // Determine if any environment filter is active
 const environmentFilterActive = computed(() =>
@@ -138,9 +168,6 @@ watchEffect(() => {
   }
 });
 
-// Add a new state for challenge mode
-const challengingRoundsOnly = ref(true);
-
 // Get practice rounds
 const practiceRounds = computed(() => {
   return gameTypes.filter(type =>
@@ -207,25 +234,25 @@ const mediumRounds = computed(() => filteredRounds.value.filter(r => r.category 
 const longRounds = computed(() => filteredRounds.value.filter(r => r.category === "long"));
 const practiceRoundsFiltered = computed(() => filteredRounds.value.filter(r => r.category === "practice"));
 
-// Toggle functions
+// Toggle functions now use the store methods
 function toggleIndoor() {
-  indoorSelected.value = !indoorSelected.value;
+  searchPreferencesStore.toggleIndoor();
 }
 
 function toggleOutdoor() {
-  outdoorSelected.value = !outdoorSelected.value;
+  searchPreferencesStore.toggleOutdoor();
 }
 
 function toggleMetric() {
-  metricSelected.value = !metricSelected.value;
+  searchPreferencesStore.toggleMetric();
 }
 
 function toggleImperial() {
-  imperialSelected.value = !imperialSelected.value;
+  searchPreferencesStore.toggleImperial();
 }
 
 function togglePractice() {
-  practiceSelected.value = !practiceSelected.value;
+  searchPreferencesStore.togglePractice();
 }
 
 function selectRound(type) {
@@ -255,7 +282,7 @@ function updateMaxDistance() {
 
 // Add a function to toggle challenge mode
 function toggleChallengingRounds() {
-  challengingRoundsOnly.value = !challengingRoundsOnly.value;
+  searchPreferencesStore.toggleChallengingRounds();
 }
 </script>
 
@@ -345,7 +372,7 @@ function toggleChallengingRounds() {
       <!-- Filters at the top -->
       <div class="filters-container">
         <div class="filters">
-          <!-- Indoor Filter Button -->
+          <!-- Indoor Filter Button with house icon -->
           <button
             class="filter-button"
             :class="{ 'active': indoorSelected }"
@@ -355,9 +382,9 @@ function toggleChallengingRounds() {
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                  stroke-width="2"
                  stroke-linecap="round" stroke-linejoin="round" class="filter-icon">
-              <circle cx="12" cy="12" r="10"></circle>
-              <circle cx="12" cy="12" r="6"></circle>
-              <circle cx="12" cy="12" r="2"></circle>
+              <!-- House/Home icon -->
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
             </svg>
             <span class="filter-label">Indoor</span>
           </button>
