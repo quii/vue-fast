@@ -77,14 +77,17 @@ if ("serviceWorker" in navigator) {
 
 const app = createApp({
   template: `
-    <MainNavigation />
-    <router-view></router-view>
+    <div class="app-container">
+      <div class="content-area">
+        <router-view></router-view>
+      </div>
+      <MainNavigation />
+    </div>
   `
 });
 app.use(router)
 app.component("MainNavigation", MainNavigation);
 app.use(createPinia())
 app.use(Toast, {})
-
 
 app.mount('#app')

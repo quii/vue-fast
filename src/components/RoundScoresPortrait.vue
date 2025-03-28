@@ -90,7 +90,6 @@ tbody td {
 
 .grand-totals-header td {
   font-weight: 600;
-  padding-top: 1em;
   border-bottom: none;
   background-color: var(--color-background-soft);
 }

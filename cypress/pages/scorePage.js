@@ -4,7 +4,7 @@ class ScorePage {
   }
 
   navigateTo() {
-    cy.get("a").contains("📝 Scoring").click();
+    cy.get("a").contains("Score").click();
   }
 
   clearData() {

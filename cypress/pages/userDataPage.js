@@ -1,6 +1,6 @@
 export class UserDataPage {
   navigateTo() {
-    cy.get("a").contains("You").click();
+    cy.get("a").contains("Profile").click();
   }
 
   setArcherDetails(gender, bowType, ageGroup, name = null) {

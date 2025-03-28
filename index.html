@@ -3,16 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <link rel="icon" href="/favicon.ico">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta name="theme-color" content="white" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#181818" media="(prefers-color-scheme: dark)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <title>Fast!</title>
+  <style>
+      body {
+          margin: 0;
+          padding: 0;
+          height: 100vh;
+          overflow-x: hidden;
+      }
+
+      #app {
+          height: 100%;
+      }
+
+      .app-container {
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+      }
+
+      .content-area {
+          flex: 1;
+          overflow-y: auto;
+          padding-bottom: calc(60px + env(safe-area-inset-bottom, 0));
+      }
+
+      /* Add smooth scrolling */
+      html {
+          scroll-behavior: smooth;
+      }
+  </style>
 </head>
 <body>
-<div id="app">
-  <Navigation />
-  <router-view></router-view>
-</div>
+<div id="app"></div>
 <script type="module" src="/src/main.js"></script>
 </body>
 </html>

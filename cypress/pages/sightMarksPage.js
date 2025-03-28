@@ -1,6 +1,6 @@
 class SightMarksPage {
   navigateTo() {
-    cy.get("a").contains("📐").click();
+    cy.get("a").contains("Sight").click();
   }
 
   addSightMark(distance, unit, notches, vertical) {

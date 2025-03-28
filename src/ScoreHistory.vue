@@ -28,28 +28,54 @@
         @reset="handleReset"
       />
 
+      <!-- Replace the existing round graph button section with this -->
       <div v-if="showGraphButton" class="graph-button-container">
-        <button class="view-graph-button" @click="openGraph">
-          📈 View {{ capitalizedRoundName }} Graph
-        </button>
+        <BaseButton
+          variant="default"
+          size="medium"
+          @click="openGraph"
+          fullWidth
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" class="button-icon">
+            <line x1="18" y1="20" x2="18" y2="10"></line>
+            <line x1="12" y1="20" x2="12" y2="4"></line>
+            <line x1="6" y1="20" x2="6" y2="14"></line>
+            <line x1="2" y1="20" x2="22" y2="20"></line>
+          </svg>
+          <span>View {{ capitalizedRoundName }} Graph</span>
+        </BaseButton>
       </div>
-
       <div v-if="showIndoorHandicapGraphButton || showOutdoorHandicapGraphButton"
            class="graph-button-container handicap-buttons">
-        <button
+        <BaseButton
           v-if="showIndoorHandicapGraphButton"
-          class="view-graph-button handicap-button"
-          @click="openIndoorHandicapGraph">
-          📉 Indoor Handicap
-        </button>
-        <button
-          v-if="showOutdoorHandicapGraphButton"
-          class="view-graph-button handicap-button"
-          @click="openOutdoorHandicapGraph">
-          📉 Outdoor Handicap
-        </button>
-      </div>
+          variant="default"
+          size="medium"
+          @click="openIndoorHandicapGraph"
+          class="handicap-button"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" class="button-icon">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+          </svg>
+          <span>Indoor Handicap</span>
+        </BaseButton>
 
+        <BaseButton
+          v-if="showOutdoorHandicapGraphButton"
+          variant="default"
+          size="medium"
+          @click="openOutdoorHandicapGraph"
+          class="handicap-button"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" class="button-icon">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+          </svg>
+          <span>Outdoor Handicap</span>
+        </BaseButton>
+      </div>
       <div v-if="hasClassificationProgress" class="classification-progress-section">
         <div v-for="(bowProgress, bowType) in classificationProgress" :key="bowType">
           <!-- In the template, update the ClassificationProgress components -->
@@ -124,6 +150,7 @@ import { usePreferencesStore } from "@/stores/preferences";
 import HistoryTipModal from "@/components/modals/HistoryTipModal.vue";
 import ScoreHistoryGraph from "@/components/ScoreHistoryGraph.vue";
 import ClassificationProgress from "@/components/ClassificationProgress.vue";
+import BaseButton from "@/components/BaseButton.vue";
 
 const store = useHistoryStore();
 const router = useRouter();
@@ -336,7 +363,6 @@ function view(id) {
   router.push({ name: "viewHistory", params: { id } });
 }
 </script>
-
 <style scoped>
 td {
   text-transform: capitalize;
@@ -388,24 +414,17 @@ p {
   padding: 0 0.5em; /* Add consistent horizontal padding */
 }
 
+.button-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 0.5em;
+}
+
 .graph-button-container {
   display: flex;
   justify-content: center;
-  margin: 10px 0; /* Only vertical margin */
+  margin: 0;
   width: 100%; /* Full width of parent */
-}
-
-.view-graph-button {
-  background-color: var(--color-background-soft);
-  color: var(--color-text);
-  border: 1px solid var(--color-border);
-  padding: 8px 16px;
-  border-radius: 4px;
-  font-size: 1rem;
-  cursor: pointer;
-  width: 100%; /* Make buttons take full width of container */
-  max-width: 100%; /* Ensure buttons don't exceed container width */
-  text-align: center; /* Center text in buttons */
 }
 
 .graph-modal {
@@ -444,14 +463,11 @@ p {
 
 .handicap-buttons {
   display: flex;
-  justify-content: space-between; /* Change to space-between for better spacing */
-  gap: 10px; /* Keep gap between buttons */
-  width: 100%; /* Ensure full width */
+  gap: 0.5em;
 }
 
 .handicap-button {
-  flex: 1; /* Make buttons share space equally */
-  max-width: calc(50% - 5px); /* Ensure buttons don't get too wide, accounting for gap */
+  flex: 1;
 }
 
 .classification-progress-section {
@@ -467,6 +483,4 @@ p {
   gap: 0.5em;
   margin: 1em 0;
 }
-
-
 </style>
