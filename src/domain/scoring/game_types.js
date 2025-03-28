@@ -96,10 +96,9 @@ function sortByNumberOfEndsAndDistance(a, b) {
 
 export async function calculateAppropriateRounds(classification, age, sex, bowtype, maxYards) {
   const classificationNumber = classificationList.indexOf(classification);
-  const outdoorRounds = gameTypes.filter(x => gameTypeConfig[x].isOutdoor);
 
   const improvementRounds = [];
-  for (const round of outdoorRounds) {
+  for (const round of gameTypes) {
     const scores = await calculateRoundScores(sex, bowtype, age, round);
     const config = gameTypeConfig[round];
     const distance = calculateDistanceLabel(config);

@@ -1,10 +1,9 @@
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, watchEffect } from "vue";
 import { useRouter } from "vue-router";
-import { useHistoryStore } from "@/stores/history";
 import { useUserStore } from "@/stores/user";
-import { gameTypes } from "@/domain/scoring/game_types";
-import { filterGameTypes } from "@/domain/scoring/round_filters"; // Import the domain function
+import { calculateAppropriateRounds } from "@/domain/scoring/game_types";
+import { filterGameTypes } from "@/domain/scoring/round_filters";
 import RoundCard from "@/components/RoundCard.vue";
 
 defineProps({
@@ -19,7 +18,6 @@ defineProps({
 });
 
 const router = useRouter();
-const history = useHistoryStore();
 const userStore = useUserStore();
 
 // Filter state - all unselected by default
@@ -67,27 +65,73 @@ const filters = computed(() => {
   };
 });
 
-const recentTypes = computed(() => history.getRecentGameTypes());
-const otherTypes = computed(() =>
-  gameTypes.filter(type => !recentTypes.value.includes(type))
+// Get appropriate rounds based on user profile
+const appropriateRounds = ref({ short: [], medium: [], long: [] });
+const allRoundsList = ref([]);
+
+// Check if user has all required details
+const userHasRequiredDetails = computed(() =>
+  userStore.user.gender &&
+  userStore.user.ageGroup &&
+  userStore.user.bowType &&
+  userStore.user.outdoorClassifications &&
+  userStore.user.outdoorClassifications[userStore.user.bowType]
 );
 
-// Use the domain function to filter rounds
-const filteredRecentTypes = computed(() =>
-  filterGameTypes(recentTypes.value, filters.value)
-);
+// Add a new state for challenge mode
+const challengingRoundsOnly = ref(true);
 
-const filteredOtherTypes = computed(() =>
-  filterGameTypes(otherTypes.value, filters.value)
-);
+// Fetch appropriate rounds when component mounts or when max distance or challenge mode changes
+watchEffect(async () => {
+  if (userHasRequiredDetails.value) {
+    // Get the classification for the current bow type
+    // If challenging rounds only is disabled, use "Unclassified" to show all rounds
+    const classification = challengingRoundsOnly.value
+      ? userStore.user.outdoorClassifications[userStore.user.bowType] || "Unclassified"
+      : "Unclassified";
 
-function selectRound(type) {
-  router.push({
-    path: "/",
-    query: { selectedRound: type }
-  });
-}
+    // Calculate appropriate rounds
+    appropriateRounds.value = await calculateAppropriateRounds(
+      classification,
+      userStore.user.ageGroup,
+      userStore.user.gender,
+      userStore.user.bowType,
+      maxDistance.value
+    );
 
+    // Combine all rounds into a single array
+    allRoundsList.value = [
+      ...appropriateRounds.value.short.map(r => ({ ...r, category: "short" })),
+      ...appropriateRounds.value.medium.map(r => ({ ...r, category: "medium" })),
+      ...appropriateRounds.value.long.map(r => ({ ...r, category: "long" }))
+    ];
+  } else {
+    allRoundsList.value = [];
+  }
+});
+
+// Apply additional filters to the appropriate rounds
+const filteredRounds = computed(() => {
+  if (allRoundsList.value.length === 0) {
+    return [];
+  }
+
+  // Extract just the round names for filtering
+  const roundNames = allRoundsList.value.map(r => r.round);
+
+  // Apply our filters
+  const filteredNames = filterGameTypes(roundNames, filters.value);
+
+  // Return the full round objects that match the filtered names
+  return allRoundsList.value.filter(r => filteredNames.includes(r.round));
+});
+
+// Group filtered rounds by category for display
+const shortRounds = computed(() => filteredRounds.value.filter(r => r.category === "short"));
+const mediumRounds = computed(() => filteredRounds.value.filter(r => r.category === "medium"));
+const longRounds = computed(() => filteredRounds.value.filter(r => r.category === "long"));
+
+// Toggle functions
 function toggleIndoor() {
   indoorSelected.value = !indoorSelected.value;
 }
@@ -108,9 +152,15 @@ function togglePractice() {
   practiceSelected.value = !practiceSelected.value;
 }
 
+function selectRound(type) {
+  router.push({
+    path: "/",
+    query: { selectedRound: type }
+  });
+}
+
 // Update user's max distance when the slider changes
 function updateMaxDistance() {
-  // Save to user store
   userStore.save(
     userStore.user.ageGroup,
     userStore.user.gender,
@@ -126,11 +176,16 @@ function updateMaxDistance() {
     userStore.user.knockColor
   );
 }
+
+// Add a function to toggle challenge mode
+function toggleChallengingRounds() {
+  challengingRoundsOnly.value = !challengingRoundsOnly.value;
+}
 </script>
 
 <template>
   <div class="round-selection-page">
-    <!-- Filters at the top, styled like TopBar.vue -->
+    <!-- Filters at the top -->
     <div class="filters-container">
       <div class="filters">
         <!-- Indoor Filter Button -->
@@ -220,6 +275,22 @@ function updateMaxDistance() {
           </svg>
           <span class="filter-label">Practice</span>
         </button>
+
+        <!-- Challenge Mode Filter Button with archery-related design -->
+        <button
+          class="filter-button challenge-button"
+          :class="{ 'active': challengingRoundsOnly }"
+          @click="toggleChallengingRounds"
+          aria-label="Toggle challenging rounds"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" class="filter-icon">
+            <circle cx="12" cy="12" r="10"></circle>
+            <circle cx="12" cy="12" r="6"></circle>
+            <circle cx="12" cy="12" r="2"></circle>
+          </svg>
+          <span class="filter-label">{{ challengingRoundsOnly ? "Challenging" : "All Rounds" }}</span>
+        </button>
       </div>
     </div>
 
@@ -242,28 +313,50 @@ function updateMaxDistance() {
       <input type="text" v-model="searchQuery" placeholder="Search rounds..." />
     </div>
 
-    <!-- Round lists -->
-    <div class="rounds-container">
-      <div v-if="filteredRecentTypes.length">
-        <h3>Recent Rounds</h3>
+    <!-- Message when user details are missing -->
+    <div v-if="!userHasRequiredDetails" class="missing-details-message">
+      <p>To see rounds that can help improve your classification, please complete your profile in the "You" tab.</p>
+    </div>
+
+    <!-- Message when no rounds match filters -->
+    <div v-else-if="filteredRounds.length === 0" class="no-rounds-message">
+      <p>No rounds match your current filters. Try adjusting your filters or increasing your maximum distance.</p>
+    </div>
+
+    <!-- Rounds categorized by length -->
+    <div v-else class="rounds-container">
+      <div v-if="shortRounds.length > 0" class="round-category">
+        <h3>Short Rounds</h3>
         <div class="round-list">
           <RoundCard
-            v-for="type in filteredRecentTypes"
-            :key="type"
-            :round="{ round: type }"
-            @click="selectRound(type)"
+            v-for="round in shortRounds"
+            :key="round.round"
+            :round="round"
+            @click="selectRound(round.round)"
           />
         </div>
       </div>
 
-      <div>
-        <h3>All Rounds</h3>
+      <div v-if="mediumRounds.length > 0" class="round-category">
+        <h3>Medium Rounds</h3>
         <div class="round-list">
           <RoundCard
-            v-for="type in filteredOtherTypes"
-            :key="type"
-            :round="{ round: type }"
-            @click="selectRound(type)"
+            v-for="round in mediumRounds"
+            :key="round.round"
+            :round="round"
+            @click="selectRound(round.round)"
+          />
+        </div>
+      </div>
+
+      <div v-if="longRounds.length > 0" class="round-category">
+        <h3>Long Rounds</h3>
+        <div class="round-list">
+          <RoundCard
+            v-for="round in longRounds"
+            :key="round.round"
+            :round="round"
+            @click="selectRound(round.round)"
           />
         </div>
       </div>
@@ -411,5 +504,89 @@ function updateMaxDistance() {
   .filter-button {
     width: 70px;
   }
+}
+
+/* Add styles for the classification section */
+.classification-section {
+  margin-bottom: 2em;
+  background-color: var(--color-background-soft);
+  border-radius: 8px;
+  padding: 1em;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.classification-section h3 {
+  margin-top: 0;
+  margin-bottom: 1em;
+  font-size: 1.2em;
+  color: var(--color-text);
+}
+
+.round-category {
+  margin-bottom: 1.5em;
+}
+
+.round-category h4 {
+  margin: 0.5em 0;
+  font-size: 1em;
+  color: var(--color-text-light);
+}
+
+.all-rounds-section h3 {
+  margin: 1em 0 0.5em 0;
+  font-size: 1.2em;
+  color: var(--color-text);
+}
+
+.all-rounds-section h4 {
+  margin: 0.5em 0;
+  font-size: 1em;
+  color: var(--color-text-light);
+}
+
+/* Challenge button styles */
+.challenge-button {
+  position: relative;
+}
+
+.challenge-button.active {
+  background-color: var(--color-highlight, #4CAF50);
+  color: white;
+}
+
+/* Filter explanation styles */
+.filter-explanation {
+  background-color: var(--color-background-soft);
+  border-radius: 8px;
+  padding: 0.75em 1em;
+  margin-bottom: 1em;
+  font-size: 0.9em;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.filter-explanation.challenging {
+  border-left: 4px solid var(--color-highlight, #4CAF50);
+}
+
+.filter-explanation:not(.challenging) {
+  border-left: 4px solid var(--color-border);
+}
+
+.filter-explanation p {
+  margin: 0;
+}
+
+/* Add a little animation for the filter buttons */
+.filter-button {
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.filter-button:hover {
+  transform: translateY(-2px);
+}
+
+.filter-button:active {
+  transform: scale(0.95) translateY(0);
 }
 </style>
