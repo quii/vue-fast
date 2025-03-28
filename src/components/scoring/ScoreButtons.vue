@@ -54,6 +54,7 @@ const buttonClass = useButtonClass();
   padding: 0.10em;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   z-index: 10;
+  margin-bottom: 1em;
 }
 
 button {

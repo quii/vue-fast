@@ -103,7 +103,7 @@ class ScorePage {
   }
 
   addNote(noteText) {
-    cy.get("button").contains("📝 Take a note").click();
+    cy.get("button").contains("Take a note").click();
     cy.get("#noteTakerTextArea").type(noteText);
     cy.get("button").contains("💾 Save note").click();
   }

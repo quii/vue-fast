@@ -18,22 +18,19 @@ const props = defineProps({
 })
 
 const colspan = computed(() => (props.endSize * 2) + 2);
-
-
 </script>
 
 <template>
-  <tr v-for="round in rounds" :key="round.id">
+  <tr v-for="round in rounds" :key="round.id" class="score-row">
     <EndScores :scores="round.firstEnd" :endSize="endSize" />
     <EndScores :scores="round.secondEnd" :endSize="endSize" />
-    <td>{{ round.subTotals.hits }}</td>
-    <td
-      :class="{onTrack: false, offTrack: false}">
+    <td class="stat-cell">{{ round.subTotals.hits }}</td>
+    <td class="stat-cell" :class="{onTrack: false, offTrack: false}">
       {{ round.subTotals.totalScore }}
     </td>
-    <td>{{ round.subTotals.golds }}</td>
-    <td v-if="hasX">{{ round.subTotals.X }}</td>
-    <td :class="{
+    <td class="stat-cell">{{ round.subTotals.golds }}</td>
+    <td v-if="hasX" class="stat-cell">{{ round.subTotals.X }}</td>
+    <td class="running-total" :class="{
       onTrack: false,
       highlight: false,
     }">
@@ -44,9 +41,49 @@ const colspan = computed(() => (props.endSize * 2) + 2);
   <tr class="round-subtotal">
     <td :colspan="colspan"></td>
     <td data-test="subTotalHits">{{ subtotals.hits }}</td>
-    <td>{{ subtotals.totalScore }}</td>
+    <td data-test="subTotalScore">{{ subtotals.totalScore }}</td>
     <td data-test="subTotalGolds">{{ subtotals.golds }}</td>
     <td v-if="hasX">{{ subtotals.X }}</td>
-    <td data-test="subTotalScore">{{ subtotals.totalScore }}</td>
+    <td>{{ subtotals.totalScore }}</td>
   </tr>
 </template>
+
+<style scoped>
+.score-row td {
+  padding: 0.5em;
+  vertical-align: middle;
+}
+
+.stat-cell {
+  text-align: center;
+  font-weight: 500;
+}
+
+.running-total {
+  text-align: center;
+  font-weight: 600;
+  border-left: 1px solid var(--color-border-light, rgba(60, 60, 60, 0.1));
+}
+
+.round-subtotal {
+  background-color: var(--color-background-mute);
+}
+
+.round-subtotal td {
+  padding: 0.5em;
+  text-align: center;
+  font-weight: 600;
+}
+
+.onTrack {
+  color: green;
+}
+
+.offTrack {
+  color: red;
+}
+
+.highlight {
+  background-color: rgba(255, 215, 0, 0.2);
+}
+</style>

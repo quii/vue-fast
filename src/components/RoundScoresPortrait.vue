@@ -27,47 +27,79 @@ const totals = computed(() => calculateSubtotals(props.scores, props.gameType));
 const rounds = computed(() => calculateDistanceTotals(props.scores, props.gameType, props.endSize));
 const oneDistanceShoot = computed(() => rounds.value.length === 1);
 const colspan = computed(() => props.endSize);
-
 const totalColspan = computed(() => props.endSize === 5 ? 1 : 2);
-
 </script>
 
 <template>
-  <table>
-    <thead>
-    <tr>
-      <th :colSpan="colspan">🎯 Scores</th>
-      <th>E/T</th>
-    </tr>
-    </thead>
-    <tbody>
-    <RoundTablePortrait
-      v-for="(round, index) in rounds"
-      :key="index+'portrait'"
-      :subtotals="round.subTotals"
-      :rounds="round.roundBreakdown"
-      :endSize="endSize"
-      :hasX="hasX"
-    />
-    <tr v-if="!oneDistanceShoot" class="grand-totals">
-      <td :colSpan="colspan+1">Grand totals</td>
-    </tr>
-    <tr v-if="!oneDistanceShoot" class="grand-totals">
-      <td>Hits</td>
-      <td data-test="totalHits">{{ totals.hits }}</td>
-      <td>Golds</td>
-      <td data-test="totalGolds">{{ totals.golds }}</td>
-      <td>Score</td>
-      <td :colspan="totalColspan">{{ totals.totalScore }}</td>
-    </tr>
-    </tbody>
-  </table>
-  <ClassificationDetails :end-size="props.endSize" :game-type="props.gameType"
-                         :scores="props.scores" :user-profile="props.userProfile"></ClassificationDetails>
+  <div class="table-container">
+    <table>
+      <thead>
+      <tr>
+        <th :colSpan="colspan"></th>
+        <th>E/T</th>
+      </tr>
+      </thead>
+      <tbody>
+      <RoundTablePortrait
+        v-for="(round, index) in rounds"
+        :key="index+'portrait'"
+        :subtotals="round.subTotals"
+        :rounds="round.roundBreakdown"
+        :endSize="endSize"
+        :hasX="hasX"
+      />
+      <tr v-if="!oneDistanceShoot" class="grand-totals-header">
+        <td :colSpan="colspan+1">Grand totals</td>
+      </tr>
+      <tr v-if="!oneDistanceShoot" class="grand-totals">
+        <td>Hits</td>
+        <td data-test="totalHits">{{ totals.hits }}</td>
+        <td>Golds</td>
+        <td data-test="totalGolds">{{ totals.golds }}</td>
+        <td>Score</td>
+        <td :colspan="totalColspan">{{ totals.totalScore }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <ClassificationDetails
+    :end-size="props.endSize"
+    :game-type="props.gameType"
+    :scores="props.scores"
+    :user-profile="props.userProfile"
+  />
 </template>
 
 <style scoped>
+
+.table-container {
+  padding: 0.5em;
+  overflow-x: auto;
+}
+
 table {
+  width: 100%;
+  border-collapse: collapse;
   table-layout: fixed;
+}
+
+tbody td {
+  padding: 0.5em;
+  border-bottom: 1px solid var(--color-border-light, rgba(60, 60, 60, 0.1));
+}
+
+.grand-totals-header td {
+  font-weight: 600;
+  padding-top: 1em;
+  border-bottom: none;
+  background-color: var(--color-background-soft);
+}
+
+.grand-totals td {
+  font-weight: 500;
+}
+
+.grand-totals td:nth-child(even) {
+  font-weight: 600;
 }
 </style>
