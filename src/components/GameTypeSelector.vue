@@ -1,90 +1,38 @@
 <script setup>
-import { ref, computed } from "vue";
 import RoundCard from "./RoundCard.vue";
-import { gameTypes } from "@/domain/scoring/game_types";
-import { useHistoryStore } from "@/stores/history";
+import { useRouter } from "vue-router";
 
-defineProps({
+const props = defineProps({  // Make sure to assign to a variable
   gameType: {
     type: String,
     required: true
   }
 });
 
-const emit = defineEmits(["changeGameType"]);
-const history = useHistoryStore();
-const showModal = ref(false);
-const searchQuery = ref("");
+defineEmits(["changeGameType"]);
+const router = useRouter();
 
-const recentTypes = computed(() => history.getRecentGameTypes());
-const otherTypes = computed(() =>
-  gameTypes.filter(type => !recentTypes.value.includes(type))
-);
-
-const filteredRecentTypes = computed(() => {
-  if (!searchQuery.value) return recentTypes.value;
-  return recentTypes.value.filter(type =>
-    type.toLowerCase().includes(searchQuery.value.toLowerCase())
-  );
-});
-
-const filteredOtherTypes = computed(() => {
-  if (!searchQuery.value) return otherTypes.value;
-  return otherTypes.value.filter(type =>
-    type.toLowerCase().includes(searchQuery.value.toLowerCase())
-  );
-});
-
-function selectRound(type) {
-  emit("changeGameType", type);
-  showModal.value = false;
+function navigateToRoundSelection() {
+  router.push({
+    name: "selectRound",
+    query: {
+      returnTo: "score",
+      currentRound: props.gameType  // Now using props.gameType
+    }
+  });
 }
 </script>
+
 <template>
   <div>
     <!-- Replace button with RoundCard for the currently selected round -->
-    <div class="current-round-container" @click="showModal = true">
+    <div class="current-round-container" @click="navigateToRoundSelection">
       <RoundCard
         v-if="gameType"
         :round="{ round: gameType }"
       />
       <div v-else class="select-placeholder">
         <span>Select the round you're shooting</span>
-      </div>
-    </div>
-
-    <div v-if="showModal" class="modal-overlay">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h2>Select Round</h2>
-          <button class="close-button" @click="showModal = false">×</button>
-        </div>
-
-        <div class="search-container">
-          <input type="text" v-model="searchQuery" placeholder="Search rounds..." />
-        </div>
-
-        <div class="rounds-container">
-          <div v-if="filteredRecentTypes.length">
-            <h3>Recent Rounds</h3>
-            <RoundCard
-              v-for="type in filteredRecentTypes"
-              :key="type"
-              :round="{ round: type }"
-              @click="selectRound(type)"
-            />
-          </div>
-
-          <div>
-            <h3>All Rounds</h3>
-            <RoundCard
-              v-for="type in filteredOtherTypes"
-              :key="type"
-              :round="{ round: type }"
-              @click="selectRound(type)"
-            />
-          </div>
-        </div>
       </div>
     </div>
   </div>

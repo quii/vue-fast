@@ -39,6 +39,16 @@ const routes = [
     path: "/sight-marks",
     name: "sight-marks",
     component: () => import("./components/sight_marks/SightMarksPage.vue")
+  },
+  // Add the new route for round selection
+  {
+    path: "/select-round",
+    name: "selectRound",
+    component: () => import("./views/RoundSelectionPage.vue"),
+    props: route => ({
+      returnTo: route.query.returnTo || "/",
+      currentRound: route.query.currentRound || ""
+    })
   }
 ]
 const router = VueRouter.createRouter({

@@ -23,8 +23,10 @@ import {
 } from "@/domain/scoring/classification";
 import { calculateSubtotals } from "@/domain/scoring/subtotals";
 import { calculateAverageScorePerEnd } from "@/domain/scoring/distance_totals";
+import { useRoute, useRouter } from "vue-router";
 
 const synth = window.speechSynthesis;
+const router = useRouter();
 
 const scoresStore = useScoresStore();
 const gameTypeStore = useGameTypeStore();
@@ -32,6 +34,16 @@ const arrowHistoryStore = useArrowHistoryStore();
 const userStore = useUserStore();
 const notesStore = useNotesStore();
 const history = useHistoryStore();
+
+const route = useRoute();
+
+watch(() => route.query.selectedRound, (newRound) => {
+  if (newRound) {
+    gameTypeStore.setGameType(newRound);
+    // Clear the query parameter after using it
+    router.replace({ query: {} });
+  }
+}, { immediate: true });
 
 const validScores = computed(() => gameTypeStore.currentRound.scores);
 const maxReached = computed(() => {
