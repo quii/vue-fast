@@ -15,6 +15,37 @@ class ScorePage {
     });
   }
 
+  selectPractice(distance) {
+    cy.get(".current-round-container").click();
+
+    cy.get(".filter-label").contains("Practice").click();
+
+    const gameName = `Practice ${distance}`;
+
+    // If there's a search input, use it to find the round faster
+    cy.get(".search-container input").then($input => {
+      if ($input.length) {
+        cy.wrap($input).type(gameName);
+      }
+    });
+
+    // Find the round card with the exact matching round name
+    // We need to be more precise to avoid selecting rounds that contain the name as a substring
+    cy.get(".rounds-container .round-name").each(($el) => {
+      const text = $el.text().trim().toLowerCase();
+      const searchName = gameName.toLowerCase();
+
+      // Check for exact match or match with formatting differences
+      if (text === searchName ||
+        text === searchName.charAt(0).toUpperCase() + searchName.slice(1) ||
+        // Handle special case for rounds with roman numerals
+        text.replace(/\s+/g, " ") === searchName.replace(/\s+/g, " ")) {
+        cy.wrap($el).click();
+        return false; // Break the each loop
+      }
+    });
+  }
+
   selectGame(gameName) {
     // Click the select button to open the modal
     cy.get(".current-round-container").click();

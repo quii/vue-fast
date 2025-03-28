@@ -2,10 +2,12 @@
 import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
 import { useHistoryStore } from "@/stores/history";
-import { gameTypeConfig, gameTypes } from "@/domain/scoring/game_types";
+import { useUserStore } from "@/stores/user";
+import { gameTypes } from "@/domain/scoring/game_types";
+import { filterGameTypes } from "@/domain/scoring/round_filters"; // Import the domain function
 import RoundCard from "@/components/RoundCard.vue";
 
-const props = defineProps({
+defineProps({
   returnTo: {
     type: String,
     default: "/"
@@ -18,56 +20,66 @@ const props = defineProps({
 
 const router = useRouter();
 const history = useHistoryStore();
+const userStore = useUserStore();
+
+// Filter state - all unselected by default
+const indoorSelected = ref(false);
+const outdoorSelected = ref(false);
+const metricSelected = ref(false);
+const imperialSelected = ref(false);
+const practiceSelected = ref(false);
+
+// Max distance from user preferences
+const maxDistance = ref(userStore.user.maxYards || 100);
 const searchQuery = ref("");
 
-// Filter state
-const showIndoor = ref(true);
-const showOutdoor = ref(true);
+// Determine if any environment filter is active
+const environmentFilterActive = computed(() =>
+  indoorSelected.value || outdoorSelected.value
+);
+
+// Determine if any unit filter is active
+const unitFilterActive = computed(() =>
+  metricSelected.value || imperialSelected.value
+);
+
+// Create a computed property for the filter object
+const filters = computed(() => {
+  // If no environment filters are selected, show all environments
+  const showIndoor = environmentFilterActive.value ? indoorSelected.value : true;
+  const showOutdoor = environmentFilterActive.value ? outdoorSelected.value : true;
+
+  // If no unit filters are selected, show all units
+  const showMetric = unitFilterActive.value ? metricSelected.value : true;
+  const showImperial = unitFilterActive.value ? imperialSelected.value : true;
+
+  // Practice rounds are only shown when explicitly selected
+  const showPractice = practiceSelected.value;
+
+  return {
+    showIndoor,
+    showOutdoor,
+    showMetric,
+    showImperial,
+    showPractice,
+    maxDistance: maxDistance.value,
+    searchQuery: searchQuery.value
+  };
+});
 
 const recentTypes = computed(() => history.getRecentGameTypes());
 const otherTypes = computed(() =>
   gameTypes.filter(type => !recentTypes.value.includes(type))
 );
 
-const filteredRecentTypes = computed(() => {
-  if (!searchQuery.value) {
-    return filterByEnvironment(recentTypes.value);
-  }
-  return filterByEnvironment(recentTypes.value.filter(type =>
-    type.toLowerCase().includes(searchQuery.value.toLowerCase())
-  ));
-});
+// Use the domain function to filter rounds
+const filteredRecentTypes = computed(() =>
+  filterGameTypes(recentTypes.value, filters.value)
+);
 
-const filteredOtherTypes = computed(() => {
-  if (!searchQuery.value) {
-    return filterByEnvironment(otherTypes.value);
-  }
-  return filterByEnvironment(otherTypes.value.filter(type =>
-    type.toLowerCase().includes(searchQuery.value.toLowerCase())
-  ));
-});
-
-function filterByEnvironment(types) {
-  return types.filter(type => {
-    // Use the gameTypeConfig to determine if a round is indoor or outdoor
-    const config = gameTypeConfig[type.toLowerCase()];
-
-    // If config exists and has isOutdoor property
-    if (config) {
-      const isOutdoor = config.isOutdoor === true;
-      const isIndoor = !isOutdoor;
-
-      return (isIndoor && showIndoor.value) || (isOutdoor && showOutdoor.value);
-    }
-
-    // Fallback for rounds without config - use string matching
-    const lowerType = type.toLowerCase();
-    const isOutdoor = lowerType.includes("outdoor") || lowerType.includes("field");
-    const isIndoor = !isOutdoor;
-
-    return (isIndoor && showIndoor.value) || (isOutdoor && showOutdoor.value);
-  });
-}
+const filteredOtherTypes = computed(() =>
+  filterGameTypes(otherTypes.value, filters.value)
+);
 
 function selectRound(type) {
   router.push({
@@ -77,19 +89,42 @@ function selectRound(type) {
 }
 
 function toggleIndoor() {
-  showIndoor.value = !showIndoor.value;
-  // Ensure at least one filter is active
-  if (!showIndoor.value && !showOutdoor.value) {
-    showOutdoor.value = true;
-  }
+  indoorSelected.value = !indoorSelected.value;
 }
 
 function toggleOutdoor() {
-  showOutdoor.value = !showOutdoor.value;
-  // Ensure at least one filter is active
-  if (!showIndoor.value && !showOutdoor.value) {
-    showIndoor.value = true;
-  }
+  outdoorSelected.value = !outdoorSelected.value;
+}
+
+function toggleMetric() {
+  metricSelected.value = !metricSelected.value;
+}
+
+function toggleImperial() {
+  imperialSelected.value = !imperialSelected.value;
+}
+
+function togglePractice() {
+  practiceSelected.value = !practiceSelected.value;
+}
+
+// Update user's max distance when the slider changes
+function updateMaxDistance() {
+  // Save to user store
+  userStore.save(
+    userStore.user.ageGroup,
+    userStore.user.gender,
+    userStore.user.bowType,
+    userStore.user.indoorClassifications,
+    userStore.user.outdoorClassifications,
+    userStore.user.indoorSeasonStartDate,
+    userStore.user.outdoorSeasonStartDate,
+    maxDistance.value,
+    userStore.user.name,
+    userStore.user.constructiveCriticism,
+    userStore.user.experimentalTargetFace,
+    userStore.user.knockColor
+  );
 }
 </script>
 
@@ -101,7 +136,7 @@ function toggleOutdoor() {
         <!-- Indoor Filter Button -->
         <button
           class="filter-button"
-          :class="{ 'active': showIndoor }"
+          :class="{ 'active': indoorSelected }"
           @click="toggleIndoor"
           aria-label="Show indoor rounds"
         >
@@ -117,7 +152,7 @@ function toggleOutdoor() {
         <!-- Outdoor Filter Button -->
         <button
           class="filter-button"
-          :class="{ 'active': showOutdoor }"
+          :class="{ 'active': outdoorSelected }"
           @click="toggleOutdoor"
           aria-label="Show outdoor rounds"
         >
@@ -135,7 +170,71 @@ function toggleOutdoor() {
           </svg>
           <span class="filter-label">Outdoor</span>
         </button>
+
+        <!-- Metric Filter Button -->
+        <button
+          class="filter-button"
+          :class="{ 'active': metricSelected }"
+          @click="toggleMetric"
+          aria-label="Show metric rounds"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" class="filter-icon">
+            <line x1="4" y1="9" x2="20" y2="9"></line>
+            <line x1="4" y1="15" x2="20" y2="15"></line>
+            <line x1="10" y1="3" x2="8" y2="21"></line>
+            <line x1="16" y1="3" x2="14" y2="21"></line>
+          </svg>
+          <span class="filter-label">Metric</span>
+        </button>
+
+        <!-- Imperial Filter Button -->
+        <button
+          class="filter-button"
+          :class="{ 'active': imperialSelected }"
+          @click="toggleImperial"
+          aria-label="Show imperial rounds"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" class="filter-icon">
+            <path d="M6 3v18"></path>
+            <path d="M18 3v18"></path>
+            <path d="M6 8h12"></path>
+            <path d="M6 16h12"></path>
+          </svg>
+          <span class="filter-label">Imperial</span>
+        </button>
+
+        <!-- Practice Filter Button -->
+        <button
+          class="filter-button"
+          :class="{ 'active': practiceSelected }"
+          @click="togglePractice"
+          aria-label="Show practice rounds"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" class="filter-icon">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+            <line x1="12" y1="17" x2="12.01" y2="17"></line>
+          </svg>
+          <span class="filter-label">Practice</span>
+        </button>
       </div>
+    </div>
+
+    <!-- Max Distance Slider -->
+    <div class="distance-slider-container">
+      <label for="max-distance">Maximum Distance: {{ maxDistance }} yards</label>
+      <input
+        type="range"
+        id="max-distance"
+        v-model="maxDistance"
+        min="10"
+        max="100"
+        step="10"
+        @change="updateMaxDistance"
+      />
     </div>
 
     <!-- Search bar -->
@@ -189,6 +288,8 @@ function toggleOutdoor() {
   display: flex;
   justify-content: space-around;
   padding: 0.75em 0.5em;
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+  gap: 0.5em; /* Add gap between wrapped items */
 }
 
 .filter-button {
@@ -255,6 +356,50 @@ function toggleOutdoor() {
   display: flex;
   flex-direction: column;
   gap: 0.5em;
+}
+
+.distance-slider-container {
+  background-color: var(--color-background-soft);
+  border-radius: 8px;
+  padding: 1em;
+  margin-bottom: 1em;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.distance-slider-container label {
+  display: block;
+  margin-bottom: 0.5em;
+  font-weight: 500;
+}
+
+.distance-slider-container input[type="range"] {
+  width: 100%;
+  margin: 0.5em 0;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 8px;
+  background: var(--color-background-mute);
+  border-radius: 4px;
+  outline: none;
+}
+
+.distance-slider-container input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-highlight, #4CAF50);
+  cursor: pointer;
+}
+
+.distance-slider-container input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-highlight, #4CAF50);
+  cursor: pointer;
+  border: none;
 }
 
 @media (min-width: 768px) {

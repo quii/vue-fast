@@ -12,7 +12,7 @@ describe("practicing", () => {
   });
 
   it("can pick a practice and score", () => {
-    scorePage.selectGame("Practice 60yd");
+    scorePage.selectPractice("60yd");
 
     scorePage.score(7);
     scorePage.assertButtonIsEnabled("7");
@@ -20,8 +20,7 @@ describe("practicing", () => {
   });
 
   it("can save practice scores at any point without reaching max arrows", () => {
-    // Select a practice round
-    scorePage.selectGame("Practice 50m");
+    scorePage.selectPractice("50m");
 
     // Score just 2 arrows
     const practiceScores = [9, 7];

@@ -40,6 +40,7 @@ function calculateConfigFromBase(base) {
         isOutdoor: gameType.isOutdoor,
         maxArrows,
         canSaveAnytime,
+        isPracticeRound,
         numberOfEnds: maxArrows / endSize,
         isImperial: gameType.isImperial,
         maxDistanceMetres: gameType.maxDistanceMetres || convertToMeters(gameType.maxDistanceYards),
