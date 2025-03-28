@@ -33,12 +33,6 @@ const totalColspan = computed(() => props.endSize === 5 ? 1 : 2);
 <template>
   <div class="table-container">
     <table>
-      <thead>
-      <tr>
-        <th :colSpan="colspan"></th>
-        <th>E/T</th>
-      </tr>
-      </thead>
       <tbody>
       <RoundTablePortrait
         v-for="(round, index) in rounds"
