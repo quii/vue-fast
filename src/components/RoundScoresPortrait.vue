@@ -2,7 +2,6 @@
 import { computed } from "vue";
 import { calculateSubtotals } from "@/domain/scoring/subtotals";
 import RoundTablePortrait from "@/components/RoundTablePortrait.vue";
-import ClassificationDetails from "@/components/ClassificationDetails.vue";
 import { calculateDistanceTotals } from "@/domain/scoring/distance_totals";
 
 const props = defineProps({
@@ -56,12 +55,7 @@ const totalColspan = computed(() => props.endSize === 5 ? 1 : 2);
       </tbody>
     </table>
   </div>
-  <ClassificationDetails
-    :end-size="props.endSize"
-    :game-type="props.gameType"
-    :scores="props.scores"
-    :user-profile="props.userProfile"
-  />
+
 </template>
 
 <style scoped>

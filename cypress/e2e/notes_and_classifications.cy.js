@@ -11,7 +11,7 @@ describe("Notes and Classifications", () => {
     scorePage.clearData();
   });
 
-  it.only("records scores with notes and persists them", () => {
+  it("records scores with notes and persists them", () => {
     userDataPage.navigateTo();
     userDataPage.setArcherDetails("male", "recurve", "senior");
 
@@ -20,7 +20,7 @@ describe("Notes and Classifications", () => {
 
     // First end of 6
     scorePage.score([10, 9, 9, 8, 8, 7]);
-    scorePage.expandClassificationDetails();
+    scorePage.clickClassificationDetails();
     scorePage.checkClassificationTable("A2", "121");
     // scorePage.checkOnTrackStatus(true);
     scorePage.addNote("Good grouping on the 9s");
@@ -40,6 +40,7 @@ describe("Notes and Classifications", () => {
 
     scorePage.checkClassificationAchieved("A1");
     scorePage.checkClassificationMissed("B3");
+    scorePage.clickClassificationDetails();
 
     scorePage.save();
 
@@ -59,7 +60,7 @@ describe("Notes and Classifications", () => {
     // Enter first score to make classification table visible
     scorePage.score([5, 5, 3, 3, 1, 1]);
 
-    scorePage.expandClassificationDetails();
+    scorePage.clickClassificationDetails();
     scorePage.checkClassificationMissed("A3");
 
     for (let i = 0; i < 5; i++) {
@@ -92,7 +93,7 @@ describe("Notes and Classifications", () => {
 
     scorePage.selectGame("Windsor");
     scorePage.score([9, 9, 9, 9, 7, 5]); // Initial score to show classifications
-    scorePage.expandClassificationDetails();
+    scorePage.clickClassificationDetails();
 
     // Score exactly A3 (490)
     for (let i = 0; i < 17; i++) {

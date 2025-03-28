@@ -3,7 +3,6 @@ import { computed } from "vue";
 import RoundTable from "@/components/RoundTable.vue";
 import { calculateSubtotals } from "@/domain/scoring/subtotals";
 import { calculateDistanceTotals } from "@/domain/scoring/distance_totals";
-import ClassificationDetails from "@/components/ClassificationDetails.vue";
 
 const props = defineProps({
   scores: {
@@ -65,13 +64,6 @@ const oneDistanceShoot = computed(() => rounds.value.length === 1);
       </tbody>
     </table>
   </div>
-
-  <ClassificationDetails
-    :end-size="props.endSize"
-    :game-type="props.gameType"
-    :scores="props.scores"
-    :user-profile="props.userProfile"
-  />
 </template>
 <style scoped>
 

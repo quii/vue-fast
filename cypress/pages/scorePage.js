@@ -103,7 +103,7 @@ class ScorePage {
   }
 
   addNote(noteText) {
-    cy.get("button").contains("Take a note").click();
+    cy.get("span").contains("Note").click();
     cy.get("#noteTakerTextArea").type(noteText);
     cy.get("button").contains("💾 Save note").click();
   }
@@ -112,11 +112,16 @@ class ScorePage {
     cy.get("[data-test=\"note-text\"]").contains(noteText).click();
   }
 
-  expandClassificationDetails() {
-    cy.contains("Classification Details").click();
+  clickClassificationDetails() {
+    // Now we need to click on the stats container in the TopBar to expand the details
+    cy.get("span").contains("Class").click();
   }
 
   checkClassificationTable(expectedClassification, shortBy) {
+    // First ensure the classification details are expanded
+    cy.get(".classification-details-container").should("be.visible");
+
+    // Then check for the classification and shortBy value
     cy.get(".classification-table-container").within(() => {
       // Find the row containing the classification
       cy.contains(".classification-badge", expectedClassification)
@@ -131,27 +136,30 @@ class ScorePage {
   }
 
   checkOnTrackStatus(isOnTrack) {
+    // First ensure the classification details are expanded
+    cy.get(".classification-details-container").should("be.visible");
+
     if (isOnTrack) {
-      cy.get(".onTrack").should("exist");
+      cy.get(".avgOnTrack").should("exist");
     } else {
-      cy.get(".offTrack").should("exist");
+      cy.get(".avgOffTrack").should("exist");
     }
   }
 
   checkClassificationAchieved(classification) {
-    cy.get("#classification").within(() => {
-      cy.contains(".classification-badge", classification)
-        .closest(".table-row")
-        .should("have.class", "achieved");
-    });
+    // Check for the classification badge and then verify the achieved class
+    cy.get(".classification-table-container")
+      .contains(".classification-badge", classification)
+      .closest(".table-row")
+      .should("have.class", "achieved");
   }
 
   checkClassificationMissed(classification) {
-    cy.get("#classification").within(() => {
-      cy.contains(".classification-badge", classification)
-        .closest(".table-row")
-        .should("not.have.class", "achieved");
-    });
+    // Check for the classification badge and then verify it doesn't have the achieved class
+    cy.get(".classification-table-container")
+      .contains(".classification-badge", classification)
+      .closest(".table-row")
+      .should("not.have.class", "achieved");
   }
 }
 
