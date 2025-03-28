@@ -2,9 +2,10 @@
 import { ref, computed, watchEffect } from "vue";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/user";
-import { calculateAppropriateRounds } from "@/domain/scoring/game_types";
+import { calculateAppropriateRounds, gameTypes } from "@/domain/scoring/game_types";
 import { filterGameTypes } from "@/domain/scoring/round_filters";
 import RoundCard from "@/components/RoundCard.vue";
+import { classificationList } from "@/domain/scoring/classificationList.js";
 
 defineProps({
   returnTo: {
@@ -19,6 +20,15 @@ defineProps({
 
 const router = useRouter();
 const userStore = useUserStore();
+
+// User profile state
+const selectedAgeGroup = ref(userStore.user.ageGroup || "");
+const selectedGender = ref(userStore.user.gender || "");
+const selectedBowtype = ref(userStore.user.bowType || "");
+
+// Classifications by bow type
+const indoorClassifications = ref({ ...(userStore.user.indoorClassifications || {}) });
+const outdoorClassifications = ref({ ...(userStore.user.outdoorClassifications || {}) });
 
 // Filter state - all unselected by default
 const indoorSelected = ref(false);
@@ -71,15 +81,72 @@ const allRoundsList = ref([]);
 
 // Check if user has all required details
 const userHasRequiredDetails = computed(() =>
-  userStore.user.gender &&
-  userStore.user.ageGroup &&
-  userStore.user.bowType &&
-  userStore.user.outdoorClassifications &&
-  userStore.user.outdoorClassifications[userStore.user.bowType]
+  selectedGender.value &&
+  selectedAgeGroup.value &&
+  selectedBowtype.value &&
+  outdoorClassifications.value[selectedBowtype.value]
 );
+
+// Function to save user profile
+function saveUserProfile() {
+  userStore.save(
+    selectedAgeGroup.value,
+    selectedGender.value,
+    selectedBowtype.value,
+    indoorClassifications.value,
+    outdoorClassifications.value,
+    userStore.user.indoorSeasonStartDate,
+    userStore.user.outdoorSeasonStartDate,
+    maxDistance.value,
+    userStore.user.name,
+    userStore.user.constructiveCriticism,
+    userStore.user.experimentalTargetFace,
+    userStore.user.knockColor
+  );
+}
+
+// Update indoor classification
+function updateIndoorClassification(bowType, classification) {
+  indoorClassifications.value = {
+    ...indoorClassifications.value,
+    [bowType]: classification
+  };
+}
+
+// Update outdoor classification
+function updateOutdoorClassification(bowType, classification) {
+  outdoorClassifications.value = {
+    ...outdoorClassifications.value,
+    [bowType]: classification
+  };
+}
+
+// Initialize classifications when bow type changes
+watchEffect(() => {
+  if (selectedBowtype.value && !indoorClassifications.value[selectedBowtype.value]) {
+    indoorClassifications.value = {
+      ...indoorClassifications.value,
+      [selectedBowtype.value]: "Unclassified"
+    };
+  }
+
+  if (selectedBowtype.value && !outdoorClassifications.value[selectedBowtype.value]) {
+    outdoorClassifications.value = {
+      ...outdoorClassifications.value,
+      [selectedBowtype.value]: "Unclassified"
+    };
+  }
+});
 
 // Add a new state for challenge mode
 const challengingRoundsOnly = ref(true);
+
+// Get practice rounds
+const practiceRounds = computed(() => {
+  return gameTypes.filter(type =>
+    type.toLowerCase().includes("practice")
+  ).map(round => ({ round, category: "practice" }));
+});
 
 // Fetch appropriate rounds when component mounts or when max distance or challenge mode changes
 watchEffect(async () => {
@@ -112,24 +179,33 @@ watchEffect(async () => {
 
 // Apply additional filters to the appropriate rounds
 const filteredRounds = computed(() => {
-  if (allRoundsList.value.length === 0) {
+  if (allRoundsList.value.length === 0 && !practiceSelected.value) {
     return [];
   }
 
+  // Start with the appropriate rounds
+  let rounds = [...allRoundsList.value];
+
+  // Add practice rounds if the practice filter is selected
+  if (practiceSelected.value) {
+    rounds = [...rounds, ...practiceRounds.value];
+  }
+
   // Extract just the round names for filtering
-  const roundNames = allRoundsList.value.map(r => r.round);
+  const roundNames = rounds.map(r => r.round);
 
   // Apply our filters
   const filteredNames = filterGameTypes(roundNames, filters.value);
 
   // Return the full round objects that match the filtered names
-  return allRoundsList.value.filter(r => filteredNames.includes(r.round));
+  return rounds.filter(r => filteredNames.includes(r.round));
 });
 
 // Group filtered rounds by category for display
 const shortRounds = computed(() => filteredRounds.value.filter(r => r.category === "short"));
 const mediumRounds = computed(() => filteredRounds.value.filter(r => r.category === "medium"));
 const longRounds = computed(() => filteredRounds.value.filter(r => r.category === "long"));
+const practiceRoundsFiltered = computed(() => filteredRounds.value.filter(r => r.category === "practice"));
 
 // Toggle functions
 function toggleIndoor() {
@@ -185,179 +261,274 @@ function toggleChallengingRounds() {
 
 <template>
   <div class="round-selection-page">
-    <!-- Filters at the top -->
-    <div class="filters-container">
-      <div class="filters">
-        <!-- Indoor Filter Button -->
-        <button
-          class="filter-button"
-          :class="{ 'active': indoorSelected }"
-          @click="toggleIndoor"
-          aria-label="Show indoor rounds"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-               stroke-linecap="round" stroke-linejoin="round" class="filter-icon">
-            <circle cx="12" cy="12" r="10"></circle>
-            <circle cx="12" cy="12" r="6"></circle>
-            <circle cx="12" cy="12" r="2"></circle>
-          </svg>
-          <span class="filter-label">Indoor</span>
-        </button>
+    <!-- User Profile Setup Section (shown when details are missing) -->
+    <div v-if="!userHasRequiredDetails" class="profile-setup-section">
+      <h2>Complete Your Profile</h2>
+      <p>To see rounds that match your skill level, please provide the following information:</p>
 
-        <!-- Outdoor Filter Button -->
-        <button
-          class="filter-button"
-          :class="{ 'active': outdoorSelected }"
-          @click="toggleOutdoor"
-          aria-label="Show outdoor rounds"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-               stroke-linecap="round" stroke-linejoin="round" class="filter-icon">
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="1" y1="12" x2="3" y2="12"></line>
-            <line x1="21" y1="12" x2="23" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-          </svg>
-          <span class="filter-label">Outdoor</span>
-        </button>
+      <div class="profile-form">
+        <div class="form-group">
+          <label for="age-group">Age Group</label>
+          <select id="age-group" v-model="selectedAgeGroup" @change="saveUserProfile">
+            <option disabled value="">Select age group</option>
+            <option>50+</option>
+            <option value="senior">Senior</option>
+            <option value="u21">Under 21</option>
+            <option value="u18">Under 18</option>
+            <option value="u16">Under 16</option>
+            <option value="u15">Under 15</option>
+            <option value="u14">Under 14</option>
+            <option value="u12">Under 12</option>
+          </select>
+        </div>
 
-        <!-- Metric Filter Button -->
-        <button
-          class="filter-button"
-          :class="{ 'active': metricSelected }"
-          @click="toggleMetric"
-          aria-label="Show metric rounds"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-               stroke-linecap="round" stroke-linejoin="round" class="filter-icon">
-            <line x1="4" y1="9" x2="20" y2="9"></line>
-            <line x1="4" y1="15" x2="20" y2="15"></line>
-            <line x1="10" y1="3" x2="8" y2="21"></line>
-            <line x1="16" y1="3" x2="14" y2="21"></line>
-          </svg>
-          <span class="filter-label">Metric</span>
-        </button>
+        <div class="form-group">
+          <label for="gender">Gender</label>
+          <select id="gender" v-model="selectedGender" @change="saveUserProfile">
+            <option disabled value="">Select gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
 
-        <!-- Imperial Filter Button -->
-        <button
-          class="filter-button"
-          :class="{ 'active': imperialSelected }"
-          @click="toggleImperial"
-          aria-label="Show imperial rounds"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-               stroke-linecap="round" stroke-linejoin="round" class="filter-icon">
-            <path d="M6 3v18"></path>
-            <path d="M18 3v18"></path>
-            <path d="M6 8h12"></path>
-            <path d="M6 16h12"></path>
-          </svg>
-          <span class="filter-label">Imperial</span>
-        </button>
+        <div class="form-group">
+          <label for="bow-type">Bow Type</label>
+          <select id="bow-type" v-model="selectedBowtype" @change="saveUserProfile">
+            <option disabled value="">Select bow type</option>
+            <option value="recurve">Recurve</option>
+            <option value="barebow">Barebow</option>
+            <option value="longbow">Longbow</option>
+            <option value="compound">Compound</option>
+          </select>
+        </div>
 
-        <!-- Practice Filter Button -->
-        <button
-          class="filter-button"
-          :class="{ 'active': practiceSelected }"
-          @click="togglePractice"
-          aria-label="Show practice rounds"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-               stroke-linecap="round" stroke-linejoin="round" class="filter-icon">
-            <circle cx="12" cy="12" r="10"></circle>
-            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-            <line x1="12" y1="17" x2="12.01" y2="17"></line>
-          </svg>
-          <span class="filter-label">Practice</span>
-        </button>
+        <div v-if="selectedBowtype" class="form-group">
+          <label for="outdoor-classification">{{ selectedBowtype.charAt(0).toUpperCase() + selectedBowtype.slice(1) }}
+            Outdoor Classification</label>
+          <select
+            id="outdoor-classification"
+            v-model="outdoorClassifications[selectedBowtype]"
+            @change="updateOutdoorClassification(selectedBowtype, outdoorClassifications[selectedBowtype]); saveUserProfile()"
+          >
+            <option>Unclassified</option>
+            <option v-for="option in classificationList" :value="option" v-bind:key="option">
+              {{ option }}
+            </option>
+          </select>
+          <p class="help-text">If you're unsure, select "Unclassified"</p>
+        </div>
 
-        <!-- Challenge Mode Filter Button with archery-related design -->
-        <button
-          class="filter-button challenge-button"
-          :class="{ 'active': challengingRoundsOnly }"
-          @click="toggleChallengingRounds"
-          aria-label="Toggle challenging rounds"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-               stroke-linecap="round" stroke-linejoin="round" class="filter-icon">
-            <circle cx="12" cy="12" r="10"></circle>
-            <circle cx="12" cy="12" r="6"></circle>
-            <circle cx="12" cy="12" r="2"></circle>
-          </svg>
-          <span class="filter-label">{{ challengingRoundsOnly ? "Challenging" : "All Rounds" }}</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- Max Distance Slider -->
-    <div class="distance-slider-container">
-      <label for="max-distance">Maximum Distance: {{ maxDistance }} yards</label>
-      <input
-        type="range"
-        id="max-distance"
-        v-model="maxDistance"
-        min="10"
-        max="100"
-        step="10"
-        @change="updateMaxDistance"
-      />
-    </div>
-
-    <!-- Search bar -->
-    <div class="search-container">
-      <input type="text" v-model="searchQuery" placeholder="Search rounds..." />
-    </div>
-
-    <!-- Message when user details are missing -->
-    <div v-if="!userHasRequiredDetails" class="missing-details-message">
-      <p>To see rounds that can help improve your classification, please complete your profile in the "You" tab.</p>
-    </div>
-
-    <!-- Message when no rounds match filters -->
-    <div v-else-if="filteredRounds.length === 0" class="no-rounds-message">
-      <p>No rounds match your current filters. Try adjusting your filters or increasing your maximum distance.</p>
-    </div>
-
-    <!-- Rounds categorized by length -->
-    <div v-else class="rounds-container">
-      <div v-if="shortRounds.length > 0" class="round-category">
-        <h3>Short Rounds</h3>
-        <div class="round-list">
-          <RoundCard
-            v-for="round in shortRounds"
-            :key="round.round"
-            :round="round"
-            @click="selectRound(round.round)"
-          />
+        <div v-if="selectedBowtype" class="form-group">
+          <label for="indoor-classification">{{ selectedBowtype.charAt(0).toUpperCase() + selectedBowtype.slice(1) }}
+            Indoor Classification</label>
+          <select
+            id="indoor-classification"
+            v-model="indoorClassifications[selectedBowtype]"
+            @change="updateIndoorClassification(selectedBowtype, indoorClassifications[selectedBowtype]); saveUserProfile()"
+          >
+            <option>Unclassified</option>
+            <option v-for="option in classificationList" :value="option" v-bind:key="option">
+              {{ option }}
+            </option>
+          </select>
+          <p class="help-text">If you're unsure, select "Unclassified"</p>
         </div>
       </div>
 
-      <div v-if="mediumRounds.length > 0" class="round-category">
-        <h3>Medium Rounds</h3>
-        <div class="round-list">
-          <RoundCard
-            v-for="round in mediumRounds"
-            :key="round.round"
-            :round="round"
-            @click="selectRound(round.round)"
-          />
+      <div class="profile-note">
+        <p>You can update these details anytime in the "You" tab.</p>
+      </div>
+    </div>
+
+    <!-- Only show this section if user has required details -->
+    <div v-if="userHasRequiredDetails">
+      <!-- Filters at the top -->
+      <div class="filters-container">
+        <div class="filters">
+          <!-- Indoor Filter Button -->
+          <button
+            class="filter-button"
+            :class="{ 'active': indoorSelected }"
+            @click="toggleIndoor"
+            aria-label="Show indoor rounds"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" class="filter-icon">
+              <circle cx="12" cy="12" r="10"></circle>
+              <circle cx="12" cy="12" r="6"></circle>
+              <circle cx="12" cy="12" r="2"></circle>
+            </svg>
+            <span class="filter-label">Indoor</span>
+          </button>
+
+          <!-- Outdoor Filter Button -->
+          <button
+            class="filter-button"
+            :class="{ 'active': outdoorSelected }"
+            @click="toggleOutdoor"
+            aria-label="Show outdoor rounds"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" class="filter-icon">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <span class="filter-label">Outdoor</span>
+          </button>
+
+          <!-- Metric Filter Button -->
+          <button
+            class="filter-button"
+            :class="{ 'active': metricSelected }"
+            @click="toggleMetric"
+            aria-label="Show metric rounds"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" class="filter-icon">
+              <line x1="4" y1="9" x2="20" y2="9"></line>
+              <line x1="4" y1="15" x2="20" y2="15"></line>
+              <line x1="10" y1="3" x2="8" y2="21"></line>
+              <line x1="16" y1="3" x2="14" y2="21"></line>
+            </svg>
+            <span class="filter-label">Metric</span>
+          </button>
+
+          <!-- Imperial Filter Button -->
+          <button
+            class="filter-button"
+            :class="{ 'active': imperialSelected }"
+            @click="toggleImperial"
+            aria-label="Show imperial rounds"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" class="filter-icon">
+              <path d="M6 3v18"></path>
+              <path d="M18 3v18"></path>
+              <path d="M6 8h12"></path>
+              <path d="M6 16h12"></path>
+            </svg>
+            <span class="filter-label">Imperial</span>
+          </button>
+
+          <!-- Practice Filter Button -->
+          <button
+            class="filter-button"
+            :class="{ 'active': practiceSelected }"
+            @click="togglePractice"
+            aria-label="Show practice rounds"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" class="filter-icon">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+            <span class="filter-label">Practice</span>
+          </button>
+
+          <!-- Challenge Mode Filter Button with archery-related design -->
+          <button
+            class="filter-button challenge-button"
+            :class="{ 'active': challengingRoundsOnly }"
+            @click="toggleChallengingRounds"
+            aria-label="Toggle challenging rounds"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" class="filter-icon">
+              <circle cx="12" cy="12" r="10"></circle>
+              <circle cx="12" cy="12" r="6"></circle>
+              <circle cx="12" cy="12" r="2"></circle>
+            </svg>
+            <span class="filter-label">{{ challengingRoundsOnly ? "Challenging" : "All Rounds" }}</span>
+          </button>
         </div>
       </div>
 
-      <div v-if="longRounds.length > 0" class="round-category">
-        <h3>Long Rounds</h3>
-        <div class="round-list">
-          <RoundCard
-            v-for="round in longRounds"
-            :key="round.round"
-            :round="round"
-            @click="selectRound(round.round)"
-          />
+      <!-- Max Distance Slider -->
+      <div class="distance-slider-container">
+        <label for="max-distance">Maximum Distance: {{ maxDistance }} yards</label>
+        <input
+          type="range"
+          id="max-distance"
+          v-model="maxDistance"
+          min="10"
+          max="100"
+          step="10"
+          @change="updateMaxDistance"
+        />
+      </div>
+
+      <!-- Search bar -->
+      <div class="search-container">
+        <input type="text" v-model="searchQuery" placeholder="Search rounds..." />
+      </div>
+
+      <!-- Message when no rounds match filters -->
+      <div v-if="filteredRounds.length === 0" class="no-rounds-message">
+        <p>No rounds match your current filters. Try adjusting your filters or increasing your maximum distance.</p>
+      </div>
+
+      <!-- Rounds categorized by length -->
+      <div v-if="filteredRounds.length > 0" class="rounds-container">
+        <div v-if="practiceRoundsFiltered.length > 0" class="round-category">
+          <h3>Practice Rounds</h3>
+          <div class="round-list">
+            <RoundCard
+              v-for="round in practiceRoundsFiltered"
+              :key="round.round"
+              :round="round"
+              @click="selectRound(round.round)"
+            />
+          </div>
+        </div>
+
+        <div v-if="shortRounds.length > 0" class="round-category">
+          <h3>Short Rounds</h3>
+          <div class="round-list">
+            <RoundCard
+              v-for="round in shortRounds"
+              :key="round.round"
+              :round="round"
+              @click="selectRound(round.round)"
+            />
+          </div>
+        </div>
+
+        <div v-if="mediumRounds.length > 0" class="round-category">
+          <h3>Medium Rounds</h3>
+          <div class="round-list">
+            <RoundCard
+              v-for="round in mediumRounds"
+              :key="round.round"
+              :round="round"
+              @click="selectRound(round.round)"
+            />
+          </div>
+        </div>
+
+        <div v-if="longRounds.length > 0" class="round-category">
+          <h3>Long Rounds</h3>
+          <div class="round-list">
+            <RoundCard
+              v-for="round in longRounds"
+              :key="round.round"
+              :round="round"
+              @click="selectRound(round.round)"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -588,5 +759,68 @@ function toggleChallengingRounds() {
 
 .filter-button:active {
   transform: scale(0.95) translateY(0);
+}
+
+/* Profile setup section styles */
+.profile-setup-section {
+  background-color: var(--color-background-soft);
+  border-radius: 8px;
+  padding: 1.5em;
+  margin-bottom: 1.5em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-setup-section h2 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  font-size: 1.3em;
+  color: var(--color-text);
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin: 1em 0;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.form-group label {
+  font-weight: 500;
+  font-size: 0.9em;
+  color: var(--color-text);
+}
+
+.form-group select {
+  padding: 0.75em;
+  font-size: 1em;
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+.help-text {
+  font-size: 0.8em;
+  color: var(--color-text-light);
+  margin: 0.25em 0 0 0;
+}
+
+.profile-note {
+  margin-top: 1em;
+  padding: 0.75em;
+  background-color: rgba(var(--color-background-mute-rgb), 0.5);
+  border-radius: 6px;
+  font-size: 0.9em;
+}
+
+.profile-note p {
+  margin: 0;
+  color: var(--color-text-light);
 }
 </style>

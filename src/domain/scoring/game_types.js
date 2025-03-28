@@ -108,6 +108,11 @@ export async function calculateAppropriateRounds(classification, age, sex, bowty
       const numberOfEnds = config.distancesRoundSizes.reduce((a, b) => a + b);
       improvementRounds.push({ round, numberOfEnds, distance, distanceValue });
     }
+
+    if (round === "frostbite") {
+      const numberOfEnds = config.distancesRoundSizes.reduce((a, b) => a + b);
+      improvementRounds.push({ round, numberOfEnds, distance, distanceValue });
+    }
   }
 
   return improvementRounds.reduce((acc, round) => {

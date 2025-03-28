@@ -18,6 +18,16 @@ class ScorePage {
   selectPractice(distance) {
     cy.get(".current-round-container").click();
 
+    // Check if the profile setup form is visible and fill it out if needed
+    cy.get("body").then(($body) => {
+      if ($body.find(".profile-setup-section").length > 0) {
+        // Fill out the profile form with senior, male, recurve
+        cy.get("#age-group").select("senior");
+        cy.get("#gender").select("male");
+        cy.get("#bow-type").select("recurve");
+      }
+    });
+
     cy.get(".filter-label").contains("Practice").click();
 
     const gameName = `Practice ${distance}`;
@@ -49,6 +59,16 @@ class ScorePage {
   selectGame(gameName) {
     // Click the select button to open the modal
     cy.get(".current-round-container").click();
+
+    // Check if the profile setup form is visible and fill it out if needed
+    cy.get("body").then(($body) => {
+      if ($body.find(".profile-setup-section").length > 0) {
+        // Fill out the profile form with senior, male, recurve
+        cy.get("#age-group").select("senior");
+        cy.get("#gender").select("male");
+        cy.get("#bow-type").select("recurve");
+      }
+    });
 
     // If there's a search input, use it to find the round faster
     cy.get(".search-container input").then($input => {
