@@ -44,6 +44,7 @@ class ScorePage {
   }
 
   score(input) {
+    cy.dismissToasters();
     if (Array.isArray(input)) {
       input.forEach(score => {
         this.score(score);

@@ -1,5 +1,4 @@
 <script setup>
-
 import { calculateScoreIsValidForEnd } from "@/domain/scoring/end";
 import useButtonClass from "@/composeaables/useButtonClass";
 
@@ -41,9 +40,8 @@ const buttonClass = useButtonClass();
     <button class="undo" @click="$emit('undo')">⌫</button>
   </div>
 </template>
-
 <style scoped>
-div {
+.score-buttons {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -51,29 +49,78 @@ div {
   flex-wrap: wrap;
   top: 0;
   align-self: flex-start;
-}
-
-.undo {
-  color: var(--color-text);
+  background-color: var(--color-background-soft);
+  border-radius: 0 0 8px 8px;
+  padding: 0.10em;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  z-index: 10;
 }
 
 button {
   flex: 1 1 0;
-  font-size: 2.8em;
-  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-  -moz-box-sizing: border-box; /* Firefox, other Gecko */
-  box-sizing: border-box; /* Opera/IE 8+ */
-  height: 15vh;
+  font-size: 2.4em;
+  box-sizing: border-box;
+  height: 12vh;
+  min-height: 50px;
+  max-height: 80px;
   min-width: 10vh;
   font-weight: bold;
   text-align: center;
   padding: 0;
-  border: 1px solid var(--color-background-mute);
+  margin: 0.1em;
+  border-radius: 6px;
+  border: none;
+  transition: transform 0.1s ease;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+.undo {
+  color: var(--color-text);
+  background-color: var(--color-background-mute);
 }
 
 button:disabled {
-  background-color: grey;
-  border-color: grey;
-  color: darkgray;
+  opacity: 0.5;
+  background-color: var(--color-background-mute);
+  color: var(--color-text-light);
+}
+
+/* Gold scores */
+.gold {
+  background-color: #FFD700;
+  color: #333;
+}
+
+/* Red scores */
+.red {
+  background-color: #E53935;
+  color: white;
+}
+
+/* Blue scores */
+.blue {
+  background-color: #1E88E5;
+  color: white;
+}
+
+/* Black scores */
+.black {
+  background-color: #212121;
+  color: white;
+}
+
+/* White scores */
+.white {
+  background-color: #F5F5F5;
+  color: #333;
+}
+
+/* Miss */
+.miss {
+  background-color: #757575;
+  color: white;
 }
 </style>
