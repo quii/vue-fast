@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 
 const props = defineProps({
   modelValue: {
@@ -14,6 +14,9 @@ const props = defineProps({
 
 const emit = defineEmits(["update:modelValue"]);
 
+// Generate a unique ID for this checkbox instance
+const uniqueId = ref(`checkbox-${Math.random().toString(36).substr(2, 9)}`);
+
 const checked = computed({
   get: () => props.modelValue,
   set: (value) => emit("update:modelValue", value)
@@ -24,11 +27,11 @@ const checked = computed({
   <div class="checkbox-container">
     <input
       type="checkbox"
-      :id="'checkbox-' + _uid"
+      :id="uniqueId"
       v-model="checked"
       class="base-checkbox"
     />
-    <label :for="'checkbox-' + _uid" class="checkbox-label">{{ label }}</label>
+    <label :for="uniqueId" class="checkbox-label">{{ label }}</label>
   </div>
 </template>
 
