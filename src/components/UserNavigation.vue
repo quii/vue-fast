@@ -17,33 +17,39 @@ const isActive = (path) => {
 <template>
   <nav class="bottom-nav">
     <router-link to="/" class="nav-item" :class="{ active: isActive('/') }">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-           stroke-linecap="round" stroke-linejoin="round" class="nav-icon">
-        <circle cx="12" cy="12" r="10"></circle>
-        <circle cx="12" cy="12" r="6"></circle>
-        <circle cx="12" cy="12" r="2"></circle>
-      </svg>
+      <div class="icon-container">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" class="nav-icon">
+          <circle cx="12" cy="12" r="10"></circle>
+          <circle cx="12" cy="12" r="6"></circle>
+          <circle cx="12" cy="12" r="2"></circle>
+        </svg>
+      </div>
       <span class="nav-label">Score</span>
     </router-link>
 
     <router-link to="/history" class="nav-item"
                  :class="{ active: isActive('/history') || route.path.startsWith('/history/') }">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-           stroke-linecap="round" stroke-linejoin="round" class="nav-icon">
-        <path d="M12 8v4l3 3"></path>
-        <path d="M3.05 11a9 9 0 1 1 .5 4"></path>
-        <path d="M2 2v5h5"></path>
-      </svg>
+      <div class="icon-container">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" class="nav-icon">
+          <path d="M12 8v4l3 3"></path>
+          <path d="M3.05 11a9 9 0 1 1 .5 4"></path>
+          <path d="M2 2v5h5"></path>
+        </svg>
+      </div>
       <span class="nav-label">History</span>
     </router-link>
 
     <router-link to="/sight-marks" class="nav-item" :class="{ active: isActive('/sight-marks') }">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-           stroke-linecap="round" stroke-linejoin="round" class="nav-icon">
-        <path d="M2 12h20"></path>
-        <path d="M12 2v20"></path>
-        <circle cx="12" cy="12" r="4"></circle>
-      </svg>
+      <div class="icon-container">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" class="nav-icon">
+          <path d="M2 12h20"></path>
+          <path d="M12 2v20"></path>
+          <circle cx="12" cy="12" r="4"></circle>
+        </svg>
+      </div>
       <span class="nav-label">Sight</span>
     </router-link>
 
@@ -61,11 +67,13 @@ const isActive = (path) => {
     </router-link>
 
     <router-link to="/you" class="nav-item" :class="{ active: isActive('/you') }">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-           stroke-linecap="round" stroke-linejoin="round" class="nav-icon">
-        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-        <circle cx="12" cy="7" r="4"></circle>
-      </svg>
+      <div class="icon-container">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" class="nav-icon">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </div>
       <span class="nav-label">Profile</span>
     </router-link>
   </nav>
@@ -95,25 +103,30 @@ const isActive = (path) => {
   color: var(--color-text-light);
   text-decoration: none;
   transition: color 0.2s ease;
+  height: 100%; /* Ensure all items have the same height */
 }
 
 .nav-item.active {
   color: var(--color-highlight, #4CAF50);
 }
 
+.icon-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 24px; /* Fixed height for all icon containers */
+  margin-bottom: 0.25em;
+}
+
 .nav-icon {
   width: 24px;
   height: 24px;
-  margin-bottom: 0.25em;
 }
 
 .nav-label {
   font-size: 0.75em;
   font-weight: 500;
-}
-
-.icon-container {
-  position: relative;
 }
 
 .notification-badge {
