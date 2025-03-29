@@ -15,8 +15,24 @@ class ScorePage {
     });
   }
 
-  selectPractice(distance) {
+  tapRoundSelector() {
     cy.get(".current-round-container").click();
+  }
+
+  setMaxDistance(yards) {
+    cy.get("input[type=\"range\"]").invoke("val", yards).trigger("input");
+  }
+
+  checkRoundRecommendation(roundName, shouldExist = true) {
+    if (shouldExist) {
+      cy.contains(roundName).should("exist");
+    } else {
+      cy.contains(roundName).should("not.exist");
+    }
+  }
+
+  selectPractice(distance) {
+    this.tapRoundSelector();
 
     // Check if the profile setup form is visible and fill it out if needed
     cy.get("body").then(($body) => {
@@ -57,8 +73,7 @@ class ScorePage {
   }
 
   selectGame(gameName) {
-    // Click the select button to open the modal
-    cy.get(".current-round-container").click();
+    this.tapRoundSelector();
 
     // Check if the profile setup form is visible and fill it out if needed
     cy.get("body").then(($body) => {

@@ -1,19 +1,25 @@
+import ScorePage from "../pages/scorePage";
 import { userDataPage } from "../pages/userDataPage";
 
 describe("Round recommendations", () => {
   it("shows appropriate rounds based on archer's max distance", () => {
+    const scorePage = new ScorePage();
+
     cy.visit("/");
     userDataPage.navigateTo();
     userDataPage.setArcherDetails("male", "recurve", "senior");
     userDataPage.setClassification("A1");
-    userDataPage.setMaxDistance(50);
 
-    userDataPage.checkRoundRecommendation("Windsor", false);
-    userDataPage.checkRoundRecommendation("National", false);
+    scorePage.navigateTo();
+    scorePage.tapRoundSelector();
+    scorePage.setMaxDistance(50);
 
-    userDataPage.setMaxDistance(60);
+    scorePage.checkRoundRecommendation("Windsor", false);
+    scorePage.checkRoundRecommendation("National", false);
 
-    userDataPage.checkRoundRecommendation("Windsor");
-    userDataPage.checkRoundRecommendation("National");
+    scorePage.setMaxDistance(60);
+
+    scorePage.checkRoundRecommendation("Windsor");
+    scorePage.checkRoundRecommendation("National");
   });
 });

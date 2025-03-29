@@ -2,9 +2,7 @@
 import { computed, ref, watchEffect } from "vue";
 import { useUserStore } from "@/stores/user";
 import { useHistoryStore } from "@/stores/history";
-import RoundDetails from "@/components/RoundDetails.vue";
 import { classificationList } from "@/domain/scoring/classificationList.js";
-import { calculateAppropriateRounds } from "@/domain/scoring/game_types.js";
 
 const userStore = useUserStore();
 const historyStore = useHistoryStore();
@@ -13,7 +11,6 @@ const selectedAgeGroup = ref(userStore.user.ageGroup);
 const selectedGender = ref(userStore.user.gender);
 const selectedBowtype = ref(userStore.user.bowType);
 const name = ref(userStore.user.name) || "";
-const maxYards = ref(userStore.user.maxYards ?? 100);
 const constructiveCriticism = ref(userStore.user.constructiveCriticism ?? true);
 const experimentalTargetFace = ref(userStore.user.experimentalTargetFace ?? false);
 const knockColor = ref(userStore.user.knockColor ?? "#FF69B4"); // Hot pink default
@@ -49,47 +46,6 @@ watchEffect(() => {
   });
 });
 
-const allArcherDetailsProvided = computed(() => selectedAgeGroup.value &&
-  selectedGender.value &&
-  selectedBowtype.value
-);
-
-const suitableRounds = ref({ short: [], medium: [], long: [] });
-
-// Combine all rounds into a single array
-const allSuitableRounds = computed(() => {
-  return [
-    ...suitableRounds.value.short,
-    ...suitableRounds.value.medium,
-    ...suitableRounds.value.long
-  ];
-});
-
-watchEffect(async () => {
-  if (allArcherDetailsProvided.value) {
-    // Always use the outdoor classification for suitable rounds
-    const currentClassification = outdoorClassifications.value[selectedBowtype.value] || "Unclassified";
-
-    suitableRounds.value = await calculateAppropriateRounds(
-      currentClassification,
-      selectedAgeGroup.value,
-      selectedGender.value,
-      selectedBowtype.value,
-      maxYards.value
-    );
-  }
-});
-
-const hasSuitableRounds = computed(() => {
-  return suitableRounds.value.short.length > 0 || suitableRounds.value.long.length > 0 || suitableRounds.value.medium.length > 0;
-});
-
-// Function to handle round selection
-function selectRound(roundName) {
-  // You can implement what happens when a round is selected
-  console.log(`Selected round: ${roundName}`);
-  // Perhaps navigate to a new page or open a modal with details
-}
 
 function updateIndoorClassification(bowType, classification) {
   indoorClassifications.value = {
@@ -120,7 +76,7 @@ watchEffect(() => {
     outdoorClassifications.value,
     indoorSeasonStartDate.value,
     outdoorSeasonStartDate.value,
-    maxYards.value,
+    userStore.user.maxYards,
     name.value,
     constructiveCriticism.value,
     experimentalTargetFace.value,
@@ -201,21 +157,6 @@ watchEffect(() => {
         </div>
       </div>
     </div>
-
-    <div class="shooting-preferences">
-      <h2>Suggested rounds</h2>
-      <label>Set your maximum shooting distance ({{ maxYards }} yards)</label>
-      <input type="range" v-model="maxYards" min="10" max="100" step="10" />
-    </div>
-
-    <RoundDetails
-      :rounds="allSuitableRounds"
-      @select-round="selectRound"
-    ></RoundDetails>
-
-  <div v-if="!hasSuitableRounds">
-    ⚠️ For your classification, your max distance is too short for me to suggest rounds to improve at.
-  </div>
 
     <div class="shooting-preferences">
       <h2>Other Preferences</h2>
@@ -300,13 +241,6 @@ button {
 h2 {
   margin-top: 0;
   font-size: 1.2em;
-}
-
-.recommended-rounds {
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  padding: 0em;
-  margin-top: 1em;
 }
 
 .recommended-rounds h2 {

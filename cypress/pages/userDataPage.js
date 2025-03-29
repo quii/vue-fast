@@ -29,18 +29,6 @@ export class UserDataPage {
     });
   }
 
-  checkRoundRecommendation(roundName, shouldExist = true) {
-    if (shouldExist) {
-      cy.contains(roundName).should("exist");
-    } else {
-      cy.contains(roundName).should("not.exist");
-    }
-  }
-
-  setMaxDistance(yards) {
-    cy.get("input[type=\"range\"]").invoke("val", yards).trigger("input");
-  }
-
   setSeasonDates(indoorDate, outdoorDate) {
     cy.get("input[type=\"date\"]").eq(0).invoke("val", indoorDate).trigger("change");
     cy.get("input[type=\"date\"]").eq(1).invoke("val", outdoorDate).trigger("change");
