@@ -1,5 +1,9 @@
 <script setup>
 import BaseModal from "@/components/modals/BaseModal.vue";
+import BaseSelect from "@/components/ui/BaseSelect.vue";
+import BaseButton from "@/components/BaseButton.vue";
+import FormGroup from "@/components/ui/FormGroup.vue";
+import ButtonGroup from "@/components/ui/ButtonGroup.vue";
 import { ref } from "vue";
 
 defineProps(["rounds"]);
@@ -14,20 +18,31 @@ function handleSelect() {
 </script>
 
 <template>
-  <BaseModal>
-    <h2>Filter by Round 🏹</h2>
+  <BaseModal title="Filter by Round">
+    <FormGroup>
+      <BaseSelect v-model="selectedRound">
+        <option value="">All Rounds</option>
+        <option v-for="round in rounds" :key="round" :value="round">
+          {{ round }}
+        </option>
+      </BaseSelect>
+    </FormGroup>
 
-    <select v-model="selectedRound" class="round-select">
-      <option value="">All Rounds</option>
-      <option v-for="round in rounds" :key="round" :value="round">
-        {{ round }}
-      </option>
-    </select>
+    <ButtonGroup>
+      <BaseButton
+        variant="outline"
+        @click="emit('close')"
+      >
+        Cancel
+      </BaseButton>
 
-    <div class="button-group">
-      <button @click="emit('close')">Cancel</button>
-      <button class="primary" @click="handleSelect">Apply Filter</button>
-    </div>
+      <BaseButton
+        variant="primary"
+        @click="handleSelect"
+      >
+        Apply Filter
+      </BaseButton>
+    </ButtonGroup>
   </BaseModal>
 </template>
 

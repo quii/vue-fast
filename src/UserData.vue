@@ -3,6 +3,12 @@ import { computed, ref, watchEffect } from "vue";
 import { useUserStore } from "@/stores/user";
 import { useHistoryStore } from "@/stores/history";
 import { classificationList } from "@/domain/scoring/classificationList.js";
+import SectionCard from "@/components/ui/SectionCard.vue";
+import FormGroup from "@/components/ui/FormGroup.vue";
+import BaseInput from "@/components/ui/BaseInput.vue";
+import BaseSelect from "@/components/ui/BaseSelect.vue";
+import BaseCheckbox from "@/components/ui/BaseCheckbox.vue";
+import BaseButton from "@/components/BaseButton.vue";
 
 const userStore = useUserStore();
 const historyStore = useHistoryStore();
@@ -85,140 +91,147 @@ watchEffect(() => {
 });
 </script>
 <template>
-  <div>
-    <div class="user-details-section">
-      <h2>Personal Information</h2>
-      <input type="text" v-model="name" placeholder="Name" />
+  <div class="profile-page">
+    <SectionCard>
+      <h2 class="section-title">Personal Information</h2>
 
-      <select v-model="selectedAgeGroup">
-        <option disabled value="">Select age group</option>
-        <option>50+</option>
-        <option value="senior">Senior</option>
-        <option value="u21">Under 21</option>
-        <option value="u18">Under 18</option>
-        <option value="u16">Under 16</option>
-        <option value="u15">Under 15</option>
-        <option value="u14">Under 14</option>
-        <option value="u12">Under 12</option>
-      </select>
+      <FormGroup label="Name">
+        <BaseInput v-model="name" placeholder="Name" />
+      </FormGroup>
 
-      <select v-model="selectedGender">
-        <option disabled value="">Select gender</option>
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-      </select>
+      <FormGroup label="Age Group">
+        <BaseSelect v-model="selectedAgeGroup">
+          <option disabled value="">Select age group</option>
+          <option>50+</option>
+          <option value="senior">Senior</option>
+          <option value="u21">Under 21</option>
+          <option value="u18">Under 18</option>
+          <option value="u16">Under 16</option>
+          <option value="u15">Under 15</option>
+          <option value="u14">Under 14</option>
+          <option value="u12">Under 12</option>
+        </BaseSelect>
+      </FormGroup>
 
-      <select v-model="selectedBowtype">
-        <option disabled value="">Select bow type</option>
-        <option value="recurve">Recurve</option>
-        <option value="barebow">Barebow</option>
-        <option value="longbow">Longbow</option>
-        <option value="compound">Compound</option>
-      </select>
-    </div>
+      <FormGroup label="Gender">
+        <BaseSelect v-model="selectedGender">
+          <option disabled value="">Select gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </BaseSelect>
+      </FormGroup>
 
-    <div class="season-dates">
-      <h2>Season Dates</h2>
-      <label>
-        Indoor Season Start Date
-        <input type="date" v-model="indoorSeasonStartDate" />
-      </label>
-      <label>
-        Outdoor Season Start Date
-        <input type="date" v-model="outdoorSeasonStartDate" />
-      </label>
-      <button @click="resetSeasonDates" class="reset-dates-btn">Reset to Default Dates</button>
-    </div>
+      <FormGroup label="Bow Type">
+        <BaseSelect v-model="selectedBowtype">
+          <option disabled value="">Select bow type</option>
+          <option value="recurve">Recurve</option>
+          <option value="barebow">Barebow</option>
+          <option value="longbow">Longbow</option>
+          <option value="compound">Compound</option>
+        </BaseSelect>
+      </FormGroup>
+    </SectionCard>
 
-    <div class="classifications">
-      <h2>Classifications</h2>
+    <SectionCard>
+      <h2 class="section-title">Season Dates</h2>
+
+      <FormGroup label="Indoor Season Start Date">
+        <BaseInput type="date" v-model="indoorSeasonStartDate" />
+      </FormGroup>
+
+      <FormGroup label="Outdoor Season Start Date">
+        <BaseInput type="date" v-model="outdoorSeasonStartDate" />
+      </FormGroup>
+
+      <BaseButton
+        variant="outline"
+        @click="resetSeasonDates"
+        fullWidth
+      >
+        Reset to Default Dates
+      </BaseButton>
+    </SectionCard>
+
+    <SectionCard v-if="usedBowTypes.length > 0">
+      <h2 class="section-title">Classifications</h2>
 
       <div v-for="bowType in usedBowTypes" :key="bowType" class="bow-classification">
-        <div class="classification-row">
-          <label>{{ bowType.charAt(0).toUpperCase() + bowType.slice(1) }} Indoor
-          <select v-model="indoorClassifications[bowType]"
-                  @change="updateIndoorClassification(bowType, indoorClassifications[bowType])">
-            <option>Unclassified</option>
-            <option v-for="option in classificationList" :value="option" v-bind:key="option">
-              {{ option }}
-            </option>
-          </select></label>
-        </div>
+        <h3 class="bow-type-title">{{ bowType.charAt(0).toUpperCase() + bowType.slice(1) }}</h3>
 
-        <div class="classification-row">
-          <label>{{ bowType.charAt(0).toUpperCase() + bowType.slice(1) }} Outdoor
-          <select v-model="outdoorClassifications[bowType]"
-                  @change="updateOutdoorClassification(bowType, outdoorClassifications[bowType])">
+        <FormGroup :label="`${bowType.charAt(0).toUpperCase() + bowType.slice(1)} Indoor`">
+          <BaseSelect
+            v-model="indoorClassifications[bowType]"
+            @change="updateIndoorClassification(bowType, indoorClassifications[bowType])"
+          >
             <option>Unclassified</option>
             <option v-for="option in classificationList" :value="option" v-bind:key="option">
               {{ option }}
             </option>
-          </select></label>
-        </div>
+          </BaseSelect>
+        </FormGroup>
+
+        <FormGroup :label="`${bowType.charAt(0).toUpperCase() + bowType.slice(1)} Outdoor`">
+          <BaseSelect
+            v-model="outdoorClassifications[bowType]"
+            @change="updateOutdoorClassification(bowType, outdoorClassifications[bowType])"
+          >
+            <option>Unclassified</option>
+            <option v-for="option in classificationList" :value="option" v-bind:key="option">
+              {{ option }}
+            </option>
+          </BaseSelect>
+        </FormGroup>
       </div>
+    </SectionCard>
+
+    <SectionCard>
+      <h2 class="section-title">Other Preferences</h2>
+
+      <BaseCheckbox
+        v-model="constructiveCriticism"
+        label="Constructive criticism enabled"
+      />
+
+      <BaseCheckbox
+        v-model="experimentalTargetFace"
+        label="Experimental target face scoring enabled"
+      />
+
+      <FormGroup label="Choose knock colour">
+        <BaseInput type="color" v-model="knockColor" />
+      </FormGroup>
+    </SectionCard>
+
+    <div class="buymeacoffee">
+      <p>Happy for you to use this for free, but if you wish to show appreciation, <a
+        href="https://buymeacoffee.com/quii">feel free to tap here and buy me a coffee ☕️ 🥰</a></p>
     </div>
-
-    <div class="shooting-preferences">
-      <h2>Other Preferences</h2>
-
-      <label class="inline"><input type="checkbox" v-model="constructiveCriticism" /> Constructive criticism
-        enabled</label>
-
-      <label class="inline">
-        <input type="checkbox" v-model="experimentalTargetFace" />
-        Experimental target face scoring enabled
-      </label>
-      <label>Choose knock colour<input type="color" v-model="knockColor" />
-      </label>
-    </div>
-
-  <div class="buymeacoffee">
-    <p>Happy for you to use this for free, but if you wish to show appreciation, <a href="https://buymeacoffee.com/quii">feel free to tap here and buy me a coffee ☕️ 🥰</a></p>
   </div>
-  </div>
-
-
 </template>
 <style scoped>
-div {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8em;
-  padding: 1em;
+.profile-page {
+  padding: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-.classification-row, .bow-classification {
-  padding: 0;
+.section-title {
+  margin-top: 0;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: var(--color-text);
 }
 
-.inline {
-  display: inline-block;
-}
-
-label {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-}
-
-button {
-  font-size: 1.5em;
-  padding: 0.5em;
-}
-
-.user-details-section,
-.season-dates,
-.classifications,
-.shooting-preferences {
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  padding: 1em;
+.bow-type-title {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+  color: var(--color-text-light);
 }
 
 .bow-classification {
-  border-bottom: 1px solid var(--color-border);
-  padding-bottom: 1em;
-  margin-bottom: 1em;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--color-border-light);
 }
 
 .bow-classification:last-child {
@@ -227,29 +240,20 @@ button {
   padding-bottom: 0;
 }
 
-.bow-classification h3 {
-  margin-top: 0;
-  margin-bottom: 0.5em;
+.buymeacoffee {
+  margin-top: 2rem;
+  padding: 1rem;
+  text-align: center;
+  background-color: var(--color-background-soft);
+  border-radius: 8px;
 }
 
-.reset-dates-btn {
-  font-size: 1em;
-  padding: 0.5em;
-  margin-top: 0.5em;
+.buymeacoffee a {
+  color: var(--color-highlight);
+  text-decoration: none;
 }
 
-h2 {
-  margin-top: 0;
-  font-size: 1.2em;
-}
-
-.recommended-rounds h2 {
-  margin-top: 0;
-  margin-bottom: 1em;
-}
-
-input, select {
-  padding: 0.5em;
-  font-size: 1.2em;
+.buymeacoffee a:hover {
+  text-decoration: underline;
 }
 </style>

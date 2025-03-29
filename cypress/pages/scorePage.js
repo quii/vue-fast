@@ -169,9 +169,14 @@ class ScorePage {
   }
 
   addNote(noteText) {
+    // Click the Note button in the TopBar to open the note modal
     cy.get("span").contains("Note").click();
-    cy.get("#noteTakerTextArea").type(noteText);
-    cy.get("button").contains("💾 Save note").click();
+
+    // Now we need to target the BaseTextarea in the NoteModal
+    cy.get(".note-textarea").type(noteText);
+
+    // Click the Save Note button
+    cy.get("button").contains("Save Note").click();
   }
 
   highlightNote(noteText) {

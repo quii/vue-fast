@@ -1,5 +1,6 @@
 <script setup>
 import GameTypeSelector from "@/components/GameTypeSelector.vue";
+import NoteModal from "@/components/modals/NoteModal.vue";
 import RoundScores from "@/components/RoundScores.vue";
 import InteractiveTargetFace from "@/components/scoring/InteractiveTargetFace.vue";
 import ScoreButtons from "@/components/scoring/ScoreButtons.vue";
@@ -184,10 +185,10 @@ function handleScore(scoreData) {
   scoresStore.add(scoreData.score);
 }
 
-function saveNote() {
+function saveNote(text) {
   const completedEnds = Math.floor(scoresStore.scores.length / gameTypeStore.currentRound.endSize);
   const currentEnd = completedEnds > 0 ? completedEnds : 1;
-  notesStore.addPendingNote(currentEnd, noteText.value);
+  notesStore.addPendingNote(currentEnd, text);
   noteText.value = "";
   showNoteTaker.value = false;
   toast.success("Note saved");
@@ -238,21 +239,12 @@ function handleTakeNote() {
       💾 Save score to history
     </button>
 
-    <div id="noteTaker" v-if="showNoteTaker" class="modal-overlay">
-      <div class="modal-content">
-        <textarea v-model="noteText" id="noteTakerTextArea" placeholder="Take note of anything here.
-
-Did the end go well?
-
-Why or why not?
-
-Did you follow your process?"></textarea>
-        <div class="note-actions">
-          <button @click="saveNote" :disabled="!noteText.trim()">💾 Save note</button>
-          <button @click="showNoteTaker = false">❌ Cancel</button>
-        </div>
-      </div>
-    </div>
+    <NoteModal
+      v-if="showNoteTaker"
+      :initial-text="noteText"
+      @save="saveNote"
+      @close="showNoteTaker = false"
+    />
     <RoundScores v-if="hasStarted" :scores="scoresStore.scores"
                  :game-type="gameTypeStore.type"
                  :endSize="gameTypeStore.currentRound.endSize"

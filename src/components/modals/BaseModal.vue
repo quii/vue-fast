@@ -1,6 +1,16 @@
+<script setup>
+defineProps({
+  title: {
+    type: String,
+    default: ""
+  }
+});
+</script>
+
 <template>
   <div class="modal-overlay">
     <div class="modal-content">
+      <h2 v-if="title" class="modal-title">{{ title }}</h2>
       <slot></slot>
     </div>
   </div>
@@ -22,10 +32,25 @@
 .modal-content {
   background: var(--color-background);
   color: var(--color-text);
-  padding: 2.5rem;
+  padding: 1.5rem;
   margin: 0 1rem;
   border-radius: 12px;
   min-width: 400px;
-  text-align: center;
+  max-width: 90vw;
+}
+
+.modal-title {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+  color: var(--color-text);
+  text-align: left;
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    min-width: 0;
+    width: 90%;
+  }
 }
 </style>

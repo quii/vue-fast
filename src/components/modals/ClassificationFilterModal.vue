@@ -1,5 +1,9 @@
 <script setup>
 import BaseModal from "@/components/modals/BaseModal.vue";
+import BaseSelect from "@/components/ui/BaseSelect.vue";
+import BaseButton from "@/components/BaseButton.vue";
+import FormGroup from "@/components/ui/FormGroup.vue";
+import ButtonGroup from "@/components/ui/ButtonGroup.vue";
 import { ref } from "vue";
 import { classificationList } from "@/domain/scoring/classificationList";
 
@@ -15,48 +19,30 @@ function handleSelect() {
 </script>
 
 <template>
-  <BaseModal>
-    <h2>Filter by Classification 🏅</h2>
+  <BaseModal title="Filter by Classification">
+    <FormGroup>
+      <BaseSelect v-model="selectedClassification">
+        <option value="">All Classifications</option>
+        <option v-for="classification in filteredClassifications" :key="classification" :value="classification">
+          {{ classification }}
+        </option>
+      </BaseSelect>
+    </FormGroup>
 
-    <select v-model="selectedClassification" class="classification-select">
-      <option value="">All Classifications</option>
-      <option v-for="classification in filteredClassifications" :key="classification" :value="classification">
-        {{ classification }}
-      </option>
-    </select>
+    <ButtonGroup>
+      <BaseButton
+        variant="outline"
+        @click="emit('close')"
+      >
+        Cancel
+      </BaseButton>
 
-    <div class="button-group">
-      <button @click="emit('close')">Cancel</button>
-      <button class="primary" @click="handleSelect">Apply Filter</button>
-    </div>
+      <BaseButton
+        variant="primary"
+        @click="handleSelect"
+      >
+        Apply Filter
+      </BaseButton>
+    </ButtonGroup>
   </BaseModal>
 </template>
-
-<style scoped>
-.classification-select {
-  width: 100%;
-  margin: 1rem 0;
-  padding: 0.5rem;
-  font-size: 1.1rem;
-}
-
-.button-group {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
-
-button {
-  padding: 0.5rem 1rem;
-  font-size: 1.1rem;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-button.primary {
-  background: #4CAF50;
-  color: white;
-  border: none;
-}
-</style>
