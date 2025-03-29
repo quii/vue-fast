@@ -55,13 +55,13 @@ function toggleClassificationDetails() {
     <div class="filters-container">
       <div class="filters">
         <!-- Arrows Remaining Display (non-interactive) -->
-        <div class="info-display" v-if="hasStarted && arrowsRemaining !== null">
+        <div class="info-display" v-if="arrowsRemaining !== null">
           <div class="info-value">{{ arrowsRemaining }}</div>
           <div class="info-label">Arrows left</div>
         </div>
 
         <!-- Max Possible Score Display (non-interactive) -->
-        <div class="info-display" v-if="hasStarted && maxPossibleScore !== null">
+        <div class="info-display" v-if="maxPossibleScore !== null">
           <div class="info-value">{{ maxPossibleScore }}</div>
           <div class="info-label">Max score</div>
         </div>
@@ -99,11 +99,12 @@ function toggleClassificationDetails() {
           <span class="filter-label">Note</span>
         </button>
 
-        <!-- Clear Scores Button -->
+        <!-- Clear Scores Button - Always visible but disabled when not started -->
         <button
-          v-if="hasStarted"
           class="filter-button"
+          :class="{ 'disabled': !hasStarted }"
           @click="confirmClear"
+          :disabled="!hasStarted"
           aria-label="Clear scores"
         >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
