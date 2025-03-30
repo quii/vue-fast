@@ -465,12 +465,12 @@ function toggleChallengingRounds() {
             <span class="filter-label">Practice</span>
           </button>
 
-          <!-- Challenge Mode Filter Button with archery-related design -->
+          <!-- Challenge Mode Filter Button - updated with consistent label -->
           <button
             class="filter-button challenge-button"
             :class="{ 'active': challengingRoundsOnly }"
             @click="toggleChallengingRounds"
-            aria-label="Toggle challenging rounds"
+            aria-label="Show rounds appropriate for your level"
           >
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                  stroke-width="2"
@@ -479,7 +479,7 @@ function toggleChallengingRounds() {
               <circle cx="12" cy="12" r="6"></circle>
               <circle cx="12" cy="12" r="2"></circle>
             </svg>
-            <span class="filter-label">{{ challengingRoundsOnly ? "Challenging" : "All Rounds" }}</span>
+            <span class="filter-label">For You</span>
           </button>
         </div>
       </div>
@@ -745,109 +745,5 @@ function toggleChallengingRounds() {
 /* Challenge button styles */
 .challenge-button {
   position: relative;
-}
-
-.challenge-button.active {
-  background-color: var(--color-highlight, #4CAF50);
-  color: white;
-}
-
-/* Filter explanation styles */
-.filter-explanation {
-  background-color: var(--color-background-soft);
-  border-radius: 8px;
-  padding: 0.75em 1em;
-  margin-bottom: 1em;
-  font-size: 0.9em;
-  text-align: center;
-  transition: background-color 0.3s ease;
-}
-
-.filter-explanation.challenging {
-  border-left: 4px solid var(--color-highlight, #4CAF50);
-}
-
-.filter-explanation:not(.challenging) {
-  border-left: 4px solid var(--color-border);
-}
-
-.filter-explanation p {
-  margin: 0;
-}
-
-/* Add a little animation for the filter buttons */
-.filter-button {
-  transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-.filter-button:hover {
-  transform: translateY(-2px);
-}
-
-.filter-button:active {
-  transform: scale(0.95) translateY(0);
-}
-
-/* Profile setup section styles */
-.profile-setup-section {
-  background-color: var(--color-background-soft);
-  border-radius: 8px;
-  padding: 1.5em;
-  margin-bottom: 1.5em;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
-.profile-setup-section h2 {
-  margin-top: 0;
-  margin-bottom: 0.5em;
-  font-size: 1.3em;
-  color: var(--color-text);
-}
-
-.profile-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-  margin: 1em 0;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-}
-
-.form-group label {
-  font-weight: 500;
-  font-size: 0.9em;
-  color: var(--color-text);
-}
-
-.form-group select {
-  padding: 0.75em;
-  font-size: 1em;
-  border: 1px solid var(--color-border);
-  border-radius: 6px;
-  background-color: var(--color-background);
-  color: var(--color-text);
-}
-
-.help-text {
-  font-size: 0.8em;
-  color: var(--color-text-light);
-  margin: 0.25em 0 0 0;
-}
-
-.profile-note {
-  margin-top: 1em;
-  padding: 0.75em;
-  background-color: rgba(var(--color-background-mute-rgb), 0.5);
-  border-radius: 6px;
-  font-size: 0.9em;
-}
-
-.profile-note p {
-  margin: 0;
-  color: var(--color-text-light);
 }
 </style>
