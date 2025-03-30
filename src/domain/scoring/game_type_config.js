@@ -377,7 +377,7 @@ export const baseConfig = [
     isImperial: false,
     distancesRoundSizes: [3, 3],
     maxDistanceMetres: 50,
-    otherDistancesMetres: [40]
+    otherDistancesMetres: [30]
   },
   {
     name: 'short metric ii',
