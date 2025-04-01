@@ -119,17 +119,8 @@
                :key="shoot.id"
                class="diary-entry"
                @click="view(shoot.id)">
-        <header>
-          <time>{{ parseAndRenderDate(shoot.date) }}</time>
-          <h2>
-            {{ shoot.gameType.charAt(0).toUpperCase() + shoot.gameType.slice(1) }}
-            <span v-if="shoot.classification"
-                  :class="[shoot.classification.name, shoot.classification.scheme, 'classLabel']">
-      {{ shoot.classification.name }} - {{ shoot.score }}
-    </span>
-          </h2>
-        </header>
-        <UserNotes :shootId="shoot.id" />
+        <HistoryCard :item="shoot" />
+        <UserNotes :shoot-id="shoot.id" />
       </article>
     </div>
   </div>
@@ -349,16 +340,6 @@ function handleTouchEnd(e) {
   }
 }
 
-const dateFormat = {
-  day: "numeric",
-  month: "numeric",
-  year: "numeric"
-};
-
-function parseAndRenderDate(date) {
-  return new Date(date).toLocaleDateString("en-GB", dateFormat);
-}
-
 function view(id) {
   router.push({ name: "viewHistory", params: { id } });
 }
@@ -372,46 +353,23 @@ p {
   text-align: center;
 }
 
-.diary-entry:first-child {
-  margin-top: 0;
+.fullpage {
+  padding: 0; /* Remove horizontal padding */
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Diary view styles */
+.diary-view {
+  padding: 0 0.5rem;
 }
 
 .diary-entry {
-  margin: 1rem;
-  padding: 1rem 0.5rem 0 0.5rem;
-  border-bottom: 1px solid var(--color-border);
+  margin: 1rem 0;
 }
 
-.diary-entry time {
-  display: block;
-  font-size: 0.9rem;
-  margin-bottom: 0.3rem;
-}
-
-.diary-entry h2 {
-  margin: 0;
-  font-size: 1.4rem;
-  line-height: 1.5;
-}
-
-.diary-entry :deep(.notes-container) {
-  padding: 0;
-}
-
-.diary-entry :deep(.note-row) {
+.diary-entry:last-child {
   border-bottom: none;
-}
-
-.classLabel {
-  font-size: 1rem;
-  font-weight: bold;
-  padding: 0.2rem 0.5rem;
-  border-radius: 0.2rem;
-  margin-left: 0.5rem;
-}
-
-.fullpage {
-  padding: 0 0.5em; /* Add consistent horizontal padding */
 }
 
 .button-icon {
@@ -421,10 +379,32 @@ p {
 }
 
 .graph-button-container {
+  padding: 0 0.5rem;
+  margin: 1rem 0;
+}
+
+.handicap-buttons {
   display: flex;
-  justify-content: center;
-  margin: 0;
-  width: 100%; /* Full width of parent */
+  gap: 0.5em;
+}
+
+.handicap-button {
+  flex: 1;
+}
+
+.classification-progress-section {
+  margin: 0; /* Remove vertical margin */
+  border: none; /* Remove border */
+  background-color: transparent; /* Make background transparent */
+}
+
+/* Add new card styles */
+.history-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  margin: 1rem 0;
+  padding: 0 0.5rem;
 }
 
 .graph-modal {
@@ -459,28 +439,5 @@ p {
   cursor: pointer;
   z-index: 1001;
   color: var(--color-text);
-}
-
-.handicap-buttons {
-  display: flex;
-  gap: 0.5em;
-}
-
-.handicap-button {
-  flex: 1;
-}
-
-.classification-progress-section {
-  margin: 0; /* Remove vertical margin */
-  border: none; /* Remove border */
-  background-color: transparent; /* Make background transparent */
-}
-
-/* Add new card styles */
-.history-cards {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-  margin: 1em 0;
 }
 </style>

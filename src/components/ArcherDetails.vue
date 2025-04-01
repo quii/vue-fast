@@ -1,30 +1,74 @@
 <script setup>
-defineProps(["name", "ageGroup", "gender", "bowType"]);
+import { computed } from "vue";
+
+const props = defineProps({
+  name: {
+    type: String,
+    required: true
+  },
+  ageGroup: {
+    type: String,
+    default: ""
+  },
+  gender: {
+    type: String,
+    default: ""
+  },
+  bowType: {
+    type: String,
+    default: ""
+  }
+});
+
+// Capitalize the first letter of each word
+function capitalize(str) {
+  if (!str) return "";
+  return str.split(" ")
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ");
+}
+
+const capitalizedName = computed(() => capitalize(props.name));
+const capitalizedBowType = computed(() => capitalize(props.bowType));
+const capitalizedGender = computed(() => capitalize(props.gender));
+const capitalizedAgeGroup = computed(() => capitalize(props.ageGroup));
 </script>
 
 <template>
-  <table class="details">
-    <thead>
-    <tr>
-      <th>Name</th>
-      <th>Age group</th>
-      <th>Gender</th>
-      <th>Bow type</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td>{{ name }}</td>
-      <td>{{ ageGroup }}</td>
-      <td>{{ gender }}</td>
-      <td>{{ bowType }}</td>
-    </tr>
-    </tbody>
-  </table>
+  <div class="archer-details">
+    <div class="info-chips">
+      <div class="info-chip">{{ capitalizedName }}</div>
+      <div v-if="bowType" class="info-chip">{{ capitalizedBowType }}</div>
+      <div v-if="gender" class="info-chip">{{ capitalizedGender }}</div>
+      <div v-if="ageGroup" class="info-chip">{{ capitalizedAgeGroup }}</div>
+    </div>
+  </div>
 </template>
 
 <style scoped>
-.details {
-  text-transform: capitalize;
+.archer-details {
+  margin-bottom: 1rem;
+}
+
+.info-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.info-chip {
+  background-color: var(--color-background-mute);
+  border-radius: 16px;
+  padding: 0.25rem 0.75rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--color-text);
+}
+
+@media (min-width: 768px) {
+  .info-chips {
+    gap: 0.75rem;
+  }
 }
 </style>

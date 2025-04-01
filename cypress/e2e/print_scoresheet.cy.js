@@ -53,7 +53,7 @@ describe("Print scoresheet", () => {
 
     cy.get("h1").should("contain", "bray i");
     cy.get("h2").should("contain", "Shot at Sherwood Forest");
-    cy.get(".details").should("contain", "recurve");
+    cy.get(".archer-details").should("contain", "Recurve");
     cy.get(".signature-row").should("contain", "John Smith");
     cy.get("table").should("contain", "231"); // Updated total for 30 arrows
   });

@@ -46,7 +46,8 @@ function deleteNote(noteId) {
 </script>
 
 <template>
-  <div class="notes-container">
+  <div class="notes-container" v-if="notes.length > 0">
+    <h3 class="notes-heading">Notes</h3>
     <div v-for="note in notes"
          :key="note.id"
          class="note-row"
@@ -62,39 +63,66 @@ function deleteNote(noteId) {
 
 <style scoped>
 .notes-container {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
+  background-color: var(--color-background-soft);
+  border-radius: 8px;
+  margin: 1rem 0;
+  padding: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.notes-heading {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem 0;
+  color: var(--color-text-light);
+  text-align: center;
 }
 
 .note-row {
   display: flex;
   align-items: flex-start;
   border-bottom: 1px solid var(--color-border);
-  margin-bottom: 0.5rem;
   padding: 0.5rem 0;
 }
 
+.note-row:last-child {
+  border-bottom: none;
+}
+
 .highlighted {
-  background-color: gold;
-  color: black;
+  background-color: rgba(255, 215, 0, 0.2);
   border-radius: 8px;
 }
 
 .end-number {
-  font-size: 1.1rem;
-  min-width: 100px;
-  font-weight: bold;
-  padding: 0.8rem 1rem;
+  font-size: 0.9rem;
+  min-width: 80px;
+  font-weight: 600;
+  padding: 0.5rem;
+  color: var(--color-text-light);
 }
 
 .note-content {
   flex-grow: 1;
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   line-height: 1.5;
   white-space: pre-wrap;
   margin: 0;
-  padding: 0.8rem 1rem;
+  padding: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .notes-container {
+    max-width: 800px;
+    margin: 1rem auto;
+  }
+
+  .end-number {
+    min-width: 100px;
+  }
+
+  .note-content {
+    font-size: 1rem;
+  }
 }
 </style>
-

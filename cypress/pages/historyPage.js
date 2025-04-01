@@ -53,6 +53,7 @@ class HistoryPage {
   }
 
   checkNoteIsHighlighted(noteText) {
+    // Check for a note row with both the highlighted class and the specified text
     cy.get("[data-test=\"note-row\"].highlighted").contains(noteText);
   }
 
