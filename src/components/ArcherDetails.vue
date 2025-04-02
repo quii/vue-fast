@@ -46,9 +46,6 @@ const capitalizedAgeGroup = computed(() => capitalize(props.ageGroup));
 </template>
 
 <style scoped>
-.archer-details {
-  margin-bottom: 1rem;
-}
 
 .info-chips {
   display: flex;

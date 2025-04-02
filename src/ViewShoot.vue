@@ -190,14 +190,15 @@ function handleAction(actionData) {
   <!-- Content Container with proper padding -->
   <div class="content-container">
     <BaseCard>
-      <div id="scores">
         <ArcherDetails
           :name="userStore.user.name"
           :age-group="history.selectedShoot.userProfile.ageGroup"
           :gender="history.selectedShoot.userProfile.gender"
           :bow-type="history.selectedShoot.userProfile.bowType"
         />
-        <ViewOnlyTargetFace
+    </BaseCard>
+
+    <ViewOnlyTargetFace
           v-if="arrows.length > 0"
           :arrows="arrows"
           :valid-scores="gameTypeConfig[gameType].scores"
@@ -210,8 +211,6 @@ function handleAction(actionData) {
           :user-profile="history.selectedShoot.userProfile"
           :game-type="gameType"
         />
-      </div>
-    </BaseCard>
 
     <UserNotes :shoot-id="history.selectedShoot.id" :allow-highlight="true" />
   </div>
