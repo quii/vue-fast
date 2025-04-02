@@ -104,7 +104,7 @@ function closeEditModal() {
 </template>
 <style scoped>
 .classification-progress {
-  margin: 0.5em 0;
+  margin: 0.5em 0.5em 1em 0.5em;
   padding: 1em;
   border: 1px solid var(--color-border);
   border-radius: 8px;

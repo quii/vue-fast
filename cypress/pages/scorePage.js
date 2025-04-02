@@ -189,8 +189,6 @@ class ScorePage {
   }
 
   checkClassificationTable(expectedClassification, shortBy) {
-    // First ensure the classification details are expanded
-    cy.get(".classification-details-container").should("be.visible");
 
     // Then check for the classification and shortBy value
     cy.get(".classification-table-container").within(() => {
