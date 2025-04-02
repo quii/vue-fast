@@ -13,13 +13,7 @@ import { usePreferencesStore } from "@/stores/preferences";
 import { useArrowHistoryStore } from "@/stores/arrow_history";
 import PrintModal from "@/components/modals/PrintModal.vue";
 import BaseCard from "@/components/BaseCard.vue";
-// Update the import path for BaseButton
 import BaseButton from "@/components/ui/BaseButton.vue";
-import BaseTopBar from "@/components/ui/BaseTopBar.vue";
-import ClassificationDetailsTable from "@/components/ClassificationDetailsTable.vue";
-import { createClassificationCalculator } from "@/domain/scoring/classification";
-import { calculateSubtotals } from "@/domain/scoring/subtotals";
-import { calculateAverageScorePerEnd } from "@/domain/scoring/distance_totals";
 
 const preferences = usePreferencesStore();
 const arrowHistoryStore = useArrowHistoryStore();
@@ -28,7 +22,6 @@ const arrows = computed(() => arrowHistoryStore.getArrowsForShoot(route.params.i
 const showPrintModal = ref(false);
 const showTip = ref(!preferences.hasSeenPrintTip);
 const showDeleteConfirmation = ref(false);
-const showClassificationDetails = ref(false);
 
 function dismissTip() {
   preferences.dismissPrintTip();
@@ -59,46 +52,6 @@ const capitalizedGameType = computed(() => {
   return gameType.value.charAt(0).toUpperCase() + gameType.value.slice(1);
 });
 
-// Calculate classification data
-const classificationCalculator = ref(null);
-const availableClassifications = ref(null);
-const totals = computed(() => calculateSubtotals(scores.value, gameType.value));
-const averageScoresPerEnd = computed(() =>
-  calculateAverageScorePerEnd(scores.value, endSize.value, gameType.value)
-);
-
-// Since this is a completed shoot, arrows remaining is 0
-const arrowsRemaining = computed(() => 0);
-// Max possible score is the same as the total score for a completed shoot
-const maxPossibleScore = computed(() => totals.value?.totalScore || 0);
-
-// Initialize classification calculator
-async function initClassificationCalculator() {
-  if (!history.selectedShoot?.userProfile) return;
-
-  const { gender, ageGroup, bowType } = history.selectedShoot.userProfile;
-
-  if (!gender || !ageGroup || !bowType) return;
-
-  classificationCalculator.value = await createClassificationCalculator(
-    gameType.value,
-    gender,
-    ageGroup,
-    bowType,
-    null // No personal best needed for this calculation
-  );
-
-  if (classificationCalculator.value) {
-    availableClassifications.value = classificationCalculator.value(
-      totals.value?.totalScore || 0,
-      averageScoresPerEnd.value
-    );
-  }
-}
-
-// Call the initialization function
-initClassificationCalculator();
-
 function confirmDelete() {
   showDeleteConfirmation.value = true;
 }
@@ -116,86 +69,59 @@ function cancelDelete() {
 function handlePrintClick() {
   showPrintModal.value = true;
 }
-
-// Prepare info displays for the top bar
-const infoDisplays = computed(() => [
-  {
-    value: capitalizedGameType.value,
-    label: "Round",
-    class: "wide"
-  },
-  {
-    value: formattedDate.value,
-    label: "Date",
-    class: "wide"
-  }
-]);
-
-// Prepare action buttons for the top bar
-const actionButtons = computed(() => [
-  {
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-           stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="8" r="6"></circle>
-            <path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"></path>
-          </svg>`,
-    label: "Class",
-    action: "toggle-expand",
-    active: showClassificationDetails.value,
-    disabled: !availableClassifications.value
-  },
-  {
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-           stroke-linecap="round" stroke-linejoin="round">
-            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
-            <polyline points="17 21 17 13 7 13 7 21"></polyline>
-            <polyline points="7 3 7 8 15 8"></polyline>
-          </svg>`,
-    label: "Save",
-    action: "save"
-  },
-  {
-    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-           stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="3 6 5 6 21 6"></polyline>
-            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-          </svg>`,
-    label: "Delete",
-    action: "delete",
-    variant: "danger"
-  }
-]);
-
-function handleAction(actionData) {
-  if (actionData.action === "delete") {
-    confirmDelete();
-  } else if (actionData.action === "save") {
-    handlePrintClick();
-  } else if (actionData.action === "toggle-expand") {
-    // Just toggle the state, the computed property will update automatically
-    showClassificationDetails.value = !showClassificationDetails.value;
-  }
-}
 </script>
 
 <template>
-  <!-- Top Bar using BaseTopBar component -->
-  <BaseTopBar
-    :info-displays="infoDisplays"
-    :action-buttons="actionButtons"
-    :has-expandable-content="!!availableClassifications"
-    alignment="right"
-    @action="handleAction"
-  >
-    <template #expandable-content>
-      <ClassificationDetailsTable
-        v-if="availableClassifications"
-        :max-possible-score="maxPossibleScore"
-        :arrows-remaining="arrowsRemaining"
-        :available-classifications="availableClassifications"
-      />
-    </template>
-  </BaseTopBar>
+  <!-- Top Bar -->
+  <div class="top-bar-container">
+    <div class="filters-container">
+      <div class="filters">
+        <!-- Round Name Display (non-interactive) -->
+        <div class="info-display round-info">
+          <div class="info-value round-name">{{ capitalizedGameType }}</div>
+          <div class="info-label">Round</div>
+        </div>
+
+        <!-- Date Display (non-interactive) -->
+        <div class="info-display date-info">
+          <div class="info-value date-value">{{ formattedDate }}</div>
+          <div class="info-label">Date</div>
+        </div>
+
+        <div class="spacer"></div>
+
+        <!-- Save Score Sheet Button -->
+        <button
+          class="filter-button"
+          @click="handlePrintClick"
+          data-test="view-shoot-save"
+          aria-label="Save score sheet"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" class="filter-icon">
+            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+            <polyline points="17 21 17 13 7 13 7 21"></polyline>
+            <polyline points="7 3 7 8 15 8"></polyline>
+          </svg>
+          <span class="filter-label">Save</span>
+        </button>
+
+        <!-- Delete Shoot Button -->
+        <button
+          class="filter-button delete-button"
+          @click="confirmDelete"
+          aria-label="Delete shoot"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" class="filter-icon">
+            <polyline points="3 6 5 6 21 6"></polyline>
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+          </svg>
+          <span class="filter-label">Delete</span>
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- Content Container with proper padding -->
   <div class="content-container">
@@ -279,6 +205,113 @@ function handleAction(actionData) {
   margin: 0 auto;
 }
 
+/* Top Bar Styles - Based on TopBar.vue */
+.top-bar-container {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--color-background);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.filters-container {
+  background-color: var(--color-background-soft);
+  border-radius: 8px;
+  margin: 0.5em;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.filters {
+  display: flex;
+  padding: 0.75em 0.5em;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+.filter-button, .info-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  background-color: var(--color-background);
+  border: none;
+  color: var(--color-text-light);
+  transition: all 0.2s ease;
+  padding: 0.5em;
+}
+
+.info-display {
+  background-color: var(--color-background-mute);
+  cursor: default;
+}
+
+.round-info, .date-info {
+  width: 120px; /* Double the width */
+  padding: 0.5em;
+}
+
+.info-display .round-name {
+  font-size: 1em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.info-display .date-value {
+  font-size: 0.95em; /* Smaller font size for date */
+  white-space: nowrap;
+}
+
+.filter-button {
+  cursor: pointer;
+}
+
+.filter-button:active {
+  transform: scale(0.95);
+}
+
+.filter-button.delete-button {
+  color: #dc3545;
+  background-color: rgba(220, 53, 69, 0.1);
+  border: 1px solid rgba(220, 53, 69, 0.2);
+}
+
+.filter-button.delete-button:active {
+  background-color: rgba(220, 53, 69, 0.2);
+}
+
+.filter-icon {
+  width: 20px;
+  height: 20px;
+  margin-bottom: 0.25em;
+}
+
+.filter-label {
+  font-size: 0.7em;
+  font-weight: 500;
+  text-align: center;
+  line-height: 1;
+  margin-bottom: 0.3em;
+}
+
+.info-value {
+  font-size: 1.2em;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}
+
 /* Modal Styles */
 .modal-overlay {
   position: fixed;
@@ -311,5 +344,19 @@ function handleAction(actionData) {
   display: flex;
   gap: 1em;
   margin-top: 1.5em;
+}
+
+@media (min-width: 768px) {
+  .filters {
+    gap: 1rem;
+  }
+
+  .filter-button {
+    width: 70px;
+  }
+
+  .round-info, .date-info {
+    width: 140px; /* Even wider on larger screens */
+  }
 }
 </style>

@@ -45,7 +45,7 @@ describe("Print scoresheet", () => {
       });
     });
 
-    cy.contains("Save").click();
+    cy.get("[data-test=\"view-shoot-save\"]").click();
     cy.get("#captain").type("John Smith");
     cy.get("#location").type("Sherwood Forest");
     cy.get("[data-test=\"view-shoot-save2\"]").click();

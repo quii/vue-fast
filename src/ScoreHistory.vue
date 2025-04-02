@@ -380,7 +380,7 @@ p {
 
 .graph-button-container {
   padding: 0 0.5rem;
-  margin: 0;
+  margin: 1rem 0;
 }
 
 .handicap-buttons {
