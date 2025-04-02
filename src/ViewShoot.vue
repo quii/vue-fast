@@ -1,5 +1,6 @@
 <script setup>
 import ViewOnlyTargetFace from "@/components/scoring/ViewOnlyTargetFace.vue";
+import { formatRoundName } from "@/domain/formatting.js";
 import { useRoute, useRouter } from "vue-router";
 import { useHistoryStore } from "@/stores/history";
 import { gameTypeConfig } from "@/domain/scoring/game_types";
@@ -53,14 +54,17 @@ const date = computed(() => history.selectedShoot.date);
 // Format the date for display
 const formattedDate = computed(() => {
   if (!date.value) return "";
-  return new Date(date.value).toLocaleDateString();
+
+  // Format as dd/mm/yy instead of the full date
+  const dateObj = new Date(date.value);
+  const day = dateObj.getDate().toString().padStart(2, "0");
+  const month = (dateObj.getMonth() + 1).toString().padStart(2, "0");
+  const year = dateObj.getFullYear().toString().slice(-2); // Get last 2 digits of year
+
+  return `${day}/${month}/${year}`;
 });
 
-// Capitalize the game type for display
-const capitalizedGameType = computed(() => {
-  if (!gameType.value) return "";
-  return gameType.value.charAt(0).toUpperCase() + gameType.value.slice(1);
-});
+const capitalizedGameType = computed(() => formatRoundName(gameType.value));
 
 // Calculate classification data
 const classificationCalculator = ref(null);

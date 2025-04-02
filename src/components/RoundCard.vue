@@ -1,6 +1,7 @@
 <script setup>
+import { formatRoundName } from "@/domain/formatting.js";
 import { computed } from "vue";
-import { getRoundDetails, formatRoundName } from "@/domain/round_details";
+import { getRoundDetails } from "@/domain/round_details";
 import { useHistoryStore } from "@/stores/history";
 import { useSightMarksStore } from "@/stores/sight_marks";
 

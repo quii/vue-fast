@@ -1,4 +1,5 @@
-import { getRoundDetails, formatRoundName } from "./round_details";
+import { formatRoundName } from "@/domain/formatting.js";
+import { getRoundDetails } from "./round_details";
 import { describe, expect, test, vi } from "vitest";
 
 // Mock the gameTypeConfig module

@@ -52,6 +52,18 @@ function handleAction(actionName, index) {
 
   emit("action", { action: actionName, index });
 }
+
+// Function to determine font size class based on text length
+function getFontSizeClass(text) {
+  if (!text) return "";
+
+  const length = text.toString().length;
+
+  if (length > 20) return "text-xs";
+  if (length > 15) return "text-sm";
+  if (length > 10) return "text-md";
+  return "text-default"; // Add a default class instead of empty string
+}
 </script>
 
 <template>
@@ -65,7 +77,7 @@ function handleAction(actionName, index) {
           class="info-display"
           :class="info.class"
         >
-          <div class="info-value">{{ info.value }}</div>
+          <div class="info-value" :class="getFontSizeClass(info.value)">{{ info.value }}</div>
           <div class="info-label">{{ info.label }}</div>
         </div>
 
@@ -219,13 +231,33 @@ function handleAction(actionName, index) {
 }
 
 .info-value {
-  font-size: 1.2em;
+  font-size: 1em; /* Reduced from 1.2em to 1em as the base size */
   font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-grow: 1;
   text-align: center;
+  word-break: break-word;
+  hyphens: auto;
+  padding: 0 0.2em;
+}
+
+/* Responsive font sizes */
+.info-value.text-xs {
+  font-size: 0.75em;
+}
+
+.info-value.text-sm {
+  font-size: 0.85em;
+}
+
+.info-value.text-md {
+  font-size: 0.95em;
+}
+
+.info-value.text-default {
+  font-size: 1em;
 }
 
 .expandable-content-container {
