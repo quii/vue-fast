@@ -31,17 +31,44 @@ const shootInProgress = computed(() => props.arrowsRemaining > 0);
              'failed': classification.score > maxPossibleScore && shootInProgress
            }]">
         <div class="body-cell class-cell">
-          <span v-if="classification.achieved" class="achieved-icon">✅</span>
           <span class="classification-badge" :class="classification.name">{{ classification.name }}</span>
+          <span v-if="classification.achieved" class="achieved-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+          </span>
         </div>
         <div class="body-cell score-cell">
           {{ classification.score }}
-          <span class="short" v-if="classification.shortBy">(-{{ classification.shortBy }})</span>
+          <span class="short" v-if="classification.shortBy">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-down">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <polyline points="19 12 12 19 5 12"></polyline>
+            </svg>
+            {{ classification.shortBy }}
+          </span>
         </div>
         <div v-if="shootInProgress" class="body-cell avg-cell">
           {{ classification.scorePerEnd }}
-          <span class="avgOnTrack" v-if="classification.perEndDiff >= 0">(+{{ classification.perEndDiff }})</span>
-          <span class="avgOffTrack" v-if="classification.perEndDiff < 0">({{ classification.perEndDiff }})</span>
+          <span class="avgOnTrack" v-if="classification.perEndDiff >= 0">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-up">
+              <line x1="12" y1="19" x2="12" y2="5"></line>
+              <polyline points="5 12 12 5 19 12"></polyline>
+            </svg>
+            {{ classification.perEndDiff }}
+          </span>
+          <span class="avgOffTrack" v-if="classification.perEndDiff < 0">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="arrow-down">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <polyline points="19 12 12 19 5 12"></polyline>
+            </svg>
+            {{ Math.abs(classification.perEndDiff) }}
+          </span>
         </div>
       </div>
     </div>
@@ -54,7 +81,7 @@ const shootInProgress = computed(() => props.arrowsRemaining > 0);
   overflow: hidden;
   padding: 0;
   background-color: var(--color-background-soft);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .table-header {
@@ -63,6 +90,7 @@ const shootInProgress = computed(() => props.arrowsRemaining > 0);
   padding: 0.75em 1em;
   font-weight: 600;
   font-size: 0.9em;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .table-body {
@@ -73,8 +101,12 @@ const shootInProgress = computed(() => props.arrowsRemaining > 0);
 .table-row {
   display: flex;
   padding: 0.75em 1em;
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-border-light);
   transition: background-color 0.2s ease;
+}
+
+.table-row:first-child {
+  border-top: none;
 }
 
 .table-row:hover {
@@ -86,7 +118,7 @@ const shootInProgress = computed(() => props.arrowsRemaining > 0);
 }
 
 .class-cell {
-  flex: 1;
+  flex: 1.2;
   display: flex;
   align-items: center;
   gap: 0.5em;
@@ -94,28 +126,45 @@ const shootInProgress = computed(() => props.arrowsRemaining > 0);
 
 .score-cell {
   flex: 1;
+  display: flex;
+  align-items: center;
 }
 
 .avg-cell {
   flex: 1;
+  display: flex;
+  align-items: center;
 }
 
 .classification-badge {
   display: inline-block;
-  padding: 0.2em 0.6em;
+  padding: 0.25em 0.7em;
   border-radius: 12px;
-  font-size: 0.9em;
+  font-size: 0.85em;
   font-weight: 600;
   text-align: center;
   min-width: 2.5em;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .achieved {
   background-color: rgba(144, 238, 144, 0.1);
+  border-left: 3px solid var(--color-highlight, #4CAF50);
 }
 
 .achieved-icon {
-  font-size: 1.1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  color: var(--color-highlight, #4CAF50);
+  margin-left: 0.3em;
+}
+
+.achieved-icon svg {
+  width: 100%;
+  height: 100%;
 }
 
 .failed {
@@ -123,35 +172,25 @@ const shootInProgress = computed(() => props.arrowsRemaining > 0);
   opacity: 0.7;
 }
 
-.avgOnTrack {
-  color: green;
+.avgOnTrack, .avgOffTrack, .short {
   margin-left: 0.3em;
-}
-
-.short, .avgOffTrack {
-  color: red;
-  margin-left: 0.3em;
-}
-
-/* Table footer for remaining arrows and max score */
-.table-footer {
-  background-color: var(--color-background-mute);
-  padding: 0.5em 1em;
-  border-top: 1px solid var(--color-border);
-}
-
-.footer-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.3em 0;
-}
-
-.footer-label {
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.2em;
 }
 
-.footer-value {
-  font-weight: 600;
+.avgOnTrack {
+  color: var(--color-highlight, #4CAF50);
+}
+
+.avgOffTrack, .short {
+  color: #dc3545;
+}
+
+.arrow-up, .arrow-down {
+  width: 14px;
+  height: 14px;
 }
 
 /* Classification colors matching HistoryCard.vue */

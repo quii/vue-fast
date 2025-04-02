@@ -198,7 +198,7 @@ class ScorePage {
         .within(() => {
           if (shortBy) {
             // Look for the shortBy value in the score cell
-            cy.get(".score-cell").contains(`(-${shortBy})`);
+            cy.get(".score-cell").contains(shortBy);
           }
         });
     });
