@@ -6,7 +6,7 @@ import { useUserStore } from "@/stores/user";
 import { useToast } from "vue-toastification";
 import { computed } from "vue";
 import SectionCard from "@/components/ui/SectionCard.vue";
-import BaseButton from "@/components/BaseButton.vue";
+import BaseButton from "@/components/ui/BaseButton.vue";
 
 const history = useHistoryStore();
 const notes = useNotesStore();

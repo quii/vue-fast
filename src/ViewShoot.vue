@@ -13,7 +13,7 @@ import { usePreferencesStore } from "@/stores/preferences";
 import { useArrowHistoryStore } from "@/stores/arrow_history";
 import PrintModal from "@/components/modals/PrintModal.vue";
 import BaseCard from "@/components/BaseCard.vue";
-import BaseButton from "@/components/BaseButton.vue";
+import BaseButton from "@/components/ui/BaseButton.vue";
 
 const preferences = usePreferencesStore();
 const arrowHistoryStore = useArrowHistoryStore();

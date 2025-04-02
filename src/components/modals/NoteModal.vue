@@ -1,7 +1,7 @@
 <script setup>
 import BaseModal from "@/components/modals/BaseModal.vue";
 import BaseTextarea from "@/components/ui/BaseTextarea.vue";
-import BaseButton from "@/components/BaseButton.vue";
+import BaseButton from "@/components/ui/BaseButton.vue";
 import ButtonGroup from "@/components/ui/ButtonGroup.vue";
 import { ref } from "vue";
 

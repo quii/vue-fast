@@ -141,7 +141,7 @@ import { usePreferencesStore } from "@/stores/preferences";
 import HistoryTipModal from "@/components/modals/HistoryTipModal.vue";
 import ScoreHistoryGraph from "@/components/ScoreHistoryGraph.vue";
 import ClassificationProgress from "@/components/ClassificationProgress.vue";
-import BaseButton from "@/components/BaseButton.vue";
+import BaseButton from "@/components/ui/BaseButton.vue";
 
 const store = useHistoryStore();
 const router = useRouter();

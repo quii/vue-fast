@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import BaseButton from "@/components/BaseButton.vue";
+import BaseButton from "@/components/ui/BaseButton.vue";
 import ClassificationDetailsTable from "@/components/ClassificationDetailsTable.vue";
 
 const props = defineProps({

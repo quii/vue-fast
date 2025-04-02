@@ -1,7 +1,7 @@
 <script setup>
 import BaseModal from "@/components/modals/BaseModal.vue";
 import BaseSelect from "@/components/ui/BaseSelect.vue";
-import BaseButton from "@/components/BaseButton.vue";
+import BaseButton from "@/components/ui/BaseButton.vue";
 import FormGroup from "@/components/ui/FormGroup.vue";
 import ButtonGroup from "@/components/ui/ButtonGroup.vue";
 import { ref } from "vue";
