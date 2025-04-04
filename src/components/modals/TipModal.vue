@@ -4,9 +4,7 @@ const emit = defineEmits(["close"]);
 </script>
 
 <template>
-  <BaseModal>
-    <h2>Viewing Tips 💡</h2>
-
+  <BaseModal title="Viewing Tips">
     <p>Try turning your phone into landscape mode to see the full scoresheet with additional calculations and
       statistics.</p>
 

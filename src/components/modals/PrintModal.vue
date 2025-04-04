@@ -105,9 +105,7 @@ function print() {
 </script>
 
 <template>
-  <BaseModal>
-    <h2>Download Score Sheet 📄</h2>
-
+  <BaseModal title="Download Score Sheet">
     <form @submit.prevent="print">
       <div class="form-group">
         <label for="captain">Target Captain's Name</label>

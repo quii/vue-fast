@@ -278,28 +278,6 @@ function handleTakeNote() {
   }
 }
 
-.controls select {
-  padding: 0.5em;
-  font-size: 1.2em;
-  width: 100vw;
-  height: 5vh;
-  color: var(--color-text);
-  border: 1px solid var(--color-background-mute);
-  border-radius: 0;
-}
-
-button {
-  font-size: 1.2em;
-  width: 100vw;
-  height: 5vh;
-  color: var(--color-text);
-  border: 1px solid var(--color-background-mute);
-}
-
-.page {
-  width: 100vw;
-}
-
 .save {
   width: 100%;
   font-size: 1.5em;
@@ -308,47 +286,6 @@ button {
 
 ::backdrop {
   background-color: rgba(0, 0, 0, 0.7);
-}
-
-/* Add these styles to replace the popover styling */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  width: 90vw;
-  height: 70vh;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-}
-
-.modal-content textarea {
-  width: 100%;
-  height: 90%;
-  resize: none;
-  font-size: 1.5em;
-  padding: 1em;
-  border: none;
-}
-
-.note-actions {
-  display: flex;
-  height: 10%;
-}
-
-.note-actions button {
-  width: 50%;
-  font-size: 1.5em;
 }
 
 button:disabled {
@@ -373,53 +310,4 @@ button:disabled {
   }
 }
 
-.button-icon {
-  margin-right: 0.5em;
-}
-
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  width: 90vw;
-  max-width: 500px;
-  height: 70vh;
-  background-color: var(--color-background);
-  display: flex;
-  flex-direction: column;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-}
-
-.modal-content textarea {
-  width: 100%;
-  height: 90%;
-  resize: none;
-  font-size: 1.2em;
-  padding: 1em;
-  border: none;
-  background-color: var(--color-background);
-  color: var(--color-text);
-}
-
-.note-actions {
-  display: flex;
-  height: 10%;
-  border-top: 1px solid var(--color-border);
-}
-
-.note-actions button {
-  flex: 1;
-}
 </style>
