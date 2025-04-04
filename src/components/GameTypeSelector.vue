@@ -1,4 +1,6 @@
 <script setup>
+import BaseButton from "@/components/ui/BaseButton.vue";
+import ButtonGroup from "@/components/ui/ButtonGroup.vue";
 import RoundCard from "./RoundCard.vue";
 import { useRouter } from "vue-router";
 
@@ -35,11 +37,46 @@ function navigateToRoundSelection() {
         <span>Select the round you're shooting</span>
       </div>
     </div>
-    <p>Tap to select round to shoot</p>
+    <ButtonGroup class="compact-button-group">
+      <BaseButton @click="navigateToRoundSelection">
+        <!-- Simple arrow right icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="tap-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14"></path>
+          <path d="M12 5l7 7-7 7"></path>
+        </svg>
+        Tap to select round to shoot
+      </BaseButton>
+    </ButtonGroup>
   </div>
 </template>
 
 <style scoped>
+.compact-button-group {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.compact-button-group :deep(button) {
+  margin-top: 0;
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.tap-icon {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+}
+
+/* Target the button inside our custom ButtonGroup */
+.compact-button-group :deep(button) {
+  margin-top: 0;
+  margin-bottom: 0;
+}
 p {
   text-align: right;
   padding-bottom: 1rem;
