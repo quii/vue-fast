@@ -78,9 +78,8 @@
       </div>
       <div v-if="hasClassificationProgress" class="classification-progress-section">
         <div v-for="(bowProgress, bowType) in classificationProgress" :key="bowType">
-          <!-- In the template, update the ClassificationProgress components -->
           <ClassificationProgress
-            v-if="bowProgress.indoor.dozenArrowsRequired > 0"
+            v-if="shouldShowIndoorProgress(bowProgress)"
             :currentClassification="userStore.getIndoorClassification(bowType)"
             :nextClassification="bowProgress.indoor.nextClassification"
             :dozenArrowsShot="bowProgress.indoor.dozenArrowsShot"
@@ -90,7 +89,7 @@
           />
 
           <ClassificationProgress
-            v-if="bowProgress.outdoor.dozenArrowsRequired > 0"
+            v-if="shouldShowOutdoorProgress(bowProgress)"
             :currentClassification="userStore.getOutdoorClassification(bowType)"
             :nextClassification="bowProgress.outdoor.nextClassification"
             :dozenArrowsShot="bowProgress.outdoor.dozenArrowsShot"
@@ -98,7 +97,6 @@
             environment="outdoor"
             :bowType="bowType"
           />
-
         </div>
       </div>
 
@@ -186,13 +184,34 @@ const classificationProgress = computed(() => {
   );
 });
 
-// Check if there's any progress to show
+const isIndoorSeasonActive = computed(() => {
+  const today = new Date();
+  const indoorStartDate = new Date(userStore.user.indoorSeasonStartDate);
+  return today >= indoorStartDate;
+});
+
+const isOutdoorSeasonActive = computed(() => {
+  const today = new Date();
+  const outdoorStartDate = new Date(userStore.user.outdoorSeasonStartDate);
+  return today >= outdoorStartDate;
+});
+
+// Functions to determine if we should show progress
+const shouldShowIndoorProgress = (bowProgress) => {
+  return bowProgress.indoor.dozenArrowsRequired > 0 && isIndoorSeasonActive.value;
+};
+
+const shouldShowOutdoorProgress = (bowProgress) => {
+  return bowProgress.outdoor.dozenArrowsRequired > 0 && isOutdoorSeasonActive.value;
+};
+
+// Update the hasClassificationProgress computed property to consider season dates
 const hasClassificationProgress = computed(() => {
   if (!classificationProgress.value) return false;
 
   for (const bowType in classificationProgress.value) {
     const progress = classificationProgress.value[bowType];
-    if (progress.indoor.dozenArrowsRequired > 0 || progress.outdoor.dozenArrowsRequired > 0) {
+    if (shouldShowIndoorProgress(progress) || shouldShowOutdoorProgress(progress)) {
       return true;
     }
   }
@@ -345,13 +364,6 @@ function view(id) {
 }
 </script>
 <style scoped>
-td {
-  text-transform: capitalize;
-}
-
-p {
-  text-align: center;
-}
 
 .fullpage {
   padding: 0.5rem;

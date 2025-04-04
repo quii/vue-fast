@@ -5,13 +5,15 @@
 export function calculateDefaultSeasonDates() {
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
+  const currentMonth = currentDate.getMonth();
 
   // Indoor season typically runs October to March
   // Outdoor season typically runs April to September
 
-  // For indoor, use October 1st of previous year if we're currently in Jan-Sep
-  // or October 1st of current year if we're in Oct-Dec
-  const indoorYear = currentDate.getMonth() < 9 ? currentYear - 1 : currentYear;
+  // For indoor:
+  // - If we're in Jan-March (months 0-2), use October 1st of previous year
+  // - If we're in April-December (months 3-11), use October 1st of current year
+  const indoorYear = (currentMonth >= 0 && currentMonth <= 2) ? currentYear - 1 : currentYear;
   const indoorDate = `${indoorYear}-10-01`; // Use string format directly
 
   // For outdoor, use April 1st of current year
@@ -22,6 +24,7 @@ export function calculateDefaultSeasonDates() {
     outdoor: outdoorDate
   };
 }
+
 
 /**
  * Determines if a date is within the indoor season
