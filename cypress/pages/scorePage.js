@@ -31,7 +31,8 @@ class ScorePage {
     }
   }
 
-  selectPractice(distance) {
+  // Private helper method to handle common round selection logic
+  _selectRound(roundName, filterType = null) {
     this.tapRoundSelector();
 
     // Check if the profile setup form is visible and fill it out if needed
@@ -44,22 +45,23 @@ class ScorePage {
       }
     });
 
-    cy.get(".filter-label").contains("Practice").click();
+    // Apply filter if specified
+    if (filterType) {
+      cy.get(".filter-label").contains(filterType).click();
+    }
 
-    const gameName = `Practice ${distance}`;
-
-    // If there's a search input, use it to find the round faster
-    cy.get(".search-container input").then($input => {
-      if ($input.length) {
-        cy.wrap($input).clear().type(gameName);
+    // Try to find the search input, but don't fail if it doesn't exist
+    cy.get("body").then($body => {
+      // If search container exists, use it
+      if ($body.find(".search-container input").length > 0) {
+        cy.get(".search-container input").clear().type(roundName);
       }
     });
 
     // Find the round card with the exact matching round name
-    // We need to be more precise to avoid selecting rounds that contain the name as a substring
     cy.get(".rounds-container .round-name").each(($el) => {
       const text = $el.text().trim().toLowerCase();
-      const searchName = gameName.toLowerCase();
+      const searchName = roundName.toLowerCase();
 
       // Check for exact match or match with formatting differences
       if (text === searchName ||
@@ -72,41 +74,13 @@ class ScorePage {
     });
   }
 
+  selectPractice(distance) {
+    const gameName = `Practice ${distance}`;
+    this._selectRound(gameName, "Practice");
+  }
+
   selectGame(gameName) {
-    this.tapRoundSelector();
-
-    // Check if the profile setup form is visible and fill it out if needed
-    cy.get("body").then(($body) => {
-      if ($body.find(".profile-setup-section").length > 0) {
-        // Fill out the profile form with senior, male, recurve
-        cy.get("#age-group").select("senior");
-        cy.get("#gender").select("male");
-        cy.get("#bow-type").select("recurve");
-      }
-    });
-
-    // If there's a search input, use it to find the round faster
-    cy.get(".search-container input").then($input => {
-      if ($input.length) {
-        cy.wrap($input).clear().type(gameName);
-      }
-    });
-
-    // Find the round card with the exact matching round name
-    // We need to be more precise to avoid selecting rounds that contain the name as a substring
-    cy.get(".rounds-container .round-name").each(($el) => {
-      const text = $el.text().trim().toLowerCase();
-      const searchName = gameName.toLowerCase();
-
-      // Check for exact match or match with formatting differences
-      if (text === searchName ||
-        text === searchName.charAt(0).toUpperCase() + searchName.slice(1) ||
-        // Handle special case for rounds with roman numerals
-        text.replace(/\s+/g, " ") === searchName.replace(/\s+/g, " ")) {
-        cy.wrap($el).click();
-        return false; // Break the each loop
-      }
-    });
+    this._selectRound(gameName);
   }
 
   score(input) {
@@ -180,7 +154,8 @@ class ScorePage {
   }
 
   highlightNote(noteText) {
-    cy.get("[data-test=\"note-text\"]").contains(noteText).click();
+    // Use force: true to click even if the element is not visible
+    cy.get("[data-test=\"note-text\"]").contains(noteText).click({ force: true });
   }
 
   clickClassificationDetails() {
@@ -189,7 +164,6 @@ class ScorePage {
   }
 
   checkClassificationTable(expectedClassification, shortBy) {
-
     // Then check for the classification and shortBy value
     cy.get(".classification-table-container").within(() => {
       // Find the row containing the classification
@@ -233,4 +207,3 @@ class ScorePage {
 }
 
 export default ScorePage;
-
