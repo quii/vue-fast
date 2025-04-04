@@ -68,15 +68,12 @@ const oneDistanceShoot = computed(() => rounds.value.length === 1);
 <style scoped>
 
 .table-container {
-  padding: 0.5em;
   overflow-x: auto;
 }
 
 table {
-  width: calc(100% - 1.5em);
   border-collapse: collapse;
   table-layout: fixed;
-  margin: 0 0.75em;
 }
 
 tbody td {
@@ -86,10 +83,8 @@ tbody td {
 
 .grand-totals td {
   font-weight: 600;
-  padding-top: 1em;
-  border-top: 1px solid var(--color-border);
-  color: black;
   background-color: var(--color-background-mute);
+  font-size: 1.1rem;
 }
 
 .grand-totals td:first-child {
