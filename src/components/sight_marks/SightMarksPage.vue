@@ -1,6 +1,10 @@
 <template>
   <div class="sight-marks">
-    <button class="add-button" @click="showAddMark = true">Add sight mark</button>
+    <BaseTopBar
+      :action-buttons="actionButtons"
+      alignment="right"
+      @action="handleAction"
+    />
 
     <BaseModal v-if="showAddMark">
       <div class="form-group">
@@ -103,6 +107,7 @@ import { computed, ref } from "vue";
 import { useSightMarksStore } from "@/stores/sight_marks";
 import BaseModal from "@/components/modals/BaseModal.vue";
 import NumberSpinner from "@/components/common/NumberSpinner.vue";
+import BaseTopBar from "@/components/ui/BaseTopBar.vue";
 
 const store = useSightMarksStore();
 const marks = computed(() => store.getMarks());
@@ -135,6 +140,22 @@ const notchesValue = computed({
 })
 
 const displayNotches = computed(() => newMark.value.notches);
+
+// Define action buttons for the BaseTopBar
+const actionButtons = computed(() => [
+  {
+    icon: "➕", // Simple plus icon, could be replaced with a component
+    label: "Add Mark",
+    action: "add-mark"
+  }
+]);
+
+// Handle actions from the BaseTopBar
+function handleAction(actionData) {
+  if (actionData.action === "add-mark") {
+    showAddMark.value = true;
+  }
+}
 
 function formatVertical(vertical) {
   return `${vertical.major}.${vertical.minor}.${vertical.micro}`;
@@ -206,7 +227,7 @@ function togglePriority(mark) {
 }
 
 .sight-marks {
-  padding: 1rem;
+  padding: 0.5rem;
 }
 
 .form-group {
@@ -281,17 +302,6 @@ function togglePriority(mark) {
   gap: 1rem;
   justify-content: center;
   margin-top: 1.5rem;
-}
-
-.add-button {
-  width: 100%;
-  padding: 1rem;
-  font-size: 1.2rem;
-  margin: 1rem 0;
-  background: #007AFF;
-  color: white;
-  border: none;
-  border-radius: 8px;
 }
 
 .primary {

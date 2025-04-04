@@ -67,54 +67,6 @@ p {
   color: var(--color-text-light);
 }
 
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  width: 90%;
-  max-width: 600px;
-  max-height: 90vh;
-  background-color: var(--color-background);
-  border-radius: 8px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1em;
-  border-bottom: 1px solid var(--color-border);
-}
-
-.modal-header h2 {
-  margin: 0;
-}
-
-.close-button {
-  background: none;
-  border: none;
-  font-size: 1.5em;
-  cursor: pointer;
-}
-
-.search-container {
-  padding: 1em;
-  border-bottom: 1px solid var(--color-border);
-}
-
 .search-container input {
   width: 100%;
   padding: 0.5em;
@@ -125,13 +77,4 @@ p {
   color: var(--color-text);
 }
 
-.rounds-container {
-  padding: 1em;
-  overflow-y: auto;
-}
-
-.rounds-container h3 {
-  margin-top: 0;
-  margin-bottom: 0.5em;
-}
 </style>

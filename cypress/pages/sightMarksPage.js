@@ -4,7 +4,7 @@ class SightMarksPage {
   }
 
   addSightMark(distance, unit, notches, vertical) {
-    cy.get(".add-button").click();
+    cy.contains("Add Mark").click();
     cy.get(".distance-number").clear().type(distance);
     cy.get(".unit-select").select(unit);
     cy.get(".horizontal-slider").invoke("val", 15 - notches).trigger("input");

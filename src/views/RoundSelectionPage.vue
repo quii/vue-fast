@@ -666,8 +666,6 @@ function toggleChallengingRounds() {
 .distance-slider-container input[type="range"] {
   width: 100%;
   margin: 0.5em 0;
-  -webkit-appearance: none;
-  appearance: none;
   height: 8px;
   background: var(--color-background-mute);
   border-radius: 4px;
