@@ -393,7 +393,6 @@ p {
   display: flex;
   flex-direction: column;
   gap: 0.5em;
-  margin: 1rem 0;
 }
 
 .graph-modal {
