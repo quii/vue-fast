@@ -1,5 +1,6 @@
 <script setup>
 import { formatRoundName } from "@/domain/formatting.js";
+import { canEstimateSightMark, estimateSightMark } from "@/domain/sight_marks/estimation.js";
 import { computed } from "vue";
 import { getRoundDetails } from "@/domain/round_details";
 import { useHistoryStore } from "@/stores/history";
@@ -35,6 +36,16 @@ const hasPB = computed(() => {
   return personalBest.value !== undefined;
 });
 
+// Get all sight marks for estimation
+const allSightMarks = computed(() => {
+  return sightMarksStore.getMarks();
+});
+
+// Check if we can estimate sight marks
+const canEstimate = computed(() => {
+  return canEstimateSightMark(allSightMarks.value);
+});
+
 // Get sight marks for each distance in the round
 const distanceInfoWithSightMarks = computed(() => {
   if (!roundDetails.value || !roundDetails.value.distanceInfo) {
@@ -44,21 +55,37 @@ const distanceInfoWithSightMarks = computed(() => {
   return roundDetails.value.distanceInfo.map(info => {
     // Extract the numeric part and unit from the distance string
     const match = info.distance.match(/(\d+)(yd|m)/);
-    if (!match) return { ...info, sightMarks: [] };
+    if (!match) return { ...info, sightMarks: [], estimatedMarks: [] };
 
     const [, distanceValue, unit] = match;
+    const distanceNumber = parseInt(distanceValue);
 
     // Find sight marks for this distance
     let sightMarks = [];
     if (unit === "yd") {
-      sightMarks = sightMarksStore.findMarksForDistance(null, parseInt(distanceValue));
+      sightMarks = sightMarksStore.findMarksForDistance(null, distanceNumber);
     } else {
-      sightMarks = sightMarksStore.findMarksForDistance(parseInt(distanceValue), null);
+      sightMarks = sightMarksStore.findMarksForDistance(distanceNumber, null);
+    }
+
+    // If no sight marks found and we can estimate, add an estimated mark
+    let estimatedMarks = [];
+    if (sightMarks.length === 0 && canEstimate.value) {
+      const estimatedMark = estimateSightMark(
+        allSightMarks.value,
+        distanceNumber,
+        unit
+      );
+
+      if (estimatedMark) {
+        estimatedMarks = [estimatedMark];
+      }
     }
 
     return {
       ...info,
-      sightMarks
+      sightMarks,
+      estimatedMarks
     };
   });
 });
@@ -93,13 +120,24 @@ function formatVertical(vertical) {
                 <div class="info-row">
                   <span class="dozens">{{ info.dozens }} dozen</span>
 
-                  <!-- Sight marks for this distance -->
+                  <!-- User's saved sight marks for this distance -->
                   <div v-if="info.sightMarks && info.sightMarks.length > 0" class="sight-marks-inline">
                     <div v-for="(mark, markIndex) in info.sightMarks" :key="mark.id"
                          class="sight-mark-inline"
                          :class="{ 'first-mark': markIndex === 0 }">
                       <span class="sight-mark-emoji">📏</span>
                       <span class="sight-value">{{ formatVertical(mark.vertical) }}</span>
+                    </div>
+                  </div>
+
+                  <!-- Estimated sight marks for this distance -->
+                  <div v-else-if="info.estimatedMarks && info.estimatedMarks.length > 0" class="sight-marks-inline">
+                    <div v-for="(mark, markIndex) in info.estimatedMarks" :key="`est-${index}-${markIndex}`"
+                         class="sight-mark-inline estimated-mark"
+                         :class="{ 'first-mark': markIndex === 0 }">
+                      <span class="sight-mark-emoji">📏</span>
+                      <span class="sight-value">{{ formatVertical(mark.vertical) }}</span>
+                      <span class="estimated-label">(est.)</span>
                     </div>
                   </div>
                 </div>
@@ -365,5 +403,19 @@ function formatVertical(vertical) {
   font-size: 0.7em;
   font-weight: 600;
   color: var(--color-text-light, #666);
+}
+
+.estimated-mark {
+  border: 1px dashed var(--color-border);
+  border-radius: 4px;
+  padding: 0 0.3em;
+  background-color: rgba(var(--color-background-rgb), 0.5);
+}
+
+.estimated-label {
+  font-size: 0.7em;
+  color: var(--color-text-light);
+  font-style: italic;
+  margin-left: 0.25em;
 }
 </style>
