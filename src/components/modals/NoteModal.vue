@@ -33,7 +33,7 @@ Did the end go well?
 Why or why not?
 
 Did you follow your process?"
-      rows="10"
+      rows=10
       class="note-textarea"
     />
 

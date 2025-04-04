@@ -65,7 +65,7 @@ function deleteNote(noteId) {
 .notes-container {
   background-color: var(--color-background-soft);
   border-radius: 8px;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
   padding: 0.75rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }

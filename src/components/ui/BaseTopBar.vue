@@ -127,7 +127,7 @@ function getFontSizeClass(text) {
 .filters-container {
   background-color: var(--color-background-soft);
   border-radius: 8px;
-  margin: 0.5em;
+  margin-bottom: 0.5em;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
@@ -261,7 +261,6 @@ function getFontSizeClass(text) {
 }
 
 .expandable-content-container {
-  padding: 0 0.5em 0.5em 0.5em;
   animation: slideDown 0.3s ease-out;
 }
 

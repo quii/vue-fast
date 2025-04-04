@@ -22,6 +22,7 @@ describe("Notes and Classifications", () => {
     scorePage.score([10, 9, 9, 8, 8, 7]);
     scorePage.clickClassificationDetails();
     scorePage.checkClassificationTable("A2", "121");
+    scorePage.clickClassificationDetails()
     // scorePage.checkOnTrackStatus(true);
     scorePage.addNote("Good grouping on the 9s");
 
@@ -38,6 +39,7 @@ describe("Notes and Classifications", () => {
       scorePage.score([10, 9, 9, 8, 8, 2]);
     }
 
+    scorePage.clickClassificationDetails()
     scorePage.checkClassificationAchieved("A1");
     scorePage.checkClassificationMissed("B3");
     scorePage.clickClassificationDetails();

@@ -1,17 +1,17 @@
 <script setup>
 import ViewOnlyTargetFace from "@/components/scoring/ViewOnlyTargetFace.vue";
-import { formatRoundName } from "@/domain/formatting.js";
-import { useRoute, useRouter } from "vue-router";
-import { useHistoryStore } from "@/stores/history";
-import { gameTypeConfig } from "@/domain/scoring/game_types";
-import { computed, ref } from "vue";
+import {formatRoundName} from "@/domain/formatting.js";
+import {useRoute, useRouter} from "vue-router";
+import {useHistoryStore} from "@/stores/history";
+import {gameTypeConfig} from "@/domain/scoring/game_types";
+import {computed, ref} from "vue";
 import RoundScores from "@/components/RoundScores.vue";
-import { useUserStore } from "@/stores/user";
+import {useUserStore} from "@/stores/user";
 import TipModal from "@/components/modals/TipModal.vue";
 import UserNotes from "@/components/UserNotes.vue";
 import ArcherDetails from "@/components/ArcherDetails.vue";
-import { usePreferencesStore } from "@/stores/preferences";
-import { useArrowHistoryStore } from "@/stores/arrow_history";
+import {usePreferencesStore} from "@/stores/preferences";
+import {useArrowHistoryStore} from "@/stores/arrow_history";
 import PrintModal from "@/components/modals/PrintModal.vue";
 import BaseCard from "@/components/BaseCard.vue";
 // Update the import path for BaseButton
@@ -21,9 +21,9 @@ import ClassificationDetailsTable from "@/components/ClassificationDetailsTable.
 import ClassificationIcon from "@/components/icons/ClassificationIcon.vue";
 import SaveIcon from "@/components/icons/SaveIcon.vue";
 import ClearIcon from "@/components/icons/ClearIcon.vue"; // Reuse this for Delete
-import { createClassificationCalculator } from "@/domain/scoring/classification";
-import { calculateSubtotals } from "@/domain/scoring/subtotals";
-import { calculateAverageScorePerEnd } from "@/domain/scoring/distance_totals";
+import {createClassificationCalculator} from "@/domain/scoring/classification";
+import {calculateSubtotals} from "@/domain/scoring/subtotals";
+import {calculateAverageScorePerEnd} from "@/domain/scoring/distance_totals";
 
 const preferences = usePreferencesStore();
 const arrowHistoryStore = useArrowHistoryStore();
@@ -71,7 +71,7 @@ const classificationCalculator = ref(null);
 const availableClassifications = ref(null);
 const totals = computed(() => calculateSubtotals(scores.value, gameType.value));
 const averageScoresPerEnd = computed(() =>
-  calculateAverageScorePerEnd(scores.value, endSize.value, gameType.value)
+    calculateAverageScorePerEnd(scores.value, endSize.value, gameType.value)
 );
 
 // Since this is a completed shoot, arrows remaining is 0
@@ -83,22 +83,22 @@ const maxPossibleScore = computed(() => totals.value?.totalScore || 0);
 async function initClassificationCalculator() {
   if (!history.selectedShoot?.userProfile) return;
 
-  const { gender, ageGroup, bowType } = history.selectedShoot.userProfile;
+  const {gender, ageGroup, bowType} = history.selectedShoot.userProfile;
 
   if (!gender || !ageGroup || !bowType) return;
 
   classificationCalculator.value = await createClassificationCalculator(
-    gameType.value,
-    gender,
-    ageGroup,
-    bowType,
-    null // No personal best needed for this calculation
+      gameType.value,
+      gender,
+      ageGroup,
+      bowType,
+      null // No personal best needed for this calculation
   );
 
   if (classificationCalculator.value) {
     availableClassifications.value = classificationCalculator.value(
-      totals.value?.totalScore || 0,
-      averageScoresPerEnd.value
+        totals.value?.totalScore || 0,
+        averageScoresPerEnd.value
     );
   }
 }
@@ -173,88 +173,89 @@ function handleAction(actionData) {
 </script>
 
 <template>
-  <!-- Top Bar using BaseTopBar component -->
-  <BaseTopBar
-    :info-displays="infoDisplays"
-    :action-buttons="actionButtons"
-    :has-expandable-content="!!availableClassifications"
-    alignment="right"
-    @action="handleAction"
-  >
-    <template #expandable-content>
-      <ClassificationDetailsTable
-        v-if="availableClassifications"
-        :max-possible-score="maxPossibleScore"
-        :arrows-remaining="arrowsRemaining"
-        :available-classifications="availableClassifications"
-      />
-    </template>
-  </BaseTopBar>
-
-  <!-- Content Container with proper padding -->
-  <div class="content-container">
-    <BaseCard>
-        <ArcherDetails
-          :name="userStore.user.name"
-          :age-group="history.selectedShoot.userProfile.ageGroup"
-          :gender="history.selectedShoot.userProfile.gender"
-          :bow-type="history.selectedShoot.userProfile.bowType"
+  <div class="page">
+    <BaseTopBar
+        :info-displays="infoDisplays"
+        :action-buttons="actionButtons"
+        :has-expandable-content="!!availableClassifications"
+        alignment="right"
+        @action="handleAction"
+    >
+      <template #expandable-content>
+        <ClassificationDetailsTable
+            v-if="availableClassifications"
+            :max-possible-score="maxPossibleScore"
+            :arrows-remaining="arrowsRemaining"
+            :available-classifications="availableClassifications"
         />
-    </BaseCard>
+      </template>
+    </BaseTopBar>
 
-    <ViewOnlyTargetFace
+      <BaseCard>
+        <ArcherDetails
+            :name="userStore.user.name"
+            :age-group="history.selectedShoot.userProfile.ageGroup"
+            :gender="history.selectedShoot.userProfile.gender"
+            :bow-type="history.selectedShoot.userProfile.bowType"
+        />
+      </BaseCard>
+
+      <ViewOnlyTargetFace
           v-if="arrows.length > 0"
           :arrows="arrows"
           :valid-scores="gameTypeConfig[gameType].scores"
           :game-type="gameType"
           :knock-color="userStore.user.knockColor"
-        />
-        <RoundScores
+      />
+      <RoundScores
           :scores="scores"
           :end-size="endSize"
           :user-profile="history.selectedShoot.userProfile"
           :game-type="gameType"
-        />
+      />
 
-    <UserNotes :shoot-id="history.selectedShoot.id" :allow-highlight="true" />
-  </div>
+      <UserNotes :shoot-id="history.selectedShoot.id" :allow-highlight="true"/>
 
-  <TipModal v-if="showTip" @close="dismissTip" />
-  <PrintModal
-    v-if="showPrintModal"
-    :shoot="history.selectedShoot"
-    :archer-name="userStore.user.name"
-    :age-group="userStore.user.ageGroup"
-    :gender="userStore.user.gender"
-    :bow-type="userStore.user.bowType"
-    :end-size="endSize"
-    :game-type="gameType"
-    :date="date"
-    @close="showPrintModal = false"
-  />
+    <TipModal v-if="showTip" @close="dismissTip"/>
+    <PrintModal
+        v-if="showPrintModal"
+        :shoot="history.selectedShoot"
+        :archer-name="userStore.user.name"
+        :age-group="userStore.user.ageGroup"
+        :gender="userStore.user.gender"
+        :bow-type="userStore.user.bowType"
+        :end-size="endSize"
+        :game-type="gameType"
+        :date="date"
+        @close="showPrintModal = false"
+    />
 
-  <!-- Confirmation Modal -->
-  <div v-if="showDeleteConfirmation" class="modal-overlay">
-    <div class="modal-content">
-      <h3>Delete this shoot?</h3>
-      <p>Are you sure you want to delete this shoot? This action cannot be undone.</p>
-      <div class="confirmation-actions">
-        <BaseButton
-          variant="danger"
-          @click="deleteShoot">
-          Yes, delete this shoot
-        </BaseButton>
-        <BaseButton
-          variant="outline"
-          @click="cancelDelete">
-          Cancel
-        </BaseButton>
+    <!-- Confirmation Modal -->
+    <div v-if="showDeleteConfirmation" class="modal-overlay">
+      <div class="modal-content">
+        <h3>Delete this shoot?</h3>
+        <p>Are you sure you want to delete this shoot? This action cannot be undone.</p>
+        <div class="confirmation-actions">
+          <BaseButton
+              variant="danger"
+              @click="deleteShoot">
+            Yes, delete this shoot
+          </BaseButton>
+          <BaseButton
+              variant="outline"
+              @click="cancelDelete">
+            Cancel
+          </BaseButton>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+.page {
+  padding: 0.5rem;
+}
 .signatures p {
   padding-top: 5em;
 }
@@ -263,13 +264,6 @@ function handleAction(actionData) {
   height: 1.8em;
   padding-left: 1em;
   border: none;
-}
-
-/* Content Container - Added for proper padding */
-.content-container {
-  padding: 0 0.5rem;
-  max-width: 800px;
-  margin: 0 auto;
 }
 
 /* Modal Styles */

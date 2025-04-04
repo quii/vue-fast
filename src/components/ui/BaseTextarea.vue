@@ -28,7 +28,7 @@ const value = computed({
   <textarea
     v-model="value"
     :placeholder="placeholder"
-    :rows="rows"
+    :rows=rows
     class="base-textarea"
   ></textarea>
 </template>

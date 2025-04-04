@@ -6,25 +6,25 @@ import InteractiveTargetFace from "@/components/scoring/InteractiveTargetFace.vu
 import ScoreButtons from "@/components/scoring/ScoreButtons.vue";
 import UserNotes from "@/components/UserNotes.vue";
 import TopBar from "@/components/TopBar.vue";
-import { insults } from "@/domain/insults";
-import { X } from "@/domain/scoring/game_type_config.js";
-import { calculateMaxPossibleScore, convertToValues } from "@/domain/scoring/scores.js";
-import { calculateTotal } from "@/domain/scoring/subtotals.js";
-import { useArrowHistoryStore } from "@/stores/arrow_history.js";
-import { useGameTypeStore } from "@/stores/game_type";
-import { useHistoryStore } from "@/stores/history";
-import { useScoresStore } from "@/stores/scores";
-import { useUserStore } from "@/stores/user";
-import { useNotesStore } from "@/stores/user_notes";
-import { computed, ref } from "vue";
-import { useToast } from "vue-toastification";
-import { watch } from "vue";
+import {insults} from "@/domain/insults";
+import {X} from "@/domain/scoring/game_type_config.js";
+import {calculateMaxPossibleScore, convertToValues} from "@/domain/scoring/scores.js";
+import {calculateTotal} from "@/domain/scoring/subtotals.js";
+import {useArrowHistoryStore} from "@/stores/arrow_history.js";
+import {useGameTypeStore} from "@/stores/game_type";
+import {useHistoryStore} from "@/stores/history";
+import {useScoresStore} from "@/stores/scores";
+import {useUserStore} from "@/stores/user";
+import {useNotesStore} from "@/stores/user_notes";
+import {computed, ref} from "vue";
+import {useToast} from "vue-toastification";
+import {watch} from "vue";
 import {
   createClassificationCalculator
 } from "@/domain/scoring/classification";
-import { calculateSubtotals } from "@/domain/scoring/subtotals";
-import { calculateAverageScorePerEnd } from "@/domain/scoring/distance_totals";
-import { useRoute, useRouter } from "vue-router";
+import {calculateSubtotals} from "@/domain/scoring/subtotals";
+import {calculateAverageScorePerEnd} from "@/domain/scoring/distance_totals";
+import {useRoute, useRouter} from "vue-router";
 
 const synth = window.speechSynthesis;
 const router = useRouter();
@@ -42,9 +42,9 @@ watch(() => route.query.selectedRound, (newRound) => {
   if (newRound) {
     gameTypeStore.setGameType(newRound);
     // Clear the query parameter after using it
-    router.replace({ query: {} });
+    router.replace({query: {}});
   }
-}, { immediate: true });
+}, {immediate: true});
 
 const validScores = computed(() => gameTypeStore.currentRound.scores);
 const maxReached = computed(() => {
@@ -66,7 +66,7 @@ const classificationCalculator = ref(null);
 const availableClassifications = ref(null);
 const totals = computed(() => calculateSubtotals(scoresStore.scores, gameTypeStore.type));
 const averageScoresPerEnd = computed(() =>
-  calculateAverageScorePerEnd(scoresStore.scores, gameTypeStore.currentRound.endSize, gameTypeStore.type)
+    calculateAverageScorePerEnd(scoresStore.scores, gameTypeStore.currentRound.endSize, gameTypeStore.type)
 );
 
 const userProfile = computed(() => {
@@ -79,7 +79,7 @@ const userProfile = computed(() => {
 });
 
 const canSaveAnytime = computed(() =>
-  gameTypeStore.currentRound.canSaveAnytime && scoresStore.scores.length > 0
+    gameTypeStore.currentRound.canSaveAnytime && scoresStore.scores.length > 0
 );
 
 const arrowsRemaining = computed(() => {
@@ -93,9 +93,9 @@ const maxPossibleScore = computed(() => {
 });
 
 const userDetailsSaved = computed(() =>
-  userProfile.value.gender &&
-  userProfile.value.ageGroup &&
-  userProfile.value.bowType
+    userProfile.value.gender &&
+    userProfile.value.ageGroup &&
+    userProfile.value.bowType
 );
 
 const isPracticeRound = computed(() => {
@@ -112,13 +112,13 @@ watch([() => gameTypeStore.type, userDetailsSaved, isPracticeRound], async () =>
   }
 
   classificationCalculator.value = await createClassificationCalculator(
-    gameTypeStore.type,
-    userProfile.value.gender,
-    userProfile.value.ageGroup,
-    userProfile.value.bowType,
-    personalBest.value
+      gameTypeStore.type,
+      userProfile.value.gender,
+      userProfile.value.ageGroup,
+      userProfile.value.bowType,
+      personalBest.value
   );
-}, { immediate: true });
+}, {immediate: true});
 
 watch([() => scoresStore.scores, classificationCalculator, totals, averageScoresPerEnd], () => {
   if (!classificationCalculator.value) {
@@ -127,14 +127,14 @@ watch([() => scoresStore.scores, classificationCalculator, totals, averageScores
   }
 
   availableClassifications.value = classificationCalculator.value(
-    totals.value.totalScore,
-    averageScoresPerEnd.value
+      totals.value.totalScore,
+      averageScoresPerEnd.value
   );
-}, { immediate: true });
+}, {immediate: true});
 
 watch(maxReached, (isMaxReached) => {
   if (isMaxReached) {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({top: 0, behavior: "smooth"});
     toast.info("You've completed the shoot! You can now save your scores.");
   }
 });
@@ -144,11 +144,11 @@ function saveScores(event) {
 
   try {
     const id = history.add(date.value,
-      runningTotal.value,
-      gameTypeStore.type,
-      [...scoresStore.scores],
-      gameTypeStore.currentRound.unit,
-      userProfile.value
+        runningTotal.value,
+        gameTypeStore.type,
+        [...scoresStore.scores],
+        gameTypeStore.currentRound.unit,
+        userProfile.value
     );
 
     arrowHistoryStore.saveArrowsForShoot(id, [...scoresStore.arrows]);
@@ -203,47 +203,47 @@ function handleTakeNote() {
 <template>
   <div class="page">
     <TopBar
-      :hasStarted="hasStarted"
-      :arrowsRemaining="arrowsRemaining"
-      :maxPossibleScore="maxPossibleScore"
-      :availableClassifications="availableClassifications"
-      @clear-scores="clearScores"
-      @take-note="handleTakeNote"
+        :hasStarted="hasStarted"
+        :arrowsRemaining="arrowsRemaining"
+        :maxPossibleScore="maxPossibleScore"
+        :availableClassifications="availableClassifications"
+        @clear-scores="clearScores"
+        @take-note="handleTakeNote"
     />
 
     <InteractiveTargetFace
-      v-if="userStore.isExperimentalUser()"
-      :arrows="scoresStore.arrows"
-      :scores="scoresStore.scores"
-      :game-type="gameTypeStore.type"
-      :valid-scores="validScores"
-      :max-reached="maxReached"
-      :knock-color="userStore.user.knockColor"
-      @score="handleScore"
-      @undo="scoresStore.undo"
+        v-if="userStore.isExperimentalUser()"
+        :arrows="scoresStore.arrows"
+        :scores="scoresStore.scores"
+        :game-type="gameTypeStore.type"
+        :valid-scores="validScores"
+        :max-reached="maxReached"
+        :knock-color="userStore.user.knockColor"
+        @score="handleScore"
+        @undo="scoresStore.undo"
     />
     <ScoreButtons
-      v-else
-      :validScores="validScores"
-      @score="handleScore"
-      :max-reached="maxReached"
-      :scores="scoresStore.scores"
-      :game-type="gameTypeStore.type"
-      @undo="scoresStore.undo"
+        v-else
+        :validScores="validScores"
+        @score="handleScore"
+        :max-reached="maxReached"
+        :scores="scoresStore.scores"
+        :game-type="gameTypeStore.type"
+        @undo="scoresStore.undo"
     />
     <button
-      class="save"
-      v-if="maxReached || canSaveAnytime"
-      @click="saveScores"
-      :class="{ 'pulse-animation': maxReached }">
+        class="save"
+        v-if="maxReached || canSaveAnytime"
+        @click="saveScores"
+        :class="{ 'pulse-animation': maxReached }">
       💾 Save score to history
     </button>
 
     <NoteModal
-      v-if="showNoteTaker"
-      :initial-text="noteText"
-      @save="saveNote"
-      @close="showNoteTaker = false"
+        v-if="showNoteTaker"
+        :initial-text="noteText"
+        @save="saveNote"
+        @close="showNoteTaker = false"
     />
     <RoundScores v-if="hasStarted" :scores="scoresStore.scores"
                  :game-type="gameTypeStore.type"
@@ -251,16 +251,19 @@ function handleTakeNote() {
                  :hasX="validScores.includes(X)"
                  :user-profile="userProfile"
     />
-  </div>
-  <UserNotes :allow-highlight="true" />
+    <UserNotes :allow-highlight="true"/>
 
-  <div class="controls">
-    <GameTypeSelector :gameType="gameTypeStore.type"
-                      @changeGameType="gameTypeStore.setGameType" />
+      <GameTypeSelector :gameType="gameTypeStore.type"
+                        @changeGameType="gameTypeStore.setGameType"/>
   </div>
+
 </template>
 
 <style scoped>
+.page {
+  padding: 0.5rem;
+}
+
 .pulse-animation {
   animation: pulse 2s infinite;
 }
@@ -309,5 +312,4 @@ button:disabled {
     transform: scale(1);
   }
 }
-
 </style>

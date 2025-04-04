@@ -354,18 +354,13 @@ p {
 }
 
 .fullpage {
-  padding: 0; /* Remove horizontal padding */
+  padding: 0.5rem;
   max-width: 800px;
   margin: 0 auto;
 }
 
-/* Diary view styles */
-.diary-view {
-  padding: 0 0.5rem;
-}
-
 .diary-entry {
-  margin: 1rem 0;
+  margin: 0.5rem 0;
 }
 
 .diary-entry:last-child {
@@ -376,11 +371,6 @@ p {
   width: 18px;
   height: 18px;
   margin-right: 0.5em;
-}
-
-.graph-button-container {
-  padding: 0 0.5rem;
-  margin: 0;
 }
 
 .handicap-buttons {
@@ -404,7 +394,6 @@ p {
   flex-direction: column;
   gap: 0.5em;
   margin: 1rem 0;
-  padding: 0 0.5rem;
 }
 
 .graph-modal {

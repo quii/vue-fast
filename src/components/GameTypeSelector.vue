@@ -35,14 +35,21 @@ function navigateToRoundSelection() {
         <span>Select the round you're shooting</span>
       </div>
     </div>
+    <p>Tap to select round to shoot</p>
   </div>
 </template>
-<style scoped>
 
+<style scoped>
+p {
+  text-align: right;
+  padding-bottom: 1rem;
+  padding-right: 0.5rem;
+  font-size: 0.8rem;
+}
 .current-round-container {
   cursor: pointer;
   transition: transform 0.1s ease;
-  margin: 1em 0.5em 1em 0.5em;
+  margin-top:0.5rem;
 }
 
 .current-round-container:active {

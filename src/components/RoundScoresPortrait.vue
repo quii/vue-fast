@@ -61,7 +61,7 @@ const totalColspan = computed(() => props.endSize === 5 ? 1 : 2);
 <style scoped>
 
 .table-container {
-  padding: 0.5em;
+  margin-top: 0.5rem;
   overflow-x: auto;
 }
 
