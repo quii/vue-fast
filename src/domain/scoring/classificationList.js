@@ -26,3 +26,15 @@ export function getNextClassification(currentClassification) {
   }
   return currentClassification;
 }
+
+export const classificationMap = {
+  A3: "Archer Third Class",
+  A2: "Archer Second Class",
+  A1: "Archer First Class",
+  B3: "Bowman Third Class",
+  B2: "Bowman Second Class",
+  B1: "Bowman First Class",
+  MB: "Master Bowman",
+  GMB: "Grand Master Bowman",
+  EMB: "Elite Master Bowman"
+};
