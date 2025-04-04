@@ -1,76 +1,103 @@
 <script setup>
 import BaseModal from "@/components/modals/BaseModal.vue";
-import BaseSelect from "@/components/ui/BaseSelect.vue";
-import BaseButton from "@/components/ui/BaseButton.vue";
-import FormGroup from "@/components/ui/FormGroup.vue";
-import ButtonGroup from "@/components/ui/ButtonGroup.vue";
-import { ref } from "vue";
+import { formatRoundName } from "@/domain/formatting.js";
+import { getRoundDetails } from "@/domain/round_details";
 
 defineProps(["rounds"]);
 const emit = defineEmits(["close", "select"]);
 
-const selectedRound = ref("");
-
-function handleSelect() {
-  emit("select", selectedRound.value);
+function handleSelect(round) {
+  emit("select", round);
   emit("close");
+}
+
+function getRoundColorScheme(roundName) {
+  if (!roundName) return "";
+  const details = getRoundDetails(roundName);
+  return details ? details.colorScheme : "";
 }
 </script>
 
 <template>
   <BaseModal title="Filter by Round">
-    <FormGroup>
-      <BaseSelect v-model="selectedRound">
-        <option value="">All Rounds</option>
-        <option v-for="round in rounds" :key="round" :value="round">
-          {{ round }}
-        </option>
-      </BaseSelect>
-    </FormGroup>
-
-    <ButtonGroup>
-      <BaseButton
-        variant="outline"
-        @click="emit('close')"
+    <div class="round-buttons">
+      <button
+        class="round-button all-button"
+        @click="handleSelect('')"
       >
-        Cancel
-      </BaseButton>
+        All Rounds
+      </button>
 
-      <BaseButton
-        variant="primary"
-        @click="handleSelect"
+      <button
+        v-for="round in rounds"
+        :key="round"
+        class="round-button"
+        @click="handleSelect(round)"
       >
-        Apply Filter
-      </BaseButton>
-    </ButtonGroup>
+        <div
+          class="round-indicator"
+          :class="getRoundColorScheme(round)"
+        ></div>
+        <span class="round-name">{{ formatRoundName(round) }}</span>
+      </button>
+    </div>
   </BaseModal>
 </template>
 
 <style scoped>
-.round-select {
-  width: 100%;
-  margin: 1rem 0;
-  padding: 0.5rem;
-  font-size: 1.1rem;
-}
-
-.button-group {
+.round-buttons {
   display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  margin-top: 2rem;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  max-height: 60vh;
+  overflow-y: auto;
 }
 
-button {
-  padding: 0.5rem 1rem;
-  font-size: 1.1rem;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-button.primary {
-  background: #4CAF50;
-  color: white;
+.round-button {
+  padding: 0.75rem 0.5rem 0.75rem 0;
+  border-radius: 4px;
   border: none;
+  cursor: pointer;
+  transition: transform 0.1s ease;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  min-height: 2.5rem;
+  background-color: var(--color-background-soft);
+  color: var(--color-text);
+  text-align: left;
+}
+
+.round-indicator {
+  width: 8px;
+  height: 100%;
+  min-height: 2.5rem;
+  margin-right: 0.75rem;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.round-name {
+  font-weight: 500;
+}
+
+.round-button:active {
+  transform: scale(0.98);
+}
+
+.all-button {
+  justify-content: center;
+  text-align: center;
+  padding: 0.75rem 1rem;
+}
+
+/* Color schemes copied from RoundCard.vue */
+.imperial {
+  background-color: hsla(207, 85%, 65%, 1);
+}
+
+.metric {
+  background-color: hsla(3, 84%, 65%, 1);
 }
 </style>

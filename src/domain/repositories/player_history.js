@@ -62,7 +62,11 @@ export class PlayerHistory {
   }
 
   getAvailableRounds() {
-    return [...new Set(this.storage.value.map(h => h.gameType))];
+    const uniqueRounds = [...new Set(this.storage.value.map(h => h.gameType))];
+
+    return uniqueRounds.sort((a, b) => {
+      return a.toLowerCase().localeCompare(b.toLowerCase());
+    });
   }
 
   addAverageEndScores(history) {
