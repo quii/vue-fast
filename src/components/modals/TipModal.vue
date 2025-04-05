@@ -16,6 +16,7 @@ const emit = defineEmits(["close"]);
 
 <style scoped>
 .button-group {
+  width: 1px;
   margin-top: 2rem;
 }
 
