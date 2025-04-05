@@ -16,7 +16,7 @@ class ScorePage {
   }
 
   tapRoundSelector() {
-    cy.get(".current-round-container").click();
+    cy.contains("Tap to select round to shoot").click();
   }
 
   setMaxDistance(yards) {
