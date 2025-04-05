@@ -162,6 +162,7 @@ function formatVertical(vertical) {
 
 <style scoped>
 .round-card {
+  width: 100%;
   display: flex;
   background-color: var(--color-background-soft);
   border-radius: 8px;

@@ -718,14 +718,9 @@ function toggleChallengingRounds() {
   color: var(--color-text);
 }
 
-.round-category {
-  margin-bottom: 1.5em;
-}
-
-.round-category h4 {
-  margin: 0.5em 0;
+.round-category h3 {
+  margin: 0 0 0.5em 0;
   font-size: 1em;
-  color: var(--color-text-light);
 }
 
 .all-rounds-section h3 {
@@ -737,7 +732,6 @@ function toggleChallengingRounds() {
 .all-rounds-section h4 {
   margin: 0.5em 0;
   font-size: 1em;
-  color: var(--color-text-light);
 }
 
 /* Challenge button styles */
