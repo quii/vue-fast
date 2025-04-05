@@ -7,16 +7,16 @@
 <style scoped>
 .button-group {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   gap: 1rem;
-  margin-top: 1.5rem;
-  /* Ensure no right padding/margin that would cause misalignment */
-  padding-right: 0;
+  margin-top: 0.5rem;
+}
+
+.button-group :deep(.base-button:last-child) {
   margin-right: 0;
 }
 
-/* Override the right margin of the last button */
-.button-group :deep(.base-button:last-child) {
-  margin-right: 0;
+.button-group :deep(.base-button:first-child) {
+  margin-left: 0;
 }
 </style>

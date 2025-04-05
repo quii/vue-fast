@@ -1,6 +1,11 @@
 <template>
-  <div class="graph-container">
-    <canvas ref="chartCanvas"></canvas>
+  <div v-if="visible" class="graph-modal">
+    <div class="graph-modal-content">
+      <button class="close-graph" @click="closeGraph">✕</button>
+      <div class="graph-container">
+        <canvas ref="chartCanvas"></canvas>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -20,8 +25,14 @@ const props = defineProps({
   graphTitle: {
     type: String,
     default: ""
+  },
+  visible: {
+    type: Boolean,
+    default: false
   }
 });
+
+const emit = defineEmits(["close"]);
 
 const chartCanvas = ref(null);
 let chart = null;
@@ -43,6 +54,10 @@ const graphTitle = computed(() => {
   }
   return props.isHandicapGraph ? "Handicap Progress" : `${capitalizedRoundName.value} Progress`;
 });
+
+function closeGraph() {
+  emit("close");
+}
 
 function renderChart() {
   if (!chartCanvas.value || props.historyData.length === 0) return;
@@ -158,19 +173,63 @@ function renderChart() {
 }
 
 onMounted(() => {
-  renderChart();
+  if (props.visible) {
+    renderChart();
+  }
 });
 
 watch(() => [props.historyData, props.isHandicapGraph], () => {
   renderChart();
 }, { deep: true });
+
+watch(() => props.visible, (newValue) => {
+  if (newValue) {
+    // Wait for the DOM to update before rendering the chart
+    setTimeout(() => {
+      renderChart();
+    }, 0);
+  }
+});
 </script>
 
 <style scoped>
 .graph-container {
-  height: 70vh;
+  height: 100%;
   width: 100%;
-  margin: 0 auto;
   padding: 10px;
+}
+
+.graph-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.graph-modal-content {
+  background-color: var(--color-background);
+  width: 95%;
+  height: 90%;
+  border-radius: 8px;
+  position: relative;
+  padding: 10px;
+}
+
+.close-graph {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 1001;
+  color: var(--color-text);
 }
 </style>

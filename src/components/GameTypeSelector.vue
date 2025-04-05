@@ -52,19 +52,6 @@ function navigateToRoundSelection() {
 </template>
 
 <style scoped>
-.compact-button-group {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.compact-button-group :deep(button) {
-  margin-top: 0;
-  margin-bottom: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
 
 .tap-icon {
   width: 18px;

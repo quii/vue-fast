@@ -3,16 +3,13 @@
   <div class="fullpage" @touchstart="handleTouchStart"
        @touchend="handleTouchEnd">
 
-    <div v-if="showGraph" class="graph-modal">
-      <div class="graph-modal-content">
-        <button class="close-graph" @click="showGraph = false">✕</button>
-        <ScoreHistoryGraph
-          :historyData="graphData"
-          :isHandicapGraph="isHandicapGraph"
-          :graphTitle="graphTitle"
-        />
-      </div>
-    </div>
+    <ScoreHistoryGraph
+      :historyData="graphData"
+      :isHandicapGraph="isHandicapGraph"
+      :graphTitle="graphTitle"
+      :visible="showGraph"
+      @close="showGraph = false"
+    />
 
     <div v-if="!isDiaryMode">
       <HistoryFilters
@@ -28,26 +25,18 @@
         @reset="handleReset"
       />
 
-      <!-- Replace the existing round graph button section with this -->
-      <div v-if="showGraphButton" class="graph-button-container">
+      <ButtonGroup v-if="showGraphButton">
         <BaseButton
           variant="default"
           size="medium"
           @click="openGraph"
           fullWidth
         >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-               stroke-linecap="round" stroke-linejoin="round" class="button-icon">
-            <line x1="18" y1="20" x2="18" y2="10"></line>
-            <line x1="12" y1="20" x2="12" y2="4"></line>
-            <line x1="6" y1="20" x2="6" y2="14"></line>
-            <line x1="2" y1="20" x2="22" y2="20"></line>
-          </svg>
+          <GraphIcon />
           <span>View {{ capitalizedRoundName }} Graph</span>
         </BaseButton>
-      </div>
-      <div v-if="showIndoorHandicapGraphButton || showOutdoorHandicapGraphButton"
-           class="graph-button-container handicap-buttons">
+      </ButtonGroup>
+      <ButtonGroup v-if="showIndoorHandicapGraphButton || showOutdoorHandicapGraphButton">
         <BaseButton
           v-if="showIndoorHandicapGraphButton"
           variant="default"
@@ -55,10 +44,7 @@
           @click="openIndoorHandicapGraph"
           class="handicap-button"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-               stroke-linecap="round" stroke-linejoin="round" class="button-icon">
-            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-          </svg>
+          <GraphIcon />
           <span>Indoor Handicap</span>
         </BaseButton>
 
@@ -69,13 +55,10 @@
           @click="openOutdoorHandicapGraph"
           class="handicap-button"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-               stroke-linecap="round" stroke-linejoin="round" class="button-icon">
-            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-          </svg>
+          <GraphIcon />
           <span>Outdoor Handicap</span>
         </BaseButton>
-      </div>
+      </ButtonGroup>
       <div v-if="hasClassificationProgress" class="classification-progress-section">
         <div v-for="(bowProgress, bowType) in classificationProgress" :key="bowType">
           <ClassificationProgress
@@ -126,6 +109,9 @@
 
 <script setup>
 import HistoryCard from "@/components/HistoryCard.vue";
+import GraphIcon from "@/components/icons/GraphIcon.vue";
+import ButtonGroup from "@/components/ui/ButtonGroup.vue";
+import { formatRoundName } from "@/domain/formatting.js";
 import { calculateAllClassificationProgress } from "@/domain/scoring/classification_progress.js";
 import { gameTypeConfig } from "@/domain/scoring/game_types.js";
 import { ref, watchEffect, computed } from "vue";
@@ -228,7 +214,6 @@ watchEffect(async () => {
   }, user.user);
 });
 
-// Add these computed properties
 const indoorEntriesWithHandicap = computed(() => {
   return filteredHistory.value.filter(item =>
     item.handicap !== undefined &&
@@ -247,30 +232,17 @@ const outdoorEntriesWithHandicap = computed(() => {
   );
 });
 
-// Update the existing computed property
 const showIndoorHandicapGraphButton = computed(() => {
-  // Only show if no round filter is active and we have enough indoor handicap entries
   return !roundFilterActive.value && indoorEntriesWithHandicap.value.length >= 5;
 });
 
-// Add a new computed property for outdoor
 const showOutdoorHandicapGraphButton = computed(() => {
-  // Only show if no round filter is active and we have enough outdoor handicap entries
   return !roundFilterActive.value && outdoorEntriesWithHandicap.value.length >= 5;
 });
 
 
-const capitalizedRoundName = computed(() => {
-  if (!roundFilter.value) return "";
+const capitalizedRoundName = computed(() => formatRoundName(roundFilter.value));
 
-  // Split the round name by spaces
-  return roundFilter.value
-    .split(" ")
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-});
-
-// Computed property to determine if we should show the graph button
 const showGraphButton = computed(() => {
   if (!roundFilterActive.value) return false;
 
@@ -379,21 +351,6 @@ function view(id) {
   border-bottom: none;
 }
 
-.button-icon {
-  width: 18px;
-  height: 18px;
-  margin-right: 0.5em;
-}
-
-.handicap-buttons {
-  display: flex;
-  gap: 0.5em;
-}
-
-.handicap-button {
-  flex: 1;
-}
-
 .classification-progress-section {
   margin: 0; /* Remove vertical margin */
   border: none; /* Remove border */
@@ -405,39 +362,5 @@ function view(id) {
   display: flex;
   flex-direction: column;
   gap: 0.5em;
-}
-
-.graph-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  z-index: 1000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.graph-modal-content {
-  background-color: var(--color-background);
-  width: 95%;
-  height: 90%;
-  border-radius: 8px;
-  position: relative;
-  padding: 10px;
-}
-
-.close-graph {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  z-index: 1001;
-  color: var(--color-text);
 }
 </style>
