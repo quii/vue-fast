@@ -215,3 +215,65 @@ classification:
 - Even for seemingly small additions, consider whether they represent a distinct UI concept that deserves its own
   component
 - When in doubt about whether to extend an existing component or create a new one, prefer creating a new component
+
+## TypeScript Migration Strategy
+
+When converting JavaScript domain code to TypeScript with stronger type guarantees, follow these principles:
+
+### Preserve Public APIs
+
+- **Maintain backward compatibility** with existing interfaces when adding types to domain code
+- Public function signatures should remain unchanged initially, even if the internal implementation uses more
+  sophisticated types
+- Add type definitions that accommodate both old and new calling patterns where possible
+
+### Adapter Pattern for Gradual Migration
+
+- Use adapter functions or wrapper methods to convert between legacy data structures and new typed structures
+- Create internal helper functions that handle the conversion logic, keeping it DRY
+- Consider using TypeScript's union types to explicitly model the transition state (e.g.,
+  `type Distance = number | DistanceObject`)
+
+### Incremental Adoption
+
+- Refactor one component at a time to use the new typed interfaces
+- Update tests first to use the new interfaces, ensuring the domain logic works correctly with the new types
+- Only remove support for legacy formats after all consumers have been updated
+
+### Example Migration Pattern
+
+1. **Phase 1**: Add types while maintaining the same API
+   ```typescript
+   // Before: function estimateSightMark(marks, targetDistance, targetUnit)
+   // After:
+   function estimateSightMark(
+     marks: Array<LegacySightMark | TypedSightMark>, 
+     targetDistance: number | Distance, 
+     targetUnit?: DistanceUnit
+   ): SightMark | null {
+     // Internal conversion to typed structures
+     const typedMarks = marks.map(convertToTypedSightMark);
+     const typedDistance = convertToDistance(targetDistance, targetUnit);
+     
+     // Core logic using typed structures
+     // ...
+     
+     // Return in a format compatible with existing code
+     return result;
+   }
+   ```
+
+2. **Phase 2**: Update consumers one by one to use the new typed API directly
+
+3. **Phase 3**: Once all consumers are updated, simplify the API to use only typed structures
+   ```typescript
+   function estimateSightMark(
+     marks: Array<TypedSightMark>, 
+     targetDistance: Distance
+   ): SightMark | null {
+     // Clean implementation with no conversion needed
+     // ...
+   }
+   ```
+
+This approach minimizes disruption while gradually improving type safety throughout the codebase.

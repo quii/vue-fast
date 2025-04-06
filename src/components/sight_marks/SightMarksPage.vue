@@ -99,10 +99,10 @@
         />
         <label>Distance</label>
         <div class="distance-inputs">
-          <input type="number" v-model="newMark.distance" class="distance-number" />
-          <select v-model="newMark.unit" class="unit-select">
-            <option value="m">m</option>
-            <option value="yd">yd</option>
+          <input type="number" v-model="newMark.distanceValue" class="distance-number" />
+          <select v-model="newMark.distanceUnit" class="unit-select">
+            <option value="meters">m</option>
+            <option value="yards">yd</option>
           </select>
         </div>
       </div>
@@ -183,38 +183,77 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { computed, ref } from "vue";
 import { useSightMarksStore } from "@/stores/sight_marks";
 import BaseModal from "@/components/modals/BaseModal.vue";
 import NumberSpinner from "@/components/common/NumberSpinner.vue";
 import BaseTopBar from "@/components/ui/BaseTopBar.vue";
-import { estimateSightMark, canEstimateSightMark } from "@/domain/sight_marks/estimation";
+import {
+  estimateSightMark,
+  canEstimateSightMark,
+  SightMark,
+  VerticalAdjustment
+} from "@/domain/sight_marks/estimation";
+import { Distance } from "@/domain/distance/distance";
 
+interface StoreSightMark extends SightMark {
+  id: string;
+  label?: string;
+  priority: boolean;
+}
+
+interface NewMarkForm {
+  id: string | null;
+  distanceValue: number;
+  distanceUnit: "meters" | "yards";
+  notches: number;
+  label: string;
+  vertical: VerticalAdjustment;
+}
+
+type DistanceUnit = "meters" | "yards";
 
 const store = useSightMarksStore();
-const marks = computed(() => store.getMarks());
+const marks = computed<StoreSightMark[]>(() => store.getMarks());
 
 const showAddMark = ref(false);
 const showDeleteConfirm = ref(false);
-const markToDelete = ref(null);
-const longPressTimer = ref(null);
+const markToDelete = ref<StoreSightMark | null>(null);
+const longPressTimer = ref<number | null>(null);
 
 // New refs for the estimate feature
 const showEstimateModal = ref(false);
 const estimateDistance = ref(30);
-const estimateUnit = ref("m");
-const estimatedMark = ref(null);
+const estimateUnit = ref<DistanceUnit>("meters");
+const estimatedMark = ref<SightMark | null>(null);
 const estimateLabel = ref("");
 const showSaveEstimateOptions = ref(false);
 
 // Check if we have enough marks to enable estimation
-const canEstimate = computed(() => canEstimateSightMark(marks.value));
+const canEstimate = computed(() => {
+  // Convert store marks to domain SightMark objects
+  const domainMarks = marks.value.map(storeMark => ({
+    distance: createDistanceFromMark(storeMark),
+    notches: storeMark.notches,
+    vertical: storeMark.vertical
+  }));
 
-const newMark = ref({
+  return canEstimateSightMark(domainMarks);
+});
+
+// Helper function to create Distance objects from store marks
+function createDistanceFromMark(mark: StoreSightMark): Distance {
+  // Convert legacy unit format if needed
+  const unit = mark.unit === "m" ? "meters" : mark.unit === "yd" ? "yards" : mark.unit;
+  return unit === "meters" ? Distance.meters(mark.distance) : Distance.yards(mark.distance);
+}
+
+// Helper function to format distance for display
+const newMark = ref<NewMarkForm>({
   id: null,
-  distance: 20,
-  unit: "m",
+  distanceValue: 20,
+  distanceUnit: "meters",
   notches: 2,
   label: "",
   vertical: {
@@ -222,7 +261,7 @@ const newMark = ref({
     minor: 6,
     micro: 2
   }
-})
+});
 
 const notchesValue = computed({
   get() {
@@ -231,7 +270,7 @@ const notchesValue = computed({
   set(value) {
     newMark.value.notches = 15 - value;
   }
-})
+});
 
 const displayNotches = computed(() => newMark.value.notches);
 
@@ -265,7 +304,7 @@ function openEstimateModal() {
 }
 
 // Handle actions from the BaseTopBar
-function handleAction(actionData) {
+function handleAction(actionData: { action: string }) {
   if (actionData.action === "add-mark") {
     showAddMark.value = true;
   } else if (actionData.action === "estimate-mark") {
@@ -273,22 +312,52 @@ function handleAction(actionData) {
   }
 }
 
-// Function to calculate the estimated sight mark
+//TODO: this should have to be so complex
 function calculateEstimate() {
+  // Convert store marks to domain SightMark objects with proper Distance objects
+  const domainMarks = marks.value.map(storeMark => {
+    // Check if the distance is already a Distance object
+    let distance;
+    if (typeof storeMark.distance === "object" && storeMark.distance.toMeters) {
+      distance = storeMark.distance;
+    } else {
+      // Convert legacy format to Distance object
+      const unit = storeMark.unit === "m" ? "meters" : "yards";
+      distance = unit === "meters"
+        ? Distance.meters(storeMark.distance)
+        : Distance.yards(storeMark.distance);
+    }
+
+    return {
+      distance,
+      notches: storeMark.notches,
+      vertical: storeMark.vertical
+    };
+  });
+
+  // Create a Distance object for the target
+  const targetDistance = estimateUnit.value === "meters"
+    ? Distance.meters(estimateDistance.value)
+    : Distance.yards(estimateDistance.value);
+
+  // Calculate the estimate
   estimatedMark.value = estimateSightMark(
-    marks.value,
-    estimateDistance.value,
-    estimateUnit.value
+    domainMarks,
+    targetDistance
   );
-  showSaveEstimateOptions.value = false; // Reset save options when calculating new estimate
+
+  showSaveEstimateOptions.value = false;
 }
 
 function saveEstimatedMark() {
   if (!estimatedMark.value) return;
 
+  // Convert the unit format for the store
+  const storeUnit = estimateUnit.value === "meters" ? "m" : "yd";
+
   store.addMark(
     estimateDistance.value,
-    estimateUnit.value,
+    storeUnit,
     estimatedMark.value.notches,
     estimatedMark.value.vertical,
     estimateLabel.value
@@ -301,25 +370,31 @@ function saveEstimatedMark() {
   showSaveEstimateOptions.value = false;
 }
 
-function formatVertical(vertical) {
+function formatVertical(vertical: VerticalAdjustment): string {
   return `${vertical.major}.${vertical.minor}.${vertical.micro}`;
 }
 
 function saveMark() {
-  const { id, distance, unit, notches, vertical, label } = newMark.value;
+  const storeUnit = newMark.value.distanceUnit === "meters" ? "m" : "yd";
+
+  const { id, notches, vertical, label, distanceValue } = newMark.value;
+
   if (id) {
-    store.updateMark(id, distance, unit, notches, vertical, label);
+    store.updateMark(id, distanceValue, storeUnit, notches, vertical, label);
   } else {
-    store.addMark(distance, unit, notches, vertical, label);
+    store.addMark(distanceValue, storeUnit, notches, vertical, label);
   }
   showAddMark.value = false;
 }
 
-function editMark(mark) {
+function editMark(mark: StoreSightMark) {
+  // Convert legacy unit format if needed
+  const distanceUnit = mark.unit === "m" ? "meters" : mark.unit === "yd" ? "yards" : mark.unit;
+
   newMark.value = {
     id: mark.id,
-    distance: mark.distance,
-    unit: mark.unit,
+    distanceValue: mark.distance,
+    distanceUnit: distanceUnit as DistanceUnit,
     notches: mark.notches,
     label: mark.label || "",
     vertical: {
@@ -331,12 +406,11 @@ function editMark(mark) {
   showAddMark.value = true;
 }
 
-
-function startLongPress(mark) {
-  longPressTimer.value = setTimeout(() => {
+function startLongPress(mark: StoreSightMark) {
+  longPressTimer.value = window.setTimeout(() => {
     markToDelete.value = mark;
     showDeleteConfirm.value = true;
-  }, 500)
+  }, 500);
 }
 
 function cancelLongPress() {
@@ -347,9 +421,11 @@ function cancelLongPress() {
 }
 
 function confirmDelete() {
-  store.deleteMark(markToDelete.value.id);
-  showDeleteConfirm.value = false;
-  markToDelete.value = null;
+  if (markToDelete.value) {
+    store.deleteMark(markToDelete.value.id);
+    showDeleteConfirm.value = false;
+    markToDelete.value = null;
+  }
 }
 
 function cancelDelete() {
@@ -357,7 +433,7 @@ function cancelDelete() {
   markToDelete.value = null;
 }
 
-function togglePriority(mark) {
+function togglePriority(mark: StoreSightMark) {
   store.togglePriority(mark.distance, mark.unit);
 }
 </script>

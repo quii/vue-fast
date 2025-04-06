@@ -5,6 +5,7 @@ import { computed } from "vue";
 import { getRoundDetails } from "@/domain/round_details";
 import { useHistoryStore } from "@/stores/history";
 import { useSightMarksStore } from "@/stores/sight_marks";
+import { Distance } from "@/domain/distance/distance"; // Import the Distance class
 
 const props = defineProps({
   round: {
@@ -41,9 +42,32 @@ const allSightMarks = computed(() => {
   return sightMarksStore.getMarks();
 });
 
+// Helper function to create a proper Distance object from a mark
+function createDistanceFromMark(mark) {
+  // Check if the distance is already a Distance object
+  if (typeof mark.distance === "object" && mark.distance.toMeters) {
+    return mark.distance;
+  }
+
+  // Convert legacy format to Distance object
+  const unit = mark.unit === "m" ? "meters" : "yards";
+  return unit === "meters"
+    ? Distance.meters(mark.distance)
+    : Distance.yards(mark.distance);
+}
+
+// Convert all sight marks to the format expected by the estimation functions
+const domainSightMarks = computed(() => {
+  return allSightMarks.value.map(mark => ({
+    distance: createDistanceFromMark(mark),
+    notches: mark.notches,
+    vertical: mark.vertical
+  }));
+});
+
 // Check if we can estimate sight marks
 const canEstimate = computed(() => {
-  return canEstimateSightMark(allSightMarks.value);
+  return canEstimateSightMark(domainSightMarks.value);
 });
 
 // Get sight marks for each distance in the round
@@ -57,12 +81,13 @@ const distanceInfoWithSightMarks = computed(() => {
     const match = info.distance.match(/(\d+)(yd|m)/);
     if (!match) return { ...info, sightMarks: [], estimatedMarks: [] };
 
-    const [, distanceValue, unit] = match;
+    const [, distanceValue, unitShort] = match;
     const distanceNumber = parseInt(distanceValue);
+    const unit = unitShort === "m" ? "meters" : "yards";
 
     // Find sight marks for this distance
     let sightMarks = [];
-    if (unit === "yd") {
+    if (unit === "yards") {
       sightMarks = sightMarksStore.findMarksForDistance(null, distanceNumber);
     } else {
       sightMarks = sightMarksStore.findMarksForDistance(distanceNumber, null);
@@ -71,10 +96,14 @@ const distanceInfoWithSightMarks = computed(() => {
     // If no sight marks found and we can estimate, add an estimated mark
     let estimatedMarks = [];
     if (sightMarks.length === 0 && canEstimate.value) {
+      // Create a Distance object for estimation
+      const targetDistance = unit === "meters"
+        ? Distance.meters(distanceNumber)
+        : Distance.yards(distanceNumber);
+
       const estimatedMark = estimateSightMark(
-        allSightMarks.value,
-        distanceNumber,
-        unit
+        domainSightMarks.value,
+        targetDistance
       );
 
       if (estimatedMark) {
@@ -95,6 +124,7 @@ function formatVertical(vertical) {
   return `${vertical.major}.${vertical.minor}.${vertical.micro}`;
 }
 </script>
+
 <template>
   <div v-if="roundDetails" class="round-card">
     <div :class="['card-indicator', roundDetails.colorScheme]">
