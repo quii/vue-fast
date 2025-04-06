@@ -6,7 +6,7 @@ import { filterByClassification, filterByDateRange, filterByPB, filterByRound } 
 import { addHandicapToHistory } from "@/domain/scoring/handicap";
 
 Date.prototype.addDays = function (days) {
-  var date = new Date(this.valueOf());
+  const date = new Date(this.valueOf());
   date.setDate(date.getDate() + days);
   return date;
 };

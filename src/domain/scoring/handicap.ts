@@ -1,4 +1,4 @@
-let handicapCache = {};
+const handicapCache = {};
 
 async function loadHandicapsByCategory(round) {
     const path = `/data/handicaps.json`;

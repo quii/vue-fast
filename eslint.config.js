@@ -2,48 +2,96 @@ import js from "@eslint/js";
 import pluginVue from "eslint-plugin-vue";
 import pluginVitest from "@vitest/eslint-plugin";
 import pluginCypress from "eslint-plugin-cypress/flat";
-import skipFormatting from "@vue/eslint-config-prettier/skip-formatting";
+import vueParser from "vue-eslint-parser";
+import tsParser from "@typescript-eslint/parser";
+
+// Create a compatibility instance
 
 export default [
+  // Base configuration for all files
   {
-    name: "app/files-to-lint",
-    files: ["**/*.{js,mjs,jsx,vue}"]
+    ignores: ["**/dist/**", "**/dev-dist/**", "**/dist-ssr/**", "**/coverage/**", "**/node_modules/**"]
   },
 
+  // JavaScript files
   {
-    name: "app/files-to-ignore",
-    ignores: ["**/dist/**", "**/dev-dist/**", "**/dist-ssr/**", "**/coverage/**"]
+    files: ["**/*.{js,mjs,jsx}"],
+    ...js.configs.recommended
   },
 
-  js.configs.recommended,
-  ...pluginVue.configs["flat/essential"],
+  // TypeScript files
+  {
+    files: ["**/*.{ts,tsx}"],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        ecmaVersion: 2020,
+        sourceType: "module"
+      }
+    },
+    rules: {
+      // Add TypeScript-specific rules here
+    }
+  },
+
+  // Vue files
+  {
+    files: ["**/*.vue"],
+    languageOptions: {
+      parser: vueParser,
+      parserOptions: {
+        ecmaVersion: 2020,
+        sourceType: "module",
+        parser: tsParser
+      }
+    },
+    plugins: {
+      vue: pluginVue
+    },
+    rules: {
+      ...pluginVue.configs["flat/essential"].rules
+    }
+  },
+
+  // Common settings for all files
   {
     languageOptions: {
       ecmaVersion: 2020,
-      parserOptions: {
-        "ecmaVersion": 2020
-      },
       sourceType: "module",
       globals: {
         browser: true,
-        node: true,
-        "cypress/globals": true,
-        global: true
+        node: true
       }
     }
   },
+
+  // Vitest files
   {
-    ...pluginVitest.configs.recommended,
-    files: ["src/**/__tests__/*"]
+    files: ["src/**/__tests__/**/*.{js,ts,jsx,tsx}"],
+    plugins: {
+      vitest: pluginVitest
+    },
+    rules: {
+      ...pluginVitest.configs.recommended.rules
+    }
   },
 
+  // Cypress files
   {
-    ...pluginCypress.configs.recommended,
     files: [
       "cypress/e2e/**/*.{cy,spec}.{js,ts,jsx,tsx}",
       "cypress/support/**/*.{js,ts,jsx,tsx}"
-    ]
-  },
-  skipFormatting,
-  pluginCypress.configs.globals
+    ],
+    plugins: {
+      cypress: pluginCypress
+    },
+    rules: {
+      ...pluginCypress.configs.recommended.rules
+    },
+    languageOptions: {
+      globals: {
+        ...pluginCypress.configs.globals.languageOptions.globals
+      }
+    }
+  }
 ];
