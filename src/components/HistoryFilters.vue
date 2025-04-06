@@ -117,7 +117,3 @@ function handleAction({ action }) {
     @select="classification => emit('filterClassification', classification)"
   />
 </template>
-
-<style scoped>
-/* Remove the old styles since they're now handled by BaseTopBar */
-</style>

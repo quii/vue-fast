@@ -92,9 +92,7 @@ watchEffect(() => {
 </script>
 <template>
   <div class="profile-page">
-    <SectionCard>
-      <h2 class="section-title">Personal Information</h2>
-
+    <SectionCard title="Personal Information">
       <FormGroup label="Name">
         <BaseInput v-model="name" placeholder="Name" />
       </FormGroup>
@@ -132,9 +130,7 @@ watchEffect(() => {
       </FormGroup>
     </SectionCard>
 
-    <SectionCard>
-      <h2 class="section-title">Season Dates</h2>
-
+    <SectionCard title="Season Dates">
       <FormGroup label="Indoor Season Start Date">
         <BaseInput type="date" v-model="indoorSeasonStartDate" />
       </FormGroup>
@@ -152,9 +148,7 @@ watchEffect(() => {
       </BaseButton>
     </SectionCard>
 
-    <SectionCard v-if="usedBowTypes.length > 0">
-      <h2 class="section-title">Classifications</h2>
-
+    <SectionCard title="Classifications" v-if="usedBowTypes.length > 0">
       <div v-for="bowType in usedBowTypes" :key="bowType" class="bow-classification">
         <h3 class="bow-type-title">{{ bowType.charAt(0).toUpperCase() + bowType.slice(1) }}</h3>
 
@@ -184,9 +178,7 @@ watchEffect(() => {
       </div>
     </SectionCard>
 
-    <SectionCard>
-      <h2 class="section-title">Other Preferences</h2>
-
+    <SectionCard title="Other Preferences">
       <BaseCheckbox
         v-model="constructiveCriticism"
         label="Constructive criticism enabled"
@@ -210,16 +202,9 @@ watchEffect(() => {
 </template>
 <style scoped>
 .profile-page {
-  padding: 1rem;
+  padding: 0.5rem;
   max-width: 800px;
   margin: 0 auto;
-}
-
-.section-title {
-  margin-top: 0;
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  color: var(--color-text);
 }
 
 .bow-type-title {

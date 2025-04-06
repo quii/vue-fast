@@ -119,17 +119,15 @@ function hardReset() {
 
 <template>
   <div class="data-management">
-    <SectionCard v-if="backupWarning" class="warning-card">
+    <SectionCard v-if="backupWarning" class="warning-card" title="Time for a backup!">
       <div class="warning-content">
-        <h2>⚠️ Time for a backup!</h2>
         <p class="explanation">
           It's been over a month since your last backup. Please save a new backup file to keep your data safe.
         </p>
       </div>
     </SectionCard>
 
-    <SectionCard>
-      <h2 class="section-title">Back up your data</h2>
+    <SectionCard title="Back up your data">
       <p class="explanation">
         Your scores and notes are only stored on this device. To keep them safe, download a backup file and store it
         somewhere secure.
@@ -151,8 +149,7 @@ function hardReset() {
       </BaseButton>
     </SectionCard>
 
-    <SectionCard>
-      <h2 class="section-title">Restore from backup</h2>
+    <SectionCard title="Restore from backup">
       <p class="explanation">
         Use this to restore your data from a previous backup file.
       </p>
@@ -165,8 +162,7 @@ function hardReset() {
       </div>
     </SectionCard>
 
-    <SectionCard class="danger-card">
-      <h2 class="section-title">Delete all data</h2>
+    <SectionCard class="danger-card" title="Delete all data">
       <div class="warning-content">
         <h3 class="warning-title">⚠️ This will remove everything</h3>
         <p class="explanation">
@@ -186,16 +182,9 @@ function hardReset() {
 
 <style scoped>
 .data-management {
-  padding: 1rem;
+  padding: 0.5rem;
   max-width: 800px;
   margin: 0 auto;
-}
-
-.section-title {
-  margin-top: 0;
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  color: var(--color-text);
 }
 
 .explanation {
