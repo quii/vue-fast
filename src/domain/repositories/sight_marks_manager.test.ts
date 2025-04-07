@@ -23,6 +23,40 @@ describe("SightMarksManager", () => {
     expect(storage.value[0].id).toBeTruthy();
   });
 
+  it("creates independent copies of vertical objects for each mark", () => {
+    const storage = { value: [] };
+    const manager = new SightMarksManager(storage);
+
+    // Create a vertical object that we'll reuse
+    const vertical = { major: 5, minor: 6, micro: 2 };
+
+    // Add first mark with the vertical object
+    manager.add(20, "m", 5, vertical);
+
+    // Modify the original vertical object
+    vertical.major = 7;
+    vertical.minor = 8;
+    vertical.micro = 9;
+
+    // Add second mark with the modified vertical object
+    manager.add(30, "m", 6, vertical);
+
+    // Verify both marks have their own independent vertical objects
+    expect(storage.value).toHaveLength(2);
+
+    // First mark should have the original values
+    expect(storage.value[0].vertical).toEqual({ major: 5, minor: 6, micro: 2 });
+
+    // Second mark should have the new values
+    expect(storage.value[1].vertical).toEqual({ major: 7, minor: 8, micro: 9 });
+
+    // Modify the first mark's vertical object
+    storage.value[0].vertical.major = 9;
+
+    // Verify it doesn't affect the second mark
+    expect(storage.value[1].vertical.major).toBe(7);
+  });
+
   it("updates existing sight marks", () => {
     const id = "123";
     const storage = {

@@ -22,7 +22,7 @@ export class SightMarksManager {
       distance,
       unit,
       notches,
-      vertical,
+      vertical: { ...vertical }, // Create a shallow copy of the vertical object
       priority: false,
       label
     };
