@@ -79,7 +79,7 @@ function selectRecentRound(roundType) {
     <div v-if="hasSelectedRound" class="current-round">
       <div class="current-round-header">
         <div class="current-round-label">Currently shooting</div>
-        <span class="tap-to-change">tap to change</span>
+        <span class="tap-to-change" @click="navigateToRoundSelection">tap to change</span>
       </div>
       <div class="round-card-wrapper" @click="navigateToRoundSelection">
         <RoundCard
