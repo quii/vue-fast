@@ -1,6 +1,6 @@
 <script setup>
 import CardModeToggle from "@/components/CardModeToggle.vue";
-import { ref, computed, watchEffect } from "vue";
+import { ref, computed, watchEffect, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/user";
 import { useSearchPreferencesStore } from "@/stores/searchPreferences";
@@ -18,6 +18,11 @@ defineProps({
     type: String,
     default: ""
   }
+});
+
+onMounted(() => {
+  // Clear the search query when the page is loaded
+  searchPreferencesStore.updateSearchQuery("");
 });
 
 const router = useRouter();
