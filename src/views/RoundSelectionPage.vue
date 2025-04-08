@@ -1,4 +1,5 @@
 <script setup>
+import CardModeToggle from "@/components/CardModeToggle.vue";
 import { ref, computed, watchEffect } from "vue";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/user";
@@ -66,6 +67,11 @@ const challengingRoundsOnly = computed({
 const searchQuery = computed({
   get: () => searchPreferencesStore.preferences.searchQuery,
   set: (value) => searchPreferencesStore.updatePreferences({ searchQuery: value })
+});
+
+const compactMode = computed({
+  get: () => searchPreferencesStore.preferences.compactMode,
+  set: (value) => searchPreferencesStore.updatePreferences({ compactMode: value })
 });
 
 // Max distance from user preferences
@@ -500,7 +506,10 @@ function toggleChallengingRounds() {
 
       <!-- Search bar -->
       <div class="search-container">
-        <input type="text" v-model="searchQuery" placeholder="Search rounds..." />
+        <div class="search-row">
+          <input type="text" v-model="searchQuery" placeholder="Search rounds..." />
+          <CardModeToggle v-model="compactMode" />
+        </div>
       </div>
 
       <!-- Message when no rounds match filters -->
@@ -517,6 +526,7 @@ function toggleChallengingRounds() {
               v-for="round in practiceRoundsFiltered"
               :key="round.round"
               :round="round"
+              :compact="compactMode"
               @click="selectRound(round.round)"
             />
           </div>
@@ -529,6 +539,7 @@ function toggleChallengingRounds() {
               v-for="round in shortRounds"
               :key="round.round"
               :round="round"
+              :compact="compactMode"
               @click="selectRound(round.round)"
             />
           </div>
@@ -541,6 +552,7 @@ function toggleChallengingRounds() {
               v-for="round in mediumRounds"
               :key="round.round"
               :round="round"
+              :compact="compactMode"
               @click="selectRound(round.round)"
             />
           </div>
@@ -553,6 +565,7 @@ function toggleChallengingRounds() {
               v-for="round in longRounds"
               :key="round.round"
               :round="round"
+              :compact="compactMode"
               @click="selectRound(round.round)"
             />
           </div>
@@ -623,6 +636,20 @@ function toggleChallengingRounds() {
   margin-bottom: 1em;
 }
 
+.search-container :deep(.card-mode-toggle) {
+  flex-shrink: 0;
+  width: 130px;
+}
+
+.search-container :deep(.toggle-button) {
+  height: 40px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%; /* Make the button fill the container */
+}
+
 .search-container input {
   width: 100%;
   padding: 0.75em;
@@ -631,6 +658,24 @@ function toggleChallengingRounds() {
   border-radius: 8px;
   background-color: var(--color-background-soft);
   color: var(--color-text);
+}
+
+.search-row {
+  display: flex;
+  align-items: stretch;
+  gap: 0.5em;
+}
+
+.search-row input {
+  flex: 1;
+  padding: 0.75em;
+  font-size: 1em;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background-color: var(--color-background-soft);
+  color: var(--color-text);
+  height: 40px;
+  box-sizing: border-box;
 }
 
 .rounds-container {

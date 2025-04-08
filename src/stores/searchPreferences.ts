@@ -13,9 +13,10 @@ export const useSearchPreferencesStore = defineStore("searchPreferences", () => 
     challengingRoundsOnly: true,
 
     // Search query
-    searchQuery: ""
+    searchQuery: "",
 
-    // We don't need to store maxDistance here since it's already in the user store
+    // Card display mode
+    compactMode: false
   });
 
   // Function to update all preferences at once
@@ -51,6 +52,10 @@ export const useSearchPreferencesStore = defineStore("searchPreferences", () => 
     state.value.challengingRoundsOnly = !state.value.challengingRoundsOnly;
   }
 
+  function toggleCompactMode() {
+    state.value.compactMode = !state.value.compactMode;
+  }
+
   function updateSearchQuery(query) {
     state.value.searchQuery = query;
   }
@@ -64,6 +69,7 @@ export const useSearchPreferencesStore = defineStore("searchPreferences", () => 
     toggleImperial,
     togglePractice,
     toggleChallengingRounds,
+    toggleCompactMode,
     updateSearchQuery
   };
 });
