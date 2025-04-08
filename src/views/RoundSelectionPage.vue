@@ -266,6 +266,10 @@ function togglePractice() {
   searchPreferencesStore.togglePractice();
 }
 
+function clearSearch() {
+  searchPreferencesStore.updateSearchQuery("");
+}
+
 function selectRound(type) {
   router.push({
     path: "/",
@@ -512,8 +516,38 @@ function toggleChallengingRounds() {
       <!-- Search bar -->
       <div class="search-container">
         <div class="search-row">
-          <input type="text" v-model="searchQuery" placeholder="Search rounds..." />
+          <div class="search-input-wrapper" :class="{ 'has-filter': searchQuery }">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input
+              type="text"
+              v-model="searchQuery"
+              placeholder="Search rounds..."
+              aria-label="Search rounds"
+            />
+            <button
+              v-if="searchQuery"
+              @click="clearSearch"
+              class="clear-search-button"
+              aria-label="Clear search"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="clear-icon">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
           <CardModeToggle v-model="compactMode" />
+        </div>
+
+        <!-- Active filter indicator -->
+        <div v-if="searchQuery" class="active-filter-indicator">
+          <span class="filter-message">Showing rounds matching "{{ searchQuery }}"</span>
+          <button @click="clearSearch" class="clear-filter-button">Clear</button>
         </div>
       </div>
 
@@ -647,7 +681,7 @@ function toggleChallengingRounds() {
 }
 
 .search-container :deep(.toggle-button) {
-  height: 40px;
+  height: 40px; /* Match this height with the search input */
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -784,8 +818,87 @@ function toggleChallengingRounds() {
   font-size: 1em;
 }
 
-/* Challenge button styles */
 .challenge-button {
   position: relative;
 }
+
+.search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  background-color: var(--color-background-soft);
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  transition: all 0.2s ease;
+  height: 40px; /* Set explicit height to match toggle button */
+  box-sizing: border-box;
+}
+
+.search-input-wrapper.has-filter {
+  border-color: var(--color-highlight, #4CAF50);
+  box-shadow: 0 0 0 1px var(--color-highlight, #4CAF50);
+}
+
+.search-icon {
+  width: 16px;
+  height: 16px;
+  margin-left: 12px;
+  color: var(--color-text-light, #666);
+  flex-shrink: 0; /* Prevent the icon from shrinking */
+}
+
+.search-input-wrapper input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 0 0.75em; /* Adjust padding to maintain vertical centering */
+  font-size: 1em;
+  color: var(--color-text);
+  outline: none;
+  height: 100%; /* Fill the height of the wrapper */
+  box-sizing: border-box;
+}
+
+.clear-search-button {
+  background: none;
+  border: none;
+  padding: 0.5em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-light, #666);
+}
+
+.clear-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.active-filter-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.5em;
+  padding: 0.5em 0.75em;
+  background-color: var(--color-background-soft);
+  border-radius: 8px;
+  font-size: 0.85em;
+}
+
+.filter-message {
+  color: var(--color-text-light, #666);
+  font-style: italic;
+}
+
+.clear-filter-button {
+  background: none;
+  border: none;
+  color: var(--color-highlight, #4CAF50);
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.25em 0.5em;
+}
+
 </style>
