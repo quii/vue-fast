@@ -16,7 +16,7 @@ class ScorePage {
   }
 
   tapRoundSelector() {
-    cy.contains("Change round").click();
+    cy.get(".round-card-wrapper").click();
   }
 
   setMaxDistance(yards) {
