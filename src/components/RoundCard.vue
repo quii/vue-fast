@@ -77,7 +77,7 @@ const hasPB = computed(() => {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: transform 0.1s ease;
-  margin-bottom: 0.75em;
+  margin-bottom: 0.5em;
 }
 
 .round-card:active {
