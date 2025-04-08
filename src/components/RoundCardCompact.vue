@@ -83,24 +83,55 @@ const distanceUnit = computed(() => {
   align-items: center;
   width: 100%;
   margin: 0; /* Remove any margin */
+  container-type: inline-size; /* Enable container queries */
 }
 
 .card-info {
   display: flex;
   align-items: center;
+  max-width: 70%; /* Limit width to prevent overflow */
+}
+
+.round-name {
+  margin: 0; /* Remove default margins */
+  font-weight: 600;
+  line-height: 1.2; /* Consistent line height */
+  white-space: nowrap; /* Prevent wrapping */
+  overflow: hidden; /* Hide overflow */
+  text-overflow: ellipsis; /* Add ellipsis for overflow */
+  font-size: 1.2em; /* Default size */
+}
+
+/* Container queries for responsive font sizing */
+@container (max-width: 350px) {
+  .round-name {
+    font-size: 1.1em;
+  }
+}
+
+@container (max-width: 300px) {
+  .round-name {
+    font-size: 1em;
+  }
+}
+
+@container (max-width: 250px) {
+  .round-name {
+    font-size: 0.9em;
+  }
+}
+
+@container (max-width: 220px) {
+  .round-name {
+    font-size: 0.8em;
+  }
 }
 
 .card-right {
   display: flex;
   align-items: center;
   gap: 0.75em;
-}
-
-.round-name {
-  margin: 0; /* Remove default margins */
-  font-size: 1.2em;
-  font-weight: 600;
-  line-height: 1.2; /* Consistent line height */
+  flex-shrink: 0; /* Prevent right side from shrinking */
 }
 
 /* Styles for the distance display - matching PB styling */
