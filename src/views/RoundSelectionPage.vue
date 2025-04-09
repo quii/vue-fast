@@ -1,10 +1,11 @@
 <script setup>
 import CardModeToggle from "@/components/CardModeToggle.vue";
+import { calculateAppropriateRounds } from "@/domain/scoring/round_calculator.js";
 import { ref, computed, watchEffect, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/user";
 import { useSearchPreferencesStore } from "@/stores/searchPreferences";
-import { calculateAppropriateRounds, gameTypes } from "@/domain/scoring/game_types";
+import { gameTypes } from "@/domain/scoring/game_types";
 import { filterGameTypes } from "@/domain/scoring/round_filters";
 import RoundCard from "@/components/RoundCard.vue";
 import { classificationList } from "@/domain/scoring/classificationList.js";
@@ -117,7 +118,6 @@ const filters = computed(() => {
 });
 
 // Get appropriate rounds based on user profile
-const appropriateRounds = ref({ short: [], medium: [], long: [] });
 const allRoundsList = ref([]);
 
 // Check if user has all required details
@@ -196,20 +196,13 @@ watchEffect(async () => {
       : "Unclassified";
 
     // Calculate appropriate rounds
-    appropriateRounds.value = await calculateAppropriateRounds(
+    allRoundsList.value = await calculateAppropriateRounds(
       classification,
       userStore.user.ageGroup,
       userStore.user.gender,
       userStore.user.bowType,
       maxDistance.value
     );
-
-    // Combine all rounds into a single array
-    allRoundsList.value = [
-      ...appropriateRounds.value.short.map(r => ({ ...r, category: "short" })),
-      ...appropriateRounds.value.medium.map(r => ({ ...r, category: "medium" })),
-      ...appropriateRounds.value.long.map(r => ({ ...r, category: "long" }))
-    ];
   } else {
     allRoundsList.value = [];
   }
