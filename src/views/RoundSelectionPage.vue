@@ -239,10 +239,6 @@ const filteredRounds = computed(() => {
   return rounds.filter(r => filteredNames.includes(r.round));
 });
 
-// Group filtered rounds by category for display
-const shortRounds = computed(() => filteredRounds.value.filter(r => r.category === "short"));
-const mediumRounds = computed(() => filteredRounds.value.filter(r => r.category === "medium"));
-const longRounds = computed(() => filteredRounds.value.filter(r => r.category === "long"));
 const practiceRoundsFiltered = computed(() => filteredRounds.value.filter(r => r.category === "practice"));
 
 // Toggle functions now use the store methods
@@ -559,7 +555,6 @@ function toggleChallengingRounds() {
       <!-- Rounds categorized by length -->
       <div v-if="filteredRounds.length > 0" class="rounds-container">
         <div v-if="practiceRoundsFiltered.length > 0" class="round-category">
-          <h3>Practice Rounds</h3>
           <div class="round-list">
             <RoundCard
               v-for="round in practiceRoundsFiltered"
@@ -571,43 +566,14 @@ function toggleChallengingRounds() {
           </div>
         </div>
 
-        <div v-if="shortRounds.length > 0" class="round-category">
-          <h3>Short Rounds</h3>
-          <div class="round-list">
+        <div v-if="filteredRounds.length > 0" class="round-category">
             <RoundCard
-              v-for="round in shortRounds"
+              v-for="round in filteredRounds"
               :key="round.round"
               :round="round"
               :compact="compactMode"
               @click="selectRound(round.round)"
             />
-          </div>
-        </div>
-
-        <div v-if="mediumRounds.length > 0" class="round-category">
-          <h3>Medium Rounds</h3>
-          <div class="round-list">
-            <RoundCard
-              v-for="round in mediumRounds"
-              :key="round.round"
-              :round="round"
-              :compact="compactMode"
-              @click="selectRound(round.round)"
-            />
-          </div>
-        </div>
-
-        <div v-if="longRounds.length > 0" class="round-category">
-          <h3>Long Rounds</h3>
-          <div class="round-list">
-            <RoundCard
-              v-for="round in longRounds"
-              :key="round.round"
-              :round="round"
-              :compact="compactMode"
-              @click="selectRound(round.round)"
-            />
-          </div>
         </div>
       </div>
     </div>
@@ -672,7 +638,7 @@ function toggleChallengingRounds() {
 }
 
 .search-container {
-  margin-bottom: 1em;
+  margin-bottom: 0.5rem;
 }
 
 .search-container :deep(.card-mode-toggle) {
@@ -715,16 +681,6 @@ function toggleChallengingRounds() {
   color: var(--color-text);
   height: 40px;
   box-sizing: border-box;
-}
-
-.rounds-container {
-  margin-bottom: 2em;
-}
-
-.rounds-container h3 {
-  margin: 1em 0 0.5em 0;
-  font-size: 1.1em;
-  color: var(--color-text-light);
 }
 
 .round-list {
@@ -900,5 +856,4 @@ function toggleChallengingRounds() {
   cursor: pointer;
   padding: 0.25em 0.5em;
 }
-
 </style>
