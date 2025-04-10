@@ -16,6 +16,7 @@ export interface GameTypeBase {
 }
 
 export interface GameTypeConfig {
+  name: string;
   distancesRoundSizes?: number[];
   scores: (number | string)[];
   unit: string;
@@ -61,6 +62,7 @@ function calculateConfigFromBase(base: GameTypeBase[]): GameTypeConfigs {
 
     return ({
       ...acc, [gameType.name]: {
+        name: gameType.name,
         distancesRoundSizes: gameType.distancesRoundSizes,
         scores: gameType.scores || calculateScoresForGame(gameType),
         unit: gameType.isImperial ? "yd" : "m",

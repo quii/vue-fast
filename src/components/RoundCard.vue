@@ -6,6 +6,7 @@ import { useHistoryStore } from "@/stores/history";
 import RoundCardFull from "./RoundCardFull.vue";
 import RoundCardCompact from "./RoundCardCompact.vue";
 
+//todo: all this really needs is the round name, not an object with a round name in it
 const props = defineProps({
   round: {
     type: Object,

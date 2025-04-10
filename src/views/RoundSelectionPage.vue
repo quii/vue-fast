@@ -183,8 +183,9 @@ watchEffect(() => {
 const practiceRounds = computed(() => {
   return gameTypes.filter(type =>
     type.toLowerCase().includes("practice")
-  ).map(round => ({ round, category: "practice" }));
+  );
 });
+
 
 // Fetch appropriate rounds when component mounts or when max distance or challenge mode changes
 watchEffect(async () => {
@@ -196,13 +197,14 @@ watchEffect(async () => {
       : "Unclassified";
 
     // Calculate appropriate rounds
-    allRoundsList.value = await calculateAppropriateRounds(
+    const value = await calculateAppropriateRounds(
       classification,
       userStore.user.ageGroup,
       userStore.user.gender,
       userStore.user.bowType,
       maxDistance.value
     );
+    allRoundsList.value = value;
   } else {
     allRoundsList.value = [];
   }
@@ -222,17 +224,14 @@ const filteredRounds = computed(() => {
     rounds = [...rounds, ...practiceRounds.value];
   }
 
-  // Extract just the round names for filtering
-  const roundNames = rounds.map(r => r.round);
-
   // Apply our filters
-  const filteredNames = filterGameTypes(roundNames, filters.value);
+  const filteredNames = filterGameTypes(rounds, filters.value);
 
   // Return the full round objects that match the filtered names
-  return rounds.filter(r => filteredNames.includes(r.round));
+  return rounds.filter(r => filteredNames.includes(r));
 });
 
-const practiceRoundsFiltered = computed(() => filteredRounds.value.filter(r => r.category === "practice"));
+const practiceRoundsFiltered = computed(() => filteredRounds.value.filter(r => r.includes("practice")));
 
 // Toggle functions now use the store methods
 function toggleIndoor() {
@@ -551,10 +550,10 @@ function toggleChallengingRounds() {
           <div class="round-list">
             <RoundCard
               v-for="round in practiceRoundsFiltered"
-              :key="round.round"
-              :round="round"
+              :key="round"
+              :round="{round}"
               :compact="compactMode"
-              @click="selectRound(round.round)"
+              @click="selectRound(round)"
             />
           </div>
         </div>
@@ -563,9 +562,9 @@ function toggleChallengingRounds() {
             <RoundCard
               v-for="round in filteredRounds"
               :key="round.round"
-              :round="round"
+              :round="{round}"
               :compact="compactMode"
-              @click="selectRound(round.round)"
+              @click="selectRound(round)"
             />
         </div>
       </div>
