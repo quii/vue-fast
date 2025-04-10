@@ -14,15 +14,16 @@ export async function calculateAppropriateRounds(
 
   const improvementRounds: GameTypeConfig[] = [gameTypeConfig["frostbite"]];
 
-  for (const round of gameTypes) {
-    const scores = await calculateRoundScores(sex, bowtype, age, round);
-    const config: GameTypeConfig = gameTypeConfig[round];
+  const distanceAppropriateRounds: GameTypeConfig[] = gameTypes
+    .map(name => gameTypeConfig[name])
+    .filter(config => config.maxDistanceYards <= maxYards);
 
+  for (const round of distanceAppropriateRounds) {
+    const scores = await calculateRoundScores(sex, bowtype, age, round.name);
     const hasAHigherClassificationAttainable = scores.length > (classificationNumber + 1);
-    const underMaxDistance = config.maxDistanceYards <= maxYards;
 
-    if (hasAHigherClassificationAttainable && underMaxDistance) {
-      improvementRounds.push(config);
+    if (hasAHigherClassificationAttainable) {
+      improvementRounds.push(round);
     }
   }
 
