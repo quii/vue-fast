@@ -42,7 +42,7 @@ describe("player history", () => {
     playerHistory.add(new Date().addDays(10), 123, "national 50", [1, 2, 3], "yd");
     playerHistory.add(new Date().addDays(10), 826, "windsor 50", [1, 2, 3], "yd");
 
-    const sortedHistory = await playerHistory.sortedHistory("male", "senior", "recurve");
+    const sortedHistory = await playerHistory.sortedHistory();
     expect(sortedHistory).toHaveLength(4);
     console.log(sortedHistory);
     expect(sortedHistory[0].score).toEqual(123);
@@ -68,6 +68,28 @@ describe("player history", () => {
     const playerHistory = new PlayerHistory();
     playerHistory.add(new Date(), 456, "national 50", [1, 2, 3], "yd");
     expect(playerHistory.totalArrows()).toEqual(3);
+  });
+
+  test("it can retreive your average score for a given round", async () => {
+    const playerHistory = new PlayerHistory();
+    const assumedEndSize = 6; // Assumption: end size is 6, currently all rounds have end size 6, however we need to 
+
+    // if shooting less than a full end, the average should assume you shot a full end
+    const nineArrowsShot = [9, 9, 9, 9, 9, 9, 9, 9, 9];
+    const sum9End = nineArrowsShot.reduce((sum, v) => sum + v, 0);
+    const expected9Score = (sum9End / nineArrowsShot.length) * assumedEndSize;
+
+    // if shooting more than a full end, the average should average the scores of the multiple ends
+    const twelveArrowsShot = [9, 9, 9, 9, 9, 9, 1, 1, 1, 1, 1, 1];
+    const sum12End = twelveArrowsShot.reduce((sum, v) => sum + v, 0);
+    const expected12Score = (sum12End / twelveArrowsShot.length) * assumedEndSize;
+
+    playerHistory.add(new Date(), sum9End, "portsmouth", nineArrowsShot, "yd");
+    playerHistory.add(new Date(), sum12End, "practice 20yd", twelveArrowsShot, "yd");
+
+    const sortedHistory = await playerHistory.sortedHistory();
+    expect(sortedHistory[0].averagePerEnd).toEqual(expected9Score);
+    expect(sortedHistory[1].averagePerEnd).toEqual(expected12Score);
   });
 
   test("gets unique game types from recent games, ordered by most recent first", () => {
