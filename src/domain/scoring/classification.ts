@@ -89,7 +89,7 @@ function createFrostbiteClassificationCalculator(roundName, sex, age, bowtype, p
   };
 }
 
-export async function calculateRoundScores(sex, bowtype, age, roundName, personalBest) {
+export async function calculateRoundScores(sex, bowtype, age, roundName, personalBest?: Number) {
   if (sex === "male") {
     sex = "Men";
   }
@@ -111,7 +111,7 @@ export async function calculateRoundScores(sex, bowtype, age, roundName, persona
       bowType: bowtype,
       age: age,
       round: roundName,
-      score: personalBest ?? 0
+      score: personalBest
     });
   }
 

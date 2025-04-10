@@ -1,20 +1,13 @@
 import { classificationList } from "@/domain/scoring/classificationList";
 import { calculateRoundScores } from "@/domain/scoring/classification";
-import { gameTypeConfig, gameTypes } from "@/domain/scoring/game_types";
+import { GameTypeConfig, gameTypeConfig, gameTypes } from "@/domain/scoring/game_types";
+import { Distance, toMeters, yards } from "@/domain/distance/distance";
 
-// Define interfaces for our data structures
 interface RoundInfo {
   round: string;
   numberOfEnds: number;
   distance: string;
   distanceValue: number;
-}
-
-interface GameTypeConfig {
-  maxDistanceYards?: number;
-  maxDistanceMetres?: number;
-  distancesRoundSizes: number[];
-  isImperial?: boolean;
 }
 
 export async function calculateAppropriateRounds(
@@ -31,15 +24,17 @@ export async function calculateAppropriateRounds(
     const scores = await calculateRoundScores(sex, bowtype, age, round);
     const config: GameTypeConfig = gameTypeConfig[round];
     const distance: string = calculateDistanceLabel(config);
-    const distanceValue: number = config.maxDistanceMetres || convertToMeters(config.maxDistanceYards || 0);
+
+    const distanceValue: number = config.maxDistanceMetres ||
+      (config.maxDistanceYards ? toMeters(yards(config.maxDistanceYards)) : 0);
 
     if (scores.length > (classificationNumber + 1) && (config.maxDistanceYards || 0) <= maxYards) {
-      const numberOfEnds: number = config.distancesRoundSizes.reduce((a, b) => a + b);
+      const numberOfEnds: number = config.distancesRoundSizes?.reduce((a, b) => a + b) ?? Infinity;
       improvementRounds.push({ round, numberOfEnds, distance, distanceValue });
     }
 
     if (round === "frostbite") {
-      const numberOfEnds: number = config.distancesRoundSizes.reduce((a, b) => a + b);
+      const numberOfEnds: number = config.distancesRoundSizes?.reduce((a, b) => a + b) ?? Infinity;
       improvementRounds.push({ round, numberOfEnds, distance, distanceValue });
     }
   }
@@ -56,8 +51,4 @@ function calculateDistanceLabel(config: GameTypeConfig): string {
 
 function sortByNumberOfEndsAndDistance(a: RoundInfo, b: RoundInfo): number {
   return a.numberOfEnds - b.numberOfEnds || a.distanceValue - b.distanceValue;
-}
-
-function convertToMeters(yards: number): number {
-  return yards / 1.094;
 }

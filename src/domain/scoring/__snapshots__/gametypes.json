@@ -21,7 +21,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 18,
     "isImperial": true,
-    "maxDistanceMetres": 73.12614259597805,
+    "maxDistanceMetres": 73.152,
     "maxDistanceYards": 80,
     "otherDistancesYards": [
       60,
@@ -50,7 +50,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 15,
     "isImperial": true,
-    "maxDistanceMetres": 54.84460694698354,
+    "maxDistanceMetres": 54.864,
     "maxDistanceYards": 60,
     "otherDistancesYards": [
       50,
@@ -82,7 +82,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 5,
     "isImperial": false,
-    "maxDistanceMetres": 18.281535648994513,
+    "maxDistanceMetres": 18.288,
     "maxDistanceYards": 20
   },
   "bray ii": {
@@ -110,7 +110,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 5,
     "isImperial": false,
-    "maxDistanceMetres": 22.851919561243143,
+    "maxDistanceMetres": 22.86,
     "maxDistanceYards": 25
   },
   "bristol ii": {
@@ -135,7 +135,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 24,
     "isImperial": true,
-    "maxDistanceMetres": 54.84460694698354,
+    "maxDistanceMetres": 54.864,
     "maxDistanceYards": 60,
     "otherDistancesYards": [
       50,
@@ -164,7 +164,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 24,
     "isImperial": true,
-    "maxDistanceMetres": 45.703839122486286,
+    "maxDistanceMetres": 45.72,
     "maxDistanceYards": 50,
     "otherDistancesYards": [
       40,
@@ -193,7 +193,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 24,
     "isImperial": true,
-    "maxDistanceMetres": 36.563071297989026,
+    "maxDistanceMetres": 36.576,
     "maxDistanceYards": 40,
     "otherDistancesYards": [
       30,
@@ -222,7 +222,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 24,
     "isImperial": true,
-    "maxDistanceMetres": 27.42230347349177,
+    "maxDistanceMetres": 27.432,
     "maxDistanceYards": 30,
     "otherDistancesYards": [
       20,
@@ -256,7 +256,7 @@
     "numberOfEnds": 6,
     "isImperial": false,
     "maxDistanceMetres": 30,
-    "maxDistanceYards": 32.82
+    "maxDistanceYards": 32.808398950131235
   },
   "hereford / bristol i": {
     "distancesRoundSizes": [
@@ -280,7 +280,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 24,
     "isImperial": true,
-    "maxDistanceMetres": 73.12614259597805,
+    "maxDistanceMetres": 73.152,
     "maxDistanceYards": 80,
     "otherDistancesYards": [
       60,
@@ -315,7 +315,7 @@
     "numberOfEnds": 12,
     "isImperial": false,
     "maxDistanceMetres": 90,
-    "maxDistanceYards": 98.46000000000001,
+    "maxDistanceYards": 98.4251968503937,
     "otherDistancesMetres": [
       70
     ]
@@ -348,7 +348,7 @@
     "numberOfEnds": 12,
     "isImperial": false,
     "maxDistanceMetres": 70,
-    "maxDistanceYards": 76.58000000000001,
+    "maxDistanceYards": 76.55293088363955,
     "otherDistancesMetres": [
       60
     ]
@@ -381,7 +381,7 @@
     "numberOfEnds": 12,
     "isImperial": false,
     "maxDistanceMetres": 60,
-    "maxDistanceYards": 65.64,
+    "maxDistanceYards": 65.61679790026247,
     "otherDistancesMetres": [
       50
     ]
@@ -414,7 +414,7 @@
     "numberOfEnds": 12,
     "isImperial": false,
     "maxDistanceMetres": 50,
-    "maxDistanceYards": 54.7,
+    "maxDistanceYards": 54.68066491688539,
     "otherDistancesMetres": [
       40
     ]
@@ -447,7 +447,7 @@
     "numberOfEnds": 12,
     "isImperial": false,
     "maxDistanceMetres": 40,
-    "maxDistanceYards": 43.760000000000005,
+    "maxDistanceYards": 43.74453193350831,
     "otherDistancesMetres": [
       30
     ]
@@ -480,7 +480,7 @@
     "numberOfEnds": 12,
     "isImperial": false,
     "maxDistanceMetres": 30,
-    "maxDistanceYards": 32.82,
+    "maxDistanceYards": 32.808398950131235,
     "otherDistancesMetres": [
       20
     ]
@@ -506,7 +506,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 12,
     "isImperial": true,
-    "maxDistanceMetres": 73.12614259597805,
+    "maxDistanceMetres": 73.152,
     "maxDistanceYards": 80,
     "otherDistancesYards": [
       60
@@ -533,7 +533,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 8,
     "isImperial": true,
-    "maxDistanceMetres": 73.12614259597805,
+    "maxDistanceMetres": 73.152,
     "maxDistanceYards": 80,
     "otherDistancesYards": [
       60
@@ -560,7 +560,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 16,
     "isImperial": true,
-    "maxDistanceMetres": 73.12614259597805,
+    "maxDistanceMetres": 73.152,
     "maxDistanceYards": 80,
     "otherDistancesYards": [
       60
@@ -593,7 +593,7 @@
     "numberOfEnds": 12,
     "isImperial": false,
     "maxDistanceMetres": 30,
-    "maxDistanceYards": 32.82
+    "maxDistanceYards": 32.808398950131235
   },
   "metric 122-40": {
     "distancesRoundSizes": [
@@ -622,7 +622,7 @@
     "numberOfEnds": 12,
     "isImperial": false,
     "maxDistanceMetres": 40,
-    "maxDistanceYards": 43.760000000000005
+    "maxDistanceYards": 43.74453193350831
   },
   "metric 80-30": {
     "distancesRoundSizes": [
@@ -651,7 +651,7 @@
     "numberOfEnds": 12,
     "isImperial": false,
     "maxDistanceMetres": 30,
-    "maxDistanceYards": 32.82
+    "maxDistanceYards": 32.808398950131235
   },
   "metric 80-40": {
     "distancesRoundSizes": [
@@ -680,7 +680,7 @@
     "numberOfEnds": 12,
     "isImperial": false,
     "maxDistanceMetres": 40,
-    "maxDistanceYards": 43.760000000000005
+    "maxDistanceYards": 43.74453193350831
   },
   "metric iii": {
     "distancesRoundSizes": [
@@ -712,7 +712,7 @@
     "numberOfEnds": 24,
     "isImperial": false,
     "maxDistanceMetres": 50,
-    "maxDistanceYards": 54.7,
+    "maxDistanceYards": 54.68066491688539,
     "otherDistancesMetres": [
       40,
       30,
@@ -749,7 +749,7 @@
     "numberOfEnds": 24,
     "isImperial": false,
     "maxDistanceMetres": 40,
-    "maxDistanceYards": 43.760000000000005,
+    "maxDistanceYards": 43.74453193350831,
     "otherDistancesMetres": [
       30,
       20,
@@ -786,7 +786,7 @@
     "numberOfEnds": 24,
     "isImperial": false,
     "maxDistanceMetres": 30,
-    "maxDistanceYards": 32.82,
+    "maxDistanceYards": 32.808398950131235,
     "otherDistancesMetres": [
       20,
       15,
@@ -814,7 +814,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 12,
     "isImperial": true,
-    "maxDistanceMetres": 54.84460694698354,
+    "maxDistanceMetres": 54.864,
     "maxDistanceYards": 60,
     "otherDistancesYards": [
       50
@@ -841,7 +841,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 12,
     "isImperial": true,
-    "maxDistanceMetres": 27.42230347349177,
+    "maxDistanceMetres": 27.432,
     "maxDistanceYards": 30,
     "otherDistancesYards": [
       20
@@ -868,7 +868,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 12,
     "isImperial": true,
-    "maxDistanceMetres": 36.563071297989026,
+    "maxDistanceMetres": 36.576,
     "maxDistanceYards": 40,
     "otherDistancesYards": [
       30
@@ -895,7 +895,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 12,
     "isImperial": true,
-    "maxDistanceMetres": 45.703839122486286,
+    "maxDistanceMetres": 45.72,
     "maxDistanceYards": 50,
     "otherDistancesYards": [
       40
@@ -922,7 +922,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 12,
     "isImperial": true,
-    "maxDistanceMetres": 91.40767824497257,
+    "maxDistanceMetres": 91.44,
     "maxDistanceYards": 100,
     "otherDistancesYards": [
       80
@@ -949,7 +949,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 8,
     "isImperial": true,
-    "maxDistanceMetres": 91.40767824497257,
+    "maxDistanceMetres": 91.44,
     "maxDistanceYards": 100,
     "otherDistancesYards": [
       80
@@ -976,7 +976,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 16,
     "isImperial": true,
-    "maxDistanceMetres": 91.40767824497257,
+    "maxDistanceMetres": 91.44,
     "maxDistanceYards": 100,
     "otherDistancesYards": [
       80
@@ -1007,7 +1007,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 10,
     "isImperial": false,
-    "maxDistanceMetres": 18.281535648994513,
+    "maxDistanceMetres": 18.288,
     "maxDistanceYards": 20
   },
   "practice 100m": {
@@ -1034,7 +1034,7 @@
     "numberOfEnds": null,
     "isImperial": false,
     "maxDistanceMetres": "100",
-    "maxDistanceYards": 109.4
+    "maxDistanceYards": 109.36132983377078
   },
   "practice 100yd": {
     "scores": [
@@ -1053,7 +1053,7 @@
     "isPracticeRound": true,
     "numberOfEnds": null,
     "isImperial": true,
-    "maxDistanceMetres": 91.40767824497257,
+    "maxDistanceMetres": 91.44,
     "maxDistanceYards": "100"
   },
   "practice 10m": {
@@ -1080,7 +1080,7 @@
     "numberOfEnds": null,
     "isImperial": false,
     "maxDistanceMetres": "10",
-    "maxDistanceYards": 10.940000000000001
+    "maxDistanceYards": 10.936132983377078
   },
   "practice 10yd": {
     "scores": [
@@ -1099,7 +1099,7 @@
     "isPracticeRound": true,
     "numberOfEnds": null,
     "isImperial": true,
-    "maxDistanceMetres": 9.140767824497257,
+    "maxDistanceMetres": 9.144,
     "maxDistanceYards": "10"
   },
   "practice 20m": {
@@ -1126,7 +1126,7 @@
     "numberOfEnds": null,
     "isImperial": false,
     "maxDistanceMetres": "20",
-    "maxDistanceYards": 21.880000000000003
+    "maxDistanceYards": 21.872265966754156
   },
   "practice 20yd": {
     "scores": [
@@ -1145,7 +1145,7 @@
     "isPracticeRound": true,
     "numberOfEnds": null,
     "isImperial": true,
-    "maxDistanceMetres": 18.281535648994513,
+    "maxDistanceMetres": 18.288,
     "maxDistanceYards": "20"
   },
   "practice 30m": {
@@ -1172,7 +1172,7 @@
     "numberOfEnds": null,
     "isImperial": false,
     "maxDistanceMetres": "30",
-    "maxDistanceYards": 32.82
+    "maxDistanceYards": 32.808398950131235
   },
   "practice 30yd": {
     "scores": [
@@ -1191,7 +1191,7 @@
     "isPracticeRound": true,
     "numberOfEnds": null,
     "isImperial": true,
-    "maxDistanceMetres": 27.42230347349177,
+    "maxDistanceMetres": 27.432,
     "maxDistanceYards": "30"
   },
   "practice 40m": {
@@ -1218,7 +1218,7 @@
     "numberOfEnds": null,
     "isImperial": false,
     "maxDistanceMetres": "40",
-    "maxDistanceYards": 43.760000000000005
+    "maxDistanceYards": 43.74453193350831
   },
   "practice 40yd": {
     "scores": [
@@ -1237,7 +1237,7 @@
     "isPracticeRound": true,
     "numberOfEnds": null,
     "isImperial": true,
-    "maxDistanceMetres": 36.563071297989026,
+    "maxDistanceMetres": 36.576,
     "maxDistanceYards": "40"
   },
   "practice 50m": {
@@ -1264,7 +1264,7 @@
     "numberOfEnds": null,
     "isImperial": false,
     "maxDistanceMetres": "50",
-    "maxDistanceYards": 54.7
+    "maxDistanceYards": 54.68066491688539
   },
   "practice 50yd": {
     "scores": [
@@ -1283,7 +1283,7 @@
     "isPracticeRound": true,
     "numberOfEnds": null,
     "isImperial": true,
-    "maxDistanceMetres": 45.703839122486286,
+    "maxDistanceMetres": 45.72,
     "maxDistanceYards": "50"
   },
   "practice 60m": {
@@ -1310,7 +1310,7 @@
     "numberOfEnds": null,
     "isImperial": false,
     "maxDistanceMetres": "60",
-    "maxDistanceYards": 65.64
+    "maxDistanceYards": 65.61679790026247
   },
   "practice 60yd": {
     "scores": [
@@ -1329,7 +1329,7 @@
     "isPracticeRound": true,
     "numberOfEnds": null,
     "isImperial": true,
-    "maxDistanceMetres": 54.84460694698354,
+    "maxDistanceMetres": 54.864,
     "maxDistanceYards": "60"
   },
   "practice 70m": {
@@ -1356,7 +1356,7 @@
     "numberOfEnds": null,
     "isImperial": false,
     "maxDistanceMetres": "70",
-    "maxDistanceYards": 76.58000000000001
+    "maxDistanceYards": 76.55293088363955
   },
   "practice 80m": {
     "scores": [
@@ -1382,7 +1382,7 @@
     "numberOfEnds": null,
     "isImperial": false,
     "maxDistanceMetres": "80",
-    "maxDistanceYards": 87.52000000000001
+    "maxDistanceYards": 87.48906386701663
   },
   "practice 80yd": {
     "scores": [
@@ -1401,7 +1401,7 @@
     "isPracticeRound": true,
     "numberOfEnds": null,
     "isImperial": true,
-    "maxDistanceMetres": 73.12614259597805,
+    "maxDistanceMetres": 73.152,
     "maxDistanceYards": "80"
   },
   "practice 90m": {
@@ -1428,7 +1428,7 @@
     "numberOfEnds": null,
     "isImperial": false,
     "maxDistanceMetres": "90",
-    "maxDistanceYards": 98.46000000000001
+    "maxDistanceYards": 98.4251968503937
   },
   "practice 90yd": {
     "scores": [
@@ -1447,7 +1447,7 @@
     "isPracticeRound": true,
     "numberOfEnds": null,
     "isImperial": true,
-    "maxDistanceMetres": 82.26691042047531,
+    "maxDistanceMetres": 82.29599999999999,
     "maxDistanceYards": "90"
   },
   "short metric / short metric i": {
@@ -1478,7 +1478,7 @@
     "numberOfEnds": 12,
     "isImperial": false,
     "maxDistanceMetres": 50,
-    "maxDistanceYards": 54.7,
+    "maxDistanceYards": 54.68066491688539,
     "otherDistancesMetres": [
       30
     ]
@@ -1511,7 +1511,7 @@
     "numberOfEnds": 12,
     "isImperial": false,
     "maxDistanceMetres": 40,
-    "maxDistanceYards": 43.760000000000005,
+    "maxDistanceYards": 43.74453193350831,
     "otherDistancesMetres": [
       30
     ]
@@ -1544,7 +1544,7 @@
     "numberOfEnds": 12,
     "isImperial": false,
     "maxDistanceMetres": 30,
-    "maxDistanceYards": 32.82,
+    "maxDistanceYards": 32.808398950131235,
     "otherDistancesMetres": [
       20
     ]
@@ -1577,7 +1577,7 @@
     "numberOfEnds": 12,
     "isImperial": false,
     "maxDistanceMetres": 20,
-    "maxDistanceYards": 21.880000000000003,
+    "maxDistanceYards": 21.872265966754156,
     "otherDistancesMetres": [
       10
     ]
@@ -1604,7 +1604,7 @@
     "numberOfEnds": 12,
     "isImperial": true,
     "maxDistanceMetres": 15,
-    "maxDistanceYards": 16.41,
+    "maxDistanceYards": 16.404199475065617,
     "otherDistancesMetres": [
       10
     ]
@@ -1631,7 +1631,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 18,
     "isImperial": true,
-    "maxDistanceMetres": 91.40767824497257,
+    "maxDistanceMetres": 91.44,
     "maxDistanceYards": 100,
     "otherDistancesYards": [
       80,
@@ -1659,7 +1659,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 14,
     "isImperial": true,
-    "maxDistanceMetres": 36.563071297989026,
+    "maxDistanceMetres": 36.576,
     "maxDistanceYards": 40,
     "otherDistancesYards": [
       30
@@ -1691,7 +1691,7 @@
     "numberOfEnds": 12,
     "isImperial": false,
     "maxDistanceMetres": 30,
-    "maxDistanceYards": 32.82
+    "maxDistanceYards": 32.808398950131235
   },
   "vegas 300": {
     "distancesRoundSizes": [
@@ -1714,7 +1714,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 5,
     "isImperial": false,
-    "maxDistanceMetres": 18.281535648994513,
+    "maxDistanceMetres": 18.288,
     "maxDistanceYards": 20
   },
   "wa 1440 (60m) / metric ii": {
@@ -1747,7 +1747,7 @@
     "numberOfEnds": 24,
     "isImperial": false,
     "maxDistanceMetres": 60,
-    "maxDistanceYards": 65.64,
+    "maxDistanceYards": 65.61679790026247,
     "otherDistancesMetres": [
       50,
       40,
@@ -1784,7 +1784,7 @@
     "numberOfEnds": 24,
     "isImperial": false,
     "maxDistanceMetres": 70,
-    "maxDistanceYards": 76.58000000000001,
+    "maxDistanceYards": 76.55293088363955,
     "otherDistancesMetres": [
       60,
       50,
@@ -1821,7 +1821,7 @@
     "numberOfEnds": 24,
     "isImperial": false,
     "maxDistanceMetres": 90,
-    "maxDistanceYards": 98.46000000000001,
+    "maxDistanceYards": 98.4251968503937,
     "otherDistancesMetres": [
       70
     ]
@@ -1852,7 +1852,7 @@
     "numberOfEnds": 10,
     "isImperial": false,
     "maxDistanceMetres": 18,
-    "maxDistanceYards": 19.692
+    "maxDistanceYards": 19.68503937007874
   },
   "wa 25m": {
     "distancesRoundSizes": [
@@ -1880,7 +1880,7 @@
     "numberOfEnds": 10,
     "isImperial": false,
     "maxDistanceMetres": 25,
-    "maxDistanceYards": 27.35
+    "maxDistanceYards": 27.340332458442695
   },
   "wa 50m (barebow) / metric 122-50": {
     "distancesRoundSizes": [
@@ -1909,7 +1909,7 @@
     "numberOfEnds": 12,
     "isImperial": false,
     "maxDistanceMetres": 50,
-    "maxDistanceYards": 54.7
+    "maxDistanceYards": 54.68066491688539
   },
   "wa 50m (compound)": {
     "distancesRoundSizes": [
@@ -1938,7 +1938,7 @@
     "numberOfEnds": 12,
     "isImperial": false,
     "maxDistanceMetres": 50,
-    "maxDistanceYards": 54.7
+    "maxDistanceYards": 54.68066491688539
   },
   "wa 60m": {
     "distancesRoundSizes": [
@@ -1967,7 +1967,7 @@
     "numberOfEnds": 12,
     "isImperial": false,
     "maxDistanceMetres": 60,
-    "maxDistanceYards": 65.64
+    "maxDistanceYards": 65.61679790026247
   },
   "wa 70m": {
     "distancesRoundSizes": [
@@ -1996,7 +1996,7 @@
     "numberOfEnds": 12,
     "isImperial": false,
     "maxDistanceMetres": 70,
-    "maxDistanceYards": 76.58000000000001
+    "maxDistanceYards": 76.55293088363955
   },
   "wa 900": {
     "distancesRoundSizes": [
@@ -2027,7 +2027,7 @@
     "numberOfEnds": 15,
     "isImperial": false,
     "maxDistanceMetres": 60,
-    "maxDistanceYards": 65.64,
+    "maxDistanceYards": 65.61679790026247,
     "otherDistancesMetres": [
       50,
       40
@@ -2061,7 +2061,7 @@
     "numberOfEnds": 12,
     "isImperial": false,
     "maxDistanceMetres": 50,
-    "maxDistanceYards": 54.7
+    "maxDistanceYards": 54.68066491688539
   },
   "warwick": {
     "distancesRoundSizes": [
@@ -2084,7 +2084,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 8,
     "isImperial": true,
-    "maxDistanceMetres": 54.84460694698354,
+    "maxDistanceMetres": 54.864,
     "maxDistanceYards": 60,
     "otherDistancesYards": [
       50
@@ -2111,7 +2111,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 8,
     "isImperial": true,
-    "maxDistanceMetres": 27.42230347349177,
+    "maxDistanceMetres": 27.432,
     "maxDistanceYards": 30,
     "otherDistancesYards": [
       20
@@ -2138,7 +2138,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 8,
     "isImperial": true,
-    "maxDistanceMetres": 36.563071297989026,
+    "maxDistanceMetres": 36.576,
     "maxDistanceYards": 40,
     "otherDistancesYards": [
       30
@@ -2165,7 +2165,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 8,
     "isImperial": true,
-    "maxDistanceMetres": 45.703839122486286,
+    "maxDistanceMetres": 45.72,
     "maxDistanceYards": 50,
     "otherDistancesYards": [
       40
@@ -2192,7 +2192,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 16,
     "isImperial": true,
-    "maxDistanceMetres": 54.84460694698354,
+    "maxDistanceMetres": 54.864,
     "maxDistanceYards": 60,
     "otherDistancesYards": [
       50
@@ -2219,7 +2219,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 16,
     "isImperial": true,
-    "maxDistanceMetres": 27.42230347349177,
+    "maxDistanceMetres": 27.432,
     "maxDistanceYards": 30,
     "otherDistancesYards": [
       20
@@ -2246,7 +2246,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 16,
     "isImperial": true,
-    "maxDistanceMetres": 36.563071297989026,
+    "maxDistanceMetres": 36.576,
     "maxDistanceYards": 40,
     "otherDistancesYards": [
       30
@@ -2273,7 +2273,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 16,
     "isImperial": true,
-    "maxDistanceMetres": 45.703839122486286,
+    "maxDistanceMetres": 45.72,
     "maxDistanceYards": 50,
     "otherDistancesYards": [
       40
@@ -2301,7 +2301,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 18,
     "isImperial": true,
-    "maxDistanceMetres": 54.84460694698354,
+    "maxDistanceMetres": 54.864,
     "maxDistanceYards": 60,
     "otherDistancesYards": [
       50,
@@ -2330,7 +2330,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 18,
     "isImperial": true,
-    "maxDistanceMetres": 27.42230347349177,
+    "maxDistanceMetres": 27.432,
     "maxDistanceYards": 30,
     "otherDistancesYards": [
       20,
@@ -2359,7 +2359,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 18,
     "isImperial": true,
-    "maxDistanceMetres": 36.563071297989026,
+    "maxDistanceMetres": 36.576,
     "maxDistanceYards": 40,
     "otherDistancesYards": [
       30,
@@ -2388,7 +2388,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 18,
     "isImperial": true,
-    "maxDistanceMetres": 45.703839122486286,
+    "maxDistanceMetres": 45.72,
     "maxDistanceYards": 50,
     "otherDistancesYards": [
       40,
@@ -2416,7 +2416,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 12,
     "isImperial": false,
-    "maxDistanceMetres": 18.281535648994513,
+    "maxDistanceMetres": 18.288,
     "maxDistanceYards": 20
   },
   "york": {
@@ -2441,7 +2441,7 @@
     "isPracticeRound": false,
     "numberOfEnds": 24,
     "isImperial": true,
-    "maxDistanceMetres": 91.40767824497257,
+    "maxDistanceMetres": 91.44,
     "maxDistanceYards": 100,
     "otherDistancesYards": [
       80,

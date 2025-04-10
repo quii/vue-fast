@@ -1,15 +1,17 @@
+import { GameTypeBase } from "@/domain/scoring/game_types";
+
 const standardDistances = [
   "10", "20", "30", "40", "50", "60", "70", "80", "90", "100"
 ];
 
-export const imperialPractices = standardDistances.filter(x => x !== "70").map(distance => ({
+export const imperialPractices: GameTypeBase[] = standardDistances.filter(x => x !== "70").map(distance => ({
   name: `practice ${distance}yd`,
   isOutdoor: true,
   isImperial: true,
   maxDistanceYards: distance
 }));
 
-export const metricPractices = standardDistances.map(distance => ({
+export const metricPractices: GameTypeBase[] = standardDistances.map(distance => ({
   name: `practice ${distance}m`,
   isOutdoor: true,
   isImperial: false,
@@ -18,7 +20,7 @@ export const metricPractices = standardDistances.map(distance => ({
 
 export const MISS = "M";
 export const X = "X";
-export const baseConfig = [
+export const baseConfig: GameTypeBase[] = [
   {
     name: 'york',
     isOutdoor: true,
