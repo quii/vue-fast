@@ -1,14 +1,14 @@
 <script setup>
 import CardModeToggle from "@/components/CardModeToggle.vue";
-import { calculateAppropriateRounds } from "@/domain/scoring/round_calculator.js";
-import { ref, computed, watchEffect, onMounted } from "vue";
-import { useRouter } from "vue-router";
-import { useUserStore } from "@/stores/user";
-import { useSearchPreferencesStore } from "@/stores/searchPreferences";
-import { gameTypes } from "@/domain/scoring/game_types";
-import { filterGameTypes } from "@/domain/scoring/round_filters";
 import RoundCard from "@/components/RoundCard.vue";
 import { classificationList } from "@/domain/scoring/classificationList.js";
+import { gameTypes } from "@/domain/scoring/game_types";
+import { calculateAppropriateRounds } from "@/domain/scoring/round_calculator.js";
+import { filterGameTypes } from "@/domain/scoring/round_filters";
+import { useSearchPreferencesStore } from "@/stores/searchPreferences";
+import { useUserStore } from "@/stores/user";
+import { computed, onMounted, ref, watchEffect } from "vue";
+import { useRouter } from "vue-router";
 
 defineProps({
   returnTo: {
@@ -22,7 +22,6 @@ defineProps({
 });
 
 onMounted(() => {
-  // Clear the search query when the page is loaded
   searchPreferencesStore.updateSearchQuery("");
 });
 
@@ -197,14 +196,13 @@ watchEffect(async () => {
       : "Unclassified";
 
     // Calculate appropriate rounds
-    const value = await calculateAppropriateRounds(
+    allRoundsList.value = await calculateAppropriateRounds(
       classification,
       userStore.user.ageGroup,
       userStore.user.gender,
       userStore.user.bowType,
       maxDistance.value
     );
-    allRoundsList.value = value;
   } else {
     allRoundsList.value = [];
   }
@@ -216,19 +214,7 @@ const filteredRounds = computed(() => {
     return [];
   }
 
-  // Start with the appropriate rounds
-  let rounds = [...allRoundsList.value];
-
-  // Add practice rounds if the practice filter is selected
-  if (practiceSelected.value) {
-    rounds = [...rounds, ...practiceRounds.value];
-  }
-
-  // Apply our filters
-  const filteredNames = filterGameTypes(rounds, filters.value);
-
-  // Return the full round objects that match the filtered names
-  return rounds.filter(r => filteredNames.includes(r));
+  return filterGameTypes([...allRoundsList.value, ...practiceRounds.value], filters.value);
 });
 
 const practiceRoundsFiltered = computed(() => filteredRounds.value.filter(r => r.includes("practice")));
