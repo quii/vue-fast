@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { calculateAppropriateRounds } from "./round_calculator";
 import { gameTypeConfig } from "./game_types";
 import fs from "fs";
@@ -89,6 +89,25 @@ describe("calculateAppropriateRounds", () => {
     // B3 should have access to more challenging rounds
     expect(result).toContain("york");
     expect(result).toContain("st. george");
+
+    // But easier rounds should be excluded as they're too easy for B3
+    expect(result).not.toContain("windsor");
+    expect(result).not.toContain("national");
+  });
+
+  it("for B1 archers, include rounds which are b1, even though this wont improve classification", async () => {
+    const classification = "B1";
+    const result = await calculateAppropriateRounds(
+      classification,
+      defaultParams.age,
+      defaultParams.sex,
+      defaultParams.bowtype,
+      100
+    );
+
+    expect(result).toContain("new warwick");
+    expect(result).toContain("york");
+    expect(result).toContain("new western");
 
     // But easier rounds should be excluded as they're too easy for B3
     expect(result).not.toContain("windsor");

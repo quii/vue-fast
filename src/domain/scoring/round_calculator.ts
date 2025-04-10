@@ -11,6 +11,7 @@ export async function calculateAppropriateRounds(
   maxYards: number
 ): Promise<string[]> {
   const classificationNumber: number = classificationList.indexOf(classification);
+  const improvementModifier = classificationNumber > 4 ? 5 : classificationNumber + 1;
 
   const improvementRounds: GameTypeConfig[] = [gameTypeConfig["frostbite"]];
 
@@ -20,7 +21,7 @@ export async function calculateAppropriateRounds(
 
   for (const round of distanceAppropriateRounds) {
     const scores = await calculateRoundScores(sex, bowtype, age, round.name);
-    const hasAHigherClassificationAttainable = scores.length > (classificationNumber + 1);
+    const hasAHigherClassificationAttainable = scores.length > improvementModifier;
 
     if (hasAHigherClassificationAttainable) {
       improvementRounds.push(round);
