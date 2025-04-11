@@ -6,7 +6,7 @@ const props = defineProps({
   infoDisplays: {
     type: Array,
     default: () => []
-    // Expected format: [{ value: 'Value', label: 'Label' }]
+    // Expected format: [{ value: 'Value', label: 'Label', class: 'optional-class', action: 'optional-action' }]
   },
 
   // Array of action buttons
@@ -70,12 +70,13 @@ function getFontSizeClass(text) {
   <div class="top-bar-container">
     <div class="filters-container">
       <div class="filters" :class="`align-${alignment}`">
-        <!-- Info Displays (non-interactive) -->
+        <!-- Info Displays (non-interactive or with action) -->
         <div
           v-for="(info, index) in infoDisplays"
           :key="`info-${index}`"
           class="info-display"
-          :class="info.class"
+          :class="[info.class, { 'active': info.active, 'clickable': info.action }]"
+          @click="info.action ? handleAction(info.action, index) : null"
         >
           <div class="info-value" :class="getFontSizeClass(info.value)">{{ info.value }}</div>
           <div class="info-label">{{ info.label }}</div>
@@ -89,11 +90,14 @@ function getFontSizeClass(text) {
           v-for="(button, index) in actionButtons"
           :key="`action-${index}`"
           class="filter-button"
-          :class="{
-            'active': button.active,
-            'disabled': button.disabled,
-            'delete-button': button.variant === 'danger'
-          }"
+          :class="[
+      {
+        'active': button.active,
+        'disabled': button.disabled,
+        'delete-button': button.variant === 'danger'
+      },
+      button.class  // Add this line to include any custom classes
+    ]"
           @click="handleAction(button.action, index)"
           :disabled="button.disabled"
           :aria-label="button.label"
@@ -175,13 +179,35 @@ function getFontSizeClass(text) {
   cursor: pointer;
 }
 
-.filter-button:active {
+.filter-button:active, .info-display.clickable:active {
   transform: scale(0.95);
 }
 
-.filter-button.active {
+.filter-button.active, .info-display.active {
   background-color: var(--color-highlight, #4CAF50);
   color: white;
+}
+
+.filter-button.wide-button {
+  width: 125px; /* Width of two buttons + gap */
+}
+
+@media (min-width: 768px) {
+  .filters {
+    gap: 1rem;
+  }
+
+  .filter-button {
+    width: 70px;
+  }
+
+  .filter-button.wide-button {
+    width: 145px; /* Width of two buttons + gap on larger screens */
+  }
+
+  .info-display.wide {
+    width: 140px;
+  }
 }
 
 .filter-button.disabled {
@@ -204,8 +230,34 @@ function getFontSizeClass(text) {
   cursor: default;
 }
 
+.info-display.clickable {
+  cursor: pointer;
+}
+
 .info-display.wide {
   width: 120px;
+}
+
+.info-display.save-button {
+  background-color: var(--color-highlight, #4CAF50);
+  color: white;
+}
+
+.info-display.save-button.active {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+    background-color: var(--color-highlight-bright, #5FDF63);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .filter-icon {
@@ -223,10 +275,11 @@ function getFontSizeClass(text) {
 }
 
 .filter-label, .info-label {
-  font-size: 0.7em;
+  font-size: 1em;
   font-weight: 500;
   text-align: center;
   line-height: 1;
+  margin-top: 0.25em;
   margin-bottom: 0.3em;
 }
 
@@ -275,6 +328,11 @@ function getFontSizeClass(text) {
   }
 }
 
+/* Add this new style for wide buttons */
+.filter-button.wide-button {
+  width: 125px; /* Width of two buttons + gap */
+}
+
 @media (min-width: 768px) {
   .filters {
     gap: 1rem;
@@ -284,8 +342,45 @@ function getFontSizeClass(text) {
     width: 70px;
   }
 
+  .filter-button.wide-button {
+    width: 145px; /* Width of two buttons + gap on larger screens */
+  }
+
   .info-display.wide {
     width: 140px;
   }
+
+  .custom-component-container {
+    width: 70px;
+  }
+
+  .custom-component-container.wide {
+    width: 145px; /* Width of two buttons + gap */
+  }
+}
+
+/* Add this new style for the highlight variant */
+.filter-button.active,
+.filter-button[class*="highlight"] {
+  background-color: var(--color-highlight, #4CAF50);
+  color: white;
+}
+
+/* Add a pulse animation for active save button */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+    background-color: var(--color-highlight-bright, #5FDF63);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.filter-button.active[class*="highlight"] {
+  animation: pulse 2s infinite;
 }
 </style>

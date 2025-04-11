@@ -6,6 +6,7 @@ import BaseTopBar from "@/components/ui/BaseTopBar.vue";
 import ClassificationIcon from "@/components/icons/ClassificationIcon.vue";
 import NoteIcon from "@/components/icons/NoteIcon.vue";
 import ClearIcon from "@/components/icons/ClearIcon.vue";
+import SaveIcon from "@/components/icons/SaveIcon.vue";
 
 const props = defineProps({
   hasStarted: {
@@ -23,14 +24,27 @@ const props = defineProps({
   availableClassifications: {
     type: Array,
     default: null
+  },
+  canSave: {
+    type: Boolean,
+    default: false
+  },
+  maxReached: {
+    type: Boolean,
+    default: false
   }
 });
 
-const emit = defineEmits(["clear-scores", "take-note"]);
+const emit = defineEmits(["clear-scores", "take-note", "save-scores"]);
 const showConfirmation = ref(false);
 
 // Prepare info displays
 const infoDisplays = computed(() => {
+  // If we can save, don't show info displays
+  if (props.canSave) {
+    return [];
+  }
+
   const displays = [];
 
   if (props.arrowsRemaining !== null) {
@@ -52,7 +66,22 @@ const infoDisplays = computed(() => {
 
 // Prepare action buttons
 const actionButtons = computed(() => {
-  return [
+  const buttons = [];
+
+  // Add save button if we can save
+  if (props.canSave) {
+    buttons.push({
+      iconComponent: SaveIcon,
+      label: "Save to history",
+      action: "save-scores",
+      class: "wide-button",
+      variant: "highlight",
+      active: props.maxReached
+    });
+  }
+
+  // Add standard buttons
+  buttons.push(
     {
       iconComponent: ClassificationIcon,
       label: "Class",
@@ -72,7 +101,9 @@ const actionButtons = computed(() => {
       disabled: !props.hasStarted,
       variant: "danger"
     }
-  ];
+  );
+
+  return buttons;
 });
 
 function handleAction(actionData) {
@@ -80,6 +111,8 @@ function handleAction(actionData) {
     showConfirmation.value = true;
   } else if (actionData.action === "take-note") {
     emit("take-note");
+  } else if (actionData.action === "save-scores") {
+    emit("save-scores");
   }
 }
 

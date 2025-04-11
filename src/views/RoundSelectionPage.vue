@@ -684,7 +684,7 @@ function toggleChallengingRounds() {
 }
 
 .filter-label {
-  font-size: 0.7em;
+  font-size: 0.9em;
   font-weight: 500;
 }
 

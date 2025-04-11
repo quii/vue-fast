@@ -81,6 +81,7 @@ const userProfile = computed(() => {
 const canSaveAnytime = computed(() =>
     gameTypeStore.currentRound.canSaveAnytime && scoresStore.scores.length > 0
 );
+const canSave = computed(() => maxReached.value || canSaveAnytime.value);
 
 const arrowsRemaining = computed(() => {
   const maxArrows = gameTypeStore.currentRound.maxArrows;
@@ -132,16 +133,7 @@ watch([() => scoresStore.scores, classificationCalculator, totals, averageScores
   );
 }, {immediate: true});
 
-watch(maxReached, (isMaxReached) => {
-  if (isMaxReached) {
-    window.scrollTo({top: 0, behavior: "smooth"});
-    toast.info("You've completed the shoot! You can now save your scores.");
-  }
-});
-
-function saveScores(event) {
-  event.preventDefault();
-
+function saveScores() {
   try {
     const id = history.add(date.value,
         runningTotal.value,
@@ -203,12 +195,15 @@ function handleTakeNote() {
 <template>
   <div class="page">
     <TopBar
-        :hasStarted="hasStarted"
-        :arrowsRemaining="arrowsRemaining"
-        :maxPossibleScore="maxPossibleScore"
-        :availableClassifications="availableClassifications"
-        @clear-scores="clearScores"
-        @take-note="handleTakeNote"
+      :hasStarted="hasStarted"
+      :arrowsRemaining="arrowsRemaining"
+      :maxPossibleScore="maxPossibleScore"
+      :availableClassifications="availableClassifications"
+      :canSave="canSave"
+      :maxReached="maxReached"
+      @clear-scores="clearScores"
+      @take-note="handleTakeNote"
+      @save-scores="saveScores"
     />
 
     <InteractiveTargetFace
@@ -231,13 +226,6 @@ function handleTakeNote() {
         :game-type="gameTypeStore.type"
         @undo="scoresStore.undo"
     />
-    <button
-        class="save"
-        v-if="maxReached || canSaveAnytime"
-        @click="saveScores"
-        :class="{ 'pulse-animation': maxReached }">
-      💾 Save score to history
-    </button>
 
     <NoteModal
         v-if="showNoteTaker"
