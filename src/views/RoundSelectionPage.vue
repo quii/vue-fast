@@ -1,6 +1,7 @@
 <script setup>
 import CardModeToggle from "@/components/CardModeToggle.vue";
 import RoundCard from "@/components/RoundCard.vue";
+import { meters, toMeters, toYards, yards } from "@/domain/distance/distance.js";
 import { classificationList } from "@/domain/scoring/classificationList.js";
 import { gameTypes } from "@/domain/scoring/game_types";
 import { calculateAppropriateRounds } from "@/domain/scoring/round_calculator.js";
@@ -87,6 +88,45 @@ const minDistance = computed({
 const maxDistance = computed({
   get: () => searchPreferencesStore.preferences.maxDistance,
   set: (value) => searchPreferencesStore.updateMaxDistance(value)
+});
+
+const distanceUnit = computed({
+  get: () => searchPreferencesStore.preferences.distanceUnit,
+  set: (value) => searchPreferencesStore.updatePreferences({ distanceUnit: value })
+});
+
+const displayedMinDistance = computed({
+  get: () => {
+    if (distanceUnit.value === "meters") {
+      return Math.round(toMeters(yards(minDistance.value))) + 1; //+1 is a bit of a hack to get around rounding issues
+    }
+    return minDistance.value;
+  },
+  set: (value) => {
+    if (distanceUnit.value === "meters") {
+      // Convert from meters to yards for storage
+      updateMinDistanceConstrained(Math.round(toYards(meters(value))));
+    } else {
+      updateMinDistanceConstrained(value);
+    }
+  }
+});
+
+const displayedMaxDistance = computed({
+  get: () => {
+    if (distanceUnit.value === "meters") {
+      return Math.round(toMeters(yards(maxDistance.value)));
+    }
+    return maxDistance.value;
+  },
+  set: (value) => {
+    if (distanceUnit.value === "meters") {
+      // Convert from meters to yards for storage
+      updateMaxDistanceConstrained(Math.round(toYards(meters(value))));
+    } else {
+      updateMaxDistanceConstrained(value);
+    }
+  }
 });
 
 // Determine if any environment filter is active
@@ -274,6 +314,7 @@ function updateMaxDistanceConstrained(value) {
 function toggleChallengingRounds() {
   searchPreferencesStore.toggleChallengingRounds();
 }
+
 </script>
 
 <template>
@@ -476,28 +517,45 @@ function toggleChallengingRounds() {
 
       <!-- Max Distance Slider -->
       <div class="distance-sliders-container">
+        <div class="distance-unit-toggle">
+          <div class="unit-toggle-buttons">
+            <button
+              class="unit-button"
+              :class="{ 'active': distanceUnit === 'yards' }"
+              @click="distanceUnit = 'yards'"
+            >
+              Yards
+            </button>
+            <button
+              class="unit-button"
+              :class="{ 'active': distanceUnit === 'meters' }"
+              @click="distanceUnit = 'meters'"
+            >
+              Meters
+            </button>
+          </div>
+        </div>
+        <!-- Min Distance Slider -->
         <div class="distance-slider">
-          <label for="min-distance">Minimum Distance: {{ minDistance }} yards</label>
+          <label for="min-distance">Minimum Distance: {{ displayedMinDistance }} {{ distanceUnit }}</label>
           <input
             type="range"
             id="min-distance"
-            v-model="minDistance"
-            min="10"
+            v-model="displayedMinDistance"
+            min="0"
             max="100"
-            step="10"
-            @input="updateMinDistanceConstrained($event.target.value)"
           />
         </div>
+
+        <!-- Max Distance Slider -->
         <div class="distance-slider">
-          <label for="max-distance">Maximum Distance: {{ maxDistance }} yards</label>
+          <label for="max-distance">Maximum Distance: {{ displayedMaxDistance }} {{ distanceUnit }}</label>
           <input
             type="range"
             id="max-distance"
-            v-model="maxDistance"
-            min="10"
+            v-model="displayedMaxDistance"
+            min="0"
             max="100"
-            step="10"
-            @input="updateMaxDistanceConstrained($event.target.value)"
           />
         </div>
       </div>
@@ -682,6 +740,37 @@ function toggleChallengingRounds() {
   gap: 0.5em;
 }
 
+.distance-unit-toggle {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.unit-toggle-buttons {
+  display: flex;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+.unit-button {
+  padding: 0.3em 0.8em;
+  background: var(--color-background);
+  border: none;
+  cursor: pointer;
+  font-size: 0.85em;
+  transition: all 0.2s ease;
+}
+
+.unit-button.active {
+  background-color: var(--color-highlight, #4CAF50);
+  color: white;
+}
+
+.unit-button:first-child {
+  border-right: 1px solid var(--color-border);
+}
+
 .distance-sliders-container {
   background-color: var(--color-background-soft);
   border-radius: 8px;
@@ -728,12 +817,6 @@ function toggleChallengingRounds() {
   border: none;
 }
 
-.distance-range-display {
-  text-align: center;
-  font-size: 0.9em;
-  color: var(--color-text-light);
-  margin-top: 0.5em;
-}
 
 @media (min-width: 768px) {
   .filters {

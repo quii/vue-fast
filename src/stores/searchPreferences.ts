@@ -15,6 +15,7 @@ export const useSearchPreferencesStore = defineStore("searchPreferences", () => 
     // Distance range filters
     minDistance: 0,
     maxDistance: 100,
+    distanceUnit: "yards",
 
     // Search query
     searchQuery: "",
@@ -73,6 +74,10 @@ export const useSearchPreferencesStore = defineStore("searchPreferences", () => 
     state.value.maxDistance = distance;
   }
 
+  function toggleDistanceUnit() {
+    state.value.distanceUnit = state.value.distanceUnit === "yards" ? "meters" : "yards";
+  }
+
   return {
     preferences: state,
     updatePreferences,
@@ -85,6 +90,7 @@ export const useSearchPreferencesStore = defineStore("searchPreferences", () => 
     toggleCompactMode,
     updateSearchQuery,
     updateMinDistance,
-    updateMaxDistance
+    updateMaxDistance,
+    toggleDistanceUnit
   };
 });
