@@ -9,7 +9,10 @@ const indoorClassificationRequirements = {
   "A3": 10,
   "B3": 15,
   "B2": 15,
-  "B1": 15
+  "B1": 15,
+  "MB": 15,
+  "GMB": 15,
+  "EMB": 15
 }
 
 const outdoorClassificationRequirements = {
@@ -19,13 +22,13 @@ const outdoorClassificationRequirements = {
   "A3": 12,
   "B3": 18,
   "B2": 18,
-  "B1": 18
+  "B1": 18,
+  "MB": 36,
+  "GMB": 36,
+  "EMB": 36
 }
 
 function getDozenArrowsRequired(classification, environment) {
-  // Master Bowman and above have special requirements (record status shoots, which we dont capture yet)
-  if (["MB", "GMB", "EMB"].includes(classification)) return 0;
-
   if(environment==="indoor") {
     return indoorClassificationRequirements[classification]
   }
@@ -34,11 +37,31 @@ function getDozenArrowsRequired(classification, environment) {
 }
 
 function meetsClassificationStandard(shoot, nextClassification) {
+  // First check if the shoot has the required classification
   if (!shoot.classification || !shoot.classification.name) {
     return false;
   }
 
-  return isHigherOrEqualClassification(shoot.classification.name, nextClassification);
+  // Check if the classification meets or exceeds the required level
+  const meetsClassificationLevel = isHigherOrEqualClassification(shoot.classification.name, nextClassification);
+
+  if (!meetsClassificationLevel) {
+    return false;
+  }
+
+  // For master bowmen tiers, require record status
+  if (["MB", "GMB", "EMB"].includes(nextClassification)) {
+    // If no shootStatus is defined (legacy data), it can't qualify for master bowmen tiers
+    if (!shoot.shootStatus) {
+      return false;
+    }
+
+    // Only count record status shoots for master bowmen tiers
+    return shoot.shootStatus === "RecordStatus";
+  }
+
+  // For other classifications, any shoot with the right classification level qualifies
+  return true;
 }
 
 export function calculateClassificationProgress(history, bowType, currentClassification, environment, seasonStartDate) {

@@ -21,7 +21,7 @@ const props = defineProps({
   status: {
     type: String,
     default: "Practice"
-  }
+  },
 });
 
 // Capitalize the first letter of each word

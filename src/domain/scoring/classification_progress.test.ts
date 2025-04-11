@@ -247,16 +247,16 @@ describe("Classification Progress", () => {
           gameType: "portsmouth",
           scores: Array(60).fill(9),
           userProfile: { bowType: "recurve" },
-          classification: { name: "GMB" }
+          classification: { name: "EMB" }
         }
       ];
 
       const result = calculateClassificationProgress(
-        history, "recurve", "GMB", "indoor", "2023-10-01"
+        history, "recurve", "EMB", "indoor", "2023-10-01"
       );
 
-      expect(result.dozenArrowsShot).toBe(0);
-      expect(result.dozenArrowsRequired).toBe(0);
+      expect(result.dozenArrowsShot).toBe(NaN);
+      expect(result.dozenArrowsRequired).toBe(undefined);
     });
   });
 
@@ -344,5 +344,191 @@ describe("Classification Progress", () => {
       expect(result.recurve.outdoor.dozenArrowsShot).toBe(0);
       expect(result.recurve.outdoor.dozenArrowsRequired).toBe(0);
     });
+  });
+});
+
+describe("Master Bowmen Record Status Requirement", () => {
+  it("requires record status for MB classification progress", () => {
+    const history = [
+      {
+        id: 1,
+        date: "2023-11-15",
+        gameType: "portsmouth",
+        scores: Array(60).fill(9),
+        userProfile: { bowType: "recurve" },
+        classification: { name: "MB" },
+        shootStatus: "Competition" // Not record status
+      },
+      {
+        id: 2,
+        date: "2023-11-20",
+        gameType: "portsmouth",
+        scores: Array(60).fill(9),
+        userProfile: { bowType: "recurve" },
+        classification: { name: "MB" },
+        shootStatus: "RecordStatus" // Record status
+      }
+    ];
+
+    const result = calculateClassificationProgress(
+      history, "recurve", "B1", "indoor", "2023-10-01"
+    );
+
+    expect(result.nextClassification).toBe("MB");
+    // Only the record status shoot should count
+    expect(result.dozenArrowsShot).toBe(5); // 5 dozen from one shoot
+    expect(result.qualifyingShoots.length).toBe(1);
+    expect(result.qualifyingShoots[0].id).toBe(2); // Only the record status shoot
+  });
+
+  it("requires record status for GMB classification progress", () => {
+    const history = [
+      {
+        id: 1,
+        date: "2023-11-15",
+        gameType: "portsmouth",
+        scores: Array(60).fill(9),
+        userProfile: { bowType: "recurve" },
+        classification: { name: "GMB" },
+        shootStatus: "Practice" // Not record status
+      },
+      {
+        id: 2,
+        date: "2023-11-20",
+        gameType: "portsmouth",
+        scores: Array(60).fill(9),
+        userProfile: { bowType: "recurve" },
+        classification: { name: "GMB" },
+        shootStatus: "RecordStatus" // Record status
+      }
+    ];
+
+    const result = calculateClassificationProgress(
+      history, "recurve", "MB", "indoor", "2023-10-01"
+    );
+
+    expect(result.nextClassification).toBe("GMB");
+    // Only the record status shoot should count
+    expect(result.dozenArrowsShot).toBe(5); // 5 dozen from one shoot
+    expect(result.qualifyingShoots.length).toBe(1);
+    expect(result.qualifyingShoots[0].id).toBe(2); // Only the record status shoot
+  });
+
+  it("handles legacy data (no shoot status) for master bowmen tiers", () => {
+    const history = [
+      {
+        id: 1,
+        date: "2023-11-15",
+        gameType: "portsmouth",
+        scores: Array(60).fill(9),
+        userProfile: { bowType: "recurve" },
+        classification: { name: "MB" }
+        // No shootStatus defined (legacy data)
+      },
+      {
+        id: 2,
+        date: "2023-11-20",
+        gameType: "portsmouth",
+        scores: Array(60).fill(9),
+        userProfile: { bowType: "recurve" },
+        classification: { name: "MB" },
+        shootStatus: "RecordStatus" // Record status
+      }
+    ];
+
+    const result = calculateClassificationProgress(
+      history, "recurve", "B1", "indoor", "2023-10-01"
+    );
+
+    expect(result.nextClassification).toBe("MB");
+    // Only the record status shoot should count, legacy data should be ignored
+    expect(result.dozenArrowsShot).toBe(5); // 5 dozen from one shoot
+    expect(result.qualifyingShoots.length).toBe(1);
+    expect(result.qualifyingShoots[0].id).toBe(2); // Only the record status shoot
+  });
+
+  it("does not require record status for non-master bowmen tiers", () => {
+    const history = [
+      {
+        id: 1,
+        date: "2023-11-15",
+        gameType: "portsmouth",
+        scores: Array(60).fill(9),
+        userProfile: { bowType: "recurve" },
+        classification: { name: "B3" },
+        shootStatus: "Practice" // Not record status
+      },
+      {
+        id: 2,
+        date: "2023-11-20",
+        gameType: "portsmouth",
+        scores: Array(60).fill(9),
+        userProfile: { bowType: "recurve" },
+        classification: { name: "B3" },
+        shootStatus: "Competition" // Not record status
+      }
+    ];
+
+    const result = calculateClassificationProgress(
+      history, "recurve", "A1", "indoor", "2023-10-01"
+    );
+
+    expect(result.nextClassification).toBe("B3");
+    // Both shoots should count regardless of status
+    expect(result.dozenArrowsShot).toBe(10); // 5 + 5 dozen
+    expect(result.qualifyingShoots.length).toBe(2);
+  });
+
+  it("correctly handles mixed classification levels with status requirements", () => {
+    const history = [
+      {
+        id: 1,
+        date: "2023-11-15",
+        gameType: "portsmouth",
+        scores: Array(60).fill(9),
+        userProfile: { bowType: "recurve" },
+        classification: { name: "B3" },
+        shootStatus: "Practice" // Not record status, but OK for B3
+      },
+      {
+        id: 2,
+        date: "2023-11-20",
+        gameType: "portsmouth",
+        scores: Array(60).fill(9),
+        userProfile: { bowType: "recurve" },
+        classification: { name: "MB" },
+        shootStatus: "Competition" // Not record status, not OK for MB
+      },
+      {
+        id: 3,
+        date: "2023-11-25",
+        gameType: "portsmouth",
+        scores: Array(60).fill(9),
+        userProfile: { bowType: "recurve" },
+        classification: { name: "MB" },
+        shootStatus: "RecordStatus" // Record status, OK for MB
+      }
+    ];
+
+    // Test for B3 progress
+    const resultB3 = calculateClassificationProgress(
+      history, "recurve", "A1", "indoor", "2023-10-01"
+    );
+
+    expect(resultB3.nextClassification).toBe("B3");
+    // All shoots with B3 or higher should count
+    expect(resultB3.qualifyingShoots.length).toBe(3);
+    expect(resultB3.dozenArrowsShot).toBe(15); // 5 + 5 + 5 dozen
+
+    // Test for MB progress
+    const resultMB = calculateClassificationProgress(
+      history, "recurve", "B1", "indoor", "2023-10-01"
+    );
+
+    expect(resultMB.nextClassification).toBe("MB");
+    // Only MB shoots with record status should count
+    expect(resultMB.qualifyingShoots.length).toBe(1);
+    expect(resultMB.qualifyingShoots[0].id).toBe(3);
+    expect(resultMB.dozenArrowsShot).toBe(5); // 5 dozen from one shoot
   });
 });
