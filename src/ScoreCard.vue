@@ -7,25 +7,26 @@ import ScoreButtons from "@/components/scoring/ScoreButtons.vue";
 import UserNotes from "@/components/UserNotes.vue";
 import TopBar from "@/components/TopBar.vue";
 import HistoryCard from "@/components/HistoryCard.vue";
-import {insults} from "@/domain/insults";
-import {X} from "@/domain/scoring/game_type_config.js";
-import {calculateMaxPossibleScore, convertToValues} from "@/domain/scoring/scores.js";
-import {calculateTotal} from "@/domain/scoring/subtotals.js";
-import {useArrowHistoryStore} from "@/stores/arrow_history.js";
-import {useGameTypeStore} from "@/stores/game_type";
-import {useHistoryStore} from "@/stores/history";
-import {useScoresStore} from "@/stores/scores";
-import {useUserStore} from "@/stores/user";
-import {useNotesStore} from "@/stores/user_notes";
-import {computed, ref} from "vue";
-import {useToast} from "vue-toastification";
-import {watch} from "vue";
+import { insults } from "@/domain/insults";
+import { X } from "@/domain/scoring/game_type_config.js";
+import { calculateMaxPossibleScore, convertToValues } from "@/domain/scoring/scores.js";
+import { calculateTotal } from "@/domain/scoring/subtotals.js";
+import { useArrowHistoryStore } from "@/stores/arrow_history.js";
+import { useGameTypeStore } from "@/stores/game_type";
+import { useHistoryStore } from "@/stores/history";
+import { useScoresStore } from "@/stores/scores";
+import { useUserStore } from "@/stores/user";
+import { useNotesStore } from "@/stores/user_notes";
+import { computed, ref } from "vue";
+import { useToast } from "vue-toastification";
+import { watch } from "vue";
 import {
   createClassificationCalculator
 } from "@/domain/scoring/classification";
-import {calculateSubtotals} from "@/domain/scoring/subtotals";
-import {calculateAverageScorePerEnd} from "@/domain/scoring/distance_totals";
-import {useRoute, useRouter} from "vue-router";
+import { calculateSubtotals } from "@/domain/scoring/subtotals";
+import { calculateAverageScorePerEnd } from "@/domain/scoring/distance_totals";
+import { useRoute, useRouter } from "vue-router";
+import { getAllShootStatuses, DEFAULT_SHOOT_STATUS } from "@/domain/shoot/shoot_status.js";
 
 const synth = window.speechSynthesis;
 const router = useRouter();
@@ -36,6 +37,8 @@ const arrowHistoryStore = useArrowHistoryStore();
 const userStore = useUserStore();
 const notesStore = useNotesStore();
 const history = useHistoryStore();
+const selectedShootStatus = ref(DEFAULT_SHOOT_STATUS);
+const shootStatuses = getAllShootStatuses();
 
 const route = useRoute();
 
@@ -43,9 +46,9 @@ watch(() => route.query.selectedRound, (newRound) => {
   if (newRound) {
     gameTypeStore.setGameType(newRound);
     // Clear the query parameter after using it
-    router.replace({query: {}});
+    router.replace({ query: {} });
   }
-}, {immediate: true});
+}, { immediate: true });
 
 const validScores = computed(() => gameTypeStore.currentRound.scores);
 const maxReached = computed(() => {
@@ -68,7 +71,7 @@ const classificationCalculator = ref(null);
 const availableClassifications = ref(null);
 const totals = computed(() => calculateSubtotals(scoresStore.scores, gameTypeStore.type));
 const averageScoresPerEnd = computed(() =>
-    calculateAverageScorePerEnd(scoresStore.scores, gameTypeStore.currentRound.endSize, gameTypeStore.type)
+  calculateAverageScorePerEnd(scoresStore.scores, gameTypeStore.currentRound.endSize, gameTypeStore.type)
 );
 
 const userProfile = computed(() => {
@@ -81,7 +84,7 @@ const userProfile = computed(() => {
 });
 
 const canSaveAnytime = computed(() =>
-    gameTypeStore.currentRound.canSaveAnytime && scoresStore.scores.length > 0
+  gameTypeStore.currentRound.canSaveAnytime && scoresStore.scores.length > 0
 );
 const canSave = computed(() => maxReached.value || canSaveAnytime.value);
 
@@ -96,9 +99,9 @@ const maxPossibleScore = computed(() => {
 });
 
 const userDetailsSaved = computed(() =>
-    userProfile.value.gender &&
-    userProfile.value.ageGroup &&
-    userProfile.value.bowType
+  userProfile.value.gender &&
+  userProfile.value.ageGroup &&
+  userProfile.value.bowType
 );
 
 const isPracticeRound = computed(() => {
@@ -153,13 +156,13 @@ watch([() => gameTypeStore.type, userDetailsSaved, isPracticeRound], async () =>
   }
 
   classificationCalculator.value = await createClassificationCalculator(
-      gameTypeStore.type,
-      userProfile.value.gender,
-      userProfile.value.ageGroup,
-      userProfile.value.bowType,
-      personalBest.value
+    gameTypeStore.type,
+    userProfile.value.gender,
+    userProfile.value.ageGroup,
+    userProfile.value.bowType,
+    personalBest.value
   );
-}, {immediate: true});
+}, { immediate: true });
 
 watch([() => scoresStore.scores, classificationCalculator, totals, averageScoresPerEnd], () => {
   if (!classificationCalculator.value) {
@@ -168,10 +171,10 @@ watch([() => scoresStore.scores, classificationCalculator, totals, averageScores
   }
 
   availableClassifications.value = classificationCalculator.value(
-      totals.value.totalScore,
-      averageScoresPerEnd.value
+    totals.value.totalScore,
+    averageScoresPerEnd.value
   );
-}, {immediate: true});
+}, { immediate: true });
 
 function showSaveConfirmation() {
   showSaveModal.value = true;
@@ -180,17 +183,19 @@ function showSaveConfirmation() {
 function saveScores() {
   try {
     const id = history.add(date.value,
-        runningTotal.value,
-        gameTypeStore.type,
-        [...scoresStore.scores],
-        gameTypeStore.currentRound.unit,
-        userProfile.value
+      runningTotal.value,
+      gameTypeStore.type,
+      [...scoresStore.scores],
+      gameTypeStore.currentRound.unit,
+      userProfile.value,
+      selectedShootStatus.value
     );
 
     arrowHistoryStore.saveArrowsForShoot(id, [...scoresStore.arrows]);
     notesStore.assignPendingNotesToShoot(id);
     scoresStore.clear();
     showSaveModal.value = false;
+    selectedShootStatus.value = DEFAULT_SHOOT_STATUS;
     toast.success("Scores saved, please find them in the history");
 
   } catch (error) {
@@ -255,31 +260,31 @@ function handleTakeNote() {
     />
 
     <InteractiveTargetFace
-        v-if="userStore.isExperimentalUser()"
-        :arrows="scoresStore.arrows"
-        :scores="scoresStore.scores"
-        :game-type="gameTypeStore.type"
-        :valid-scores="validScores"
-        :max-reached="maxReached"
-        :knock-color="userStore.user.knockColor"
-        @score="handleScore"
-        @undo="scoresStore.undo"
+      v-if="userStore.isExperimentalUser()"
+      :arrows="scoresStore.arrows"
+      :scores="scoresStore.scores"
+      :game-type="gameTypeStore.type"
+      :valid-scores="validScores"
+      :max-reached="maxReached"
+      :knock-color="userStore.user.knockColor"
+      @score="handleScore"
+      @undo="scoresStore.undo"
     />
     <ScoreButtons
-        v-else
-        :validScores="validScores"
-        @score="handleScore"
-        :max-reached="maxReached"
-        :scores="scoresStore.scores"
-        :game-type="gameTypeStore.type"
-        @undo="scoresStore.undo"
+      v-else
+      :validScores="validScores"
+      @score="handleScore"
+      :max-reached="maxReached"
+      :scores="scoresStore.scores"
+      :game-type="gameTypeStore.type"
+      @undo="scoresStore.undo"
     />
 
     <NoteModal
-        v-if="showNoteTaker"
-        :initial-text="noteText"
-        @save="saveNote"
-        @close="showNoteTaker = false"
+      v-if="showNoteTaker"
+      :initial-text="noteText"
+      @save="saveNote"
+      @close="showNoteTaker = false"
     />
 
     <!-- Save Confirmation Modal -->
@@ -290,6 +295,27 @@ function handleTakeNote() {
 
         <div class="history-preview">
           <HistoryCard :item="historyPreview" />
+        </div>
+
+        <!-- Add shoot status selection -->
+        <div class="shoot-status-selection">
+          <h4>Shoot Type:</h4>
+          <div class="radio-group">
+            <div
+              v-for="status in shootStatuses"
+              :key="status"
+              class="radio-option"
+            >
+              <input
+                type="radio"
+                :id="status"
+                :value="status"
+                v-model="selectedShootStatus"
+                :name="'shoot-status'"
+              >
+              <label :for="status">{{ status === "RecordStatus" ? "Record Status" : status }}</label>
+            </div>
+          </div>
         </div>
 
         <div class="confirmation-actions">
@@ -313,10 +339,10 @@ function handleTakeNote() {
                  :hasX="validScores.includes(X)"
                  :user-profile="userProfile"
     />
-    <UserNotes :allow-highlight="true"/>
+    <UserNotes :allow-highlight="true" />
 
-      <GameTypeSelector :gameType="gameTypeStore.type"
-                        @changeGameType="gameTypeStore.setGameType"/>
+    <GameTypeSelector :gameType="gameTypeStore.type"
+                      @changeGameType="gameTypeStore.setGameType" />
   </div>
 
 </template>
@@ -402,5 +428,63 @@ function handleTakeNote() {
 button:disabled {
   opacity: 0.3;
   cursor: not-allowed;
+}
+
+.shoot-status-selection {
+  margin: 1.5em 0;
+  border-top: 1px solid var(--color-border, #eee);
+  padding-top: 1em;
+}
+
+.shoot-status-selection h4 {
+  margin-top: 0;
+  margin-bottom: 0.75em;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.radio-option input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.2em;
+  height: 1.2em;
+  border: 2px solid var(--color-border, #ccc);
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.radio-option input[type="radio"]:checked {
+  border-color: var(--color-highlight, #4CAF50);
+}
+
+.radio-option input[type="radio"]:checked::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0.6em;
+  height: 0.6em;
+  background-color: var(--color-highlight, #4CAF50);
+  border-radius: 50%;
+}
+
+.radio-option label {
+  font-size: 1em;
+  cursor: pointer;
 }
 </style>

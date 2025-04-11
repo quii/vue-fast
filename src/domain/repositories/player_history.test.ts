@@ -44,7 +44,6 @@ describe("player history", () => {
 
     const sortedHistory = await playerHistory.sortedHistory();
     expect(sortedHistory).toHaveLength(4);
-    console.log(sortedHistory);
     expect(sortedHistory[0].score).toEqual(123);
     expect(sortedHistory[0].topScore).toBeFalsy();
     expect(sortedHistory[1].topScore).toBeTruthy();
@@ -357,5 +356,70 @@ describe("getBowTypesUsed", () => {
     expect(result).toContain("longbow");
     expect(result).toContain("recurve");
     expect(result.length).toBe(2);
+  });
+});
+
+describe("Shoot Status", () => {
+  test("it defaults to Practice when no shoot status is provided", async () => {
+    const playerHistory = new PlayerHistory();
+
+    // Add a shoot without specifying status
+    playerHistory.add(new Date(), 456, "national", [1, 2, 3], "yd");
+
+    const history = await playerHistory.sortedHistory();
+    expect(history[0].shootStatus).toEqual("Practice");
+  });
+
+  test("it stores the provided shoot status", async () => {
+    const playerHistory = new PlayerHistory();
+
+    // Add shoots with different statuses
+    playerHistory.add(new Date(), 456, "national", [1, 2, 3], "yd", undefined, "Competition");
+    playerHistory.add(new Date(), 500, "windsor", [1, 2, 3], "yd", undefined, "RecordStatus");
+
+    const history = await playerHistory.sortedHistory();
+
+    // Find the shoots by score
+    const nationalShoot = history.find(item => item.score === 456);
+    const windsorShoot = history.find(item => item.score === 500);
+
+    expect(nationalShoot.shootStatus).toEqual("Competition");
+    expect(windsorShoot.shootStatus).toEqual("RecordStatus");
+  });
+
+  test("it can filter history by shoot status", async () => {
+    const playerHistory = new PlayerHistory();
+    const user = { gender: "male", ageGroup: "senior", bowType: "recurve" };
+
+    // Add shoots with different statuses
+    playerHistory.add(new Date(), 100, "national", [1, 2, 3], "yd", user, "Practice");
+    playerHistory.add(new Date(), 200, "national", [1, 2, 3], "yd", user, "Competition");
+    playerHistory.add(new Date(), 300, "national", [1, 2, 3], "yd", user, "RecordStatus");
+
+    // Add a filter for shoot status
+    const filters = { shootStatus: "Competition" };
+    const filtered = await playerHistory.getFilteredHistory(filters, user);
+
+    expect(filtered.length).toBe(1);
+    expect(filtered[0].score).toEqual(200);
+    expect(filtered[0].shootStatus).toEqual("Competition");
+  });
+
+  test("it can get all unique shoot statuses used in history", () => {
+    const playerHistory = new PlayerHistory();
+
+    // Add shoots with different statuses
+    playerHistory.add(new Date(), 100, "national", [1, 2, 3], "yd", undefined, "Practice");
+    playerHistory.add(new Date(), 200, "windsor", [1, 2, 3], "yd", undefined, "Competition");
+    playerHistory.add(new Date(), 300, "york", [1, 2, 3], "yd", undefined, "RecordStatus");
+    playerHistory.add(new Date(), 400, "bray", [1, 2, 3], "yd", undefined, "Competition");
+
+    const usedStatuses = playerHistory.getShootStatusesUsed();
+
+    // Should contain all three statuses without duplicates
+    expect(usedStatuses).toContain("Practice");
+    expect(usedStatuses).toContain("Competition");
+    expect(usedStatuses).toContain("RecordStatus");
+    expect(usedStatuses.length).toBe(3);
   });
 });

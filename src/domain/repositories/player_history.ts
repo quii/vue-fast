@@ -4,6 +4,7 @@ import { addTopScoreIndicator } from "@/domain/scoring/topscores";
 import { addClassificationsToHistory } from "@/domain/scoring/classification";
 import { filterByClassification, filterByDateRange, filterByPB, filterByRound } from "@/domain/history_filters";
 import { addHandicapToHistory } from "@/domain/scoring/handicap";
+import { DEFAULT_SHOOT_STATUS, ShootStatus } from "@/domain/shoot/shoot_status";
 
 // Extend Date prototype with addDays method
 declare global {
@@ -41,16 +42,18 @@ export interface HistoryItem {
   };
   handicap?: number;
   averagePerEnd?: number | null;
+  shootStatus?: ShootStatus; // New field for shoot status
 }
 
 export interface HistoryFilters {
-  pbOnly: boolean;
-  round: string | null;
-  dateRange: {
-    start: Date | null;
-    end: Date | null;
+  pbOnly?: boolean;
+  round?: string | null;
+  dateRange?: {
+    startDate?: Date | null;
+    endDate?: Date | null;
   };
-  classification: string | null;
+  classification?: string | null;
+  shootStatus?: ShootStatus | null;
 }
 
 export interface StorageInterface {
@@ -71,7 +74,8 @@ export class PlayerHistory {
     gameType: string,
     scores: any[],
     unit?: string,
-    userProfile?: UserProfile
+    userProfile?: UserProfile,
+    shootStatus: ShootStatus = DEFAULT_SHOOT_STATUS // Default to Practice if not specified
   ): number | string {
     const nextId = generateNextId(this.storage.value);
     this.storage.value.push({
@@ -81,7 +85,8 @@ export class PlayerHistory {
       gameType,
       scores,
       unit,
-      userProfile
+      userProfile,
+      shootStatus
     });
     return nextId;
   }
@@ -151,8 +156,21 @@ export class PlayerHistory {
     const filteredByRound = filterByRound(filteredByPB, filters.round);
     const filteredByDateRange = filterByDateRange(filteredByRound, filters.dateRange);
     const filteredByClassification = filterByClassification(filteredByDateRange, filters.classification);
+    const filteredByShootStatus = filterByShootStatus(filteredByClassification, filters.shootStatus);
 
-    return filteredByClassification;
+    return filteredByShootStatus;
+  }
+
+  getShootStatusesUsed(): ShootStatus[] {
+    const statusesSet = new Set<ShootStatus>();
+
+    this.storage.value.forEach(item => {
+      if (item.shootStatus) {
+        statusesSet.add(item.shootStatus);
+      }
+    });
+
+    return Array.from(statusesSet);
   }
 
   getBowTypesUsed(currentBowType: string | null = null): string[] {
@@ -179,6 +197,11 @@ function generateNextId(history: HistoryItem[]): number {
     .sort((a, b) => a - b)
     .slice(-1)[0] || 0;
   return maxId + 1;
+}
+
+export function filterByShootStatus(history: HistoryItem[], shootStatus: ShootStatus | null): HistoryItem[] {
+  if (!shootStatus) return history;
+  return history.filter(item => item.shootStatus === shootStatus);
 }
 
 function isWithinLastSixWeeks(date: string): boolean {
