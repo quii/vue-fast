@@ -4,7 +4,7 @@ import RoundCard from "@/components/RoundCard.vue";
 import { classificationList } from "@/domain/scoring/classificationList.js";
 import { gameTypes } from "@/domain/scoring/game_types";
 import { calculateAppropriateRounds } from "@/domain/scoring/round_calculator.js";
-import { filterGameTypes } from "@/domain/scoring/round_filters";
+import { filterRounds } from "@/domain/scoring/round_filters";
 import { useSearchPreferencesStore } from "@/stores/searchPreferences";
 import { useUserStore } from "@/stores/user";
 import { computed, onMounted, ref, watchEffect } from "vue";
@@ -214,7 +214,7 @@ const filteredRounds = computed(() => {
     return [];
   }
 
-  return filterGameTypes([...allRoundsList.value, ...practiceRounds.value], filters.value);
+  return filterRounds([...allRoundsList.value, ...practiceRounds.value], filters.value);
 });
 
 const practiceRoundsFiltered = computed(() => filteredRounds.value.filter(r => r.includes("practice")));

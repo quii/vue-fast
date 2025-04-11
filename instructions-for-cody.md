@@ -77,6 +77,59 @@ This approach leads to cleaner interfaces, less prop drilling, and components th
   and scoping
 - In domain, the unit tests live in the same directory as the file under test. There is no separate test folder.
 
+## Dependency Injection and Testing Approach
+
+We use the factory function pattern to enable dependency injection in our domain code without relying on global mocks.
+This approach maintains a clean public API while making testing straightforward.
+
+### Factory Function Pattern
+
+```typescript
+// Create a factory function that accepts dependencies with defaults
+export function createSomeFunction(dependency = defaultDependency) {
+  // Return the actual function with the dependency pre-configured
+  return function actualFunction(param1, param2) {
+    // Use the injected dependency inside
+    return dependency.doSomething(param1, param2);
+  };
+}
+
+// Export a pre-configured instance for normal use
+export const someFunction = createSomeFunction();
+```
+
+### Testing With Factory Functions
+
+```typescript
+import { createSomeFunction } from '@/domain/some_module';
+
+describe('someFunction', () => {
+  test('works with test dependencies', () => {
+    // Create a fake dependency for testing
+    const testDependency = {
+      doSomething: () => 'test result'
+    };
+    
+    // Create a test-specific instance with the fake dependency
+    const someFunction = createSomeFunction(testDependency);
+    
+    // Test using the configured function
+    expect(someFunction('input')).toBe('test result');
+  });
+});
+```
+
+### Benefits
+
+- **No Global Mocks**: Avoids jest.mock() and other global mocking approaches
+- **Explicit Dependencies**: Dependencies are clearly visible in the code
+- **Simple API**: Vue components can still import and use functions directly
+- **Testable**: Domain logic can be tested in isolation with controlled dependencies
+- **Framework Agnostic**: Domain code remains pure and not tied to Vue or any framework
+
+This approach aligns with our preference for functional programming, pure functions, and explicit dependencies while
+maintaining a clean public API for our Vue components.
+
 ## End-to-end Testing Workflow
 
 - Page objects live in cypress/pages and encapsulate all the ways to interact with a page

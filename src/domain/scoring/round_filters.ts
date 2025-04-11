@@ -1,4 +1,4 @@
-import { gameTypeConfig } from "@/domain/scoring/game_types";
+import { gameTypeConfig, GameTypeConfig } from "@/domain/scoring/game_types";
 
 export interface GameTypeFilters {
   showIndoor: boolean;
@@ -10,26 +10,30 @@ export interface GameTypeFilters {
   searchQuery?: string;
 }
 
-//todo: maybe we shouldn't be asking the vue to pass in game types. This belongs to the domain.
-export function filterGameTypes(types: string[], filters: GameTypeFilters): string[] {
-  // Apply search filter first if provided
-  let filteredTypes = types;
-  if (filters.searchQuery) {
-    const query = filters.searchQuery.toLowerCase();
-    filteredTypes = types.filter(type =>
-      type.toLowerCase().includes(query)
-    );
-  }
+export type RoundFilterConfig = Record<string, Pick<GameTypeConfig, "isOutdoor" | "isImperial" | "isPracticeRound" | "maxDistanceYards">>;
 
-  return filteredTypes.filter(type => {
-    const { isOutdoor, isImperial, isPracticeRound, maxDistanceYards } = gameTypeConfig[type.toLowerCase()];
+export function createRoundFilter(config: RoundFilterConfig = gameTypeConfig) {
+  return function filterRounds(roundNames: string[], filters: GameTypeFilters): string[] {
+    let filteredTypes = filters.searchQuery ? filterByName(roundNames, filters.searchQuery) : roundNames;
 
-    // Check if the round's max distance is within the user's max distance
-    const passesDistanceFilter = maxDistanceYards <= filters.maxDistance;
-    const passesEnvironmentFilter = (!isOutdoor && filters.showIndoor) || (isOutdoor && filters.showOutdoor);
-    const passesUnitFilter = (!isImperial && filters.showMetric) || (isImperial && filters.showImperial);
-    const passesPracticeFilter = filters.showPractice ? isPracticeRound : !isPracticeRound;
+    return filteredTypes.filter(type => {
+      const { isOutdoor, isImperial, isPracticeRound, maxDistanceYards } = config[type.toLowerCase()];
 
-    return passesEnvironmentFilter && passesUnitFilter && passesPracticeFilter && passesDistanceFilter;
-  });
+      const passesDistanceFilter = maxDistanceYards <= filters.maxDistance;
+      const passesEnvironmentFilter = (!isOutdoor && filters.showIndoor) || (isOutdoor && filters.showOutdoor);
+      const passesUnitFilter = (!isImperial && filters.showMetric) || (isImperial && filters.showImperial);
+      const passesPracticeFilter = filters.showPractice ? isPracticeRound : !isPracticeRound;
+
+      return passesEnvironmentFilter && passesUnitFilter && passesPracticeFilter && passesDistanceFilter;
+    });
+  };
 }
+
+function filterByName(types: string[], filter: string) {
+  const query = filter.toLowerCase();
+  return types.filter(type =>
+    type.toLowerCase().includes(query)
+  );
+}
+
+export const filterRounds = createRoundFilter();

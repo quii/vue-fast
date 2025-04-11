@@ -34,7 +34,7 @@ export interface GameTypeConfig {
   otherDistancesMetres?: number[];
 }
 
-type GameTypeConfigs = Record<string, GameTypeConfig>;
+export type GameTypeConfigs = Record<string, GameTypeConfig>;
 
 const imperialScores: (number | string)[] = [9, 7, 5, 3, 1, MISS];
 const outdoorMetricScores: (number | string)[] = ["X", 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, MISS];
