@@ -275,7 +275,7 @@ function getFontSizeClass(text) {
 }
 
 .filter-label, .info-label {
-  font-size: 1em;
+  font-size: 0.8em;
   font-weight: 500;
   text-align: center;
   line-height: 1;

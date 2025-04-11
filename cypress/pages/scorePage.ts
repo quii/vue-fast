@@ -132,6 +132,7 @@ class ScorePage {
 
   save() {
     cy.contains("Save to history").click();
+    cy.get(".save-button").click();
   }
 
   assertButtonIsDisabled(buttonValue) {

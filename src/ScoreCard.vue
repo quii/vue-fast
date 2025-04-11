@@ -6,6 +6,7 @@ import InteractiveTargetFace from "@/components/scoring/InteractiveTargetFace.vu
 import ScoreButtons from "@/components/scoring/ScoreButtons.vue";
 import UserNotes from "@/components/UserNotes.vue";
 import TopBar from "@/components/TopBar.vue";
+import HistoryCard from "@/components/HistoryCard.vue";
 import {insults} from "@/domain/insults";
 import {X} from "@/domain/scoring/game_type_config.js";
 import {calculateMaxPossibleScore, convertToValues} from "@/domain/scoring/scores.js";
@@ -61,6 +62,7 @@ const hasStarted = computed(() => scoresStore.scores.length > 0);
 const currentEnd = computed(() => Math.floor(scoresStore.scores.length / gameTypeStore.currentRound.endSize));
 
 const showNoteTaker = ref(false);
+const showSaveModal = ref(false); // New ref for save modal
 
 const classificationCalculator = ref(null);
 const availableClassifications = ref(null);
@@ -105,6 +107,44 @@ const isPracticeRound = computed(() => {
 
 const personalBest = computed(() => history.personalBest(gameTypeStore.type));
 
+const historyPreview = computed(() => {
+  // Calculate average per end if possible
+  let averagePerEnd = null;
+  if (scoresStore.scores.length > 0 && gameTypeStore.currentRound.endSize > 0) {
+    const totalScore = runningTotal.value;
+    const totalEnds = Math.ceil(scoresStore.scores.length / gameTypeStore.currentRound.endSize);
+    averagePerEnd = (totalScore / totalEnds).toFixed(1);
+  }
+
+  const isTopScore = personalBest.value < runningTotal.value;
+
+  let classification = null;
+  if (availableClassifications.value && availableClassifications.value.length > 0) {
+    // Filter to only include achieved classifications and exclude "PB"
+    const validClassifications = availableClassifications.value.filter(c =>
+      c.achieved && c.name !== "PB"
+    );
+
+    if (validClassifications.length > 0) {
+      // Get the last item (highest valid classification)
+      const highestClassification = validClassifications[validClassifications.length - 1];
+      classification = {
+        name: highestClassification.name,
+        scheme: highestClassification.scheme
+      };
+    }
+  }
+
+  return {
+    date: date.value,
+    gameType: gameTypeStore.type,
+    score: runningTotal.value,
+    averagePerEnd: averagePerEnd,
+    topScore: isTopScore,
+    classification: classification
+  };
+});
+
 watch([() => gameTypeStore.type, userDetailsSaved, isPracticeRound], async () => {
   if (!userDetailsSaved.value || isPracticeRound.value) {
     classificationCalculator.value = null;
@@ -133,6 +173,10 @@ watch([() => scoresStore.scores, classificationCalculator, totals, averageScores
   );
 }, {immediate: true});
 
+function showSaveConfirmation() {
+  showSaveModal.value = true;
+}
+
 function saveScores() {
   try {
     const id = history.add(date.value,
@@ -146,6 +190,7 @@ function saveScores() {
     arrowHistoryStore.saveArrowsForShoot(id, [...scoresStore.arrows]);
     notesStore.assignPendingNotesToShoot(id);
     scoresStore.clear();
+    showSaveModal.value = false;
     toast.success("Scores saved, please find them in the history");
 
   } catch (error) {
@@ -154,9 +199,12 @@ function saveScores() {
   }
 }
 
+function cancelSave() {
+  showSaveModal.value = false;
+}
+
 function clearScores() {
   scoresStore.clear();
-  toast.info("All scores have been cleared");
 }
 
 function handleScore(scoreData) {
@@ -203,7 +251,7 @@ function handleTakeNote() {
       :maxReached="maxReached"
       @clear-scores="clearScores"
       @take-note="handleTakeNote"
-      @save-scores="saveScores"
+      @save-scores="showSaveConfirmation"
     />
 
     <InteractiveTargetFace
@@ -233,6 +281,32 @@ function handleTakeNote() {
         @save="saveNote"
         @close="showNoteTaker = false"
     />
+
+    <!-- Save Confirmation Modal -->
+    <div v-if="showSaveModal" class="modal-overlay">
+      <div class="modal-content save-modal">
+        <h3>Save to History</h3>
+        <p>Review your score before saving:</p>
+
+        <div class="history-preview">
+          <HistoryCard :item="historyPreview" />
+        </div>
+
+        <div class="confirmation-actions">
+          <button
+            class="save-button"
+            @click="saveScores">
+            Save to History
+          </button>
+          <button
+            class="cancel-button"
+            @click="cancelSave">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+
     <RoundScores v-if="hasStarted" :scores="scoresStore.scores"
                  :game-type="gameTypeStore.type"
                  :endSize="gameTypeStore.currentRound.endSize"
@@ -252,27 +326,73 @@ function handleTakeNote() {
   padding: 0.5rem;
 }
 
-.pulse-animation {
-  animation: pulse 2s infinite;
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-    background-color: var(--color-highlight, #4CAF50);
-  }
-  100% {
-    transform: scale(1);
-  }
+.modal-content {
+  width: 90vw;
+  max-width: 400px;
+  background-color: var(--color-background);
+  border-radius: 8px;
+  padding: 1.5em;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
-.save {
-  width: 100%;
-  font-size: 1.5em;
-  height: 15vh
+.save-modal h3 {
+  margin-top: 0;
+  color: var(--color-highlight, #4CAF50);
+  text-align: center;
+}
+
+.history-preview {
+  margin: 1.5em 0;
+}
+
+.confirmation-actions {
+  display: flex;
+  gap: 1em;
+  margin-top: 1.5em;
+}
+
+.save-button, .cancel-button {
+  flex: 1;
+  padding: 0.75em;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.save-button {
+  background-color: var(--color-highlight, #4CAF50);
+  color: white;
+  border: none;
+}
+
+.save-button:active {
+  background-color: var(--color-highlight-bright, #5FDF63);
+  transform: scale(0.98);
+}
+
+.cancel-button {
+  background-color: transparent;
+  color: var(--color-text);
+  border: 1px solid var(--color-border, #ccc);
+}
+
+.cancel-button:active {
+  background-color: var(--color-background-mute, #f5f5f5);
+  transform: scale(0.98);
 }
 
 ::backdrop {
@@ -282,22 +402,5 @@ function handleTakeNote() {
 button:disabled {
   opacity: 0.3;
   cursor: not-allowed;
-}
-
-.pulse-animation {
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-    background-color: var(--color-highlight, #4CAF50);
-  }
-  100% {
-    transform: scale(1);
-  }
 }
 </style>
