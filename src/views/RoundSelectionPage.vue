@@ -79,8 +79,15 @@ const compactMode = computed({
   set: (value) => searchPreferencesStore.updatePreferences({ compactMode: value })
 });
 
-// Max distance from user preferences
-const maxDistance = ref(userStore.user.maxYards || 100);
+const minDistance = computed({
+  get: () => searchPreferencesStore.preferences.minDistance,
+  set: (value) => searchPreferencesStore.updateMinDistance(value)
+});
+
+const maxDistance = computed({
+  get: () => searchPreferencesStore.preferences.maxDistance,
+  set: (value) => searchPreferencesStore.updateMaxDistance(value)
+});
 
 // Determine if any environment filter is active
 const environmentFilterActive = computed(() =>
@@ -112,6 +119,7 @@ const filters = computed(() => {
     showImperial,
     showPractice,
     maxDistance: maxDistance.value,
+    minDistance: minDistance.value,
     searchQuery: searchQuery.value
   };
 });
@@ -137,7 +145,6 @@ function saveUserProfile() {
     outdoorClassifications.value,
     userStore.user.indoorSeasonStartDate,
     userStore.user.outdoorSeasonStartDate,
-    maxDistance.value,
     userStore.user.name,
     userStore.user.constructiveCriticism,
     userStore.user.experimentalTargetFace,
@@ -251,22 +258,16 @@ function selectRound(type) {
   });
 }
 
-// Update user's max distance when the slider changes
-function updateMaxDistance() {
-  userStore.save(
-    userStore.user.ageGroup,
-    userStore.user.gender,
-    userStore.user.bowType,
-    userStore.user.indoorClassifications,
-    userStore.user.outdoorClassifications,
-    userStore.user.indoorSeasonStartDate,
-    userStore.user.outdoorSeasonStartDate,
-    maxDistance.value,
-    userStore.user.name,
-    userStore.user.constructiveCriticism,
-    userStore.user.experimentalTargetFace,
-    userStore.user.knockColor
-  );
+function updateMinDistanceConstrained(value) {
+  // Ensure min distance doesn't exceed max distance
+  const newValue = Math.min(parseInt(value), maxDistance.value);
+  searchPreferencesStore.updateMinDistance(newValue);
+}
+
+function updateMaxDistanceConstrained(value) {
+  // Ensure max distance isn't less than min distance
+  const newValue = Math.max(parseInt(value), minDistance.value);
+  searchPreferencesStore.updateMaxDistance(newValue);
 }
 
 // Add a function to toggle challenge mode
@@ -474,17 +475,31 @@ function toggleChallengingRounds() {
       </div>
 
       <!-- Max Distance Slider -->
-      <div class="distance-slider-container">
-        <label for="max-distance">Maximum Distance: {{ maxDistance }} yards</label>
-        <input
-          type="range"
-          id="max-distance"
-          v-model="maxDistance"
-          min="10"
-          max="100"
-          step="10"
-          @change="updateMaxDistance"
-        />
+      <div class="distance-sliders-container">
+        <div class="distance-slider">
+          <label for="min-distance">Minimum Distance: {{ minDistance }} yards</label>
+          <input
+            type="range"
+            id="min-distance"
+            v-model="minDistance"
+            min="10"
+            max="100"
+            step="10"
+            @input="updateMinDistanceConstrained($event.target.value)"
+          />
+        </div>
+        <div class="distance-slider">
+          <label for="max-distance">Maximum Distance: {{ maxDistance }} yards</label>
+          <input
+            type="range"
+            id="max-distance"
+            v-model="maxDistance"
+            min="10"
+            max="100"
+            step="10"
+            @input="updateMaxDistanceConstrained($event.target.value)"
+          />
+        </div>
       </div>
 
       <!-- Search bar -->
@@ -545,13 +560,13 @@ function toggleChallengingRounds() {
         </div>
 
         <div v-if="filteredRounds.length > 0" class="round-category">
-            <RoundCard
-              v-for="round in filteredRounds"
-              :key="round.round"
-              :round="{round}"
-              :compact="compactMode"
-              @click="selectRound(round)"
-            />
+          <RoundCard
+            v-for="round in filteredRounds"
+            :key="round.round"
+            :round="{round}"
+            :compact="compactMode"
+            @click="selectRound(round)"
+          />
         </div>
       </div>
     </div>
@@ -667,7 +682,7 @@ function toggleChallengingRounds() {
   gap: 0.5em;
 }
 
-.distance-slider-container {
+.distance-sliders-container {
   background-color: var(--color-background-soft);
   border-radius: 8px;
   padding: 1em;
@@ -675,13 +690,17 @@ function toggleChallengingRounds() {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.distance-slider-container label {
+.distance-slider {
+  margin-bottom: 1em;
+}
+
+.distance-slider label {
   display: block;
   margin-bottom: 0.5em;
   font-weight: 500;
 }
 
-.distance-slider-container input[type="range"] {
+.distance-slider input[type="range"] {
   width: 100%;
   margin: 0.5em 0;
   height: 8px;
@@ -690,7 +709,7 @@ function toggleChallengingRounds() {
   outline: none;
 }
 
-.distance-slider-container input[type="range"]::-webkit-slider-thumb {
+.distance-slider input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 20px;
@@ -700,13 +719,20 @@ function toggleChallengingRounds() {
   cursor: pointer;
 }
 
-.distance-slider-container input[type="range"]::-moz-range-thumb {
+.distance-slider input[type="range"]::-moz-range-thumb {
   width: 20px;
   height: 20px;
   border-radius: 50%;
   background: var(--color-highlight, #4CAF50);
   cursor: pointer;
   border: none;
+}
+
+.distance-range-display {
+  text-align: center;
+  font-size: 0.9em;
+  color: var(--color-text-light);
+  margin-top: 0.5em;
 }
 
 @media (min-width: 768px) {

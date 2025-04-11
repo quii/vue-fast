@@ -12,6 +12,10 @@ export const useSearchPreferencesStore = defineStore("searchPreferences", () => 
     practiceSelected: false,
     challengingRoundsOnly: true,
 
+    // Distance range filters
+    minDistance: 0,
+    maxDistance: 100,
+
     // Search query
     searchQuery: "",
 
@@ -60,6 +64,15 @@ export const useSearchPreferencesStore = defineStore("searchPreferences", () => 
     state.value.searchQuery = query;
   }
 
+  // New functions for distance range
+  function updateMinDistance(distance) {
+    state.value.minDistance = distance;
+  }
+
+  function updateMaxDistance(distance) {
+    state.value.maxDistance = distance;
+  }
+
   return {
     preferences: state,
     updatePreferences,
@@ -70,6 +83,8 @@ export const useSearchPreferencesStore = defineStore("searchPreferences", () => 
     togglePractice,
     toggleChallengingRounds,
     toggleCompactMode,
-    updateSearchQuery
+    updateSearchQuery,
+    updateMinDistance,
+    updateMaxDistance
   };
 });

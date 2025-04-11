@@ -82,7 +82,6 @@ watchEffect(() => {
     outdoorClassifications.value,
     indoorSeasonStartDate.value,
     outdoorSeasonStartDate.value,
-    userStore.user.maxYards,
     name.value,
     constructiveCriticism.value,
     experimentalTargetFace.value,

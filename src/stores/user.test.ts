@@ -48,7 +48,6 @@ describe("User Store with Classification Updates", () => {
       outdoorClassifications,
       "2023-10-01", // indoorSeasonStartDate
       "2023-04-01", // outdoorSeasonStartDate
-      80, // maxYards
       "John Doe", // name
       true, // constructiveCriticism
       false, // experimentalTargetFace
@@ -63,7 +62,6 @@ describe("User Store with Classification Updates", () => {
     expect(userStore.user.outdoorClassifications).toEqual(outdoorClassifications);
     expect(userStore.user.indoorSeasonStartDate).toBe("2023-10-01");
     expect(userStore.user.outdoorSeasonStartDate).toBe("2023-04-01");
-    expect(userStore.user.maxYards).toBe(80);
     expect(userStore.user.name).toBe("John Doe");
     expect(userStore.user.constructiveCriticism).toBe(true);
     expect(userStore.user.experimentalTargetFace).toBe(false);

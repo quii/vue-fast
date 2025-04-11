@@ -44,7 +44,8 @@ describe("round filters", () => {
         showImperial: true,
         showPractice: false,
         maxDistance: 100,
-        searchQuery: "national"
+        searchQuery: "national",
+        minDistance: 0
       };
       expect(testFilterRounds(allRounds, filters)).toEqual(["National"]);
     });
@@ -57,7 +58,8 @@ describe("round filters", () => {
         showImperial: true,
         showPractice: false,
         maxDistance: 100,
-        searchQuery: "bray"
+        searchQuery: "bray",
+        minDistance: 0
       };
 
       expect(testFilterRounds(allRounds, filters)).toEqual(["Bray I"]);
@@ -71,7 +73,8 @@ describe("round filters", () => {
         showImperial: true,
         showPractice: false,
         maxDistance: 100,
-        searchQuery: ""
+        searchQuery: "",
+        minDistance: 0
       };
 
       expect(testFilterRounds(allRounds, filters)).toEqual(["National", "Bray I", "WA 70m"]);
@@ -86,7 +89,8 @@ describe("round filters", () => {
         showMetric: true,
         showImperial: true,
         showPractice: false,
-        maxDistance: 100
+        maxDistance: 100,
+        minDistance: 0
       };
 
       expect(testFilterRounds(allRounds, filters)).toEqual(["Bray I"]);
@@ -99,7 +103,8 @@ describe("round filters", () => {
         showMetric: true,
         showImperial: true,
         showPractice: false,
-        maxDistance: 100
+        maxDistance: 100,
+        minDistance: 0
       };
 
       expect(testFilterRounds(allRounds, filters)).toEqual(["National", "WA 70m"]);
@@ -112,7 +117,8 @@ describe("round filters", () => {
         showMetric: true,
         showImperial: true,
         showPractice: false,
-        maxDistance: 100
+        maxDistance: 100,
+        minDistance: 0
       };
 
       expect(testFilterRounds(allRounds, filters)).toEqual([]);
@@ -127,7 +133,8 @@ describe("round filters", () => {
         showMetric: true,
         showImperial: false,
         showPractice: false,
-        maxDistance: 100
+        maxDistance: 100,
+        minDistance: 0
       };
 
       expect(testFilterRounds(allRounds, filters)).toEqual(["Bray I", "WA 70m"]);
@@ -140,7 +147,8 @@ describe("round filters", () => {
         showMetric: false,
         showImperial: true,
         showPractice: false,
-        maxDistance: 100
+        maxDistance: 100,
+        minDistance: 0
       };
 
       expect(testFilterRounds(allRounds, filters)).toEqual(["National"]);
@@ -155,7 +163,8 @@ describe("round filters", () => {
         showMetric: true,
         showImperial: true,
         showPractice: true,
-        maxDistance: 100
+        maxDistance: 100,
+        minDistance: 0
       };
 
       expect(testFilterRounds(allRounds, filters)).toEqual(["Practice Round"]);
@@ -168,7 +177,8 @@ describe("round filters", () => {
         showMetric: true,
         showImperial: true,
         showPractice: false,
-        maxDistance: 100
+        maxDistance: 100,
+        minDistance: 0
       };
 
       const result = testFilterRounds(allRounds, filters);
@@ -185,7 +195,8 @@ describe("round filters", () => {
         showMetric: true,
         showImperial: true,
         showPractice: false,
-        maxDistance: 50
+        maxDistance: 50,
+        minDistance: 0
       };
 
       expect(testFilterRounds(allRounds, filters)).toEqual(["Bray I"]);
@@ -198,7 +209,8 @@ describe("round filters", () => {
         showMetric: true,
         showImperial: true,
         showPractice: false,
-        maxDistance: 60
+        maxDistance: 60,
+        minDistance: 0
       };
 
       expect(testFilterRounds(allRounds, filters)).toContain("National");
@@ -211,7 +223,8 @@ describe("round filters", () => {
         showMetric: true,
         showImperial: true,
         showPractice: false,
-        maxDistance: 10
+        maxDistance: 10,
+        minDistance: 0
       };
 
       expect(testFilterRounds(allRounds, filters)).toEqual([]);
@@ -226,7 +239,8 @@ describe("round filters", () => {
         showMetric: false,
         showImperial: true,
         showPractice: false,
-        maxDistance: 60
+        maxDistance: 60,
+        minDistance: 0
       };
 
       // Should only return National (outdoor, imperial, not practice, max 60 yards)
@@ -241,11 +255,129 @@ describe("round filters", () => {
         showImperial: true,
         showPractice: false,
         maxDistance: 100,
+        minDistance: 0,
         searchQuery: "a"  // Matches National, Bray I, WA 70m
       };
 
       // Should match rounds with 'a' that aren't practice rounds
       expect(testFilterRounds(allRounds, filters)).toEqual(["National", "Bray I", "WA 70m"]);
+    });
+  });
+
+  describe("minimum distance filtering", () => {
+    it("should filter rounds by minimum distance", () => {
+      const filters: GameTypeFilters = {
+        showIndoor: true,
+        showOutdoor: true,
+        showMetric: true,
+        showImperial: true,
+        showPractice: false,
+        maxDistance: 100,
+        minDistance: 50,
+        searchQuery: ""
+      };
+
+      // Should only return rounds with distances >= 50 yards (National and WA 70m)
+      expect(testFilterRounds(allRounds, filters)).toEqual(["National", "WA 70m"]);
+    });
+
+    it("should include rounds with exactly the minimum distance", () => {
+      const filters: GameTypeFilters = {
+        showIndoor: true,
+        showOutdoor: true,
+        showMetric: true,
+        showImperial: true,
+        showPractice: false,
+        maxDistance: 100,
+        minDistance: 60,
+        searchQuery: ""
+      };
+
+      // Should include National which is exactly 60 yards
+      expect(testFilterRounds(allRounds, filters)).toContain("National");
+      expect(testFilterRounds(allRounds, filters)).not.toContain("Bray I");
+    });
+
+    it("should return no rounds when min distance is too high", () => {
+      const filters: GameTypeFilters = {
+        showIndoor: true,
+        showOutdoor: true,
+        showMetric: true,
+        showImperial: true,
+        showPractice: false,
+        maxDistance: 100,
+        minDistance: 80,
+        searchQuery: ""
+      };
+
+      // No rounds have distances >= 80 yards
+      expect(testFilterRounds(allRounds, filters)).toEqual([]);
+    });
+
+    it("should work correctly with maxDistance filter", () => {
+      const filters: GameTypeFilters = {
+        showIndoor: true,
+        showOutdoor: true,
+        showMetric: true,
+        showImperial: true,
+        showPractice: false,
+        maxDistance: 70,
+        minDistance: 30,
+        searchQuery: ""
+      };
+
+      // Should only return National (between 30 and 70 yards)
+      expect(testFilterRounds(allRounds, filters)).toEqual(["National"]);
+    });
+
+    it("should allow minDistance of 0 to include all rounds", () => {
+      const filters: GameTypeFilters = {
+        showIndoor: true,
+        showOutdoor: true,
+        showMetric: true,
+        showImperial: true,
+        showPractice: false,
+        maxDistance: 100,
+        minDistance: 0,
+        searchQuery: ""
+      };
+
+      // Should include all non-practice rounds
+      expect(testFilterRounds(allRounds, filters)).toEqual(["National", "Bray I", "WA 70m"]);
+    });
+  });
+
+  describe("combined filtering with minDistance", () => {
+    it("should apply minDistance with other filters", () => {
+      const filters: GameTypeFilters = {
+        showIndoor: false,
+        showOutdoor: true,
+        showMetric: false,
+        showImperial: true,
+        showPractice: false,
+        maxDistance: 100,
+        minDistance: 50,
+        searchQuery: ""
+      };
+
+      // Should only return National (outdoor, imperial, not practice, >= 50 yards)
+      expect(testFilterRounds(allRounds, filters)).toEqual(["National"]);
+    });
+
+    it("should handle search query with distance range filters", () => {
+      const filters: GameTypeFilters = {
+        showIndoor: true,
+        showOutdoor: true,
+        showMetric: true,
+        showImperial: true,
+        showPractice: false,
+        maxDistance: 80,
+        minDistance: 30,
+        searchQuery: "a"  // Matches National, Bray I, WA 70m
+      };
+
+      // Should match rounds with 'a' that are between 30-80 yards and aren't practice rounds
+      expect(testFilterRounds(allRounds, filters)).toEqual(["National", "WA 70m"]);
     });
   });
 
@@ -257,7 +389,8 @@ describe("round filters", () => {
         showMetric: true,
         showImperial: true,
         showPractice: false,
-        maxDistance: 100
+        maxDistance: 100,
+        minDistance: 0
       };
 
       expect(testFilterRounds([], filters)).toEqual([]);
@@ -271,7 +404,8 @@ describe("round filters", () => {
         showImperial: true,
         showPractice: false,
         maxDistance: 100,
-        searchQuery: undefined
+        searchQuery: undefined,
+        minDistance: 0
       };
 
       expect(testFilterRounds(allRounds, filters)).toEqual(["National", "Bray I", "WA 70m"]);

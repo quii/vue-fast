@@ -76,7 +76,6 @@ function handleFileUpload(event) {
       const outdoorSeasonStartDate = data.user.outdoorSeasonStartDate || defaultSeasons.outdoor;
 
       // Other fields with defaults
-      const maxYards = data.user.maxYards || 100;
       const name = data.user.name || "";
       const constructiveCriticism = data.user.constructiveCriticism !== undefined ? data.user.constructiveCriticism : true;
       const experimentalTargetFace = data.user.experimentalTargetFace || false;
@@ -90,7 +89,6 @@ function handleFileUpload(event) {
         outdoorClassifications,
         indoorSeasonStartDate,
         outdoorSeasonStartDate,
-        maxYards,
         name,
         constructiveCriticism,
         experimentalTargetFace,

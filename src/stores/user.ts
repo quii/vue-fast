@@ -5,6 +5,31 @@ import { calculateDefaultSeasonDates } from "@/domain/season_dates";
 const defaultSeasons = calculateDefaultSeasonDates();
 
 export const useUserStore = defineStore("user", () => {
+  // Migration: Check if maxYards exists in user store and migrate it
+  const userStore = localStorage.getItem("user");
+  if (userStore) {
+    try {
+      const userData = JSON.parse(userStore);
+      if (userData && userData.maxYards !== undefined) {
+        // Get existing search preferences or create new ones
+        const existingPrefs = localStorage.getItem("searchPreferences");
+        let searchPrefs = existingPrefs ? JSON.parse(existingPrefs) : {};
+
+        // Only set maxDistance if it's not already set
+        if (searchPrefs.maxDistance === undefined) {
+          searchPrefs.maxDistance = userData.maxYards;
+          localStorage.setItem("searchPreferences", JSON.stringify(searchPrefs));
+        }
+
+        // Remove maxYards from user data
+        delete userData.maxYards;
+        localStorage.setItem("user", JSON.stringify(userData));
+      }
+    } catch (e) {
+      console.error("Error during maxYards migration:", e);
+    }
+  }
+
   // First, load the raw data from localStorage to check if migration is needed
   const rawUserData = localStorage.getItem("user");
   let initialUserData = null;
@@ -60,7 +85,6 @@ export const useUserStore = defineStore("user", () => {
     ageGroup: "",
     gender: "",
     bowType: "",
-    maxYards: 100,
     name: "",
     constructiveCriticism: true,
     experimentalTargetFace: false,
@@ -75,7 +99,6 @@ export const useUserStore = defineStore("user", () => {
     outdoorClassifications,
     indoorSeasonStartDate,
     outdoorSeasonStartDate,
-    maxYards,
     name,
     constructiveCriticism,
     experimentalTargetFace,
@@ -89,7 +112,6 @@ export const useUserStore = defineStore("user", () => {
       outdoorClassifications,
       indoorSeasonStartDate,
       outdoorSeasonStartDate,
-      maxYards,
       name,
       constructiveCriticism,
       experimentalTargetFace,

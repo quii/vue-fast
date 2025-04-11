@@ -20,7 +20,7 @@ class ScorePage {
   }
 
   setMaxDistance(yards) {
-    cy.get("input[type=\"range\"]").invoke("val", yards).trigger("input");
+    cy.get("#max-distance").invoke("val", yards).trigger("input");
   }
 
   checkRoundRecommendation(roundName, shouldExist = true) {

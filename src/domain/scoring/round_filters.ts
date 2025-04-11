@@ -7,6 +7,7 @@ export interface GameTypeFilters {
   showImperial: boolean;
   showPractice: boolean;
   maxDistance: number;
+  minDistance: number;
   searchQuery?: string;
 }
 
@@ -19,7 +20,9 @@ export function createRoundFilter(config: RoundFilterConfig = gameTypeConfig) {
     return filteredTypes.filter(type => {
       const { isOutdoor, isImperial, isPracticeRound, maxDistanceYards } = config[type.toLowerCase()];
 
-      const passesDistanceFilter = maxDistanceYards <= filters.maxDistance;
+      const passesMaxDistanceFilter = maxDistanceYards <= filters.maxDistance;
+      const passesMinDistanceFilter = maxDistanceYards >= filters.minDistance;
+      const passesDistanceFilter = passesMaxDistanceFilter && passesMinDistanceFilter;
       const passesEnvironmentFilter = (!isOutdoor && filters.showIndoor) || (isOutdoor && filters.showOutdoor);
       const passesUnitFilter = (!isImperial && filters.showMetric) || (isImperial && filters.showImperial);
       const passesPracticeFilter = filters.showPractice ? isPracticeRound : !isPracticeRound;
