@@ -39,6 +39,7 @@ export const useHistoryStore = defineStore("history", () => {
     getAvailableRounds: () => playerHistory.getAvailableRounds(),
     getBowTypesUsed: (currentBowType) => playerHistory.getBowTypesUsed(currentBowType),
     add: (...args) => playerHistory.add(...args),
+    updateShoot: (...args) => playerHistory.updateShoot(...args),
     remove: (id) => playerHistory.remove(id),
     importHistory: (history, userProfile) => playerHistory.importHistory(history, userProfile),
     sortedHistory: (...args) => playerHistory.sortedHistory(...args),

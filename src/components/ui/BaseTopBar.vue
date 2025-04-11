@@ -310,7 +310,7 @@ function getFontSizeClass(text) {
 }
 
 .info-value.text-default {
-  font-size: 1em;
+  font-size: 0.9em;
 }
 
 .expandable-content-container {

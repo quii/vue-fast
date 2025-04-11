@@ -17,6 +17,10 @@ const props = defineProps({
   bowType: {
     type: String,
     default: ""
+  },
+  status: {
+    type: String,
+    default: "Practice"
   }
 });
 
@@ -41,6 +45,7 @@ const capitalizedAgeGroup = computed(() => capitalize(props.ageGroup));
       <div v-if="bowType" class="info-chip">{{ capitalizedBowType }}</div>
       <div v-if="gender" class="info-chip">{{ capitalizedGender }}</div>
       <div v-if="ageGroup" class="info-chip">{{ capitalizedAgeGroup }}</div>
+      <div v-if="status" class="info-chip">{{ status }}</div>
     </div>
   </div>
 </template>
@@ -65,7 +70,7 @@ const capitalizedAgeGroup = computed(() => capitalize(props.ageGroup));
 
 @media (min-width: 768px) {
   .info-chips {
-    gap: 0.75rem;
+    gap: 0.5rem;
   }
 }
 </style>

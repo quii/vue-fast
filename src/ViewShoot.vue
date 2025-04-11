@@ -1,6 +1,8 @@
 <script setup>
+import EditIcon from "@/components/icons/EditIcon.vue";
 import ViewOnlyTargetFace from "@/components/scoring/ViewOnlyTargetFace.vue";
 import {formatRoundName} from "@/domain/formatting.js";
+import { getAllShootStatuses, getShootStatusDisplayName } from "@/domain/shoot/shoot_status.js";
 import {useRoute, useRouter} from "vue-router";
 import {useHistoryStore} from "@/stores/history";
 import {gameTypeConfig} from "@/domain/scoring/game_types";
@@ -44,14 +46,18 @@ const router = useRouter();
 const history = useHistoryStore();
 const userStore = useUserStore();
 
+const showEditModal = ref(false);
+const editedStatus = ref(null);
+const editedDate = ref("");
+
 history.setShootToView(route.params.id);
 
 const endSize = computed(() => gameTypeConfig[history.selectedShoot.gameType].endSize);
 const scores = computed(() => history.selectedShoot.scores);
 const gameType = computed(() => history.selectedShoot.gameType);
 const date = computed(() => history.selectedShoot.date);
+const status = computed(() => getShootStatusDisplayName(history.selectedShoot.shootStatus));
 
-// Format the date for display
 const formattedDate = computed(() => {
   if (!date.value) return "";
 
@@ -148,6 +154,11 @@ const actionButtons = computed(() => [
     disabled: !availableClassifications.value
   },
   {
+    iconComponent: EditIcon,
+    label: "Edit",
+    action: "edit"
+  },
+  {
     iconComponent: SaveIcon,
     label: "Save",
     action: "save"
@@ -166,9 +177,44 @@ function handleAction(actionData) {
   } else if (actionData.action === "save") {
     handlePrintClick();
   } else if (actionData.action === "toggle-expand") {
-    // Just toggle the state, the computed property will update automatically
     showClassificationDetails.value = !showClassificationDetails.value;
+  } else if (actionData.action === "edit") {
+    openEditModal();
   }
+}
+
+function openEditModal() {
+  // Initialize with current values
+  editedStatus.value = history.selectedShoot.shootStatus || "Practice";
+  editedDate.value = history.selectedShoot.date || new Date().toISOString().substr(0, 10);
+  showEditModal.value = true;
+}
+
+function saveEditedShoot() {
+  // Validate the date
+  if (!editedDate.value) {
+    toast.error("Please enter a valid date");
+    return;
+  }
+
+  // Update the shoot with both status and date
+  const success = history.updateShoot(history.selectedShoot.id, {
+    shootStatus: editedStatus.value,
+    date: editedDate.value
+  });
+
+  if (success) {
+    // Refresh the selected shoot data
+    history.setShootToView(history.selectedShoot.id);
+    showEditModal.value = false;
+    toast.success("Shoot updated successfully");
+  } else {
+    toast.error("Failed to update shoot");
+  }
+}
+
+function cancelEdit() {
+  showEditModal.value = false;
 }
 </script>
 
@@ -197,6 +243,7 @@ function handleAction(actionData) {
             :age-group="history.selectedShoot.userProfile.ageGroup"
             :gender="history.selectedShoot.userProfile.gender"
             :bow-type="history.selectedShoot.userProfile.bowType"
+            :status="status"
         />
       </BaseCard>
 
@@ -250,6 +297,56 @@ function handleAction(actionData) {
       </div>
     </div>
   </div>
+
+  <div v-if="showEditModal" class="modal-overlay">
+    <div class="modal-content">
+      <h3>Edit Shoot</h3>
+
+      <div class="edit-section">
+        <h4>Date:</h4>
+        <div class="date-input-container">
+          <input
+            type="date"
+            v-model="editedDate"
+            class="date-input"
+          >
+        </div>
+      </div>
+
+      <div class="edit-section">
+        <h4>Shoot Status:</h4>
+        <div class="radio-group">
+          <div
+            v-for="status in getAllShootStatuses()"
+            :key="status"
+            class="radio-option"
+          >
+            <input
+              type="radio"
+              :id="`status-${status}`"
+              :value="status"
+              v-model="editedStatus"
+              :name="'edit-shoot-status'"
+            >
+            <label :for="`status-${status}`">{{ getShootStatusDisplayName(status) }}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="confirmation-actions">
+        <BaseButton
+          variant="primary"
+          @click="saveEditedShoot">
+          Save Changes
+        </BaseButton>
+        <BaseButton
+          variant="outline"
+          @click="cancelEdit">
+          Cancel
+        </BaseButton>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style scoped>
@@ -298,5 +395,81 @@ function handleAction(actionData) {
   display: flex;
   gap: 1em;
   margin-top: 1.5em;
+}
+
+.edit-section {
+  margin: 1.5em 0;
+}
+
+.edit-section h4 {
+  margin-top: 0;
+  margin-bottom: 0.75em;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75em;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.radio-option input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 1.2em;
+  height: 1.2em;
+  border: 2px solid var(--color-border, #ccc);
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.radio-option input[type="radio"]:checked {
+  border-color: var(--color-highlight, #4CAF50);
+}
+
+.radio-option input[type="radio"]:checked::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0.6em;
+  height: 0.6em;
+  background-color: var(--color-highlight, #4CAF50);
+  border-radius: 50%;
+}
+
+.radio-option label {
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.date-input-container {
+  margin-bottom: 1em;
+}
+
+.date-input {
+  width: 100%;
+  padding: 0.75em;
+  border-radius: 6px;
+  border: 1px solid var(--color-border, #ccc);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-size: 1em;
+}
+
+.date-input:focus {
+  outline: none;
+  border-color: var(--color-highlight, #4CAF50);
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
 }
 </style>

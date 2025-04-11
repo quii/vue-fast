@@ -189,6 +189,23 @@ export class PlayerHistory {
 
     return Array.from(bowTypesSet);
   }
+
+  updateShoot(id: number | string, updates: Partial<HistoryItem>): boolean {
+    const shootIndex = this.storage.value.findIndex(item => item.id === id);
+
+    if (shootIndex === -1) {
+      return false; // Shoot not found
+    }
+
+    // Update the shoot with the provided updates
+    this.storage.value[shootIndex] = {
+      ...this.storage.value[shootIndex],
+      ...updates
+    };
+
+    return true;
+  }
+
 }
 
 function generateNextId(history: HistoryItem[]): number {
