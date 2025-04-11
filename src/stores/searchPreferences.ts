@@ -24,6 +24,29 @@ export const useSearchPreferencesStore = defineStore("searchPreferences", () => 
     compactMode: false
   });
 
+
+  // Validate and sanitize distance values
+  function sanitizeDistanceValues() {
+    // Check if minDistance is NaN or invalid
+    if (isNaN(state.value.minDistance) || state.value.minDistance === null || state.value.minDistance === undefined) {
+      state.value.minDistance = 0;
+    }
+
+    // Check if maxDistance is NaN or invalid
+    if (isNaN(state.value.maxDistance) || state.value.maxDistance === null || state.value.maxDistance === undefined) {
+      state.value.maxDistance = 100;
+    }
+
+    // Ensure minDistance is not negative
+    state.value.minDistance = Math.max(0, state.value.minDistance);
+
+    // Ensure maxDistance is at least minDistance
+    state.value.maxDistance = Math.max(state.value.minDistance, state.value.maxDistance);
+  }
+
+  // Run validation on initial load
+  sanitizeDistanceValues();
+
   // Function to update all preferences at once
   function updatePreferences(preferences) {
     state.value = {
@@ -65,13 +88,26 @@ export const useSearchPreferencesStore = defineStore("searchPreferences", () => 
     state.value.searchQuery = query;
   }
 
-  // New functions for distance range
   function updateMinDistance(distance) {
-    state.value.minDistance = distance;
+    // Convert to number and validate
+    const numDistance = Number(distance);
+    state.value.minDistance = isNaN(numDistance) ? 0 : numDistance;
+
+    // Ensure maxDistance is at least minDistance
+    if (state.value.maxDistance < state.value.minDistance) {
+      state.value.maxDistance = state.value.minDistance;
+    }
   }
 
   function updateMaxDistance(distance) {
-    state.value.maxDistance = distance;
+    // Convert to number and validate
+    const numDistance = Number(distance);
+    state.value.maxDistance = isNaN(numDistance) ? 100 : numDistance;
+
+    // Ensure minDistance is not greater than maxDistance
+    if (state.value.minDistance > state.value.maxDistance) {
+      state.value.minDistance = state.value.maxDistance;
+    }
   }
 
   function toggleDistanceUnit() {
