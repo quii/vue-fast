@@ -5,19 +5,74 @@ import { addClassificationsToHistory } from "@/domain/scoring/classification";
 import { filterByClassification, filterByDateRange, filterByPB, filterByRound } from "@/domain/history_filters";
 import { addHandicapToHistory } from "@/domain/scoring/handicap";
 
-Date.prototype.addDays = function (days) {
+// Extend Date prototype with addDays method
+declare global {
+  interface Date {
+    addDays(days: number): Date;
+  }
+}
+
+Date.prototype.addDays = function(days: number): Date {
   const date = new Date(this.valueOf());
   date.setDate(date.getDate() + days);
   return date;
 };
 
+// Define interfaces for type safety
+export interface UserProfile {
+  gender?: string;
+  ageGroup?: string;
+  bowType?: string;
+  classification?: string;
+}
+
+export interface HistoryItem {
+  id: number | string;
+  date: string;
+  score: number;
+  gameType: string;
+  scores: any[]; // Keep as any[] to maintain backward compatibility
+  unit?: string;
+  userProfile?: UserProfile;
+  topScore?: boolean;
+  classification?: {
+    name: string;
+    scheme: string;
+  };
+  handicap?: number;
+  averagePerEnd?: number | null;
+}
+
+export interface HistoryFilters {
+  pbOnly: boolean;
+  round: string | null;
+  dateRange: {
+    start: Date | null;
+    end: Date | null;
+  };
+  classification: string | null;
+}
+
+export interface StorageInterface {
+  value: HistoryItem[];
+}
+
 export class PlayerHistory {
-  constructor(storage = { value: [] }, currentUserProfile = null) {
+  private storage: StorageInterface;
+
+  constructor(storage: StorageInterface = { value: [] }, currentUserProfile: UserProfile | null = null) {
     this.storage = storage;
     this.storage.value = prepareHistoryData(this.storage.value, currentUserProfile);
   }
 
-  add(date, score, gameType, scores, unit, userProfile) {
+  add(
+    date: string,
+    score: number,
+    gameType: string,
+    scores: any[],
+    unit?: string,
+    userProfile?: UserProfile
+  ): number | string {
     const nextId = generateNextId(this.storage.value);
     this.storage.value.push({
       id: nextId,
@@ -31,37 +86,37 @@ export class PlayerHistory {
     return nextId;
   }
 
-  remove(id) {
+  remove(id: number | string): void {
     this.storage.value = this.storage.value.filter(item => item.id !== id);
   }
 
-  importHistory(history, currentUserProfile = null) {
+  importHistory(history: HistoryItem[], currentUserProfile: UserProfile | null = null): void {
     this.storage.value = prepareHistoryData(history, currentUserProfile);
   }
 
-  async sortedHistory() {
+  async sortedHistory(): Promise<HistoryItem[]> {
     const scoresWithIndicator = addTopScoreIndicator(this.storage.value);
     const scoresWithClassification = await addClassificationsToHistory(scoresWithIndicator);
     const scoresWithHandicaps = await addHandicapToHistory(scoresWithClassification);
     const scoresWithAverages = this.addAverageEndScores(scoresWithHandicaps);
-    return scoresWithAverages.sort((a, b) => new Date(b.date) - new Date(a.date));
+    return scoresWithAverages.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   }
 
-  personalBest(round) {
+  personalBest(round: string): number | undefined {
     const roundScores = getScoresForRound(this.storage.value, round);
     return getHighestScore(roundScores);
   }
 
-  totalArrows() {
+  totalArrows(): number {
     return this.storage.value.reduce((acc, item) => acc + item.scores.length, 0);
   }
 
-  getRecentGameTypes() {
+  getRecentGameTypes(): string[] {
     const recentGames = this.storage.value.filter(game => isWithinLastSixWeeks(game.date));
     return getUniqueGameTypes(recentGames);
   }
 
-  getAvailableRounds() {
+  getAvailableRounds(): string[] {
     const uniqueRounds = [...new Set(this.storage.value.map(h => h.gameType))];
 
     return uniqueRounds.sort((a, b) => {
@@ -69,7 +124,7 @@ export class PlayerHistory {
     });
   }
 
-  addAverageEndScores(history) {
+  addAverageEndScores(history: HistoryItem[]): HistoryItem[] {
     return history.map(item => {
       // Get the game type configuration
       const gameType = item.gameType?.toLowerCase();
@@ -83,14 +138,14 @@ export class PlayerHistory {
         return { ...item, averagePerEnd: null };
       }
 
-      // Calculate average per end
-      const numberOfEnds = item.scores.length / endSize;
-      const averagePerEnd = Math.round((item.score / numberOfEnds) * 10) / 10; // Round to 1 decimal place
+      // Calculate average per arrow, then multiply by end size
+      const averagePerArrow = item.score / item.scores.length;
+      const averagePerEnd = Math.round((averagePerArrow * endSize) * 10) / 10; // Round to 1 decimal place
       return { ...item, averagePerEnd };
     });
   }
 
-  async getFilteredHistory(filters) {
+  async getFilteredHistory(filters: HistoryFilters): Promise<HistoryItem[]> {
     const baseHistory = await this.sortedHistory();
     const filteredByPB = filterByPB(baseHistory, filters.pbOnly);
     const filteredByRound = filterByRound(filteredByPB, filters.round);
@@ -100,8 +155,8 @@ export class PlayerHistory {
     return filteredByClassification;
   }
 
-  getBowTypesUsed(currentBowType = null) {
-    const bowTypesSet = new Set();
+  getBowTypesUsed(currentBowType: string | null = null): string[] {
+    const bowTypesSet = new Set<string>();
 
     this.storage.value.forEach(item => {
       if (item.userProfile?.bowType) {
@@ -118,35 +173,36 @@ export class PlayerHistory {
   }
 }
 
-function generateNextId(history) {
+function generateNextId(history: HistoryItem[]): number {
   const maxId = history
-    .map(x => x.id)
-    .sort((a, b) => a.score - b.score)
+    .map(x => Number(x.id))
+    .sort((a, b) => a - b)
     .slice(-1)[0] || 0;
-  return parseInt(maxId, 10) + 1;
+  return maxId + 1;
 }
 
-function isWithinLastSixWeeks(date) {
+function isWithinLastSixWeeks(date: string): boolean {
   const sixWeeksAgo = new Date().addDays(-42);
   return new Date(date) > sixWeeksAgo;
 }
 
-function getUniqueGameTypes(history) {
+function getUniqueGameTypes(history: HistoryItem[]): string[] {
   return [...new Set(history.map(game => game.gameType))];
 }
 
-function getScoresForRound(history, round) {
+function getScoresForRound(history: HistoryItem[], round: string): number[] {
   return history
     .filter(x => x.gameType === round)
     .map(x => x.score);
 }
 
-function getHighestScore(scores) {
+function getHighestScore(scores: number[]): number | undefined {
+  if (scores.length === 0) return undefined;
   const sortedScores = scores.sort((a, b) => b - a);
   return sortedScores[0];
 }
 
-function prepareHistoryData(historyData, currentUserProfile = null) {
+function prepareHistoryData(historyData: HistoryItem[], currentUserProfile: UserProfile | null = null): HistoryItem[] {
   let fixedData = userDataFixer(historyData);
 
   if (currentUserProfile) {
