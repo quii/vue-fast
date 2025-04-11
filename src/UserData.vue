@@ -2,7 +2,7 @@
 import { computed, ref, watchEffect } from "vue";
 import { useUserStore } from "@/stores/user";
 import { useHistoryStore } from "@/stores/history";
-import { classificationList } from "@/domain/scoring/classificationList.js";
+import { classificationList, classificationListWithoutPB } from "@/domain/scoring/classificationList.js";
 import SectionCard from "@/components/ui/SectionCard.vue";
 import FormGroup from "@/components/ui/FormGroup.vue";
 import BaseInput from "@/components/ui/BaseInput.vue";
@@ -157,7 +157,7 @@ watchEffect(() => {
             @change="updateIndoorClassification(bowType, indoorClassifications[bowType])"
           >
             <option>Unclassified</option>
-            <option v-for="option in classificationList" :value="option" v-bind:key="option">
+            <option v-for="option in classificationListWithoutPB" :value="option" v-bind:key="option">
               {{ option }}
             </option>
           </BaseSelect>
@@ -169,7 +169,7 @@ watchEffect(() => {
             @change="updateOutdoorClassification(bowType, outdoorClassifications[bowType])"
           >
             <option>Unclassified</option>
-            <option v-for="option in classificationList" :value="option" v-bind:key="option">
+            <option v-for="option in classificationListWithoutPB" :value="option" v-bind:key="option">
               {{ option }}
             </option>
           </BaseSelect>

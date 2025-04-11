@@ -11,6 +11,10 @@ export const classificationList = [
   "PB"
 ];
 
+export const classificationListWithoutPB = classificationList.filter(
+  (classification) => classification !== "PB"
+);
+
 export function getClassificationIndex(classification) {
   return classificationList.indexOf(classification);
 }
