@@ -201,7 +201,14 @@ function generateNextId(history: HistoryItem[]): number {
 
 export function filterByShootStatus(history: HistoryItem[], shootStatus: ShootStatus | null): HistoryItem[] {
   if (!shootStatus) return history;
-  return history.filter(item => item.shootStatus === shootStatus);
+
+  return history.filter(item => {
+    if (shootStatus === "Practice") {
+      return item.shootStatus === "Practice" || item.shootStatus === undefined;
+    }
+
+    return item.shootStatus === shootStatus;
+  });
 }
 
 function isWithinLastSixWeeks(date: string): boolean {

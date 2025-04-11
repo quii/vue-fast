@@ -1,4 +1,6 @@
 <script setup>
+import StatusIcon from "@/components/icons/StatusIcon.vue";
+import ShootStatusFilterModal from "@/components/modals/ShootStatusFilterModal.vue";
 import RoundFilterModal from "./modals/RoundFilterModal.vue";
 import DateRangeFilterModal from "./modals/DateRangeFilterModal.vue";
 import ClassificationFilterModal from "./modals/ClassificationFilterModal.vue";
@@ -15,13 +17,16 @@ const props = defineProps({
   roundFilterActive: Boolean,
   dateFilterActive: Boolean,
   classificationFilterActive: Boolean,
-  availableRounds: Array
+  statusFilterActive: Boolean,
+  availableRounds: Array,
+  currentStatus: String
 });
 
 const showRoundModal = ref(false);
 const showDateModal = ref(false);
 const showClassificationModal = ref(false);
-const emit = defineEmits(["filterDate", "filterRound", "filterClassification", "toggle-pb", "reset"]);
+const showStatusModal = ref(false);
+const emit = defineEmits(["filterDate", "filterRound", "filterClassification", "toggle-pb", "reset", "filterStatus"]);
 
 // Define the action buttons for the BaseTopBar
 const actionButtons = computed(() => [
@@ -47,6 +52,14 @@ const actionButtons = computed(() => [
     label: "Class",
     action: "classification",
     active: props.classificationFilterActive,
+    disabled: false
+  },
+  // Status Filter
+  {
+    iconComponent: StatusIcon,
+    label: "Status",
+    action: "status",
+    active: props.statusFilterActive,
     disabled: false
   },
   // Personal Best Filter
@@ -79,6 +92,9 @@ function handleAction({ action }) {
     case "classification":
       showClassificationModal.value = true;
       break;
+    case "status":
+      showStatusModal.value = true;
+      break;
     case "pb":
       emit("toggle-pb");
       break;
@@ -90,7 +106,6 @@ function handleAction({ action }) {
 </script>
 
 <template>
-  <!-- Replace the old filter buttons with BaseTopBar -->
   <BaseTopBar
     :actionButtons="actionButtons"
     :alignment="'spread'"
@@ -115,5 +130,12 @@ function handleAction({ action }) {
     v-if="showClassificationModal"
     @close="showClassificationModal = false"
     @select="classification => emit('filterClassification', classification)"
+  />
+
+  <ShootStatusFilterModal
+    v-if="showStatusModal"
+    :currentStatus="currentStatus"
+    @close="showStatusModal = false"
+    @select="status => emit('filterStatus', status)"
   />
 </template>

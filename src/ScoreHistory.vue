@@ -17,11 +17,14 @@
         :round-filter-active="roundFilterActive"
         :date-filter-active="dateFilterActive"
         :classification-filter-active="classificationFilterActive"
+        :status-filter-active="statusFilterActive"
+        :current-status="statusFilter"
         :available-rounds="availableRounds"
         @toggle-pb="handlePBToggle"
         @filter-round="handleRoundFilter"
         @filter-date="handleDateFilter"
         @filter-classification="handleClassificationFilter"
+        @filter-status="handleStatusFilter"
         @reset="handleReset"
       />
 
@@ -142,6 +145,9 @@ const dateFilterActive = computed(() => Boolean(dateFilter.value.startDate || da
 const classificationFilter = ref("");
 const classificationFilterActive = computed(() => Boolean(classificationFilter.value));
 const pbFilterActive = ref(false);
+const statusFilter = ref(null);
+const statusFilterActive = computed(() => statusFilter.value !== null);
+
 const startX = ref(0);
 const availableRounds = computed(() => store.getAvailableRounds());
 const showTip = ref(!preferences.hasSeenHistoryTip);
@@ -210,7 +216,8 @@ watchEffect(async () => {
     pbOnly: pbFilterActive.value,
     round: roundFilter.value,
     dateRange: dateFilter.value,
-    classification: classificationFilter.value
+    classification: classificationFilter.value,
+    shootStatus: statusFilter.value // Add status filter
   }, user.user);
 });
 
@@ -304,11 +311,16 @@ function handleTouchStart(e) {
   startX.value = e.touches[0].screenX;
 }
 
+function handleStatusFilter(status) {
+  statusFilter.value = status;
+}
+
 function handleReset() {
   pbFilterActive.value = false;
   roundFilter.value = "";
   dateFilter.value = { startDate: "", endDate: "" };
   classificationFilter.value = "";
+  statusFilter.value = null;
 }
 
 function dismissTip() {

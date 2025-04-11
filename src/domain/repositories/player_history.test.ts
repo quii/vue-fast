@@ -1,4 +1,4 @@
-import { PlayerHistory } from "@/domain/repositories/player_history.js";
+import { filterByShootStatus, PlayerHistory } from "@/domain/repositories/player_history.js";
 import { classificationList } from "@/domain/scoring/classificationList.js";
 import { beforeEach, describe, expect, test, vi } from "vitest";
 
@@ -421,5 +421,62 @@ describe("Shoot Status", () => {
     expect(usedStatuses).toContain("Competition");
     expect(usedStatuses).toContain("RecordStatus");
     expect(usedStatuses.length).toBe(3);
+  });
+});
+
+describe("filterByShootStatus", () => {
+  test("returns all items when no status filter is applied", () => {
+    const history = [
+      { id: 1, date: "2023-01-01", score: 100, gameType: "national", scores: [], shootStatus: "Practice" },
+      { id: 2, date: "2023-01-02", score: 200, gameType: "windsor", scores: [], shootStatus: "Competition" },
+      { id: 3, date: "2023-01-03", score: 300, gameType: "york", scores: [] } // No status (legacy data)
+    ];
+
+    const filtered = filterByShootStatus(history, null);
+
+    expect(filtered).toEqual(history);
+    expect(filtered.length).toBe(3);
+  });
+
+  test("includes items with no status when filtering for Practice", () => {
+    const history = [
+      { id: 1, date: "2023-01-01", score: 100, gameType: "national", scores: [], shootStatus: "Practice" },
+      { id: 2, date: "2023-01-02", score: 200, gameType: "windsor", scores: [], shootStatus: "Competition" },
+      { id: 3, date: "2023-01-03", score: 300, gameType: "york", scores: [] } // No status (legacy data)
+    ];
+
+    const filtered = filterByShootStatus(history, "Practice");
+
+    expect(filtered.length).toBe(2);
+    expect(filtered).toContainEqual(history[0]); // Explicit Practice
+    expect(filtered).toContainEqual(history[2]); // No status (treated as Practice)
+  });
+
+  test("only includes exact matches for non-Practice statuses", () => {
+    const history = [
+      { id: 1, date: "2023-01-01", score: 100, gameType: "national", scores: [], shootStatus: "Practice" },
+      { id: 2, date: "2023-01-02", score: 200, gameType: "windsor", scores: [], shootStatus: "Competition" },
+      { id: 3, date: "2023-01-03", score: 300, gameType: "york", scores: [] }, // No status (legacy data)
+      { id: 4, date: "2023-01-04", score: 400, gameType: "bray", scores: [], shootStatus: "RecordStatus" }
+    ];
+
+    // Test Competition filter
+    const filteredCompetition = filterByShootStatus(history, "Competition");
+    expect(filteredCompetition.length).toBe(1);
+    expect(filteredCompetition).toContainEqual(history[1]);
+
+    // Test RecordStatus filter
+    const filteredRecordStatus = filterByShootStatus(history, "RecordStatus");
+    expect(filteredRecordStatus.length).toBe(1);
+    expect(filteredRecordStatus).toContainEqual(history[3]);
+  });
+
+  test("handles empty history array", () => {
+    const history = [];
+
+    const filtered = filterByShootStatus(history, "Practice");
+
+    expect(filtered).toEqual([]);
+    expect(filtered.length).toBe(0);
   });
 });
