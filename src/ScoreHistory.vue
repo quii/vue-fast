@@ -375,4 +375,12 @@ function view(id) {
   flex-direction: column;
   gap: 0.5em;
 }
+
+.button-group {
+  margin-top: 0;
+}
+
+.button-group button {
+  margin-top: 0.25rem;
+}
 </style>
