@@ -71,7 +71,7 @@ describe("player history", () => {
 
   test("it can retreive your average score for a given round", async () => {
     const playerHistory = new PlayerHistory();
-    const assumedEndSize = 6; // Assumption: end size is 6, currently all rounds have end size 6, however we need to 
+    const assumedEndSize = 6;
 
     // if shooting less than a full end, the average should assume you shot a full end
     const nineArrowsShot = [9, 9, 9, 9, 9, 9, 9, 9, 9];
@@ -83,10 +83,19 @@ describe("player history", () => {
     const sum12End = twelveArrowsShot.reduce((sum, v) => sum + v, 0);
     const expected12Score = (sum12End / twelveArrowsShot.length) * assumedEndSize;
 
-    playerHistory.add(new Date(), sum9End, "portsmouth", nineArrowsShot, "yd");
-    playerHistory.add(new Date(), sum12End, "practice 20yd", twelveArrowsShot, "yd");
+    // Use different dates to ensure consistent sorting
+    const today = new Date();
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+
+    // Add the shoots with different dates
+    playerHistory.add(today, sum9End, "portsmouth", nineArrowsShot, "yd");
+    playerHistory.add(yesterday, sum12End, "practice 20yd", twelveArrowsShot, "yd");
 
     const sortedHistory = await playerHistory.sortedHistory();
+
+    // Now we can be sure that the today's shoot will be first (index 0)
+    // and yesterday's shoot will be second (index 1)
     expect(sortedHistory[0].averagePerEnd).toEqual(expected9Score);
     expect(sortedHistory[1].averagePerEnd).toEqual(expected12Score);
   });
