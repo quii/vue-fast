@@ -31,6 +31,11 @@ const emit = defineEmits(["save", "cancel"]);
 const date = ref(props.initialDate);
 const shootStatus = ref(props.initialStatus);
 
+const isToday = computed(() => {
+  const today = new Date().toISOString().substr(0, 10);
+  return date.value === today;
+});
+
 // Reset form when props change
 watch(() => props.visible, (isVisible) => {
   if (isVisible) {
@@ -89,6 +94,7 @@ function handleCancel() {
             v-model="date"
             class="date-input"
           >
+          <span v-if="isToday" class="today-indicator">Today</span>
         </div>
       </div>
 
@@ -273,5 +279,36 @@ function handleCancel() {
 .radio-option label {
   font-size: 1em;
   cursor: pointer;
+}
+
+.date-input-container {
+  position: relative;
+  margin-bottom: 1em;
+}
+
+.today-indicator {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--color-highlight, #4CAF50);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.75em;
+  font-weight: 600;
+  pointer-events: none; /* So it doesn't interfere with the date picker */
+}
+
+/* Adjust the date input to accommodate the badge */
+.date-input {
+  width: 100%;
+  padding: 0.75em;
+  padding-right: 70px; /* Make room for the "Today" badge */
+  border-radius: 6px;
+  border: 1px solid var(--color-border, #ccc);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-size: 1em;
 }
 </style>
