@@ -1,6 +1,7 @@
 <script setup>
 import GameTypeSelector from "@/components/GameTypeSelector.vue";
 import NoteModal from "@/components/modals/NoteModal.vue";
+import ShootEditModal from "@/components/modals/ShootEditModal.vue";
 import RoundScores from "@/components/RoundScores.vue";
 import InteractiveTargetFace from "@/components/scoring/InteractiveTargetFace.vue";
 import ScoreButtons from "@/components/scoring/ScoreButtons.vue";
@@ -180,22 +181,25 @@ function showSaveConfirmation() {
   showSaveModal.value = true;
 }
 
-function saveScores() {
+function handleSaveFromModal(data) {
+  // Update date and status from modal
+  date.value = data.date;
+
   try {
-    const id = history.add(date.value,
+    const id = history.add(
+      date.value,
       runningTotal.value,
       gameTypeStore.type,
       [...scoresStore.scores],
       gameTypeStore.currentRound.unit,
       userProfile.value,
-      selectedShootStatus.value
+      data.shootStatus // Use the status from the modal
     );
 
     arrowHistoryStore.saveArrowsForShoot(id, [...scoresStore.arrows]);
     notesStore.assignPendingNotesToShoot(id);
     scoresStore.clear();
     showSaveModal.value = false;
-    selectedShootStatus.value = DEFAULT_SHOOT_STATUS;
     toast.success("Scores saved, please find them in the history");
 
   } catch (error) {
@@ -288,50 +292,15 @@ function handleTakeNote() {
     />
 
     <!-- Save Confirmation Modal -->
-    <div v-if="showSaveModal" class="modal-overlay">
-      <div class="modal-content save-modal">
-        <h3>Save to History</h3>
-        <p>Review your score before saving:</p>
-
-        <div class="history-preview">
-          <HistoryCard :item="historyPreview" />
-        </div>
-
-        <!-- Add shoot status selection -->
-        <div class="shoot-status-selection">
-          <h4>Shoot Type:</h4>
-          <div class="radio-group">
-            <div
-              v-for="status in shootStatuses"
-              :key="status"
-              class="radio-option"
-            >
-              <input
-                type="radio"
-                :id="status"
-                :value="status"
-                v-model="selectedShootStatus"
-                :name="'shoot-status'"
-              >
-              <label :for="status">{{ status === "RecordStatus" ? "Record Status" : status }}</label>
-            </div>
-          </div>
-        </div>
-
-        <div class="confirmation-actions">
-          <button
-            class="save-button"
-            @click="saveScores">
-            Save to History
-          </button>
-          <button
-            class="cancel-button"
-            @click="cancelSave">
-            Cancel
-          </button>
-        </div>
-      </div>
-    </div>
+    <ShootEditModal
+      :visible="showSaveModal"
+      :shootData="historyPreview"
+      :isEditMode="false"
+      :initialDate="date"
+      :initialStatus="DEFAULT_SHOOT_STATUS"
+      @save="handleSaveFromModal"
+      @cancel="cancelSave"
+    />
 
     <RoundScores v-if="hasStarted" :scores="scoresStore.scores"
                  :game-type="gameTypeStore.type"

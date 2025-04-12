@@ -26,6 +26,7 @@ import ClearIcon from "@/components/icons/ClearIcon.vue"; // Reuse this for Dele
 import {createClassificationCalculator} from "@/domain/scoring/classification";
 import {calculateSubtotals} from "@/domain/scoring/subtotals";
 import {calculateAverageScorePerEnd} from "@/domain/scoring/distance_totals";
+import ShootEditModal from "@/components/modals/ShootEditModal.vue";
 
 const preferences = usePreferencesStore();
 const arrowHistoryStore = useArrowHistoryStore();
@@ -112,6 +113,35 @@ async function initClassificationCalculator() {
 // Call the initialization function
 initClassificationCalculator();
 
+const editShootData = computed(() => {
+  if (!history.selectedShoot) return null;
+
+  // Create classification object similar to ScoreCard.vue
+  let classification = null;
+  if (availableClassifications.value && availableClassifications.value.length > 0) {
+    // Filter to only include achieved classifications and exclude "PB"
+    const validClassifications = availableClassifications.value.filter(c =>
+      c.achieved && c.name !== "PB"
+    );
+
+    if (validClassifications.length > 0) {
+      // Get the last item (highest valid classification)
+      const highestClassification = validClassifications[validClassifications.length - 1];
+      classification = {
+        name: highestClassification.name,
+        scheme: highestClassification.scheme
+      };
+    }
+  }
+
+  // Make sure we have all the required properties for HistoryCard
+  return {
+    ...history.selectedShoot,
+    // Use our calculated classification instead of the stored one
+    classification: classification || history.selectedShoot.classification
+  };
+});
+
 function confirmDelete() {
   showDeleteConfirmation.value = true;
 }
@@ -189,32 +219,21 @@ function openEditModal() {
   editedDate.value = history.selectedShoot.date || new Date().toISOString().substr(0, 10);
   showEditModal.value = true;
 }
+function cancelEdit() {
+  showEditModal.value = false;
+}
 
-function saveEditedShoot() {
-  // Validate the date
-  if (!editedDate.value) {
-    toast.error("Please enter a valid date");
-    return;
-  }
-
+function handleSaveFromModal(data) {
   // Update the shoot with both status and date
   const success = history.updateShoot(history.selectedShoot.id, {
-    shootStatus: editedStatus.value,
-    date: editedDate.value
+    shootStatus: data.shootStatus,
+    date: data.date
   });
 
   if (success) {
-    // Refresh the selected shoot data
     history.setShootToView(history.selectedShoot.id);
     showEditModal.value = false;
-    toast.success("Shoot updated successfully");
-  } else {
-    toast.error("Failed to update shoot");
   }
-}
-
-function cancelEdit() {
-  showEditModal.value = false;
 }
 </script>
 
@@ -298,55 +317,15 @@ function cancelEdit() {
     </div>
   </div>
 
-  <div v-if="showEditModal" class="modal-overlay">
-    <div class="modal-content">
-      <h3>Edit Shoot</h3>
-
-      <div class="edit-section">
-        <h4>Date:</h4>
-        <div class="date-input-container">
-          <input
-            type="date"
-            v-model="editedDate"
-            class="date-input"
-          >
-        </div>
-      </div>
-
-      <div class="edit-section">
-        <h4>Shoot Status:</h4>
-        <div class="radio-group">
-          <div
-            v-for="status in getAllShootStatuses()"
-            :key="status"
-            class="radio-option"
-          >
-            <input
-              type="radio"
-              :id="`status-${status}`"
-              :value="status"
-              v-model="editedStatus"
-              :name="'edit-shoot-status'"
-            >
-            <label :for="`status-${status}`">{{ getShootStatusDisplayName(status) }}</label>
-          </div>
-        </div>
-      </div>
-
-      <div class="confirmation-actions">
-        <BaseButton
-          variant="primary"
-          @click="saveEditedShoot">
-          Save Changes
-        </BaseButton>
-        <BaseButton
-          variant="outline"
-          @click="cancelEdit">
-          Cancel
-        </BaseButton>
-      </div>
-    </div>
-  </div>
+  <ShootEditModal
+    :visible="showEditModal"
+    :shootData="editShootData"
+    :isEditMode="true"
+    :initialDate="history.selectedShoot?.date"
+    :initialStatus="history.selectedShoot?.shootStatus || 'Practice'"
+    @save="handleSaveFromModal"
+    @cancel="cancelEdit"
+  />
 </template>
 
 <style scoped>
