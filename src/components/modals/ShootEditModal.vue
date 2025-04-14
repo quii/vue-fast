@@ -1,6 +1,9 @@
 <script setup>
 import { ref, computed, watch } from "vue";
 import HistoryCard from "@/components/HistoryCard.vue";
+import BaseModal from "@/components/modals/BaseModal.vue";
+import BaseButton from "@/components/ui/BaseButton.vue";
+import ButtonGroup from "@/components/ui/ButtonGroup.vue";
 import { getAllShootStatuses } from "@/domain/shoot/shoot_status.js";
 
 const props = defineProps({
@@ -76,142 +79,77 @@ function handleCancel() {
 </script>
 
 <template>
-  <div v-if="visible" class="modal-overlay">
-    <div class="modal-content save-modal">
-      <h3>{{ modalTitle }}</h3>
-      <p>{{ isEditMode ? "Review your changes before saving:" : "Review your score before saving:" }}</p>
+  <BaseModal v-if="visible" :title="modalTitle">
+    <p>{{ isEditMode ? "Review your changes before saving:" : "Review your score before saving:" }}</p>
 
-      <div class="history-preview">
-        <HistoryCard :item="previewData" />
-      </div>
+    <div class="history-preview">
+      <HistoryCard :item="previewData" />
+    </div>
 
-      <!-- Date editing -->
-      <div class="edit-section">
-        <h4>Date:</h4>
-        <div class="date-input-container">
-          <input
-            type="date"
-            v-model="date"
-            class="date-input"
-          >
-          <span v-if="isToday" class="today-indicator">Today</span>
-        </div>
-      </div>
-
-      <!-- Shoot status selection -->
-      <div class="shoot-status-selection">
-        <h4>Shoot Type:</h4>
-        <div class="radio-group">
-          <div
-            v-for="status in shootStatuses"
-            :key="status"
-            class="radio-option"
-          >
-            <input
-              type="radio"
-              :id="`status-${status}`"
-              :value="status"
-              v-model="shootStatus"
-              :name="'shoot-status'"
-            >
-            <label :for="`status-${status}`">{{ status === "RecordStatus" ? "Record Status" : status }}</label>
-          </div>
-        </div>
-      </div>
-
-      <div class="confirmation-actions">
-        <button
-          class="save-button"
-          @click="handleSave">
-          {{ saveButtonText }}
-        </button>
-        <button
-          class="cancel-button"
-          @click="handleCancel">
-          Cancel
-        </button>
+    <!-- Date editing -->
+    <div class="edit-section">
+      <h4>Date:</h4>
+      <div class="date-input-container">
+        <input
+          type="date"
+          v-model="date"
+          class="date-input"
+        >
+        <span v-if="isToday" class="today-indicator">Today</span>
       </div>
     </div>
-  </div>
+
+    <!-- Shoot status selection -->
+    <div class="shoot-status-selection">
+      <h4>Shoot Type:</h4>
+      <div class="radio-group">
+        <div
+          v-for="status in shootStatuses"
+          :key="status"
+          class="radio-option"
+        >
+          <input
+            type="radio"
+            :id="`status-${status}`"
+            :value="status"
+            v-model="shootStatus"
+            :name="'shoot-status'"
+          >
+          <label :for="`status-${status}`">{{ status === "RecordStatus" ? "Record Status" : status }}</label>
+        </div>
+      </div>
+    </div>
+
+    <ButtonGroup>
+      <BaseButton
+        variant="outline"
+        @click="handleCancel">
+        Cancel
+      </BaseButton>
+      <BaseButton
+        class="save-button"
+        variant="primary"
+        @click="handleSave">
+        {{ saveButtonText }}
+      </BaseButton>
+    </ButtonGroup>
+  </BaseModal>
 </template>
 
 <style scoped>
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  width: 90vw;
-  max-width: 400px;
-  background-color: var(--color-background);
-  border-radius: 8px;
-  padding: 1.5em;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-}
-
-.save-modal h3 {
-  margin-top: 0;
-  color: var(--color-highlight, #4CAF50);
-  text-align: center;
-}
-
 .history-preview {
   margin: 1.5em 0;
 }
 
-.confirmation-actions {
-  display: flex;
-  gap: 1em;
-  margin-top: 1.5em;
-}
-
-.save-button, .cancel-button {
-  flex: 1;
-  padding: 0.75em;
-  border-radius: 6px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.save-button {
-  background-color: var(--color-highlight, #4CAF50);
-  color: white;
-  border: none;
-}
-
-.save-button:active {
-  background-color: var(--color-highlight-bright, #5FDF63);
-  transform: scale(0.98);
-}
-
-.cancel-button {
-  background-color: transparent;
-  color: var(--color-text);
-  border: 1px solid var(--color-border, #ccc);
-}
-
-.cancel-button:active {
-  background-color: var(--color-background-mute, #f5f5f5);
-  transform: scale(0.98);
-}
-
 .date-input-container {
+  position: relative;
   margin-bottom: 1em;
 }
 
 .date-input {
   width: 100%;
   padding: 0.75em;
+  padding-right: 70px; /* Make room for the "Today" badge */
   border-radius: 6px;
   border: 1px solid var(--color-border, #ccc);
   background-color: var(--color-background);
@@ -281,11 +219,6 @@ function handleCancel() {
   cursor: pointer;
 }
 
-.date-input-container {
-  position: relative;
-  margin-bottom: 1em;
-}
-
 .today-indicator {
   position: absolute;
   right: 10px;
@@ -298,17 +231,5 @@ function handleCancel() {
   font-size: 0.75em;
   font-weight: 600;
   pointer-events: none; /* So it doesn't interfere with the date picker */
-}
-
-/* Adjust the date input to accommodate the badge */
-.date-input {
-  width: 100%;
-  padding: 0.75em;
-  padding-right: 70px; /* Make room for the "Today" badge */
-  border-radius: 6px;
-  border: 1px solid var(--color-border, #ccc);
-  background-color: var(--color-background);
-  color: var(--color-text);
-  font-size: 1em;
 }
 </style>

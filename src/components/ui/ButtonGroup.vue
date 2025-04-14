@@ -7,16 +7,11 @@
 <style scoped>
 .button-group {
   display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-top: 0.5rem;
+  gap: 1em;
+  margin-top: 1.5em;
 }
 
-.button-group :deep(.base-button:last-child) {
-  margin-right: 0;
-}
-
-.button-group :deep(.base-button:first-child) {
-  margin-left: 0;
+.button-group :deep(.base-button) {
+  flex: 1;
 }
 </style>

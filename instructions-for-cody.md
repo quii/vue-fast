@@ -330,3 +330,46 @@ When converting JavaScript domain code to TypeScript with stronger type guarante
    ```
 
 This approach minimizes disruption while gradually improving type safety throughout the codebase.
+
+## Component Composition and Styling Principles
+
+### Composition Over Custom Styling
+
+- **Always prefer composition of existing UI components over custom styling**
+- When creating new components or modals, first check if there are existing components that can be leveraged
+- Strive for zero custom CSS in higher-level components like pages and modals
+- Create small, focused UI components that can be composed together to build more complex interfaces
+
+### UI Component Hierarchy
+
+1. **Base Components**: Low-level, highly reusable UI elements (BaseButton, BaseModal)
+2. **Layout Components**: Components that handle specific layout patterns (ButtonGroup, ButtonStack)
+3. **Feature Components**: Domain-specific components that compose base and layout components
+4. **Page Components**: Top-level components that primarily compose other components with minimal custom styling
+
+### Signs You Need a New Component
+
+- When you find yourself writing the same CSS patterns repeatedly
+- When a layout pattern appears in multiple places (like stacked buttons in modals)
+- When you need to add custom CSS to a component that should be simple
+
+### Example: Modal Pattern
+
+Modals should:
+
+- Use BaseModal for consistent container styling
+- Compose existing UI components for their content
+- Have minimal to zero custom CSS
+- Use ButtonGroup for horizontal button layouts
+- Use ButtonStack for vertical button layouts
+
+### Benefits of This Approach
+
+- **Consistency**: UI elements look and behave the same across the application
+- **Maintainability**: Changes to styling can be made in one place
+- **Readability**: Component templates clearly show the structure without being cluttered by styling details
+- **Reusability**: Components can be easily reused in different contexts
+- **Scalability**: New features can be added quickly by composing existing components
+
+When creating new components, always ask: "Can this be built by composing existing components?" before adding custom
+CSS.

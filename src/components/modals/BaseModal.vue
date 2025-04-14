@@ -10,7 +10,7 @@ defineProps({
 <template>
   <div class="modal-overlay">
     <div class="modal-content">
-      <h2 v-if="title" class="modal-title">{{ title }}</h2>
+      <h3 v-if="title" class="modal-title">{{ title }}</h3>
       <slot></slot>
     </div>
   </div>
@@ -22,29 +22,29 @@ defineProps({
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.7);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   z-index: 1000;
 }
 
 .modal-content {
-  background: var(--color-background);
+  width: 90vw;
+  max-width: 400px;
+  background-color: var(--color-background);
+  border-radius: 8px;
+  padding: 1.5em;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   color: var(--color-text);
-  padding: 1.5rem;
-  margin: 0 1rem;
-  border-radius: 12px;
-  min-width: 400px;
-  max-width: 90vw;
 }
 
 .modal-title {
   margin-top: 0;
-  margin-bottom: 1.5rem;
-  font-size: 1.3rem;
-  color: var(--color-text);
-  text-align: left;
+  color: var(--color-highlight, #4CAF50);
+  text-align: center;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
 }
 
 @media (max-width: 480px) {

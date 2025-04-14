@@ -364,7 +364,7 @@ function view(id) {
 }
 
 .classification-progress-section {
-  margin: 0; /* Remove vertical margin */
+  margin: 0.75em 0; /* Remove vertical margin */
   border: none; /* Remove border */
   background-color: transparent; /* Make background transparent */
 }
