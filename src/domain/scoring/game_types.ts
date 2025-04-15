@@ -1,6 +1,6 @@
 import { baseConfig, imperialPractices, metricPractices, MISS } from "@/domain/scoring/game_type_config";
 import { meters, toMeters, toYards, yards } from "@/domain/distance/distance";
-import { Round } from "@/domain/scoring/round";
+import { Round } from "@/domain/scoring/round/round";
 
 //todo: these types feel pretty meaningless if its all nullable. We can do better modelling of some of the fields around outDoor, isImperial etc.
 export interface GameTypeBase {

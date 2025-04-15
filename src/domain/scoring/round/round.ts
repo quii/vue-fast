@@ -1,5 +1,6 @@
 import { GameTypeConfig } from "@/domain/scoring/game_types";
-import { formatRoundName } from "@/domain/formatting";
+
+import { formatRoundName } from "@/domain/scoring/round/formatting";
 
 export class Round {
   readonly name: string;

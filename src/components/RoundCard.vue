@@ -1,7 +1,8 @@
 <script setup>
-import { formatRoundName } from "@/domain/formatting.js";
+
+import { formatRoundName } from "@/domain/scoring/round/formatting.js";
 import { computed } from "vue";
-import { getRoundDetails } from "@/domain/round_details";
+import { getRoundDetails } from "@/domain/scoring/round/round_details";
 import { useHistoryStore } from "@/stores/history";
 import RoundCardFull from "./RoundCardFull.vue";
 import RoundCardCompact from "./RoundCardCompact.vue";

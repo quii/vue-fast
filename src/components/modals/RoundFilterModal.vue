@@ -1,7 +1,7 @@
 <script setup>
 import BaseModal from "@/components/modals/BaseModal.vue";
-import { formatRoundName } from "@/domain/formatting.js";
-import { getRoundDetails } from "@/domain/round_details";
+import { getRoundDetails } from "@/domain/scoring/round/round_details";
+import { formatRoundName } from "@/domain/scoring/round/formatting.js";
 
 defineProps(["rounds"]);
 const emit = defineEmits(["close", "select"]);

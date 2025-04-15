@@ -1,5 +1,6 @@
 <script setup>
-import { formatRoundName } from "@/domain/formatting";
+
+import { formatRoundName } from "@/domain/scoring/round/formatting.js";
 
 defineProps({
   item: {
