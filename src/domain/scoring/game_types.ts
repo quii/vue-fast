@@ -1,6 +1,8 @@
 import { baseConfig, imperialPractices, metricPractices, MISS } from "@/domain/scoring/game_type_config";
 import { meters, toMeters, toYards, yards } from "@/domain/distance/distance";
+import { Round } from "@/domain/scoring/round";
 
+//todo: these types feel pretty meaningless if its all nullable. We can do better modelling of some of the fields around outDoor, isImperial etc.
 export interface GameTypeBase {
   name: string;
   distancesRoundSizes?: number[];
@@ -28,6 +30,7 @@ export interface GameTypeConfig {
   isImperial: boolean;
   maxDistanceMetres: number;
   maxDistanceYards: number;
+  //these two fields probably shouldn't be nullable, just have empty arrays
   otherDistancesYards?: number[];
   otherDistancesMetres?: number[];
 }
@@ -39,11 +42,18 @@ const IMPERIAL_SCORES: readonly (number | string)[] = [9, 7, 5, 3, 1, MISS] as c
 const OUTDOOR_METRIC_SCORES: readonly (number | string)[] = ["X", 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, MISS] as const;
 const INDOOR_METRIC_SCORES: readonly (number | string)[] = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1, MISS] as const;
 
-export class GameTypeManager {
+export class RoundConfigManager {
   private readonly configs: GameTypeConfigs;
+  private readonly rounds: Map<string, Round>;
 
   constructor(baseConfigs: GameTypeBase[] = [...baseConfig, ...imperialPractices, ...metricPractices]) {
     this.configs = this.calculateConfigFromBase(baseConfigs);
+
+    // Create Round instances for each config
+    this.rounds = new Map();
+    Object.entries(this.configs).forEach(([name, config]) => {
+      this.rounds.set(name.toLowerCase(), new Round(config));
+    });
   }
 
   public getAllGameTypes(): string[] {
@@ -51,48 +61,44 @@ export class GameTypeManager {
   }
 
   public getConfig(gameType: string): GameTypeConfig | undefined {
-    return this.configs[gameType];
+    return this.configs[gameType.toLowerCase()];
   }
 
   public getAllConfigs(): GameTypeConfigs {
     return { ...this.configs };
   }
 
-  public isOutdoorRound(gameType: string): boolean {
-    const config = this.getConfig(gameType);
-    return config ? config.isOutdoor : false;
+  // New method to get a Round instance
+  public getRound(roundName: string): Round | undefined {
+    return this.rounds.get(roundName.toLowerCase());
   }
 
-  public isImperialRound(gameType: string): boolean {
-    const config = this.getConfig(gameType);
-    return config ? config.isImperial : false;
-  }
-
+  // For backward compatibility
   public getMaxArrows(gameType: string): number {
-    const config = this.getConfig(gameType);
-    return config ? config.maxArrows : 0;
+    const round = this.getRound(gameType);
+    return round ? round.maxArrows : 0;
   }
 
   public getEndSize(gameType: string): number {
-    const config = this.getConfig(gameType);
-    return config ? config.endSize : 6;
+    const round = this.getRound(gameType);
+    return round ? round.endSize : 6;
   }
 
   public getScores(gameType: string): (number | string)[] {
-    const config = this.getConfig(gameType);
-    return config ? [...config.scores] : [];
+    const round = this.getRound(gameType);
+    return round ? [...round.scores] : [];
   }
 
   public getUnit(gameType: string): string {
-    const config = this.getConfig(gameType);
-    return config ? config.unit : "m";
+    const round = this.getRound(gameType);
+    return round ? round.unit : "m";
   }
 
   public getMaxDistance(gameType: string, unit: string = "m"): number {
-    const config = this.getConfig(gameType);
-    if (!config) return 0;
+    const round = this.getRound(gameType);
+    if (!round) return 0;
 
-    return unit === "m" ? config.maxDistanceMetres : config.maxDistanceYards;
+    return round.getMaxDistance(unit);
   }
 
   private calculateConfigFromBase(baseConfigs: GameTypeBase[]): GameTypeConfigs {
@@ -169,7 +175,7 @@ export class GameTypeManager {
 }
 
 // Create a singleton instance for use throughout the application
-const gameTypeManagerInstance = new GameTypeManager();
+const gameTypeManagerInstance = new RoundConfigManager();
 
 // For backward compatibility with existing code
 // TODO: peel back usages of this, in favour of gameTypeManager
@@ -177,4 +183,4 @@ export const gameTypeConfig: GameTypeConfigs = gameTypeManagerInstance.getAllCon
 export const gameTypes: string[] = gameTypeManagerInstance.getAllGameTypes();
 
 // Export the instance for new code to use
-export const gameTypeManager = gameTypeManagerInstance;
+export const roundConfigManager = gameTypeManagerInstance;

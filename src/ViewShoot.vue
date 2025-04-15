@@ -1,11 +1,10 @@
 <script setup>
 import EditIcon from "@/components/icons/EditIcon.vue";
 import ViewOnlyTargetFace from "@/components/scoring/ViewOnlyTargetFace.vue";
-import {formatRoundName} from "@/domain/formatting.js";
-import { getAllShootStatuses, getShootStatusDisplayName } from "@/domain/shoot/shoot_status.js";
+import { getShootStatusDisplayName } from "@/domain/shoot/shoot_status.js";
 import {useRoute, useRouter} from "vue-router";
 import {useHistoryStore} from "@/stores/history";
-import {gameTypeConfig} from "@/domain/scoring/game_types";
+import { roundConfigManager } from "@/domain/scoring/game_types";
 import {computed, ref} from "vue";
 import RoundScores from "@/components/RoundScores.vue";
 import {useUserStore} from "@/stores/user";
@@ -53,9 +52,10 @@ const editedDate = ref("");
 
 history.setShootToView(route.params.id);
 
-const endSize = computed(() => gameTypeConfig[history.selectedShoot.gameType].endSize);
+const round = computed(() => roundConfigManager.getRound(history.selectedShoot.gameType));
+const roundName = computed(() => round.value.name);
+const endSize = computed(() => round.value.endSize);
 const scores = computed(() => history.selectedShoot.scores);
-const gameType = computed(() => history.selectedShoot.gameType);
 const date = computed(() => history.selectedShoot.date);
 const status = computed(() => getShootStatusDisplayName(history.selectedShoot.shootStatus));
 
@@ -71,14 +71,12 @@ const formattedDate = computed(() => {
   return `${day}/${month}/${year}`;
 });
 
-const capitalizedGameType = computed(() => formatRoundName(gameType.value));
-
 // Calculate classification data
 const classificationCalculator = ref(null);
 const availableClassifications = ref(null);
-const totals = computed(() => calculateSubtotals(scores.value, gameType.value));
+const totals = computed(() => calculateSubtotals(scores.value, roundName.value));
 const averageScoresPerEnd = computed(() =>
-    calculateAverageScorePerEnd(scores.value, endSize.value, gameType.value)
+  calculateAverageScorePerEnd(scores.value, endSize.value, roundName.value)
 );
 
 // Since this is a completed shoot, arrows remaining is 0
@@ -95,7 +93,7 @@ async function initClassificationCalculator() {
   if (!gender || !ageGroup || !bowType) return;
 
   classificationCalculator.value = await createClassificationCalculator(
-      gameType.value,
+    roundName.value,
       gender,
       ageGroup,
       bowType,
@@ -163,7 +161,7 @@ function handlePrintClick() {
 // Prepare info displays for the top bar
 const infoDisplays = computed(() => [
   {
-    value: capitalizedGameType.value,
+    value: round.value.prettyRoundName(),
     label: "Round",
     class: "wide"
   },
@@ -269,15 +267,15 @@ function handleSaveFromModal(data) {
       <ViewOnlyTargetFace
           v-if="arrows.length > 0"
           :arrows="arrows"
-          :valid-scores="gameTypeConfig[gameType].scores"
-          :game-type="gameType"
+          :valid-scores="round.scores"
+          :game-type="roundName"
           :knock-color="userStore.user.knockColor"
       />
       <RoundScores
           :scores="scores"
           :end-size="endSize"
           :user-profile="history.selectedShoot.userProfile"
-          :game-type="gameType"
+          :game-type="roundName"
       />
 
       <UserNotes :shoot-id="history.selectedShoot.id" :allow-highlight="true"/>
@@ -291,7 +289,7 @@ function handleSaveFromModal(data) {
         :gender="userStore.user.gender"
         :bow-type="userStore.user.bowType"
         :end-size="endSize"
-        :game-type="gameType"
+        :game-type="roundName"
         :date="date"
         @close="showPrintModal = false"
     />

@@ -111,24 +111,24 @@
 </template>
 
 <script setup>
+import ClassificationProgress from "@/components/ClassificationProgress.vue";
 import HistoryCard from "@/components/HistoryCard.vue";
-import GraphIcon from "@/components/icons/GraphIcon.vue";
-import ButtonGroup from "@/components/ui/ButtonGroup.vue";
-import { formatRoundName } from "@/domain/formatting.js";
-import { calculateAllClassificationProgress } from "@/domain/scoring/classification_progress.js";
-import { gameTypeConfig } from "@/domain/scoring/game_types.js";
-import { ref, watchEffect, computed } from "vue";
-import UserNotes from "@/components/UserNotes.vue";
-import { useHistoryStore } from "@/stores/history";
-import { useRouter } from "vue-router";
-import { useUserStore } from "@/stores/user";
-import { useNotesStore } from "@/stores/user_notes";
 import HistoryFilters from "@/components/HistoryFilters.vue";
-import { usePreferencesStore } from "@/stores/preferences";
+import GraphIcon from "@/components/icons/GraphIcon.vue";
 import HistoryTipModal from "@/components/modals/HistoryTipModal.vue";
 import ScoreHistoryGraph from "@/components/ScoreHistoryGraph.vue";
-import ClassificationProgress from "@/components/ClassificationProgress.vue";
 import BaseButton from "@/components/ui/BaseButton.vue";
+import ButtonGroup from "@/components/ui/ButtonGroup.vue";
+import UserNotes from "@/components/UserNotes.vue";
+import { formatRoundName } from "@/domain/formatting.js";
+import { calculateAllClassificationProgress } from "@/domain/scoring/classification_progress.js";
+import { roundConfigManager } from "@/domain/scoring/game_types.js";
+import { useHistoryStore } from "@/stores/history";
+import { usePreferencesStore } from "@/stores/preferences";
+import { useUserStore } from "@/stores/user";
+import { useNotesStore } from "@/stores/user_notes";
+import { computed, ref, watchEffect } from "vue";
+import { useRouter } from "vue-router";
 
 const store = useHistoryStore();
 const router = useRouter();
@@ -221,23 +221,21 @@ watchEffect(async () => {
   }, user.user);
 });
 
-const indoorEntriesWithHandicap = computed(() => {
-  return filteredHistory.value.filter(item =>
+const indoorEntriesWithHandicap = computed(() =>
+  filteredHistory.value.filter(item =>
     item.handicap !== undefined &&
     item.handicap !== null &&
     item.handicap !== "" &&
-    !gameTypeConfig[item.gameType.toLowerCase()]?.isOutdoor // Check if it's an indoor round
-  );
-});
+    !roundConfigManager.getRound(item.gameType).isOutdoor
+  ));
 
-const outdoorEntriesWithHandicap = computed(() => {
-  return filteredHistory.value.filter(item =>
+const outdoorEntriesWithHandicap = computed(() =>
+  filteredHistory.value.filter(item =>
     item.handicap !== undefined &&
     item.handicap !== null &&
     item.handicap !== "" &&
-    gameTypeConfig[item.gameType.toLowerCase()]?.isOutdoor // Check if it's an outdoor round
-  );
-});
+    roundConfigManager.getRound(item.gameType).isOutdoor // Check if it's an outdoor round
+  ));
 
 const showIndoorHandicapGraphButton = computed(() => {
   return !roundFilterActive.value && indoorEntriesWithHandicap.value.length >= 5;

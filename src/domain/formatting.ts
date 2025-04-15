@@ -1,3 +1,4 @@
+//todo: refactor usages of this to the round instance
 export function formatRoundName(roundName) {
   if (!roundName) return "";
 
