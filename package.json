@@ -28,7 +28,7 @@
     "vue-toastification": "^2.0.0-rc.5"
   },
   "devDependencies": {
-    "@dagger.io/dagger": "^0.18.1",
+    "@dagger.io/dagger": "^0.18.3",
     "@eslint/eslintrc": "^3.3.1",
     "@rushstack/eslint-patch": "^1.11.0",
     "@typescript-eslint/eslint-plugin": "^8.30.1",
