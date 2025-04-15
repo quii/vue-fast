@@ -1,7 +1,6 @@
 import { classificationList } from "@/domain/scoring/classificationList";
 import { calculateRoundScores } from "@/domain/scoring/classification";
 import { GameTypeConfig, gameTypeConfig, gameTypes } from "@/domain/scoring/game_types";
-import { Distance, toMeters, yards } from "@/domain/distance/distance";
 
 export async function calculateAppropriateRounds(
   classification: string,
