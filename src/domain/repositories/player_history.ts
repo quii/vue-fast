@@ -42,7 +42,7 @@ export interface HistoryItem {
   };
   handicap?: number;
   averagePerEnd?: number | null;
-  shootStatus?: ShootStatus; // New field for shoot status
+  shootStatus?: ShootStatus;
 }
 
 export interface HistoryFilters {
@@ -60,152 +60,165 @@ export interface StorageInterface {
   value: HistoryItem[];
 }
 
-export class PlayerHistory {
-  private storage: StorageInterface;
+// Define the interface for the repository
+export interface PlayerHistoryRepository {
+  add(date: string, score: number, gameType: string, scores: any[], unit?: string, userProfile?: UserProfile, shootStatus?: ShootStatus): number | string;
+  remove(id: number | string): void;
 
-  constructor(storage: StorageInterface = { value: [] }, currentUserProfile: UserProfile | null = null) {
-    this.storage = storage;
-    this.storage.value = prepareHistoryData(this.storage.value, currentUserProfile);
-  }
+  getById(id: number): HistoryItem | undefined;
+  importHistory(history: HistoryItem[], currentUserProfile?: UserProfile | null): void;
+  sortedHistory(): Promise<HistoryItem[]>;
+  personalBest(round: string): number | undefined;
+  totalArrows(): number;
+  getRecentGameTypes(): string[];
+  getAvailableRounds(): string[];
+  addAverageEndScores(history: HistoryItem[]): HistoryItem[];
+  getFilteredHistory(filters: HistoryFilters, userProfile?: UserProfile): Promise<HistoryItem[]>;
+  getShootStatusesUsed(): ShootStatus[];
+  getBowTypesUsed(currentBowType?: string | null): string[];
+  updateShoot(id: number | string, updates: Partial<HistoryItem>): boolean;
+}
 
-  add(
-    date: string,
-    score: number,
-    gameType: string,
-    scores: any[],
-    unit?: string,
-    userProfile?: UserProfile,
-    shootStatus: ShootStatus = DEFAULT_SHOOT_STATUS // Default to Practice if not specified
-  ): number | string {
-    const nextId = generateNextId(this.storage.value);
-    this.storage.value.push({
-      id: nextId,
-      date,
-      score,
-      gameType,
-      scores,
-      unit,
-      userProfile,
-      shootStatus
-    });
-    return nextId;
-  }
+// Factory function to create a player history repository
+export function createPlayerHistory(storage: StorageInterface = { value: [] }, currentUserProfile: UserProfile | null = null): PlayerHistoryRepository {
+  // Initialize the data
+  storage.value = prepareHistoryData(storage.value, currentUserProfile);
 
-  remove(id: number | string): void {
-    this.storage.value = this.storage.value.filter(item => item.id !== id);
-  }
+  // Return an object with all the repository methods
+  return {
+    add(date, score, gameType, scores, unit, userProfile, shootStatus = DEFAULT_SHOOT_STATUS) {
+      const nextId = generateNextId(storage.value);
+      storage.value.push({
+        id: nextId,
+        date,
+        score,
+        gameType,
+        scores,
+        unit,
+        userProfile,
+        shootStatus
+      });
+      return nextId;
+    },
 
-  importHistory(history: HistoryItem[], currentUserProfile: UserProfile | null = null): void {
-    this.storage.value = prepareHistoryData(history, currentUserProfile);
-  }
+    getById(id) {
+      return storage.value.find(item => item.id === id);
+    },
 
-  async sortedHistory(): Promise<HistoryItem[]> {
-    const scoresWithIndicator = addTopScoreIndicator(this.storage.value);
-    const scoresWithClassification = await addClassificationsToHistory(scoresWithIndicator);
-    const scoresWithHandicaps = await addHandicapToHistory(scoresWithClassification);
-    const scoresWithAverages = this.addAverageEndScores(scoresWithHandicaps);
-    return scoresWithAverages.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-  }
+    remove(id) {
+      storage.value = storage.value.filter(item => item.id !== id);
+    },
 
-  personalBest(round: string): number | undefined {
-    const roundScores = getScoresForRound(this.storage.value, round);
-    return getHighestScore(roundScores);
-  }
+    importHistory(history, currentUserProfile = null) {
+      storage.value = prepareHistoryData(history, currentUserProfile);
+    },
 
-  totalArrows(): number {
-    return this.storage.value.reduce((acc, item) => acc + item.scores.length, 0);
-  }
+    async sortedHistory() {
+      const scoresWithIndicator = addTopScoreIndicator(storage.value);
+      const scoresWithClassification = await addClassificationsToHistory(scoresWithIndicator);
+      const scoresWithHandicaps = await addHandicapToHistory(scoresWithClassification);
+      const scoresWithAverages = this.addAverageEndScores(scoresWithHandicaps);
+      return scoresWithAverages.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    },
 
-  getRecentGameTypes(): string[] {
-    const recentGames = this.storage.value.filter(game => isWithinLastSixWeeks(game.date));
-    return getUniqueGameTypes(recentGames);
-  }
+    personalBest(round) {
+      const roundScores = getScoresForRound(storage.value, round);
+      return getHighestScore(roundScores);
+    },
 
-  getAvailableRounds(): string[] {
-    const uniqueRounds = [...new Set(this.storage.value.map(h => h.gameType))];
+    totalArrows() {
+      return storage.value.reduce((acc, item) => acc + item.scores.length, 0);
+    },
 
-    return uniqueRounds.sort((a, b) => {
-      return a.toLowerCase().localeCompare(b.toLowerCase());
-    });
-  }
+    getRecentGameTypes() {
+      const recentGames = storage.value.filter(game => isWithinLastSixWeeks(game.date));
+      return getUniqueGameTypes(recentGames);
+    },
 
-  addAverageEndScores(history: HistoryItem[]): HistoryItem[] {
-    return history.map(item => {
-      // Get the game type configuration
-      const gameType = item.gameType?.toLowerCase();
-      if (!gameType || !gameTypeConfig[gameType]) {
-        return { ...item, averagePerEnd: null };
+    getAvailableRounds() {
+      const uniqueRounds = [...new Set(storage.value.map(h => h.gameType))];
+      return uniqueRounds.sort((a, b) => {
+        return a.toLowerCase().localeCompare(b.toLowerCase());
+      });
+    },
+
+    addAverageEndScores(history) {
+      return history.map(item => {
+        // Get the game type configuration
+        const gameType = item.gameType?.toLowerCase();
+        if (!gameType || !gameTypeConfig[gameType]) {
+          return { ...item, averagePerEnd: null };
+        }
+
+        // Get the end size
+        const endSize = gameTypeConfig[gameType].endSize;
+        if (!endSize || endSize <= 0 || item.scores.length === 0) {
+          return { ...item, averagePerEnd: null };
+        }
+
+        // Calculate average per arrow, then multiply by end size
+        const averagePerArrow = item.score / item.scores.length;
+        const averagePerEnd = Math.round((averagePerArrow * endSize) * 10) / 10; // Round to 1 decimal place
+        return { ...item, averagePerEnd };
+      });
+    },
+
+    async getFilteredHistory(filters, userProfile) {
+      const baseHistory = await this.sortedHistory();
+      const filteredByPB = filterByPB(baseHistory, filters.pbOnly);
+      const filteredByRound = filterByRound(filteredByPB, filters.round);
+      const filteredByDateRange = filterByDateRange(filteredByRound, filters.dateRange);
+      const filteredByClassification = filterByClassification(filteredByDateRange, filters.classification);
+      const filteredByShootStatus = filterByShootStatus(filteredByClassification, filters.shootStatus);
+
+      return filteredByShootStatus;
+    },
+
+    getShootStatusesUsed() {
+      const statusesSet = new Set<ShootStatus>();
+
+      storage.value.forEach(item => {
+        if (item.shootStatus) {
+          statusesSet.add(item.shootStatus);
+        }
+      });
+
+      return Array.from(statusesSet);
+    },
+
+    getBowTypesUsed(currentBowType = null) {
+      const bowTypesSet = new Set<string>();
+
+      storage.value.forEach(item => {
+        if (item.userProfile?.bowType) {
+          bowTypesSet.add(item.userProfile.bowType);
+        }
+      });
+
+      // Add current bow type if provided and not already in the set
+      if (currentBowType) {
+        bowTypesSet.add(currentBowType);
       }
 
-      // Get the end size
-      const endSize = gameTypeConfig[gameType].endSize;
-      if (!endSize || endSize <= 0 || item.scores.length === 0) {
-        return { ...item, averagePerEnd: null };
+      return Array.from(bowTypesSet);
+    },
+
+    updateShoot(id, updates) {
+      const shootIndex = storage.value.findIndex(item => item.id === id);
+
+      if (shootIndex === -1) {
+        return false; // Shoot not found
       }
 
-      // Calculate average per arrow, then multiply by end size
-      const averagePerArrow = item.score / item.scores.length;
-      const averagePerEnd = Math.round((averagePerArrow * endSize) * 10) / 10; // Round to 1 decimal place
-      return { ...item, averagePerEnd };
-    });
-  }
+      // Update the shoot with the provided updates
+      storage.value[shootIndex] = {
+        ...storage.value[shootIndex],
+        ...updates
+      };
 
-  async getFilteredHistory(filters: HistoryFilters): Promise<HistoryItem[]> {
-    const baseHistory = await this.sortedHistory();
-    const filteredByPB = filterByPB(baseHistory, filters.pbOnly);
-    const filteredByRound = filterByRound(filteredByPB, filters.round);
-    const filteredByDateRange = filterByDateRange(filteredByRound, filters.dateRange);
-    const filteredByClassification = filterByClassification(filteredByDateRange, filters.classification);
-    const filteredByShootStatus = filterByShootStatus(filteredByClassification, filters.shootStatus);
-
-    return filteredByShootStatus;
-  }
-
-  getShootStatusesUsed(): ShootStatus[] {
-    const statusesSet = new Set<ShootStatus>();
-
-    this.storage.value.forEach(item => {
-      if (item.shootStatus) {
-        statusesSet.add(item.shootStatus);
-      }
-    });
-
-    return Array.from(statusesSet);
-  }
-
-  getBowTypesUsed(currentBowType: string | null = null): string[] {
-    const bowTypesSet = new Set<string>();
-
-    this.storage.value.forEach(item => {
-      if (item.userProfile?.bowType) {
-        bowTypesSet.add(item.userProfile.bowType);
-      }
-    });
-
-    // Add current bow type if provided and not already in the set
-    if (currentBowType) {
-      bowTypesSet.add(currentBowType);
+      return true;
     }
-
-    return Array.from(bowTypesSet);
-  }
-
-  updateShoot(id: number | string, updates: Partial<HistoryItem>): boolean {
-    const shootIndex = this.storage.value.findIndex(item => item.id === id);
-
-    if (shootIndex === -1) {
-      return false; // Shoot not found
-    }
-
-    // Update the shoot with the provided updates
-    this.storage.value[shootIndex] = {
-      ...this.storage.value[shootIndex],
-      ...updates
-    };
-
-    return true;
-  }
-
+  };
 }
 
 function generateNextId(history: HistoryItem[]): number {

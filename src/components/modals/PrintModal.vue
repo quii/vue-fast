@@ -5,7 +5,7 @@ import RoundScores from "@/components/RoundScores.vue";
 import ArcherDetails from "@/components/ArcherDetails.vue";
 import SaveScoreSheetButton from "@/components/SaveScoreSheetButton.vue";
 
-const props = defineProps(["shoot", "archerName", "endSize", "ageGroup", "gender", "bowType", "gameType", "date"]);
+const props = defineProps(["shoot", "archerName", "endSize", "ageGroup", "gender", "bowType", "gameType", "date", "status"]);
 const emit = defineEmits(["close"]);
 const targetCaptain = ref("");
 const shotAt = ref("");
@@ -43,7 +43,8 @@ function print() {
           name: props.archerName,
           ageGroup: props.ageGroup,
           gender: props.gender,
-          bowType: props.bowType
+          bowType: props.bowType,
+          status: props.status
         }),
         h(RoundScores, {
           scores: props.shoot.scores,

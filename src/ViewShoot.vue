@@ -50,14 +50,14 @@ const showEditModal = ref(false);
 const editedStatus = ref(null);
 const editedDate = ref("");
 
-history.setShootToView(route.params.id);
+const shoot = computed(() => history.getById(parseInt(route.params.id)));
 
-const round = computed(() => roundConfigManager.getRound(history.selectedShoot.gameType));
+const round = computed(() => roundConfigManager.getRound(shoot.value.gameType));
 const roundName = computed(() => round.value.name);
 const endSize = computed(() => round.value.endSize);
-const scores = computed(() => history.selectedShoot.scores);
-const date = computed(() => history.selectedShoot.date);
-const status = computed(() => getShootStatusDisplayName(history.selectedShoot.shootStatus));
+const scores = computed(() => shoot.value.scores);
+const date = computed(() => shoot.value.date);
+const status = computed(() => getShootStatusDisplayName(shoot.value.shootStatus));
 
 const formattedDate = computed(() => {
   if (!date.value) return "";
@@ -86,9 +86,9 @@ const maxPossibleScore = computed(() => totals.value?.totalScore || 0);
 
 // Initialize classification calculator
 async function initClassificationCalculator() {
-  if (!history.selectedShoot?.userProfile) return;
+  if (!shoot.value?.userProfile) return;
 
-  const {gender, ageGroup, bowType} = history.selectedShoot.userProfile;
+  const { gender, ageGroup, bowType } = shoot.value.userProfile;
 
   if (!gender || !ageGroup || !bowType) return;
 
@@ -112,7 +112,7 @@ async function initClassificationCalculator() {
 initClassificationCalculator();
 
 const editShootData = computed(() => {
-  if (!history.selectedShoot) return null;
+  if (!shoot) return null;
 
   // Create classification object similar to ScoreCard.vue
   let classification = null;
@@ -134,9 +134,9 @@ const editShootData = computed(() => {
 
   // Make sure we have all the required properties for HistoryCard
   return {
-    ...history.selectedShoot,
+    ...shoot.value,
     // Use our calculated classification instead of the stored one
-    classification: classification || history.selectedShoot.classification
+    classification: classification || shoot.value.classification
   };
 });
 
@@ -145,7 +145,7 @@ function confirmDelete() {
 }
 
 function deleteShoot() {
-  history.remove(history.selectedShoot.id);
+  history.remove(shoot.value.id);
   router.push("/history");
   showDeleteConfirmation.value = false;
 }
@@ -213,8 +213,8 @@ function handleAction(actionData) {
 
 function openEditModal() {
   // Initialize with current values
-  editedStatus.value = history.selectedShoot.shootStatus || "Practice";
-  editedDate.value = history.selectedShoot.date || new Date().toISOString().substr(0, 10);
+  editedStatus.value = shoot.value.shootStatus || "Practice";
+  editedDate.value = shoot.value.date || new Date().toISOString().substr(0, 10);
   showEditModal.value = true;
 }
 function cancelEdit() {
@@ -223,13 +223,12 @@ function cancelEdit() {
 
 function handleSaveFromModal(data) {
   // Update the shoot with both status and date
-  const success = history.updateShoot(history.selectedShoot.id, {
+  const success = history.updateShoot(shoot.value.id, {
     shootStatus: data.shootStatus,
     date: data.date
   });
 
   if (success) {
-    history.setShootToView(history.selectedShoot.id);
     showEditModal.value = false;
   }
 }
@@ -257,9 +256,9 @@ function handleSaveFromModal(data) {
       <BaseCard>
         <ArcherDetails
             :name="userStore.user.name"
-            :age-group="history.selectedShoot.userProfile.ageGroup"
-            :gender="history.selectedShoot.userProfile.gender"
-            :bow-type="history.selectedShoot.userProfile.bowType"
+            :age-group="shoot.userProfile.ageGroup"
+            :gender="shoot.userProfile.gender"
+            :bow-type="shoot.userProfile.bowType"
             :status="status"
         />
       </BaseCard>
@@ -274,16 +273,16 @@ function handleSaveFromModal(data) {
       <RoundScores
           :scores="scores"
           :end-size="endSize"
-          :user-profile="history.selectedShoot.userProfile"
+          :user-profile="shoot.userProfile"
           :game-type="roundName"
       />
 
-      <UserNotes :shoot-id="history.selectedShoot.id" :allow-highlight="true"/>
+    <UserNotes :shoot-id="shoot.id" :allow-highlight="true" />
 
     <TipModal v-if="showTip" @close="dismissTip"/>
     <PrintModal
         v-if="showPrintModal"
-        :shoot="history.selectedShoot"
+        :shoot="shoot"
         :archer-name="userStore.user.name"
         :age-group="userStore.user.ageGroup"
         :gender="userStore.user.gender"
@@ -291,6 +290,7 @@ function handleSaveFromModal(data) {
         :end-size="endSize"
         :game-type="roundName"
         :date="date"
+        :status="status"
         @close="showPrintModal = false"
     />
 
@@ -319,8 +319,8 @@ function handleSaveFromModal(data) {
     :visible="showEditModal"
     :shootData="editShootData"
     :isEditMode="true"
-    :initialDate="history.selectedShoot?.date"
-    :initialStatus="history.selectedShoot?.shootStatus || 'Practice'"
+    :initialDate="shoot.value?.date"
+    :initialStatus="shoot.value?.shootStatus || 'Practice'"
     @save="handleSaveFromModal"
     @cancel="cancelEdit"
   />
