@@ -64,7 +64,6 @@ export interface StorageInterface {
 export interface PlayerHistoryRepository {
   add(date: string, score: number, gameType: string, scores: any[], unit?: string, userProfile?: UserProfile, shootStatus?: ShootStatus): number | string;
   remove(id: number | string): void;
-
   getById(id: number): HistoryItem | undefined;
   importHistory(history: HistoryItem[], currentUserProfile?: UserProfile | null): void;
   sortedHistory(): Promise<HistoryItem[]>;
