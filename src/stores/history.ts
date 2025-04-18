@@ -19,6 +19,10 @@ export const useHistoryStore = defineStore("history", () => {
 
   const playerHistory = createPlayerHistory(state, currentUserProfile.value);
 
+  setTimeout(async () => {
+    await playerHistory.backfillClassifications()
+  }, 0)
+
   return {
     history: state,
     ...playerHistory

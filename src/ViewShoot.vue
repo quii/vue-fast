@@ -15,7 +15,6 @@ import {usePreferencesStore} from "@/stores/preferences";
 import {useArrowHistoryStore} from "@/stores/arrow_history";
 import PrintModal from "@/components/modals/PrintModal.vue";
 import BaseCard from "@/components/BaseCard.vue";
-// Update the import path for BaseButton
 import BaseButton from "@/components/ui/BaseButton.vue";
 import BaseTopBar from "@/components/ui/BaseTopBar.vue";
 import ClassificationDetailsTable from "@/components/ClassificationDetailsTable.vue";
@@ -29,29 +28,22 @@ import ShootEditModal from "@/components/modals/ShootEditModal.vue";
 
 const preferences = usePreferencesStore();
 const arrowHistoryStore = useArrowHistoryStore();
-const arrows = computed(() => arrowHistoryStore.getArrowsForShoot(route.params.id));
+const route = useRoute()
+const router = useRouter()
+const history = useHistoryStore()
+const userStore = useUserStore()
 
 const showPrintModal = ref(false);
 const showTip = ref(!preferences.hasSeenPrintTip);
 const showDeleteConfirmation = ref(false);
 const showClassificationDetails = ref(false);
 
-function dismissTip() {
-  preferences.dismissPrintTip();
-  showTip.value = false;
-}
-
-const route = useRoute();
-const router = useRouter();
-const history = useHistoryStore();
-const userStore = useUserStore();
-
 const showEditModal = ref(false);
 const editedStatus = ref(null);
 const editedDate = ref("");
 
 const shoot = computed(() => history.getById(parseInt(route.params.id)));
-
+const arrows = computed(() => arrowHistoryStore.getArrowsForShoot(route.params.id))
 const round = computed(() => roundConfigManager.getRound(shoot.value.gameType));
 const roundName = computed(() => round.value.name);
 const endSize = computed(() => round.value.endSize);
@@ -80,8 +72,7 @@ const averageScoresPerEnd = computed(() =>
 );
 
 // Since this is a completed shoot, arrows remaining is 0
-const arrowsRemaining = computed(() => 0);
-// Max possible score is the same as the total score for a completed shoot
+const arrowsRemaining = 0
 const maxPossibleScore = computed(() => totals.value?.totalScore || 0);
 
 // Initialize classification calculator
@@ -139,6 +130,11 @@ const editShootData = computed(() => {
     classification: classification || shoot.value.classification
   };
 });
+
+function dismissTip() {
+  preferences.dismissPrintTip()
+  showTip.value = false
+}
 
 function confirmDelete() {
   showDeleteConfirmation.value = true;

@@ -5,6 +5,7 @@ import {
   getNextClassification,
   isHigherOrEqualClassification
 } from "@/domain/scoring/classificationList";
+import { HistoryItem } from '@/domain/repositories/player_history'
 
 const sortByScore = (a, b) => a.score - b.score;
 
@@ -153,7 +154,7 @@ export function calculateClassification(sex, age, bowtype) {
   };
 }
 
-export async function addClassificationsToHistory(scoringHistory) {
+export async function addClassificationsToHistory(scoringHistory: HistoryItem[]): Promise<HistoryItem[]> {
   const updatedHistory = [];
 
   for (const item of scoringHistory) {

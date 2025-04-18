@@ -1,10 +1,10 @@
-import { gameTypeConfig } from "@/domain/scoring/game_types.js";
-import { backfillUserProfiles, userDataFixer } from "@/domain/user_data_fixer";
-import { addTopScoreIndicator } from "@/domain/scoring/topscores";
-import { addClassificationsToHistory } from "@/domain/scoring/classification";
-import { filterByClassification, filterByDateRange, filterByPB, filterByRound } from "@/domain/history_filters";
-import { addHandicapToHistory } from "@/domain/scoring/handicap";
-import { DEFAULT_SHOOT_STATUS, ShootStatus } from "@/domain/shoot/shoot_status";
+import { gameTypeConfig } from '@/domain/scoring/game_types.js'
+import { backfillUserProfiles, userDataFixer } from '@/domain/user_data_fixer'
+import { addTopScoreIndicator } from '@/domain/scoring/topscores'
+import { addClassificationsToHistory } from '@/domain/scoring/classification'
+import { filterByClassification, filterByDateRange, filterByPB, filterByRound } from '@/domain/history_filters'
+import { addHandicapToHistory } from '@/domain/scoring/handicap'
+import { DEFAULT_SHOOT_STATUS, ShootStatus } from '@/domain/shoot/shoot_status'
 
 // Extend Date prototype with addDays method
 declare global {
@@ -76,6 +76,8 @@ export interface PlayerHistoryRepository {
   getShootStatusesUsed(): ShootStatus[];
   getBowTypesUsed(currentBowType?: string | null): string[];
   updateShoot(id: number | string, updates: Partial<HistoryItem>): boolean;
+
+  backfillClassifications(): Promise<void>;
 }
 
 // Factory function to create a player history repository
@@ -216,6 +218,10 @@ export function createPlayerHistory(storage: StorageInterface = { value: [] }, c
       };
 
       return true;
+    },
+
+    async backfillClassifications() {
+      storage.value = await addClassificationsToHistory(storage.value)
     }
   };
 }
@@ -270,3 +276,4 @@ function prepareHistoryData(historyData: HistoryItem[], currentUserProfile: User
 
   return fixedData;
 }
+
