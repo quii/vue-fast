@@ -45,6 +45,10 @@ export async function addHandicapToHistory(scoringHistory) {
   const updatedHistory = [];
 
   for (const x of scoringHistory) {
+    if (x.handicap) {
+      updatedHistory.push(x)
+      continue
+    }
     const handicap = await handicapCalculator(x.gameType, x.score);
     updatedHistory.push({ ...x, handicap });
   }

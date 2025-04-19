@@ -37,12 +37,12 @@ describe("player history", () => {
   test("keeps records sorted and adds top score indicator", async () => {
     const playerHistory = createPlayerHistory();
 
-    playerHistory.add(new Date().addDays(2), 456, "national 50", [1, 2, 3], "yd");
-    playerHistory.add(new Date().addDays(5), 200, "national 50", [1, 2, 3], "yd");
-    playerHistory.add(new Date().addDays(10), 123, "national 50", [1, 2, 3], "yd");
-    playerHistory.add(new Date().addDays(10), 826, "windsor 50", [1, 2, 3], "yd");
+    await playerHistory.add(new Date().addDays(2), 456, 'national 50', [1, 2, 3], 'yd')
+    await playerHistory.add(new Date().addDays(5), 200, 'national 50', [1, 2, 3], 'yd')
+    await playerHistory.add(new Date().addDays(10), 123, 'national 50', [1, 2, 3], 'yd')
+    await playerHistory.add(new Date().addDays(10), 826, 'windsor 50', [1, 2, 3], 'yd')
 
-    const sortedHistory = await playerHistory.sortedHistory();
+    const sortedHistory = playerHistory.sortedHistory()
     expect(sortedHistory).toHaveLength(4);
     expect(sortedHistory[0].score).toEqual(123);
     expect(sortedHistory[0].topScore).toBeFalsy();
@@ -51,21 +51,21 @@ describe("player history", () => {
     expect(sortedHistory[3].topScore).toBeTruthy();
   });
 
-  test("it can retrieve your personal best for a round", () => {
+  test('it can retrieve your personal best for a round', async () => {
     const playerHistory = createPlayerHistory();
 
-    playerHistory.add(new Date(), 456, "national 50", [1, 2, 3], "yd");
-    playerHistory.add(new Date(), 455, "national 50", [1, 2, 3], "yd");
-    playerHistory.add(new Date(), 826, "windsor 50", [1, 2, 3], "yd");
+    await playerHistory.add(new Date(), 456, 'national 50', [1, 2, 3], 'yd')
+    await playerHistory.add(new Date(), 455, 'national 50', [1, 2, 3], 'yd')
+    await playerHistory.add(new Date(), 826, 'windsor 50', [1, 2, 3], 'yd')
 
     expect(playerHistory.personalBest("national 50")).toEqual(456);
     expect(playerHistory.personalBest("windsor 50")).toEqual(826);
     expect(playerHistory.personalBest("frostbite")).toBeUndefined();
   });
 
-  test("it can total up the number of arrows shot", () => {
+  test('it can total up the number of arrows shot', async () => {
     const playerHistory = createPlayerHistory();
-    playerHistory.add(new Date(), 456, "national 50", [1, 2, 3], "yd");
+    await playerHistory.add(new Date(), 456, 'national 50', [1, 2, 3], 'yd')
     expect(playerHistory.totalArrows()).toEqual(3);
   });
 
@@ -89,10 +89,10 @@ describe("player history", () => {
     yesterday.setDate(yesterday.getDate() - 1);
 
     // Add the shoots with different dates
-    playerHistory.add(today, sum9End, "portsmouth", nineArrowsShot, "yd");
-    playerHistory.add(yesterday, sum12End, "practice 20yd", twelveArrowsShot, "yd");
+    await playerHistory.add(today, sum9End, 'portsmouth', nineArrowsShot, 'yd')
+    await playerHistory.add(yesterday, sum12End, 'practice 20yd', twelveArrowsShot, 'yd')
 
-    const sortedHistory = await playerHistory.sortedHistory();
+    const sortedHistory = playerHistory.sortedHistory()
 
     // Now we can be sure that the today's shoot will be first (index 0)
     // and yesterday's shoot will be second (index 1)
@@ -100,7 +100,7 @@ describe("player history", () => {
     expect(sortedHistory[1].averagePerEnd).toEqual(expected12Score);
   });
 
-  test("gets unique game types from recent games, ordered by most recent first", () => {
+  test('gets unique game types from recent games, ordered by most recent first', async () => {
     const playerHistory = createPlayerHistory();
 
     const now = new Date();
@@ -108,10 +108,10 @@ describe("player history", () => {
     const twoWeeksAgo = new Date().addDays(-14);
     const sevenWeeksAgo = new Date().addDays(-49);
 
-    playerHistory.add(twoWeeksAgo, 200, "national", [1, 2, 3], "yd");
-    playerHistory.add(oneWeekAgo, 300, "windsor", [1, 2, 3], "yd");
-    playerHistory.add(now, 100, "national", [1, 2, 3], "yd");
-    playerHistory.add(sevenWeeksAgo, 400, "york", [1, 2, 3], "yd");
+    await playerHistory.add(twoWeeksAgo, 200, 'national', [1, 2, 3], 'yd')
+    await playerHistory.add(oneWeekAgo, 300, 'windsor', [1, 2, 3], 'yd')
+    await playerHistory.add(now, 100, 'national', [1, 2, 3], 'yd')
+    await playerHistory.add(sevenWeeksAgo, 400, 'york', [1, 2, 3], 'yd')
 
     const recentTypes = playerHistory.getRecentGameTypes();
     expect(recentTypes).toEqual(["national", "windsor"]);
@@ -123,11 +123,11 @@ describe("player history", () => {
     const bestNational = 200;
     const bestWindsor = 150;
 
-    playerHistory.add(new Date(), 100, "national", [1, 2, 3], "yd");
-    playerHistory.add(new Date(), bestNational, "national", [1, 2, 3], "yd");
-    playerHistory.add(new Date(), bestWindsor, "windsor", [1, 2, 3], "yd");
+    await playerHistory.add(new Date(), 100, 'national', [1, 2, 3], 'yd')
+    await playerHistory.add(new Date(), bestNational, 'national', [1, 2, 3], 'yd')
+    await playerHistory.add(new Date(), bestWindsor, 'windsor', [1, 2, 3], 'yd')
 
-    const filtered = await playerHistory.getFilteredHistory({ pbOnly: true }, user);
+    const filtered = playerHistory.getFilteredHistory({ pbOnly: true }, user)
 
     expect(filtered.length).toBe(2);
     expect(filtered.every(score => score.topScore)).toBe(true);
@@ -140,11 +140,11 @@ describe("player history", () => {
     const playerHistory = createPlayerHistory();
     const user = { gender: "male", ageGroup: "senior", bowType: "recurve" };
 
-    playerHistory.add(new Date(), 100, "national", [1, 2, 3], "yd");
-    playerHistory.add(new Date(), 200, "windsor", [1, 2, 3], "yd");
+    await playerHistory.add(new Date(), 100, 'national', [1, 2, 3], 'yd')
+    await playerHistory.add(new Date(), 200, 'windsor', [1, 2, 3], 'yd')
 
     const filters = { round: "national" };
-    const filtered = await playerHistory.getFilteredHistory(filters, user);
+    const filtered = playerHistory.getFilteredHistory(filters, user)
 
     expect(filtered.length).toBe(1);
     expect(filtered[0].gameType).toBe("national");
@@ -158,9 +158,9 @@ describe("player history", () => {
     const lastWeek = new Date().addDays(-7);
     const twoWeeksAgo = new Date().addDays(-14);
 
-    playerHistory.add(today, 100, "national", [1, 2, 3], "yd");
-    playerHistory.add(lastWeek, 200, "national", [1, 2, 3], "yd");
-    playerHistory.add(twoWeeksAgo, 300, "national", [1, 2, 3], "yd");
+    await playerHistory.add(today, 100, 'national', [1, 2, 3], 'yd')
+    await playerHistory.add(lastWeek, 200, 'national', [1, 2, 3], 'yd')
+    await playerHistory.add(twoWeeksAgo, 300, 'national', [1, 2, 3], 'yd')
 
     const filters = {
       dateRange: {
@@ -168,7 +168,7 @@ describe("player history", () => {
         endDate: today
       }
     };
-    const filtered = await playerHistory.getFilteredHistory(filters, user);
+    const filtered = playerHistory.getFilteredHistory(filters, user)
 
     expect(filtered.length).toBe(2);
   });
@@ -177,11 +177,12 @@ describe("player history", () => {
     const user = { gender: "male", ageGroup: "senior", bowType: "recurve" };
     const playerHistory = createPlayerHistory(undefined, user);
 
-    playerHistory.add(new Date(), 490, "windsor", [1, 2, 3], "yd", user);
-    playerHistory.add(new Date(), 100, "windsor", [1, 2, 3], "yd", user);
+    await playerHistory.add(new Date(), 490, 'windsor', [1, 2, 3], 'yd', user)
+    await playerHistory.add(new Date(), 100, 'windsor', [1, 2, 3], 'yd', user)
 
     const filters = { classification: "A3" };
-    const filtered = await playerHistory.getFilteredHistory(filters);
+    await playerHistory.backfillClassifications()
+    const filtered = playerHistory.getFilteredHistory(filters)
 
     expect(filtered.length).toBe(1,
       `Expected to find 1 score with A3 classification. Found ${filtered.length} scores instead. Scores: ${JSON.stringify(filtered, null, 2)}`
@@ -200,16 +201,17 @@ describe("player history", () => {
 
     const today = new Date();
 
-    playerHistory.add(today, 490, "windsor", [1, 2, 3], "yd", user);
-    playerHistory.add(today, 490, "national", [1, 2, 3], "yd", user);
-    playerHistory.add(today, 100, "windsor", [1, 2, 3], "yd", user);
+    await playerHistory.add(today, 490, 'windsor', [1, 2, 3], 'yd', user)
+    await playerHistory.add(today, 490, 'national', [1, 2, 3], 'yd', user)
+    await playerHistory.add(today, 100, 'windsor', [1, 2, 3], 'yd', user)
 
     const filters = {
       round: "windsor",
       classification: "A3"
     };
 
-    const filtered = await playerHistory.getFilteredHistory(filters);
+    await playerHistory.backfillClassifications()
+    const filtered = playerHistory.getFilteredHistory(filters)
 
     expect(filtered.length).toEqual(1,
       `Expected to find 1 score matching windsor round and A3 classification. Found ${filtered.length} scores instead. Scores: ${JSON.stringify(filtered, null, 2)}`
@@ -239,7 +241,7 @@ describe("Classification with changing age groups", () => {
     const playerHistory = createPlayerHistory(undefined, seniorProfile);
 
     // Add a shoot as a senior
-    const seniorShootId = playerHistory.add(
+    const seniorShootId = await playerHistory.add(
       "2023-01-01",
       500,
       "portsmouth",
@@ -249,7 +251,9 @@ describe("Classification with changing age groups", () => {
     );
 
     // Get the history and check classification
-    let history = await playerHistory.sortedHistory();
+    await playerHistory.backfillClassifications()
+
+    let history = playerHistory.sortedHistory()
     const seniorShoot = history.find(item => item.id === seniorShootId);
     const seniorClassification = seniorShoot.classification?.name;
 
@@ -265,7 +269,7 @@ describe("Classification with changing age groups", () => {
     const updatedPlayerHistory = createPlayerHistory(undefined, veteranProfile);
 
     // Add a shoot as a 50+
-    const veteranShootId = updatedPlayerHistory.add(
+    const veteranShootId = await updatedPlayerHistory.add(
       "2023-06-01",
       500, // Same score
       "portsmouth", // Same round
@@ -275,7 +279,8 @@ describe("Classification with changing age groups", () => {
     );
 
     // Get the updated history
-    history = await updatedPlayerHistory.sortedHistory();
+    await updatedPlayerHistory.backfillClassifications()
+    history = updatedPlayerHistory.sortedHistory()
 
     // Find both shoots
     const historicalSeniorShoot = history.find(item => item.id === seniorShootId);
@@ -302,17 +307,17 @@ describe("Classification with changing age groups", () => {
 });
 
 describe("getBowTypesUsed", () => {
-  test("returns all bow types from history plus the current one", () => {
+  test('returns all bow types from history plus the current one', async () => {
     const playerHistory = createPlayerHistory();
 
     // Add scores with recurve bow type
-    playerHistory.add(new Date(), 456, "national", [1, 2, 3], "yd", {
+    await playerHistory.add(new Date(), 456, 'national', [1, 2, 3], 'yd', {
       gender: "male",
       ageGroup: "senior",
       bowType: "recurve"
     });
 
-    playerHistory.add(new Date(), 500, "windsor", [1, 2, 3], "yd", {
+    await playerHistory.add(new Date(), 500, 'windsor', [1, 2, 3], 'yd', {
       gender: "male",
       ageGroup: "senior",
       bowType: "recurve"
@@ -373,9 +378,9 @@ describe("Shoot Status", () => {
     const playerHistory = createPlayerHistory();
 
     // Add a shoot without specifying status
-    playerHistory.add(new Date(), 456, "national", [1, 2, 3], "yd");
+    await playerHistory.add(new Date(), 456, 'national', [1, 2, 3], 'yd')
 
-    const history = await playerHistory.sortedHistory();
+    const history = playerHistory.sortedHistory()
     expect(history[0].shootStatus).toEqual("Practice");
   });
 
@@ -383,10 +388,10 @@ describe("Shoot Status", () => {
     const playerHistory = createPlayerHistory();
 
     // Add shoots with different statuses
-    playerHistory.add(new Date(), 456, "national", [1, 2, 3], "yd", undefined, "Competition");
-    playerHistory.add(new Date(), 500, "windsor", [1, 2, 3], "yd", undefined, "RecordStatus");
+    await playerHistory.add(new Date(), 456, 'national', [1, 2, 3], 'yd', undefined, 'Competition')
+    await playerHistory.add(new Date(), 500, 'windsor', [1, 2, 3], 'yd', undefined, 'RecordStatus')
 
-    const history = await playerHistory.sortedHistory();
+    const history = playerHistory.sortedHistory()
 
     // Find the shoots by score
     const nationalShoot = history.find(item => item.score === 456);
@@ -401,27 +406,27 @@ describe("Shoot Status", () => {
     const user = { gender: "male", ageGroup: "senior", bowType: "recurve" };
 
     // Add shoots with different statuses
-    playerHistory.add(new Date(), 100, "national", [1, 2, 3], "yd", user, "Practice");
-    playerHistory.add(new Date(), 200, "national", [1, 2, 3], "yd", user, "Competition");
-    playerHistory.add(new Date(), 300, "national", [1, 2, 3], "yd", user, "RecordStatus");
+    await playerHistory.add(new Date(), 100, 'national', [1, 2, 3], 'yd', user, 'Practice')
+    await playerHistory.add(new Date(), 200, 'national', [1, 2, 3], 'yd', user, 'Competition')
+    await playerHistory.add(new Date(), 300, 'national', [1, 2, 3], 'yd', user, 'RecordStatus')
 
     // Add a filter for shoot status
     const filters = { shootStatus: "Competition" };
-    const filtered = await playerHistory.getFilteredHistory(filters, user);
+    const filtered = playerHistory.getFilteredHistory(filters, user)
 
     expect(filtered.length).toBe(1);
     expect(filtered[0].score).toEqual(200);
     expect(filtered[0].shootStatus).toEqual("Competition");
   });
 
-  test("it can get all unique shoot statuses used in history", () => {
+  test('it can get all unique shoot statuses used in history', async () => {
     const playerHistory = createPlayerHistory();
 
     // Add shoots with different statuses
-    playerHistory.add(new Date(), 100, "national", [1, 2, 3], "yd", undefined, "Practice");
-    playerHistory.add(new Date(), 200, "windsor", [1, 2, 3], "yd", undefined, "Competition");
-    playerHistory.add(new Date(), 300, "york", [1, 2, 3], "yd", undefined, "RecordStatus");
-    playerHistory.add(new Date(), 400, "bray", [1, 2, 3], "yd", undefined, "Competition");
+    await playerHistory.add(new Date(), 100, 'national', [1, 2, 3], 'yd', undefined, 'Practice')
+    await playerHistory.add(new Date(), 200, 'windsor', [1, 2, 3], 'yd', undefined, 'Competition')
+    await playerHistory.add(new Date(), 300, 'york', [1, 2, 3], 'yd', undefined, 'RecordStatus')
+    await playerHistory.add(new Date(), 400, 'bray', [1, 2, 3], 'yd', undefined, 'Competition')
 
     const usedStatuses = playerHistory.getShootStatusesUsed();
 

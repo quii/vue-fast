@@ -64,7 +64,8 @@
       </ButtonGroup>
       <div v-if="hasClassificationProgress" class="classification-progress-section">
         <div v-for="(bowProgress, bowType) in classificationProgress" :key="bowType">
-          <ClassificationProgress
+          <KeepAlive>
+            <ClassificationProgress
             v-if="shouldShowIndoorProgress(bowProgress)"
             :currentClassification="userStore.getIndoorClassification(bowType)"
             :nextClassification="bowProgress.indoor.nextClassification"
@@ -73,7 +74,9 @@
             environment="indoor"
             :bowType="bowType"
           />
+          </KeepAlive>
 
+          <KeepAlive>
           <ClassificationProgress
             v-if="shouldShowOutdoorProgress(bowProgress)"
             :currentClassification="userStore.getOutdoorClassification(bowType)"
@@ -83,6 +86,7 @@
             environment="outdoor"
             :bowType="bowType"
           />
+          </KeepAlive>
         </div>
       </div>
 
@@ -157,7 +161,15 @@ const showGraph = ref(false);
 const graphData = ref([]);
 const isHandicapGraph = ref(false);
 
-const filteredHistory = ref([]);
+const filteredHistory = computed(() => {
+  return store.getFilteredHistory({
+    pbOnly: pbFilterActive.value,
+    round: roundFilter.value,
+    dateRange: dateFilter.value,
+    classification: classificationFilter.value,
+    shootStatus: statusFilter.value // Add status filter
+  }, user.user)
+})
 
 // Get bow types used by the archer
 const bowTypesUsed = computed(() => {
@@ -211,30 +223,20 @@ const hasClassificationProgress = computed(() => {
   return false;
 });
 
-watchEffect(async () => {
-  filteredHistory.value = await store.getFilteredHistory({
-    pbOnly: pbFilterActive.value,
-    round: roundFilter.value,
-    dateRange: dateFilter.value,
-    classification: classificationFilter.value,
-    shootStatus: statusFilter.value // Add status filter
-  }, user.user);
-});
-
 const indoorEntriesWithHandicap = computed(() =>
   filteredHistory.value.filter(item =>
+    !roundConfigManager.getRound(item.gameType).isOutdoor &&
     item.handicap !== undefined &&
     item.handicap !== null &&
-    item.handicap !== "" &&
-    !roundConfigManager.getRound(item.gameType).isOutdoor
+    item.handicap !== ''
   ));
 
 const outdoorEntriesWithHandicap = computed(() =>
   filteredHistory.value.filter(item =>
+    roundConfigManager.getRound(item.gameType).isOutdoor &&
     item.handicap !== undefined &&
     item.handicap !== null &&
-    item.handicap !== "" &&
-    roundConfigManager.getRound(item.gameType).isOutdoor // Check if it's an outdoor round
+    item.handicap !== ''
   ));
 
 const showIndoorHandicapGraphButton = computed(() => {

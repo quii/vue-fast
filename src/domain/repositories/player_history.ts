@@ -62,17 +62,19 @@ export interface StorageInterface {
 
 // Define the interface for the repository
 export interface PlayerHistoryRepository {
-  add(date: string, score: number, gameType: string, scores: any[], unit?: string, userProfile?: UserProfile, shootStatus?: ShootStatus): number | string;
+  add(date: string, score: number, gameType: string, scores: any[], unit?: string, userProfile?: UserProfile, shootStatus?: ShootStatus): Promise<number | string>;
   remove(id: number | string): void;
   getById(id: number): HistoryItem | undefined;
   importHistory(history: HistoryItem[], currentUserProfile?: UserProfile | null): void;
-  sortedHistory(): Promise<HistoryItem[]>;
+
+  sortedHistory(): HistoryItem[];
   personalBest(round: string): number | undefined;
   totalArrows(): number;
   getRecentGameTypes(): string[];
   getAvailableRounds(): string[];
   addAverageEndScores(history: HistoryItem[]): HistoryItem[];
-  getFilteredHistory(filters: HistoryFilters, userProfile?: UserProfile): Promise<HistoryItem[]>;
+
+  getFilteredHistory(filters: HistoryFilters, userProfile?: UserProfile): HistoryItem[];
   getShootStatusesUsed(): ShootStatus[];
   getBowTypesUsed(currentBowType?: string | null): string[];
   updateShoot(id: number | string, updates: Partial<HistoryItem>): boolean;
@@ -87,7 +89,7 @@ export function createPlayerHistory(storage: StorageInterface = { value: [] }, c
 
   // Return an object with all the repository methods
   return {
-    add(date, score, gameType, scores, unit, userProfile, shootStatus = DEFAULT_SHOOT_STATUS) {
+    async add(date, score, gameType, scores, unit, userProfile, shootStatus = DEFAULT_SHOOT_STATUS) {
       const nextId = generateNextId(storage.value);
       storage.value.push({
         id: nextId,
@@ -99,6 +101,7 @@ export function createPlayerHistory(storage: StorageInterface = { value: [] }, c
         userProfile,
         shootStatus
       });
+      await this.backfillClassifications()
       return nextId;
     },
 
@@ -114,11 +117,9 @@ export function createPlayerHistory(storage: StorageInterface = { value: [] }, c
       storage.value = prepareHistoryData(history, currentUserProfile);
     },
 
-    async sortedHistory() {
+    sortedHistory() {
       const scoresWithIndicator = addTopScoreIndicator(storage.value);
-      const scoresWithClassification = await addClassificationsToHistory(scoresWithIndicator);
-      const scoresWithHandicaps = await addHandicapToHistory(scoresWithClassification);
-      const scoresWithAverages = this.addAverageEndScores(scoresWithHandicaps);
+      const scoresWithAverages = this.addAverageEndScores(scoresWithIndicator)
       return scoresWithAverages.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
     },
 
@@ -164,15 +165,13 @@ export function createPlayerHistory(storage: StorageInterface = { value: [] }, c
       });
     },
 
-    async getFilteredHistory(filters, userProfile) {
-      const baseHistory = await this.sortedHistory();
+    getFilteredHistory(filters, userProfile) {
+      const baseHistory = this.sortedHistory()
       const filteredByPB = filterByPB(baseHistory, filters.pbOnly);
       const filteredByRound = filterByRound(filteredByPB, filters.round);
       const filteredByDateRange = filterByDateRange(filteredByRound, filters.dateRange);
       const filteredByClassification = filterByClassification(filteredByDateRange, filters.classification);
-      const filteredByShootStatus = filterByShootStatus(filteredByClassification, filters.shootStatus);
-
-      return filteredByShootStatus;
+      return filterByShootStatus(filteredByClassification, filters.shootStatus)
     },
 
     getShootStatusesUsed() {
@@ -221,7 +220,8 @@ export function createPlayerHistory(storage: StorageInterface = { value: [] }, c
     },
 
     async backfillClassifications() {
-      storage.value = await addClassificationsToHistory(storage.value)
+      const withClassifications = await addClassificationsToHistory(storage.value)
+      storage.value = await addHandicapToHistory(withClassifications)
     }
   };
 }

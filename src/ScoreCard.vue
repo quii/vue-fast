@@ -181,12 +181,12 @@ function showSaveConfirmation() {
   showSaveModal.value = true;
 }
 
-function handleSaveFromModal(data) {
+async function handleSaveFromModal(data) {
   // Update date and status from modal
   date.value = data.date;
 
   try {
-    const id = history.add(
+    const id = await history.add(
       date.value,
       runningTotal.value,
       gameTypeStore.type,

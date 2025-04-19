@@ -21,7 +21,7 @@ export const useHistoryStore = defineStore("history", () => {
 
   setTimeout(async () => {
     await playerHistory.backfillClassifications()
-  }, 0)
+  }, 0);
 
   return {
     history: state,
