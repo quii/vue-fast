@@ -7,7 +7,6 @@ import InteractiveTargetFace from "@/components/scoring/InteractiveTargetFace.vu
 import ScoreButtons from "@/components/scoring/ScoreButtons.vue";
 import UserNotes from "@/components/UserNotes.vue";
 import TopBar from "@/components/TopBar.vue";
-import HistoryCard from "@/components/HistoryCard.vue";
 import { insults } from "@/domain/insults";
 import { X } from "@/domain/scoring/game_type_config.js";
 import { calculateMaxPossibleScore, convertToValues } from "@/domain/scoring/scores.js";
@@ -200,8 +199,6 @@ async function handleSaveFromModal(data) {
     notesStore.assignPendingNotesToShoot(id);
     scoresStore.clear();
     showSaveModal.value = false;
-    toast.success("Scores saved, please find them in the history");
-
   } catch (error) {
     console.log(error);
     toast.error("Error saving scores", error);
@@ -240,7 +237,6 @@ function saveNote(text) {
   notesStore.addPendingNote(currentEnd, text);
   noteText.value = "";
   showNoteTaker.value = false;
-  toast.success("Note saved");
 }
 
 function handleTakeNote() {
