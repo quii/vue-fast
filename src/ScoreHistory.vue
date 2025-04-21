@@ -90,15 +90,13 @@
         </div>
       </div>
 
-      <div class="history-cards">
-        <div
-          v-for="item in filteredHistory"
-          :key="`${item.id}-${item.date}-${item.gameType}-${item.score}`"
-          @click="view(item.id)"
-        >
-          <HistoryCard :item="item" />
-        </div>
-      </div>
+      <RecycleScroller :items="filteredHistory"
+                       :item-size="95"
+                       v-slot="{ item }"
+                       key-field="id"
+                       class="history-cards">
+        <HistoryCard :item="item" @click="view(item.id)" />
+      </RecycleScroller>
       <p>You have recorded {{ totalArrows }} arrows shot!</p>
     </div>
 
