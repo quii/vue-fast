@@ -26,7 +26,7 @@ import {
 import { calculateSubtotals } from "@/domain/scoring/subtotals";
 import { calculateAverageScorePerEnd } from "@/domain/scoring/distance_totals";
 import { useRoute, useRouter } from "vue-router";
-import { getAllShootStatuses, DEFAULT_SHOOT_STATUS } from "@/domain/shoot/shoot_status.js";
+import { DEFAULT_SHOOT_STATUS } from '@/domain/shoot/shoot_status.js'
 
 const synth = window.speechSynthesis;
 const router = useRouter();
@@ -37,15 +37,12 @@ const arrowHistoryStore = useArrowHistoryStore();
 const userStore = useUserStore();
 const notesStore = useNotesStore();
 const history = useHistoryStore();
-const selectedShootStatus = ref(DEFAULT_SHOOT_STATUS);
-const shootStatuses = getAllShootStatuses();
 
 const route = useRoute();
 
 watch(() => route.query.selectedRound, (newRound) => {
   if (newRound) {
     gameTypeStore.setGameType(newRound);
-    // Clear the query parameter after using it
     router.replace({ query: {} });
   }
 }, { immediate: true });
@@ -74,15 +71,6 @@ const averageScoresPerEnd = computed(() =>
   calculateAverageScorePerEnd(scoresStore.scores, gameTypeStore.currentRound.endSize, gameTypeStore.type)
 );
 
-const userProfile = computed(() => {
-  return {
-    gender: userStore.user.gender,
-    ageGroup: userStore.user.ageGroup,
-    bowType: userStore.user.bowType,
-    classification: userStore.user.classification
-  };
-});
-
 const canSaveAnytime = computed(() =>
   gameTypeStore.currentRound.canSaveAnytime && scoresStore.scores.length > 0
 );
@@ -99,9 +87,9 @@ const maxPossibleScore = computed(() => {
 });
 
 const userDetailsSaved = computed(() =>
-  userProfile.value.gender &&
-  userProfile.value.ageGroup &&
-  userProfile.value.bowType
+  userStore.user.gender &&
+  userStore.user.ageGroup &&
+  userStore.user.bowType
 );
 
 const isPracticeRound = computed(() => {
@@ -157,9 +145,9 @@ watch([() => gameTypeStore.type, userDetailsSaved, isPracticeRound], async () =>
 
   classificationCalculator.value = await createClassificationCalculator(
     gameTypeStore.type,
-    userProfile.value.gender,
-    userProfile.value.ageGroup,
-    userProfile.value.bowType,
+    userStore.user.gender,
+    userStore.user.ageGroup,
+    userStore.user.bowType,
     personalBest.value
   );
 }, { immediate: true });
@@ -191,7 +179,7 @@ async function handleSaveFromModal(data) {
       gameTypeStore.type,
       [...scoresStore.scores],
       gameTypeStore.currentRound.unit,
-      userProfile.value,
+      userStore.user,
       data.shootStatus // Use the status from the modal
     );
 
@@ -302,7 +290,7 @@ function handleTakeNote() {
                  :game-type="gameTypeStore.type"
                  :endSize="gameTypeStore.currentRound.endSize"
                  :hasX="validScores.includes(X)"
-                 :user-profile="userProfile"
+                 :user-profile="userStore.user"
     />
     <UserNotes :allow-highlight="true" />
 
