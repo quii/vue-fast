@@ -1,5 +1,6 @@
 <script setup>
 import EditIcon from "@/components/icons/EditIcon.vue";
+import ShareIcon from '@/components/icons/ShareIcon.vue'
 import ViewOnlyTargetFace from "@/components/scoring/ViewOnlyTargetFace.vue";
 import { getShootStatusDisplayName } from "@/domain/shoot/shoot_status.js";
 import {useRoute, useRouter} from "vue-router";
@@ -183,12 +184,12 @@ const actionButtons = computed(() => [
     action: "edit"
   },
   {
-    iconComponent: SaveIcon,
-    label: "Save",
-    action: "save"
+    iconComponent: ShareIcon,
+    label: 'Share',
+    action: 'share'
   },
   {
-    iconComponent: ClearIcon, // Reusing ClearIcon for Delete
+    iconComponent: ClearIcon,
     label: "Delete",
     action: "delete",
     variant: "danger"
@@ -198,12 +199,12 @@ const actionButtons = computed(() => [
 function handleAction(actionData) {
   if (actionData.action === "delete") {
     confirmDelete();
-  } else if (actionData.action === "save") {
+  } else if (actionData.action === 'share') {
     handlePrintClick();
   } else if (actionData.action === "toggle-expand") {
     showClassificationDetails.value = !showClassificationDetails.value;
   } else if (actionData.action === "edit") {
-    openEditModal();
+    openEditModal()
   }
 }
 
