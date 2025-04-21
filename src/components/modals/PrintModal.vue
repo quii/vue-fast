@@ -115,12 +115,15 @@ async function generateSvg() {
   isGenerating.value = true
 
   try {
+    // Create a temporary container
     const container = document.createElement('div')
     container.style.position = 'absolute'
     container.style.left = '-9999px'
-    container.style.width = '800px'
+    container.style.width = '800px' // Fixed width for consistent rendering
+    container.style.padding = '20px' // Add padding to the container
     document.body.appendChild(container)
 
+    // Create a Vue app to render the components
     const app = createApp({
       render() {
         return h('div', {
@@ -134,61 +137,186 @@ async function generateSvg() {
           h('h2', {
             style: {
               textAlign: 'center',
-              textTransform: 'capitalize'
+              textTransform: 'capitalize',
+              marginBottom: '15px'
             }
           }, `${props.gameType} - ${props.date}`),
 
           shotAt.value && h('h3', {
             style: {
-              textAlign: 'center'
+              textAlign: 'center',
+              marginBottom: '20px'
             }
           }, `Shot at ${shotAt.value}`),
 
-          h(ArcherDetails, {
-            name: props.archerName,
-            ageGroup: props.ageGroup,
-            gender: props.gender,
-            bowType: props.bowType,
-            status: props.status
-          }),
+          // Custom archer details rendering instead of using the component
+          h('div', {
+            style: {
+              display: 'flex',
+              justifyContent: 'space-between',
+              margin: '20px 0',
+              padding: '15px',
+              border: '1px solid #ccc',
+              borderRadius: '8px',
+              backgroundColor: '#f9f9f9'
+            }
+          }, [
+            // Left column - labels
+            h('div', {
+              style: {
+                flex: '1'
+              }
+            }, [
+              h('div', { style: { fontWeight: 'bold', marginBottom: '8px' } }, 'Archer:'),
+              h('div', { style: { fontWeight: 'bold', marginBottom: '8px' } }, 'Gender:')
+            ]),
 
+            // Left column - values
+            h('div', {
+              style: {
+                flex: '1',
+                textAlign: 'left',
+                paddingLeft: '10px' // Ensure consistent spacing
+              }
+            }, [
+              h('div', { style: { marginBottom: '8px' } }, props.archerName),
+              h('div', {
+                style: {
+                  marginBottom: '8px',
+                  textTransform: 'capitalize' // Capitalize gender
+                }
+              }, props.gender)
+            ]),
+
+            // Right column - labels
+            h('div', {
+              style: {
+                flex: '1',
+                textAlign: 'right',
+                paddingRight: '10px' // Add spacing between label and value
+              }
+            }, [
+              h('div', { style: { fontWeight: 'bold', marginBottom: '8px' } }, 'Bow Type:'),
+              h('div', { style: { fontWeight: 'bold', marginBottom: '8px' } }, 'Age Group:')
+            ]),
+
+            // Right column - values
+            h('div', {
+              style: {
+                flex: '1',
+                textAlign: 'left'
+              }
+            }, [
+              h('div', {
+                style: {
+                  marginBottom: '8px',
+                  textTransform: 'capitalize' // Capitalize bow type
+                }
+              }, props.bowType),
+              h('div', {
+                style: {
+                  marginBottom: '8px',
+                  textTransform: 'capitalize' // Capitalize age group
+                }
+              }, props.ageGroup)
+            ])
+          ]),
           h(RoundScores, {
             scores: props.shoot.scores,
             gameType: props.gameType,
             endSize: props.endSize,
             forceLandscape: true
-          })
-        ])
-      }
-    })
+          }),
 
-    app.component('ArcherDetails', ArcherDetails)
+          // Add an extra spacer div at the bottom
+          h('div', {
+            style: {
+              height: '40px' // Extra space at the bottom
+            }
+          })
+        ]);
+      }
+    });
+
     app.component('RoundScores', RoundScores)
     app.mount(container)
 
+    // Wait a bit for rendering to complete
     await new Promise(resolve => setTimeout(resolve, 100))
 
-    const canvas = document.createElement('canvas')
-    const ctx = canvas.getContext('2d')
+    // Directly modify the table styles in the DOM
+    const tables = container.querySelectorAll('table')
+    tables.forEach(table => {
+      // Add border to table
+      table.style.borderCollapse = 'collapse'
+      table.style.width = '100%'
+      table.style.border = '1px solid #333'
 
-    canvas.width = container.offsetWidth
-    canvas.height = container.offsetHeight
+      // Style all cells
+      const cells = table.querySelectorAll('th, td')
+      cells.forEach(cell => {
+        cell.style.border = '1px solid #333'
+        cell.style.padding = '10px'
+        cell.style.textAlign = 'center'
+      });
 
-    ctx.fillStyle = 'white'
-    ctx.fillRect(0, 0, canvas.width, canvas.height)
+      // Find and style running total rows
+      const rows = table.querySelectorAll('tr')
+      rows.forEach(row => {
+        const cells = row.querySelectorAll('td')
+        cells.forEach(cell => {
+          if (cell.textContent.trim() === 'R/T') {
+            // Style all cells in this row
+            cells.forEach(rowCell => {
+              rowCell.style.fontWeight = 'bold'
+              rowCell.style.backgroundColor = '#f0f0f0'
+            });
+          }
+        });
+      });
 
+      // Style the final score row (last row)
+      if (rows.length > 0) {
+        const lastRow = rows[rows.length - 1]
+        const lastRowCells = lastRow.querySelectorAll('td')
+        lastRowCells.forEach(cell => {
+          cell.style.fontWeight = 'bold'
+          cell.style.backgroundColor = '#e6e6e6'
+          cell.style.fontSize = '1.1em'
+        });
+      }
+    });
+
+    // Calculate dimensions with extra padding for shorter shoots
+    let svgHeight = container.offsetHeight
+
+    // Add extra height for shorter shoots (fewer ends)
+    // The fewer the ends, the more extra space we add
+    const endCount = props.shoot.scores.length
+    if (endCount < 10) {
+      // Add progressively more padding for shorter shoots
+      const extraPadding = Math.max(0, (10 - endCount) * 10)
+      svgHeight += extraPadding
+    }
+
+    // Always add a minimum extra padding
+    svgHeight += 30
+
+    // Convert HTML to SVG using SVG foreignObject
     const data = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="${canvas.width}" height="${canvas.height}">
+      <svg xmlns="http://www.w3.org/2000/svg" width="${container.offsetWidth}" height="${svgHeight}">
         <foreignObject width="100%" height="100%">
           <div xmlns="http://www.w3.org/1999/xhtml">
             ${container.innerHTML}
           </div>
         </foreignObject>
       </svg>
-    `
+    `;
 
+    // Store the SVG data
     svgData.value = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(data)}`
 
+    // Clean up
     app.unmount()
     document.body.removeChild(container)
   } catch (error) {
