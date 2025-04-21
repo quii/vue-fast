@@ -31,7 +31,8 @@ describe("practicing", () => {
 
     // Verify the current score before saving
     scorePage.checkSubTotalScore(expectedScore);
-    scorePage.save();
+    scorePage.saveToHistory()
+    scorePage.save()
 
     historyPage.navigateTo();
 

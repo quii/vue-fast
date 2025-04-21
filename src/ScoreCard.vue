@@ -164,6 +164,13 @@ watch([() => scoresStore.scores, classificationCalculator, totals, averageScores
   );
 }, { immediate: true });
 
+watch(() => maxReached.value, (isMaxReached) => {
+  if (isMaxReached) {
+    // Automatically show the save modal when the shoot is completed
+    showSaveModal.value = true
+  }
+}, { immediate: false })
+
 function showSaveConfirmation() {
   showSaveModal.value = true;
 }
