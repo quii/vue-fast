@@ -19,3 +19,40 @@ export function formatRoundName(roundName) {
     }
   }).join(" ");
 }
+
+export function formatDateContextually(date: string | Date): string {
+  if (!date) return ''
+
+  // Convert to Date object if it's a string
+  const dateObj = date instanceof Date ? date : new Date(date)
+
+  // Check if valid date
+  if (isNaN(dateObj.getTime())) return ''
+
+  // Get current date (reset time to midnight for accurate day comparison)
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+
+  // Reset time on the input date for accurate comparison
+  const targetDate = new Date(dateObj)
+  targetDate.setHours(0, 0, 0, 0)
+
+  // Calculate difference in days
+  const diffTime = today.getTime() - targetDate.getTime()
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24))
+
+  // Return contextual string based on difference
+  if (diffDays === 0) {
+    return 'Today'
+  } else if (diffDays === 1) {
+    return 'Yesterday'
+  } else if (diffDays > 1 && diffDays <= 7) {
+    return `${diffDays} days ago`
+  } else {
+    // Format as DD/MM/YY
+    const day = dateObj.getDate().toString().padStart(2, '0')
+    const month = (dateObj.getMonth() + 1).toString().padStart(2, '0')
+    const year = dateObj.getFullYear().toString().slice(-2)
+    return `${day}/${month}/${year}`
+  }
+}

@@ -15,7 +15,7 @@ describe("data management", () => {
     dataManagementPage.importData("cypress/fixtures/backup-data.json");
 
     historyPage.navigateTo();
-    historyPage.selectHistoryItem("28/06/2023");
+    historyPage.selectHistoryItem('28/06/23')
     historyPage.checkTotalGolds("1");
     historyPage.checkNoteExists("Test note");
     historyPage.checkNoteIsHighlighted("Test note");

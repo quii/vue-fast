@@ -1,11 +1,14 @@
 <script setup>
 import { ref, computed, watch } from "vue";
 import HistoryCard from "@/components/HistoryCard.vue";
+import CompactHistoryCard from '@/components/CompactHistoryCard.vue'
 import BaseModal from "@/components/modals/BaseModal.vue";
 import BaseButton from "@/components/ui/BaseButton.vue";
 import ButtonGroup from "@/components/ui/ButtonGroup.vue";
 import { getAllShootStatuses } from "@/domain/shoot/shoot_status.js";
-
+import { formatRoundName } from '@/domain/scoring/round/formatting.js'
+import { useHistoryStore } from '@/stores/history'
+import { useUserStore } from '@/stores/user'
 const props = defineProps({
   // Common props
   visible: Boolean,
@@ -30,22 +33,58 @@ const props = defineProps({
 
 const emit = defineEmits(["save", "cancel"]);
 
+// Get store instances
+const historyStore = useHistoryStore()
+const userStore = useUserStore()
+
 // Local state for editing
 const date = ref(props.initialDate);
 const shootStatus = ref(props.initialStatus);
+const recentShoots = ref([])
 
 const isToday = computed(() => {
   const today = new Date().toISOString().substr(0, 10);
   return date.value === today;
 });
 
+const formattedRoundName = computed(() => {
+  if (!props.shootData?.gameType) return ''
+  return formatRoundName(props.shootData.gameType)
+})
+
 // Reset form when props change
 watch(() => props.visible, (isVisible) => {
   if (isVisible) {
     date.value = props.initialDate;
     shootStatus.value = props.initialStatus;
+
+    // Fetch recent shoots when modal becomes visible
+    if (!props.isEditMode && props.shootData?.gameType) {
+      fetchRecentShoots()
+    }
   }
 }, { immediate: true });
+
+// Fetch recent shoots of the same game type
+function fetchRecentShoots() {
+  if (!props.shootData?.gameType) return
+
+  // Use getFilteredHistory to get shoots of the same game type
+  const filteredHistory = historyStore.getFilteredHistory({
+    round: props.shootData.gameType
+  }, userStore.user)
+
+  // Take the most recent 3 shoots (excluding the current one if it exists)
+  recentShoots.value = filteredHistory
+    .filter(shoot => {
+      // If the current shoot has an ID, exclude it from recent shoots
+      if (props.shootData.id) {
+        return shoot.id !== props.shootData.id
+      }
+      return true
+    })
+    .slice(0, 3)
+}
 
 // Computed properties for display
 const modalTitle = computed(() => props.isEditMode ? "Edit Shoot" : "Save to History");
@@ -66,6 +105,9 @@ const previewData = computed(() => {
 // Available statuses
 const shootStatuses = getAllShootStatuses();
 
+// Check if we have recent shoots to display
+const hasRecentShoots = computed(() => recentShoots.value.length > 0)
+
 function handleSave() {
   emit("save", {
     date: date.value,
@@ -84,6 +126,18 @@ function handleCancel() {
 
     <div class="history-preview">
       <HistoryCard :item="previewData" />
+    </div>
+
+    <!-- Recent shoots comparison (only show in save mode, not edit mode) -->
+    <div v-if="!isEditMode && hasRecentShoots" class="recent-shoots">
+      <h4>Last {{ recentShoots.length }} {{ formattedRoundName }} shoots:</h4>
+      <div class="recent-shoots-list">
+        <CompactHistoryCard
+          v-for="shoot in recentShoots"
+          :key="shoot.id"
+          :item="shoot"
+        />
+      </div>
     </div>
 
     <!-- Date editing -->
@@ -159,7 +213,7 @@ function handleCancel() {
 
 .date-input:focus {
   outline: none;
-  border-color: var(--color-highlight, #4CAF50);
+  border-color: var(--color-primary);
   box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
 }
 
@@ -167,7 +221,7 @@ function handleCancel() {
   margin: 1.5em 0;
 }
 
-.edit-section h4, .shoot-status-selection h4 {
+.edit-section h4, .shoot-status-selection h4, .recent-shoots h4 {
   margin-top: 0;
   margin-bottom: 0.75em;
   font-weight: 600;
@@ -199,7 +253,7 @@ function handleCancel() {
 }
 
 .radio-option input[type="radio"]:checked {
-  border-color: var(--color-highlight, #4CAF50);
+  border-color: var(--color-primary);
 }
 
 .radio-option input[type="radio"]:checked::before {
@@ -210,7 +264,7 @@ function handleCancel() {
   transform: translate(-50%, -50%);
   width: 0.6em;
   height: 0.6em;
-  background-color: var(--color-highlight, #4CAF50);
+  background-color: var(--color-primary);
   border-radius: 50%;
 }
 
@@ -224,12 +278,26 @@ function handleCancel() {
   right: 10px;
   top: 50%;
   transform: translateY(-50%);
-  background-color: var(--color-highlight, #4CAF50);
+  background-color: var(--color-primary);
   color: white;
   padding: 2px 8px;
   border-radius: 12px;
   font-size: 0.75em;
   font-weight: 600;
   pointer-events: none; /* So it doesn't interfere with the date picker */
+}
+
+/* Recent shoots styling */
+.recent-shoots {
+  margin: 1.5em 0;
+  padding: 1em;
+  background-color: var(--color-background-soft, #f5f5f5);
+  border-radius: 8px;
+}
+
+.recent-shoots-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
 }
 </style>
