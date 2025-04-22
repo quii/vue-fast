@@ -172,18 +172,24 @@ function skipTutorial() {
   bottom: 20%;
   left: 50%;
   transform: translateX(-50%);
-  background-color: white;
+  background-color: var(--color-background);
+  color: var(--color-text);
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   width: 85%;
   max-width: 400px;
   z-index: 1002;
+  border: 1px solid var(--color-border);
 }
 
 .tutorial-tooltip h3 {
   margin-top: 0;
   color: var(--color-primary, #4caf50);
+}
+
+.tutorial-tooltip p {
+  color: var(--color-text);
 }
 
 .tutorial-actions {
@@ -205,7 +211,7 @@ function skipTutorial() {
 .skip-button {
   background-color: transparent;
   border: none;
-  color: #666;
+  color: var(--color-text-light);
   cursor: pointer;
   padding: 0.5rem 1rem;
 }
