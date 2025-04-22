@@ -35,6 +35,8 @@ class ScorePage {
   _selectRound(roundName, filterType = null) {
     this.tapRoundSelector();
 
+    cy.contains('Got it!').click()
+
     // Check if the profile setup form is visible and fill it out if needed
     cy.get("body").then(($body) => {
       if ($body.find(".profile-setup-section").length > 0) {

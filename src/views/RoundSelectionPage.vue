@@ -1,6 +1,7 @@
 <script setup>
 import CardModeToggle from "@/components/CardModeToggle.vue";
 import RoundCard from "@/components/RoundCard.vue";
+import RoundSelectionTipModal from '@/components/modals/RoundSelectionTipModal.vue'
 import { meters, toMeters, toYards, yards } from "@/domain/distance/distance.js";
 import { classificationList } from "@/domain/scoring/classificationList.js";
 import { gameTypes } from "@/domain/scoring/game_types";
@@ -10,6 +11,7 @@ import { useSearchPreferencesStore } from "@/stores/searchPreferences";
 import { useUserStore } from "@/stores/user";
 import { computed, onMounted, ref, watchEffect } from "vue";
 import { useRouter } from "vue-router";
+import { usePreferencesStore } from '@/stores/preferences'
 
 defineProps({
   returnTo: {
@@ -29,6 +31,8 @@ onMounted(() => {
 const router = useRouter();
 const userStore = useUserStore();
 const searchPreferencesStore = useSearchPreferencesStore();
+const preferencesStore = usePreferencesStore()
+const showRoundSelectionTip = ref(!preferencesStore.hasSeenRoundSelectionTip)
 
 // User profile state
 const selectedAgeGroup = ref(userStore.user.ageGroup || "");
@@ -315,10 +319,33 @@ function toggleChallengingRounds() {
   searchPreferencesStore.toggleChallengingRounds();
 }
 
+function handleReset() {
+  // Reset all filters to default values
+  searchPreferencesStore.updateSearchQuery('')
+  searchPreferencesStore.updatePreferences({
+    indoorSelected: true,
+    outdoorSelected: true,
+    metricSelected: true,
+    imperialSelected: true,
+    practiceSelected: false,
+    challengingRoundsOnly: false,
+    minDistance: 0,
+    maxDistance: 100
+  })
+}
+
+function dismissRoundSelectionTip() {
+  preferencesStore.dismissRoundSelectionTip()
+  showRoundSelectionTip.value = false
+}
+
 </script>
 
 <template>
   <div class="round-selection-page">
+    <!-- Show the tip modal if the user hasn't seen it yet -->
+    <RoundSelectionTipModal v-if="showRoundSelectionTip" @close="dismissRoundSelectionTip" />
+
     <!-- User Profile Setup Section (shown when details are missing) -->
     <div v-if="!userHasRequiredDetails" class="profile-setup-section">
       <h2>Complete Your Profile</h2>
@@ -600,7 +627,14 @@ function toggleChallengingRounds() {
 
       <!-- Message when no rounds match filters -->
       <div v-if="filteredRounds.length === 0" class="no-rounds-message">
-        <p>No rounds match your current filters. Try adjusting your filters or increasing your maximum distance.</p>
+        <p>No rounds match your current filters.</p>
+        <ul class="help-suggestions">
+          <li>Try increasing your maximum distance (currently {{ displayedMaxDistance }} {{ distanceUnit }})</li>
+          <li>Check that you have selected the correct environment (Indoor/Outdoor)</li>
+          <li>Clear your search query if you have one</li>
+          <li>Try toggling between Metric and Imperial rounds</li>
+        </ul>
+        <button @click="handleReset" class="reset-filters-button">Reset All Filters</button>
       </div>
 
       <!-- Rounds categorized by length -->
@@ -942,5 +976,144 @@ function toggleChallengingRounds() {
   font-weight: 600;
   cursor: pointer;
   padding: 0.25em 0.5em;
+}
+
+.instruction-panel {
+  background-color: var(--color-background-soft);
+  border-left: 3px solid var(--color-highlight, #4CAF50);
+  padding: 0.75em 1em;
+  margin-bottom: 1em;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.filter-section-label {
+  font-size: 0.85em;
+  color: var(--color-text-light);
+  margin-bottom: 0.5em;
+  padding-left: 0.5em;
+}
+
+.round-card {
+  position: relative;
+}
+
+.tap-indicator {
+  position: absolute;
+  bottom: 5px;
+  right: 8px;
+  font-size: 0.7em;
+  color: var(--color-text-light);
+  opacity: 0.7;
+}
+
+.game-type-selector {
+  margin-top: 1em;
+  padding: 0.75em;
+  background-color: var(--color-background-soft);
+  border-radius: 8px;
+  position: relative;
+}
+
+.game-type-selector::after {
+  content: "Tap to change round";
+  position: absolute;
+  right: 1em;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.8em;
+  color: var(--color-text-light);
+  opacity: 0.8;
+}
+
+.no-rounds-message {
+  background-color: var(--color-background-soft);
+  border-radius: 8px;
+  padding: 1em;
+  margin: 1em 0;
+}
+
+.help-suggestions {
+  margin: 0.5em 0;
+  padding-left: 1.5em;
+  font-size: 0.9em;
+}
+
+.reset-filters-button {
+  background-color: var(--color-highlight, #4CAF50);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5em 1em;
+  margin-top: 0.5em;
+  cursor: pointer;
+}
+
+.round-selection-tip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+}
+
+.tip-content {
+  background-color: var(--color-background);
+  border-radius: 8px;
+  padding: 1.5em;
+  max-width: 90%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.dismiss-tip-button {
+  background-color: var(--color-highlight, #4CAF50);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.75em 1.5em;
+  margin-top: 1em;
+  width: 100%;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.round-selection-tip {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1em;
+}
+
+.tip-content {
+  background-color: var(--color-background);
+  border-radius: 8px;
+  padding: 1.5em;
+  max-width: 90%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.dismiss-tip-button {
+  background-color: var(--color-highlight, #4CAF50);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.75em 1.5em;
+  margin-top: 1em;
+  width: 100%;
+  font-weight: bold;
+  cursor: pointer;
 }
 </style>
