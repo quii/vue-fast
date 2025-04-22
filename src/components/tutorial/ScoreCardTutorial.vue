@@ -26,6 +26,11 @@ const highlightPosition = ref({})
 
 const steps = [
   {
+    targetSelector: 'body', // Just target the body for the intro step
+    title: 'Welcome to Fast!',
+    content: 'This tutorial will guide you through the basics of scoring a round. We\'ll show you how to select rounds, enter scores, and use the top bar features.'
+  },
+  {
     targetSelector: '.game-type-selector',
     title: 'Round Selection',
     content: 'This is the round you are currently shooting. If you wish to change it, tap it to go to the round selector and pick a different one.'
@@ -33,12 +38,17 @@ const steps = [
   {
     targetSelector: '.score-buttons, .interactive-target-face',
     title: 'Scoring',
-    content: 'Tap the numbers to record your score. Fast will automatically do all the maths for you! You can rotate your phone landscape to see the full scorecard'
+    content: 'Tap the numbers to record your score. Fast will automatically do all the maths for you! You can rotate your phone landscape to see the full scorecard.'
   },
   {
     targetSelector: '.top-bar-container',
     title: 'Top Bar',
     content: 'Here you can clear scores, take notes, or press the "Class" button to see classification details and score requirements for your current round.'
+  },
+  {
+    targetSelector: 'body', // Target the body for the final step
+    title: 'Saving Your Shoot',
+    content: 'When you\'ve shot all the required arrows for your round, you\'ll be prompted to save your shoot. You can then view and analyze your performance in the History tab.'
   }
 ]
 
@@ -53,6 +63,20 @@ watch([currentStep, () => props.visible], () => {
 
 function updateHighlightPosition() {
   const step = steps[currentStep.value]
+
+  // For intro and final steps, center the highlight in the middle of the screen
+  if (step.targetSelector === 'body' && (currentStep.value === 0 || currentStep.value === steps.length - 1)) {
+    highlightPosition.value = {
+      top: '50%',
+      left: '50%',
+      width: '80%',
+      height: '100px',
+      transform: 'translate(-50%, -50%)',
+      opacity: '0' // Make it invisible for intro/final steps
+    }
+    return
+  }
+
   const elements = document.querySelectorAll(step.targetSelector)
 
   if (elements.length === 0) {
@@ -84,7 +108,8 @@ function updateHighlightPosition() {
       top: `${minY}px`,
       left: `${minX}px`,
       width: `${maxX - minX}px`,
-      height: `${maxY - minY}px`
+      height: `${maxY - minY}px`,
+      opacity: '1'
     }
   } else {
     // Single element
@@ -93,7 +118,8 @@ function updateHighlightPosition() {
       top: `${rect.top}px`,
       left: `${rect.left}px`,
       width: `${rect.width}px`,
-      height: `${rect.height}px`
+      height: `${rect.height}px`,
+      opacity: '1'
     }
   }
 }
@@ -165,6 +191,7 @@ function skipTutorial() {
   border-radius: 4px;
   box-shadow: 0 0 0 2000px rgba(0, 0, 0, 0.7);
   pointer-events: none;
+  transition: all 0.3s ease;
 }
 
 .tutorial-tooltip {

@@ -14,33 +14,53 @@ class ScorePage {
   // Helper method to dismiss the tutorial if it's visible
   dismissTutorialIfVisible() {
     // Use cy.get with { timeout: 1000 } to avoid long waits if the tutorial isn't there
-    cy.get('body').then(($body) => {
+    cy.get('body', { timeout: 2000 }).then(($body) => {
       if ($body.find('.tutorial-overlay').length > 0) {
         // Tutorial is visible, click through all steps
         cy.log('Tutorial detected, clicking through steps')
 
         // Keep clicking "Next" until we see "Got it!" button
+        let stepCount = 0
+        const maxSteps = 10 // Safety limit to prevent infinite loops
+
         const clickNextUntilDone = () => {
+          // Increment step counter
+          stepCount++
+
+          // Safety check to prevent infinite recursion
+          if (stepCount > maxSteps) {
+            cy.log('Maximum tutorial steps exceeded, forcing continue')
+            return
+          }
+
           cy.get('body').then(($body) => {
             if ($body.find('.tutorial-overlay').length > 0) {
               // Check if the last step button (Got it!) is visible
-              if ($body.find('.next-button:contains(\'Got it!\')').length > 0) {
+              if ($body.find('.next-button:contains("Got it!")').length > 0) {
+                cy.log(`Tutorial step ${stepCount}: Clicking "Got it!" to finish`)
                 cy.get('.next-button').contains('Got it!').click()
               } else {
                 // Click Next and continue
+                cy.log(`Tutorial step ${stepCount}: Clicking "Next"`)
                 cy.get('.next-button').contains('Next').click()
+
+                // Wait a moment for the transition to complete
+                cy.wait(300)
+
                 // Recursively check and click until done
                 clickNextUntilDone()
               }
+            } else {
+              cy.log('Tutorial dismissed successfully')
             }
-          })
-        }
+          });
+        };
 
         clickNextUntilDone()
       } else {
         cy.log('No tutorial detected, continuing')
       }
-    })
+    });
   }
 
   clearData() {
@@ -230,16 +250,6 @@ class ScorePage {
     });
   }
 
-  checkOnTrackStatus(isOnTrack) {
-    // First ensure the classification details are expanded
-    cy.get(".classification-details-container").should("be.visible");
-
-    if (isOnTrack) {
-      cy.get(".avgOnTrack").should("exist");
-    } else {
-      cy.get(".avgOffTrack").should("exist");
-    }
-  }
 
   checkClassificationAchieved(classification) {
     // Check for the classification badge and then verify the achieved class
