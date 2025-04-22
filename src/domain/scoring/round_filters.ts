@@ -15,9 +15,13 @@ export type RoundFilterConfig = Record<string, Pick<GameTypeConfig, "isOutdoor" 
 
 export function createRoundFilter(config: RoundFilterConfig = gameTypeConfig) {
   return function filterRounds(roundNames: string[], filters: GameTypeFilters): string[] {
-    let filteredTypes = filters.searchQuery ? filterByName(roundNames, filters.searchQuery) : roundNames;
+    // If searchQuery is defined, use it as the only filter
+    if (filters.searchQuery) {
+      return filterByName(roundNames, filters.searchQuery)
+    }
 
-    return filteredTypes.filter(type => {
+    // Otherwise, apply all other filters
+    return roundNames.filter(type => {
       const { isOutdoor, isImperial, isPracticeRound, maxDistanceYards } = config[type.toLowerCase()];
 
       const passesMaxDistanceFilter = maxDistanceYards <= filters.maxDistance;
@@ -31,7 +35,6 @@ export function createRoundFilter(config: RoundFilterConfig = gameTypeConfig) {
     });
   };
 }
-
 function filterByName(types: string[], filter: string) {
   const query = filter.toLowerCase();
   return types.filter(type =>

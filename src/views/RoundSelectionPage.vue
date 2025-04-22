@@ -774,7 +774,7 @@ function toggleChallengingRounds() {
 .distance-sliders-container {
   background-color: var(--color-background-soft);
   border-radius: 8px;
-  padding: 1em;
+  padding: 1em 1em 0.25em 1em;
   margin-bottom: 1em;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }

@@ -36,48 +36,54 @@ describe("round filters", () => {
   const allRounds = ["National", "Bray I", "Practice Round", "WA 70m"];
 
   describe("search filtering", () => {
-    it("should filter rounds by name when search query is provided", () => {
+    it('should filter rounds by name when search query is provided, ignoring other filters', () => {
       const filters: GameTypeFilters = {
-        showIndoor: true,
-        showOutdoor: true,
-        showMetric: true,
-        showImperial: true,
-        showPractice: false,
-        maxDistance: 100,
-        searchQuery: "national",
-        minDistance: 0
+        showIndoor: false, // This would normally exclude indoor rounds
+        showOutdoor: false, // This would normally exclude outdoor rounds
+        showMetric: false, // This would normally exclude metric rounds
+        showImperial: false, // This would normally exclude imperial rounds
+        showPractice: false, // This would normally exclude practice rounds
+        maxDistance: 0, // This would normally exclude all rounds
+        searchQuery: 'bray',
+        minDistance: 100 // This would normally exclude all rounds
       };
-      expect(testFilterRounds(allRounds, filters)).toEqual(["National"]);
+
+      // Despite all other filters that would exclude everything,
+      // we should still get "Bray I" because searchQuery is the only filter that matters
+      expect(testFilterRounds(allRounds, filters)).toEqual(['Bray I'])
     });
 
-    it("should handle case-insensitive search", () => {
+    it('should handle case-insensitive search, ignoring other filters', () => {
       const filters: GameTypeFilters = {
-        showIndoor: true,
+        showIndoor: false,
         showOutdoor: true,
-        showMetric: true,
+        showMetric: false,
         showImperial: true,
         showPractice: false,
-        maxDistance: 100,
-        searchQuery: "bray",
+        maxDistance: 50, // This would normally exclude National
+        searchQuery: 'national',
         minDistance: 0
       };
 
-      expect(testFilterRounds(allRounds, filters)).toEqual(["Bray I"]);
+      // Despite maxDistance filter that would exclude National,
+      // we should still get it because searchQuery is the only filter that matters
+      expect(testFilterRounds(allRounds, filters)).toEqual(['National'])
     });
 
-    it("should return all non-practice rounds when search query is empty", () => {
+    it('should return all matching rounds for search query regardless of other filters', () => {
       const filters: GameTypeFilters = {
-        showIndoor: true,
-        showOutdoor: true,
-        showMetric: true,
-        showImperial: true,
+        showIndoor: false,
+        showOutdoor: false,
+        showMetric: false,
+        showImperial: false,
         showPractice: false,
-        maxDistance: 100,
-        searchQuery: "",
-        minDistance: 0
+        maxDistance: 0,
+        searchQuery: 'a', // Matches National, Bray I, Practice Round, WA 70m
+        minDistance: 100
       };
 
-      expect(testFilterRounds(allRounds, filters)).toEqual(["National", "Bray I", "WA 70m"]);
+      // All rounds contain "a", so all should be returned despite other restrictive filters
+      expect(testFilterRounds(allRounds, filters)).toEqual(['National', 'Bray I', 'Practice Round', 'WA 70m'])
     });
   });
 
@@ -260,7 +266,7 @@ describe("round filters", () => {
       };
 
       // Should match rounds with 'a' that aren't practice rounds
-      expect(testFilterRounds(allRounds, filters)).toEqual(["National", "Bray I", "WA 70m"]);
+      expect(testFilterRounds(allRounds, filters)).toEqual(['National', 'Bray I', 'Practice Round', 'WA 70m'])
     });
   });
 
@@ -373,7 +379,6 @@ describe("round filters", () => {
         showPractice: false,
         maxDistance: 80,
         minDistance: 30,
-        searchQuery: "a"  // Matches National, Bray I, WA 70m
       };
 
       // Should match rounds with 'a' that are between 30-80 yards and aren't practice rounds
@@ -411,4 +416,55 @@ describe("round filters", () => {
       expect(testFilterRounds(allRounds, filters)).toEqual(["National", "Bray I", "WA 70m"]);
     });
   });
+
+  describe('combined filtering with search query', () => {
+    it('should ignore all other filters when search query is provided', () => {
+      const filters: GameTypeFilters = {
+        showIndoor: false,
+        showOutdoor: false,
+        showMetric: false,
+        showImperial: false,
+        showPractice: false,
+        maxDistance: 0,
+        minDistance: 100,
+        searchQuery: 'wa'
+      }
+
+      // Despite all filters being set to exclude everything,
+      // "WA 70m" should still be returned because it matches the search query
+      expect(testFilterRounds(allRounds, filters)).toEqual(['WA 70m'])
+    })
+
+    it('should apply all filters normally when search query is empty', () => {
+      const filters: GameTypeFilters = {
+        showIndoor: false,
+        showOutdoor: true,
+        showMetric: false,
+        showImperial: true,
+        showPractice: false,
+        maxDistance: 60,
+        minDistance: 0,
+        searchQuery: ''
+      }
+
+      // Should only return National (outdoor, imperial, not practice, max 60 yards)
+      expect(testFilterRounds(allRounds, filters)).toEqual(['National'])
+    })
+
+    it('should apply all filters normally when search query is undefined', () => {
+      const filters: GameTypeFilters = {
+        showIndoor: false,
+        showOutdoor: true,
+        showMetric: false,
+        showImperial: true,
+        showPractice: false,
+        maxDistance: 60,
+        minDistance: 0,
+        searchQuery: undefined
+      }
+
+      // Should only return National (outdoor, imperial, not practice, max 60 yards)
+      expect(testFilterRounds(allRounds, filters)).toEqual(['National'])
+    })
+  })
 });
