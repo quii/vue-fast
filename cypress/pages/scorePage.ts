@@ -13,13 +13,22 @@ class ScorePage {
 
   // Helper method to dismiss the tutorial if it's visible
   dismissTutorialIfVisible() {
-    // Use cy.get with { timeout: 1000 } to avoid long waits if the tutorial isn't there
-    cy.get('body', { timeout: 2000 }).then(($body) => {
+    // First check if the tutorial overlay exists
+    cy.get('body').then(($body) => {
       if ($body.find('.tutorial-overlay').length > 0) {
-        // Tutorial is visible, click through all steps
         cy.log('Tutorial detected, clicking through steps')
 
-        // Keep clicking "Next" until we see "Got it!" button
+        // Try the Skip button first as a faster alternative
+        if ($body.find('.skip-button').length > 0) {
+          cy.log('Skip button found, using it to dismiss tutorial')
+          cy.get('.skip-button').click({ force: true })
+
+          // Verify the tutorial is gone
+          cy.get('.tutorial-overlay').should('not.exist')
+          return
+        }
+
+        // If Skip button approach didn't work, click through all steps
         let stepCount = 0
         const maxSteps = 10 // Safety limit to prevent infinite loops
 
@@ -30,19 +39,25 @@ class ScorePage {
           // Safety check to prevent infinite recursion
           if (stepCount > maxSteps) {
             cy.log('Maximum tutorial steps exceeded, forcing continue')
+            // Try to force-click the Got it button as a last resort
+            cy.get('.next-button').click({ force: true })
             return
           }
 
-          cy.get('body').then(($body) => {
-            if ($body.find('.tutorial-overlay').length > 0) {
+          // Check if tutorial is still visible
+          cy.get('body').then(($updatedBody) => {
+            if ($updatedBody.find('.tutorial-overlay').length > 0) {
               // Check if the last step button (Got it!) is visible
-              if ($body.find('.next-button:contains("Got it!")').length > 0) {
+              if ($updatedBody.find('.next-button:contains("Got it!")').length > 0) {
                 cy.log(`Tutorial step ${stepCount}: Clicking "Got it!" to finish`)
-                cy.get('.next-button').contains('Got it!').click()
+                cy.get('.next-button').contains('Got it!').click({ force: true })
+
+                // Verify the tutorial is gone
+                cy.get('.tutorial-overlay').should('not.exist')
               } else {
                 // Click Next and continue
                 cy.log(`Tutorial step ${stepCount}: Clicking "Next"`)
-                cy.get('.next-button').contains('Next').click()
+                cy.get('.next-button').contains('Next').click({ force: true })
 
                 // Wait a moment for the transition to complete
                 cy.wait(300)
@@ -73,6 +88,7 @@ class ScorePage {
 
   tapRoundSelector() {
     cy.get(".round-card-wrapper").click();
+    cy.wait(500)
     cy.get('body').then(($body) => {
       if ($body.find('.profile-setup-section').length > 0) {
         cy.contains('label', 'Age Group').parent().find('select').select('Senior')
@@ -112,10 +128,34 @@ class ScorePage {
     // Check if the tutorial appears after tapping round selector and dismiss it
     this.dismissTutorialIfVisible()
 
+    // Check if the Round Selection Tip Modal is visible and dismiss it
+    cy.get('body').then(($body) => {
+      if ($body.find('button:contains(\'Got it!\')').length > 0) {
+        cy.contains('Got it!').click()
+      }
+    });
+
+    cy.wait(500)
+
+    cy.get('body').then(($body) => {
+      if ($body.find('.profile-setup-section').length > 0) {
+        cy.log('Profile setup form detected, filling out details')
+
+          cy.contains('Age Group').parents('.form-group').find('select').select('senior', { force: true })
+          cy.contains('Gender').parents('.form-group').find('select').select('male', { force: true })
+          cy.contains('Bow Type').parents('.form-group').find('select').select('recurve', { force: true })
+      }
+    })
+
+    cy.get('body').then(($body) => {
+      if ($body.find('button:contains(\'Got it!\')').length > 0) {
+        cy.contains('Got it!').click()
+      }
+    })
 
     // Apply filter if specified
     if (filterType) {
-      cy.get(".filter-label").contains(filterType).click();
+      cy.get('.filter-label').contains(filterType).click({ force: true })
     }
 
     // Try to find the search input, but don't fail if it doesn't exist
@@ -126,21 +166,31 @@ class ScorePage {
       }
     });
 
-    // Find the round card with the exact matching round name
-    cy.get(".rounds-container .round-name").each(($el) => {
-      const text = $el.text().trim().toLowerCase();
-      const searchName = roundName.toLowerCase();
+    // Wait for filtering to complete
+    cy.wait(500)
 
-      // Check for exact match or match with formatting differences
-      if (text === searchName ||
-        text === searchName.charAt(0).toUpperCase() + searchName.slice(1) ||
-        // Handle special case for rounds with roman numerals
-        text.replace(/\s+/g, " ") === searchName.replace(/\s+/g, " ")) {
-        cy.wrap($el).click();
-        return false; // Break the each loop
-      }
+    // Find the round card with the exact matching round name
+    cy.get('.rounds-container').should('exist').then(() => {
+      cy.get('.rounds-container .round-name').each(($el) => {
+        const text = $el.text().trim().toLowerCase()
+        const searchName = roundName.toLowerCase()
+
+        // Check for exact match or match with formatting differences
+        if (text === searchName ||
+          text === searchName.charAt(0).toUpperCase() + searchName.slice(1) ||
+          // Handle special case for rounds with roman numerals
+          text.replace(/\s+/g, ' ') === searchName.replace(/\s+/g, ' ')) {
+
+          // Scroll the element into view and force click
+          cy.wrap($el).scrollIntoView()
+          cy.wrap($el).click({ force: true })
+
+          return false // Break the each loop
+        }
+      });
     });
   }
+
 
   selectPractice(distance) {
     const gameName = `Practice ${distance}`;

@@ -76,10 +76,8 @@ if ("serviceWorker" in navigator) {
       }, intervalMS);
     },
     onOfflineReady() {
-      toast.success("App ready for offline use");
     },
     onNeedRefresh() {
-      toast.info("Updating to new version...");
       setTimeout(() => {
         window.location.reload();
       }, 1000);
