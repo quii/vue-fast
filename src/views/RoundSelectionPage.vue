@@ -10,6 +10,9 @@ import PracticeIcon from '@/components/icons/PracticeIcon.vue'
 import TargetIcon from '@/components/icons/TargetIcon.vue'
 import SearchIcon from '@/components/icons/SearchIcon.vue'
 import CloseIcon from '@/components/icons/CloseIcon.vue'
+import SectionCard from '@/components/ui/SectionCard.vue'
+import FormGroup from '@/components/ui/FormGroup.vue'
+import BaseSelect from '@/components/ui/BaseSelect.vue'
 import { meters, toMeters, toYards, yards } from "@/domain/distance/distance.js";
 import { classificationList } from "@/domain/scoring/classificationList.js";
 import { gameTypes } from "@/domain/scoring/game_types";
@@ -40,9 +43,22 @@ const router = useRouter();
 const userStore = useUserStore();
 const searchPreferencesStore = useSearchPreferencesStore();
 const preferencesStore = usePreferencesStore()
-const showRoundSelectionTip = ref(!preferencesStore.hasSeenRoundSelectionTip)
+const manuallyTriggeredTip = ref(false)
+
+// Compute whether to show the tip based on conditions
+const showRoundSelectionTip = computed(() => {
+  // Show if:
+  // 1. User has required details AND
+  // 2. Either they haven't seen the tip before OR they manually triggered it
+  return userHasRequiredDetails.value &&
+    (manuallyTriggeredTip.value || !preferencesStore.hasSeenRoundSelectionTip)
+})
+
+// Function to manually show the tip
 const manuallyShowTip = () => {
-  showRoundSelectionTip.value = true
+  if (userHasRequiredDetails.value) {
+    manuallyTriggeredTip.value = true
+  }
 }
 
 // User profile state
@@ -347,7 +363,7 @@ function handleReset() {
 
 function dismissRoundSelectionTip() {
   preferencesStore.dismissRoundSelectionTip()
-  showRoundSelectionTip.value = false
+  manuallyTriggeredTip.value = false
 }
 
 </script>
@@ -359,13 +375,12 @@ function dismissRoundSelectionTip() {
 
     <!-- User Profile Setup Section (shown when details are missing) -->
     <div v-if="!userHasRequiredDetails" class="profile-setup-section">
-      <h2>Complete Your Profile</h2>
-      <p>To see rounds that match your skill level, please provide the following information:</p>
+      <SectionCard title="Complete Your Profile">
+        <p class="profile-intro">To see rounds that match your skill level, please provide the following
+          information:</p>
 
-      <div class="profile-form">
-        <div class="form-group">
-          <label for="age-group">Age Group</label>
-          <select id="age-group" v-model="selectedAgeGroup" @change="saveUserProfile">
+        <FormGroup label="Age Group">
+          <BaseSelect v-model="selectedAgeGroup" @change="saveUserProfile">
             <option disabled value="">Select age group</option>
             <option>50+</option>
             <option value="senior">Senior</option>
@@ -375,34 +390,30 @@ function dismissRoundSelectionTip() {
             <option value="u15">Under 15</option>
             <option value="u14">Under 14</option>
             <option value="u12">Under 12</option>
-          </select>
-        </div>
+          </BaseSelect>
+        </FormGroup>
 
-        <div class="form-group">
-          <label for="gender">Gender</label>
-          <select id="gender" v-model="selectedGender" @change="saveUserProfile">
+        <FormGroup label="Gender">
+          <BaseSelect v-model="selectedGender" @change="saveUserProfile">
             <option disabled value="">Select gender</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
-          </select>
-        </div>
+          </BaseSelect>
+        </FormGroup>
 
-        <div class="form-group">
-          <label for="bow-type">Bow Type</label>
-          <select id="bow-type" v-model="selectedBowtype" @change="saveUserProfile">
+        <FormGroup label="Bow Type">
+          <BaseSelect v-model="selectedBowtype" @change="saveUserProfile">
             <option disabled value="">Select bow type</option>
             <option value="recurve">Recurve</option>
             <option value="barebow">Barebow</option>
             <option value="longbow">Longbow</option>
             <option value="compound">Compound</option>
-          </select>
-        </div>
+          </BaseSelect>
+        </FormGroup>
 
-        <div v-if="selectedBowtype" class="form-group">
-          <label for="outdoor-classification">{{ selectedBowtype.charAt(0).toUpperCase() + selectedBowtype.slice(1) }}
-            Outdoor Classification</label>
-          <select
-            id="outdoor-classification"
+        <FormGroup v-if="selectedBowtype"
+                   :label="`${selectedBowtype.charAt(0).toUpperCase() + selectedBowtype.slice(1)} Outdoor Classification`">
+          <BaseSelect
             v-model="outdoorClassifications[selectedBowtype]"
             @change="updateOutdoorClassification(selectedBowtype, outdoorClassifications[selectedBowtype]); saveUserProfile()"
           >
@@ -410,15 +421,13 @@ function dismissRoundSelectionTip() {
             <option v-for="option in classificationList" :value="option" v-bind:key="option">
               {{ option }}
             </option>
-          </select>
+          </BaseSelect>
           <p class="help-text">If you're unsure, select "Unclassified"</p>
-        </div>
+        </FormGroup>
 
-        <div v-if="selectedBowtype" class="form-group">
-          <label for="indoor-classification">{{ selectedBowtype.charAt(0).toUpperCase() + selectedBowtype.slice(1) }}
-            Indoor Classification</label>
-          <select
-            id="indoor-classification"
+        <FormGroup v-if="selectedBowtype"
+                   :label="`${selectedBowtype.charAt(0).toUpperCase() + selectedBowtype.slice(1)} Indoor Classification`">
+          <BaseSelect
             v-model="indoorClassifications[selectedBowtype]"
             @change="updateIndoorClassification(selectedBowtype, indoorClassifications[selectedBowtype]); saveUserProfile()"
           >
@@ -426,14 +435,12 @@ function dismissRoundSelectionTip() {
             <option v-for="option in classificationList" :value="option" v-bind:key="option">
               {{ option }}
             </option>
-          </select>
+          </BaseSelect>
           <p class="help-text">If you're unsure, select "Unclassified"</p>
-        </div>
-      </div>
+        </FormGroup>
 
-      <div class="profile-note">
-        <p>You can update these details anytime in the "You" tab.</p>
-      </div>
+        <p class="profile-note">You can update these details anytime in the "You" tab.</p>
+      </SectionCard>
     </div>
 
     <!-- Only show this section if user has required details -->
@@ -1161,5 +1168,31 @@ function dismissRoundSelectionTip() {
 /* Ensure the search input takes up remaining space */
 .search-input-wrapper {
   flex: 1;
+}
+
+.profile-setup-section {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.profile-intro {
+  margin-bottom: 1rem;
+  color: var(--color-text);
+}
+
+.help-text {
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+}
+
+.profile-note {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background-color: var(--color-background-soft);
+  border-left: 3px solid var(--color-highlight, #4CAF50);
+  border-radius: 4px;
+  font-size: 0.9rem;
 }
 </style>
