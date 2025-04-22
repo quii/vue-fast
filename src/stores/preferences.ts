@@ -4,7 +4,8 @@ export const usePreferencesStore = defineStore("preferences", {
   state: () => ({
     hasSeenPrintTip: localStorage.getItem("hasSeenPrintTip") === "true",
     hasSeenHistoryTip: localStorage.getItem('hasSeenHistoryTip') === 'true',
-    hasSeenRoundSelectionTip: localStorage.getItem('hasSeenRoundSelectionTip') === 'true'
+    hasSeenRoundSelectionTip: localStorage.getItem('hasSeenRoundSelectionTip') === 'true',
+    hasSeenScoreCardTutorial: localStorage.getItem('hasSeenScoreCardTutorial') === 'true'
   }),
   actions: {
     dismissPrintTip() {
@@ -18,6 +19,10 @@ export const usePreferencesStore = defineStore("preferences", {
     dismissRoundSelectionTip() {
       this.hasSeenRoundSelectionTip = true
       localStorage.setItem('hasSeenRoundSelectionTip', 'true')
+    },
+    dismissScoreCardTutorial() {
+      this.hasSeenScoreCardTutorial = true
+      localStorage.setItem('hasSeenScoreCardTutorial', 'true')
     }
   }
 });

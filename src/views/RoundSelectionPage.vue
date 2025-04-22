@@ -2,6 +2,14 @@
 import CardModeToggle from "@/components/CardModeToggle.vue";
 import RoundCard from "@/components/RoundCard.vue";
 import RoundSelectionTipModal from '@/components/modals/RoundSelectionTipModal.vue'
+import IndoorIcon from '@/components/icons/IndoorIcon.vue'
+import OutdoorIcon from '@/components/icons/OutdoorIcon.vue'
+import MetricIcon from '@/components/icons/MetricIcon.vue'
+import ImperialIcon from '@/components/icons/ImperialIcon.vue'
+import PracticeIcon from '@/components/icons/PracticeIcon.vue'
+import TargetIcon from '@/components/icons/TargetIcon.vue'
+import SearchIcon from '@/components/icons/SearchIcon.vue'
+import CloseIcon from '@/components/icons/CloseIcon.vue'
 import { meters, toMeters, toYards, yards } from "@/domain/distance/distance.js";
 import { classificationList } from "@/domain/scoring/classificationList.js";
 import { gameTypes } from "@/domain/scoring/game_types";
@@ -33,6 +41,9 @@ const userStore = useUserStore();
 const searchPreferencesStore = useSearchPreferencesStore();
 const preferencesStore = usePreferencesStore()
 const showRoundSelectionTip = ref(!preferencesStore.hasSeenRoundSelectionTip)
+const manuallyShowTip = () => {
+  showRoundSelectionTip.value = true
+}
 
 // User profile state
 const selectedAgeGroup = ref(userStore.user.ageGroup || "");
@@ -343,7 +354,7 @@ function dismissRoundSelectionTip() {
 
 <template>
   <div class="round-selection-page">
-    <!-- Show the tip modal if the user hasn't seen it yet -->
+    <!-- Show the tip modal if the user hasn't seen it yet or if manually triggered -->
     <RoundSelectionTipModal v-if="showRoundSelectionTip" @close="dismissRoundSelectionTip" />
 
     <!-- User Profile Setup Section (shown when details are missing) -->
@@ -437,13 +448,7 @@ function dismissRoundSelectionTip() {
             @click="toggleIndoor"
             aria-label="Show indoor rounds"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                 stroke-width="2"
-                 stroke-linecap="round" stroke-linejoin="round" class="filter-icon">
-              <!-- House/Home icon -->
-              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-              <polyline points="9 22 9 12 15 12 15 22"></polyline>
-            </svg>
+            <IndoorIcon class="filter-icon" />
             <span class="filter-label">Indoor</span>
           </button>
 
@@ -454,19 +459,7 @@ function dismissRoundSelectionTip() {
             @click="toggleOutdoor"
             aria-label="Show outdoor rounds"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                 stroke-width="2"
-                 stroke-linecap="round" stroke-linejoin="round" class="filter-icon">
-              <circle cx="12" cy="12" r="5"></circle>
-              <line x1="12" y1="1" x2="12" y2="3"></line>
-              <line x1="12" y1="21" x2="12" y2="23"></line>
-              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-              <line x1="1" y1="12" x2="3" y2="12"></line>
-              <line x1="21" y1="12" x2="23" y2="12"></line>
-              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-            </svg>
+            <OutdoorIcon class="filter-icon" />
             <span class="filter-label">Outdoor</span>
           </button>
 
@@ -477,14 +470,7 @@ function dismissRoundSelectionTip() {
             @click="toggleMetric"
             aria-label="Show metric rounds"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                 stroke-width="2"
-                 stroke-linecap="round" stroke-linejoin="round" class="filter-icon">
-              <line x1="4" y1="9" x2="20" y2="9"></line>
-              <line x1="4" y1="15" x2="20" y2="15"></line>
-              <line x1="10" y1="3" x2="8" y2="21"></line>
-              <line x1="16" y1="3" x2="14" y2="21"></line>
-            </svg>
+            <MetricIcon class="filter-icon" />
             <span class="filter-label">Metric</span>
           </button>
 
@@ -495,14 +481,7 @@ function dismissRoundSelectionTip() {
             @click="toggleImperial"
             aria-label="Show imperial rounds"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                 stroke-width="2"
-                 stroke-linecap="round" stroke-linejoin="round" class="filter-icon">
-              <path d="M6 3v18"></path>
-              <path d="M18 3v18"></path>
-              <path d="M6 8h12"></path>
-              <path d="M6 16h12"></path>
-            </svg>
+            <ImperialIcon class="filter-icon" />
             <span class="filter-label">Imperial</span>
           </button>
 
@@ -513,13 +492,7 @@ function dismissRoundSelectionTip() {
             @click="togglePractice"
             aria-label="Show practice rounds"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                 stroke-width="2"
-                 stroke-linecap="round" stroke-linejoin="round" class="filter-icon">
-              <circle cx="12" cy="12" r="10"></circle>
-              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-              <line x1="12" y1="17" x2="12.01" y2="17"></line>
-            </svg>
+            <PracticeIcon class="filter-icon" />
             <span class="filter-label">Practice</span>
           </button>
 
@@ -530,13 +503,7 @@ function dismissRoundSelectionTip() {
             @click="toggleChallengingRounds"
             aria-label="Show rounds appropriate for your level"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                 stroke-width="2"
-                 stroke-linecap="round" stroke-linejoin="round" class="filter-icon">
-              <circle cx="12" cy="12" r="10"></circle>
-              <circle cx="12" cy="12" r="6"></circle>
-              <circle cx="12" cy="12" r="2"></circle>
-            </svg>
+            <TargetIcon class="filter-icon" />
             <span class="filter-label">For You</span>
           </button>
         </div>
@@ -591,11 +558,7 @@ function dismissRoundSelectionTip() {
       <div class="search-container">
         <div class="search-row">
           <div class="search-input-wrapper" :class="{ 'has-filter': searchQuery }">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon">
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
+            <SearchIcon class="search-icon" />
             <input
               type="text"
               v-model="searchQuery"
@@ -608,14 +571,24 @@ function dismissRoundSelectionTip() {
               class="clear-search-button"
               aria-label="Clear search"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="clear-icon">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </svg>
+              <CloseIcon class="clear-icon" />
             </button>
           </div>
           <CardModeToggle v-model="compactMode" />
+
+          <!-- Help button with consistent spacing -->
+          <button
+            class="help-button"
+            @click="manuallyShowTip"
+            aria-label="Show help"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="help-icon">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+          </button>
         </div>
 
         <!-- Active filter indicator -->
@@ -661,6 +634,20 @@ function dismissRoundSelectionTip() {
           />
         </div>
       </div>
+
+      <!-- Help button - positioned relative to the container -->
+      <button
+        class="help-button"
+        @click="manuallyShowTip"
+        aria-label="Show help"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="help-icon">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+      </button>
     </div>
   </div>
 </template>
@@ -753,7 +740,7 @@ function dismissRoundSelectionTip() {
 .search-row {
   display: flex;
   align-items: stretch;
-  gap: 0.5em;
+  gap: 0.5em; /* Consistent gap between all elements */
 }
 
 .search-row input {
@@ -1115,5 +1102,64 @@ function dismissRoundSelectionTip() {
   width: 100%;
   font-weight: bold;
   cursor: pointer;
+}
+
+/* Add these styles for the container and help button */
+.rounds-content-container {
+  position: relative;
+  padding-bottom: 60px; /* Add padding at the bottom to make room for the help button */
+}
+
+/* Make sure the round-selection-page has position relative */
+.round-selection-page {
+  padding: 0.5em;
+  position: relative;
+}
+
+/* Updated search row to ensure consistent spacing */
+.search-row {
+  display: flex;
+  align-items: stretch;
+  gap: 0.5em; /* Consistent gap between all elements */
+}
+
+/* Make all buttons in the row have the same width for consistency */
+.search-container :deep(.card-mode-toggle),
+.help-button {
+  flex-shrink: 0;
+  width: 40px; /* Consistent width for both buttons */
+  height: 40px; /* Consistent height */
+}
+
+/* Override the card-mode-toggle width if it needs to be wider */
+.search-container :deep(.card-mode-toggle) {
+  width: auto; /* Let it size based on content */
+  min-width: 40px; /* Minimum width */
+}
+
+.help-button {
+  border-radius: 8px;
+  background-color: var(--color-background-soft);
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.help-button:active {
+  transform: scale(0.95);
+}
+
+.help-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--color-text);
+}
+
+/* Ensure the search input takes up remaining space */
+.search-input-wrapper {
+  flex: 1;
 }
 </style>

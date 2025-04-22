@@ -7,6 +7,7 @@ import InteractiveTargetFace from "@/components/scoring/InteractiveTargetFace.vu
 import ScoreButtons from "@/components/scoring/ScoreButtons.vue";
 import UserNotes from "@/components/UserNotes.vue";
 import TopBar from "@/components/TopBar.vue";
+import ScoreCardTutorial from '@/components/tutorial/ScoreCardTutorial.vue'
 import { insults } from "@/domain/insults";
 import { X } from "@/domain/scoring/game_type_config.js";
 import { calculateMaxPossibleScore, convertToValues } from "@/domain/scoring/scores.js";
@@ -17,7 +18,8 @@ import { useHistoryStore } from "@/stores/history";
 import { useScoresStore } from "@/stores/scores";
 import { useUserStore } from "@/stores/user";
 import { useNotesStore } from "@/stores/user_notes";
-import { computed, ref } from "vue";
+import { usePreferencesStore } from '@/stores/preferences'
+import { computed, ref, onMounted } from 'vue'
 import { useToast } from "vue-toastification";
 import { watch } from "vue";
 import {
@@ -37,8 +39,17 @@ const arrowHistoryStore = useArrowHistoryStore();
 const userStore = useUserStore();
 const notesStore = useNotesStore();
 const history = useHistoryStore();
+const preferencesStore = usePreferencesStore()
 
 const route = useRoute();
+const showTutorial = ref(false)
+
+onMounted(() => {
+  // Show tutorial if user hasn't seen it before
+  if (!preferencesStore.hasSeenScoreCardTutorial) {
+    showTutorial.value = true
+  }
+})
 
 watch(() => route.query.selectedRound, (newRound) => {
   if (newRound) {
@@ -238,42 +249,49 @@ function handleTakeNote() {
   showNoteTaker.value = true;
 }
 
+function closeTutorial() {
+  showTutorial.value = false
+}
 </script>
 
 <template>
   <div class="page">
-    <TopBar
-      :hasStarted="hasStarted"
-      :arrowsRemaining="arrowsRemaining"
-      :maxPossibleScore="maxPossibleScore"
-      :availableClassifications="availableClassifications"
-      :canSave="canSave"
-      :maxReached="maxReached"
-      @clear-scores="clearScores"
-      @take-note="handleTakeNote"
-      @save-scores="showSaveConfirmation"
-    />
+    <div class="top-bar-container">
+      <TopBar
+        :hasStarted="hasStarted"
+        :arrowsRemaining="arrowsRemaining"
+        :maxPossibleScore="maxPossibleScore"
+        :availableClassifications="availableClassifications"
+        :canSave="canSave"
+        :maxReached="maxReached"
+        @clear-scores="clearScores"
+        @take-note="handleTakeNote"
+        @save-scores="showSaveConfirmation"
+      />
+    </div>
 
-    <InteractiveTargetFace
-      v-if="userStore.isExperimentalUser()"
-      :arrows="scoresStore.arrows"
-      :scores="scoresStore.scores"
-      :game-type="gameTypeStore.type"
-      :valid-scores="validScores"
-      :max-reached="maxReached"
-      :knock-color="userStore.user.knockColor"
-      @score="handleScore"
-      @undo="scoresStore.undo"
-    />
-    <ScoreButtons
-      v-else
-      :validScores="validScores"
-      @score="handleScore"
-      :max-reached="maxReached"
-      :scores="scoresStore.scores"
-      :game-type="gameTypeStore.type"
-      @undo="scoresStore.undo"
-    />
+    <div v-if="userStore.isExperimentalUser()" class="interactive-target-face">
+      <InteractiveTargetFace
+        :arrows="scoresStore.arrows"
+        :scores="scoresStore.scores"
+        :game-type="gameTypeStore.type"
+        :valid-scores="validScores"
+        :max-reached="maxReached"
+        :knock-color="userStore.user.knockColor"
+        @score="handleScore"
+        @undo="scoresStore.undo"
+      />
+    </div>
+    <div v-else class="score-buttons">
+      <ScoreButtons
+        :validScores="validScores"
+        @score="handleScore"
+        :max-reached="maxReached"
+        :scores="scoresStore.scores"
+        :game-type="gameTypeStore.type"
+        @undo="scoresStore.undo"
+      />
+    </div>
 
     <NoteModal
       v-if="showNoteTaker"
@@ -301,14 +319,30 @@ function handleTakeNote() {
     />
     <UserNotes :allow-highlight="true" />
 
-    <GameTypeSelector :gameType="gameTypeStore.type"
-                      @changeGameType="gameTypeStore.setGameType" />
-  </div>
+    <div class="game-type-selector">
+      <GameTypeSelector
+        :gameType="gameTypeStore.type"
+        @changeGameType="gameTypeStore.setGameType"
+      />
+    </div>
 
+    <!-- Tutorial Component -->
+    <ScoreCardTutorial
+      :visible="showTutorial"
+      @close="closeTutorial"
+    />
+  </div>
 </template>
 
 <style scoped>
 .page {
   padding: 0.5rem;
+}
+
+.top-bar-container,
+.score-buttons,
+.interactive-target-face,
+.game-type-selector {
+  margin-bottom: 1rem;
 }
 </style>

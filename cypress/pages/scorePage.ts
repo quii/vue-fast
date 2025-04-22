@@ -1,10 +1,46 @@
 class ScorePage {
   visit() {
     cy.visit("/");
+    this.dismissTutorialIfVisible()
   }
 
   navigateTo() {
     cy.get("a").contains("Score").click();
+
+    // Check if the tutorial is visible and click through it if it appears
+    this.dismissTutorialIfVisible()
+  }
+
+  // Helper method to dismiss the tutorial if it's visible
+  dismissTutorialIfVisible() {
+    // Use cy.get with { timeout: 1000 } to avoid long waits if the tutorial isn't there
+    cy.get('body').then(($body) => {
+      if ($body.find('.tutorial-overlay').length > 0) {
+        // Tutorial is visible, click through all steps
+        cy.log('Tutorial detected, clicking through steps')
+
+        // Keep clicking "Next" until we see "Got it!" button
+        const clickNextUntilDone = () => {
+          cy.get('body').then(($body) => {
+            if ($body.find('.tutorial-overlay').length > 0) {
+              // Check if the last step button (Got it!) is visible
+              if ($body.find('.next-button:contains(\'Got it!\')').length > 0) {
+                cy.get('.next-button').contains('Got it!').click()
+              } else {
+                // Click Next and continue
+                cy.get('.next-button').contains('Next').click()
+                // Recursively check and click until done
+                clickNextUntilDone()
+              }
+            }
+          })
+        }
+
+        clickNextUntilDone()
+      } else {
+        cy.log('No tutorial detected, continuing')
+      }
+    })
   }
 
   clearData() {
@@ -35,10 +71,12 @@ class ScorePage {
   _selectRound(roundName, filterType = null) {
     this.tapRoundSelector();
 
-    cy.contains('Got it!').click()
+    // Check if the tutorial appears after tapping round selector and dismiss it
+    this.dismissTutorialIfVisible()
 
     // Check if the profile setup form is visible and fill it out if needed
     cy.get("body").then(($body) => {
+      cy.contains('Got it!').click()
       if ($body.find(".profile-setup-section").length > 0) {
         // Fill out the profile form with senior, male, recurve
         cy.get("#age-group").select("senior");
