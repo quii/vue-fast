@@ -17,7 +17,7 @@
     "test:e2e:live": "CYPRESS_BASE_URL=https://winter-feather-5776.fly.dev cypress run --config video=false"
   },
   "dependencies": {
-    "@eslint/js": "^9.24.0",
+    "@eslint/js": "^9.25.1",
     "@vitest/eslint-plugin": "^1.1.43",
     "@vueuse/core": "^13.1.0",
     "chart.js": "^4.4.9",
