@@ -1,12 +1,15 @@
 import DataManagementPage from "../pages/dataManagementPage";
 import HistoryPage from "../pages/historyPage";
+import ScorePage from '../pages/scorePage'
 
 
 describe("data management", () => {
   const dataManagementPage = new DataManagementPage();
   const historyPage = new HistoryPage();
+  const scorePage = new ScorePage()
 
   beforeEach(() => {
+    scorePage.visit()
     dataManagementPage.navigateTo();
     dataManagementPage.resetData();
   });

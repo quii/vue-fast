@@ -5,7 +5,8 @@ describe("Round recommendations", () => {
   it("shows appropriate rounds based on archer's max distance", () => {
     const scorePage = new ScorePage();
 
-    cy.visit("/");
+    scorePage.visit()
+    scorePage.navigateTo()
     userDataPage.navigateTo();
     userDataPage.setArcherDetails("male", "recurve", "senior");
     userDataPage.setClassification("A1");

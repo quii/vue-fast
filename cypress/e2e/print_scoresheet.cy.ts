@@ -9,8 +9,7 @@ describe("Print scoresheet", () => {
     cy.window().then((win) => {
       cy.stub(win, "print");
     });
-    cy.visit("/");
-
+    scorePage.visit()
     userDataPage.navigateTo();
     userDataPage.setArcherDetails("male", "recurve", "senior", "Chris");
 

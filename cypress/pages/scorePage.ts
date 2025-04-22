@@ -53,6 +53,19 @@ class ScorePage {
 
   tapRoundSelector() {
     cy.get(".round-card-wrapper").click();
+    cy.get('body').then(($body) => {
+      if ($body.find('button:contains(\'Got it!\')').length > 0) {
+        cy.contains('Got it!').click()
+      }
+
+      // Now check if the profile setup form is visible and fill it out if needed
+      if ($body.find('.profile-setup-section').length > 0) {
+        // Fill out the profile form with senior, male, recurve
+        cy.get('#age-group').select('senior')
+        cy.get('#gender').select('male')
+        cy.get('#bow-type').select('recurve')
+      }
+    })
   }
 
   setMaxDistance(yards) {
@@ -74,16 +87,6 @@ class ScorePage {
     // Check if the tutorial appears after tapping round selector and dismiss it
     this.dismissTutorialIfVisible()
 
-    // Check if the profile setup form is visible and fill it out if needed
-    cy.get("body").then(($body) => {
-      cy.contains('Got it!').click()
-      if ($body.find(".profile-setup-section").length > 0) {
-        // Fill out the profile form with senior, male, recurve
-        cy.get("#age-group").select("senior");
-        cy.get("#gender").select("male");
-        cy.get("#bow-type").select("recurve");
-      }
-    });
 
     // Apply filter if specified
     if (filterType) {

@@ -1,10 +1,12 @@
 import SightMarksPage from "../pages/sightMarksPage";
+import ScorePage from '../pages/scorePage'
 
 describe("Sight Marks", () => {
   const sightMarksPage = new SightMarksPage();
+  const scorePage = new ScorePage()
 
   beforeEach(() => {
-    cy.visit("/");
+    scorePage.visit()
     sightMarksPage.navigateTo();
   });
 
