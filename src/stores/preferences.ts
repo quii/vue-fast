@@ -23,6 +23,18 @@ export const usePreferencesStore = defineStore("preferences", {
     dismissScoreCardTutorial() {
       this.hasSeenScoreCardTutorial = true
       localStorage.setItem('hasSeenScoreCardTutorial', 'true')
+    },
+    // New method to reset all preferences
+    resetAllTips() {
+      this.hasSeenPrintTip = false
+      this.hasSeenHistoryTip = false
+      this.hasSeenRoundSelectionTip = false
+      this.hasSeenScoreCardTutorial = false
+
+      localStorage.removeItem('hasSeenPrintTip')
+      localStorage.removeItem('hasSeenHistoryTip')
+      localStorage.removeItem('hasSeenRoundSelectionTip')
+      localStorage.removeItem('hasSeenScoreCardTutorial')
     }
   }
 });

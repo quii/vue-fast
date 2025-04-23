@@ -1,7 +1,8 @@
 <script setup>
-import { computed, ref, watchEffect } from "vue";
+import { computed, ref, watch, watchEffect } from 'vue'
 import { useUserStore } from "@/stores/user";
 import { useHistoryStore } from "@/stores/history";
+import { useInstallationStore } from '@/stores/installation'
 import { classificationList, classificationListWithoutPB } from "@/domain/scoring/classificationList.js";
 import SectionCard from "@/components/ui/SectionCard.vue";
 import FormGroup from "@/components/ui/FormGroup.vue";
@@ -12,6 +13,7 @@ import BaseButton from "@/components/ui/BaseButton.vue";
 
 const userStore = useUserStore();
 const historyStore = useHistoryStore();
+const installationStore = useInstallationStore()
 
 const selectedAgeGroup = ref(userStore.user.ageGroup);
 const selectedGender = ref(userStore.user.gender);
@@ -20,6 +22,7 @@ const name = ref(userStore.user.name) || "";
 const constructiveCriticism = ref(userStore.user.constructiveCriticism ?? true);
 const experimentalTargetFace = ref(userStore.user.experimentalTargetFace ?? false);
 const knockColor = ref(userStore.user.knockColor ?? "#FF69B4"); // Hot pink default
+const showDevTools = ref(installationStore.showDevTools)
 
 // Season dates
 const indoorSeasonStartDate = ref(userStore.user.indoorSeasonStartDate);
@@ -33,6 +36,11 @@ const outdoorClassifications = ref({ ...(userStore.user.outdoorClassifications |
 const usedBowTypes = computed(() => {
   return historyStore.getBowTypesUsed(selectedBowtype.value);
 });
+
+// Check if we're in development mode
+const isDevelopment = computed(() => {
+  return import.meta.env.MODE === 'development'
+})
 
 // Initialize classifications for bow types
 watchEffect(() => {
@@ -72,6 +80,15 @@ function resetSeasonDates() {
   indoorSeasonStartDate.value = userStore.user.indoorSeasonStartDate;
   outdoorSeasonStartDate.value = userStore.user.outdoorSeasonStartDate;
 }
+
+function toggleDevTools(value) {
+  installationStore.toggleDevTools(value)
+}
+
+watch(showDevTools, (newValue) => {
+  console.log('UserData: showDevTools changed to:', newValue)
+  toggleDevTools(newValue)
+})
 
 watchEffect(() => {
   userStore.save(
@@ -191,6 +208,13 @@ watchEffect(() => {
       <FormGroup label="Choose knock colour">
         <BaseInput type="color" v-model="knockColor" />
       </FormGroup>
+
+      <!-- Add the DevTools checkbox -->
+      <BaseCheckbox
+        v-if="isDevelopment"
+        v-model="showDevTools"
+        label="Show developer tools"
+      />
     </SectionCard>
 
     <div class="buymeacoffee">

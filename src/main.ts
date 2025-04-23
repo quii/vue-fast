@@ -3,16 +3,19 @@ import * as VueRouter from 'vue-router'
 
 import { createApp } from 'vue/dist/vue.esm-bundler'
 import VueVirtualScroller from 'vue-virtual-scroller'
+import DevTools from '@/components/DevTools.vue'
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 import { createPinia } from 'pinia'
 import ScoreCard from './ScoreCard.vue'
 import Toast from 'vue-toastification'
+import InstallBanner from './components/InstallBanner.vue'
 
 import 'vue-toastification/dist/index.css'
 import { registerSW } from "virtual:pwa-register";
 import DataMenuItem from "@/components/DataMenuItem.vue";
 import MainNavigation from "./components/UserNavigation.vue";
 import { useToast } from "vue-toastification";
+import { useInstallationStore } from './stores/installation'
 
 const toast = useToast();
 
@@ -42,7 +45,6 @@ const routes = [
     name: "sight-marks",
     component: () => import("./components/sight_marks/SightMarksPage.vue")
   },
-  // Add the new route for round selection
   {
     path: "/select-round",
     name: "selectRound",
@@ -85,20 +87,29 @@ if ("serviceWorker" in navigator) {
   })
 }
 
+const pinia = createPinia()
 const app = createApp({
   template: `
     <div class="app-container">
       <div class="content-area">
         <router-view></router-view>
       </div>
+      <InstallBanner />
       <MainNavigation />
+      <DevTools />
     </div>
   `
 });
 app.use(router)
 app.use(VueVirtualScroller)
+app.use(pinia)
 app.component("MainNavigation", MainNavigation);
-app.use(createPinia())
+app.component('InstallBanner', InstallBanner)
+app.component('DevTools', DevTools)
 app.use(Toast, {})
+
+// Initialize the installation store
+const installationStore = useInstallationStore()
+installationStore.detectPlatform()
 
 app.mount('#app')

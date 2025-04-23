@@ -1,18 +1,36 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <div id="app">
+    <router-view></router-view>
+    <InstallBanner />
+  </div>
 </template>
 
-<script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-import HelloWorld from './components/HelloWorld.vue';
+<script setup>
+import InstallBanner from './components/InstallBanner.vue'
+import { onMounted } from 'vue'
+import { useInstallationStore } from './stores/installation'
 
-@Options({
-  components: {
-    HelloWorld,
-  },
+const installationStore = useInstallationStore()
+
+onMounted(() => {
+  // Listen for the beforeinstallprompt event
+  window.addEventListener('beforeinstallprompt', (e) => {
+    // Prevent the mini-infobar from appearing on mobile
+    e.preventDefault()
+    // Store the event so it can be triggered later
+    installationStore.setDeferredPrompt(e)
+  })
+
+  // Detect when app is installed
+  window.addEventListener('appinstalled', () => {
+    // Clear the deferredPrompt
+    installationStore.setDeferredPrompt(null)
+    console.log('PWA was installed')
+  })
+
+  // Initial platform detection
+  installationStore.detectPlatform()
 })
-export default class App extends Vue {}
 </script>
 
 <style>
