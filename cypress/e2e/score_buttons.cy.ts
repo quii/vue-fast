@@ -44,7 +44,7 @@ describe("score buttons", () => {
     scorePage.score("5");
     scorePage.assertButtonIsEnabled('5')
     scorePage.score('4')
-    scorePage.assertButtonIsDisabled('4')
+    scorePage.assertButtonIsDisabled('5')
     scorePage.checkSubTotalScore('9')
   });
 
