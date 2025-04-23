@@ -58,7 +58,7 @@ watch(() => route.query.selectedRound, (newRound) => {
   }
 }, { immediate: true });
 
-const validScores = computed(() => gameTypeStore.currentRound.scores);
+const validScores = computed(() => gameTypeStore.currentRound.getScores(userStore.user.bowType))
 const maxReached = computed(() => {
   const maxArrows = gameTypeStore.currentRound.maxArrows;
   return scoresStore.scores.length >= maxArrows && maxArrows !== Infinity;

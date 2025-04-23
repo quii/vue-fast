@@ -73,34 +73,6 @@ export class RoundConfigManager {
     return this.rounds.get(roundName.toLowerCase());
   }
 
-  // For backward compatibility
-  public getMaxArrows(gameType: string): number {
-    const round = this.getRound(gameType);
-    return round ? round.maxArrows : 0;
-  }
-
-  public getEndSize(gameType: string): number {
-    const round = this.getRound(gameType);
-    return round ? round.endSize : 6;
-  }
-
-  public getScores(gameType: string): (number | string)[] {
-    const round = this.getRound(gameType);
-    return round ? [...round.scores] : [];
-  }
-
-  public getUnit(gameType: string): string {
-    const round = this.getRound(gameType);
-    return round ? round.unit : "m";
-  }
-
-  public getMaxDistance(gameType: string, unit: string = "m"): number {
-    const round = this.getRound(gameType);
-    if (!round) return 0;
-
-    return round.getMaxDistance(unit);
-  }
-
   private calculateConfigFromBase(baseConfigs: GameTypeBase[]): GameTypeConfigs {
     const rounds = baseConfigs.reduce<Record<string, GameTypeConfig>>((acc, gameType) => {
       const endSize: number = this.calculateEndSize(gameType.endSize);

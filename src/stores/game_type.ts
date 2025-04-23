@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { useLocalStorage } from '@vueuse/core'
-import { gameTypeConfig, gameTypes } from "@/domain/scoring/game_types";
+import { gameTypeConfig, gameTypes, roundConfigManager } from '@/domain/scoring/game_types'
 import { computed } from "vue";
 
 
@@ -12,7 +12,7 @@ export const useGameTypeStore = defineStore('gameType', () => {
   }
 
   const currentRound = computed(() => {
-    return gameTypeConfig[type.value]
+    return roundConfigManager.getRound(type.value)
   })
 
   return {

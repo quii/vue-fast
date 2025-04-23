@@ -41,11 +41,11 @@ describe("score buttons", () => {
   it("understands worcester rules", () => {
     scorePage.selectGame("Worcester");
 
-    scorePage.score("X");
-    scorePage.assertButtonIsEnabled("X");
     scorePage.score("5");
-    scorePage.assertButtonIsDisabled("X");
-    scorePage.checkSubTotalScore("10");
+    scorePage.assertButtonIsEnabled('5')
+    scorePage.score('4')
+    scorePage.assertButtonIsDisabled('4')
+    scorePage.checkSubTotalScore('9')
   });
 
   it("understands vegas 300 rules, which are 10 to 6", () => {
