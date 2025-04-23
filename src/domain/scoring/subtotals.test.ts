@@ -3,6 +3,7 @@ import { calculateSubtotals } from "@/domain/scoring/subtotals";
 
 const imperialRound = "national";
 const metricRound = "wa 70m";
+const worcesterRound = 'worcester'
 
 test.each([
   [[], 0],
@@ -41,16 +42,27 @@ test.each([
 
 describe("worcester", () => {
   test("X in worcester counts as 5", () => {
-    expect(calculateSubtotals(["X", "X", 5], "worcester").totalScore).toEqual(15);
+    expect(calculateSubtotals(['X', 'X', 5], worcesterRound).totalScore).toEqual(15)
   });
+
+  // Add new tests for Worcester gold threshold
+  test('scores of 5 and above count as golds in Worcester', () => {
+    expect(calculateSubtotals([5, 5, 5, 4, 4, 4], worcesterRound).golds).toEqual(3)
+  })
+
+  test('scores below 5 don\'t count as golds in Worcester', () => {
+    expect(calculateSubtotals([4, 4, 4, 3, 3, 3], worcesterRound).golds).toEqual(0)
+  })
+
+  test('X counts as gold in Worcester', () => {
+    expect(calculateSubtotals(['X', 'X', 5, 4, 3, 2], worcesterRound).golds).toEqual(3)
+  })
 });
 
 describe("metric golds are only 10 and X", () => {
-
   test("10 in metric golds counts as 10", () => {
     expect(calculateSubtotals([10, 10, 10], metricRound).golds).toEqual(3);
   });
-
 
   test("X in metric golds counts as 10", () => {
     expect(calculateSubtotals(["X", "X", 10], metricRound).golds).toEqual(3);
@@ -62,11 +74,9 @@ describe("metric golds are only 10 and X", () => {
 });
 
 describe("imperial rounds only have 9 as gold", () => {
-
   test("9 golds as gold", () => {
     expect(calculateSubtotals([9, 9, 9], imperialRound).golds).toEqual(3);
   });
-
 
   test("another example", () => {
     expect(calculateSubtotals([9, 7, 7], imperialRound).golds).toEqual(1);
