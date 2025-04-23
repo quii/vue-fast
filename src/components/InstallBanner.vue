@@ -148,15 +148,16 @@ function dismissBanner() {
 <style scoped>
 .install-banner {
   position: fixed;
-  bottom: 60px; /* Position above the navigation bar */
+  bottom: 3.75rem; /* Position above the navigation bar (60px → 3.75rem) */
   left: 0;
   right: 0;
   background-color: var(--color-background);
   border-top: 1px solid var(--color-border);
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 -0.125rem 0.625rem rgba(0, 0, 0, 0.1);
   z-index: 100;
-  padding: 12px 16px;
+  padding: 0.75rem 1rem 1rem; /* Increased bottom padding (12px/16px → 0.75rem/1rem) */
   animation: slide-up 0.3s ease;
+  margin-bottom: 0.5rem; /* Add margin between banner and nav bar (8px → 0.5rem) */
 }
 
 .banner-content {
@@ -214,7 +215,7 @@ function dismissBanner() {
 }
 
 .install-instructions {
-  padding: 8px 0;
+  padding: 0.5rem 0 0.75rem; /* Increased bottom padding for instructions (8px/12px → 0.5rem/0.75rem) */
 }
 
 .instructions-header {
@@ -245,6 +246,10 @@ function dismissBanner() {
   margin-bottom: 12px;
   font-size: 0.9rem;
   color: var(--color-text);
+}
+
+.platform-instructions li:last-child {
+  margin-bottom: 0.5rem; /* 8px → 0.5rem */
 }
 
 .instruction-step {
