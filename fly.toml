@@ -17,7 +17,7 @@ NODE_ENV = "production"
   auto_rollback = true
 
 [[services]]
-  http_checks = []
+# Remove the empty http_checks array here
 internal_port = 8080
   processes = ["app"]
   protocol = "tcp"
@@ -41,8 +41,8 @@ internal_port = 8080
     grace_period = "1s"
     interval = "15s"
     restart_limit = 0
+  timeout = "2s"
 
-# Add a health check for the API
 [[services.http_checks]]
 interval = "10s"
 grace_period = "5s"
@@ -51,4 +51,4 @@ path = "/api/health"
 protocol = "http"
 restart_limit = 0
 timeout = "2s"
-tls_skip_verify = false    timeout = "2s"
+tls_skip_verify = false
