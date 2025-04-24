@@ -21,7 +21,7 @@ const gameTypeStore = useGameTypeStore();
 const userStore = useUserStore();
 
 function scoreButtonClass(score) {
-  if (gameTypeStore.type === "worcester") {
+  if (gameTypeStore.type === 'worcester' || gameTypeStore.type === 'worcester (5 spot)') {
     if (score === 5) {
       return {
         "worcester5": true

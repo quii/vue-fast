@@ -8,7 +8,7 @@ const scoreMappings = {
 };
 
 export function convertToValue(score, gameType) {
-  if (gameType === "worcester" && score === "X") {
+  if (gameType?.toLowerCase().includes('worcester') && score === 'X') {
     return 5;
   }
   return scoreMappings[score] ?? score;

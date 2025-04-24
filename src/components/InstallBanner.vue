@@ -9,7 +9,6 @@ const isVisible = ref(false)
 
 onMounted(() => {
   installationStore.detectPlatform()
-  console.log('InstallBanner mounted, canPromptInstall:', installationStore.canPromptInstall)
   updateVisibility()
 })
 
@@ -18,7 +17,6 @@ watch(() => installationStore.canPromptInstall, updateVisibility)
 watch(() => installationStore.isTestMode, updateVisibility)
 
 function updateVisibility() {
-  console.log('Updating visibility, canPromptInstall:', installationStore.canPromptInstall)
   isVisible.value = installationStore.canPromptInstall
 }
 
@@ -29,7 +27,6 @@ function promptInstall() {
     installationStore.deferredPrompt.prompt()
     installationStore.deferredPrompt.userChoice.then((choiceResult) => {
       if (choiceResult.outcome === 'accepted') {
-        console.log('User accepted the install prompt')
       }
       // Reset the deferred prompt variable
       installationStore.setDeferredPrompt(null)
@@ -37,12 +34,10 @@ function promptInstall() {
   } else {
     // For iOS or when the native prompt isn't available
     showInstructions.value = true
-    console.log('Showing instructions')
   }
 }
 
 function dismissBanner() {
-  console.log('Dismissing banner')
   installationStore.dismissPrompt()
   showInstructions.value = false
   isVisible.value = false

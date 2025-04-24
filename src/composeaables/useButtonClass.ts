@@ -1,6 +1,6 @@
 export default function useButtonClass() {
   return function buttonClass(score, gameType) {
-    if (gameType === "worcester") {
+    if (gameType.toLowerCase().includes('worcester')) {
       return getWorcesterClass(score);
     }
     return { [`score${score}`]: true };

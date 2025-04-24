@@ -2486,6 +2486,30 @@
       6
     ],
     "scores": [
+      5,
+      4,
+      3,
+      2,
+      1,
+      "M"
+    ],
+    "unit": "m",
+    "endSize": 5,
+    "isOutdoor": false,
+    "maxArrows": 60,
+    "canSaveAnytime": false,
+    "isPracticeRound": false,
+    "numberOfEnds": 12,
+    "isImperial": false,
+    "maxDistanceMetres": 18.288,
+    "maxDistanceYards": 20
+  },
+  "worcester (5 spot)": {
+    "name": "worcester (5 spot)",
+    "distancesRoundSizes": [
+      6
+    ],
+    "scores": [
       "X",
       5,
       4,

@@ -524,7 +524,16 @@ export const baseConfig: GameTypeBase[] = [
     isOutdoor: false,
     isImperial: false,
     endSize: 5,
-    scores: ["X", 5, 4, 3, 2, 1, MISS],
+    scores: [5, 4, 3, 2, 1, MISS],
+    distancesRoundSizes: [6],
+    maxDistanceYards: 20
+  },
+  {
+    name: 'worcester (5 spot)',
+    isOutdoor: false,
+    isImperial: false,
+    endSize: 5,
+    scores: ['X', 5, 4, 3, 2, 1, MISS],
     distancesRoundSizes: [6],
     maxDistanceYards: 20
   },

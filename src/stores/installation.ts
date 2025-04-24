@@ -34,11 +34,6 @@ export const useInstallationStore = defineStore('installation', () => {
     if (!isTestMode.value) {
       isIOS.value = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream
     }
-
-    console.log('Platform detection:', {
-      isStandalone: isStandalone.value,
-      isIOS: isIOS.value
-    })
   }
 
   function dismissPrompt() {

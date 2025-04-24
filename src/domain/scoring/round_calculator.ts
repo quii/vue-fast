@@ -16,10 +16,16 @@ export async function calculateAppropriateRounds(
 
   const distanceAppropriateRounds: GameTypeConfig[] = gameTypes
     .map(name => gameTypeConfig[name])
-    .filter(config => config.maxDistanceYards <= maxYards);
+    .filter(config => config.maxDistanceYards <= maxYards); //todo dont need this anymore
 
   for (const round of distanceAppropriateRounds) {
-    const scores = await calculateRoundScores(sex, bowtype, age, round.name);
+    //todo: should have some kind of classification pointer where we have multiple rounds for the same logical classification
+    let lookup = round.name
+    if (round.name === 'worcester (5 spot)') {
+      lookup = 'worcester'
+    }
+
+    const scores = await calculateRoundScores(sex, bowtype, age, lookup)
     const hasAHigherClassificationAttainable = scores.length > improvementModifier;
 
     if (hasAHigherClassificationAttainable) {

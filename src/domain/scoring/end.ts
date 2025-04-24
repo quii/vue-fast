@@ -12,7 +12,7 @@ function convertScore(score, round) {
 
 function getEndSize(round) {
     const roundConfig = gameTypeConfig[round];
-    if (!roundConfig?.isOutdoor && round !== "worcester") {
+  if (!roundConfig?.isOutdoor && round !== 'worcester' && round !== 'worcester (5 spot)') {
         return 3;
     }
     return roundConfig.endSize;

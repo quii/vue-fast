@@ -232,7 +232,7 @@ export async function calculatePotentialClassificationWithoutOutliers(scores, cu
     return null;
   }
 
-  const numericScores = scores.map(convertToValue);
+  const numericScores = scores.map(s => convertToValue(s, roundName))
   const sortedScores = [...numericScores].sort((a, b) => a - b);
   const currentTotal = sortedScores.reduce((sum, score) => sum + score, 0);
 

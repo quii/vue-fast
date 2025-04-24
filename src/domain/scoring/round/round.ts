@@ -43,13 +43,6 @@ export class Round {
   }
 
   getScores(bowType: string): (number | string)[] {
-    if (this.name.toLowerCase().includes('worcester')) {
-      if (bowType.toLowerCase() === 'compound') {
-        return [...this.scores]
-      }
-      return this.scores.filter(score => score !== 'X')
-    }
-
     return this.scores
   }
 

@@ -6,16 +6,8 @@ import { ref, computed, watch } from 'vue'
 const installationStore = useInstallationStore()
 const preferencesStore = usePreferencesStore()
 const isDevelopment = computed(() => import.meta.env.MODE === 'development')
-console.log(isDevelopment.value)
-console.log(installationStore.showDevTools)
 const debugInfo = ref('')
 const isVisible = computed(() => isDevelopment.value && installationStore.showDevTools)
-
-// Log visibility state changes for debugging
-watch(isVisible, (newValue) => {
-  console.log('DevTools visibility changed:', newValue)
-  console.log('showDevTools value:', installationStore.showDevTools)
-})
 
 function toggleTestMode() {
   installationStore.toggleTestMode()

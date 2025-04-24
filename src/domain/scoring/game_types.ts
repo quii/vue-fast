@@ -49,7 +49,6 @@ export class RoundConfigManager {
   constructor(baseConfigs: GameTypeBase[] = [...baseConfig, ...imperialPractices, ...metricPractices]) {
     this.configs = this.calculateConfigFromBase(baseConfigs);
 
-    // Create Round instances for each config
     this.rounds = new Map();
     Object.entries(this.configs).forEach(([name, config]) => {
       this.rounds.set(name.toLowerCase(), new Round(config));
