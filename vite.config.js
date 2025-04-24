@@ -4,6 +4,7 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import { VitePWA } from "vite-plugin-pwa";
+
 export default defineConfig({
   plugins: [
     vue(),
@@ -18,6 +19,9 @@ export default defineConfig({
         cleanupOutdatedCaches: true,
         skipWaiting: true,
         clientsClaim: true,
+        navigateFallback: 'index.html',
+        // Exclude API routes from being cached by the service worker
+        navigateFallbackDenylist: [/^\/api\//]
       },
       manifest: {
         name: "Fast v6",
@@ -48,6 +52,16 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url))
+    }
+  },
+  // Configure the dev server to proxy API requests to our backend server
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+        secure: false
+      }
     }
   },
   publicDir: "public",
