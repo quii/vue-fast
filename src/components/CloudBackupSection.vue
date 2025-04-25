@@ -96,6 +96,9 @@ async function restoreBackup(backupId) {
       Your data can be automatically backed up to the cloud when you save scores.
       <span class="status-indicator">Status: <strong>{{ cloudBackupStatus }}</strong></span>
     </p>
+    <p class="beta-note">
+      Cloud backup is currently in beta. Your data is still stored locally on this device.
+    </p>
 
     <div class="button-group">
       <BaseButton
@@ -148,10 +151,6 @@ async function restoreBackup(backupId) {
         </li>
       </ul>
     </div>
-
-    <p class="beta-note">
-      Cloud backup is currently in beta. Your data is still stored locally on this device.
-    </p>
   </div>
 </template>
 
