@@ -171,6 +171,7 @@ export const backupService = {
 
   /**
    * Get the list of available backups for the current device
+   * Also includes backups associated with the current user's name if available
    */
   async getBackups(): Promise<BackupMetadata[]> {
     try {
@@ -212,8 +213,13 @@ export const backupService = {
 
   /**
    * Find backups by user name (for cross-device recovery)
+   * This is now used internally by the loadBackups function
    */
   async findBackupsByName(name: string): Promise<BackupMetadata[]> {
+    if (!name || name.trim() === '') {
+      return []
+    }
+
     try {
       const response = await fetch(`/api/find-backups?name=${encodeURIComponent(name)}`)
 

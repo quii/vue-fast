@@ -2,10 +2,14 @@
 import { ref, computed, onMounted } from 'vue'
 import { useToast } from 'vue-toastification'
 import BaseButton from '@/components/ui/BaseButton.vue'
+import ButtonGroup from '@/components/ui/ButtonGroup.vue'
+import CloudIcon from '@/components/icons/CloudIcon.vue'
 import { backupService } from '@/services/backupService'
 import { formatDateContextually } from '@/domain/scoring/round/formatting.js'
+import { useUserStore } from '@/stores/user' // Import the user store
 
 const toast = useToast()
+const userStore = useUserStore() // Get access to the user store
 const cloudBackupStatus = ref('Ready') // Initial status
 const backups = ref([]) // Will hold list of available backups
 const isLoading = ref(false) // Loading state
@@ -13,7 +17,6 @@ const isLoading = ref(false) // Loading state
 // Computed property to check if a backup is in progress
 const isBackingUp = computed(() =>
   cloudBackupStatus.value === 'Backing up...' ||
-  cloudBackupStatus.value === 'Testing connection...' ||
   cloudBackupStatus.value === 'Restoring...' ||
   isLoading.value
 );
@@ -53,7 +56,31 @@ async function loadBackups() {
   try {
     isLoading.value = true
     cloudBackupStatus.value = 'Loading backups...'
-    backups.value = await backupService.getBackups()
+
+    // First get backups by device ID
+    const deviceBackups = await backupService.getBackups()
+
+    // Then get backups by user name if available
+    let userNameBackups = []
+    const userName = userStore.user.name
+    if (userName && userName.trim() !== '') {
+      userNameBackups = await backupService.findBackupsByName(userName)
+    }
+
+    // Combine and deduplicate backups (using backup key as unique identifier)
+    const allBackups = [...deviceBackups]
+
+    // Add user name backups that aren't already in the list
+    userNameBackups.forEach(backup => {
+      if (!allBackups.some(existing => existing.key === backup.key)) {
+        allBackups.push(backup)
+      }
+    })
+
+    // Sort by timestamp (newest first)
+    allBackups.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+
+    backups.value = allBackups
     cloudBackupStatus.value = backups.value.length > 0 ? 'Ready' : 'No backups found'
   } catch (error) {
     console.error('Error loading backups:', error)
@@ -61,26 +88,6 @@ async function loadBackups() {
     toast.error('Failed to load backups')
   } finally {
     isLoading.value = false
-  }
-}
-
-async function testApiConnection() {
-  cloudBackupStatus.value = 'Testing connection...'
-
-  try {
-    const isConnected = await backupService.testConnection()
-
-    if (isConnected) {
-      cloudBackupStatus.value = 'Connected'
-      toast.success('API connection successful!')
-    } else {
-      cloudBackupStatus.value = 'Connection failed'
-      toast.error('API connection failed')
-    }
-  } catch (error) {
-    console.error('Error testing API connection:', error)
-    cloudBackupStatus.value = 'Error'
-    toast.error('Error testing API connection')
   }
 }
 
@@ -130,44 +137,21 @@ async function restoreBackup(backupKey) {
     toast.error(`Error restoring backup: ${error.message}`)
   }
 }
-
-// Find backups by user name (for cross-device recovery)
-async function findBackupsByName() {
-  const name = prompt('Enter your name to find backups across devices:')
-  if (!name) return
-
-  cloudBackupStatus.value = 'Searching...'
-  isLoading.value = true
-
-  try {
-    const foundBackups = await backupService.findBackupsByName(name)
-
-    if (foundBackups.length > 0) {
-      backups.value = foundBackups
-      cloudBackupStatus.value = `Found ${foundBackups.length} backups`
-      toast.success(`Found ${foundBackups.length} backups for "${name}"`)
-    } else {
-      cloudBackupStatus.value = 'No backups found'
-      toast.info(`No backups found for "${name}"`)
-    }
-  } catch (error) {
-    console.error('Error finding backups:', error)
-    cloudBackupStatus.value = 'Error'
-    toast.error('Error finding backups')
-  } finally {
-    isLoading.value = false
-  }
-}
 </script>
 
 <template>
   <div class="cloud-backup">
+    <div class="section-header">
+      <CloudIcon class="cloud-icon" />
+      <span class="status-text">Cloud Backup <span class="status-badge">{{ cloudBackupStatus }}</span></span>
+    </div>
+
     <p class="explanation">
       Your data can be automatically backed up to the cloud when you save scores.
-      <span class="status-indicator">Status: <strong>{{ cloudBackupStatus }}</strong></span>
+      Access your backups from any device.
     </p>
 
-    <div class="button-group">
+    <ButtonGroup>
       <BaseButton
         variant="primary"
         @click="manualBackup"
@@ -183,40 +167,7 @@ async function findBackupsByName() {
         </template>
         Backup Now
       </BaseButton>
-
-      <BaseButton
-        variant="outline"
-        @click="testApiConnection"
-        :disabled="isBackingUp"
-      >
-        <template #icon>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-               stroke-linecap="round" stroke-linejoin="round" class="button-icon">
-            <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-          </svg>
-        </template>
-        Test Connection
-      </BaseButton>
-    </div>
-
-    <!-- Cross-device recovery button -->
-    <div class="recovery-section">
-      <BaseButton
-        variant="outline"
-        @click="findBackupsByName"
-        :disabled="isBackingUp"
-        fullWidth
-      >
-        <template #icon>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-               stroke-linecap="round" stroke-linejoin="round" class="button-icon">
-            <circle cx="11" cy="11" r="8"></circle>
-            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-          </svg>
-        </template>
-        Find Backups by Name
-      </BaseButton>
-    </div>
+    </ButtonGroup>
 
     <!-- Backup list -->
     <div v-if="backups.length > 0" class="backup-list">
@@ -256,10 +207,6 @@ async function findBackupsByName() {
     <div v-if="isLoading" class="loading">
       <p>Loading...</p>
     </div>
-
-    <p class="beta-note">
-      Cloud backup is currently in beta. Your data is still stored locally on this device.
-    </p>
   </div>
 </template>
 
@@ -268,30 +215,41 @@ async function findBackupsByName() {
   width: 100%;
 }
 
+.section-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  gap: 0.5rem;
+}
+
+.cloud-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--color-primary);
+}
+
+.status-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.status-badge {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: normal;
+  padding: 0.2em 0.6em;
+  border-radius: 12px;
+  background-color: var(--color-background-soft);
+  color: var(--color-text-light);
+  margin-left: 0.5rem;
+  vertical-align: middle;
+}
+
 .explanation {
   margin-bottom: 1rem;
   line-height: 1.4;
   color: var(--color-text);
-}
-
-.status-indicator {
-  display: inline-block;
-  margin-left: 0.5rem;
-  font-size: 0.9rem;
-}
-
-.button-group {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.button-group :deep(.base-button) {
-  flex: 1;
-}
-
-.recovery-section {
-  margin-bottom: 1rem;
 }
 
 .button-icon {

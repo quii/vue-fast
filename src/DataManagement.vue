@@ -6,9 +6,11 @@ import { useInstallationStore } from '@/stores/installation.js'
 import { useNotesStore } from "@/stores/user_notes";
 import { useUserStore } from "@/stores/user";
 import { useToast } from "vue-toastification";
-import { computed } from "vue";
+import { computed, ref } from 'vue'
 import SectionCard from "@/components/ui/SectionCard.vue";
 import BaseButton from "@/components/ui/BaseButton.vue";
+import BaseInput from '@/components/ui/BaseInput.vue'
+import FormGroup from '@/components/ui/FormGroup.vue'
 
 const history = useHistoryStore();
 const notes = useNotesStore();
@@ -17,6 +19,32 @@ const toast = useToast();
 const installationStore = useInstallationStore()
 
 const backupWarning = computed(() => user.needsBackup());
+const userName = ref(user.user.name || '')
+const hasName = computed(() => user.user.name && user.user.name.trim() !== '')
+
+function saveUserName() {
+  if (!userName.value.trim()) {
+    toast.error('Please enter your name')
+    return
+  }
+
+  // Save the user's name while preserving other user settings
+  user.save(
+    user.user.ageGroup,
+    user.user.gender,
+    user.user.bowType,
+    user.user.indoorClassifications,
+    user.user.outdoorClassifications,
+    user.user.indoorSeasonStartDate,
+    user.user.outdoorSeasonStartDate,
+    userName.value.trim(),
+    user.user.constructiveCriticism,
+    user.user.experimentalTargetFace,
+    user.user.knockColor
+  )
+
+  toast.success('Name saved successfully')
+}
 
 function exportData() {
   const data = {
@@ -178,9 +206,48 @@ function hardReset() {
         Reset all data
       </BaseButton>
     </SectionCard>
-    <SectionCard title="Cloud Backup">
-      <CloudBackupSection />
-    </SectionCard>
+
+    <!-- Cloud Backup Section -->
+    <template v-if="hasName">
+      <SectionCard title="Cloud Backup">
+        <CloudBackupSection />
+      </SectionCard>
+    </template>
+    <template v-else>
+      <SectionCard title="Enable Cloud Backup">
+        <p class="explanation">
+          Cloud backup allows you to access your archery data across multiple devices and provides an extra layer of
+          protection for your scores.
+        </p>
+        <p class="explanation">
+          To enable cloud backup, please enter your name below:
+        </p>
+        <FormGroup label="Your Name">
+          <BaseInput
+            v-model="userName"
+            placeholder="Enter your name"
+            type="text"
+          />
+        </FormGroup>
+        <BaseButton
+          variant="primary"
+          @click="saveUserName"
+          fullWidth
+          class="save-name-button"
+        >
+          <template #icon>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" class="button-icon">
+              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+              <polyline points="17 21 17 13 7 13 7 21"></polyline>
+              <polyline points="7 3 7 8 15 8"></polyline>
+            </svg>
+          </template>
+          Save Name & Enable Cloud Backup
+        </BaseButton>
+      </SectionCard>
+    </template>
   </div>
 </template>
 
@@ -233,5 +300,9 @@ function hardReset() {
   width: 18px;
   height: 18px;
   margin-right: 0.5rem;
+}
+
+.save-name-button {
+  margin-top: 1rem;
 }
 </style>
