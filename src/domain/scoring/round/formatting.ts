@@ -29,27 +29,42 @@ export function formatDateContextually(date: string | Date): string {
   // Check if valid date
   if (isNaN(dateObj.getTime())) return ''
 
-  // Get current date (reset time to midnight for accurate day comparison)
-  const today = new Date()
-  today.setHours(0, 0, 0, 0)
+  // Get current date and time
+  const now = new Date()
 
-  // Reset time on the input date for accurate comparison
+  // Calculate difference in milliseconds
+  const diffMs = now.getTime() - dateObj.getTime()
+  const diffMinutes = Math.floor(diffMs / (1000 * 60))
+  const diffHours = Math.floor(diffMs / (1000 * 60 * 60))
+
+  // Reset time to midnight for day comparison
+  const today = new Date(now)
+  today.setHours(0, 0, 0, 0)
   const targetDate = new Date(dateObj)
   targetDate.setHours(0, 0, 0, 0)
 
-  // Calculate difference in days
-  const diffTime = today.getTime() - targetDate.getTime()
-  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24))
+  // Calculate difference in days based on calendar days
+  const diffDays = Math.floor((today.getTime() - targetDate.getTime()) / (1000 * 60 * 60 * 24))
 
   // Return contextual string based on difference
-  if (diffDays === 0) {
+  if (diffMinutes < 1) {
+    return 'Just now'
+  } else if (diffMinutes < 60) {
+    return `${diffMinutes} ${diffMinutes === 1 ? 'min' : 'mins'} ago`
+  } else if (diffHours < 24) {
+    return `${diffHours} ${diffHours === 1 ? 'hour' : 'hours'} ago`
+  } else if (diffDays === 0) {
+    // This case should not happen with our logic, but keeping it for safety
     return 'Today'
   } else if (diffDays === 1) {
     return 'Yesterday'
   } else if (diffDays > 1 && diffDays <= 7) {
     return `${diffDays} days ago`
+  } else if (diffDays <= 28) {
+    // Use a more conservative approach for weeks (4 weeks max)
+    return `${Math.floor(diffDays / 7)} ${Math.floor(diffDays / 7) === 1 ? 'week' : 'weeks'} ago`
   } else {
-    // Format as DD/MM/YY
+    // Format as DD/MM/YY for anything older than 4 weeks
     const day = dateObj.getDate().toString().padStart(2, '0')
     const month = (dateObj.getMonth() + 1).toString().padStart(2, '0')
     const year = dateObj.getFullYear().toString().slice(-2)

@@ -6,6 +6,17 @@ import { useNotesStore } from '@/stores/user_notes'
 // Constants
 const BACKUP_RETRY_DELAYS = [2000, 5000, 10000, 30000] // Retry delays in ms (exponential backoff)
 const BACKUP_ENDPOINT = '/api/backup'
+const DEVICE_ID_STORAGE_KEY = 'archery-device-id'
+
+// Interface for backup metadata
+interface BackupMetadata {
+  key: string;
+  userName: string;
+  deviceId: string;
+  timestamp: string;
+  size?: number;
+  lastModified?: Date;
+}
 
 /**
  * Service for handling cloud backups
@@ -23,8 +34,7 @@ export const backupService = {
 
   /**
    * Get the device ID for backup
-   * Currently using a placeholder - in a real implementation, this would be a unique
-   * identifier stored in the installation store
+   * Generates and stores a unique device ID if one doesn't exist
    */
   getDeviceId(): string {
     const installationStore = useInstallationStore()
@@ -34,8 +44,16 @@ export const backupService = {
       return 'dev-device-1'
     }
 
-    // TODO: Generate and store a real device ID
-    return 'device-1'
+    // Check if we already have a device ID stored
+    let deviceId = localStorage.getItem(DEVICE_ID_STORAGE_KEY)
+
+    // If not, generate a new one and store it
+    if (!deviceId) {
+      deviceId = 'device-' + Math.random().toString(36).substring(2, 15)
+      localStorage.setItem(DEVICE_ID_STORAGE_KEY, deviceId)
+    }
+
+    return deviceId
   },
 
   /**
@@ -43,11 +61,6 @@ export const backupService = {
    */
   async scheduleBackup(retryCount = 0): Promise<boolean> {
     console.log('Backup scheduled')
-
-    if (!this.isEnabled()) {
-      console.log('Backup not enabled - app is not installed as PWA')
-      return false
-    }
 
     try {
       const success = await this.performBackup()
@@ -96,6 +109,10 @@ export const backupService = {
       const userStore = useUserStore()
       const historyStore = useHistoryStore()
       const notesStore = useNotesStore()
+      const deviceId = this.getDeviceId()
+
+      // Get user name (or use 'anonymous' if not set)
+      const userName = userStore.user.name || 'anonymous'
 
       // Collect data to back up
       const data = {
@@ -103,25 +120,35 @@ export const backupService = {
         notes: notesStore.notes,
         user: userStore.user,
         timestamp: new Date().toISOString(),
-        deviceId: this.getDeviceId()
+        deviceId
       }
 
-      // For now, just log the data that would be backed up
-      console.log('Data to back up:', data)
+      console.log('Sending backup to server...')
 
-      // In a real implementation, we would send this data to the server
-      // This is a placeholder for the actual API call
-      // const response = await fetch(`${BACKUP_ENDPOINT}/${this.getDeviceId()}`, {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify(data),
-      // });
+      // Send data to the server
+      const response = await fetch(`${BACKUP_ENDPOINT}/${deviceId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          data,
+          userName
+        })
+      })
 
-      // return response.ok;
+      if (!response.ok) {
+        const errorData = await response.json()
+        console.error('Backup API error:', errorData)
+        return false
+      }
 
-      // For now, simulate a successful backup
+      const result = await response.json()
+      console.log('Backup API response:', result)
+
+      // Update last backup date in user store
+      userStore.updateLastBackupDate()
+
       return true
     } catch (error) {
       console.error('Error performing backup:', error)
@@ -143,22 +170,149 @@ export const backupService = {
   },
 
   /**
-   * Get the list of available backups
-   * This is a placeholder for the actual implementation
+   * Get the list of available backups for the current device
    */
-  async getBackups(): Promise<any[]> {
-    // In a real implementation, we would fetch the list of backups from the server
-    return []
+  async getBackups(): Promise<BackupMetadata[]> {
+    try {
+      const deviceId = this.getDeviceId()
+      const response = await fetch(`/api/backups/${deviceId}`)
+
+      if (!response.ok) {
+        console.error('Failed to fetch backups:', await response.text())
+        return []
+      }
+
+      const data = await response.json()
+      return data.backups || []
+    } catch (error) {
+      console.error('Error fetching backups:', error)
+      return []
+    }
+  },
+
+  /**
+   * Find backups by device ID
+   */
+  async findBackupsByDeviceId(deviceId: string): Promise<BackupMetadata[]> {
+    try {
+      const response = await fetch(`/api/backups/${deviceId}`)
+
+      if (!response.ok) {
+        console.error('Failed to fetch backups by device ID:', await response.text())
+        return []
+      }
+
+      const data = await response.json()
+      return data.backups || []
+    } catch (error) {
+      console.error('Error fetching backups by device ID:', error)
+      return []
+    }
+  },
+
+  /**
+   * Find backups by user name (for cross-device recovery)
+   */
+  async findBackupsByName(name: string): Promise<BackupMetadata[]> {
+    try {
+      const response = await fetch(`/api/find-backups?name=${encodeURIComponent(name)}`)
+
+      if (!response.ok) {
+        console.error('Failed to fetch backups by name:', await response.text())
+        return []
+      }
+
+      const data = await response.json()
+      return data.backups || []
+    } catch (error) {
+      console.error('Error fetching backups by name:', error)
+      return []
+    }
   },
 
   /**
    * Restore from a backup
-   * This is a placeholder for the actual implementation
    */
   async restoreBackup(backupId: string): Promise<boolean> {
-    // In a real implementation, we would fetch the backup data from the server
-    // and restore it to the stores
-    return false
+    try {
+      console.log('Restoring backup with ID:', backupId)
+
+      const response = await fetch(`/api/backup/${encodeURIComponent(backupId)}`)
+
+      if (!response.ok) {
+        const errorText = await response.text()
+        console.error('Failed to fetch backup data:', errorText)
+        throw new Error(`Server returned ${response.status}: ${errorText}`)
+      }
+
+      const result = await response.json()
+
+      if (!result.success || !result.data) {
+        console.error('Invalid backup data received:', result)
+        throw new Error('Invalid backup data received')
+      }
+
+      const backupData = result.data
+
+      // Restore data to stores
+      const historyStore = useHistoryStore()
+      const notesStore = useNotesStore()
+      const userStore = useUserStore()
+
+      // Import history data
+      if (backupData.history) {
+        historyStore.importHistory(
+          backupData.history,
+          {
+            ageGroup: backupData.user.ageGroup,
+            bowType: backupData.user.bowType,
+            gender: backupData.user.gender
+          }
+        )
+      }
+
+      // Import notes data
+      if (backupData.notes) {
+        notesStore.importNotes(backupData)
+      }
+
+      // Import user data
+      if (backupData.user) {
+        const userData = backupData.user
+
+        // Handle potential missing fields in older backup files
+        let indoorClassifications = userData.indoorClassifications || {}
+        let outdoorClassifications = userData.outdoorClassifications || {}
+
+        // Use default values for missing fields
+        const name = userData.name || ''
+        const constructiveCriticism = userData.constructiveCriticism !== undefined ? userData.constructiveCriticism : true
+        const experimentalTargetFace = userData.experimentalTargetFace || false
+        const knockColor = userData.knockColor || '#FF69B4'
+
+        userStore.save(
+          userData.ageGroup,
+          userData.gender,
+          userData.bowType,
+          indoorClassifications,
+          outdoorClassifications,
+          userData.indoorSeasonStartDate,
+          userData.outdoorSeasonStartDate,
+          name,
+          constructiveCriticism,
+          experimentalTargetFace,
+          knockColor
+        )
+      }
+
+      // Update last backup date
+      userStore.updateLastBackupDate()
+
+      return true
+    } catch (error) {
+      console.error('Error restoring backup:', error)
+      throw error // Re-throw to allow component to handle it
+    }
   }
 }
 

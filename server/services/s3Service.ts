@@ -99,21 +99,64 @@ export class S3Service {
     return { key, timestamp }
   }
 
+  /**
+   * Get a backup by key
+   */
   async getBackup(key: string): Promise<any> {
-    const response = await this.s3Client.send(new GetObjectCommand({
-      Bucket: this.bucketName,
-      Key: key
-    }))
+    try {
+      console.log(`Getting backup with key: ${key}`)
 
-    const streamToString = (stream: any): Promise<string> => new Promise((resolve, reject) => {
-      const chunks: any[] = []
-      stream.on('data', (chunk: any) => chunks.push(chunk))
-      stream.on('error', reject)
-      stream.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')))
+      const command = new GetObjectCommand({
+        Bucket: this.bucketName,
+        Key: key
+      })
+
+      const response = await this.s3Client.send(command)
+
+      // Check if response.Body exists
+      if (!response.Body) {
+        throw new Error('Response body is undefined')
+      }
+
+      // Read the stream
+      const bodyContents = await this.streamToString(response.Body)
+
+      // Parse the JSON data
+      return JSON.parse(bodyContents)
+    } catch (error: unknown) {
+      console.error(`Error getting backup with key ${key}:`, error)
+      throw error
+    }
+  }
+
+  /**
+   * Convert a readable stream to a string
+   */
+  private async streamToString(stream: any): Promise<string> {
+    // For AWS SDK v3, we can use the transformToString utility
+    if (typeof stream.transformToString === 'function') {
+      return stream.transformToString()
+    }
+
+    // Fallback to manual stream reading
+    return new Promise((resolve, reject) => {
+      const chunks: Buffer[] = []
+
+      // Handle different types of streams
+      if (typeof stream.on === 'function') {
+        stream.on('data', (chunk: Buffer | string) => {
+          // Ensure chunk is a Buffer
+          chunks.push(typeof chunk === 'string' ? Buffer.from(chunk) : chunk)
+        })
+        stream.on('error', reject)
+        stream.on('end', () => resolve(Buffer.concat(chunks).toString('utf8')))
+      } else if (stream instanceof Uint8Array) {
+        // Handle Uint8Array directly
+        resolve(Buffer.from(stream).toString('utf8'))
+      } else {
+        reject(new Error('Unsupported stream type'))
+      }
     })
-
-    const bodyContents = await streamToString(response.Body)
-    return JSON.parse(bodyContents)
   }
 
   async listBackupsByDevice(deviceId: string): Promise<Array<{

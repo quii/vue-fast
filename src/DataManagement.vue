@@ -178,7 +178,7 @@ function hardReset() {
         Reset all data
       </BaseButton>
     </SectionCard>
-    <SectionCard v-if="installationStore.isStandalone || installationStore.isTestMode" title="Cloud Backup">
+    <SectionCard title="Cloud Backup">
       <CloudBackupSection />
     </SectionCard>
   </div>

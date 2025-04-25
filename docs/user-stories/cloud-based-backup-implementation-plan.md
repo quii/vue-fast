@@ -204,6 +204,8 @@ steps to ensure we can validate our progress and deploy working increments.
   - Send data to the API
   - Handle success/failure
   - Implement basic retry logic
+- Add a method `findBackupsByDeviceId(deviceId)` to:
+  - Search for backups by device ID
 - Add a new method `findBackupsByName(name)` to:
   - Search for backups by user name
   - Support recovery across different devices

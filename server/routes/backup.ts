@@ -76,7 +76,10 @@ router.get('/find-backups', async (req: Request, res: Response) => {
     })
   } catch (error) {
     console.error('Error finding backups:', error)
-    res.status(500).json({ error: 'Failed to find backups' })
+    res.status(500).json({
+      error: 'Failed' +
+        ' to find backups'
+    })
   }
 })
 
@@ -84,15 +87,27 @@ router.get('/find-backups', async (req: Request, res: Response) => {
 router.get('/backup/:key(*)', async (req: Request, res: Response) => {
   try {
     const key = req.params.key
+    console.log('Retrieving backup with key:', key)
+
     const data = await s3Service.getBackup(key)
 
     res.json({
       success: true,
       data
     })
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Error retrieving backup:', error)
-    res.status(500).json({ error: 'Failed to retrieve backup' })
+
+    // Type guard for error with message property
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
+    console.error('Error details:', errorMessage)
+
+    // More detailed error response
+    res.status(500).json({
+      error: 'Failed to retrieve backup',
+      message: errorMessage,
+      key: req.params.key
+    })
   }
 })
 
