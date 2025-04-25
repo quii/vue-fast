@@ -164,37 +164,58 @@ steps to ensure we can validate our progress and deploy working increments.
 
 ### Step 1: Set Up Local S3-Compatible Storage
 
-- Add LocalStack or MinIO for local development
-- Configure the server to connect to the local S3 service
-- Update Docker Compose for local development
+- Add MinIO for local development instead of using Docker Compose
+- Configure environment variables for local S3 connection
+- Update the `dev:all` script to include MinIO while maintaining the existing developer experience
 
 ### Step 2: Implement S3 Service
 
 - Create `server/services/s3Service.ts` with basic operations:
-    - Initialize S3 client
-    - List buckets (for testing)
-    - Create bucket if not exists
+  - Initialize S3 client
+  - Create bucket if not exists
+  - Store and retrieve objects
+  - List objects
+  - Delete objects
+- Implement metadata tagging for backups:
+  - Tag each backup with user name
+  - Tag each backup with device ID
+  - Tag each backup with timestamp
+- Structure S3 keys to support cross-device recovery:
+  - Use format: `backups/{userName}/{deviceId}/{timestamp}.json`
 
 ### Step 3: Implement Basic Backup API
 
 - Create POST endpoint `/api/backup/:deviceId`
+- Store user name alongside backup data
 - Implement basic validation
-- Store the received data in S3
+- Store the received data in S3 with appropriate metadata
 - Return success/failure response
+- Add a new endpoint `/api/find-backups?name={userName}` for cross-device recovery:
+  - Allow users to find their backups by name
+  - Return a list of backups across all devices for that user
 
 ### Step 4: Update Backup Service
 
 - Enhance `backupService.scheduleBackup()` to:
-    - Collect data from stores
-    - Send data to the API
-    - Handle success/failure
-    - Implement basic retry logic
+  - Generate and store a stable device ID
+  - Include user name in backup data
+  - Collect data from stores
+  - Send data to the API
+  - Handle success/failure
+  - Implement basic retry logic
+- Add a new method `findBackupsByName(name)` to:
+  - Search for backups by user name
+  - Support recovery across different devices
 
 ### Step 5: Test Backup Flow
 
 - Verify data is correctly sent to the API
-- Confirm data is stored in S3
+- Confirm data is stored in S3 with proper metadata
 - Test error handling
+- Verify cross-device recovery works:
+  - Create backups with different device IDs
+  - Retrieve backups by user name
+  - Restore from a backup created on a different device
 
 ## Phase 4: Complete Backup & Restore Functionality
 
