@@ -1,5 +1,5 @@
 import runDockerTests from './run-docker-tests.js'
-import { stopContainer } from './run-docker-tests.js'
+import { stopContainers } from './run-docker-tests.js'
 import { spawn } from 'child_process'
 
 async function runTests() {
@@ -20,14 +20,14 @@ async function runTests() {
       console.log(`Cypress process exited with code ${code}`)
 
       // Stop the container
-      await stopContainer()
+      await stopContainers()
 
       // Exit with the same code as Cypress
       process.exit(code)
     })
   } catch (error) {
     console.error('Error running tests:', error)
-    await stopContainer()
+    await stopContainers()
     process.exit(1)
   }
 }

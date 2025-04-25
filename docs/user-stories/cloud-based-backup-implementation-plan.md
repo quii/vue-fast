@@ -186,6 +186,7 @@ steps to ensure we can validate our progress and deploy working increments.
 ### Step 3: Implement Basic Backup API
 
 - Create POST endpoint `/api/backup/:deviceId`
+- Create GET endpoint `/api/backup/:deviceId` (this should retrieve a list of backups by device ID)
 - Store user name alongside backup data
 - Implement basic validation
 - Store the received data in S3 with appropriate metadata
