@@ -1,12 +1,16 @@
 import express from 'express'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import dotenv from 'dotenv'
 // Use .js extension because that's what it will be at runtime
 import apiRoutes from './routes/api.js'
 
 // ES module equivalent of __dirname
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
+
+// Load environment variables from .env file
+dotenv.config({ path: path.resolve(__dirname, '../.env') })
 
 // Add explicit type annotation
 const app: express.Application = express()

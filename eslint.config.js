@@ -95,9 +95,27 @@ export default [
     }
   },
 
-  // Docker test files - Add this new configuration
+  // Docker test files
   {
     files: ['tests/docker/**/*.{js,ts}'],
+    languageOptions: {
+      globals: {
+        console: 'readonly',
+        process: 'readonly',
+        setTimeout: 'readonly',
+        clearTimeout: 'readonly',
+        __dirname: 'readonly',
+        __filename: 'readonly',
+        module: 'readonly',
+        require: 'readonly',
+        Buffer: 'readonly'
+      }
+    }
+  },
+
+  // Node.js scripts
+  {
+    files: ['scripts/**/*.{js,mjs}'],
     languageOptions: {
       globals: {
         console: 'readonly',
