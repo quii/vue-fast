@@ -82,8 +82,23 @@ export interface PlayerHistoryRepository {
   backfillClassifications(): Promise<void>;
 }
 
+// Add this interface near the top of the file
+export interface EventEmitter {
+  emit(eventName: string, detail: any): void;
+}
+
+// Default implementation that does nothing
+const noopEventEmitter: EventEmitter = {
+  emit: () => {
+  }
+}
+
 // Factory function to create a player history repository
-export function createPlayerHistory(storage: StorageInterface = { value: [] }, currentUserProfile: UserProfile | null = null): PlayerHistoryRepository {
+export function createPlayerHistory(
+  storage: StorageInterface = { value: [] },
+  currentUserProfile: UserProfile | null = null,
+  eventEmitter: EventEmitter = noopEventEmitter
+): PlayerHistoryRepository {
   // Initialize the data
   storage.value = prepareHistoryData(storage.value, currentUserProfile);
 
@@ -102,6 +117,10 @@ export function createPlayerHistory(storage: StorageInterface = { value: [] }, c
         shootStatus
       });
       await this.backfillClassifications()
+
+      // Emit event when a score is added
+      eventEmitter.emit('archery-data-changed', { type: 'score-saved' })
+
       return nextId;
     },
 
@@ -111,10 +130,16 @@ export function createPlayerHistory(storage: StorageInterface = { value: [] }, c
 
     remove(id) {
       storage.value = storage.value.filter(item => item.id !== id);
+
+      // Emit event when a score is removed
+      eventEmitter.emit('archery-data-changed', { type: 'score-deleted' })
     },
 
     importHistory(history, currentUserProfile = null) {
       storage.value = prepareHistoryData(history, currentUserProfile);
+
+      // Emit event when history is imported
+      eventEmitter.emit('archery-data-changed', { type: 'history-imported' })
     },
 
     sortedHistory() {
@@ -215,6 +240,9 @@ export function createPlayerHistory(storage: StorageInterface = { value: [] }, c
         ...storage.value[shootIndex],
         ...updates
       };
+
+      // Emit event when a shoot is updated
+      eventEmitter.emit('archery-data-changed', { type: 'shoot-updated' })
 
       return true;
     },

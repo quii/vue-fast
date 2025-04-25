@@ -16,6 +16,7 @@ import DataMenuItem from "@/components/DataMenuItem.vue";
 import MainNavigation from "./components/UserNavigation.vue";
 import { useToast } from "vue-toastification";
 import { useInstallationStore } from './stores/installation'
+import { backupService } from './services/backupService'
 
 const toast = useToast();
 
@@ -86,6 +87,21 @@ if ("serviceWorker" in navigator) {
     }
   })
 }
+
+// Set up backup event listener
+window.addEventListener('archery-data-changed', (event) => {
+  // Type assertion for CustomEvent
+  const customEvent = event as CustomEvent
+  console.log('Data change detected:', customEvent.detail)
+
+  // Only attempt backup if the service is enabled (PWA is installed)
+  if (backupService.isEnabled()) {
+    console.log('Scheduling backup...')
+    backupService.scheduleBackup()
+  } else {
+    console.log('Backup not enabled - app is not installed as PWA')
+  }
+})
 
 const pinia = createPinia()
 const app = createApp({

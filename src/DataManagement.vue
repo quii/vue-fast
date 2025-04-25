@@ -1,6 +1,8 @@
 <script setup>
+import CloudBackupSection from '@/components/CloudBackupSection.vue'
 import { calculateDefaultSeasonDates } from "@/domain/season_dates.js";
 import { useHistoryStore } from "@/stores/history";
+import { useInstallationStore } from '@/stores/installation.js'
 import { useNotesStore } from "@/stores/user_notes";
 import { useUserStore } from "@/stores/user";
 import { useToast } from "vue-toastification";
@@ -12,6 +14,7 @@ const history = useHistoryStore();
 const notes = useNotesStore();
 const user = useUserStore();
 const toast = useToast();
+const installationStore = useInstallationStore()
 
 const backupWarning = computed(() => user.needsBackup());
 
@@ -174,6 +177,9 @@ function hardReset() {
       >
         Reset all data
       </BaseButton>
+    </SectionCard>
+    <SectionCard v-if="installationStore.isStandalone || installationStore.isTestMode" title="Cloud Backup">
+      <CloudBackupSection />
     </SectionCard>
   </div>
 </template>

@@ -3,7 +3,14 @@ import { useUserStore } from "@/stores/user.js";
 import { defineStore } from "pinia";
 import { useLocalStorage } from "@vueuse/core";
 import { computed, ref, watchEffect } from "vue";
-import { createPlayerHistory } from "@/domain/repositories/player_history.js";
+import { createPlayerHistory, EventEmitter } from '@/domain/repositories/player_history.js'
+
+// Create an adapter that emits window events
+const windowEventEmitter: EventEmitter = {
+  emit: (eventName, detail) => {
+    window.dispatchEvent(new CustomEvent(eventName, { detail }))
+  }
+}
 
 export const useHistoryStore = defineStore("history", () => {
   const state = useLocalStorage("history", []);
@@ -17,7 +24,8 @@ export const useHistoryStore = defineStore("history", () => {
     classification: userStore.user.classification
   }));
 
-  const playerHistory = createPlayerHistory(state, currentUserProfile.value);
+  // Pass the event emitter to the factory function
+  const playerHistory = createPlayerHistory(state, currentUserProfile.value, windowEventEmitter)
 
   setTimeout(async () => {
     await playerHistory.backfillClassifications()
