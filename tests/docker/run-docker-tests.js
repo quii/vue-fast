@@ -39,11 +39,11 @@ async function runDockerTests() {
     // Build the Docker image with build args for S3 configuration
     execSync(
       'docker build ' +
-      '--build-arg S3_ENDPOINT=http://minio:9000 ' +
-      '--build-arg S3_REGION=us-east-1 ' +
-      '--build-arg S3_ACCESS_KEY=minioadmin ' +
-      '--build-arg S3_SECRET_KEY=minioadmin ' +
-      '--build-arg S3_BUCKET_NAME=archery-backups-test ' +
+      '--build-arg AWS_ENDPOINT_URL_S3=http://minio:9000 ' +
+      '--build-arg AWS_REGION=us-east-1 ' +
+      '--build-arg AWS_ACCESS_KEY_ID=minioadmin ' +
+      '--build-arg AWS_SECRET_ACCESS_KEY=minioadmin ' +
+      '--build-arg BUCKET_NAME=archery-backups-test ' +
       '-t vue-fast-test .',
       {
         cwd: projectRoot,
@@ -58,12 +58,12 @@ async function runDockerTests() {
       .withNetwork(network)
       .withExposedPorts(8080)
       .withEnvironment({
-        S3_ENDPOINT: 'http://minio:9000',
-        S3_REGION: 'us-east-1',
-        S3_ACCESS_KEY: 'minioadmin',
-        S3_SECRET_KEY: 'minioadmin',
-        S3_BUCKET_NAME: 'archery-backups-test',
-        NODE_ENV: 'development', // Use development for more verbose logging
+        AWS_ENDPOINT_URL_S3: 'http://minio:9000',
+        AWS_REGION: 'us-east-1',
+        AWS_ACCESS_KEY_ID: 'minioadmin',
+        AWS_SECRET_ACCESS_KEY: 'minioadmin',
+        BUCKET_NAME: 'archery-backups-test',
+        NODE_ENV: 'development',
         DEBUG: 'true'
       })
       .start()
@@ -74,6 +74,32 @@ async function runDockerTests() {
 
     const url = `http://${host}:${port}`
     console.log(`Vue app container started at ${url}`)
+
+    // Add some additional logging to help debug
+    console.log(`Host: ${host}`)
+    console.log(`Port: ${port}`)
+    console.log(`Full URL: ${url}`)
+
+    // Try to make a test request to verify connectivity
+    try {
+      const testReq = http.request({
+        hostname: host,
+        port: port,
+        path: '/',
+        method: 'GET',
+        timeout: 5000
+      }, (res) => {
+        console.log(`Test request status: ${res.statusCode}`)
+      })
+
+      testReq.on('error', (e) => {
+        console.error(`Test request error: ${e.message}`)
+      })
+
+      testReq.end()
+    } catch (error) {
+      console.error(`Error making test request: ${error.message}`)
+    }
 
     // Set environment variables for Cypress
     process.env.CYPRESS_BASE_URL = url

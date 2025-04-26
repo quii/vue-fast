@@ -1,0 +1,6 @@
+{
+  "baseUrl": "http://app:8080",
+  "video": false,
+  "screenshotOnRunFailure": true,
+  "reporter": "spec"
+}

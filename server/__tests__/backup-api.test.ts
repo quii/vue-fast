@@ -41,11 +41,11 @@ describe('Backup API Integration Tests', () => {
     const endpoint = `http://${container.getHost()}:${container.getMappedPort(9000)}`
 
     // Set environment variables for the S3 service
-    process.env.S3_ENDPOINT = endpoint
-    process.env.S3_REGION = 'us-east-1'
-    process.env.S3_ACCESS_KEY = 'minioadmin'
-    process.env.S3_SECRET_KEY = 'minioadmin'
-    process.env.S3_BUCKET_NAME = testBucketName
+    process.env.AWS_ENDPOINT_URL_S3 = endpoint
+    process.env.AWS_REGION = 'us-east-1'
+    process.env.AWS_ACCESS_KEY_ID = 'minioadmin'
+    process.env.AWS_SECRET_ACCESS_KEY = 'minioadmin'
+    process.env.BUCKET_NAME = testBucketName
 
     // Create a test S3 service for setup/verification
     testS3Service = new S3Service({

@@ -22,24 +22,25 @@ export class S3Service {
     secretKey?: string;
     bucketName?: string;
   }) {
+
     // Log configuration for debugging
     console.log('S3 Configuration:')
-    console.log('Endpoint:', options?.endpoint || process.env.S3_ENDPOINT)
-    console.log('Region:', options?.region || process.env.S3_REGION)
-    console.log('Access Key:', options?.accessKey || process.env.S3_ACCESS_KEY ? '[REDACTED]' : 'undefined')
-    console.log('Secret Key:', options?.secretKey || process.env.S3_SECRET_KEY ? '[REDACTED]' : 'undefined')
-    console.log('Bucket Name:', options?.bucketName || process.env.S3_BUCKET_NAME)
+    console.log('Endpoint:', options?.endpoint || process.env.AWS_ENDPOINT_URL_S3)
+    console.log('Region:', options?.region || process.env.AWS_REGION)
+    console.log('Access Key:', options?.accessKey || process.env.AWS_ACCESS_KEY_ID ? '[REDACTED]' : 'undefined')
+    console.log('Secret Key:', options?.secretKey || process.env.AWS_SECRET_ACCESS_KEY ? '[REDACTED]' : 'undefined')
+    console.log('Bucket Name:', options?.bucketName || process.env.BUCKET_NAME)
 
     this.s3Client = new S3Client({
-      region: options?.region || process.env.S3_REGION || 'us-east-1',
-      endpoint: options?.endpoint || process.env.S3_ENDPOINT,
+      region: options?.region || process.env.AWS_REGION || 'us-east-1',
+      endpoint: options?.endpoint || process.env.AWS_ENDPOINT_URL_S3,
       forcePathStyle: true, // Needed for MinIO and localstack
       credentials: {
-        accessKeyId: options?.accessKey || process.env.S3_ACCESS_KEY || '',
-        secretAccessKey: options?.secretKey || process.env.S3_SECRET_KEY || ''
+        accessKeyId: options?.accessKey || process.env.AWS_ACCESS_KEY_ID || '',
+        secretAccessKey: options?.secretKey || process.env.AWS_SECRET_ACCESS_KEY || ''
       }
     })
-    this.bucketName = options?.bucketName || process.env.S3_BUCKET_NAME || 'archery-backups'
+    this.bucketName = options?.bucketName || process.env.BUCKET_NAME || 'archery-backups'
   }
 
   async initializeBucket(): Promise<void> {

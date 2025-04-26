@@ -48,6 +48,7 @@ Did you follow your process?"
       <BaseButton
         variant="primary"
         @click="saveNote"
+        data-test="save-note-button"
         :disabled="!noteText.trim()"
       >
         Save Note

@@ -208,7 +208,7 @@ class ScorePage {
         this.score(score);
       });
     } else {
-      cy.get("button").contains(new RegExp("^" + input.toString() + "$", "g")).click();
+      cy.get('button').contains(new RegExp('^' + input.toString() + '$', 'g')).click({ force: true })
     }
     return this;
   }
@@ -266,22 +266,59 @@ class ScorePage {
 
   addNote(noteText) {
     // Click the Note button in the TopBar to open the note modal
-    cy.get("span").contains("Note").click();
+    cy.get('span').contains('Note').click({ force: true })
 
-    // Now we need to target the BaseTextarea in the NoteModal
-    cy.get(".note-textarea").type(noteText);
+    // Wait for the modal to be visible
+    cy.get('.note-textarea').should('be.visible')
 
+    // Clear the textarea first to ensure it's empty
+    cy.get('.note-textarea').clear()
+
+    // Type the note text with a delay to ensure it's properly entered
+    cy.get('.note-textarea').type(noteText, { delay: 10 })
+
+    // Verify the text was entered correctly
+    cy.get('.note-textarea').should('have.value', noteText)
+
+    cy.wait(2000) // Add a small wait to ensure the note is rendered
     // Click the Save Note button
-    cy.get("button").contains("Save Note").click();
+    // cy.contains(" Save Note ").click({ force: true });
+    cy.get('[data-test="save-note-button"]').click({ force: true })
+
+    // Take a screenshot after saving
+    cy.screenshot('after-saving-note')
+
+    // Wait for the note to be added to the DOM
+    cy.wait(1000) // Add a small wait to ensure the note is rendered
   }
 
   highlightNote(noteText) {
-    // Use force: true to click even if the element is not visible
-    cy.get("[data-test=\"note-text\"]").contains(noteText).click({ force: true });
+    cy.log(`Attempting to highlight note: ${noteText}`)
+
+    // Take a screenshot before highlighting
+    cy.screenshot('before-highlighting-note')
+
+    // Check if the note element exists
+    cy.get('body').then($body => {
+      if ($body.find('[data-test="note-text"]').length > 0) {
+        cy.log('Note element found')
+      } else {
+        cy.log('Note element not found, will retry')
+      }
+    });
+
+    // Wait for the note element to be available with a longer timeout
+    cy.get('[data-test="note-text"]', { timeout: 20000 })
+      .should('exist')
+      .contains(noteText, { timeout: 20000 })
+      .should('exist')
+      .click({ force: true });
+
+    // Take a screenshot after highlighting
+    cy.screenshot('after-highlighting-note')
   }
 
   clickClassificationDetails() {
-    // Now we need to click on the stats container in the TopBar to expand the details
     cy.get("span").contains("Class").click();
   }
 

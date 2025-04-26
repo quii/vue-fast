@@ -21,7 +21,6 @@ describe('S3Service Integration Tests', () => {
     const endpoint = `http://${container.getHost()}:${container.getMappedPort(9000)}`
 
     // Initialize S3 service with test container
-
     s3Service = new S3Service({
       endpoint,
       region: 'us-east-1',
