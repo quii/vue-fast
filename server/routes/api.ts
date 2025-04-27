@@ -50,6 +50,32 @@ router.get('/diagnose', async (req, res) => {
     })
   }
 })
+
+// Add a new endpoint to list all bucket contents
+router.get('/list-all-backups', async (req, res) => {
+  try {
+    const s3Service = new S3Service()
+
+    // Initialize the bucket first to ensure it exists
+    await s3Service.initializeBucket()
+
+    // List all objects in the bucket
+    const result = await s3Service.listAllBackups()
+
+    res.json({
+      success: true,
+      count: result.length,
+      backups: result
+    })
+  } catch (error: any) {
+    console.error('Error listing all backups:', error)
+    res.status(500).json({
+      success: false,
+      error: error.message
+    })
+  }
+})
+
 // Mount backup routes
 router.use('/', backupRoutes)
 

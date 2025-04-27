@@ -244,4 +244,57 @@ export class S3Service {
       }
     }
   }
+
+  async listAllBackups(): Promise<Array<{
+    key: string;
+    userName: string;
+    deviceId: string;
+    timestamp: string;
+    size?: number;
+    lastModified?: Date;
+  }>> {
+    try {
+      const result = await this.s3Client.send(new ListObjectsV2Command({
+        Bucket: this.bucketName,
+        Prefix: 'backups/',
+        MaxKeys: 1000 // Increase this if you have more backups
+      }))
+
+      return (result.Contents || [])
+        .map(item => {
+          const key = item.Key as string
+          const parts = key.split('/')
+
+          // Handle the case where the key format doesn't match expected pattern
+          let userName = 'unknown'
+          let deviceId = 'unknown'
+          let timestamp = 'unknown'
+
+          if (parts.length >= 4) {
+            userName = decodeURIComponent(parts[1])
+            deviceId = parts[2]
+            timestamp = parts[3].replace('.json', '')
+          }
+
+          return {
+            key,
+            userName,
+            deviceId,
+            timestamp,
+            size: item.Size,
+            lastModified: item.LastModified
+          }
+        })
+        .sort((a, b) => {
+          // Sort by lastModified date if available, otherwise by timestamp
+          if (a.lastModified && b.lastModified) {
+            return b.lastModified.getTime() - a.lastModified.getTime()
+          }
+          return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+        })
+    } catch (error) {
+      console.error('Error listing all backups:', error)
+      throw error
+    }
+  }
 }
