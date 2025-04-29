@@ -87,6 +87,23 @@ function formatBytes(bytes) {
   return `${size.toFixed(1)} ${units[unitIndex]}`
 }
 
+function downloadBackupData(data, filename) {
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
+  const url = URL.createObjectURL(blob)
+
+  const a = document.createElement('a')
+  a.href = url
+  a.download = filename || 'backup-data.json'
+  document.body.appendChild(a)
+  a.click()
+
+  // Cleanup
+  setTimeout(() => {
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
+  }, 0)
+}
+
 async function viewBackup(key) {
   try {
     const response = await fetch(`/api/backup/${encodeURIComponent(key)}`)
@@ -96,23 +113,8 @@ async function viewBackup(key) {
     }
 
     const data = await response.json()
-    console.log('Backup data:', data)
+    downloadBackupData(data, `backup-${key}.json`)
 
-    // Open a new window with the JSON data
-    const jsonWindow = window.open('', '_blank')
-    jsonWindow.document.write(`
-      <html>
-        <head>
-          <title>Backup Data: ${key}</title>
-          <style>
-            body { font-family: monospace; white-space: pre; padding: 20px; }
-          </style>
-        </head>
-        <body>
-          ${JSON.stringify(data, null, 2)}
-        </body>
-      </html>
-    `)
   } catch (error) {
     console.error('Error viewing backup:', error)
     toast.error(`Failed to view backup: ${error.message}`)
