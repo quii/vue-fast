@@ -297,4 +297,63 @@ export class S3Service {
       throw error
     }
   }
+
+  async deleteTestData(): Promise<{ deletedCount: number, errors: number }> {
+    try {
+      console.log('Deleting test backup data...')
+
+      // List all backups
+      const result = await this.s3Client.send(new ListObjectsV2Command({
+        Bucket: this.bucketName,
+        Prefix: 'backups/',
+        MaxKeys: 1000
+      }))
+
+      const testDataKeys: string[] = []
+      let errors = 0
+
+      // First, identify all test data objects
+      for (const item of result.Contents || []) {
+        const key = item.Key as string
+        const parts = key.split('/')
+
+        // Check if this is a backup with the expected format
+        if (parts.length >= 4) {
+          const userName = decodeURIComponent(parts[1])
+
+          // Check if this is test data
+          if (
+            userName.toLowerCase() === 'anonymous' ||
+            userName.toLowerCase().includes('test archer')
+          ) {
+            testDataKeys.push(key)
+          }
+        }
+      }
+
+      console.log(`Found ${testDataKeys.length} test data objects to delete`)
+
+      // Delete all identified test data objects
+      for (const key of testDataKeys) {
+        try {
+          await this.s3Client.send(new DeleteObjectCommand({
+            Bucket: this.bucketName,
+            Key: key
+          }))
+          console.log(`Deleted test data: ${key}`)
+        } catch (error) {
+          console.error(`Error deleting test data ${key}:`, error)
+          errors++
+        }
+      }
+
+      return {
+        deletedCount: testDataKeys.length - errors,
+        errors
+      }
+    } catch (error) {
+      console.error('Error deleting test data:', error)
+      throw error
+    }
+  }
 }

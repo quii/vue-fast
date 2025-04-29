@@ -76,6 +76,32 @@ router.get('/list-all-backups', async (req, res) => {
   }
 })
 
+// Add this to your server routes file (e.g., server/routes/api.js or similar)
+
+// DELETE endpoint to remove test data
+router.delete('/delete-test-backups', async (req, res) => {
+  try {
+    // You might want to add some authentication here to prevent unauthorized access
+
+    const s3Service = new S3Service() // Or however you initialize your service
+    const result = await s3Service.deleteTestData()
+
+    res.json({
+      success: true,
+      message: `Successfully deleted ${result.deletedCount} test backup(s)`,
+      ...result
+    })
+  } catch (error: any) {
+    console.error('Error in delete-test-backups endpoint:', error)
+    res.status(500).json({
+      success: false,
+      message: 'Failed to delete test backups',
+      error: error.message
+    })
+  }
+})
+
+
 // Mount backup routes
 router.use('/', backupRoutes)
 
