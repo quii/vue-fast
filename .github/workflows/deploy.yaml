@@ -30,3 +30,6 @@ jobs:
       - name: Check live works
         run: npm run test:e2e:live
 
+      - name: Cleanup test data
+        run: npm run cleanup-test-data:live
+
