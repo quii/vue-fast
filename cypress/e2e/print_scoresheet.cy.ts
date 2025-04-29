@@ -11,7 +11,7 @@ describe("Print scoresheet", () => {
     });
     scorePage.visit()
     userDataPage.navigateTo();
-    userDataPage.setArcherDetails("male", "recurve", "senior", "Chris");
+    userDataPage.setArcherDetails('male', 'recurve', 'senior', 'Test Archer 1')
 
     scorePage.navigateTo();
     scorePage.selectGame("Bray i");
