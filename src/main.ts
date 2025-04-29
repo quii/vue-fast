@@ -54,6 +54,12 @@ const routes = [
       returnTo: route.query.returnTo || "/",
       currentRound: route.query.currentRound || ""
     })
+  },
+  // Add the new route for the backup debugger (hidden from navigation)
+  {
+    path: '/admin/backups',
+    name: 'backupDebugger',
+    component: () => import('./components/admin/BackupDebugger.vue')
   }
 ]
 const router = VueRouter.createRouter({

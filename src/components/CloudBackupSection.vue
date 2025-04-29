@@ -4,6 +4,7 @@ import { useToast } from 'vue-toastification'
 import BaseButton from '@/components/ui/BaseButton.vue'
 import ButtonGroup from '@/components/ui/ButtonGroup.vue'
 import CloudIcon from '@/components/icons/CloudIcon.vue'
+import BackupCard from '@/components/backup/BackupCard.vue'
 import { backupService } from '@/services/backupService'
 import { formatDateContextually } from '@/domain/scoring/round/formatting.js'
 import { useUserStore } from '@/stores/user' // Import the user store
@@ -173,32 +174,13 @@ async function restoreBackup(backupKey) {
     <div v-if="backups.length > 0" class="backup-list">
       <h4>Available Backups</h4>
       <div class="backup-cards">
-        <div v-for="backup in backups" :key="backup.key" class="backup-card">
-          <div :class="['time-indicator', getColorScheme(backup.timestamp)]">
-            <span class="time-text">{{ getContextualTime(backup.timestamp) }}</span>
-          </div>
-          <div class="card-content">
-            <div class="card-main">
-              <div class="card-info">
-                <h3 class="backup-title">{{ backup.userName || 'Unknown user' }}</h3>
-                <div class="card-details">
-                  <span class="backup-date">{{ formatDate(backup.timestamp) }}</span>
-                  <span class="device-id">{{ backup.deviceId }}</span>
-                </div>
-              </div>
-              <div class="action-container">
-                <BaseButton
-                  variant="outline"
-                  size="small"
-                  @click="restoreBackup(backup.key)"
-                  :disabled="isBackingUp"
-                >
-                  Restore
-                </BaseButton>
-              </div>
-            </div>
-          </div>
-        </div>
+        <BackupCard
+          v-for="backup in backups"
+          :key="backup.key"
+          :backup="backup"
+          actionLabel="Restore"
+          @action="restoreBackup"
+        />
       </div>
     </div>
     <div v-else-if="!isLoading" class="no-backups">
@@ -258,15 +240,6 @@ async function restoreBackup(backupKey) {
   margin-right: 0.5rem;
 }
 
-.beta-note {
-  font-size: 0.85rem;
-  color: var(--color-text-light);
-  font-style: italic;
-  margin-top: 0.5rem;
-  padding-top: 0.5rem;
-  border-top: 1px solid var(--color-border-light);
-}
-
 .backup-list {
   margin: 1rem 0;
   border-top: 1px solid var(--color-border-light);
@@ -286,80 +259,6 @@ async function restoreBackup(backupKey) {
   gap: 0.5rem;
 }
 
-.backup-card {
-  display: flex;
-  background-color: var(--color-background-soft);
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: transform 0.1s ease;
-}
-
-.backup-card:active {
-  transform: scale(0.98);
-}
-
-.time-indicator {
-  width: 50px;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 0.75em 0;
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  text-align: center;
-}
-
-.time-text {
-  font-weight: bold;
-  font-size: 0.85em;
-  line-height: 1.2;
-}
-
-.card-content {
-  flex-grow: 1;
-  padding: 0.75em;
-  display: flex;
-  flex-direction: column;
-}
-
-.card-main {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-.card-info {
-  display: flex;
-  flex-direction: column;
-}
-
-.backup-title {
-  margin: 0;
-  font-size: 1.1em;
-  font-weight: 600;
-}
-
-.card-details {
-  display: flex;
-  flex-direction: column;
-  margin-top: 0.2em;
-  gap: 0.2em;
-}
-
-.backup-date, .device-id {
-  font-size: 0.85em;
-  color: var(--color-text-light);
-}
-
-.action-container {
-  display: flex;
-  align-items: center;
-}
-
 .no-backups, .loading {
   margin: 1rem 0;
   padding: 1rem;
@@ -367,31 +266,5 @@ async function restoreBackup(backupKey) {
   background-color: var(--color-background-soft);
   border-radius: 4px;
   color: var(--color-text-light);
-}
-
-/* Color schemes for time indicators */
-.recent {
-  background-color: hsla(145, 63%, 42%, 0.8);
-  color: white;
-}
-
-.today {
-  background-color: hsla(207, 85%, 65%, 1);
-  color: white;
-}
-
-.week {
-  background-color: hsla(271, 68%, 32%, 0.8);
-  color: white;
-}
-
-.older {
-  background-color: hsla(3, 84%, 65%, 1);
-  color: white;
-}
-
-.neutral {
-  background-color: var(--color-border);
-  color: var(--color-text);
 }
 </style>
