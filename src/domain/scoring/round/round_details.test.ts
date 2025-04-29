@@ -84,7 +84,7 @@ describe("getRoundDetails", () => {
 describe("formatRoundName", () => {
   test("capitalizes first letter of each word", () => {
     expect(formatRoundName("national")).toBe("National");
-    expect(formatRoundName("wa 70m")).toBe("Wa 70m");
+    expect(formatRoundName('wa 70m')).toBe('WA 70m')
   });
 
   test("converts roman numerals to uppercase", () => {
@@ -97,7 +97,7 @@ describe("formatRoundName", () => {
 
   test("handles mixed case input", () => {
     expect(formatRoundName("NATIONAL")).toBe("National");
-    expect(formatRoundName("WA 70M")).toBe("Wa 70m");
+    expect(formatRoundName('WA 70M')).toBe('WA 70m')
   });
 
   test("returns empty string for empty input", () => {
@@ -105,6 +105,25 @@ describe("formatRoundName", () => {
     expect(formatRoundName(null)).toBe("");
     expect(formatRoundName(undefined)).toBe("");
   });
+
+  // Add new test cases for WA rounds
+  test('correctly formats WA rounds', () => {
+    expect(formatRoundName('wa 70m')).toBe('WA 70m')
+    expect(formatRoundName('wa 18m')).toBe('WA 18m')
+    expect(formatRoundName('wa 50m')).toBe('WA 50m')
+  })
+
+  test('does not affect words that start with \'wa\'', () => {
+    expect(formatRoundName('warwick')).toBe('Warwick')
+    expect(formatRoundName('wand')).toBe('Wand')
+    expect(formatRoundName('water newton')).toBe('Water Newton')
+  })
+
+  test('handles WA in different positions', () => {
+    expect(formatRoundName('indoor wa 18m')).toBe('Indoor WA 18m')
+    expect(formatRoundName('outdoor wa 70m')).toBe('Outdoor WA 70m')
+    expect(formatRoundName('wa combined')).toBe('WA Combined')
+  })
 });
 
 test("correctly handles metric rounds with both yard and meter distances", () => {

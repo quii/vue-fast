@@ -1,13 +1,14 @@
 //todo: refactor usages of this to the round instance
-export function formatRoundName(roundName) {
+export function formatRoundName(roundName: string): string {
   if (!roundName) return "";
 
-  // Split the round name into words
   const words = roundName.split(" ");
 
-  // Process each word
   return words.map(word => {
-    // Check if the word is a Roman numeral (i, ii, iii, iv, v, etc.)
+    if (word.toLowerCase() === 'wa') {
+      return 'WA'
+    }
+
     const romanNumeralPattern = /^(i{1,3}|iv|v|vi{1,3}|ix|x|xi{1,3}|xiv|xv|xvi{1,3})$/i;
 
     if (romanNumeralPattern.test(word)) {
