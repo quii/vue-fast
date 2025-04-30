@@ -3,7 +3,7 @@ import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import express from 'express'
 import request from 'supertest'
 import { S3Service } from '../services/s3Service.js'
-import backupRoutes from '../routes/backup.js'
+import { createBackupRouter } from '../routes/backup.js'
 
 // Define interfaces for our backup objects
 interface BackupMetadata {
@@ -64,7 +64,6 @@ describe('Backup API Integration Tests', () => {
     app.use(express.json())
 
     // Create a router with a new S3Service instance that explicitly uses the test configuration
-    const testRouter = express.Router()
     const s3ServiceForRoutes = new S3Service({
       endpoint,
       region: 'us-east-1',
@@ -76,97 +75,9 @@ describe('Backup API Integration Tests', () => {
     // Initialize the bucket for the router's S3 service
     await s3ServiceForRoutes.initializeBucket()
 
-    // Health check endpoint
-    testRouter.get('/health', (req, res) => {
-      res.json({
-        status: 'ok',
-        message: 'Hello from the backup API!'
-      })
-    })
-
-    // Store backup
-    testRouter.post('/backup/:deviceId', async (req, res) => {
-      try {
-        const { deviceId } = req.params
-        const { data, userName } = req.body
-
-        if (!deviceId || !data) {
-          return res.status(400).json({ error: 'Missing required parameters' })
-        }
-
-        // Use provided userName or 'unknown'
-        const userNameToStore = userName || 'unknown'
-
-        // Store the backup
-        const result = await s3ServiceForRoutes.storeBackup(userNameToStore, deviceId, data)
-
-        // Rotate old backups (keep only the most recent 5)
-        await s3ServiceForRoutes.rotateBackups(deviceId, 5)
-
-        res.json({
-          success: true,
-          message: 'Backup stored successfully',
-          ...result
-        })
-      } catch (error) {
-        console.error('Error storing backup:', error)
-        res.status(500).json({ error: 'Failed to store backup' })
-      }
-    })
-
-    // List backups for a device
-    testRouter.get('/backups/:deviceId', async (req, res) => {
-      try {
-        const { deviceId } = req.params
-        const backups = await s3ServiceForRoutes.listBackupsByDevice(deviceId)
-
-        res.json({
-          backups: backups.slice(0, 5) // Return only the 5 most recent
-        })
-      } catch (error) {
-        console.error('Error listing backups:', error)
-        res.status(500).json({ error: 'Failed to list backups' })
-      }
-    })
-
-    // Find backups by user name (for cross-device recovery)
-    testRouter.get('/find-backups', async (req, res) => {
-      try {
-        const { name } = req.query
-
-        if (!name) {
-          return res.status(400).json({ error: 'Name parameter is required' })
-        }
-
-        const backups = await s3ServiceForRoutes.findBackupsByName(String(name))
-
-        res.json({
-          backups: backups.slice(0, 10) // Limit to 10 most recent backups
-        })
-      } catch (error) {
-        console.error('Error finding backups:', error)
-        res.status(500).json({ error: 'Failed to find backups' })
-      }
-    })
-
-    // Get a specific backup
-    testRouter.get('/backup/:key(*)', async (req, res) => {
-      try {
-        const key = req.params.key
-        const data = await s3ServiceForRoutes.getBackup(key)
-
-        res.json({
-          success: true,
-          data
-        })
-      } catch (error) {
-        console.error('Error retrieving backup:', error)
-        res.status(500).json({ error: 'Failed to retrieve backup' })
-      }
-    })
-
-    // Use the test router instead of importing the routes
-    app.use('/api', testRouter)
+    // Use our actual router implementation with dependency injection
+    const backupRouter = createBackupRouter({ s3Service: s3ServiceForRoutes })
+    app.use('/api', backupRouter)
   }, 30000) // Increase timeout for container startup
 
   afterAll(async () => {
@@ -352,5 +263,41 @@ describe('Backup API Integration Tests', () => {
 
     expect(response.status).toBe(400)
     expect(response.body).toHaveProperty('error')
+  })
+
+  // Add a test for the delete-test-backups endpoint
+  it('should delete test data backups', async () => {
+    // First create some test data
+    const testUserName = 'Test Archer'
+    const deviceId = 'test-device-delete'
+    const testData = { test: true }
+
+    // Store a few test backups
+    await testS3Service.storeBackup(testUserName, deviceId, testData)
+    await testS3Service.storeBackup('anonymous', deviceId, testData)
+
+    // Also store a regular backup that shouldn't be deleted
+    await testS3Service.storeBackup('regular-user', deviceId, testData)
+
+    // Call the delete endpoint
+    const response = await request(app).delete('/api/delete-test-backups')
+
+    expect(response.status).toBe(200)
+    expect(response.body).toHaveProperty('success', true)
+    expect(response.body).toHaveProperty('deletedCount')
+    expect(response.body.deletedCount).toBeGreaterThanOrEqual(2) // Should delete at least the 2 test backups
+
+    // Verify that test backups are gone but regular backups remain
+    const allBackups = await testS3Service.listAllBackups()
+    const testBackups = allBackups.filter(b =>
+      b.userName.toLowerCase() === 'anonymous' ||
+      b.userName.toLowerCase().includes('test archer')
+    )
+
+    expect(testBackups.length).toBe(0) // All test backups should be gone
+
+    // Should still have the regular backup
+    const regularBackups = allBackups.filter(b => b.userName === 'regular-user')
+    expect(regularBackups.length).toBeGreaterThan(0)
   })
 })
