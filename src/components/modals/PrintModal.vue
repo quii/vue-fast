@@ -119,8 +119,8 @@ async function generateSvg() {
     const container = document.createElement('div')
     container.style.position = 'absolute'
     container.style.left = '-9999px'
-    container.style.width = '800px' // Fixed width for consistent rendering
-    container.style.padding = '20px' // Add padding to the container
+    container.style.width = '800px'
+    container.style.padding = '20px'
     document.body.appendChild(container)
 
     // Create a Vue app to render the components
@@ -134,6 +134,7 @@ async function generateSvg() {
             color: 'black'
           }
         }, [
+          // Header content remains the same
           h('h2', {
             style: {
               textAlign: 'center',
@@ -149,7 +150,7 @@ async function generateSvg() {
             }
           }, `Shot at ${shotAt.value}`),
 
-          // Custom archer details rendering instead of using the component
+          // Archer details section remains the same
           h('div', {
             style: {
               display: 'flex',
@@ -176,14 +177,14 @@ async function generateSvg() {
               style: {
                 flex: '1',
                 textAlign: 'left',
-                paddingLeft: '10px' // Ensure consistent spacing
+                paddingLeft: '10px'
               }
             }, [
               h('div', { style: { marginBottom: '8px' } }, props.archerName),
               h('div', {
                 style: {
                   marginBottom: '8px',
-                  textTransform: 'capitalize' // Capitalize gender
+                  textTransform: 'capitalize'
                 }
               }, props.gender)
             ]),
@@ -193,7 +194,7 @@ async function generateSvg() {
               style: {
                 flex: '1',
                 textAlign: 'right',
-                paddingRight: '10px' // Add spacing between label and value
+                paddingRight: '10px'
               }
             }, [
               h('div', { style: { fontWeight: 'bold', marginBottom: '8px' } }, 'Bow Type:'),
@@ -210,17 +211,19 @@ async function generateSvg() {
               h('div', {
                 style: {
                   marginBottom: '8px',
-                  textTransform: 'capitalize' // Capitalize bow type
+                  textTransform: 'capitalize'
                 }
               }, props.bowType),
               h('div', {
                 style: {
                   marginBottom: '8px',
-                  textTransform: 'capitalize' // Capitalize age group
+                  textTransform: 'capitalize'
                 }
               }, props.ageGroup)
             ])
           ]),
+
+          // Use RoundScores component
           h(RoundScores, {
             scores: props.shoot.scores,
             gameType: props.gameType,
@@ -231,7 +234,7 @@ async function generateSvg() {
           // Add an extra spacer div at the bottom
           h('div', {
             style: {
-              height: '40px' // Extra space at the bottom
+              height: '40px'
             }
           })
         ]);
@@ -243,6 +246,42 @@ async function generateSvg() {
 
     // Wait a bit for rendering to complete
     await new Promise(resolve => setTimeout(resolve, 100))
+
+    // Add a style element with the score coloring CSS
+    const styleElement = document.createElement('style')
+    styleElement.textContent = `
+      .score9, .score10, .scoreX {
+        background-color: #fefc2a !important;
+        color: black !important;
+      }
+
+      .score7, .score8 {
+        background-color: #fc2e2a !important;
+        color: white !important;
+      }
+
+      .score5, .score6 {
+        background-color: #2790f9 !important;
+        color: white !important;
+      }
+
+      .score3, .score4 {
+        background-color: black !important;
+        color: white !important;
+      }
+
+      .score1, .score2 {
+        background-color: white !important;
+        color: black !important;
+        border: 1px solid #333 !important;
+      }
+
+      .scoreM {
+        background-color: darkgreen !important;
+        color: white !important;
+      }
+    `
+    container.appendChild(styleElement)
 
     // Directly modify the table styles in the DOM
     const tables = container.querySelectorAll('table')
@@ -258,6 +297,12 @@ async function generateSvg() {
         cell.style.border = '1px solid #333'
         cell.style.padding = '10px'
         cell.style.textAlign = 'center'
+
+        // Don't override background color for score cells
+        // that already have a class-based color
+        if (!cell.className.includes('score')) {
+          cell.style.backgroundColor = ''
+        }
       });
 
       // Find and style running total rows
@@ -291,10 +336,8 @@ async function generateSvg() {
     let svgHeight = container.offsetHeight
 
     // Add extra height for shorter shoots (fewer ends)
-    // The fewer the ends, the more extra space we add
     const endCount = props.shoot.scores.length
     if (endCount < 10) {
-      // Add progressively more padding for shorter shoots
       const extraPadding = Math.max(0, (10 - endCount) * 10)
       svgHeight += extraPadding
     }
