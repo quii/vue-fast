@@ -373,3 +373,53 @@ Modals should:
 
 When creating new components, always ask: "Can this be built by composing existing components?" before adding custom
 CSS.
+
+## Page Structure and Component Reuse Guidelines
+
+### Page Structure
+
+- All new pages should follow the same look and feel as existing pages like `src/ScoreHistory.vue` and
+  `src/ScoreCard.vue`
+- Typically, a page should have:
+  - A `BaseTopBar` component at the top for actions and key information display
+  - Content sections below that follow the established visual patterns
+  - Consistent spacing and layout matching existing pages
+
+### Component Reuse and Zero-CSS Approach
+
+- **New pages or sections should require NO custom CSS**
+- Always compose pages from existing components rather than writing new markup with custom styles
+- Before implementing any feature, ask for a list of available components that might serve your needs
+- For UI elements, check if we have components like:
+  - `BaseButton`, `ButtonGroup`, `BaseTopBar`, `SectionCard`, etc.
+  - Specialized components for common patterns in the application
+- If you believe custom CSS is needed, first prompt me to confirm there isn't an existing component
+- The goal is to maintain a consistent look and feel through strict component reuse
+- Creating new CSS should be considered a last resort and requires explicit approval
+
+### Icons
+
+- **Never use inline SVG in templates**
+- Always create dedicated icon components in `src/components/icons/`
+- Before creating a new icon, ask for a list of existing icons:
+  ```bash
+  ls src/components/icons
+  ```
+- When using icons in components like `BaseTopBar`, always use the `iconComponent` prop with a component reference, not
+  the `icon` prop with HTML strings
+
+### Code Style
+
+- No docstrings - TypeScript types should provide sufficient documentation
+- Avoid comments unless necessary to explain where code should be inserted
+- In domain code, design functions to take required parameters:
+  - Handle optionality at the boundaries of the application, not in domain code
+  - Avoid nullable parameters in domain functions when possible
+  - Push null/undefined handling to the outer shell of the application
+
+### Component Design
+
+- Prefer smaller, focused components over larger multi-purpose ones
+- When a component needs different modes or behaviors, consider splitting it into multiple components
+- Follow the established patterns for component composition and props
+- Reuse existing layout components rather than creating custom layouts
