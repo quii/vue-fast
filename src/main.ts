@@ -2,9 +2,7 @@ import './assets/main.css'
 import * as VueRouter from 'vue-router'
 
 import { createApp } from 'vue/dist/vue.esm-bundler'
-import VueVirtualScroller from 'vue-virtual-scroller'
 import DevTools from '@/components/DevTools.vue'
-import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 import { createPinia } from 'pinia'
 import ScoreCard from './ScoreCard.vue'
 import Toast from 'vue-toastification'
@@ -120,7 +118,6 @@ const app = createApp({
   `
 });
 app.use(router)
-app.use(VueVirtualScroller)
 app.use(pinia)
 app.component("MainNavigation", MainNavigation);
 app.component('InstallBanner', InstallBanner)

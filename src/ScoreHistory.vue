@@ -88,14 +88,14 @@
         </div>
       </div>
 
-      <RecycleScroller :items="filteredHistory"
-                       :item-size="95"
-                       v-slot="{ item }"
-                       key-field="id"
-                       class="history-cards">
-        <HistoryCard :item="item" @click="view(item.id)" />
-      </RecycleScroller>
-      <p>You have recorded {{ totalArrows }} arrows shot!</p>
+      <div class="history-cards">
+        <HistoryCard
+          v-for="item in filteredHistory"
+          :key="item.id"
+          :item="item"
+          @click="view(item.id)"
+        />
+      </div>
     </div>
   </div>
 </template>
