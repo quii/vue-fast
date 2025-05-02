@@ -286,7 +286,7 @@ function handleSaveFromModal(data) {
         :bow-type="userStore.user.bowType"
         :end-size="endSize"
         :game-type="roundName"
-        :date="date"
+        :date="formattedDate"
         :status="status"
         @close="showPrintModal = false"
     />

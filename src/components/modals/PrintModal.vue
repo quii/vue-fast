@@ -2,6 +2,7 @@
 import BaseModal from "@/components/modals/BaseModal.vue";
 import BaseButton from '@/components/ui/BaseButton.vue'
 import ButtonStack from '@/components/ui/ButtonStack.vue'
+import { formatRoundName } from '@/domain/scoring/round/formatting.js'
 import { ref, h, createApp, onMounted } from 'vue'
 import RoundScores from "@/components/RoundScores.vue";
 import ArcherDetails from "@/components/ArcherDetails.vue";
@@ -141,7 +142,7 @@ async function generateSvg() {
               textTransform: 'capitalize',
               marginBottom: '15px'
             }
-          }, `${props.gameType} - ${props.date}`),
+          }, `${formatRoundName(props.gameType)} - ${props.date}`),
 
           shotAt.value && h('h3', {
             style: {
