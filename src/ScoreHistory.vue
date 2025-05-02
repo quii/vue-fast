@@ -115,23 +115,31 @@ import { formatRoundName } from "@/domain/scoring/round/formatting.js";
 import { useHistoryStore } from "@/stores/history";
 import { usePreferencesStore } from "@/stores/preferences";
 import { useUserStore } from "@/stores/user";
-import { computed, ref } from 'vue'
-import { useRouter } from "vue-router";
+import { computed, ref, watch, onMounted } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 
 const store = useHistoryStore();
 const router = useRouter();
+const route = useRoute() // Add this to access route parameters
 const user = useUserStore();
 const userStore = useUserStore();
 const preferences = usePreferencesStore();
 
-const roundFilter = ref("");
+// Initialize filter states from URL query parameters
+const roundFilter = ref(route.query.round || '')
 const roundFilterActive = computed(() => roundFilter.value !== "");
-const dateFilter = ref({ startDate: "", endDate: "" });
+
+const dateFilter = ref({
+  startDate: route.query.startDate || '',
+  endDate: route.query.endDate || ''
+})
 const dateFilterActive = computed(() => Boolean(dateFilter.value.startDate || dateFilter.value.endDate));
-const classificationFilter = ref("");
+
+const classificationFilter = ref(route.query.classification || '')
 const classificationFilterActive = computed(() => Boolean(classificationFilter.value));
-const pbFilterActive = ref(false);
-const statusFilter = ref(null);
+
+const pbFilterActive = ref(route.query.pbOnly === 'true')
+const statusFilter = ref(route.query.status || null)
 const statusFilterActive = computed(() => statusFilter.value !== null);
 
 const availableRounds = computed(() => store.getAvailableRounds());
@@ -270,6 +278,32 @@ function openOutdoorHandicapGraph() {
 
 const graphTitle = ref("");
 const totalArrows = computed(() => store.totalArrows());
+
+// Function to update URL with current filter state
+function updateUrlWithFilters() {
+  const query = {}
+
+  if (roundFilter.value) query.round = roundFilter.value
+  if (dateFilter.value.startDate) query.startDate = dateFilter.value.startDate
+  if (dateFilter.value.endDate) query.endDate = dateFilter.value.endDate
+  if (classificationFilter.value) query.classification = classificationFilter.value
+  if (pbFilterActive.value) query.pbOnly = 'true'
+  if (statusFilter.value) query.status = statusFilter.value
+
+  // Replace the current route with updated query parameters
+  router.replace({
+    path: route.path,
+    query
+  })
+}
+
+// Watch for changes in filter states and update URL
+watch([roundFilter, dateFilter, classificationFilter, pbFilterActive, statusFilter],
+  () => {
+    updateUrlWithFilters()
+  },
+  { deep: true }
+)
 
 function handleClassificationFilter(classification) {
   classificationFilter.value = classification;
