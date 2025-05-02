@@ -20,19 +20,17 @@ const props = defineProps({
   },
   unit: {
     default: null
+  },
+  isOneDistanceShoot: {
+    default: false
   }
 })
 
-const colspan = computed(() => (props.endSize * 2) + 2);
+const colspan = computed(() => (props.endSize * 2) + 1)
+const totalLabel = computed(() => props.isOneDistanceShoot ? 'Totals' : 'Subtotals')
 </script>
 
 <template>
-  <!-- Add a distance row if distance is available -->
-  <tr v-if="distance !== null" class="distance-row">
-    <td :colspan="endSize * 2 + 2 + (hasX ? 1 : 0) + 3">
-      {{ distance }}{{ unit }}
-    </td>
-  </tr>
   <tr v-for="round in rounds" :key="round.id" class="score-row">
     <EndScores :scores="round.firstEnd" :endSize="endSize" />
     <EndScores :scores="round.secondEnd" :endSize="endSize" />
@@ -51,7 +49,8 @@ const colspan = computed(() => (props.endSize * 2) + 2);
   </tr>
 
   <tr class="round-subtotal">
-    <td :colspan="colspan"></td>
+    <td :colspan="colspan" class="distance">{{ totalLabel }} for {{ distance }}{{ unit }}</td>
+    <td></td>
     <td data-test="subTotalHits">{{ subtotals.hits }}</td>
     <td data-test="subTotalScore">{{ subtotals.totalScore }}</td>
     <td data-test="subTotalGolds">{{ subtotals.golds }}</td>
@@ -99,10 +98,7 @@ const colspan = computed(() => (props.endSize * 2) + 2);
   background-color: rgba(255, 215, 0, 0.2);
 }
 
-.distance-row td {
-  font-weight: 600;
-  background-color: var(--color-background-soft);
-  text-align: center;
-  padding: 0.5em;
+td.distance {
+  text-align: right;
 }
 </style>

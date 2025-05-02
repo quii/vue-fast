@@ -57,5 +57,6 @@ const totalColspan = computed(() => props.endSize === 5 ? 1 : 2);
   font-weight: 600;
   background-color: var(--color-background-soft);
   text-align: center;
+  font-size: 0.8rem;
 }
 </style>

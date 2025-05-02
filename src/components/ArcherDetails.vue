@@ -22,6 +22,14 @@ const props = defineProps({
     type: String,
     default: "Practice"
   },
+  handicap: {
+    type: Number,
+    default: null
+  },
+  classification: {
+    type: Object,
+    default: null
+  }
 });
 
 // Capitalize the first letter of each word
@@ -46,6 +54,10 @@ const capitalizedAgeGroup = computed(() => capitalize(props.ageGroup));
       <div v-if="gender" class="info-chip">{{ capitalizedGender }}</div>
       <div v-if="ageGroup" class="info-chip">{{ capitalizedAgeGroup }}</div>
       <div v-if="status" class="info-chip">{{ status }}</div>
+      <div v-if="handicap !== null" class="info-chip">Handicap: {{ handicap }}</div>
+      <div v-if="classification && classification.name" class="info-chip">
+        {{ classification.name }} ({{ classification.scheme }})
+      </div>
     </div>
   </div>
 </template>

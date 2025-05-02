@@ -10,7 +10,19 @@ import SaveScoreSheetButton from "@/components/SaveScoreSheetButton.vue";
 import WhatsAppIcon from '@/components/icons/WhatsAppIcon.vue'
 import CopyIcon from '@/components/icons/CopyIcon.vue'
 
-const props = defineProps(["shoot", "archerName", "endSize", "ageGroup", "gender", "bowType", "gameType", "date", "status"]);
+const props = defineProps([
+  'shoot',
+  'archerName',
+  'endSize',
+  'ageGroup',
+  'gender',
+  'bowType',
+  'gameType',
+  'date',
+  'status',
+  'handicap',
+  'classification'
+])
 const emit = defineEmits(["close"]);
 const targetCaptain = ref("");
 const shotAt = ref("");
@@ -52,7 +64,9 @@ function print() {
           ageGroup: props.ageGroup,
           gender: props.gender,
           bowType: props.bowType,
-          status: props.status
+          status: props.status,
+          handicap: props.handicap,
+          classification: props.classification
         }),
         h(RoundScores, {
           scores: props.shoot.scores,
@@ -151,7 +165,7 @@ async function generateSvg() {
             }
           }, `Shot at ${shotAt.value}`),
 
-          // Archer details section remains the same
+          // Archer details section with handicap and classification integrated
           h('div', {
             style: {
               display: 'flex',
@@ -170,7 +184,9 @@ async function generateSvg() {
               }
             }, [
               h('div', { style: { fontWeight: 'bold', marginBottom: '8px' } }, 'Archer:'),
-              h('div', { style: { fontWeight: 'bold', marginBottom: '8px' } }, 'Gender:')
+              h('div', { style: { fontWeight: 'bold', marginBottom: '8px' } }, 'Gender:'),
+              // Add handicap label if handicap exists
+              props.handicap !== null && h('div', { style: { fontWeight: 'bold', marginBottom: '8px' } }, 'Handicap:')
             ]),
 
             // Left column - values
@@ -187,7 +203,9 @@ async function generateSvg() {
                   marginBottom: '8px',
                   textTransform: 'capitalize'
                 }
-              }, props.gender)
+              }, props.gender),
+              // Add handicap value if handicap exists
+              props.handicap !== null && h('div', { style: { marginBottom: '8px' } }, props.handicap)
             ]),
 
             // Right column - labels
@@ -199,7 +217,14 @@ async function generateSvg() {
               }
             }, [
               h('div', { style: { fontWeight: 'bold', marginBottom: '8px' } }, 'Bow Type:'),
-              h('div', { style: { fontWeight: 'bold', marginBottom: '8px' } }, 'Age Group:')
+              h('div', { style: { fontWeight: 'bold', marginBottom: '8px' } }, 'Age Group:'),
+              // Add classification label if classification exists
+              props.classification && props.classification.name && h('div', {
+                style: {
+                  fontWeight: 'bold',
+                  marginBottom: '8px'
+                }
+              }, 'Classification:')
             ]),
 
             // Right column - values
@@ -220,7 +245,13 @@ async function generateSvg() {
                   marginBottom: '8px',
                   textTransform: 'capitalize'
                 }
-              }, props.ageGroup)
+              }, props.ageGroup),
+              // Add classification value if classification exists
+              props.classification && props.classification.name && h('div', {
+                style: {
+                  marginBottom: '8px'
+                }
+              }, `${props.classification.name} (${props.classification.scheme})`)
             ])
           ]),
 
@@ -254,6 +285,10 @@ async function generateSvg() {
       .score9, .score10, .scoreX {
         background-color: #fefc2a !important;
         color: black !important;
+      }
+
+      .round-subtotal {
+      background-color: #f2f2f2 !important;
       }
 
       .score7, .score8 {

@@ -257,6 +257,8 @@ function handleSaveFromModal(data) {
             :gender="shoot.userProfile.gender"
             :bow-type="shoot.userProfile.bowType"
             :status="status"
+            :handicap="shoot.handicap"
+            :classification="shoot.classification"
         />
       </BaseCard>
 
@@ -288,6 +290,8 @@ function handleSaveFromModal(data) {
         :game-type="roundName"
         :date="formattedDate"
         :status="status"
+        :handicap="shoot.handicap"
+        :classification="shoot.classification"
         @close="showPrintModal = false"
     />
 
