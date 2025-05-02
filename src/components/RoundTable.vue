@@ -14,6 +14,12 @@ const props = defineProps({
   },
   endSize: {
     required: true
+  },
+  distance: {
+    default: null
+  },
+  unit: {
+    default: null
   }
 })
 
@@ -21,6 +27,12 @@ const colspan = computed(() => (props.endSize * 2) + 2);
 </script>
 
 <template>
+  <!-- Add a distance row if distance is available -->
+  <tr v-if="distance !== null" class="distance-row">
+    <td :colspan="endSize * 2 + 2 + (hasX ? 1 : 0) + 3">
+      {{ distance }}{{ unit }}
+    </td>
+  </tr>
   <tr v-for="round in rounds" :key="round.id" class="score-row">
     <EndScores :scores="round.firstEnd" :endSize="endSize" />
     <EndScores :scores="round.secondEnd" :endSize="endSize" />
@@ -85,5 +97,12 @@ const colspan = computed(() => (props.endSize * 2) + 2);
 
 .highlight {
   background-color: rgba(255, 215, 0, 0.2);
+}
+
+.distance-row td {
+  font-weight: 600;
+  background-color: var(--color-background-soft);
+  text-align: center;
+  padding: 0.5em;
 }
 </style>

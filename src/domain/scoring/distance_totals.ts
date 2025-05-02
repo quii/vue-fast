@@ -16,18 +16,61 @@ export function calculateDistanceTotals(scores, gameType = "national", endSize =
   if (isPracticeRound) {
     // For practice rounds, treat all arrows as a single distance
     const roundData = processRoundScores(scores, gameType, endSize, runningTotal);
+
+    // For practice rounds, use the appropriate distance based on imperial/metric
+    if (config.isImperial) {
+      roundData.distance = config.maxDistanceYards
+      roundData.unit = 'yd'
+    } else {
+      roundData.distance = config.maxDistanceMetres
+      roundData.unit = 'm'
+    }
+
     rounds.push(roundData);
   } else {
     // For standard rounds, process each distance separately
     let remainingScores = [...scores];
 
-    for (const dozens of distancesRoundSizes) {
+    // Build the complete distances array based on imperial/metric
+    const distances = []
+    const unit = config.isImperial ? 'yd' : 'm'
+
+    if (config.isImperial) {
+      // For imperial rounds, use yards
+      if (config.maxDistanceYards) {
+        distances.push(config.maxDistanceYards)
+      }
+      if (config.otherDistancesYards) {
+        distances.push(...config.otherDistancesYards)
+      }
+    } else {
+      // For metric rounds, use meters
+      if (config.maxDistanceMetres) {
+        distances.push(config.maxDistanceMetres)
+      }
+      if (config.otherDistancesMetres) {
+        distances.push(...config.otherDistancesMetres)
+      }
+    }
+
+    // Make sure we have the right number of distances
+    if (distances.length !== distancesRoundSizes.length) {
+      console.warn(`Distance count mismatch for ${gameType}: expected ${distancesRoundSizes.length}, got ${distances.length}`)
+    }
+
+    for (let i = 0; i < distancesRoundSizes.length; i++) {
+      const dozens = distancesRoundSizes[i]
       const arrowsPerDistance = Math.round(dozens * 12);
       const distanceScores = remainingScores.slice(0, arrowsPerDistance);
       remainingScores = remainingScores.slice(arrowsPerDistance);
 
       const roundData = processRoundScores(distanceScores, gameType, endSize, runningTotal);
       runningTotal += roundData.subTotals.totalScore;
+
+      // Add distance information
+      roundData.distance = distances[i] || null
+      roundData.unit = unit
+
       rounds.push(roundData);
     }
   }

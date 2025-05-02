@@ -14,6 +14,12 @@ const props = defineProps({
   },
   endSize: {
     required: true
+  },
+  distance: {
+    default: null
+  },
+  unit: {
+    default: null
   }
 });
 
@@ -28,6 +34,10 @@ const totalColspan = computed(() => props.endSize === 5 ? 1 : 2);
 </script>
 
 <template>
+  <!-- Add a distance header if distance is available -->
+  <tr v-if="distance !== null" class="distance-header">
+    <td :colSpan="endSize+1">{{ distance }}{{ unit }}</td>
+  </tr>
   <tr v-for="(end, id) in ends" :key="id">
     <EndScores :scores="end" :endSize="endSize" />
   </tr>
@@ -41,3 +51,11 @@ const totalColspan = computed(() => props.endSize === 5 ? 1 : 2);
     <td data-test="subTotalScore" :colspan="totalColspan">{{ subtotals.totalScore }}</td>
   </tr>
 </template>
+
+<style scoped>
+.distance-header td {
+  font-weight: 600;
+  background-color: var(--color-background-soft);
+  text-align: center;
+}
+</style>

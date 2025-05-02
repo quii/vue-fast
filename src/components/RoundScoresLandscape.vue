@@ -52,6 +52,8 @@ const oneDistanceShoot = computed(() => rounds.value.length === 1);
         :rounds="round.roundBreakdown"
         :endSize="endSize"
         :hasX="hasX"
+        :distance="round.distance"
+        :unit="round.unit"
       />
       <tr v-if="!oneDistanceShoot" class="grand-totals">
         <td :colspan="colspan"></td>

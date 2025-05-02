@@ -40,6 +40,8 @@ const totalColspan = computed(() => props.endSize === 5 ? 1 : 2);
         :rounds="round.roundBreakdown"
         :endSize="endSize"
         :hasX="hasX"
+        :distance="round.distance"
+        :unit="round.unit"
       />
       <tr v-if="!oneDistanceShoot" class="grand-totals-header">
         <td :colSpan="colspan+1">Grand totals</td>
