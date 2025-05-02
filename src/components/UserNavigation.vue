@@ -41,6 +41,17 @@ const isActive = (path) => {
       <span class="nav-label">History</span>
     </router-link>
 
+    <router-link to="/diary" class="nav-item" :class="{ active: isActive('/diary') }">
+      <div class="icon-container">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" class="nav-icon">
+          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+        </svg>
+      </div>
+      <span class="nav-label">Diary</span>
+    </router-link>
+
     <router-link to="/sight-marks" class="nav-item" :class="{ active: isActive('/sight-marks') }">
       <div class="icon-container">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"

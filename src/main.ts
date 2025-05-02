@@ -27,6 +27,11 @@ const routes = [
     component: () => import("./ScoreHistory.vue")
   },
   {
+    path: '/diary',
+    name: 'diary',
+    component: () => import('./DiaryPage.vue')
+  },
+  {
     path: "/data",
     component: () => import("./DataManagement.vue"),
     title: DataMenuItem

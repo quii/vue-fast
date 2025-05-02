@@ -1,8 +1,6 @@
 <template>
   <HistoryTipModal v-if="showTip" @close="dismissTip" />
-  <div class="fullpage" @touchstart="handleTouchStart"
-       @touchend="handleTouchEnd">
-
+  <div class="fullpage">
     <ScoreHistoryGraph
       :historyData="graphData"
       :isHandicapGraph="isHandicapGraph"
@@ -11,7 +9,7 @@
       @close="showGraph = false"
     />
 
-    <div v-if="!isDiaryMode">
+    <div>
       <HistoryFilters
         :pb-filter-active="pbFilterActive"
         :round-filter-active="roundFilterActive"
@@ -99,16 +97,6 @@
       </RecycleScroller>
       <p>You have recorded {{ totalArrows }} arrows shot!</p>
     </div>
-
-    <div v-else class="diary-view">
-      <article v-for="shoot in shootsWithNotes"
-               :key="shoot.id"
-               class="diary-entry"
-               @click="view(shoot.id)">
-        <HistoryCard :item="shoot" />
-        <UserNotes :shoot-id="shoot.id" />
-      </article>
-    </div>
   </div>
 </template>
 
@@ -121,25 +109,21 @@ import HistoryTipModal from "@/components/modals/HistoryTipModal.vue";
 import ScoreHistoryGraph from "@/components/ScoreHistoryGraph.vue";
 import BaseButton from "@/components/ui/BaseButton.vue";
 import ButtonGroup from "@/components/ui/ButtonGroup.vue";
-import UserNotes from "@/components/UserNotes.vue";
 import { calculateAllClassificationProgress } from "@/domain/scoring/classification_progress.js";
 import { roundConfigManager } from "@/domain/scoring/game_types.js";
 import { formatRoundName } from "@/domain/scoring/round/formatting.js";
 import { useHistoryStore } from "@/stores/history";
 import { usePreferencesStore } from "@/stores/preferences";
 import { useUserStore } from "@/stores/user";
-import { useNotesStore } from "@/stores/user_notes";
-import { computed, ref, watchEffect } from "vue";
+import { computed, ref } from 'vue'
 import { useRouter } from "vue-router";
 
 const store = useHistoryStore();
 const router = useRouter();
 const user = useUserStore();
-const notesStore = useNotesStore();
 const userStore = useUserStore();
 const preferences = usePreferencesStore();
 
-const isDiaryMode = ref(false);
 const roundFilter = ref("");
 const roundFilterActive = computed(() => roundFilter.value !== "");
 const dateFilter = ref({ startDate: "", endDate: "" });
@@ -150,7 +134,6 @@ const pbFilterActive = ref(false);
 const statusFilter = ref(null);
 const statusFilterActive = computed(() => statusFilter.value !== null);
 
-const startX = ref(0);
 const availableRounds = computed(() => store.getAvailableRounds());
 const showTip = ref(!preferences.hasSeenHistoryTip);
 
@@ -165,7 +148,7 @@ const filteredHistory = computed(() => {
     round: roundFilter.value,
     dateRange: dateFilter.value,
     classification: classificationFilter.value,
-    shootStatus: statusFilter.value // Add status filter
+    shootStatus: statusFilter.value
   }, user.user)
 })
 
@@ -287,7 +270,6 @@ function openOutdoorHandicapGraph() {
 
 const graphTitle = ref("");
 const totalArrows = computed(() => store.totalArrows());
-const shootsWithNotes = computed(() => filteredHistory.value.filter(shoot => notesStore.getNotesByShootId(shoot.id).length > 0));
 
 function handleClassificationFilter(classification) {
   classificationFilter.value = classification;
@@ -303,10 +285,6 @@ function handleRoundFilter(round) {
 
 function handlePBToggle() {
   pbFilterActive.value = !pbFilterActive.value;
-}
-
-function handleTouchStart(e) {
-  startX.value = e.touches[0].screenX;
 }
 
 function handleStatusFilter(status) {
@@ -326,21 +304,6 @@ function dismissTip() {
   showTip.value = false;
 }
 
-function handleTouchEnd(e) {
-  const endX = e.changedTouches[0].screenX;
-  const swipeDistance = endX - startX.value;
-  const swipeThreshold = 50;
-
-
-  if (Math.abs(swipeDistance) > swipeThreshold) {
-    if (swipeDistance > 0 && isDiaryMode.value) {
-      isDiaryMode.value = false; // Swipe right to table
-    } else if (swipeDistance < 0 && !isDiaryMode.value && shootsWithNotes.value.length > 0) {
-      isDiaryMode.value = true; // Swipe left to diary
-    }
-  }
-}
-
 function view(id) {
   router.push({ name: "viewHistory", params: { id } });
 }
@@ -353,18 +316,10 @@ function view(id) {
   margin: 0 auto;
 }
 
-.diary-entry {
-  margin: 0.5rem 0;
-}
-
-.diary-entry:last-child {
-  border-bottom: none;
-}
-
 .classification-progress-section {
-  margin: 0.75em 0; /* Remove vertical margin */
-  border: none; /* Remove border */
-  background-color: transparent; /* Make background transparent */
+  margin: 0.75em 0;
+  border: none;
+  background-color: transparent;
 }
 
 /* Add new card styles */
