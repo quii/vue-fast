@@ -21,6 +21,7 @@ class HistoryPage {
     // Update to work with card layout - look for the item text in the card
     cy.dismissToasters();
     cy.get(".history-card").contains(item).click();
+    cy.wait(500)
   }
 
   checkTotalGolds(expectedGolds) {
@@ -70,6 +71,65 @@ class HistoryPage {
       });
       expect(matchingCards.length).to.be.at.least(1);
     });
+  }
+
+  // Method to toggle PB filter
+  togglePBFilter() {
+    cy.get('button').contains('PB').click()
+    return this
+  }
+
+  // Method to filter by round
+  filterByRound(roundName) {
+    cy.get('button').contains('Round').click()
+
+    if (roundName === '') {
+      // If empty string is passed, select "All Rounds"
+      cy.get('.round-buttons').within(() => {
+        cy.get('.all-button').click()
+      })
+    } else {
+      // Otherwise find the specific round by name
+      cy.get('.round-buttons').within(() => {
+        // Look for the button containing the round name
+        cy.get('.round-name').contains(roundName).closest('button').click()
+      })
+    }
+
+    return this
+  }
+
+  // Method to filter by classification
+  filterByClassification(classification) {
+    cy.get('button').contains('Class').click()
+    cy.get('.modal-content').within(() => {
+      if (classification === '') {
+        // If empty string is passed, select "All Classifications"
+        cy.contains('All Classifications').click()
+      } else {
+        // Otherwise find the specific classification
+        cy.contains(classification).click()
+      }
+    })
+    return this
+  }
+
+  // Method to reset all filters
+  resetFilters() {
+    cy.get('button').contains('Reset').click()
+    return this
+  }
+
+  // Method to check if a filter is active
+  checkFilterActive(filterName) {
+    cy.get('button').contains('.filter-label', filterName).closest('button').should('have.class', 'active')
+    return this
+  }
+
+  // Method to check if a filter is not active
+  checkFilterNotActive(filterName) {
+    cy.get('button').contains('.filter-label', filterName).closest('button').should('not.have.class', 'active')
+    return this
   }
 }
 
