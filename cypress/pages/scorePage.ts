@@ -17,7 +17,7 @@ class ScorePage {
 
   tapRoundSelector() {
     cy.get(".round-card-wrapper").click();
-    cy.wait(500)
+    cy.wait(100)
     cy.get('body').then(($body) => {
       if ($body.find('.profile-setup-section').length > 0) {
         cy.contains('label', 'Age Group').parent().find('select').select('Senior')
@@ -61,7 +61,7 @@ class ScorePage {
       }
     });
 
-    cy.wait(500)
+    cy.wait(100)
 
     cy.get('body').then(($body) => {
       if ($body.find('.profile-setup-section').length > 0) {
@@ -91,9 +91,6 @@ class ScorePage {
         cy.get(".search-container input").clear().type(roundName);
       }
     });
-
-    // Wait for filtering to complete
-    cy.wait(500)
 
     // Find the round card with the exact matching round name
     cy.get('.rounds-container').should('exist').then(() => {
@@ -206,7 +203,7 @@ class ScorePage {
     // Verify the text was entered correctly
     cy.get('.note-textarea').should('have.value', noteText)
 
-    cy.wait(2000) // Add a small wait to ensure the note is rendered
+    cy.wait(500) // Add a small wait to ensure the note is rendered
     // Click the Save Note button
     // cy.contains(" Save Note ").click({ force: true });
     cy.get('[data-test="save-note-button"]').click({ force: true })
@@ -215,7 +212,7 @@ class ScorePage {
     cy.screenshot('after-saving-note')
 
     // Wait for the note to be added to the DOM
-    cy.wait(1000) // Add a small wait to ensure the note is rendered
+    cy.wait(500) // Add a small wait to ensure the note is rendered
   }
 
   highlightNote(noteText) {
