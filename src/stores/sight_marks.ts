@@ -30,12 +30,45 @@ export const useSightMarksStore = defineStore("sight_marks", () => {
     return manager.getAll();
   }
 
+  // New method to get backup data
+  function getBackupData() {
+    return getMarks() // Simply return all marks
+  }
+
+  // New method to restore from backup
+  function restoreFromBackup(backupData) {
+    if (!Array.isArray(backupData)) return
+
+    // Clear existing marks first
+    const currentMarks = getMarks()
+    currentMarks.forEach(mark => {
+      if (mark.id !== undefined) {
+        deleteMark(mark.id)
+      }
+    })
+
+    // Add the backed up marks
+    backupData.forEach(mark => {
+      if (mark.distance && mark.unit && mark.notches !== undefined) {
+        addMark(
+          mark.distance,
+          mark.unit,
+          mark.notches,
+          mark.vertical || 0,
+          mark.label || ''
+        )
+      }
+    })
+  }
+
   return {
     addMark,
     updateMark,
     deleteMark,
     togglePriority,
     findMarksForDistance,
-    getMarks
+    getMarks,
+    getBackupData,     // Export the new backup method
+    restoreFromBackup  // Export the new restore method
   };
 })

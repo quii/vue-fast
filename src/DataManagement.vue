@@ -40,8 +40,6 @@ function saveUserName() {
     user.user.experimentalTargetFace,
     user.user.knockColor
   )
-
-  toast.success('Name saved successfully')
 }
 
 function exportData() {

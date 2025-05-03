@@ -2,6 +2,8 @@ import { useInstallationStore } from '@/stores/installation'
 import { useUserStore } from '@/stores/user'
 import { useHistoryStore } from '@/stores/history'
 import { useNotesStore } from '@/stores/user_notes'
+import { useSightMarksStore } from '@/stores/sight_marks'
+import { usePreferencesStore } from '@/stores/preferences'
 
 // Constants
 const BACKUP_RETRY_DELAYS = [2000, 5000, 10000, 30000] // Retry delays in ms (exponential backoff)
@@ -109,6 +111,8 @@ export const backupService = {
       const userStore = useUserStore()
       const historyStore = useHistoryStore()
       const notesStore = useNotesStore()
+      const sightMarksStore = useSightMarksStore()
+      const preferencesStore = usePreferencesStore()
       const deviceId = this.getDeviceId()
 
       // Get user name (or use 'anonymous' if not set)
@@ -119,13 +123,12 @@ export const backupService = {
         history: historyStore.history,
         notes: notesStore.notes,
         user: userStore.user,
+        sightMarks: sightMarksStore.getBackupData(),
+        preferences: preferencesStore.getBackupData(),
         timestamp: new Date().toISOString(),
         deviceId
       }
 
-      console.log('Sending backup to server...')
-
-      // Send data to the server
       const response = await fetch(`${BACKUP_ENDPOINT}/${deviceId}`, {
         method: 'POST',
         headers: {
@@ -264,6 +267,8 @@ export const backupService = {
       const historyStore = useHistoryStore()
       const notesStore = useNotesStore()
       const userStore = useUserStore()
+      const sightMarksStore = useSightMarksStore()
+      const preferencesStore = usePreferencesStore()
 
       // Import history data
       if (backupData.history) {
@@ -280,6 +285,16 @@ export const backupService = {
       // Import notes data
       if (backupData.notes) {
         notesStore.importNotes(backupData)
+      }
+
+      // Import sight marks data using the new method
+      if (backupData.sightMarks) {
+        sightMarksStore.restoreFromBackup(backupData.sightMarks)
+      }
+
+      // Import preferences data
+      if (backupData.preferences) {
+        preferencesStore.restoreFromBackup(backupData.preferences)
       }
 
       // Import user data
