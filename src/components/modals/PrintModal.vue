@@ -1,14 +1,14 @@
 <script setup>
-import BaseModal from "@/components/modals/BaseModal.vue";
+import BaseModal from '@/components/modals/BaseModal.vue'
 import BaseButton from '@/components/ui/BaseButton.vue'
 import ButtonStack from '@/components/ui/ButtonStack.vue'
-import { formatRoundName } from '@/domain/scoring/round/formatting.js'
-import { ref, h, createApp, onMounted } from 'vue'
-import RoundScores from "@/components/RoundScores.vue";
-import ArcherDetails from "@/components/ArcherDetails.vue";
-import SaveScoreSheetButton from "@/components/SaveScoreSheetButton.vue";
+import { ref, onMounted } from 'vue'
 import WhatsAppIcon from '@/components/icons/WhatsAppIcon.vue'
 import CopyIcon from '@/components/icons/CopyIcon.vue'
+import CaptainInputModal from '@/components/modals/CaptainInputModal.vue'
+import ScoreSheetPdfGenerator from '@/components/pdf/ScoreSheetPdfGenerator.vue'
+import { generateScoreSheetSvg, svgToPng } from '@/utils/scoreSheetGenerator.js'
+import { shareToWhatsApp, copyImageToClipboard, copyTextToClipboard, isMobileDevice } from '@/utils/shareUtils.js'
 
 const props = defineProps([
   'shoot',
@@ -23,454 +23,114 @@ const props = defineProps([
   'handicap',
   'classification'
 ])
-const emit = defineEmits(["close"]);
-const targetCaptain = ref("");
-const shotAt = ref("");
+
+const emit = defineEmits(['close'])
+const shotAt = ref('')
+const captainName = ref('')
 const showCopySuccess = ref(false)
 const svgData = ref(null)
 const isGenerating = ref(false)
+const showCaptainPrompt = ref(false)
+const pdfGeneratorRef = ref(null)
 
-function print() {
-  const formatTitle = (str) => str ? str.replace(/[^a-zA-Z0-9\s-]/g, "").replace(/\s+/g, "-") : "";
-  const title = [
-    formatTitle(props.archerName),
-    shotAt.value ? formatTitle(shotAt.value) : ""
-  ].filter(Boolean).join("-");
+// Generate SVG preview when component mounts
+onMounted(async () => {
+  await generatePreview()
+})
 
-  const printWindow = window.open("", "_blank", "");
-  const doc = printWindow.document;
-  doc.title = title;
+// Generate the score sheet preview
+async function generatePreview() {
+  if (isGenerating.value) return
 
-  const style = document.createElement("style");
-  style.textContent = `
-    body { font-family: Arial; padding: 20px; }
-    table { border-collapse: collapse; width: 100%; }
-    td, th { border: 1px solid black; padding: 8px; text-align: center; text-transform: capitalize; }
-    .score { font-weight: bold; }
-    .signatures { margin-top: 2em; }
-    h1 { text-transform: capitalize; text-align: center; }
-    h2 {text-align: center;}
-    #classification { display: none; }
-  `;
-
-  const container = document.createElement("div");
-  const app = createApp({
-    render() {
-      return h("div", [
-        h("h1", `${props.gameType} - ${props.date}`),
-        shotAt.value && h("h2", `Shot at ${shotAt.value}`),
-        h(ArcherDetails, {
-          name: props.archerName,
-          ageGroup: props.ageGroup,
-          gender: props.gender,
-          bowType: props.bowType,
-          status: props.status,
-          handicap: props.handicap,
-          classification: props.classification
-        }),
-        h(RoundScores, {
-          scores: props.shoot.scores,
-          gameType: props.shoot.gameType,
-          endSize: props.endSize,
-          forceLandscape: true
-        })
-      ]);
-    }
-  });
-
-  app.component("ArcherDetails", ArcherDetails);
-  app.mount(container);
-
-  const signatures = document.createElement("div");
-  signatures.className = "signatures";
-  signatures.innerHTML = `
-  <div class="signature-block">
-    <div class="signature-row">
-      <span>Target Captain: ${targetCaptain.value}</span>
-      <div class="signature-line"></div>
-    </div>
-  </div>
-
-  <div class="signature-block">
-    <div class="signature-row">
-      <span>Archer: ${props.archerName}</span>
-      <div class="signature-line"></div>
-    </div>
-  </div>
-`;
-
-  const signatureStyles = `
-  .signatures {
-    margin-top: 3em;
-    display: flex;
-    flex-direction: column;
-    gap: 6em;
-  }
-  .signature-row {
-    display: flex;
-    align-items: center;
-    gap: 1em;
-  }
-  .signature-line {
-    flex-grow: 1;
-    border-bottom: 2px dotted black;
-    height: 2em;
-  }
-`;
-  style.textContent += signatureStyles;
-  doc.head.appendChild(style);
-  doc.body.appendChild(container);
-  doc.body.appendChild(signatures);
-  doc.body.appendChild(document.createElement("script")).textContent = "window.onload = () => window.print()";
-
-  emit("close");
-}
-
-async function generateSvg() {
   isGenerating.value = true
-
   try {
-    // Create a temporary container
-    const container = document.createElement('div')
-    container.style.position = 'absolute'
-    container.style.left = '-9999px'
-    container.style.width = '800px'
-    container.style.padding = '20px'
-    document.body.appendChild(container)
-
-    // Create a Vue app to render the components
-    const app = createApp({
-      render() {
-        return h('div', {
-          style: {
-            backgroundColor: 'white',
-            padding: '20px',
-            fontFamily: 'Arial',
-            color: 'black'
-          }
-        }, [
-          // Header content remains the same
-          h('h2', {
-            style: {
-              textAlign: 'center',
-              textTransform: 'capitalize',
-              marginBottom: '15px'
-            }
-          }, `${formatRoundName(props.gameType)} - ${props.date}`),
-
-          shotAt.value && h('h3', {
-            style: {
-              textAlign: 'center',
-              marginBottom: '20px'
-            }
-          }, `Shot at ${shotAt.value}`),
-
-          // Archer details section with handicap and classification integrated
-          h('div', {
-            style: {
-              display: 'flex',
-              justifyContent: 'space-between',
-              margin: '20px 0',
-              padding: '15px',
-              border: '1px solid #ccc',
-              borderRadius: '8px',
-              backgroundColor: '#f9f9f9'
-            }
-          }, [
-            // Left column - labels
-            h('div', {
-              style: {
-                flex: '1'
-              }
-            }, [
-              h('div', { style: { fontWeight: 'bold', marginBottom: '8px' } }, 'Archer:'),
-              h('div', { style: { fontWeight: 'bold', marginBottom: '8px' } }, 'Gender:'),
-              // Add handicap label if handicap exists
-              props.handicap !== null && h('div', { style: { fontWeight: 'bold', marginBottom: '8px' } }, 'Handicap:')
-            ]),
-
-            // Left column - values
-            h('div', {
-              style: {
-                flex: '1',
-                textAlign: 'left',
-                paddingLeft: '10px'
-              }
-            }, [
-              h('div', { style: { marginBottom: '8px' } }, props.archerName),
-              h('div', {
-                style: {
-                  marginBottom: '8px',
-                  textTransform: 'capitalize'
-                }
-              }, props.gender),
-              // Add handicap value if handicap exists
-              props.handicap !== null && h('div', { style: { marginBottom: '8px' } }, props.handicap)
-            ]),
-
-            // Right column - labels
-            h('div', {
-              style: {
-                flex: '1',
-                textAlign: 'right',
-                paddingRight: '10px'
-              }
-            }, [
-              h('div', { style: { fontWeight: 'bold', marginBottom: '8px' } }, 'Bow Type:'),
-              h('div', { style: { fontWeight: 'bold', marginBottom: '8px' } }, 'Age Group:'),
-              // Add classification label if classification exists
-              props.classification && props.classification.name && h('div', {
-                style: {
-                  fontWeight: 'bold',
-                  marginBottom: '8px'
-                }
-              }, 'Classification:')
-            ]),
-
-            // Right column - values
-            h('div', {
-              style: {
-                flex: '1',
-                textAlign: 'left'
-              }
-            }, [
-              h('div', {
-                style: {
-                  marginBottom: '8px',
-                  textTransform: 'capitalize'
-                }
-              }, props.bowType),
-              h('div', {
-                style: {
-                  marginBottom: '8px',
-                  textTransform: 'capitalize'
-                }
-              }, props.ageGroup),
-              // Add classification value if classification exists
-              props.classification && props.classification.name && h('div', {
-                style: {
-                  marginBottom: '8px'
-                }
-              }, `${props.classification.name} (${props.classification.scheme})`)
-            ])
-          ]),
-
-          // Use RoundScores component
-          h(RoundScores, {
-            scores: props.shoot.scores,
-            gameType: props.gameType,
-            endSize: props.endSize,
-            forceLandscape: true
-          }),
-
-          // Add an extra spacer div at the bottom
-          h('div', {
-            style: {
-              height: '40px'
-            }
-          })
-        ]);
-      }
-    });
-
-    app.component('RoundScores', RoundScores)
-    app.mount(container)
-
-    // Wait a bit for rendering to complete
-    await new Promise(resolve => setTimeout(resolve, 100))
-
-    // Add a style element with the score coloring CSS
-    const styleElement = document.createElement('style')
-    styleElement.textContent = `
-      .score9, .score10, .scoreX {
-        background-color: #fefc2a !important;
-        color: black !important;
-      }
-
-      .round-subtotal {
-      background-color: #f2f2f2 !important;
-      }
-
-      .score7, .score8 {
-        background-color: #fc2e2a !important;
-        color: white !important;
-      }
-
-      .score5, .score6 {
-        background-color: #2790f9 !important;
-        color: white !important;
-      }
-
-      .score3, .score4 {
-        background-color: black !important;
-        color: white !important;
-      }
-
-      .score1, .score2 {
-        background-color: white !important;
-        color: black !important;
-        border: 1px solid #333 !important;
-      }
-
-      .scoreM {
-        background-color: darkgreen !important;
-        color: white !important;
-      }
-    `
-    container.appendChild(styleElement)
-
-    // Directly modify the table styles in the DOM
-    const tables = container.querySelectorAll('table')
-    tables.forEach(table => {
-      // Add border to table
-      table.style.borderCollapse = 'collapse'
-      table.style.width = '100%'
-      table.style.border = '1px solid #333'
-
-      // Style all cells
-      const cells = table.querySelectorAll('th, td')
-      cells.forEach(cell => {
-        cell.style.border = '1px solid #333'
-        cell.style.padding = '10px'
-        cell.style.textAlign = 'center'
-
-        // Don't override background color for score cells
-        // that already have a class-based color
-        if (!cell.className.includes('score')) {
-          cell.style.backgroundColor = ''
-        }
-      });
-
-      // Find and style running total rows
-      const rows = table.querySelectorAll('tr')
-      rows.forEach(row => {
-        const cells = row.querySelectorAll('td')
-        cells.forEach(cell => {
-          if (cell.textContent.trim() === 'R/T') {
-            // Style all cells in this row
-            cells.forEach(rowCell => {
-              rowCell.style.fontWeight = 'bold'
-              rowCell.style.backgroundColor = '#f0f0f0'
-            });
-          }
-        });
-      });
-
-      // Style the final score row (last row)
-      if (rows.length > 0) {
-        const lastRow = rows[rows.length - 1]
-        const lastRowCells = lastRow.querySelectorAll('td')
-        lastRowCells.forEach(cell => {
-          cell.style.fontWeight = 'bold'
-          cell.style.backgroundColor = '#e6e6e6'
-          cell.style.fontSize = '1.1em'
-        });
-      }
-    });
-
-    // Calculate dimensions with extra padding for shorter shoots
-    let svgHeight = container.offsetHeight
-
-    // Add extra height for shorter shoots (fewer ends)
-    const endCount = props.shoot.scores.length
-    if (endCount < 10) {
-      const extraPadding = Math.max(0, (10 - endCount) * 10)
-      svgHeight += extraPadding
-    }
-
-    // Always add a minimum extra padding
-    svgHeight += 30
-
-    // Convert HTML to SVG using SVG foreignObject
-    const data = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="${container.offsetWidth}" height="${svgHeight}">
-        <foreignObject width="100%" height="100%">
-          <div xmlns="http://www.w3.org/1999/xhtml">
-            ${container.innerHTML}
-          </div>
-        </foreignObject>
-      </svg>
-    `;
-
-    // Store the SVG data
-    svgData.value = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(data)}`
-
-    // Clean up
-    app.unmount()
-    document.body.removeChild(container)
+    svgData.value = await generateScoreSheetSvg({
+      gameType: props.gameType,
+      date: props.date,
+      shotAt: shotAt.value,
+      archerName: props.archerName,
+      gender: props.gender,
+      handicap: props.handicap,
+      bowType: props.bowType,
+      ageGroup: props.ageGroup,
+      classification: props.classification,
+      scores: props.shoot.scores,
+      endSize: props.endSize
+    })
   } catch (error) {
-    console.error('Error generating SVG:', error)
+    console.error('Failed to generate preview:', error)
   } finally {
     isGenerating.value = false
   }
 }
 
-async function svgToPng() {
-  if (!svgData.value) {
-    await generateSvg()
-  }
-
-  return new Promise((resolve, reject) => {
-    const img = new Image()
-    img.onload = () => {
-      const canvas = document.createElement('canvas')
-      canvas.width = img.width
-      canvas.height = img.height
-
-      const ctx = canvas.getContext('2d')
-      ctx.fillStyle = 'white'
-      ctx.fillRect(0, 0, canvas.width, canvas.height)
-      ctx.drawImage(img, 0, 0)
-
-      resolve(canvas.toDataURL('image/png'))
-    }
-    img.onerror = reject
-    img.src = svgData.value
-  })
+// Handle PDF download button click
+function handlePrintClick() {
+  showCaptainPrompt.value = true
 }
 
+// Handle captain name submission
+function handleCaptainSubmit(name) {
+  captainName.value = name // Set the captainName value
+  showCaptainPrompt.value = false
+
+  // Add a small delay to ensure the prop is updated
+  setTimeout(() => {
+    // Generate PDF using the ScoreSheetPdfGenerator component
+    if (pdfGeneratorRef.value) {
+      pdfGeneratorRef.value.generatePdf()
+      emit('close')
+    }
+  }, 0)
+}
+
+// Copy score sheet to clipboard
 async function copyToClipboard() {
   try {
-    const pngData = await svgToPng()
+    // Ensure we have SVG data
+    if (!svgData.value) {
+      await generatePreview()
+    }
 
+    // Convert SVG to PNG
+    const pngData = await svgToPng(svgData.value)
+
+    // Get PNG as blob
     const response = await fetch(pngData)
     const blob = await response.blob()
 
-    try {
-      await navigator.clipboard.write([
-        new ClipboardItem({
-          [blob.type]: blob
-        })
-      ])
-      showCopySuccess.value = true
-      setTimeout(() => {
-        showCopySuccess.value = false
-      }, 2000)
-    } catch (err) {
-      const scoreTotal = props.shoot.scores.reduce((total, end) => {
-        if (Array.isArray(end)) {
-          return total + end.reduce((endTotal, arrow) => endTotal + (parseInt(arrow) || 0), 0)
-        }
-        return total
-      }, 0)
+    // Try to copy the image
+    const success = await copyImageToClipboard(blob)
 
+    if (!success) {
+      // Fallback to copying text if image copy fails
+      const scoreTotal = calculateTotalScore()
       const shareText = `${props.archerName} scored ${scoreTotal} on a ${props.gameType} round${shotAt.value ? ` at ${shotAt.value}` : ''}!`
-      await navigator.clipboard.writeText(shareText)
-
-      showCopySuccess.value = true
-      setTimeout(() => {
-        showCopySuccess.value = false
-      }, 2000)
+      await copyTextToClipboard(shareText)
     }
+
+    // Show success message
+    showCopySuccess.value = true
+    setTimeout(() => {
+      showCopySuccess.value = false
+    }, 2000)
   } catch (err) {
     console.error('Failed to copy:', err)
   }
 }
 
-async function shareToWhatsApp() {
+// Share to WhatsApp
+async function shareToWhatsAppHandler() {
   try {
-    const pngData = await svgToPng()
+    // Ensure we have SVG data
+    if (!svgData.value) {
+      await generatePreview()
+    }
 
+    // Convert SVG to PNG
+    const pngData = await svgToPng(svgData.value)
+
+    // Try to use Web Share API on mobile devices
     if (navigator.share && isMobileDevice()) {
       try {
         const response = await fetch(pngData)
@@ -489,55 +149,30 @@ async function shareToWhatsApp() {
       }
     }
 
-    const scoreTotal = props.shoot.scores.reduce((total, end) => {
-      if (Array.isArray(end)) {
-        return total + end.reduce((endTotal, arrow) => endTotal + (parseInt(arrow) || 0), 0)
-      }
-      return total
-    }, 0)
-
+    // Fallback to basic WhatsApp sharing
+    const scoreTotal = calculateTotalScore()
     const shareText = `${props.archerName} scored ${scoreTotal} on a ${props.gameType} round${shotAt.value ? ` at ${shotAt.value}` : ''}!`
-    openWhatsAppDirectly(shareText)
+    shareToWhatsApp(shareText)
+    emit('close')
   } catch (error) {
     console.error('Error sharing to WhatsApp:', error)
   }
 }
 
-function openWhatsAppDirectly(text) {
-  const encodedText = encodeURIComponent(text)
-
-  if (isMobileDevice()) {
-    window.open(`https://wa.me/?text=${encodedText}`, '_blank')
-  } else {
-    window.open(`https://web.whatsapp.com/send?text=${encodedText}`, '_blank')
-  }
-
-  emit('close')
+// Calculate total score from all ends
+function calculateTotalScore() {
+  return props.shoot.scores.reduce((total, end) => {
+    if (Array.isArray(end)) {
+      return total + end.reduce((endTotal, arrow) => endTotal + (parseInt(arrow) || 0), 0)
+    }
+    return total
+  }, 0)
 }
-
-function isMobileDevice() {
-  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-}
-
-onMounted(() => {
-  generateSvg()
-})
 </script>
 
 <template>
   <BaseModal title="Share Score Sheet">
-    <form @submit.prevent="print">
-      <div class="form-group">
-        <label for="captain">Target Captain's Name</label>
-        <input
-          id="captain"
-          v-model="targetCaptain"
-          type="text"
-          placeholder="Enter name"
-          autofocus
-        >
-      </div>
-
+    <form @submit.prevent>
       <div class="form-group">
         <label for="location">Shot At</label>
         <input
@@ -546,6 +181,7 @@ onMounted(() => {
           type="text"
           placeholder="Enter location (optional)"
           @input="svgData = null"
+          autofocus
         >
       </div>
 
@@ -559,14 +195,14 @@ onMounted(() => {
           <img :src="svgData" alt="Score Sheet Preview" />
         </div>
         <div v-else class="no-preview">
-          <button type="button" @click="generateSvg" class="generate-button">
+          <button type="button" @click="generatePreview" class="generate-button">
             Generate Preview
           </button>
         </div>
       </div>
     </form>
 
-    <!-- Move buttons outside the form -->
+    <!-- Share Options -->
     <div class="share-options">
       <h3>Share Options</h3>
 
@@ -586,7 +222,7 @@ onMounted(() => {
         <BaseButton
           type="button"
           variant="outline"
-          @click="shareToWhatsApp"
+          @click="shareToWhatsAppHandler"
           :disabled="!svgData"
           fullWidth
           class="whatsapp-button"
@@ -597,8 +233,7 @@ onMounted(() => {
 
         <BaseButton
           type="button"
-          @click="print"
-          :disabled="!targetCaptain.trim()"
+          @click="handlePrintClick"
           fullWidth
           variant="outline"
           data-test="view-shoot-save2"
@@ -618,8 +253,34 @@ onMounted(() => {
         Cancel
       </BaseButton>
     </div>
+
+    <!-- Hidden PDF Generator Component -->
+    <ScoreSheetPdfGenerator
+      ref="pdfGeneratorRef"
+      :archer-name="props.archerName"
+      :shot-at="shotAt"
+      :target-captain="captainName"
+      :shoot="props.shoot"
+      :game-type="props.gameType"
+      :date="props.date"
+      :age-group="props.ageGroup"
+      :gender="props.gender"
+      :bow-type="props.bowType"
+      :status="props.status"
+      :handicap="props.handicap"
+      :classification="props.classification"
+      :end-size="props.endSize"
+    />
   </BaseModal>
+
+  <!-- Captain Input Modal -->
+  <CaptainInputModal
+    :show="showCaptainPrompt"
+    @close="showCaptainPrompt = false"
+    @submit="handleCaptainSubmit"
+  />
 </template>
+
 <style scoped>
 h2 {
   font-size: 1.5rem;
@@ -643,6 +304,7 @@ input {
   background-color: var(--color-background-soft);
   color: var(--color-text);
   border: 1px solid var(--color-border);
+  border-radius: 4px;
 }
 
 .preview-container {

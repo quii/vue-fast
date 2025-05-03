@@ -44,10 +44,18 @@ describe("Print scoresheet", () => {
     });
 
     cy.contains('Share').click()
-    cy.get("#captain").type("John Smith");
+
+    // Update for the new location field
     cy.get("#location").type("Sherwood Forest");
+
+    // Click the Download PDF button
     cy.get("[data-test=\"view-shoot-save2\"]").click();
 
+    // Now the captain input modal should appear - fill it in
+    cy.get('#captain').type('John Smith')
+
+    // Find and click the Download PDF button in the captain modal
+    cy.get('[data-test="captain-submit-button"]').click()
 
     cy.get("h1").should("contain", "bray i");
     cy.get("h2").should("contain", "Shot at Sherwood Forest");

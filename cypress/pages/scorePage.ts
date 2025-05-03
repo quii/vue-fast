@@ -17,7 +17,7 @@ class ScorePage {
 
   tapRoundSelector() {
     cy.get(".round-card-wrapper").click();
-    cy.wait(100)
+    cy.wait(250)
     cy.get('body').then(($body) => {
       if ($body.find('.profile-setup-section').length > 0) {
         cy.contains('label', 'Age Group').parent().find('select').select('Senior')
@@ -61,7 +61,7 @@ class ScorePage {
       }
     });
 
-    cy.wait(100)
+    cy.wait(250)
 
     cy.get('body').then(($body) => {
       if ($body.find('.profile-setup-section').length > 0) {
