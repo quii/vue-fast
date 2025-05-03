@@ -1,62 +1,62 @@
 class HistoryPage {
   navigateTo() {
-    cy.get("a").contains("History").click();
+    cy.get('a').contains('History').click()
   }
 
   selectHistoryItem(item) {
     // Update to work with card layout - look for the item text in the card
-    cy.dismissToasters();
-    cy.get(".history-card").contains(item).click();
+    cy.dismissToasters()
+    cy.get('.history-card').contains(item).click()
     cy.wait(500)
   }
 
   checkTotalGolds(expectedGolds) {
-    cy.get("[data-test=\"totalGolds\"]").contains(expectedGolds);
+    cy.get('[data-test="totalGolds"]').contains(expectedGolds)
   }
 
   checkRecordExists(score) {
     // Update to work with card layout - look for the score in a highlighted card-score element
-    cy.dismissToasters();
-    cy.get(".card-score.highlight").contains(score);
+    cy.dismissToasters()
+    cy.get('.card-score.highlight').contains(score)
   }
 
   checkScoreExists(score, round) {
     // Instead of using within(), check that there exists at least one card
     // that contains both the score and round
-    cy.dismissToasters();
-    cy.get(".history-card").then($cards => {
+    cy.dismissToasters()
+    cy.get('.history-card').then($cards => {
       const matchingCards = $cards.filter((_, card) => {
-        const $card = Cypress.$(card);
-        const hasRound = $card.find(".round-name").text().includes(round);
-        const hasScore = $card.find(".card-score").text().includes(score);
-        return hasRound && hasScore;
-      });
-      expect(matchingCards.length).to.be.at.least(1);
-    });
+        const $card = Cypress.$(card)
+        const hasRound = $card.find('.round-name').text().includes(round)
+        const hasScore = $card.find('.card-score').text().includes(score)
+        return hasRound && hasScore
+      })
+      expect(matchingCards.length).to.be.at.least(1)
+    })
   }
 
   checkNoteExists(noteText) {
-    cy.get("[data-test=\"note-text\"]").contains(noteText);
+    cy.get('[data-test="note-text"]').contains(noteText)
   }
 
   checkNoteIsHighlighted(noteText) {
     // Check for a note row with both the highlighted class and the specified text
-    cy.get("[data-test=\"note-row\"].highlighted").contains(noteText);
+    cy.get('[data-test="note-row"].highlighted').contains(noteText)
   }
 
   checkClassificationExists(score, classification) {
-    cy.dismissToasters();
+    cy.dismissToasters()
     // Instead of using within(), check that there exists at least one card
     // that contains both the score and classification
-    cy.get(".history-card").then($cards => {
+    cy.get('.history-card').then($cards => {
       const matchingCards = $cards.filter((_, card) => {
-        const $card = Cypress.$(card);
-        const hasScore = $card.find(".card-score").text().includes(score);
-        const hasClassification = $card.find(".classification-name").text().includes(classification);
-        return hasScore && hasClassification;
-      });
-      expect(matchingCards.length).to.be.at.least(1);
-    });
+        const $card = Cypress.$(card)
+        const hasScore = $card.find('.card-score').text().includes(score)
+        const hasClassification = $card.find('.classification-name').text().includes(classification)
+        return hasScore && hasClassification
+      })
+      expect(matchingCards.length).to.be.at.least(1)
+    })
   }
 
   // Method to toggle PB filter
@@ -87,34 +87,24 @@ class HistoryPage {
 
   // Method to filter by classification
   filterByClassification(classification) {
-    // Take a screenshot to see what's happening
-    cy.screenshot('before-classification-filter')
+    // Log the action for debugging
+    cy.log(`Filtering by classification: ${classification}`)
 
     // Click the Class button with more specific targeting
-    cy.contains('span.filter-label', 'Class').closest('button').click({ force: true })
+    cy.contains('span.filter-label', 'Class').closest('button')
+      .should('be.visible')
+      .click({ force: true })
 
-    // Take another screenshot after clicking
-    cy.screenshot('after-classification-button-click')
-
-    // Wait and check if modal appears
-    cy.wait(1000)
-    cy.get('body').then($body => {
-      if ($body.find('.modal-content').length > 0) {
-        cy.log('Modal found')
-        cy.get('.modal-content').within(() => {
-          if (classification === '') {
-            // If empty string is passed, select "All Classifications"
-            cy.contains('All Classifications').click({ force: true })
-          } else {
-            // Otherwise find the specific classification
-            cy.contains(classification).click({ force: true })
-          }
-        })
+    // Wait for modal with a longer timeout
+    cy.get('.modal-content', { timeout: 10000 }).should('be.visible').within(() => {
+      if (classification === '') {
+        // If empty string is passed, select "All Classifications"
+        cy.contains('All Classifications').click({ force: true })
       } else {
-        cy.log('Modal not found after clicking Class button')
-        cy.screenshot('modal-not-found')
+        // Otherwise find the specific classification
+        cy.contains(classification).should('be.visible').click({ force: true })
       }
-    });
+    })
 
     return this
   }
@@ -138,4 +128,4 @@ class HistoryPage {
   }
 }
 
-export default HistoryPage;
+export default HistoryPage
