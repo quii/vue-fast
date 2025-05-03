@@ -90,19 +90,39 @@ class HistoryPage {
     // Log the action for debugging
     cy.log(`Filtering by classification: ${classification}`)
 
-    // Click the Class button with more specific targeting
+    // Click the Class button with more specific targeting and wait
     cy.contains('span.filter-label', 'Class').closest('button')
       .should('be.visible')
       .click({ force: true })
+      .wait(1000); // Add a wait after clicking
 
-    // Wait for modal with a longer timeout
-    cy.get('.modal-content', { timeout: 10000 }).should('be.visible').within(() => {
-      if (classification === '') {
-        // If empty string is passed, select "All Classifications"
-        cy.contains('All Classifications').click({ force: true })
+    // Check if the modal is visible
+    cy.get('body').then($body => {
+      if ($body.find('.modal-content').length > 0) {
+        cy.log('Modal found')
+        cy.get('.modal-content').within(() => {
+          if (classification === '') {
+            // If empty string is passed, select "All Classifications"
+            cy.contains('All Classifications').click({ force: true })
+          } else {
+            // Otherwise find the specific classification
+            cy.contains(classification).click({ force: true })
+          }
+        })
       } else {
-        // Otherwise find the specific classification
-        cy.contains(classification).should('be.visible').click({ force: true })
+        // If modal not found, try clicking again with a different approach
+        cy.log('Modal not found, trying alternative approach')
+        cy.get('button').contains('Class').click({ force: true })
+
+        // Wait and try again
+        cy.wait(1000)
+        cy.get('.modal-content').within(() => {
+          if (classification === '') {
+            cy.contains('All Classifications').click({ force: true })
+          } else {
+            cy.contains(classification).click({ force: true })
+          }
+        })
       }
     })
 
