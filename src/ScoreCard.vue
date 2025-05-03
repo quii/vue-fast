@@ -256,74 +256,78 @@ function closeTutorial() {
 
 <template>
   <div class="page">
-    <div class="top-bar-container">
-      <TopBar
-        :hasStarted="hasStarted"
-        :arrowsRemaining="arrowsRemaining"
-        :maxPossibleScore="maxPossibleScore"
-        :availableClassifications="availableClassifications"
-        :canSave="canSave"
-        :maxReached="maxReached"
-        @clear-scores="clearScores"
-        @take-note="handleTakeNote"
-        @save-scores="showSaveConfirmation"
-      />
+    <div class="sticky-header">
+      <div class="top-bar-container">
+        <TopBar
+          :hasStarted="hasStarted"
+          :arrowsRemaining="arrowsRemaining"
+          :maxPossibleScore="maxPossibleScore"
+          :availableClassifications="availableClassifications"
+          :canSave="canSave"
+          :maxReached="maxReached"
+          @clear-scores="clearScores"
+          @take-note="handleTakeNote"
+          @save-scores="showSaveConfirmation"
+        />
+      </div>
+
+      <div v-if="userStore.isExperimentalUser()" class="interactive-target-face">
+        <InteractiveTargetFace
+          :arrows="scoresStore.arrows"
+          :scores="scoresStore.scores"
+          :game-type="gameTypeStore.type"
+          :valid-scores="validScores"
+          :max-reached="maxReached"
+          :knock-color="userStore.user.knockColor"
+          @score="handleScore"
+          @undo="scoresStore.undo"
+        />
+      </div>
+      <div v-else class="score-buttons">
+        <ScoreButtons
+          :validScores="validScores"
+          @score="handleScore"
+          :max-reached="maxReached"
+          :scores="scoresStore.scores"
+          :game-type="gameTypeStore.type"
+          @undo="scoresStore.undo"
+        />
+      </div>
     </div>
 
-    <div v-if="userStore.isExperimentalUser()" class="interactive-target-face">
-      <InteractiveTargetFace
-        :arrows="scoresStore.arrows"
-        :scores="scoresStore.scores"
-        :game-type="gameTypeStore.type"
-        :valid-scores="validScores"
-        :max-reached="maxReached"
-        :knock-color="userStore.user.knockColor"
-        @score="handleScore"
-        @undo="scoresStore.undo"
+    <div class="scrollable-content">
+      <NoteModal
+        v-if="showNoteTaker"
+        :initial-text="noteText"
+        @save="saveNote"
+        @close="showNoteTaker = false"
       />
-    </div>
-    <div v-else class="score-buttons">
-      <ScoreButtons
-        :validScores="validScores"
-        @score="handleScore"
-        :max-reached="maxReached"
-        :scores="scoresStore.scores"
-        :game-type="gameTypeStore.type"
-        @undo="scoresStore.undo"
+
+      <!-- Save Confirmation Modal -->
+      <ShootEditModal
+        :visible="showSaveModal"
+        :shootData="historyPreview"
+        :isEditMode="false"
+        :initialDate="date"
+        :initialStatus="DEFAULT_SHOOT_STATUS"
+        @save="handleSaveFromModal"
+        @cancel="cancelSave"
       />
-    </div>
 
-    <NoteModal
-      v-if="showNoteTaker"
-      :initial-text="noteText"
-      @save="saveNote"
-      @close="showNoteTaker = false"
-    />
-
-    <!-- Save Confirmation Modal -->
-    <ShootEditModal
-      :visible="showSaveModal"
-      :shootData="historyPreview"
-      :isEditMode="false"
-      :initialDate="date"
-      :initialStatus="DEFAULT_SHOOT_STATUS"
-      @save="handleSaveFromModal"
-      @cancel="cancelSave"
-    />
-
-    <RoundScores v-if="hasStarted" :scores="scoresStore.scores"
-                 :game-type="gameTypeStore.type"
-                 :endSize="gameTypeStore.currentRound.endSize"
-                 :hasX="validScores.includes(X)"
-                 :user-profile="userStore.user"
-    />
-    <UserNotes :allow-highlight="true" />
-
-    <div class="game-type-selector">
-      <GameTypeSelector
-        :gameType="gameTypeStore.type"
-        @changeGameType="gameTypeStore.setGameType"
+      <RoundScores v-if="hasStarted" :scores="scoresStore.scores"
+                   :game-type="gameTypeStore.type"
+                   :endSize="gameTypeStore.currentRound.endSize"
+                   :hasX="validScores.includes(X)"
+                   :user-profile="userStore.user"
       />
+      <UserNotes :allow-highlight="true" />
+
+      <div class="game-type-selector">
+        <GameTypeSelector
+          :gameType="gameTypeStore.type"
+          @changeGameType="gameTypeStore.setGameType"
+        />
+      </div>
     </div>
 
     <!-- Tutorial Component -->
@@ -337,12 +341,26 @@ function closeTutorial() {
 <style scoped>
 .page {
   padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 60px); /* Adjust for bottom navigation */
 }
 
-.top-bar-container,
-.score-buttons,
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--color-background);
+}
+
+.scrollable-content {
+  flex: 1;
+  overflow-y: auto;
+}
+
 .interactive-target-face,
 .game-type-selector {
   margin-bottom: 1rem;
 }
+
 </style>
