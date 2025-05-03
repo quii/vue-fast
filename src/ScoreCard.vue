@@ -205,6 +205,8 @@ async function handleSaveFromModal(data) {
     notesStore.assignPendingNotesToShoot(id);
     scoresStore.clear();
     showSaveModal.value = false;
+
+    router.push(`/history/${id}`)
   } catch (error) {
     console.log(error);
     toast.error("Error saving scores", error);

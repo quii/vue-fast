@@ -36,7 +36,6 @@ describe("Print scoresheet", () => {
 
     historyPage.navigateTo();
     historyPage.selectHistoryItem("Bray I");
-    cy.contains("Got it!").click();
 
     cy.window().then((win) => {
       cy.stub(win, "open").callsFake(() => {

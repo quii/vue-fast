@@ -250,6 +250,20 @@ class ScorePage {
 
   save() {
     cy.get(".save-button").click();
+
+    const maxAttempts = 10
+    const attemptDismissModal = (attempt = 0) => {
+      cy.get('body').then($body => {
+        if ($body.find('button:contains("Got it!")').length > 0) {
+          cy.contains('button', 'Got it!').click()
+        } else if (attempt < maxAttempts) {
+          cy.wait(100)
+          attemptDismissModal(attempt + 1)
+        }
+      })
+    }
+    attemptDismissModal()
+
   }
 
   saveToHistory() {
