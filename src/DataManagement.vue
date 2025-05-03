@@ -154,8 +154,10 @@ function hardReset() {
 
     <SectionCard title="Back up your data">
       <p class="explanation">
-        Your scores and notes are only stored on this device. To keep them safe, download a backup file and store it
-        somewhere secure.
+        {{ hasName ?
+        'Your scores and notes are backed up to the cloud, but it\'s still a good idea to download a backup file occasionally and store it somewhere secure as an extra precaution.' :
+        'Your scores and notes are only stored on this device. To keep them safe, download a backup file and store it somewhere secure.'
+        }}
       </p>
       <BaseButton
         variant="primary"
