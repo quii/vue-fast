@@ -14,12 +14,12 @@ describe('Cloud Backup and Restore', () => {
 
   beforeEach(() => {
     // Start with a clean slate
+    cy.disableAllTips()
     scorePage.visit()
     dataManagementPage.navigateTo()
     dataManagementPage.resetData()
-    cy.get('.dismiss-button').click()
+    cy.disableAllTips()
 
-    // Set up archer details
     userDataPage.navigateTo()
     userDataPage.setArcherDetails('male', 'recurve', 'senior', archerName)
   })

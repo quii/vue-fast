@@ -1,20 +1,6 @@
 class HistoryPage {
   navigateTo() {
     cy.get("a").contains("History").click();
-
-    // Try multiple times to dismiss modal if it exists
-    const maxAttempts = 10;
-    const attemptDismissModal = (attempt = 0) => {
-      cy.get("body").then($body => {
-        if ($body.find("button:contains(\"Got it!\")").length > 0) {
-          cy.contains("button", "Got it!").click();
-        } else if (attempt < maxAttempts) {
-          cy.wait(100);
-          attemptDismissModal(attempt + 1);
-        }
-      });
-    };
-    attemptDismissModal();
   }
 
   selectHistoryItem(item) {
@@ -101,16 +87,35 @@ class HistoryPage {
 
   // Method to filter by classification
   filterByClassification(classification) {
-    cy.get('button').contains('Class').click()
-    cy.get('.modal-content').within(() => {
-      if (classification === '') {
-        // If empty string is passed, select "All Classifications"
-        cy.contains('All Classifications').click()
+    // Take a screenshot to see what's happening
+    cy.screenshot('before-classification-filter')
+
+    // Click the Class button with more specific targeting
+    cy.contains('span.filter-label', 'Class').closest('button').click({ force: true })
+
+    // Take another screenshot after clicking
+    cy.screenshot('after-classification-button-click')
+
+    // Wait and check if modal appears
+    cy.wait(1000)
+    cy.get('body').then($body => {
+      if ($body.find('.modal-content').length > 0) {
+        cy.log('Modal found')
+        cy.get('.modal-content').within(() => {
+          if (classification === '') {
+            // If empty string is passed, select "All Classifications"
+            cy.contains('All Classifications').click({ force: true })
+          } else {
+            // Otherwise find the specific classification
+            cy.contains(classification).click({ force: true })
+          }
+        })
       } else {
-        // Otherwise find the specific classification
-        cy.contains(classification).click()
+        cy.log('Modal not found after clicking Class button')
+        cy.screenshot('modal-not-found')
       }
-    })
+    });
+
     return this
   }
 

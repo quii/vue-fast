@@ -7,7 +7,9 @@ describe('History Filters', () => {
   const historyPage = new HistoryPage()
 
   beforeEach(() => {
+    cy.disableAllTips()
     scorePage.visit()
+    cy.disableAllTips()
     scorePage.clearData()
 
     // Set up user profile

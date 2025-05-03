@@ -79,3 +79,13 @@ Cypress.Commands.add("safeClick", { prevSubject: true }, (subject, options) => {
   cy.wait(500); // Short wait for toaster to appear
   cy.dismissToasters();
 });
+
+// Command to set all preferences to indicate user has seen all tips
+Cypress.Commands.add('disableAllTips', () => {
+  // Set localStorage items to indicate all tips have been seen
+  localStorage.setItem('hasSeenPrintTip', 'true')
+  localStorage.setItem('hasSeenHistoryTip', 'true')
+  localStorage.setItem('hasSeenRoundSelectionTip', 'true')
+  localStorage.setItem('hasSeenScoreCardTutorial', 'true')
+  localStorage.setItem('hasSeenInstallPrompt', 'true')
+})

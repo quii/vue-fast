@@ -7,6 +7,7 @@ describe("Notes and Classifications", () => {
   const historyPage = new HistoryPage();
 
   beforeEach(() => {
+    cy.disableAllTips()
     scorePage.visit();
     scorePage.clearData();
   });

@@ -1,81 +1,10 @@
 class ScorePage {
   visit() {
     cy.visit("/");
-    this.dismissTutorialIfVisible()
   }
 
   navigateTo() {
     cy.get("a").contains("Score").click();
-
-    // Check if the tutorial is visible and click through it if it appears
-    this.dismissTutorialIfVisible()
-  }
-
-  // Helper method to dismiss the tutorial if it's visible
-  dismissTutorialIfVisible() {
-    // First check if the tutorial overlay exists
-    cy.get('body').then(($body) => {
-      if ($body.find('.tutorial-overlay').length > 0) {
-        cy.log('Tutorial detected, clicking through steps')
-
-        // Try the Skip button first as a faster alternative
-        if ($body.find('.skip-button').length > 0) {
-          cy.log('Skip button found, using it to dismiss tutorial')
-          cy.get('.skip-button').click({ force: true })
-
-          // Verify the tutorial is gone
-          cy.get('.tutorial-overlay').should('not.exist')
-          return
-        }
-
-        // If Skip button approach didn't work, click through all steps
-        let stepCount = 0
-        const maxSteps = 10 // Safety limit to prevent infinite loops
-
-        const clickNextUntilDone = () => {
-          // Increment step counter
-          stepCount++
-
-          // Safety check to prevent infinite recursion
-          if (stepCount > maxSteps) {
-            cy.log('Maximum tutorial steps exceeded, forcing continue')
-            // Try to force-click the Got it button as a last resort
-            cy.get('.next-button').click({ force: true })
-            return
-          }
-
-          // Check if tutorial is still visible
-          cy.get('body').then(($updatedBody) => {
-            if ($updatedBody.find('.tutorial-overlay').length > 0) {
-              // Check if the last step button (Got it!) is visible
-              if ($updatedBody.find('.next-button:contains("Got it!")').length > 0) {
-                cy.log(`Tutorial step ${stepCount}: Clicking "Got it!" to finish`)
-                cy.get('.next-button').contains('Got it!').click({ force: true })
-
-                // Verify the tutorial is gone
-                cy.get('.tutorial-overlay').should('not.exist')
-              } else {
-                // Click Next and continue
-                cy.log(`Tutorial step ${stepCount}: Clicking "Next"`)
-                cy.get('.next-button').contains('Next').click({ force: true })
-
-                // Wait a moment for the transition to complete
-                cy.wait(300)
-
-                // Recursively check and click until done
-                clickNextUntilDone()
-              }
-            } else {
-              cy.log('Tutorial dismissed successfully')
-            }
-          });
-        };
-
-        clickNextUntilDone()
-      } else {
-        cy.log('No tutorial detected, continuing')
-      }
-    });
   }
 
   clearData() {
@@ -124,9 +53,6 @@ class ScorePage {
   // Private helper method to handle common round selection logic
   _selectRound(roundName, filterType = null) {
     this.tapRoundSelector();
-
-    // Check if the tutorial appears after tapping round selector and dismiss it
-    this.dismissTutorialIfVisible()
 
     // Check if the Round Selection Tip Modal is visible and dismiss it
     cy.get('body').then(($body) => {
@@ -250,20 +176,6 @@ class ScorePage {
 
   save() {
     cy.get(".save-button").click();
-
-    const maxAttempts = 10
-    const attemptDismissModal = (attempt = 0) => {
-      cy.get('body').then($body => {
-        if ($body.find('button:contains("Got it!")').length > 0) {
-          cy.contains('button', 'Got it!').click()
-        } else if (attempt < maxAttempts) {
-          cy.wait(100)
-          attemptDismissModal(attempt + 1)
-        }
-      })
-    }
-    attemptDismissModal()
-
   }
 
   saveToHistory() {

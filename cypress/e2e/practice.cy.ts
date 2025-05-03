@@ -7,6 +7,7 @@ describe("practicing", () => {
 
   beforeEach(() => {
     cy.viewport(380, 844, "portrait");
+    cy.disableAllTips()
     scorePage.visit();
     scorePage.clearData();
   });

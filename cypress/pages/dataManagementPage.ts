@@ -10,6 +10,7 @@ class DataManagementPage {
 
   resetData() {
     cy.get("button").contains("Reset").click();
+    cy.disableAllTips()
   }
 
   importData(fixturePath) {
@@ -52,6 +53,7 @@ class DataManagementPage {
   }
 
   waitForBackupsToLoad() {
+    cy.wait(1000) // Wait for the score to be saved
     // Wait for the "Loading backups..." message to disappear
     cy.contains('Loading backups...', { timeout: 10000 }).should('not.exist')
 

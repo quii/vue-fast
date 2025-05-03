@@ -8,6 +8,7 @@ describe(`Smoke test using Ruth's game`,
     const historyPage = new HistoryPage();
 
     beforeEach(() => {
+      cy.disableAllTips()
       scorePage.visit();
       scorePage.clearData();
     });

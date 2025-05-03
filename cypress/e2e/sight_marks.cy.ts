@@ -6,6 +6,7 @@ describe("Sight Marks", () => {
   const scorePage = new ScorePage()
 
   beforeEach(() => {
+    cy.disableAllTips()
     scorePage.visit()
     sightMarksPage.navigateTo();
   });

@@ -16,5 +16,10 @@
 // Import commands.js using ES2015 syntax:
 import './commands'
 
+// Disable all tips before running any tests
+before(() => {
+  cy.disableAllTips()
+})
+
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

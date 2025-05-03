@@ -4,6 +4,7 @@ describe("score buttons", () => {
   const scorePage = new ScorePage();
 
   beforeEach(() => {
+    cy.disableAllTips()
     scorePage.visit();
     scorePage.clearData();
   });
