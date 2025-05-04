@@ -75,7 +75,7 @@ async function runDockerE2ETests() {
 
     // Run Cypress using Docker directly with the browser set to electron
     // Enable video recording and ensure videos are saved to the host
-    const cypressCommand = `docker run --rm --network ${networkName} -v "${projectRoot}:/e2e" -w /e2e -e CYPRESS_TSCONFIG=cypress/tsconfig.json cypress/included:12.17.4 run --browser electron --config baseUrl=http://app:8080,video=true,videosFolder=/e2e/cypress/videos`
+    const cypressCommand = `docker run --rm --network ${networkName} -v "${projectRoot}:/e2e" -w /e2e -e CYPRESS_TSCONFIG=cypress/tsconfig.json cypress/included:12.17.4 run --headless --browser electron --config video=false baseUrl=http://app:8080`
 
     console.log(`Running command: ${cypressCommand}`)
 
