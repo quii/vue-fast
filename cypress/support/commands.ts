@@ -66,20 +66,6 @@ Cypress.Commands.add("dismissToasters", () => {
   });
 });
 
-// Command to wait for any action that might trigger a toaster
-Cypress.Commands.add("safeClick", { prevSubject: true }, (subject, options) => {
-  // First dismiss any existing toasters
-  cy.dismissToasters();
-
-  // Then perform the click
-  cy.wrap(subject).click(options);
-
-  // Then dismiss any new toasters that might appear
-  // eslint-disable-next-line cypress/no-unnecessary-waiting
-  cy.wait(500); // Short wait for toaster to appear
-  cy.dismissToasters();
-});
-
 // Command to set all preferences to indicate user has seen all tips
 Cypress.Commands.add('disableAllTips', () => {
   // Set localStorage items to indicate all tips have been seen
