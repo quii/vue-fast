@@ -204,8 +204,6 @@ function calculateTotalScore() {
 
     <!-- Share Options -->
     <div class="share-options">
-      <h3>Share Options</h3>
-
       <ButtonStack spacing="medium">
         <BaseButton
           type="button"
