@@ -53,7 +53,7 @@ class DataManagementPage {
   }
 
   waitForBackupsToLoad() {
-    cy.wait(500) // Wait for the score to be saved
+    cy.wait(1000) // Wait for the score to be saved
     // Wait for the "Loading backups..." message to disappear
     cy.contains('Loading backups...', { timeout: 10000 }).should('not.exist')
 

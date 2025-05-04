@@ -7,7 +7,7 @@ class HistoryPage {
     // Update to work with card layout - look for the item text in the card
     cy.dismissToasters()
     cy.get('.history-card').contains(item).click()
-    cy.wait(100)
+    cy.wait(500)
   }
 
   checkTotalGolds(expectedGolds) {
@@ -115,7 +115,7 @@ class HistoryPage {
         cy.get('button').contains('Class').click({ force: true })
 
         // Wait and try again
-        cy.wait(500)
+        cy.wait(1000)
         cy.get('.modal-content').within(() => {
           if (classification === '') {
             cy.contains('All Classifications').click({ force: true })
