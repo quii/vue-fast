@@ -6,30 +6,34 @@ We have lost our test pyramid approach. We have a number of cypress browser test
 pyramid. We still need the cypress tests for key use cases, but we should be able to replace the rest of them with a new
 set of tests.
 
-I want us to introduce a new set of acceptance tests which will mount the entire application using vue's testing
-capabilities
+I want us to introduce a new set of acceptance tests which will mount the entire application using Vue Test Utils.
 
 ### Principles
 
 - We must not mock any behaviour belonging to the application.
 - The only things we can mock are external things, like localstorage, window, and so on.
-    - There are things like the public folder, which holds our classification information, which is fetched by the
-      application, such as public/data/classifications/Men/Recurve/Senior.json. We'll need to find a way to mount the
-      public server in a server the application can call.
-- These acceptance tests should follow a similar pattern to the cypress tests, in that we use page objections to control
-  the application.
+- For public folder assets (like classification data in `public/data/classifications/Men/Recurve/Senior.json`), we'll create a simple web server that serves these files during tests.
+- These acceptance tests should follow a similar pattern to the cypress tests, using page objects to control the application.
 
-I have made a folder src/components/__tests__/acceptance where i expect the test harness, and various tests to live.
+I have made a folder `src/components/__tests__/acceptance` where I expect the test harness, page objects, and various tests to live.
 
-### We may need to do some refactoring first.
+### Refactoring Requirements
 
-I believe our `src/main.ts` may need refactoring. It contains our app component, and creates the router (fround at
-`src/routes.ts`) plus other window listening events amongst other things. It may need refactoring so we can then mount
-the application in our test.
+Our `src/main.ts` needs refactoring to separate the app creation from app mounting, so we can mount the application in our test environment. The refactoring should:
 
-### We can manipulate localstorage before our tests to prevent the need to dismiss first time modals, and also set up the user correctly.
+1. Extract the app creation logic into a reusable function
+2. Keep the router creation (from `src/routes.ts`) accessible for tests
+3. Ensure all event listeners and plugins are properly initialized in tests
 
-Something like this should do it
+### Test Environment Setup
+
+For our test environment, we should:
+
+1. Create a base test harness that mounts the full application
+2. Mock localStorage to prevent the need to dismiss first-time modals and set up the user profile
+3. Create page objects similar to our Cypress page objects but adapted for Vue Test Utils
+
+Here's an example of how we might set up localStorage for tests:
 
 ```typescript
   // Set up a default user profile in localStorage
@@ -58,15 +62,11 @@ mockStorage.setItem('hasSeenScoreCardTutorial', 'true')
 mockStorage.setItem('hasSeenInstallPrompt', 'true')
 ```
 
-## An example test that we can start to try and replace
+## Example Test to Replace
 
-The score_buttons test, found at cypress/e2e/score_buttons.cy.ts is a good example of a test that we can start to
+The score_buttons test, found at `cypress/e2e/score_buttons.cy.ts` is a good example of a test that we can start to
 replace. All it does is choose rounds and verifies the correct score buttons and validation around them act correctly.
-It uses the page object found here cypress/pages/scorePage.ts
-
-## Other information
-
-We are already using vitest. Please check the config vitest.config.ts
+It uses the page object found here `cypress/pages/scorePage.ts`
 
 ## Implementation plan
 
@@ -74,12 +74,23 @@ Please, don't skip steps. Do one step, and then wait for me to check things befo
 of breaking a step down into smaller ones, feel free to suggest.
 
 ### Step 1
-I first want us to do the needed refactoring to get the main.ts file into a separate file so that we have all we need to
-mount into the test. Assuming that doesn't break the app and all our tests pass, we go onto the next step.
+First, refactor the `src/main.ts` file to separate app creation from app mounting. This should:
+- Create a function that returns the configured Vue app without mounting it
+- Ensure the router is accessible for tests
+- Make sure all event listeners and plugins are properly initialized
 
 ### Step 2
-The next step is to create enough of a test harness, and page object to run a very simple test.
+Create a test harness in `src/components/__tests__/acceptance/testHarness.ts` that:
+- Mounts the full application using Vue Test Utils
+- Sets up localStorage mocking
+- Provides a way to serve public folder assets
+- Creates a base page object structure
 
-Given I select Windsor as a round
-When I tap the 7 score button
-Then then 9 score button should be disabled
+Implement a score page object in `src/components/__tests__/acceptance/pages/scorePage.ts` that:
+- Mirrors the functionality of the Cypress page object but uses Vue Test Utils methods
+- Provides methods to interact with the score buttons and verify their state
+
+### Step 4
+Create a test file `src/components/__tests__/acceptance/scoreButtons.test.ts` that:
+- Uses the test harness and score page object
+- Implements a simple test case: "Given I select Windsor as a round, When I tap the 7 score button, Then the 9 score button should be disabled"Then then 9 score button should be disabled
