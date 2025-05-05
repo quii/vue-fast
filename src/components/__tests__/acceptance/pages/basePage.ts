@@ -40,4 +40,35 @@ export class BasePage {
     await button.click()
     await this.waitForUpdate()
   }
+
+  // Debug method to get the current HTML
+  html(): string {
+    return this.wrapper.html()
+  }
+
+  // Get the current route path
+  getCurrentPath(): string | null {
+    if (this.wrapper.vm.$route) {
+      return this.wrapper.vm.$route.path
+    }
+    return null
+  }
+
+  // Debug method to log the current HTML and route to the console
+  debug(): void {
+    const currentPath = this.getCurrentPath()
+    console.log('=== DEBUG INFO ===')
+    console.log(`Current path: ${currentPath || 'Unknown'}`)
+    console.log('Current HTML:')
+    console.log(this.html())
+    console.log('=== END DEBUG INFO ===')
+  }
+
+  async navigateTo(path: string) {
+    await this.wrapper.vm.$router.push(path)
+    await this.waitForUpdate()
+
+    // Wait a bit longer to ensure the page is fully loaded
+    await new Promise(resolve => setTimeout(resolve, 100))
+  }
 }

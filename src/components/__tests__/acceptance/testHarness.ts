@@ -4,9 +4,48 @@ import { createRouter } from 'vue-router'
 import { routes } from '@/routes'
 import { createServer } from './mockServer'
 import { createPinia } from 'pinia'
-import App from '@/App.vue' // Import the actual App component
+import App from '@/App.vue'
 import { createMemoryHistory } from 'vue-router'
 import Toast from 'vue-toastification'
+
+// Create an enhanced wrapper that logs debug info when elements aren't found
+function createEnhancedWrapper(wrapper: VueWrapper): VueWrapper {
+  // Store the original find method
+  const originalFind = wrapper.find
+  const originalFindAll = wrapper.findAll
+
+  // Override the find method
+  wrapper.find = function(selector: string) {
+    const result = originalFind.call(this, selector)
+
+    // If the element wasn't found, log debug info
+    if (!result.exists()) {
+      console.error(`Element not found: "${selector}"`)
+      console.log('Current path:', wrapper.vm.$route?.path || 'Unknown')
+      console.log('Current HTML:')
+      console.log(wrapper.html())
+    }
+
+    return result
+  }
+
+  // Override the findAll method to log when no elements are found
+  wrapper.findAll = function(selector: string) {
+    const results = originalFindAll.call(this, selector)
+
+    // If no elements were found, log debug info
+    if (results.length === 0) {
+      console.error(`No elements found for: "${selector}"`)
+      console.log('Current path:', wrapper.vm.$route?.path || 'Unknown')
+      console.log('Current HTML:')
+      console.log(wrapper.html())
+    }
+
+    return results
+  }
+
+  return wrapper
+}
 
 // Mock localStorage
 class MockStorage {
@@ -79,6 +118,64 @@ function setupMatchMediaMock() {
 // Mock server for public assets
 let server: ReturnType<typeof createServer>
 
+// Base class for page objects
+export class BasePage {
+  constructor(protected wrapper: VueWrapper) {}
+
+  async waitForUpdate(): Promise<void> {
+    await vi.dynamicImportSettled()
+  }
+
+  // Helper method to find elements by text content
+  async findByText(text: string, selector = '*') {
+    // Find all elements matching the selector
+    const elements = this.wrapper.findAll(selector)
+
+    // Filter to find the one containing the text
+    for (const element of elements) {
+      if (element.text().includes(text)) {
+        return element
+      }
+    }
+
+    // If no element was found, log debug info
+    console.error(`No element found with text: "${text}" and selector: "${selector}"`)
+    console.log('Current path:', this.wrapper.vm.$route?.path || 'Unknown')
+    console.log('Current HTML:')
+    console.log(this.wrapper.html())
+
+    // Return an empty wrapper if not found
+    return { exists: () => false } as any
+  }
+
+  // Get the current route path
+  getCurrentPath(): string | null {
+    if (this.wrapper.vm.$route) {
+      return this.wrapper.vm.$route.path
+    }
+    return null
+  }
+
+  // Debug method to log the current HTML and route to the console
+  debug(): void {
+    const currentPath = this.getCurrentPath()
+    console.log('=== DEBUG INFO ===')
+    console.log(`Current path: ${currentPath || 'Unknown'}`)
+    console.log('Current HTML:')
+    console.log(this.wrapper.html())
+    console.log('=== END DEBUG INFO ===')
+  }
+
+  // Navigate to a specific path
+  async navigateTo(path: string) {
+    await this.wrapper.vm.$router.push(path)
+    await this.waitForUpdate()
+
+    // Wait a bit longer to ensure the page is fully loaded
+    await new Promise(resolve => setTimeout(resolve, 100))
+  }
+}
+
 // Setup function to mount the app and return the wrapper
 export async function setupApp() {
   // Mock window.matchMedia before creating the app
@@ -103,7 +200,7 @@ export async function setupApp() {
   const pinia = createPinia()
 
   // Mount the App component directly
-  const wrapper = mount(App, {
+  let wrapper = mount(App, {
     global: {
       plugins: [router, pinia, Toast],
       stubs: {
@@ -111,6 +208,9 @@ export async function setupApp() {
       }
     }
   })
+
+  // Enhance the wrapper with our debug functionality
+  wrapper = createEnhancedWrapper(wrapper)
 
   // Wait for router to be ready
   await router.isReady()

@@ -4,6 +4,7 @@
     <ScoreHistoryGraph
       :historyData="graphData"
       :isHandicapGraph="isHandicapGraph"
+      :isArrowsGraph="isArrowsGraph"
       :graphTitle="graphTitle"
       :visible="showGraph"
       @close="showGraph = false"
@@ -37,7 +38,7 @@
           <span>View {{ capitalizedRoundName }} Graph</span>
         </BaseButton>
       </ButtonGroup>
-      <ButtonGroup v-if="showIndoorHandicapGraphButton || showOutdoorHandicapGraphButton">
+      <ButtonGroup v-if="showIndoorHandicapGraphButton || showOutdoorHandicapGraphButton || showArrowsGraphButton">
         <BaseButton
           v-if="showIndoorHandicapGraphButton"
           variant="default"
@@ -58,6 +59,17 @@
         >
           <GraphIcon />
           <span>Outdoor Handicap</span>
+        </BaseButton>
+
+        <BaseButton
+          v-if="showArrowsGraphButton"
+          variant="default"
+          size="medium"
+          @click="openArrowsGraph"
+          class="arrows-button"
+        >
+          <GraphIcon />
+          <span>Arrows Shot</span>
         </BaseButton>
       </ButtonGroup>
       <div v-if="hasClassificationProgress" class="classification-progress-section">
@@ -149,6 +161,7 @@ const showTip = ref(!preferences.hasSeenHistoryTip);
 const showGraph = ref(false);
 const graphData = ref([]);
 const isHandicapGraph = ref(false);
+const isArrowsGraph = ref(false); // New state for arrows graph
 
 const filteredHistory = computed(() => {
   return store.getFilteredHistory({
@@ -236,6 +249,21 @@ const showOutdoorHandicapGraphButton = computed(() => {
   return !roundFilterActive.value && outdoorEntriesWithHandicap.value.length >= 5;
 });
 
+// New computed property to determine if we should show the arrows graph button
+const showArrowsGraphButton = computed(() => {
+  // Show the button if we have at least 2 entries with arrow data
+  const entriesWithArrows = filteredHistory.value.filter(item => {
+    if (!item.scores) return false;
+
+    // Handle both flat arrays and arrays of arrays
+    if (Array.isArray(item.scores[0])) {
+      return item.scores.flat().length > 0;
+    }
+    return item.scores.length > 0;
+  });
+
+  return entriesWithArrows.length >= 2;
+});
 
 const capitalizedRoundName = computed(() => formatRoundName(roundFilter.value));
 
@@ -257,6 +285,8 @@ function openGraph() {
     item => item.gameType.toLowerCase() === roundFilter.value.toLowerCase()
   );
   isHandicapGraph.value = false;
+  isArrowsGraph.value = false;
+  graphTitle.value = `${capitalizedRoundName.value} Scores`;
   showGraph.value = true;
 }
 
@@ -264,6 +294,7 @@ function openIndoorHandicapGraph() {
   // Use only indoor entries with valid handicap values
   graphData.value = indoorEntriesWithHandicap.value;
   isHandicapGraph.value = true;
+  isArrowsGraph.value = false;
   graphTitle.value = "Indoor Handicap Progress";
   showGraph.value = true;
 }
@@ -272,8 +303,57 @@ function openOutdoorHandicapGraph() {
   // Use only outdoor entries with valid handicap values
   graphData.value = outdoorEntriesWithHandicap.value;
   isHandicapGraph.value = true;
+  isArrowsGraph.value = false;
   graphTitle.value = "Outdoor Handicap Progress";
   showGraph.value = true;
+}
+
+// New function to open the arrows shot graph
+function openArrowsGraph() {
+  // Prepare data for the arrows graph
+  const arrowsData = prepareArrowsGraphData(filteredHistory.value);
+
+  // Make sure we're setting the data correctly
+  graphData.value = arrowsData;
+  isHandicapGraph.value = false;
+  isArrowsGraph.value = true;
+  graphTitle.value = "Arrows Shot Over Time";
+  showGraph.value = true;
+}
+
+// Function to prepare data for the arrows graph
+function prepareArrowsGraphData(historyItems) {
+  // Sort by date (oldest first)
+  const sortedItems = [...historyItems].sort((a, b) =>
+    new Date(a.date).getTime() - new Date(b.date).getTime()
+  );
+
+  // Create a new array with cumulative arrow counts
+  let cumulativeArrows = 0;
+  return sortedItems.map(item => {
+    // Safely access the scores array
+    let arrowCount = 0;
+
+    if (item.scores) {
+      // If scores is an array of arrays (like for ends), flatten it
+      if (Array.isArray(item.scores[0])) {
+        arrowCount = item.scores.flat().length;
+      } else {
+        // Otherwise just count the array elements
+        arrowCount = item.scores.length;
+      }
+    }
+
+    cumulativeArrows += arrowCount;
+
+    return {
+      id: item.id,
+      date: item.date,
+      arrowCount: arrowCount,
+      cumulativeArrows: cumulativeArrows,
+      gameType: item.gameType
+    };
+  });
 }
 
 const graphTitle = ref("");
@@ -368,6 +448,10 @@ function view(id) {
 }
 
 .button-group button {
+  margin-top: 0.25rem;
+}
+
+.arrows-button {
   margin-top: 0.25rem;
 }
 </style>

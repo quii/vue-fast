@@ -8,7 +8,7 @@ export class ScorePage extends BasePage {
 
   // Visit the score page
   async visit() {
-    await this.waitForUpdate()
+    await this.navigateTo('/')
   }
 
   // Clear any existing data
@@ -26,6 +26,7 @@ export class ScorePage extends BasePage {
     const roundSelector = await this.wrapper.find('.round-card-wrapper')
     if (!roundSelector.exists()) {
       console.error('Round selector not found. Current HTML:', this.wrapper.html())
+      console.log('Current URL', this.getCurrentPath())
       throw new Error('Round selector element (.round-card-wrapper) not found in the DOM')
     }
 
@@ -173,5 +174,20 @@ export class ScorePage extends BasePage {
 
     const row = classificationBadge.closest('.table-row')
     return row.classes().includes('achieved')
+  }
+
+  // Add this method to the ScorePage class
+  async saveInModal() {
+    // Find the save button in the ShootEditModal
+    const saveButton = await this.wrapper.find('.modal-content .save-button')
+    if (!saveButton.exists()) {
+      throw new Error('Save button in modal not found')
+    }
+
+    await saveButton.trigger('click')
+    await this.waitForUpdate()
+
+    // Wait a bit longer for the navigation to complete
+    await new Promise(resolve => setTimeout(resolve, 100))
   }
 }
