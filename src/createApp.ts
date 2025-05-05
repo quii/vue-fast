@@ -14,22 +14,27 @@ export function setupServiceWorker() {
   const intervalMS = 60 * 60 * 1000;
 
   if ("serviceWorker" in navigator) {
-    const { registerSW } = import('virtual:pwa-register')
-    registerSW({
-      immediate: true,
-      onRegistered(r) {
-        r && setInterval(() => {
-          r.update();
-        }, intervalMS);
-      },
-      onOfflineReady() {
-      },
-      onNeedRefresh() {
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
-      }
-    })
+    import('virtual:pwa-register')
+      .then(({ registerSW }) => {
+        registerSW({
+          immediate: true,
+          onRegistered(r) {
+            r && setInterval(() => {
+              r.update();
+            }, intervalMS);
+          },
+          onOfflineReady() {
+          },
+          onNeedRefresh() {
+            setTimeout(() => {
+              window.location.reload();
+            }, 1000);
+          }
+        })
+      })
+      .catch(error => {
+        console.error('Failed to register service worker:', error)
+      })
   }
 }
 

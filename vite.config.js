@@ -68,5 +68,10 @@ export default defineConfig({
   assetsInclude: ["**/*.json"],
   json: {
     stringify: true
-  }
+  },
+  test: {
+    environment: 'jsdom',
+    setupFiles: ['src/setupTests.ts'],
+    // other test configuration...
+  },
 });

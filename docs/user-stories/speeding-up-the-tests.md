@@ -86,6 +86,7 @@ Create a test harness in `src/components/__tests__/acceptance/testHarness.ts` th
 - Provides a way to serve public folder assets
 - Creates a base page object structure
 
+### Step 3
 Implement a score page object in `src/components/__tests__/acceptance/pages/scorePage.ts` that:
 - Mirrors the functionality of the Cypress page object but uses Vue Test Utils methods
 - Provides methods to interact with the score buttons and verify their state

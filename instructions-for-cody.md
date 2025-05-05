@@ -136,7 +136,6 @@ maintaining a clean public API for our Vue components.
 - Each page object should have methods for:
   - Navigation to the page
   - Actions users can take (clicking buttons, filling forms etc)
-  - Assertions about what should be visible
 - End-to-end tests live in cypress/e2e and use page objects to create readable test scenarios
 - Tests should verify complete user workflows rather than isolated features
 - Follow the pattern from sight_marks.cy.js where we test the full lifecycle: create, edit, delete
@@ -423,3 +422,61 @@ CSS.
 - When a component needs different modes or behaviors, consider splitting it into multiple components
 - Follow the established patterns for component composition and props
 - Reuse existing layout components rather than creating custom layouts
+
+## Test Writing Principles
+
+- Tests should be self-describing without comments. The test code itself should clearly express what's being tested.
+- Always add type annotations to variables declared with `let` or `const` in tests for better type safety and readability.
+- Page objects should not contain assertions. They should provide methods to query the state of the page, and the tests should make assertions based on those queries.
+- Follow the "Arrange, Act, Assert" pattern in tests, but without explicit comments marking these sections.
+- Test names should clearly describe the behavior being tested, using the "when/then" or "given/when/then" format.
+- Prefer specific assertions over generic ones. For example, prefer `expect(value).toBe(expected)` over `expect(value).toBeTruthy()`.
+- Keep test setup code minimal and focused on what's relevant to the specific test.
+- Use beforeEach for common setup, but keep test-specific setup within the test itself.
+- When testing async code, always use `async/await` rather than callbacks or promise chains.
+- Page objects should represent the UI and provide methods to interact with it, but they shouldn't contain assertions themselves.
+
+## Test Assertion Principles
+
+- Use custom matchers to make assertions more readable and provide better error messages
+- Prefer `expect(await page.element()).toHaveState()` over `expect(await page.hasState()).toBe(true)`
+- Custom matchers should provide descriptive error messages that include:
+  1. What element was being tested
+  2. What state was expected
+  3. What state was actually found
+- Page objects should return element objects that can be used with custom matchers
+- This approach makes tests more readable and provides better error messages when tests fail
+
+### Example of improved assertions:
+
+```typescript
+// Instead of this:
+expect(await page.isButtonEnabled('9')).toBe(false)
+
+// Use this:
+expect(await page.button('9')).toBeDisabled()
+```
+
+This approach makes tests more readable and provides better error messages when tests fail, such as:
+"Expected button '9' to be enabled, but it was disabled"
+
+### Example of a well-written test:
+
+```typescript
+it('disables higher score buttons after scoring a lower value', async () => {
+  const page: ScorePage = new ScorePage(wrapper)
+  await page.selectGame('Windsor')
+  
+  await page.score(7)
+  
+  expect(await page.isButtonDisabled('9')).toBe(true)
+  expect(await page.isButtonEnabled('7')).toBe(true)
+})
+```
+
+Notice how:
+1. The test name clearly describes the behavior
+2. Variables have type annotations
+3. The test follows a clear structure without needing comments
+4. The page object provides query methods, not assertions
+5. The test makes assertions based on the page object's responses
