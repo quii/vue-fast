@@ -125,20 +125,12 @@ export async function setupApp() {
 // Setup and teardown hooks for tests
 export function setupTestEnvironment() {
   beforeEach(async () => {
-    // Start mock server for public assets
     server = createServer()
     await server.start()
-
-    // Log that the server has started
-    console.log('Mock server started for test')
   })
 
   afterEach(async () => {
-    // Clean up
     mockStorage.clear()
-
-    // Stop the mock server
     await server.stop()
-    console.log('Mock server stopped after test')
   })
 }

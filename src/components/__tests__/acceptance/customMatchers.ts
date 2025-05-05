@@ -1,18 +1,19 @@
-import { expect } from 'vitest'
+import { expect, vi } from 'vitest'
 import { Button } from './pages/elements/button'
 
+// Define the custom matcher interfaces
 interface CustomMatchers<R = unknown> {
   toBeEnabled(): R;
   toBeDisabled(): R;
 }
 
-declare global {
-  namespace Vi {
-    interface Assertion extends CustomMatchers {}
-    interface AsymmetricMatchersContaining extends CustomMatchers {}
-  }
+// Extend Vitest's expect interface
+declare module 'vitest' {
+  interface Assertion extends CustomMatchers {}
+  interface AsymmetricMatchersContaining extends CustomMatchers {}
 }
 
+// Implement the custom matchers
 expect.extend({
   toBeEnabled(received: Button) {
     const isEnabled = !received.hasAttribute('disabled')
