@@ -449,6 +449,7 @@ onMounted(() => {
 :deep(.modal-content) {
   max-width: 800px !important;
   width: 95vw !important;
+  padding: 0.5em 0 !important;
 }
 
 .chart-wrapper {
@@ -458,15 +459,9 @@ onMounted(() => {
   margin-bottom: 1rem;
 }
 
-.modal-actions {
-  margin-top: 1rem;
-  display: flex;
-  justify-content: flex-end;
-}
-
 @media (max-width: 480px) {
   .chart-wrapper {
-    height: 70vh;
+    height: 80vh;
   }
 }
 </style>
