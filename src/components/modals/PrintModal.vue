@@ -223,10 +223,10 @@ function calculateTotalScore() {
           @click="shareToWhatsAppHandler"
           :disabled="!svgData"
           fullWidth
-          class="whatsapp-button"
+          class="share-button"
         >
-          <WhatsAppIcon class="button-icon whatsapp-icon" />
-          <span>Share to WhatsApp</span>
+          <WhatsAppIcon class="button-icon share-icon" />
+          <span>Share Score Sheet</span>
         </BaseButton>
 
         <BaseButton
@@ -365,18 +365,18 @@ input {
 }
 
 /* Special styling for WhatsApp button */
-.whatsapp-button {
+.share-button {
   background-color: #25D366;
   color: white;
   border-color: #25D366;
 }
 
-.whatsapp-button:hover {
+.share-button:hover {
   background-color: #1ea952;
   border-color: #1ea952;
 }
 
-.whatsapp-icon {
+.share-icon {
   color: white;
   width: 20px;
   height: 20px;
