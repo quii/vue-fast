@@ -63,13 +63,18 @@ const isPortraitOrientation = () => {
 
 // Prepare chart data based on the type of graph
 const chartData = computed(() => {
+  // Sort the history data by date (oldest first)
+  const sortedData = [...props.historyData].sort((a, b) =>
+    new Date(a.date).getTime() - new Date(b.date).getTime()
+  );
+
   if (props.isArrowsGraph) {
     return {
-      labels: props.historyData.map(item => formatDate(item.date)),
+      labels: sortedData.map(item => formatDate(item.date)),
       datasets: [
         {
           label: 'Arrows per Session',
-          data: props.historyData.map(item => item.arrowCount),
+          data: sortedData.map(item => item.arrowCount),
           backgroundColor: 'rgba(75, 192, 192, 0.2)',
           borderColor: 'rgba(75, 192, 192, 1)',
           borderWidth: 1,
@@ -77,7 +82,7 @@ const chartData = computed(() => {
         },
         {
           label: 'Cumulative Arrows',
-          data: props.historyData.map(item => item.cumulativeArrows),
+          data: sortedData.map(item => item.cumulativeArrows),
           backgroundColor: 'rgba(153, 102, 255, 0.2)',
           borderColor: 'rgba(153, 102, 255, 1)',
           borderWidth: 2,
@@ -88,10 +93,10 @@ const chartData = computed(() => {
     };
   } else if (props.isHandicapGraph) {
     return {
-      labels: props.historyData.map(item => formatDate(item.date)),
+      labels: sortedData.map(item => formatDate(item.date)),
       datasets: [{
         label: 'Handicap',
-        data: props.historyData.map(item => item.handicap),
+        data: sortedData.map(item => item.handicap),
         backgroundColor: 'rgba(54, 162, 235, 0.2)',
         borderColor: 'rgba(54, 162, 235, 1)',
         borderWidth: 1,
@@ -101,10 +106,10 @@ const chartData = computed(() => {
   } else {
     // Regular score graph
     return {
-      labels: props.historyData.map(item => formatDate(item.date)),
+      labels: sortedData.map(item => formatDate(item.date)),
       datasets: [{
         label: 'Score',
-        data: props.historyData.map(item => item.score),
+        data: sortedData.map(item => item.score),
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         borderColor: 'rgba(255, 99, 132, 1)',
         borderWidth: 1,
@@ -271,9 +276,7 @@ const chartOptions = computed(() => {
       ...baseOptions,
       scales: {
         y: {
-          reverse: true, // Lower handicap is better
-          suggestedMin: minHandicap,
-          suggestedMax: maxHandicap,
+          reverse: true,
           ticks: {
             stepSize: handicapTickSpacing,
             font: {
@@ -282,7 +285,7 @@ const chartOptions = computed(() => {
           },
           title: {
             display: true,
-            text: 'Handicap',
+            text: 'Handicap (lower is better)',
             font: {
               size: isPortraitOrientation() ? 10 : 12
             }
