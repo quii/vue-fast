@@ -4,6 +4,17 @@
       <canvas ref="chartCanvas"></canvas>
     </div>
 
+    <div class="share-section" v-if="chartImageData">
+      <h4>Share this chart</h4>
+      <ShareImageButton
+        :imageData="chartImageData"
+        :fallbackText="getShareText"
+        :filename="`archery-${graphTitle.toLowerCase().replace(/\s+/g, '-')}-chart.png`"
+        variant="outline"
+        size="small"
+      />
+    </div>
+
     <ButtonGroup class="modal-actions">
       <BaseButton
         variant="primary"
@@ -21,6 +32,7 @@ import Chart from 'chart.js/auto';
 import BaseModal from "@/components/modals/BaseModal.vue";
 import BaseButton from "@/components/ui/BaseButton.vue";
 import ButtonGroup from "@/components/ui/ButtonGroup.vue";
+import ShareImageButton from '@/components/ui/ShareImageButton.vue';
 
 const props = defineProps({
   historyData: {
@@ -49,6 +61,7 @@ defineEmits(['close']);
 
 const chartCanvas = ref(null);
 let chart = null;
+const chartImageData = ref(null);
 
 // Format date for display
 const formatDate = (dateString) => {
@@ -401,7 +414,35 @@ const updateChart = () => {
     data: chartData.value,
     options: chartOptions.value
   });
+
+  // After rendering the chart, capture it as an image
+  setTimeout(() => {
+    captureChartAsImage();
+  }, 300);
 };
+
+// Capture the chart as an image for sharing
+const captureChartAsImage = () => {
+  if (!chartCanvas.value || !chart) return;
+
+  try {
+    chartImageData.value = chartCanvas.value.toDataURL('image/png');
+  } catch (error) {
+    console.error('Failed to capture chart as image:', error);
+    chartImageData.value = null;
+  }
+};
+
+// Generate fallback text for sharing
+const getShareText = computed(() => {
+  const graphType = props.isHandicapGraph
+    ? 'Handicap'
+    : props.isArrowsGraph
+      ? 'Arrows Shot'
+      : 'Score';
+
+  return `My ${graphType} progress chart for ${props.graphTitle || 'archery'}`;
+});
 
 // Handle window resize to update chart layout
 const handleResize = () => {
@@ -456,6 +497,19 @@ onMounted(() => {
   width: 100%;
   position: relative;
   margin-bottom: 1rem;
+}
+
+.share-section {
+  margin: 1rem 0;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--color-border, #ddd);
+}
+
+.share-section h4 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: var(--color-text);
 }
 
 .modal-actions {
