@@ -2,11 +2,13 @@
 import BaseModal from '@/components/modals/BaseModal.vue'
 import BaseButton from '@/components/ui/BaseButton.vue'
 import ButtonStack from '@/components/ui/ButtonStack.vue'
-import ShareImageButton from '@/components/ui/ShareImageButton.vue'
 import { ref, onMounted } from 'vue'
+import WhatsAppIcon from '@/components/icons/WhatsAppIcon.vue'
+import CopyIcon from '@/components/icons/CopyIcon.vue'
 import CaptainInputModal from '@/components/modals/CaptainInputModal.vue'
 import ScoreSheetPdfGenerator from '@/components/pdf/ScoreSheetPdfGenerator.vue'
 import { generateScoreSheetSvg, svgToPng } from '@/utils/scoreSheetGenerator.js'
+import { shareToWhatsApp, copyImageToClipboard, copyTextToClipboard, isMobileDevice } from '@/utils/shareUtils.js'
 
 const props = defineProps([
   'shoot',
@@ -25,6 +27,7 @@ const props = defineProps([
 const emit = defineEmits(['close'])
 const shotAt = ref('')
 const captainName = ref('')
+const showCopySuccess = ref(false)
 const svgData = ref(null)
 const isGenerating = ref(false)
 const showCaptainPrompt = ref(false)
@@ -81,6 +84,81 @@ function handleCaptainSubmit(name) {
   }, 0)
 }
 
+// Copy score sheet to clipboard
+async function copyToClipboard() {
+  try {
+    // Ensure we have SVG data
+    if (!svgData.value) {
+      await generatePreview()
+    }
+
+    // Convert SVG to PNG
+    const pngData = await svgToPng(svgData.value)
+
+    // Get PNG as blob
+    const response = await fetch(pngData)
+    const blob = await response.blob()
+
+    // Try to copy the image
+    const success = await copyImageToClipboard(blob)
+
+    if (!success) {
+      // Fallback to copying text if image copy fails
+      const scoreTotal = calculateTotalScore()
+      const shareText = `${props.archerName} scored ${scoreTotal} on a ${props.gameType} round${shotAt.value ? ` at ${shotAt.value}` : ''}!`
+      await copyTextToClipboard(shareText)
+    }
+
+    // Show success message
+    showCopySuccess.value = true
+    setTimeout(() => {
+      showCopySuccess.value = false
+    }, 2000)
+  } catch (err) {
+    console.error('Failed to copy:', err)
+  }
+}
+
+// Share to WhatsApp
+async function shareToWhatsAppHandler() {
+  try {
+    // Ensure we have SVG data
+    if (!svgData.value) {
+      await generatePreview()
+    }
+
+    // Convert SVG to PNG
+    const pngData = await svgToPng(svgData.value)
+
+    // Try to use Web Share API on mobile devices
+    if (navigator.share && isMobileDevice()) {
+      try {
+        const response = await fetch(pngData)
+        const blob = await response.blob()
+        const file = new File([blob], `${props.archerName}-${props.gameType}.png`, { type: 'image/png' })
+
+        await navigator.share({
+          title: `${props.archerName}'s ${props.gameType} Score`,
+          files: [file]
+        })
+
+        emit('close')
+        return
+      } catch (error) {
+        console.log('Error sharing with Web Share API:', error)
+      }
+    }
+
+    // Fallback to basic WhatsApp sharing
+    const scoreTotal = calculateTotalScore()
+    const shareText = `${props.archerName} scored ${scoreTotal} on a ${props.gameType} round${shotAt.value ? ` at ${shotAt.value}` : ''}!`
+    shareToWhatsApp(shareText)
+    emit('close')
+  } catch (error) {
+    console.error('Error sharing to WhatsApp:', error)
+  }
+}
+
 // Calculate total score from all ends
 function calculateTotalScore() {
   return props.shoot.scores.reduce((total, end) => {
@@ -89,12 +167,6 @@ function calculateTotalScore() {
     }
     return total
   }, 0)
-}
-
-// Generate fallback text for sharing
-function getShareText() {
-  const scoreTotal = calculateTotalScore()
-  return `${props.archerName} scored ${scoreTotal} on a ${props.gameType} round${shotAt.value ? ` at ${shotAt.value}` : ''}!`
 }
 </script>
 
@@ -133,15 +205,29 @@ function getShareText() {
     <!-- Share Options -->
     <div class="share-options">
       <ButtonStack spacing="medium">
-        <!-- Use the new ShareImageButton component -->
-        <ShareImageButton
-          v-if="svgData"
-          :imageData="svgData"
-          :fallbackText="getShareText()"
-          :filename="`${props.archerName}-${props.gameType}.png`"
+        <BaseButton
+          type="button"
+          variant="outline"
+          @click="copyToClipboard"
+          :disabled="!svgData"
           fullWidth
-          @close="emit('close')"
-        />
+        >
+          <CopyIcon class="button-icon" />
+          <span v-if="showCopySuccess">Copied to Clipboard!</span>
+          <span v-else>Copy to Clipboard</span>
+        </BaseButton>
+
+        <BaseButton
+          type="button"
+          variant="outline"
+          @click="shareToWhatsAppHandler"
+          :disabled="!svgData"
+          fullWidth
+          class="share-button"
+        >
+          <WhatsAppIcon class="button-icon share-icon" />
+          <span>Share Score Sheet</span>
+        </BaseButton>
 
         <BaseButton
           type="button"
@@ -272,5 +358,27 @@ input {
 .cancel-group {
   margin-top: 1.5rem;
   text-align: center;
+}
+
+.button-icon {
+  margin-right: 0.5rem;
+}
+
+/* Special styling for WhatsApp button */
+.share-button {
+  background-color: #25D366;
+  color: white;
+  border-color: #25D366;
+}
+
+.share-button:hover {
+  background-color: #1ea952;
+  border-color: #1ea952;
+}
+
+.share-icon {
+  color: white;
+  width: 20px;
+  height: 20px;
 }
 </style>
