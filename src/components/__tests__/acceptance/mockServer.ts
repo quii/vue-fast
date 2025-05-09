@@ -26,8 +26,6 @@ export function createServer() {
       })
 
       await server.listen()
-      console.log('Mock server started on http://localhost:3000')
-
       // Intercept fetch requests to redirect them to the mock server
       const originalFetch = global.fetch
       global.fetch = async (input: RequestInfo | URL, init?: RequestInit) => {
@@ -36,7 +34,6 @@ export function createServer() {
         // If the URL starts with /data, redirect it to the mock server
         if (url.pathname.startsWith('/data')) {
           const mockUrl = new URL(url.pathname, 'http://localhost:3000')
-          console.log(`Redirecting fetch to mock server: ${mockUrl.toString()}`)
           return originalFetch(mockUrl.toString(), init)
         }
 
@@ -49,8 +46,6 @@ export function createServer() {
       if (server) {
         await server.close()
         server = null
-        console.log('Mock server stopped')
-
         // Restore the original fetch
         global.fetch = originalFetch
       }

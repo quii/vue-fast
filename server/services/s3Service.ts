@@ -32,13 +32,10 @@ export class S3Service {
 
   async initializeBucket(): Promise<void> {
     try {
-      console.log(`Initializing bucket: ${this.bucketName}`)
-
       // Check if bucket exists
       try {
         const command = new HeadBucketCommand({ Bucket: this.bucketName })
         await this.s3Client.send(command)
-        console.log(`Bucket ${this.bucketName} already exists`)
         return
       } catch (error: any) {
         // If the bucket doesn't exist, create it
@@ -57,7 +54,6 @@ export class S3Service {
           Bucket: this.bucketName
         })
         await this.s3Client.send(command)
-        console.log(`Bucket ${this.bucketName} created successfully`)
       } catch (error) {
         console.error(`Error creating bucket ${this.bucketName}:`, error)
         throw error
