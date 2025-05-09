@@ -9,6 +9,7 @@ import MainNavigation from './components/UserNavigation.vue'
 import { useInstallationStore } from './stores/installation'
 import { backupService } from './services/backupService'
 import { createRouter, routes } from '@/routes'
+import { useThemeStore } from '@/stores/theme'
 
 export function setupServiceWorker() {
   const intervalMS = 60 * 60 * 1000;
@@ -74,6 +75,10 @@ export function createAppInstance() {
   // Initialize the installation store
   const installationStore = useInstallationStore()
   installationStore.detectPlatform()
+
+  // Initialize theme
+  const themeStore = useThemeStore()
+  themeStore.applyTheme()
 
   return { app, router, pinia }
 }

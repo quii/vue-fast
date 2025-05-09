@@ -39,8 +39,25 @@
   --color-off-track: darkred;
 }
 
+/* Dark theme variables - applied when data-theme="dark" is set */
+[data-theme="dark"] {
+  --color-background: var(--vt-c-black);
+  --color-background-soft: var(--vt-c-black-soft);
+  --color-background-mute: var(--vt-c-black-mute);
+
+  --color-border: var(--vt-c-divider-dark-2);
+  --color-border-hover: var(--vt-c-divider-dark-1);
+
+  --color-heading: var(--vt-c-text-dark-1);
+  --color-text: var(--vt-c-text-dark-2);
+
+  --color-on-track: lightseagreen;
+  --color-off-track: red;
+}
+
+/* Keep the media query for automatic theme switching when preference is 'device' */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --color-background: var(--vt-c-black);
     --color-background-soft: var(--vt-c-black-soft);
     --color-background-mute: var(--vt-c-black-mute);
@@ -53,7 +70,6 @@
 
     --color-on-track: lightseagreen;
     --color-off-track: red;
-
   }
 }
 

@@ -10,6 +10,7 @@ import BaseInput from "@/components/ui/BaseInput.vue";
 import BaseSelect from "@/components/ui/BaseSelect.vue";
 import BaseCheckbox from "@/components/ui/BaseCheckbox.vue";
 import BaseButton from "@/components/ui/BaseButton.vue";
+import ThemeToggle from '@/components/ui/ThemeToggle.vue'
 
 const userStore = useUserStore();
 const historyStore = useHistoryStore();
@@ -195,6 +196,7 @@ watchEffect(() => {
     </SectionCard>
 
     <SectionCard title="Other Preferences">
+      <ThemeToggle label="App Theme" />
       <BaseCheckbox
         v-model="constructiveCriticism"
         label="Constructive criticism enabled"
