@@ -27,14 +27,14 @@ jobs:
       - name: Wait for deployment to stabilize
         run: sleep 10
 
-#      - name: Check live works
-#        run: npm run test:e2e:live
-      - name: Cypress run with env
+      - name: Cypress run against live site
         uses: cypress-io/github-action@v6
         with:
-          env: CYPRESS_BASE_URL=https://winter-feather-5776.fly.dev
+          config: video=false
           browser: electron
           headed: false
+        env:
+          CYPRESS_BASE_URL: https://winter-feather-5776.fly.dev
 
       - name: Cleanup test data
         run: npm run cleanup-test-data:live
