@@ -200,17 +200,14 @@ export async function setupApp() {
   const pinia = createPinia()
 
   // Mount the App component directly
-  let wrapper = mount(App, {
+  let wrapper = createEnhancedWrapper(mount(App, {
     global: {
       plugins: [router, pinia, Toast],
       stubs: {
         'DevTools': true
       }
     }
-  })
-
-  // Enhance the wrapper with our debug functionality
-  wrapper = createEnhancedWrapper(wrapper)
+  }))
 
   // Wait for router to be ready
   await router.isReady()

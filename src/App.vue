@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <router-view></router-view>
+    <MainNavigation />
     <InstallBanner />
   </div>
 </template>
@@ -9,6 +10,7 @@
 import InstallBanner from './components/InstallBanner.vue'
 import { onMounted } from 'vue'
 import { useInstallationStore } from './stores/installation'
+import MainNavigation from '@/components/UserNavigation.vue'
 
 const installationStore = useInstallationStore()
 
