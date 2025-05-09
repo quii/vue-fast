@@ -1,19 +1,9 @@
 # Build stage
-FROM node:18-alpine3.17 as build-stage
+FROM node:18-alpine as build-stage
 WORKDIR /app
-
-# Copy package files first to leverage caching
 COPY package*.json ./
-RUN npm ci && npm cache clean --force
-
-# Copy only necessary files for the build
-COPY tsconfig*.json ./
-COPY vite.config.js ./
-COPY server ./server
-COPY src ./src
-COPY public ./public
-
-# Run build commands
+RUN npm install
+COPY . .
 RUN npm run build
 RUN npm run server:build
 
@@ -21,11 +11,23 @@ RUN npm run server:build
 FROM node:18-alpine as production-stage
 WORKDIR /app
 
-# Set environment variables
-ENV NODE_ENV=production
-# ... other ENV variables ...
+# Set build arguments for S3 configuration
+ARG AWS_ENDPOINT_URL_S3
+ARG AWS_REGION
+ARG AWS_ACCESS_KEY_ID
+ARG AWS_SECRET_ACCESS_KEY
+ARG BUCKET_NAME
 
-# Copy only what's needed
+# Set environment variables
+ENV AWS_ENDPOINT_URL_S3=$AWS_ENDPOINT_URL_S3
+ENV AWS_REGION=$AWS_REGION
+ENV AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+ENV AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+ENV BUCKET_NAME=$BUCKET_NAME
+
+ENV NODE_ENV=production
+
+# Copy built files - make sure they go to the correct locations
 COPY --from=build-stage /app/dist ./dist
 COPY --from=build-stage /app/dist/server ./dist/server
 COPY package*.json ./

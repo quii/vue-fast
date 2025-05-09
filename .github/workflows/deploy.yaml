@@ -12,10 +12,14 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
-      - name: Pre-pull Docker images
+      # Start Docker image pulls in the background
+      - name: Pre-pull Docker images in background
         run: |
-          docker pull minio/minio
-          docker pull cypress/included:12.17.4
+          docker pull minio/minio &
+          docker pull cypress/included:12.17.4 &
+          # Store the background process IDs so we can check them later
+          echo "MINIO_PID=$!" >> $GITHUB_ENV
+          echo "CYPRESS_PID=$!" >> $GITHUB_ENV
 
       - name: Cache Docker layers
         uses: actions/cache@v3
