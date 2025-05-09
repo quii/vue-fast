@@ -10,6 +10,11 @@ export class Button {
     return this.element.attributes(name) !== undefined
   }
 
+  hasAttributeWithValue(name: string, value: string): boolean {
+    const attribute = this.element.attributes(name)
+    return attribute !== undefined && attribute.valueOf() === value
+  }
+
   async click(): Promise<void> {
     await this.element.trigger('click')
   }

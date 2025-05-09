@@ -16,7 +16,7 @@ export class BasePage {
 
     // Filter to find the one containing the text
     for (const element of elements) {
-      if (element.text().includes(text)) {
+      if (element.text()==text) {
         return element
       }
     }

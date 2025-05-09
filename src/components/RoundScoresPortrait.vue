@@ -52,7 +52,7 @@ const totalColspan = computed(() => props.endSize === 5 ? 1 : 2);
         <td>Golds</td>
         <td data-test="totalGolds">{{ totals.golds }}</td>
         <td>Score</td>
-        <td :colspan="totalColspan">{{ totals.totalScore }}</td>
+        <td data-test="totalScore" :colspan="totalColspan">{{ totals.totalScore }}</td>
       </tr>
       </tbody>
     </table>

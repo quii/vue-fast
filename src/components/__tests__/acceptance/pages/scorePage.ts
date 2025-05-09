@@ -54,10 +54,22 @@ export class ScorePage extends BasePage {
 
   // Score an arrow
   async score(value: number | string) {
-    const button = await this.button(value.toString())
-    await button.click()
-    await this.waitForUpdate()
-    return this
+    try {
+      const button = await this.button(value.toString())
+      await button.click()
+      await this.waitForUpdate()
+      return this
+    } catch (error) {
+      this.debug()
+      console.error(`Error in score method for value ${value}:`, error)
+      throw error
+    }
+  }
+
+  // Add a helper method to get all current scores
+  async getAllScores(): Promise<string[]> {
+    const scoreElements = await this.wrapper.findAll('.score')
+    return scoreElements.map(el => el.text())
   }
 
   // Score multiple arrows of the same value
@@ -190,5 +202,17 @@ export class ScorePage extends BasePage {
 
     // Wait a bit longer for the navigation to complete
     await new Promise(resolve => setTimeout(resolve, 100))
+  }
+
+  // Get the current game type
+  async getCurrentGameType(): Promise<string> {
+    const roundSelector = await this.wrapper.find('.round-card-wrapper')
+    return roundSelector.text()
+  }
+
+  // Get valid scores for the current game
+  async getValidScores(): Promise<string[]> {
+    const scoreButtons = await this.wrapper.findAll('.score-button:not([disabled])')
+    return scoreButtons.map(el => el.text())
   }
 }

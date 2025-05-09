@@ -115,6 +115,36 @@ function setupMatchMediaMock() {
   })
 }
 
+// Mock Web Speech API
+function setupSpeechSynthesisMock() {
+  // Create mock functions for speech synthesis
+  const mockSpeechSynthesis = {
+    speak: vi.fn(),
+    cancel: vi.fn()
+  }
+
+  // Mock the SpeechSynthesisUtterance constructor
+  const MockUtterance = vi.fn().mockImplementation((text) => ({
+    text,
+    rate: 1,
+    pitch: 1,
+    volume: 1,
+    voice: null,
+    lang: 'en-US'
+  }))
+
+  // Add the mocks to the window object
+  Object.defineProperty(window, 'speechSynthesis', {
+    writable: true,
+    value: mockSpeechSynthesis
+  })
+
+  Object.defineProperty(window, 'SpeechSynthesisUtterance', {
+    writable: true,
+    value: MockUtterance
+  })
+}
+
 // Mock server for public assets
 let server: ReturnType<typeof createServer>
 
@@ -180,6 +210,9 @@ export class BasePage {
 export async function setupApp() {
   // Mock window.matchMedia before creating the app
   setupMatchMediaMock()
+
+  // Mock Web Speech API
+  setupSpeechSynthesisMock()
 
   // Mock localStorage
   Object.defineProperty(window, 'localStorage', {
