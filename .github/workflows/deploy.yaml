@@ -29,28 +29,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-buildx-
 
-      - name: Build Docker image
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          push: false
-          load: true
-          tags: vue-fast-test:latest
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
-          build-args: |
-            AWS_ENDPOINT_URL_S3=${{ env.AWS_ENDPOINT_URL_S3 }}
-            AWS_REGION=${{ env.AWS_REGION }}
-            AWS_ACCESS_KEY_ID=${{ env.AWS_ACCESS_KEY_ID }}
-            AWS_SECRET_ACCESS_KEY=${{ env.AWS_SECRET_ACCESS_KEY }}
-            BUCKET_NAME=${{ env.BUCKET_NAME }}
-
-      # This ugly bit is necessary to prevent the cache from growing indefinitely
-      - name: Move cache
-        run: |
-          rm -rf /tmp/.buildx-cache
-          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
-
       - name: Test and build
         uses: actions/setup-node@v3
         with:
