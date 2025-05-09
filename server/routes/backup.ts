@@ -89,8 +89,6 @@ export function createBackupRouter(dependencies: { s3Service: S3Service }): Rout
   router.get('/backup/:key(*)', async (req: Request, res: Response) => {
     try {
       const key = req.params.key
-      console.log('Retrieving backup with key:', key)
-
       const data = await s3Service.getBackup(key)
 
       res.json({

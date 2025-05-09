@@ -92,8 +92,6 @@ export class S3Service {
    */
   async getBackup(key: string): Promise<any> {
     try {
-      console.log(`Getting backup with key: ${key}`)
-
       const command = new GetObjectCommand({
         Bucket: this.bucketName,
         Key: key
@@ -227,7 +225,6 @@ export class S3Service {
       const toDelete = backups.slice(maxBackups)
       for (const backup of toDelete) {
         await this.deleteBackup(backup.key)
-        console.log(`Deleted old backup: ${backup.key}`)
       }
     }
   }
@@ -287,9 +284,6 @@ export class S3Service {
 
   async deleteTestData(): Promise<{ deletedCount: number, errors: number }> {
     try {
-      console.log('Deleting test backup data...')
-
-      // List all backups
       const result = await this.s3Client.send(new ListObjectsV2Command({
         Bucket: this.bucketName,
         Prefix: 'backups/',
@@ -318,16 +312,12 @@ export class S3Service {
         }
       }
 
-      console.log(`Found ${testDataKeys.length} test data objects to delete`)
-
-      // Delete all identified test data objects
       for (const key of testDataKeys) {
         try {
           await this.s3Client.send(new DeleteObjectCommand({
             Bucket: this.bucketName,
             Key: key
           }))
-          console.log(`Deleted test data: ${key}`)
         } catch (error) {
           console.error(`Error deleting test data ${key}:`, error)
           errors++
