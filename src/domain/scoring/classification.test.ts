@@ -178,7 +178,6 @@ describe("calculatePotentialClassificationWithoutOutliers", () => {
   test("calculates potential improvement from low scores", async () => {
     const baseScores = Array(108).fill(8);
     const scores = setScores(baseScores, 12, 1);
-    console.log(calculateTotal(scores));
 
     const potential = await calculatePotentialClassificationWithoutOutliers(
       scores,

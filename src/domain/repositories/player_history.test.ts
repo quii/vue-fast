@@ -291,8 +291,6 @@ describe("Classification with changing age groups", () => {
 
     // The veteran shoot should have a potentially different classification
     // (50+ typically has lower thresholds, so same score might achieve higher classification)
-    console.log(veteranShoot);
-    console.log(historicalSeniorShoot);
     expect(veteranShoot.classification?.name).not.toBeUndefined();
 
     // If the classifications for 50+ are indeed more lenient, this would be true

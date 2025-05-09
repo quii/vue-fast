@@ -13,11 +13,12 @@ export class ScorePage extends BasePage {
 
   // Clear any existing data
   async clearData() {
-    const clearButton = await this.wrapper.find('#clear')
-    if (clearButton.exists()) {
-      await clearButton.trigger('click')
-      await this.waitForUpdate()
-    }
+    //todo: this never works lol
+    // const clearButton = await this.wrapper.find('#clear')
+    // if (clearButton.exists()) {
+    //   await clearButton.trigger('click')
+    //   await this.waitForUpdate()
+    // }
   }
 
   // Select a round/game
