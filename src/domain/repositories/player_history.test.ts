@@ -34,21 +34,38 @@ beforeEach(() => {
 
 
 describe("player history", () => {
-  test("keeps records sorted and adds top score indicator", async () => {
+  test("keeps records sorted by date (newest first) and adds top score indicator", async () => {
     const playerHistory = createPlayerHistory();
 
-    await playerHistory.add(new Date().addDays(2), 456, 'national 50', [1, 2, 3], 'yd')
-    await playerHistory.add(new Date().addDays(5), 200, 'national 50', [1, 2, 3], 'yd')
-    await playerHistory.add(new Date().addDays(10), 123, 'national 50', [1, 2, 3], 'yd')
-    await playerHistory.add(new Date().addDays(10), 826, 'windsor 50', [1, 2, 3], 'yd')
+    // Use fixed dates with clear ordering
+    const date1 = new Date('2023-01-01');
+    const date2 = new Date('2023-01-05');
+    const date3 = new Date('2023-01-10');
+    const date4 = new Date('2023-01-15');
+
+    await playerHistory.add(date2, 456, 'national 50', [1, 2, 3], 'yd')
+    await playerHistory.add(date3, 200, 'national 50', [1, 2, 3], 'yd')
+    await playerHistory.add(date4, 123, 'national 50', [1, 2, 3], 'yd')
+    await playerHistory.add(date1, 826, 'windsor 50', [1, 2, 3], 'yd')
 
     const sortedHistory = playerHistory.sortedHistory()
     expect(sortedHistory).toHaveLength(4);
+
+    // Compare dates by converting both to timestamps
+    expect(new Date(sortedHistory[0].date).getTime()).toEqual(date4.getTime());
     expect(sortedHistory[0].score).toEqual(123);
+    expect(new Date(sortedHistory[1].date).getTime()).toEqual(date3.getTime());
+    expect(sortedHistory[1].score).toEqual(200);
+    expect(new Date(sortedHistory[2].date).getTime()).toEqual(date2.getTime());
+    expect(sortedHistory[2].score).toEqual(456);
+    expect(new Date(sortedHistory[3].date).getTime()).toEqual(date1.getTime());
+    expect(sortedHistory[3].score).toEqual(826);
+
+    // Check top score indicators
     expect(sortedHistory[0].topScore).toBeFalsy();
-    expect(sortedHistory[1].topScore).toBeTruthy();
-    expect(sortedHistory[2].topScore).toBeFalsy();
-    expect(sortedHistory[3].topScore).toBeTruthy();
+    expect(sortedHistory[1].topScore).toBeFalsy();
+    expect(sortedHistory[2].topScore).toBeTruthy(); // Highest score for 'national 50'
+    expect(sortedHistory[3].topScore).toBeTruthy(); // Highest score for 'windsor 50'
   });
 
   test('it can retrieve your personal best for a round', async () => {
