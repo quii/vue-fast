@@ -36,3 +36,10 @@ cypress/screenshots
 .idea/dataSources
 .idea/dataSources.local.xml
 fly.toml
+
+node_modules
+npm-debug.log
+.git
+.github
+*.md
+.vscode

@@ -1,9 +1,16 @@
 # Build stage
 FROM node:18-alpine as build-stage
 WORKDIR /app
+
+# Copy package files for dependency installation
 COPY package*.json ./
-RUN npm install
+RUN npm ci
+
+# Copy all source files needed for build
+# Instead of selectively copying files, copy everything except what's in .dockerignore
 COPY . .
+
+# Build the application
 RUN npm run build
 RUN npm run server:build
 
@@ -24,22 +31,15 @@ ENV AWS_REGION=$AWS_REGION
 ENV AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
 ENV AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
 ENV BUCKET_NAME=$BUCKET_NAME
-
 ENV NODE_ENV=production
 
-# Copy built files - make sure they go to the correct locations
+# Copy only the necessary built files
 COPY --from=build-stage /app/dist ./dist
 COPY --from=build-stage /app/dist/server ./dist/server
 COPY package*.json ./
 
 # Install production dependencies only
-RUN npm ci --only=production
-
-# Add debugging tools
-RUN apk add --no-cache curl
-
-# Debug the file structure
-RUN ls -la /app && ls -la /app/dist && ls -la /app/dist/server
+RUN npm ci --only=production && npm cache clean --force
 
 # Expose port
 EXPOSE 8080
