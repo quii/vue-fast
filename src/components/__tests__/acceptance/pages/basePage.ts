@@ -65,15 +65,10 @@ export class BasePage {
   }
 
   async navigateTo(path: string) {
-    console.log(`Navigating to ${path} from ${this.getCurrentPath()}`)
-
-    // Push to the router and wait for it to complete
     await this.wrapper.vm.$router.push(path)
 
-    // Wait for the router to update
     await this.waitForUpdate()
 
-    // Wait a bit longer to ensure the page is fully loaded
     await new Promise(resolve => setTimeout(resolve, 100))
   }
 }

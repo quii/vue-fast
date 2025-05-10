@@ -38,11 +38,7 @@ export class S3Service {
         await this.s3Client.send(command)
         return
       } catch (error: any) {
-        // If the bucket doesn't exist, create it
-        if (error.name === 'NotFound' || error.name === 'NoSuchBucket') {
-          console.log(`Bucket ${this.bucketName} not found, creating...`)
-        } else {
-          // For other errors, log and rethrow
+        if (!(error.name === 'NotFound' || error.name === 'NoSuchBucket')) {
           console.error(`Error checking bucket ${this.bucketName}:`, error)
           throw error
         }
