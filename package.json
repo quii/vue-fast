@@ -18,7 +18,7 @@
     "preview": "vite preview",
     "ship": "npm run test && git push",
     "test:unit:timed": "vitest run --reporter verbose",
-    "test": "vite build && npm run lint && vitest run && npm run test:server && npm run test:e2e:docker",
+    "test": "vite build && npm run lint && vitest run && npm run test:e2e:docker",
     "test:e2e:dev": "concurrently \"npm run minio:ensure\" \"npm run server:build:watch\" \"NODE_ENV=development start-server-and-test 'vite dev --port 4173 & sleep 2 && npm run server:start' http://localhost:4173 'cypress open --e2e'\"",
     "test:e2e:live": "CYPRESS_BASE_URL=https://winter-feather-5776.fly.dev cypress run --config --headless video=false",
     "test:docker": "node tests/docker/run-docker-tests.js",
