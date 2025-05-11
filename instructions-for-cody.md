@@ -66,6 +66,55 @@ rules; this app also takes care of this complexity for the archer.
 
 This approach leads to cleaner interfaces, less prop drilling, and components that are easier to test and maintain.
 
+## Dependency Design for Components
+
+We follow a ports and adapters (hexagonal architecture) approach to keep our components decoupled from implementation details:
+
+### Port Interfaces
+
+- Define abstract interfaces in `src/domain/ports/` (like `sharing.ts`) that specify what functionality is needed
+- These interfaces focus on the "what" not the "how" - they define the contract without implementation details
+- Example: `SharingPort` defines methods like `generateScoresheet`, `shareScoresheet`, etc.
+
+### Adapters (Implementations)
+
+- Create concrete implementations in `src/domain/adapters/` that fulfill the port interfaces
+- Browser-specific implementations go in `src/domain/adapters/browser/`
+- Example: `BrowserSharingService` implements `SharingPort` using browser APIs
+
+### Testing with Fakes
+
+- Create fake implementations in `src/domain/adapters/in-memory/` for testing
+- These fakes implement the same interface but with simplified behavior
+- Example: `FakeSharingService` implements `SharingPort` with tracking for test assertions
+- This approach is aligned with the guidance from "Learn Go with Tests"
+
+### Component Integration
+
+- Components should depend on the abstract interface, not concrete implementations
+- Use Vue's dependency injection system with `provide`/`inject`
+- Components inject the dependency using the interface type
+- Example: `const sharingService = inject('sharingService')` in a component
+
+### Wiring Dependencies
+
+- The real implementations are wired up in `src/createApp.ts` or `src/main.ts`
+- This keeps the application shell responsible for dependency configuration
+- Example: `app.provide('sharingService', new BrowserSharingService())`
+
+### Benefits
+
+- Components remain focused on UI concerns, not implementation details
+- Domain logic stays in the domain layer
+- Testing is simplified with fake implementations
+- We can swap implementations without changing components
+- The application is more maintainable and adaptable to change
+
+This approach creates a clean separation between:
+1. What needs to be done (ports)
+2. How it's done (adapters)
+3. How it's presented (components)
+
 ## Some TDD principles
 
 - "Write the test you want to see". We should not write badly written tests due to the code under test being poorly
