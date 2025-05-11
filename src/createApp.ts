@@ -10,6 +10,7 @@ import { useInstallationStore } from './stores/installation'
 import { backupService } from './services/backupService'
 import { createRouter, routes } from '@/routes'
 import { useThemeStore } from '@/stores/theme'
+import { BrowserSharingService } from '@/domain/adapters/browser/browser_sharing_service'
 
 export function setupServiceWorker() {
   const intervalMS = 60 * 60 * 1000;
@@ -65,6 +66,7 @@ export function createAppInstance() {
     `
   });
 
+  app.provide('sharingService', new BrowserSharingService())
   app.use(router)
   app.use(pinia)
   app.component("MainNavigation", MainNavigation);

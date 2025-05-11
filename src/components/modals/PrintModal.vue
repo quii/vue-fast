@@ -1,61 +1,37 @@
 <script setup>
-import BaseModal from '@/components/modals/BaseModal.vue'
-import BaseButton from '@/components/ui/BaseButton.vue'
-import ButtonStack from '@/components/ui/ButtonStack.vue'
-import { ref, onMounted } from 'vue'
+import { ref, inject, onMounted } from 'vue'
 import WhatsAppIcon from '@/components/icons/WhatsAppIcon.vue'
 import CopyIcon from '@/components/icons/CopyIcon.vue'
-import CaptainInputModal from '@/components/modals/CaptainInputModal.vue'
+import ButtonStack from '@/components/ui/ButtonStack.vue'
+import BaseButton from '@/components/ui/BaseButton.vue'
 import ScoreSheetPdfGenerator from '@/components/pdf/ScoreSheetPdfGenerator.vue'
-import { generateScoreSheetSvg, svgToPng } from '@/utils/scoreSheetGenerator.js'
-import { shareToWhatsApp, copyImageToClipboard, copyTextToClipboard, isMobileDevice } from '@/utils/shareUtils.js'
+import CaptainInputModal from '@/components/modals/CaptainInputModal.vue'
+import BaseModal from '@/components/modals/BaseModal.vue'
 
-const props = defineProps([
-  'shoot',
-  'archerName',
-  'endSize',
-  'ageGroup',
-  'gender',
-  'bowType',
-  'gameType',
-  'date',
-  'status',
-  'handicap',
-  'classification'
-])
+const sharingService = inject('sharingService')
 
+const props = defineProps(['shoot', 'archerName'])
 const emit = defineEmits(['close'])
-const shotAt = ref('')
-const captainName = ref('')
+const location = ref('')
+const scoresheet = ref(null)
 const showCopySuccess = ref(false)
-const svgData = ref(null)
-const isGenerating = ref(false)
 const showCaptainPrompt = ref(false)
+const captainName = ref('')
 const pdfGeneratorRef = ref(null)
+const isGenerating = ref(false)
+const shotAt = ref('') // This matches the v-model in the template
 
-// Generate SVG preview when component mounts
+// Generate preview automatically when component mounts
 onMounted(async () => {
   await generatePreview()
 })
 
-// Generate the score sheet preview
 async function generatePreview() {
-  if (isGenerating.value) return
-
-  isGenerating.value = true
   try {
-    svgData.value = await generateScoreSheetSvg({
-      gameType: props.gameType,
-      date: props.date,
-      shotAt: shotAt.value,
-      archerName: props.archerName,
-      gender: props.gender,
-      handicap: props.handicap,
-      bowType: props.bowType,
-      ageGroup: props.ageGroup,
-      classification: props.classification,
-      scores: props.shoot.scores,
-      endSize: props.endSize
+    isGenerating.value = true
+    scoresheet.value = await sharingService.generateScoresheet(props.shoot, {
+      location: shotAt.value,
+      archerName: props.archerName
     })
   } catch (error) {
     console.error('Failed to generate preview:', error)
@@ -64,14 +40,37 @@ async function generatePreview() {
   }
 }
 
-// Handle PDF download button click
+async function copyToClipboard() {
+  if (!scoresheet.value) {
+    await generatePreview()
+  }
+
+  const success = await sharingService.copyScoresheet(scoresheet.value)
+
+  // Show success message
+  showCopySuccess.value = true
+  setTimeout(() => {
+    showCopySuccess.value = false
+  }, 2000)
+}
+
+async function shareToWhatsAppHandler() {
+  if (!scoresheet.value) {
+    await generatePreview()
+  }
+
+  const text = `${props.archerName} scored ${props.shoot.score} on a ${props.shoot.gameType} round${shotAt.value ? ` at ${shotAt.value}` : ''}!`
+
+  await sharingService.shareScoresheet(scoresheet.value, text)
+  emit('close')
+}
+
 function handlePrintClick() {
   showCaptainPrompt.value = true
 }
 
-// Handle captain name submission
 function handleCaptainSubmit(name) {
-  captainName.value = name // Set the captainName value
+  captainName.value = name
   showCaptainPrompt.value = false
 
   // Add a small delay to ensure the prop is updated
@@ -82,81 +81,6 @@ function handleCaptainSubmit(name) {
       emit('close')
     }
   }, 0)
-}
-
-// Copy score sheet to clipboard
-async function copyToClipboard() {
-  try {
-    // Ensure we have SVG data
-    if (!svgData.value) {
-      await generatePreview()
-    }
-
-    // Convert SVG to PNG
-    const pngData = await svgToPng(svgData.value)
-
-    // Get PNG as blob
-    const response = await fetch(pngData)
-    const blob = await response.blob()
-
-    // Try to copy the image
-    const success = await copyImageToClipboard(blob)
-
-    if (!success) {
-      // Fallback to copying text if image copy fails
-      const scoreTotal = calculateTotalScore()
-      const shareText = `${props.archerName} scored ${scoreTotal} on a ${props.gameType} round${shotAt.value ? ` at ${shotAt.value}` : ''}!`
-      await copyTextToClipboard(shareText)
-    }
-
-    // Show success message
-    showCopySuccess.value = true
-    setTimeout(() => {
-      showCopySuccess.value = false
-    }, 2000)
-  } catch (err) {
-    console.error('Failed to copy:', err)
-  }
-}
-
-// Share to WhatsApp
-async function shareToWhatsAppHandler() {
-  try {
-    // Ensure we have SVG data
-    if (!svgData.value) {
-      await generatePreview()
-    }
-
-    // Convert SVG to PNG
-    const pngData = await svgToPng(svgData.value)
-
-    // Try to use Web Share API on mobile devices
-    if (navigator.share && isMobileDevice()) {
-      try {
-        const response = await fetch(pngData)
-        const blob = await response.blob()
-        const file = new File([blob], `${props.archerName}-${props.gameType}.png`, { type: 'image/png' })
-
-        await navigator.share({
-          title: `${props.archerName}'s ${props.gameType} Score`,
-          files: [file]
-        })
-
-        emit('close')
-        return
-      } catch (error) {
-        console.log('Error sharing with Web Share API:', error)
-      }
-    }
-
-    // Fallback to basic WhatsApp sharing
-    const scoreTotal = calculateTotalScore()
-    const shareText = `${props.archerName} scored ${scoreTotal} on a ${props.gameType} round${shotAt.value ? ` at ${shotAt.value}` : ''}!`
-    shareToWhatsApp(shareText)
-    emit('close')
-  } catch (error) {
-    console.error('Error sharing to WhatsApp:', error)
-  }
 }
 
 // Calculate total score from all ends
@@ -170,6 +94,7 @@ function calculateTotalScore() {
 }
 </script>
 
+
 <template>
   <BaseModal title="Share Score Sheet">
     <form @submit.prevent>
@@ -180,7 +105,7 @@ function calculateTotalScore() {
           v-model="shotAt"
           type="text"
           placeholder="Enter location (optional)"
-          @input="svgData = null"
+          @input="scoresheet = null"
           autofocus
         >
       </div>
@@ -191,8 +116,8 @@ function calculateTotalScore() {
         <div v-if="isGenerating" class="generating-message">
           Generating preview...
         </div>
-        <div v-else-if="svgData" class="svg-preview">
-          <img :src="svgData" alt="Score Sheet Preview" />
+        <div v-else-if="scoresheet" class="svg-preview">
+          <img :src="scoresheet" alt="Score Sheet Preview" />
         </div>
         <div v-else class="no-preview">
           <button type="button" @click="generatePreview" class="generate-button">
@@ -209,7 +134,7 @@ function calculateTotalScore() {
           type="button"
           variant="outline"
           @click="copyToClipboard"
-          :disabled="!svgData"
+          :disabled="!scoresheet"
           fullWidth
         >
           <CopyIcon class="button-icon" />
@@ -221,7 +146,7 @@ function calculateTotalScore() {
           type="button"
           variant="outline"
           @click="shareToWhatsAppHandler"
-          :disabled="!svgData"
+          :disabled="!scoresheet"
           fullWidth
           class="share-button"
         >
@@ -259,15 +184,15 @@ function calculateTotalScore() {
       :shot-at="shotAt"
       :target-captain="captainName"
       :shoot="props.shoot"
-      :game-type="props.gameType"
-      :date="props.date"
-      :age-group="props.ageGroup"
-      :gender="props.gender"
-      :bow-type="props.bowType"
-      :status="props.status"
-      :handicap="props.handicap"
-      :classification="props.classification"
-      :end-size="props.endSize"
+      :game-type="props.shoot.gameType"
+      :date="props.shoot.date"
+      :age-group="props.shoot.userProfile?.ageGroup"
+      :gender="props.shoot.userProfile?.gender"
+      :bow-type="props.shoot.userProfile?.bowType"
+      :status="props.shoot.shootStatus"
+      :handicap="props.shoot.handicap"
+      :classification="props.shoot.classification"
+      :end-size="props.shoot.endSize || 3"
     />
   </BaseModal>
 

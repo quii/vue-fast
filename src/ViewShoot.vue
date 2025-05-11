@@ -283,15 +283,6 @@ function handleSaveFromModal(data) {
         v-if="showPrintModal"
         :shoot="shoot"
         :archer-name="userStore.user.name"
-        :age-group="userStore.user.ageGroup"
-        :gender="userStore.user.gender"
-        :bow-type="userStore.user.bowType"
-        :end-size="endSize"
-        :game-type="roundName"
-        :date="formattedDate"
-        :status="status"
-        :handicap="shoot.handicap"
-        :classification="shoot.classification"
         @close="showPrintModal = false"
     />
 

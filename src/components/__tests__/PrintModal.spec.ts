@@ -1,58 +1,13 @@
-import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest'
-import { mount, VueWrapper } from '@vue/test-utils'
+import { describe, it, expect, beforeEach } from 'vitest'
+import { mount } from '@vue/test-utils'
 import PrintModal from '@/components/modals/PrintModal.vue'
-import BaseModal from '@/components/modals/BaseModal.vue'
-import BaseButton from '@/components/ui/BaseButton.vue'
-import ButtonStack from '@/components/ui/ButtonStack.vue'
-import { createPinia } from 'pinia'
-import Toast from 'vue-toastification'
-
-// Mock the utility functions
-vi.mock('@/utils/scoreSheetGenerator.js', () => ({
-  generateScoreSheetSvg: vi.fn().mockResolvedValue('data:image/svg+xml;base64,mockedSvgData'),
-  svgToPng: vi.fn().mockResolvedValue('data:image/png;base64,mockedPngData')
-}))
-
-// Update your mock to handle the fetch operation
-vi.mock('@/utils/shareUtils.js', () => ({
-  shareToWhatsApp: vi.fn(),
-  copyImageToClipboard: vi.fn().mockImplementation(() => {
-    return Promise.resolve(true);
-  }),
-  copyTextToClipboard: vi.fn(),
-  isMobileDevice: vi.fn().mockReturnValue(false)
-}))
+import { FakeSharingService } from '@/domain/adapters/in-memory/fake_sharing_service'
 
 describe('PrintModal.vue', () => {
-  let wrapper: VueWrapper
+  let fakeSharingService: FakeSharingService
 
   beforeEach(() => {
-    // Mock navigator.clipboard
-    Object.defineProperty(navigator, 'clipboard', {
-      value: {
-        write: vi.fn().mockResolvedValue(undefined),
-        writeText: vi.fn().mockResolvedValue(undefined)
-      },
-      configurable: true,
-      writable: true
-    })
-
-    // Mock window.open
-    window.open = vi.fn();
-
-    // Mock fetch for data URLs
-    global.fetch = vi.fn().mockImplementation((url) => {
-      if (url.startsWith('data:')) {
-        return Promise.resolve({
-          blob: () => Promise.resolve(new Blob(['mocked image data'], { type: 'image/png' }))
-        });
-      }
-      return Promise.reject(new Error('Unexpected fetch call'));
-    });
-  })
-
-  afterEach(() => {
-    vi.clearAllMocks()
+    fakeSharingService = new FakeSharingService()
   })
 
   const mountComponent = (props = {}) => {
@@ -63,171 +18,102 @@ describe('PrintModal.vue', () => {
           date: '2023-08-15',
           gameType: 'Bray I',
           score: 96,
-          scores: [[9, 8, 7], [8, 8, 8], [7, 7, 7], [9, 9, 9]],
-          unit: 'yd',
-          userProfile: {
-            name: 'Test Archer',
-            gender: 'male',
-            ageGroup: 'senior',
-            bowType: 'recurve',
-            classification: 'B3'
-          },
-          shootStatus: 'Practice'
+          scores: [[9, 8, 7], [8, 8, 8]],
+          // ... other properties
         },
         archerName: 'Test Archer',
-        endSize: 3,
-        ageGroup: 'senior',
-        gender: 'male',
-        bowType: 'recurve',
-        gameType: 'Bray I',
-        date: '2023-08-15',
-        status: 'Practice',
-        handicap: '45',
-        classification: {
-          name: 'B3',
-          scheme: 'AGB'
-        },
-        ...props
+        // ... other props
       },
       global: {
-        plugins: [createPinia(), Toast],
-        components: {
-          // Register real components instead of stubs for these
-          BaseModal,
-          BaseButton,
-          ButtonStack
-        },
-        stubs: {
-          // Still stub these components
-          'WhatsAppIcon': true,
-          'CopyIcon': true,
-          'CaptainInputModal': true,
-          'ScoreSheetPdfGenerator': true
+        provide: {
+          sharingService: fakeSharingService
         }
       }
     })
   }
 
-  it('renders correctly with shoot data', async () => {
-    wrapper = mountComponent()
-
-    // Wait for component to initialize
-    await vi.dynamicImportSettled()
-
-    // Check that the location input is present
-    expect(wrapper.find('#location').exists()).toBe(true)
-  })
-
   it('generates preview when location is entered', async () => {
-    wrapper = mountComponent()
+    const wrapper = mountComponent()
 
-    // Wait for component to initialize
-    await vi.dynamicImportSettled()
+    // Wait for initial automatic preview generation
+    await wrapper.vm.$nextTick()
 
-    // Enter a location
+    // Clear the fake service calls to start fresh
+    fakeSharingService.generateCalls = []
+
+    // Enter a new location (which clears the preview)
     await wrapper.find('#location').setValue('Sherwood Forest')
 
-    // Click the generate preview button since entering a location sets svgData to null
+    // Now trigger the generate button
     await wrapper.find('.generate-button').trigger('click')
 
-    // Wait for the preview to be generated
-    await vi.dynamicImportSettled()
+    // Check that generateScoresheet was called with the new location
+    expect(fakeSharingService.generateCalls.length).toBe(1)
+    expect(fakeSharingService.generateCalls[0].options.location).toBe('Sherwood Forest')
 
-    // Check that the SVG preview is displayed
-    const svgPreview = wrapper.find('.svg-preview img')
-    console.log('RENDERED HTML:', wrapper.html())
-
-    expect(svgPreview.exists()).toBe(true)
+    // Update the selector to match the component's template
+    const preview = wrapper.find('.svg-preview img')
+    expect(preview.attributes('src')).toBe(fakeSharingService.scoresheetResult)
   })
 
-  it('copies to clipboard with correct PNG data when Copy button is clicked', async () => {
-    // Import the actual utility functions to spy on them
-    const shareUtils = await import('@/utils/shareUtils.js');
-    const copyImageSpy = vi.spyOn(shareUtils, 'copyImageToClipboard').mockResolvedValue(true);
+  it('automatically generates preview on mount without requiring location input', async () => {
+    const wrapper = mountComponent()
 
-    // Import the scoreSheetGenerator to spy on svgToPng
-    const scoreSheetGenerator = await import('@/utils/scoreSheetGenerator.js');
-    const svgToPngSpy = vi.spyOn(scoreSheetGenerator, 'svgToPng');
+    // Wait for any async operations to complete
+    await wrapper.vm.$nextTick()
 
-    wrapper = mountComponent();
+    // Wait a bit longer to ensure all promises are resolved
+    await new Promise(resolve => setTimeout(resolve, 0))
 
-    // Wait for component to initialize
-    await vi.dynamicImportSettled();
+    // Check that generateScoresheet was called automatically
+    expect(fakeSharingService.generateCalls.length).toBe(1)
 
-    // Generate the preview
-    await wrapper.find('#location').setValue('Test Location');
-    await wrapper.find('.generate-button').trigger('click');
-    await vi.dynamicImportSettled();
+    // Force the component to update
+    await wrapper.vm.$forceUpdate()
+    await wrapper.vm.$nextTick()
+
+    // Check that the preview image is visible
+    const preview = wrapper.find('.svg-preview img')
+    expect(preview.exists()).toBe(true)
+    expect(preview.attributes('src')).toBe(fakeSharingService.scoresheetResult)
+  })
+
+  it('copies scoresheet to clipboard', async () => {
+    const wrapper = mountComponent()
+
+    // Wait for initial automatic preview generation
+    await wrapper.vm.$nextTick()
+    await new Promise(resolve => setTimeout(resolve, 0))
+
+    // Clear the fake service calls to start fresh
+    fakeSharingService.copyCalls = []
 
     // Find the copy button and click it
-    const buttons = wrapper.findAll('button');
-    for (let i = 0; i < buttons.length; i++) {
-      if (buttons[i].text().includes('Copy to Clipboard')) {
-        await buttons[i].trigger('click');
-        break;
-      }
-    }
+    const copyButton = wrapper.findAll('button').find(b => b.text().includes('Copy'))
+    await copyButton.trigger('click')
 
-    // Check that svgToPng was called
-    expect(svgToPngSpy).toHaveBeenCalled();
-
-    // Check that copyImageToClipboard was called with a Blob
-    expect(copyImageSpy).toHaveBeenCalledWith(expect.any(Blob));
+    // Check that copyScoresheet was called
+    expect(fakeSharingService.copyCalls.length).toBe(1)
+    expect(fakeSharingService.copyCalls[0]).toBe(fakeSharingService.scoresheetResult)
   })
 
-  it('shares via Web Share API when available', async () => {
-    // Mock isMobileDevice to return true
-    const shareUtils = await import('@/utils/shareUtils.js')
-    vi.spyOn(shareUtils, 'isMobileDevice').mockReturnValue(true)
+  it('shares scoresheet when share button is clicked', async () => {
+    const wrapper = mountComponent()
 
-    // Mock navigator.share
-    Object.defineProperty(navigator, 'share', {
-      value: vi.fn().mockResolvedValue(undefined),
-      configurable: true,
-      writable: true
-    })
+    // Wait for initial automatic preview generation
+    await wrapper.vm.$nextTick()
+    await new Promise(resolve => setTimeout(resolve, 0))
 
-    wrapper = mountComponent()
+    // Clear the fake service calls to start fresh
+    fakeSharingService.shareCalls = []
 
-    // Wait for component to initialize
-    await vi.dynamicImportSettled()
-
-    // Generate the preview instead of directly setting svgData
-    await wrapper.find('#location').setValue('Test Location')
-    await wrapper.find('.generate-button').trigger('click')
-    await vi.dynamicImportSettled()
-
-    // Find the share button by its class
+    // Find the share button and click it
     const shareButton = wrapper.find('.share-button')
     await shareButton.trigger('click')
 
-    // Check that navigator.share was called
-    expect(navigator.share).toHaveBeenCalled()
-  })
-
-  it('falls back to WhatsApp sharing when Web Share API is unavailable', async () => {
-    // Remove navigator.share
-    delete (navigator as any).share
-
-    // Import the actual utility functions to spy on them
-    const shareUtils = await import('@/utils/shareUtils.js')
-    const shareToWhatsAppSpy = vi.spyOn(shareUtils, 'shareToWhatsApp')
-
-    wrapper = mountComponent()
-
-    // Wait for component to initialize
-    await vi.dynamicImportSettled()
-
-    // Generate the preview instead of directly setting svgData
-    await wrapper.find('#location').setValue('Test Location')
-    await wrapper.find('.generate-button').trigger('click')
-    await vi.dynamicImportSettled()
-
-    // Find the share button by its class
-    const shareButton = wrapper.find('.share-button')
-    await shareButton.trigger('click')
-
-    // Check that shareToWhatsApp was called
-    expect(shareToWhatsAppSpy).toHaveBeenCalled()
+    // Check that shareScoresheet was called
+    expect(fakeSharingService.shareCalls.length).toBe(1)
+    expect(fakeSharingService.shareCalls[0].dataUrl).toBe(fakeSharingService.scoresheetResult)
+    expect(fakeSharingService.shareCalls[0].text).toContain('Test Archer scored 96')
   })
 })
