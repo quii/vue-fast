@@ -59,15 +59,35 @@ One archer should initiate the game. We then want a way for them to easily share
   - Handling disconnections and reconnections
 - Acceptance tests for the UI components using the existing test harness
 
+## User stories
+
+I expect these to be implemented as the domain layer of this feature. We should be able to unit test these cases, and they should be totally separate from accidental complexity like websockets, redis, and so on. Use fakes when needed, not stubs/spies.
+
+1. As an archer, I want to create a shoot so that I can track my scores and compare them with others.
+2. As an archer, I want to join a shoot (we will have to abstract the idea of QR code i think to an ID?) so that I can participate in a shared leaderboard.
+3. Given there are 2 archers in a shoot, and 2 archers have reported their latest scores, i can see the leaderboard with the scores of both archers.
+4. As an archer, I want to leave a shoot so that I can stop sharing my scores when I'm done. 
+5. As an archer, I want to see when the leaderboard was last updated so I know if the data is current. 
+6. As an archer, I want to be notified when I've moved up or down in rankings so I'm aware of my position changes.
+7. As an archer, I want my shoot participation to persist across sessions so I can reconnect to an ongoing shoot without losing my place.
+8. As an archer who created a shoot, I want it to be automatically deleted at the end of the day, so I don't have to manually delete it.
+
+
 ## Implementation Milestones
 
-For each step we should have automated tests. 
+For each step we should have automated tests. We should remember to take a hexagonal, ports and adapters approach to this.
 
-1. Core data models and state management for shoots. Please re-use models like HistoryItem. 
-2. Backend API endpoints and Redis integration
-3. WebSocket communication layer
-4. UI components for creating and joining shoots
-5. Leaderboard display component
-6. QR code generation and scanning
-7. Integration with the existing scoring flow
-8. Notification system for leaderboard events- Users implicitly opt-in to sharing their scores by joining a shoot- They should only last a certain amount of time, perhaps to the end of the current day
+1. **Core data models and state management for shoots.** Please re-use models like HistoryItem. I would expect us to come up with some ports here that can conceptually drive a shoot, and its lifecycle. The other steps are more or less plugging in adapters for persistence, APIs and the UI. So I would expect most, if not all user stories to be done, with corresponding tests, operating using fakes for things like persistence and so on.
+
+2. **Backend API endpoints and Redis integration (implement a driven, persistence adapter)** - This gives us a way to store and retrieve shoot data, which we can validate through API tests.
+
+3. **WebSocket communication layer (implement a driving adapter)** - Combined with a simple test client, we can validate real-time updates are working.
+
+4. **UI components for creating and joining shoots (a driving adapter)** - This should include a basic text-based code entry system for joining, not requiring QR codes yet. At this point, users can create and join shoots.
+
+5. **Leaderboard display component (implement an adapter)** - This integrates with the existing scoring flow, allowing users to see the leaderboard updating as scores are entered. This is the first point where we have end-to-end functionality.
+
+6. **QR code generation and scanning (implement an adapter)** - This enhances the joining experience but isn't required for core functionality.
+
+7. **Notification system for leaderboard events** - This adds the enhancement for position change notifications.
+8. Notification system for leaderboard events
