@@ -18,6 +18,22 @@ For real-time updates, we'll implement WebSockets to ensure all connected archer
 
 The data synchronization approach should be idempotent - each update will essentially "PUT" the archer's current shoot data (including individual scores, selected round, and profile information). With timestamped updates, this approach eliminates complex synchronization issues and handles offline scenarios gracefully when archers reconnect.
 
+For this feature, we'll use TypeScript throughout to ensure type safety. Our Vue components will use type-safe dependency injection:
+
+```typescript
+// Define port interfaces
+interface ShootService {
+  createShoot(creatorName: string): Promise<{ code: string }>;
+  joinShoot(code: string, archerName: string): Promise<boolean>;
+  // other methods...
+}
+
+// Type-safe injection in components
+const shootService = inject<ShootService>('shootService') as ShootService;
+```
+
+This approach will help catch errors at compile time and make the codebase more maintainable.
+
 ## User Experience
 
 We already have components, cards to show scores, like @HistoryCard.vue. We can adapt this to instead show current score, along with the name of the archer.
