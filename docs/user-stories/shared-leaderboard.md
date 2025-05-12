@@ -2,7 +2,7 @@
 
 ## User Story
 
-We have a number of archers using fast to track their scores. Often we want to compare how we are doing with other archer's we're shooting with. Right now, people have to ask, look at each other's phones, or the paper scoresheets. 
+We have a number of archers using Fast to track their scores. Often we want to compare how we are doing with other archers we're shooting with. Right now, people have to ask, look at each other's phones, or the paper scoresheets. 
 
 What if instead, fast users could somehow connect to a central "shoot", and as they complete ends, it updates a leaderboard. All players in the shoot can see who is shooting what round, what they've scored, and even have a leaderboard. 
 
@@ -57,7 +57,53 @@ One archer should initiate the game. We then want a way for them to easily share
   - Joining a shoot via code
   - Scoring arrows and seeing updates on the leaderboard
   - Handling disconnections and reconnections
-- Acceptance tests for the UI components using the existing test harness
+
+For Cypress tests that require multiple archers interacting with the same shoot, we'll use a combination of:
+1. Cypress browser automation for the primary archer's experience
+2. Programmatic API calls (via `cy.request()`) to simulate actions from other archers
+3. Verification that the UI updates correctly in response to these external events
+
+Example approach:
+```typescript
+describe('Shared leaderboard', () => {
+  it('should update when another archer submits scores', () => {
+    // Archer 1 (Cypress browser) creates and joins a shoot
+    cy.visit('/');
+    cy.get('button').contains('Create Shoot').click();
+    cy.get('[data-test="shoot-code"]').invoke('text').as('shootCode');
+    
+    cy.get('@shootCode').then((shootCode) => {
+      // Programmatically have Archer 2 join the same shoot via API
+      cy.request('POST', '/api/shoots/join', {
+        code: shootCode,
+        archerName: 'Test Archer 2'
+      });
+      
+      // Archer 1 enters some scores
+      cy.get('.score-page').click();
+      cy.get('button').contains('10').click();
+      // ...more scoring
+      
+      // Programmatically have Archer 2 submit scores via API
+      cy.request('POST', '/api/shoots/update-score', {
+        code: shootCode,
+        archerName: 'Test Archer 2',
+        scores: [9, 9, 10, 8, 7, 9]
+      });
+      
+      // Verify leaderboard shows both archers with correct scores
+      cy.get('.leaderboard-page').click();
+      cy.get('.leaderboard-entry').should('have.length', 2);
+      cy.contains('Test Archer 2').parent().contains('52');
+    });
+  });
+});
+```
+
+- Component tests using the existing test harness
+  - For UI components, we'll follow the same approach used in `src/components/modals/PrintModal.vue` and `src/components/__tests__/PrintModal.spec.ts`
+  - We'll inject implementations of the required ports (e.g., shoot service, leaderboard service) and use fakes in our component tests
+  - This approach allows us to test component behavior in isolation from the actual backend implementation
 
 ## User stories
 
@@ -65,12 +111,13 @@ I expect these to be implemented as the domain layer of this feature. We should 
 
 1. As an archer, I want to create a shoot so that I can track my scores and compare them with others.
 2. As an archer, I want to join a shoot (we will have to abstract the idea of QR code i think to an ID?) so that I can participate in a shared leaderboard.
-3. Given there are 2 archers in a shoot, and 2 archers have reported their latest scores, i can see the leaderboard with the scores of both archers.
+3. Given there are 2 archers in a shoot, and 2 archers have reported their latest scores, i can see the leaderboard with the scores of both archers. (expand this to N shooters, but the logic should be the same, where N > 1)
 4. As an archer, I want to leave a shoot so that I can stop sharing my scores when I'm done. 
 5. As an archer, I want to see when the leaderboard was last updated so I know if the data is current. 
 6. As an archer, I want to be notified when I've moved up or down in rankings so I'm aware of my position changes.
-7. As an archer, I want my shoot participation to persist across sessions so I can reconnect to an ongoing shoot without losing my place.
+7. As an archer, I want my shoot participation to persist across sessions, so I can reconnect to an ongoing shoot without losing my place.
 8. As an archer who created a shoot, I want it to be automatically deleted at the end of the day, so I don't have to manually delete it.
+9. As an archer, after every 2 ends have been shot by everyone, I want to be notified what my position is, and the total number of archers. If it's after the first notification, i want to know the position change, if there was one. (In practice, i expect us to raise JS events that our UI layer will deal with)
 
 
 ## Implementation Milestones
@@ -90,4 +137,3 @@ For each step we should have automated tests. We should remember to take a hexag
 6. **QR code generation and scanning (implement an adapter)** - This enhances the joining experience but isn't required for core functionality.
 
 7. **Notification system for leaderboard events** - This adds the enhancement for position change notifications.
-8. Notification system for leaderboard events
