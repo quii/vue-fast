@@ -2,6 +2,7 @@ import { describe, it, expect, beforeEach } from 'vitest'
 import { mount } from '@vue/test-utils'
 import PrintModal from '@/components/modals/PrintModal.vue'
 import { FakeSharingService } from '@/domain/adapters/in-memory/fake_sharing_service'
+import type { SharingPort } from '@/domain/ports/sharing'
 
 describe('PrintModal.vue', () => {
   let fakeSharingService: FakeSharingService
@@ -26,7 +27,7 @@ describe('PrintModal.vue', () => {
       },
       global: {
         provide: {
-          sharingService: fakeSharingService
+          sharingService: fakeSharingService as SharingPort
         }
       }
     })

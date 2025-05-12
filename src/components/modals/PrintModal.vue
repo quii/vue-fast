@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, inject, onMounted } from 'vue'
 import WhatsAppIcon from '@/components/icons/WhatsAppIcon.vue'
 import CopyIcon from '@/components/icons/CopyIcon.vue'
@@ -7,17 +7,27 @@ import BaseButton from '@/components/ui/BaseButton.vue'
 import ScoreSheetPdfGenerator from '@/components/pdf/ScoreSheetPdfGenerator.vue'
 import CaptainInputModal from '@/components/modals/CaptainInputModal.vue'
 import BaseModal from '@/components/modals/BaseModal.vue'
+import type { SharingPort, ScoresheetOptions } from '@/domain/ports/sharing'
+import type { HistoryItem } from '@/domain/repositories/player_history'
 
-const sharingService = inject('sharingService')
+const sharingService = inject<SharingPort>('sharingService') as SharingPort
 
-const props = defineProps(['shoot', 'archerName'])
-const emit = defineEmits(['close'])
+interface PrintModalProps {
+  shoot: HistoryItem;
+  archerName: string;
+}
+
+const props = defineProps<PrintModalProps>()
+const emit = defineEmits<{
+  (e: 'close'): void
+}>()
+
 const location = ref('')
-const scoresheet = ref(null)
+const scoresheet = ref<string | null>(null)
 const showCopySuccess = ref(false)
 const showCaptainPrompt = ref(false)
 const captainName = ref('')
-const pdfGeneratorRef = ref(null)
+const pdfGeneratorRef = ref<InstanceType<typeof ScoreSheetPdfGenerator> | null>(null)
 const isGenerating = ref(false)
 const shotAt = ref('') // This matches the v-model in the template
 
@@ -29,10 +39,13 @@ onMounted(async () => {
 async function generatePreview() {
   try {
     isGenerating.value = true
-    scoresheet.value = await sharingService.generateScoresheet(props.shoot, {
+
+    const options: ScoresheetOptions = {
       location: shotAt.value,
       archerName: props.archerName
-    })
+    }
+
+    scoresheet.value = await sharingService.generateScoresheet(props.shoot, options)
   } catch (error) {
     console.error('Failed to generate preview:', error)
   } finally {
@@ -45,13 +58,15 @@ async function copyToClipboard() {
     await generatePreview()
   }
 
-  const success = await sharingService.copyScoresheet(scoresheet.value)
+  if (scoresheet.value) {
+    const success = await sharingService.copyScoresheet(scoresheet.value)
 
-  // Show success message
-  showCopySuccess.value = true
-  setTimeout(() => {
-    showCopySuccess.value = false
-  }, 2000)
+    // Show success message
+    showCopySuccess.value = true
+    setTimeout(() => {
+      showCopySuccess.value = false
+    }, 2000)
+  }
 }
 
 async function shareToWhatsAppHandler() {
@@ -59,17 +74,19 @@ async function shareToWhatsAppHandler() {
     await generatePreview()
   }
 
-  const text = `${props.archerName} scored ${props.shoot.score} on a ${props.shoot.gameType} round${shotAt.value ? ` at ${shotAt.value}` : ''}!`
+  if (scoresheet.value) {
+    const text = `${props.archerName} scored ${props.shoot.score} on a ${props.shoot.gameType} round${shotAt.value ? ` at ${shotAt.value}` : ''}!`
 
-  await sharingService.shareScoresheet(scoresheet.value, text)
-  emit('close')
+    await sharingService.shareScoresheet(scoresheet.value, text)
+    emit('close')
+  }
 }
 
 function handlePrintClick() {
   showCaptainPrompt.value = true
 }
 
-function handleCaptainSubmit(name) {
+function handleCaptainSubmit(name: string) {
   captainName.value = name
   showCaptainPrompt.value = false
 
@@ -84,10 +101,10 @@ function handleCaptainSubmit(name) {
 }
 
 // Calculate total score from all ends
-function calculateTotalScore() {
+function calculateTotalScore(): number {
   return props.shoot.scores.reduce((total, end) => {
     if (Array.isArray(end)) {
-      return total + end.reduce((endTotal, arrow) => endTotal + (parseInt(arrow) || 0), 0)
+      return total + end.reduce((endTotal, arrow) => endTotal + (parseInt(arrow as string) || 0), 0)
     }
     return total
   }, 0)
