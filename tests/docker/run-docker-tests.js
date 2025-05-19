@@ -10,6 +10,7 @@ const projectRoot = path.resolve(__dirname, '../..')
 // Store container references globally so we can stop them later
 let vueContainer
 let minioContainer
+let redisContainer
 let network
 
 async function runDockerTests() {
@@ -34,9 +35,21 @@ async function runDockerTests() {
     const minioHost = minioContainer.getHost()
     console.log(`MinIO started at http://${minioHost}:${minioPort}`)
 
+    // Start Redis container
+    console.log('Starting Redis container...')
+    redisContainer = await new GenericContainer('redis:alpine')
+      .withNetwork(network)
+      .withNetworkAliases('redis')
+      .withExposedPorts(6379)
+      .start()
+
+    const redisPort = redisContainer.getMappedPort(6379)
+    const redisHost = redisContainer.getHost()
+    console.log(`Redis started at ${redisHost}:${redisPort}`)
+
     console.log('Building Docker image...')
 
-    // Build the Docker image with build args for S3 configuration
+    // Build the Docker image with build args for S3 and Redis configuration
     execSync(
       'docker build ' +
       '--build-arg AWS_ENDPOINT_URL_S3=http://minio:9000 ' +
@@ -44,6 +57,7 @@ async function runDockerTests() {
       '--build-arg AWS_ACCESS_KEY_ID=minioadmin ' +
       '--build-arg AWS_SECRET_ACCESS_KEY=minioadmin ' +
       '--build-arg BUCKET_NAME=archery-backups-test ' +
+      '--build-arg REDIS_URL=redis://redis:6379 ' +
       '-t vue-fast-test .',
       {
         cwd: projectRoot,
@@ -63,6 +77,7 @@ async function runDockerTests() {
         AWS_ACCESS_KEY_ID: 'minioadmin',
         AWS_SECRET_ACCESS_KEY: 'minioadmin',
         BUCKET_NAME: 'archery-backups-test',
+        REDIS_URL: 'redis://redis:6379',
         NODE_ENV: 'development',
         DEBUG: 'true'
       })
@@ -127,6 +142,12 @@ export async function stopContainers() {
     console.log('Stopping MinIO container...')
     await minioContainer.stop()
     console.log('MinIO container stopped')
+  }
+
+  if (redisContainer) {
+    console.log('Stopping Redis container...')
+    await redisContainer.stop()
+    console.log('Redis container stopped')
   }
 
   if (network) {

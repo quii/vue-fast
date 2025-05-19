@@ -9,6 +9,7 @@ const projectRoot = path.resolve(__dirname, '../..')
 // Store container references globally so we can stop them later
 let vueContainer
 let minioContainer
+let redisContainer
 let network
 
 async function runDockerE2ETests() {
@@ -27,6 +28,13 @@ async function runDockerE2ETests() {
       .withCommand(['server', '/data'])
       .start()
 
+    // Start Redis container
+    redisContainer = await new GenericContainer('redis:alpine')
+      .withNetwork(network)
+      .withNetworkAliases('redis')
+      .withExposedPorts(6379)
+      .start()
+
     execSync(
       'docker build ' +
       '--build-arg AWS_ENDPOINT_URL_S3=http://minio:9000 ' +
@@ -34,6 +42,7 @@ async function runDockerE2ETests() {
       '--build-arg AWS_ACCESS_KEY_ID=minioadmin ' +
       '--build-arg AWS_SECRET_ACCESS_KEY=minioadmin ' +
       '--build-arg BUCKET_NAME=archery-backups-test ' +
+      '--build-arg REDIS_URL=redis://redis:6379 ' +
       '-t vue-fast-test .',
       {
         cwd: projectRoot,
@@ -52,6 +61,7 @@ async function runDockerE2ETests() {
         AWS_ACCESS_KEY_ID: 'minioadmin',
         AWS_SECRET_ACCESS_KEY: 'minioadmin',
         BUCKET_NAME: 'archery-backups-test',
+        REDIS_URL: 'redis://redis:6379',
         NODE_ENV: 'development',
         DEBUG: 'true'
       })
@@ -99,6 +109,14 @@ async function stopContainers() {
       await minioContainer.stop()
     } catch (error) {
       console.error('Error stopping MinIO container:', error)
+    }
+  }
+
+  if (redisContainer) {
+    try {
+      await redisContainer.stop()
+    } catch (error) {
+      console.error('Error stopping Redis container:', error)
     }
   }
 

@@ -34,6 +34,8 @@ const shootService = inject<ShootService>('shootService') as ShootService;
 
 This approach will help catch errors at compile time and make the codebase more maintainable.
 
+Whilst we should leverage HistoryItem, we don't need everything from it. For example, we do not need the discrete scores, just the current totalScore is sufficient for us to rank archers.
+
 ## User Experience
 
 We already have components, cards to show scores, like @HistoryCard.vue. We can adapt this to instead show current score, along with the name of the archer.
@@ -104,7 +106,7 @@ describe('Shared leaderboard', () => {
       cy.request('POST', '/api/shoots/update-score', {
         code: shootCode,
         archerName: 'Test Archer 2',
-        scores: [9, 9, 10, 8, 7, 9]
+        totalScore: 52
       });
       
       // Verify leaderboard shows both archers with correct scores
