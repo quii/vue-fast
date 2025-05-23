@@ -1,4 +1,4 @@
-import { Shoot } from '../../shared/models/Shoot.js';
+import { Shoot, ShootParticipant } from '../../shared/models/Shoot.js';
 import { ShootRepository } from '../../shared/ports/ShootRepository.js';
 import { getRedisClient } from '../services/redisClient.js';
 import { mergeShootChanges } from '../../shared/utils/shootMergeUtils.js';
@@ -152,7 +152,7 @@ export class RedisShootRepository implements ShootRepository {
       createdAt: { __isDate: true, value: shoot.createdAt.toISOString() },
       expiresAt: { __isDate: true, value: shoot.expiresAt.toISOString() },
       lastUpdated: { __isDate: true, value: shoot.lastUpdated.toISOString() },
-      participants: shoot.participants.map(p => ({
+      participants: shoot.participants.map((p: ShootParticipant) => ({
         ...p,
         lastUpdated: { __isDate: true, value: p.lastUpdated.toISOString() }
       }))
@@ -175,7 +175,7 @@ export class RedisShootRepository implements ShootRepository {
       createdAt: new Date(parsed.createdAt.__isDate ? parsed.createdAt.value : parsed.createdAt),
       expiresAt: new Date(parsed.expiresAt.__isDate ? parsed.expiresAt.value : parsed.expiresAt),
       lastUpdated: new Date(parsed.lastUpdated.__isDate ? parsed.lastUpdated.value : parsed.lastUpdated),
-      participants: parsed.participants.map(p => ({
+      participants: parsed.participants.map((p: any) => ({
         ...p,
         lastUpdated: new Date(p.lastUpdated.__isDate ? p.lastUpdated.value : p.lastUpdated)
       }))
@@ -234,7 +234,7 @@ export class RedisShootRepository implements ShootRepository {
         try {
           const shootString = typeof serializedShoot === 'string'
             ? serializedShoot
-            : serializedShoot.toString();
+            : String(serializedShoot);
 
           const shoot = this.deserializeShoot(shootString);
 
@@ -267,7 +267,7 @@ export class RedisShootRepository implements ShootRepository {
     const valueArray = Array.isArray(values) ? values : Array.from(values);
 
     // Convert each value to string if needed
-    return valueArray.map(value => typeof value === 'string' ? value : value.toString());
+    return valueArray.map((value: unknown) => typeof value === 'string' ? value : String(value));
   }
 
   /**
@@ -283,6 +283,6 @@ export class RedisShootRepository implements ShootRepository {
       return null;
     }
 
-    return typeof value === 'string' ? value : value.toString();
+    return typeof value === 'string' ? value : String(value);
   }
 }

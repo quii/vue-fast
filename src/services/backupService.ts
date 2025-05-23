@@ -7,7 +7,7 @@ import { usePreferencesStore } from '@/stores/preferences'
 
 // Constants
 const BACKUP_RETRY_DELAYS = [2000, 5000, 10000, 30000] // Retry delays in ms (exponential backoff)
-const BACKUP_ENDPOINT = '/api/backup'
+const BACKUP_ENDPOINT = '/api/backup/backup'
 const DEVICE_ID_STORAGE_KEY = 'archery-device-id'
 
 // Interface for backup metadata
@@ -164,7 +164,7 @@ export const backupService = {
    */
   async testConnection(): Promise<boolean> {
     try {
-      const response = await fetch('/api/health')
+      const response = await fetch('/api/backup/health')
       return response.ok
     } catch (error) {
       console.error('API connection test failed:', error)
@@ -179,7 +179,7 @@ export const backupService = {
   async getBackups(): Promise<BackupMetadata[]> {
     try {
       const deviceId = this.getDeviceId()
-      const response = await fetch(`/api/backups/${deviceId}`)
+      const response = await fetch(`/api/backup/backups/${deviceId}`)
 
       if (!response.ok) {
         console.error('Failed to fetch backups:', await response.text())
@@ -199,7 +199,7 @@ export const backupService = {
    */
   async findBackupsByDeviceId(deviceId: string): Promise<BackupMetadata[]> {
     try {
-      const response = await fetch(`/api/backups/${deviceId}`)
+      const response = await fetch(`/api/backup/backups/${deviceId}`)
 
       if (!response.ok) {
         console.error('Failed to fetch backups by device ID:', await response.text())
@@ -224,7 +224,7 @@ export const backupService = {
     }
 
     try {
-      const response = await fetch(`/api/find-backups?name=${encodeURIComponent(name)}`)
+      const response = await fetch(`/api/backup/find-backups?name=${encodeURIComponent(name)}`)
 
       if (!response.ok) {
         console.error('Failed to fetch backups by name:', await response.text())
@@ -246,7 +246,7 @@ export const backupService = {
     try {
       console.log('Restoring backup with ID:', backupId)
 
-      const response = await fetch(`/api/backup/${encodeURIComponent(backupId)}`)
+      const response = await fetch(`/api/backup/backup/${encodeURIComponent(backupId)}`)
 
       if (!response.ok) {
         const errorText = await response.text()

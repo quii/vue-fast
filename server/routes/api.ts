@@ -1,10 +1,15 @@
 import express, { Router } from 'express'
-import { createBackupRouter } from './backup.js'
 import { S3Service } from '../services/s3Service.js'
+import { createBackupRouter } from './backup.js'
+import { createLeaderboardRouter } from './leaderboard.js'
+import { ShootRepository } from '../../shared/ports/ShootRepository.js'
 
 
-export function createApiRouter(dependencies: { s3Service: S3Service }) {
-  const { s3Service } = dependencies
+export function createApiRouter(dependencies: {
+  s3Service: S3Service,
+  shootRepository: ShootRepository
+}): Router {
+  const { s3Service, shootRepository } = dependencies
   const router: Router = express.Router()
 
   router.get('/health', (req, res) => {
@@ -86,7 +91,8 @@ export function createApiRouter(dependencies: { s3Service: S3Service }) {
   })
 
 
-  router.use('/', createBackupRouter(dependencies))
+  router.use('/backup', createBackupRouter({ s3Service }))
+  router.use('/shoots', createLeaderboardRouter({ shootRepository }))
 
   return router
 }

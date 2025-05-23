@@ -44,4 +44,4 @@ RUN npm ci --only=production && npm cache clean --force
 EXPOSE 8080
 
 # Start the server
-CMD ["node", "dist/server/server/index.js"]
+CMD ["node", "dist/server/index.js"]
