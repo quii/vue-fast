@@ -123,11 +123,17 @@ describe('ShootService', () => {
     const { code } = await shootService.createShoot('Creator');
     await shootService.joinShoot(code, 'Archer 1', 'Windsor');
 
+    // Add a small delay to ensure operations complete
+    await new Promise(resolve => setTimeout(resolve, 10));
+
     let shoot = await shootService.getShoot(code);
     expect(shoot!.participants).toHaveLength(1);
 
     const result = await shootService.leaveShoot(code, 'Archer 1');
     expect(result.success).toBe(true);
+
+    // Add a small delay to ensure operations complete
+    await new Promise(resolve => setTimeout(resolve, 10));
 
     shoot = await shootService.getShoot(code);
     expect(shoot!.participants).toHaveLength(0);

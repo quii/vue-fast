@@ -180,6 +180,73 @@ export function ShootRepositoryContract(
       expect(archer3?.currentPosition).toBe(2);
       expect(archer3?.previousPosition).toBe(3);
     });
+
+    it('merges concurrent updates to different participants', async () => {
+      // Create a shoot with a specific timestamp
+      const baseTime = Date.now();
+      const shoot = createTestShoot('5555', 'Test Creator');
+
+      // Add an initial participant
+      shoot.participants.push({
+        id: 'p1',
+        archerName: 'Archer 1',
+        roundName: 'Windsor',
+        totalScore: 30,
+        lastUpdated: new Date(baseTime),
+        currentPosition: 1
+      });
+
+      // Save the shoot
+      await repository.saveShoot(shoot);
+
+      // Get two copies of the shoot
+      const shoot1 = await repository.getShootByCode('5555');
+      const shoot2 = await repository.getShootByCode('5555');
+
+      expect(shoot1).not.toBeNull();
+      expect(shoot2).not.toBeNull();
+
+      if (!shoot1 || !shoot2) {
+        return; // Satisfy TypeScript null check
+      }
+
+      // Update shoot1 - change score of existing archer
+      const time1 = baseTime + 1000;
+      shoot1.participants[0].totalScore = 40;
+      shoot1.participants[0].lastUpdated = new Date(time1);
+      shoot1.lastUpdated = new Date(time1);
+      await repository.saveShoot(shoot1);
+
+      // Update shoot2 - add a new archer
+      const time2 = baseTime + 2000;
+      shoot2.participants.push({
+        id: 'p2',
+        archerName: 'Archer 2',
+        roundName: 'Windsor',
+        totalScore: 50,
+        lastUpdated: new Date(time2),
+        currentPosition: 2
+      });
+      shoot2.lastUpdated = new Date(time2);
+      await repository.saveShoot(shoot2);
+
+      // Get the final state
+      const finalShoot = await repository.getShootByCode('5555');
+
+      // Verify both changes were merged
+      expect(finalShoot).not.toBeNull();
+      expect(finalShoot!.participants).toHaveLength(2);
+
+      // Verify Archer 1's score was updated
+      const archer1 = finalShoot!.participants.find(p => p.id === 'p1');
+      expect(archer1).toBeDefined();
+      expect(archer1!.totalScore).toBe(40);
+
+      // Verify Archer 2 was added
+      const archer2 = finalShoot!.participants.find(p => p.id === 'p2');
+      expect(archer2).toBeDefined();
+      expect(archer2!.totalScore).toBe(50);
+    });
   });
 }
 
