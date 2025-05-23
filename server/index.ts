@@ -5,6 +5,7 @@ import dotenv from 'dotenv'
 import fs from 'fs'
 import { S3Service } from './services/s3Service.js'
 import { createApiRouter } from './routes/api.js'
+import { closeRedisClient } from './services/redisClient.js'
 
 // Load environment variables at the very beginning
 dotenv.config()
@@ -78,5 +79,26 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
+
+// Add graceful shutdown handlers
+process.on('SIGTERM', async () => {
+  console.log('SIGTERM received, shutting down gracefully');
+
+  // Close Redis connection
+  await closeRedisClient();
+
+  // Exit the process
+  process.exit(0);
+});
+
+process.on('SIGINT', async () => {
+  console.log('SIGINT received, shutting down gracefully');
+
+  // Close Redis connection
+  await closeRedisClient();
+
+  // Exit the process
+  process.exit(0);
+});
 
 export default app

@@ -173,6 +173,57 @@ describe('RedisShootRepository', () => {
 });
 ```
 
+## Implementation Sub-Steps
+
+To make this implementation more manageable, we'll break it down into smaller, focused tasks:
+
+### Sub-Step 2.1: Redis Client Setup
+1. Add Redis client dependency to package.json
+2. Create a Redis client factory function
+3. Implement connection management and error handling
+4. Add Redis configuration to environment variables
+
+### Sub-Step 2.2: Redis Repository Implementation
+1. Create the basic RedisShootRepository class structure
+2. Implement serialization/deserialization helpers for Date objects
+3. Implement the core repository methods one by one:
+   - saveShoot
+   - getShootByCode
+   - deleteShoot
+   - codeExists
+4. Add TTL handling for shoot expiration
+
+### Sub-Step 2.3: Redis Repository Tests
+1. Create the test file structure with testcontainers setup
+2. Implement the contract test runner for Redis
+3. Add Redis-specific tests for serialization edge cases
+4. Test expiration behavior
+
+### Sub-Step 2.4: Local Development Setup
+1. Create the ensure-redis.js script
+2. Update package.json scripts
+3. Add Redis configuration to development environment
+
+### Sub-Step 2.5: API Router Implementation
+1. Create the leaderboard router file
+2. Implement each endpoint one by one:
+   - POST /api/shoots
+   - GET /api/shoots/:code
+   - POST /api/shoots/:code/join
+   - PUT /api/shoots/:code/score
+   - DELETE /api/shoots/:code/archer/:archerName
+3. Add proper error handling and validation
+
+### Sub-Step 2.6: API Tests
+1. Create API test file with supertest
+2. Implement tests for each endpoint
+3. Test error cases and edge conditions
+
+### Sub-Step 2.7: Integration with Main API
+1. Update server/routes/api.ts to include the leaderboard router
+2. Update server/index.ts to instantiate the repository
+3. Test the full integration
+
 This approach ensures:
 1. Clean separation between domain logic and persistence
 2. Type safety through TypeScript
@@ -180,4 +231,4 @@ This approach ensures:
 4. Compatibility with both development and production environments
 5. Adherence to the hexagonal architecture principles
 6. Proper integration with the existing codebase structure
-8. Consistent local development experience with the existing setup8. Consistent local development experience with the existing setup8. Consistent local development experience with the existing setup7. Comprehensive testing using the established patterns5. Adherence to the hexagonal architecture principles
+8. Consistent local development experience with the existing setup8. Consistent local development experience with the existing setup8. Consistent local development experience with the existing setup8. Consistent local development experience with the existing setup7. Comprehensive testing using the established patterns5. Adherence to the hexagonal architecture principles
