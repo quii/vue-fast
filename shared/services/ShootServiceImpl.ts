@@ -1,15 +1,17 @@
 import { Shoot, ShootParticipant } from '../models/Shoot.js';
 import { ShootService } from '../ports/ShootService.js';
+import { ShootRepository } from '../ports/ShootRepository.js';
 import { ShootNotificationService, NotificationType } from '../ports/ShootNotificationService.js';
 
 /**
- * Implementation of the ShootService using in-memory storage for testing
+ * Implementation of the ShootService that uses a repository for persistence
  */
-export class InMemoryShootService implements ShootService {
-  private shoots: Map<string, Shoot> = new Map();
+export class ShootServiceImpl implements ShootService {
+  private repository: ShootRepository;
   private notificationService?: ShootNotificationService;
 
-  constructor(notificationService?: ShootNotificationService) {
+  constructor(repository: ShootRepository, notificationService?: ShootNotificationService) {
+    this.repository = repository;
     this.notificationService = notificationService;
   }
 
@@ -17,12 +19,12 @@ export class InMemoryShootService implements ShootService {
    * Generates a random 4-digit code for a shoot
    * @returns A unique 4-digit code
    */
-  private generateCode(): string {
+  private async generateCode(): Promise<string> {
     // Generate a random 4-digit code
     const code = Math.floor(1000 + Math.random() * 9000).toString();
 
     // Ensure the code is unique
-    if (this.shoots.has(code)) {
+    if (await this.repository.codeExists(code)) {
       return this.generateCode();
     }
 
@@ -35,7 +37,7 @@ export class InMemoryShootService implements ShootService {
    * @returns Promise with the created shoot details
    */
   async createShoot(creatorName: string): Promise<{ shoot: Shoot; code: string }> {
-    const code = this.generateCode();
+    const code = await this.generateCode();
     const now = new Date();
 
     // Set expiration to end of current day
@@ -52,7 +54,7 @@ export class InMemoryShootService implements ShootService {
       lastUpdated: now
     };
 
-    this.shoots.set(code, shoot);
+    await this.repository.saveShoot(shoot);
 
     return { shoot, code };
   }
@@ -65,7 +67,7 @@ export class InMemoryShootService implements ShootService {
    * @returns Promise with success status and shoot details
    */
   async joinShoot(code: string, archerName: string, roundName: string): Promise<{ success: boolean; shoot?: Shoot }> {
-    const shoot = this.shoots.get(code);
+    const shoot = await this.repository.getShootByCode(code);
 
     if (!shoot) {
       return { success: false };
@@ -105,6 +107,9 @@ export class InMemoryShootService implements ShootService {
     // Update positions for all participants
     this.updatePositions(shoot);
 
+    // Save the updated shoot
+    await this.repository.saveShoot(shoot);
+
     return { success: true, shoot };
   }
 
@@ -117,7 +122,7 @@ export class InMemoryShootService implements ShootService {
    * @returns Promise with success status and updated shoot details
    */
   async updateScore(code: string, archerName: string, totalScore: number, roundName: string): Promise<{ success: boolean; shoot?: Shoot }> {
-    const shoot = this.shoots.get(code);
+    const shoot = await this.repository.getShootByCode(code);
 
     if (!shoot) {
       return { success: false };
@@ -140,6 +145,9 @@ export class InMemoryShootService implements ShootService {
 
     // Update positions for all participants
     this.updatePositions(shoot);
+
+    // Save the updated shoot
+    await this.repository.saveShoot(shoot);
 
     // Check if position changed and send notification
     if (this.notificationService &&
@@ -166,7 +174,7 @@ export class InMemoryShootService implements ShootService {
    * @returns Promise with success status
    */
   async leaveShoot(code: string, archerName: string): Promise<{ success: boolean }> {
-    const shoot = this.shoots.get(code);
+    const shoot = await this.repository.getShootByCode(code);
 
     if (!shoot) {
       return { success: false };
@@ -180,6 +188,9 @@ export class InMemoryShootService implements ShootService {
 
       // Update positions for remaining participants
       this.updatePositions(shoot);
+
+      // Save the updated shoot
+      await this.repository.saveShoot(shoot);
 
       // Send notification that an archer left
       if (this.notificationService) {
@@ -201,19 +212,7 @@ export class InMemoryShootService implements ShootService {
    * @returns Promise with the shoot details
    */
   async getShoot(code: string): Promise<Shoot | null> {
-    const shoot = this.shoots.get(code);
-
-    if (!shoot) {
-      return null;
-    }
-
-    // Check if the shoot has expired
-    if (new Date() > shoot.expiresAt) {
-      this.shoots.delete(code);
-      return null;
-    }
-
-    return shoot;
+    return this.repository.getShootByCode(code);
   }
 
   /**
@@ -248,12 +247,8 @@ export class InMemoryShootService implements ShootService {
    * Cleans up expired shoots
    * Should be called periodically to free up memory
    */
-  cleanupExpiredShoots(): void {
-    const now = new Date();
-    for (const [code, shoot] of this.shoots.entries()) {
-      if (now > shoot.expiresAt) {
-        this.shoots.delete(code);
-      }
-    }
+  async cleanupExpiredShoots(): Promise<void> {
+    // This would be implemented differently for different repository types
+    // For now, we rely on the repository to handle expiration during getShootByCode
   }
 }

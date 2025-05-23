@@ -1,15 +1,18 @@
 import { describe, expect, beforeEach, it } from 'vitest';
-import { InMemoryShootService } from '../ShootServiceImpl.js';
+import { ShootServiceImpl } from '../ShootServiceImpl.js';
 import { InMemoryShootNotificationService } from '../InMemoryShootNotificationService.js';
 import { NotificationType, PositionChangeNotification } from '../../ports/ShootNotificationService.js';
+import { InMemoryShootRepository } from '../InMemoryShootRepository.js'
 
 describe('ShootService', () => {
-  let shootService: InMemoryShootService;
+  let shootService: ShootServiceImpl;
+  let repository: InMemoryShootRepository;
   let notificationService: InMemoryShootNotificationService;
 
   beforeEach(() => {
+    repository = new InMemoryShootRepository();
     notificationService = new InMemoryShootNotificationService();
-    shootService = new InMemoryShootService(notificationService);
+    shootService = new ShootServiceImpl(repository, notificationService);
   });
 
   it('creates a shoot with a valid code', async () => {
