@@ -4,23 +4,6 @@ export class InMemoryShootNotificationService implements ShootNotificationServic
   private subscribers: Map<string, Array<(notification: ShootNotification) => void>> = new Map();
   private sentNotifications: Map<string, ShootNotification[]> = new Map();
 
-  subscribeToNotifications(code: string, callback: (notification: ShootNotification) => void): () => void {
-    if (!this.subscribers.has(code)) {
-      this.subscribers.set(code, []);
-    }
-
-    this.subscribers.get(code)!.push(callback);
-
-    return () => {
-      const callbacks = this.subscribers.get(code);
-      if (callbacks) {
-        const index = callbacks.indexOf(callback);
-        if (index !== -1) {
-          callbacks.splice(index, 1);
-        }
-      }
-    };
-  }
 
   async sendNotification(code: string, notification: ShootNotification): Promise<void> {
     // Store the notification

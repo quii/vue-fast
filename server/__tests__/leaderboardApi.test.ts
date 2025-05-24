@@ -6,6 +6,8 @@ import { createApiRouter } from '../routes/api.js'
 import { S3Service } from '../services/s3Service.js'
 import { RedisShootRepository } from '../repositories/RedisShootRepository.js'
 import { closeRedisClient } from '../services/redisClient.js'
+import { InMemoryShootNotificationService } from '../../shared/services/InMemoryShootNotificationService'
+import { ShootServiceImpl } from '../../shared/services/ShootServiceImpl'
 
 describe('Leaderboard API Integration Tests', () => {
   let redisContainer: StartedTestContainer
@@ -38,10 +40,13 @@ describe('Leaderboard API Integration Tests', () => {
     // Mock the methods we don't want to actually call
     s3Service.initializeBucket = async () => {}
 
+    const notifications = new InMemoryShootNotificationService()
+    const shootService = new ShootServiceImpl(shootRepository, notifications)
+
     // Create the Express app with the API router
     app = express()
     app.use(express.json())
-    app.use('/api', createApiRouter({ s3Service, shootRepository }))
+    app.use('/api', createApiRouter({ s3Service, shootService }))
   }, 30000) // Increase timeout for container startup
 
   afterAll(async () => {

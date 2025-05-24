@@ -1,4 +1,5 @@
 import express, { Request, Response, NextFunction, Application } from 'express'
+import http from 'http'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import dotenv from 'dotenv'
@@ -9,6 +10,8 @@ import { closeRedisClient } from './services/redisClient.js'
 import { RedisShootRepository } from './repositories/RedisShootRepository.js'
 import { InMemoryShootRepository } from '../shared/services/InMemoryShootRepository.js'
 import { ShootRepository } from '../shared/ports/ShootRepository.js'
+import { WebSocketManager } from './services/WebSocketManager.js'
+import { ShootServiceImpl } from '../shared/services/ShootServiceImpl.js'
 
 // Load environment variables at the very beginning
 dotenv.config()
@@ -18,6 +21,9 @@ const __dirname = path.dirname(__filename)
 
 const app: Application = express()
 const PORT = process.env.PORT || 8080
+
+// Create HTTP server
+const server = http.createServer(app)
 
 // Initialize services
 const s3Service = new S3Service()
@@ -36,6 +42,12 @@ if (process.env.NODE_ENV === 'production' || process.env.REDIS_URL) {
   shootRepository = new InMemoryShootRepository();
 }
 
+// Initialize WebSocket manager
+const webSocketManager = new WebSocketManager(server);
+
+// Initialize ShootService with the WebSocket notification service
+const shootService = new ShootServiceImpl(shootRepository, webSocketManager);
+
 // Middleware
 app.use(express.json({ limit: '10mb' }))
 app.use(express.urlencoded({ extended: true }))
@@ -43,14 +55,13 @@ app.use(express.urlencoded({ extended: true }))
 // API routes - pass dependencies
 app.use('/api', createApiRouter({
   s3Service,
-  shootRepository
+  shootService,
 }))
 
 // Determine the correct static directory
 // In Docker, the files are at /app/dist
 // In development, they're at ../dist relative to server/index.js
-// Since we've changed the output structure, we need to adjust the path
-let staticDir = path.resolve(__dirname, '../../dist') // Go up two levels from dist/server to get to dist
+let staticDir = path.resolve(__dirname, '../../dist')
 
 // Check if we're in Docker (look for /app directory)
 if (fs.existsSync('/app/dist')) {
@@ -60,9 +71,6 @@ if (fs.existsSync('/app/dist')) {
 // Log the static directory for debugging
 console.log('Static directory:', staticDir)
 console.log('Directory exists:', fs.existsSync(staticDir))
-if (fs.existsSync(staticDir)) {
-  console.log('Directory contents:', fs.readdirSync(staticDir))
-}
 
 // Serve static files from the Vue app build directory
 app.use(express.static(staticDir))
@@ -77,9 +85,7 @@ app.get('*', (req, res, next) => {
   } else {
     // If file doesn't exist, log error and send 404
     console.error(`Index file not found at ${indexPath}`)
-    if (fs.existsSync(staticDir)) {
-      console.log('Directory contents:', fs.readdirSync(staticDir))
-    }
+    console.log('Directory contents:', fs.readdirSync(staticDir))
     next(new Error(`Index file not found at ${indexPath}`))
   }
 })
@@ -102,13 +108,17 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
 })
 
 // Start the server
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
+  console.log(`WebSocket server available at ws://localhost:${PORT}`)
 })
 
 // Add graceful shutdown handlers
 process.on('SIGTERM', async () => {
   console.log('SIGTERM received, shutting down gracefully');
+
+  // Close WebSocket connections
+  webSocketManager.close();
 
   // Close Redis connection
   await closeRedisClient();
@@ -119,6 +129,9 @@ process.on('SIGTERM', async () => {
 
 process.on('SIGINT', async () => {
   console.log('SIGINT received, shutting down gracefully');
+
+  // Close WebSocket connections
+  webSocketManager.close();
 
   // Close Redis connection
   await closeRedisClient();

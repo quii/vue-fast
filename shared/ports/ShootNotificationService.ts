@@ -42,14 +42,6 @@ export type ShootNotification =
  */
 export interface ShootNotificationService {
   /**
-   * Subscribe to notifications for a specific shoot
-   * @param code The 4-digit code of the shoot
-   * @param callback Function to call when notifications are received
-   * @returns Unsubscribe function
-   */
-  subscribeToNotifications(code: string, callback: (notification: ShootNotification) => void): () => void;
-
-  /**
    * Send a notification to all participants in a shoot
    * @param code The 4-digit code of the shoot
    * @param notification The notification to send

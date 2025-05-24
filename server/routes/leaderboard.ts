@@ -1,16 +1,12 @@
 import express, { Router, Request, Response } from 'express'
-import { ShootRepository } from '../../shared/ports/ShootRepository.js'
-import { ShootServiceImpl } from '../../shared/services/ShootServiceImpl.js'
-import { InMemoryShootNotificationService } from '../../shared/services/InMemoryShootNotificationService.js'
+import { ShootService } from '../../shared/ports/ShootService.js'
 
 // Export a function that creates the router with injected dependencies
-export function createLeaderboardRouter(dependencies: { shootRepository: ShootRepository }): Router {
-  const { shootRepository } = dependencies
+export function createLeaderboardRouter(dependencies: {
+  shootService: ShootService
+}): Router {
+  const { shootService } = dependencies
   const router: Router = express.Router()
-
-  // Create the shoot service with the repository
-  const notificationService = new InMemoryShootNotificationService()
-  const shootService = new ShootServiceImpl(shootRepository, notificationService)
 
   // Health check endpoint
   router.get('/health', (req: Request, res: Response) => {
@@ -28,7 +24,7 @@ export function createLeaderboardRouter(dependencies: { shootRepository: ShootRe
       if (!creatorName) {
         return res.status(400).json({
           success: false,
-          message: 'Creator name is required'
+          error: 'Creator name is required'
         })
       }
 
@@ -43,7 +39,7 @@ export function createLeaderboardRouter(dependencies: { shootRepository: ShootRe
       console.error('Error creating shoot:', error)
       res.status(500).json({
         success: false,
-        message: 'Failed to create shoot'
+        error: 'Failed to create shoot'
       })
     }
   })
@@ -57,7 +53,7 @@ export function createLeaderboardRouter(dependencies: { shootRepository: ShootRe
       if (!shoot) {
         return res.status(404).json({
           success: false,
-          message: 'Shoot not found'
+          error: 'Shoot not found'
         })
       }
 
@@ -69,7 +65,7 @@ export function createLeaderboardRouter(dependencies: { shootRepository: ShootRe
       console.error('Error getting shoot:', error)
       res.status(500).json({
         success: false,
-        message: 'Failed to get shoot'
+        error: 'Failed to get shoot'
       })
     }
   })
@@ -83,7 +79,7 @@ export function createLeaderboardRouter(dependencies: { shootRepository: ShootRe
       if (!archerName || !roundName) {
         return res.status(400).json({
           success: false,
-          message: 'Archer name and round name are required'
+          error: 'Archer name and round name are required'
         })
       }
 
@@ -92,19 +88,16 @@ export function createLeaderboardRouter(dependencies: { shootRepository: ShootRe
       if (!result.success) {
         return res.status(404).json({
           success: false,
-          message: 'Shoot not found or could not join'
+          error: 'Shoot not found or join failed'
         })
       }
 
-      res.json({
-        success: true,
-        shoot: result.shoot
-      })
+      res.json(result)
     } catch (error) {
       console.error('Error joining shoot:', error)
       res.status(500).json({
         success: false,
-        message: 'Failed to join shoot'
+        error: 'Failed to join shoot'
       })
     }
   })
@@ -118,7 +111,7 @@ export function createLeaderboardRouter(dependencies: { shootRepository: ShootRe
       if (!archerName || totalScore === undefined || !roundName) {
         return res.status(400).json({
           success: false,
-          message: 'Archer name, total score, and round name are required'
+          error: 'Archer name, total score, and round name are required'
         })
       }
 
@@ -127,19 +120,16 @@ export function createLeaderboardRouter(dependencies: { shootRepository: ShootRe
       if (!result.success) {
         return res.status(404).json({
           success: false,
-          message: 'Shoot not found or could not update score'
+          error: 'Shoot not found or archer not found'
         })
       }
 
-      res.json({
-        success: true,
-        shoot: result.shoot
-      })
+      res.json(result)
     } catch (error) {
       console.error('Error updating score:', error)
       res.status(500).json({
         success: false,
-        message: 'Failed to update score'
+        error: 'Failed to update score'
       })
     }
   })
@@ -154,19 +144,16 @@ export function createLeaderboardRouter(dependencies: { shootRepository: ShootRe
       if (!result.success) {
         return res.status(404).json({
           success: false,
-          message: 'Shoot not found or archer not in shoot'
+          error: 'Shoot not found or archer not found'
         })
       }
 
-      res.json({
-        success: true,
-        message: 'Successfully left the shoot'
-      })
+      res.json(result)
     } catch (error) {
       console.error('Error leaving shoot:', error)
       res.status(500).json({
         success: false,
-        message: 'Failed to leave shoot'
+        error: 'Failed to leave shoot'
       })
     }
   })

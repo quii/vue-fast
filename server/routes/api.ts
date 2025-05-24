@@ -3,13 +3,15 @@ import { S3Service } from '../services/s3Service.js'
 import { createBackupRouter } from './backup.js'
 import { createLeaderboardRouter } from './leaderboard.js'
 import { ShootRepository } from '../../shared/ports/ShootRepository.js'
+import { ShootService } from '../../shared/ports/ShootService.js'
+import { WebSocketManager } from '../services/WebSocketManager.js'
 
 
 export function createApiRouter(dependencies: {
   s3Service: S3Service,
-  shootRepository: ShootRepository
+  shootService: ShootService,
 }): Router {
-  const { s3Service, shootRepository } = dependencies
+  const { s3Service, shootService } = dependencies
   const router: Router = express.Router()
 
   router.get('/health', (req, res) => {
@@ -91,8 +93,10 @@ export function createApiRouter(dependencies: {
   })
 
 
-  router.use('/backup', createBackupRouter({ s3Service }))
-  router.use('/shoots', createLeaderboardRouter({ shootRepository }))
+  const backupRouter = createBackupRouter({ s3Service })
+  // router.use('/', backupRouter)  // For backward compatibility
+  router.use('/backups', backupRouter)  // New path
+  router.use('/shoots', createLeaderboardRouter({ shootService, }))
 
   return router
 }
