@@ -19,6 +19,8 @@
   --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
   --vt-c-text-dark-1: var(--vt-c-white);
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+
+  --vt-c-link: #0099ff;
 }
 
 /* semantic color variables for this project */
@@ -32,6 +34,8 @@
 
   --color-heading: var(--vt-c-text-light-1);
   --color-text: var(--vt-c-text-light-1);
+
+  --color-link: var(--vt-c-link);
 
   --section-gap: 160px;
 
@@ -53,6 +57,8 @@
 
   --color-on-track: lightseagreen;
   --color-off-track: red;
+
+  --color-link: #0099ff;
 }
 
 /* Keep the media query for automatic theme switching when preference is 'device' */
@@ -98,4 +104,8 @@ body {
 input, select, button, textarea {
   background-color: var(--color-background-soft);
   color: var(--color-heading);
+}
+
+a, a:visited {
+  color: var(--color-text);
 }

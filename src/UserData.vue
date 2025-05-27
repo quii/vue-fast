@@ -219,13 +219,21 @@ watchEffect(() => {
       />
     </SectionCard>
 
-    <div class="buymeacoffee">
-      <p>Happy for you to use this for free, but if you wish to show appreciation, <a
+    <SectionCard title="Share Fast">
+      <img class="qr" src="/qr.png" />
+    </SectionCard>
+
+    <SectionCard title="Buy me a coffee?">
+      <p>Happy for you to use Fast for free, but if you wish to show appreciation, <a
         href="https://buymeacoffee.com/quii">feel free to tap here and buy me a coffee ☕️ 🥰</a></p>
-    </div>
+    </SectionCard>
   </div>
 </template>
 <style scoped>
+.qr {
+  margin: 0 auto;
+  display: block;
+}
 .profile-page {
   padding: 0.5rem;
   max-width: 800px;
