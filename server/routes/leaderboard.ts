@@ -1,5 +1,9 @@
 import express, { Router, Request, Response } from 'express'
+import { ShootRepository } from '../../shared/ports/ShootRepository.js'
 import { ShootService } from '../../shared/ports/ShootService.js'
+import { ShootServiceImpl } from '../../shared/services/ShootServiceImpl.js'
+import { WebSocketManager } from '../services/WebSocketManager.js'
+import { Shoot } from '../../shared/models/Shoot.js'
 
 // Export a function that creates the router with injected dependencies
 export function createLeaderboardRouter(dependencies: {
