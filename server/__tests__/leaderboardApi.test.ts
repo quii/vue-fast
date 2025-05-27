@@ -106,7 +106,12 @@ describe('Leaderboard API Integration Tests', () => {
   it('should update an archer\'s score', async () => {
     const response = await request(app)
       .put(`/api/shoots/${createdShootCode}/score`)
-      .send({ archerName: 'Test Archer', totalScore: 42, roundName: 'Windsor' })
+      .send({
+        archerName: 'Test Archer',
+        totalScore: 42,
+        roundName: 'Windsor',
+        arrowsShot: 12
+      })
       .expect(200)
 
     expect(response.body.success).toBe(true)
@@ -130,7 +135,12 @@ describe('Leaderboard API Integration Tests', () => {
     // Update second archer's score to be higher than first
     const response = await request(app)
       .put(`/api/shoots/${createdShootCode}/score`)
-      .send({ archerName: 'Second Archer', totalScore: 50, roundName: 'Windsor' })
+      .send({
+        archerName: 'Second Archer',
+        totalScore: 50,
+        roundName: 'Windsor',
+        arrowsShot: 18
+      })
       .expect(200)
 
     expect(response.body.success).toBe(true)
@@ -192,13 +202,50 @@ describe('Leaderboard API Integration Tests', () => {
       .put(`/api/shoots/${createdShootCode}/score`)
       .send({ archerName: 'Second Archer', roundName: 'Windsor' })
       .expect(400)
+
+    // Test missing arrowsShot when updating
+    await request(app)
+      .put(`/api/shoots/${createdShootCode}/score`)
+      .send({
+        archerName: 'Second Archer',
+        totalScore: 25,
+        roundName: 'Windsor'
+      })
+      .expect(400)
+
+    // Test invalid arrowsShot (negative number)
+    await request(app)
+      .put(`/api/shoots/${createdShootCode}/score`)
+      .send({
+        archerName: 'Second Archer',
+        totalScore: 25,
+        roundName: 'Windsor',
+        arrowsShot: -5
+      })
+      .expect(400)
+
+    // Test invalid arrowsShot (not a number)
+    await request(app)
+      .put(`/api/shoots/${createdShootCode}/score`)
+      .send({
+        archerName: 'Second Archer',
+        totalScore: 25,
+        roundName: 'Windsor',
+        arrowsShot: 'invalid'
+      })
+      .expect(400)
   })
 
   it('should handle non-existent archers', async () => {
     // Try to update score for non-existent archer
     const response = await request(app)
       .put(`/api/shoots/${createdShootCode}/score`)
-      .send({ archerName: 'Non-existent Archer', totalScore: 100, roundName: 'Windsor' })
+      .send({
+        archerName: 'Non-existent Archer',
+        totalScore: 100,
+        roundName: 'Windsor',
+        arrowsShot: 24
+      })
       .expect(404)
 
     expect(response.body.success).toBe(false)

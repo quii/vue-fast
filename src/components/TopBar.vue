@@ -7,7 +7,7 @@ import ClassificationIcon from "@/components/icons/ClassificationIcon.vue";
 import NoteIcon from "@/components/icons/NoteIcon.vue";
 import ClearIcon from "@/components/icons/ClearIcon.vue";
 import SaveIcon from "@/components/icons/SaveIcon.vue";
-import LeaderboardIcon from "@/components/icons/LeaderboardIcon.vue";
+import LiveIcon from "@/components/icons/LiveIcon.vue";
 
 const props = defineProps({
   hasStarted: {
@@ -55,14 +55,6 @@ const infoDisplays = computed(() => {
     });
   }
 
-  // Remove max possible score display - replaced with leaderboard functionality
-  // if (props.maxPossibleScore !== null) {
-  //   displays.push({
-  //     value: props.maxPossibleScore,
-  //     label: "Max score"
-  //   });
-  // }
-
   return displays;
 });
 
@@ -82,10 +74,10 @@ const actionButtons = computed(() => {
     });
   }
 
-  // Add leaderboard button (replaces max score display)
+  // Add live leaderboard button
   buttons.push({
-    iconComponent: LeaderboardIcon,
-    label: "Leaderboard",
+    iconComponent: LiveIcon,
+    label: "Live",
     action: "show-leaderboard",
     active: false
   });

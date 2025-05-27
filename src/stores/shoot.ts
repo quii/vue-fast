@@ -7,6 +7,13 @@ import { WebSocketNotificationService } from '@/services/WebSocketNotificationSe
 import { PushNotificationManager } from '@/services/PushNotificationManager'
 import { useToast } from 'vue-toastification'
 
+interface PersistedShootState {
+  shootCode: string
+  archerName: string
+  roundName: string
+  joinedAt: number // timestamp
+}
+
 export const useShootStore = defineStore('shoot', () => {
   // State
   const currentShoot = ref<Shoot | null>(null)
@@ -22,6 +29,43 @@ export const useShootStore = defineStore('shoot', () => {
   // Computed
   const isInShoot = computed(() => currentShoot.value !== null)
   const shootCode = computed(() => currentShoot.value?.code || '')
+
+  // LocalStorage helpers
+  function saveShootState(shootCode: string, archerName: string, roundName: string) {
+    const state: PersistedShootState = {
+      shootCode,
+      archerName,
+      roundName,
+      joinedAt: Date.now()
+    }
+    localStorage.setItem('currentShoot', JSON.stringify(state))
+  }
+
+  function getPersistedShootState(): PersistedShootState | null {
+    try {
+      const stored = localStorage.getItem('currentShoot')
+      if (!stored) return null
+
+      const state = JSON.parse(stored) as PersistedShootState
+
+      // Check if the state is too old (e.g., older than 24 hours)
+      const maxAge = 24 * 60 * 60 * 1000 // 24 hours in milliseconds
+      if (Date.now() - state.joinedAt > maxAge) {
+        clearPersistedShootState()
+        return null
+      }
+
+      return state
+    } catch (error) {
+      console.error('Error parsing persisted shoot state:', error)
+      clearPersistedShootState()
+      return null
+    }
+  }
+
+  function clearPersistedShootState() {
+    localStorage.removeItem('currentShoot')
+  }
 
   // Initialize services
   async function initializeServices() {
@@ -117,6 +161,52 @@ export const useShootStore = defineStore('shoot', () => {
     }
   }
 
+  // Try to restore from persisted state
+  async function tryRestoreFromPersistedState(): Promise<boolean> {
+    const persistedState = getPersistedShootState()
+    if (!persistedState) return false
+
+    await initializeServices()
+    if (!shootService) return false
+
+    try {
+      // Try to get the shoot to see if it still exists
+      const shoot = await shootService.getShoot(persistedState.shootCode)
+      if (!shoot) {
+        // Shoot no longer exists, clear persisted state
+        clearPersistedShootState()
+        return false
+      }
+
+      // Check if we're still a participant
+      const isStillParticipant = shoot.participants.some(
+        p => p.archerName === persistedState.archerName
+      )
+
+      if (!isStillParticipant) {
+        // We're no longer in the shoot, clear persisted state
+        clearPersistedShootState()
+        return false
+      }
+
+      // Restore the shoot state
+      currentShoot.value = shoot
+
+      // Connect WebSocket and subscribe
+      await initializeWebSocket()
+      if (webSocketService && webSocketService.isConnected()) {
+        webSocketService.subscribeToShoot(persistedState.shootCode)
+      }
+
+      return true
+    } catch (error) {
+      console.error('Failed to restore shoot state:', error)
+      // If we get a 404 or other error, clear the persisted state
+      clearPersistedShootState()
+      return false
+    }
+  }
+
   // Initialize WebSocket connection
   async function initializeWebSocket() {
     await initializeServices()
@@ -164,6 +254,9 @@ export const useShootStore = defineStore('shoot', () => {
       if (joinResult.success && joinResult.shoot) {
         currentShoot.value = joinResult.shoot
 
+        // Save to localStorage
+        saveShootState(result.code, creatorName, roundName)
+
         // Always update score/arrows to sync current state, even if both are 0
         const scoreResult = await shootService.updateScore(result.code, creatorName, currentScore, roundName, arrowsShot)
         if (scoreResult.success && scoreResult.shoot) {
@@ -195,6 +288,9 @@ export const useShootStore = defineStore('shoot', () => {
 
       if (result.success && result.shoot) {
         currentShoot.value = result.shoot
+
+        // Save to localStorage
+        saveShootState(code, archerName, roundName)
 
         // Connect WebSocket and subscribe to the shoot
         await initializeWebSocket()
@@ -235,6 +331,9 @@ export const useShootStore = defineStore('shoot', () => {
         if (webSocketService) {
           webSocketService.unsubscribeFromShoot(currentShoot.value.code)
         }
+
+        // Clear persisted state
+        clearPersistedShootState()
 
         currentShoot.value = null
       } else {
@@ -289,6 +388,7 @@ export const useShootStore = defineStore('shoot', () => {
 
     // Actions
     initializeWebSocket,
+    tryRestoreFromPersistedState,
     createShoot,
     joinShoot,
     leaveShoot,
@@ -300,6 +400,7 @@ export const useShootStore = defineStore('shoot', () => {
       if (pushNotificationManager && currentShoot.value) {
         pushNotificationManager.clearShootSettings(currentShoot.value.code)
       }
+      // Don't clear persisted state on cleanup - only on explicit leave
       currentShoot.value = null
       connectionStatus.value = 'disconnected'
     }

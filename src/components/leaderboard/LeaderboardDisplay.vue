@@ -168,7 +168,6 @@ function toggleNotificationSettings() {
           :key="participant.id"
           class="leaderboard-card"
           :class="{
-            'is-leader': participant.position === 1,
             'is-current-user': participant.archerName === userStore.user.name
           }"
         >
@@ -188,7 +187,7 @@ function toggleNotificationSettings() {
                 </div>
               </div>
               <div class="score-container">
-                <div class="card-score" :class="{'highlight': participant.position === 1}">
+                <div class="card-score">
                   {{ participant.totalScore }}
                 </div>
               </div>
@@ -238,7 +237,7 @@ function toggleNotificationSettings() {
 .join-form h5 {
   margin-top: 0;
   margin-bottom: 1rem;
-  color: var(--color-highlight, #4CAF50);
+  color: var(--color-text);
   text-align: center;
 }
 
@@ -266,8 +265,8 @@ function toggleNotificationSettings() {
 
 .form-input:focus {
   outline: none;
-  border-color: var(--color-highlight, #4CAF50);
-  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+  border-color: var(--color-border);
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
 }
 
 .leaderboard-container {
@@ -303,14 +302,9 @@ function toggleNotificationSettings() {
   transition: transform 0.1s ease;
 }
 
-.leaderboard-card.is-leader {
-  background-color: rgba(255, 215, 0, 0.1);
-  border: 2px solid rgba(255, 215, 0, 0.3);
-}
-
 .leaderboard-card.is-current-user {
-  background-color: rgba(76, 175, 80, 0.1);
-  border: 2px solid var(--color-highlight, #4CAF50);
+  background-color: var(--color-background-soft);
+  border: 2px solid var(--color-border);
 }
 
 .position-indicator {
@@ -319,12 +313,8 @@ function toggleNotificationSettings() {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--color-highlight, #4CAF50);
+  background-color: var(--color-text-light, #666);
   color: white;
-}
-
-.leaderboard-card.is-leader .position-indicator {
-  background-color: #f39c12;
 }
 
 .position-number {
@@ -359,7 +349,7 @@ function toggleNotificationSettings() {
 
 .you-indicator {
   font-weight: 400;
-  color: var(--color-highlight, #4CAF50);
+  color: var(--color-text-light, #666);
   font-size: 0.8em;
 }
 
@@ -395,10 +385,6 @@ function toggleNotificationSettings() {
   font-weight: 700;
   padding: 0.2em 0.4em;
   border-radius: 4px;
-}
-
-.card-score.highlight {
-  background-color: rgba(255, 215, 0, 0.2);
   color: var(--color-text);
 }
 

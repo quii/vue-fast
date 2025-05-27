@@ -131,7 +131,7 @@ class ScorePage {
         this.score(score);
       });
     } else {
-      cy.get('button').contains(new RegExp('^' + input.toString() + '$', 'g')).click({ force: true })
+      cy.get('.score-buttons button').contains(new RegExp('^' + input.toString() + '$', 'g')).click({ force: true })
     }
     return this;
   }
@@ -242,7 +242,7 @@ class ScorePage {
   }
 
   clickClassificationDetails() {
-    cy.get("span").contains("Class").click();
+    cy.get(`[aria-label="Class"]`).click()
   }
 
   checkClassificationTable(expectedClassification, shortBy) {

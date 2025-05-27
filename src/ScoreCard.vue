@@ -54,6 +54,9 @@ onMounted(async () => {
 
   // Initialize WebSocket connection for leaderboard functionality
   await shootStore.initializeWebSocket()
+
+  // Try to restore any persisted shoot state
+  await shootStore.tryRestoreFromPersistedState()
 })
 
 onUnmounted(() => {

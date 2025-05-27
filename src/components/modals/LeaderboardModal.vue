@@ -57,6 +57,14 @@ const activeView = computed(() => {
   return 'menu'
 })
 
+// Dynamic title based on context
+const modalTitle = computed(() => {
+  if (activeView.value === 'leaderboard') {
+    return `Live Shoot ${shootStore.shootCode}`
+  }
+  return 'Live Scores'
+})
+
 // Actions
 function showJoinShoot() {
   if (!hasUserName.value) {
@@ -165,7 +173,6 @@ function handleNameKeyPress(event) {
 
 onMounted(async () => {
   if (props.visible) {
-    console.log('🚀 LeaderboardModal mounted, initializing WebSocket...')
     await shootStore.initializeWebSocket()
   }
 })
@@ -173,18 +180,11 @@ onMounted(async () => {
 // Watch for when the modal becomes visible
 watch(() => props.visible, async (isVisible) => {
   if (isVisible) {
-    console.log('👁️ LeaderboardModal became visible, initializing WebSocket...')
     await shootStore.initializeWebSocket()
   }
 })
 
-// Add this for debugging
-watch([currentScore, arrowsShot], ([score, arrows]) => {
-  console.log('🏹 Current score:', score, 'Arrows shot:', arrows, 'Scores array:', scoresStore.scores)
-}, { immediate: true })
-
 onUnmounted(() => {
-  console.log('🧹 LeaderboardModal unmounted, cleaning up...')
   shootStore.cleanup()
 })
 </script>
@@ -192,18 +192,18 @@ onUnmounted(() => {
 <template>
   <BaseModal
     v-if="visible"
-    :title="activeView === 'leaderboard' ? `Shoot ${shootStore.shootCode}` : 'Leaderboard'"
+    :title="modalTitle"
   >
     <!-- Loading state -->
     <div v-if="isLoading" class="loading-container">
-      <p>{{ isCreatingShoot ? 'Creating shoot...' : 'Loading...' }}</p>
+      <p>{{ isCreatingShoot ? 'Creating live shoot...' : 'Loading...' }}</p>
     </div>
 
     <!-- Name prompt -->
     <div v-else-if="activeView === 'name-prompt'" class="name-prompt-container">
       <h4 class="prompt-title">Enter Your Name</h4>
       <p class="prompt-description">
-        Please enter your name to {{ pendingAction === 'create' ? 'create' : 'join' }} a shoot.
+        Please enter your name to {{ pendingAction === 'create' ? 'create' : 'join' }} a live shoot.
       </p>
 
       <div class="form-group">
@@ -240,15 +240,15 @@ onUnmounted(() => {
     <!-- Main menu - show when not in a shoot -->
     <div v-else-if="activeView === 'menu'" class="menu-container">
       <p class="menu-description">
-        Create or join a shared leaderboard to compete with other archers in real-time.
+        Create or join a live leaderboard to compete with other archers in real-time.
       </p>
 
       <ButtonGroup>
         <BaseButton @click="handleCreateShoot">
-          Create Shoot
+          Create Live Shoot
         </BaseButton>
         <BaseButton variant="outline" @click="showJoinShoot">
-          Join Shoot
+          Join Live Shoot
         </BaseButton>
       </ButtonGroup>
 
