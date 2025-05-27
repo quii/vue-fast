@@ -7,6 +7,7 @@ import ClassificationIcon from "@/components/icons/ClassificationIcon.vue";
 import NoteIcon from "@/components/icons/NoteIcon.vue";
 import ClearIcon from "@/components/icons/ClearIcon.vue";
 import SaveIcon from "@/components/icons/SaveIcon.vue";
+import LiveIcon from "@/components/icons/LiveIcon.vue";
 
 const props = defineProps({
   hasStarted: {
@@ -35,7 +36,7 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits(["clear-scores", "take-note", "save-scores"]);
+const emit = defineEmits(["clear-scores", "take-note", "save-scores", "show-leaderboard"]);
 const showConfirmation = ref(false);
 
 // Prepare info displays
@@ -51,13 +52,6 @@ const infoDisplays = computed(() => {
     displays.push({
       value: props.arrowsRemaining,
       label: "Arrows left"
-    });
-  }
-
-  if (props.maxPossibleScore !== null) {
-    displays.push({
-      value: props.maxPossibleScore,
-      label: "Max score"
     });
   }
 
@@ -79,6 +73,14 @@ const actionButtons = computed(() => {
       active: props.maxReached
     });
   }
+
+  // Add live leaderboard button
+  buttons.push({
+    iconComponent: LiveIcon,
+    label: "Live",
+    action: "show-leaderboard",
+    active: false
+  });
 
   // Add standard buttons
   buttons.push(
@@ -113,6 +115,8 @@ function handleAction(actionData) {
     emit("take-note");
   } else if (actionData.action === "save-scores") {
     emit("save-scores");
+  } else if (actionData.action === "show-leaderboard") {
+    emit("show-leaderboard");
   }
 }
 

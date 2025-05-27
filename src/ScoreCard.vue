@@ -2,6 +2,7 @@
 import GameTypeSelector from "@/components/GameTypeSelector.vue";
 import NoteModal from "@/components/modals/NoteModal.vue";
 import ShootEditModal from "@/components/modals/ShootEditModal.vue";
+import LeaderboardModal from "@/components/modals/LeaderboardModal.vue";
 import RoundScores from "@/components/RoundScores.vue";
 import InteractiveTargetFace from "@/components/scoring/InteractiveTargetFace.vue";
 import ScoreButtons from "@/components/scoring/ScoreButtons.vue";
@@ -19,9 +20,9 @@ import { useScoresStore } from "@/stores/scores";
 import { useUserStore } from "@/stores/user";
 import { useNotesStore } from "@/stores/user_notes";
 import { usePreferencesStore } from '@/stores/preferences'
-import { computed, ref, onMounted } from 'vue'
+import { useShootStore } from '@/stores/shoot'
+import { computed, ref, onMounted, onUnmounted, watch } from 'vue'
 import { useToast } from "vue-toastification";
-import { watch } from "vue";
 import {
   createClassificationCalculator
 } from "@/domain/scoring/classification";
@@ -40,15 +41,27 @@ const userStore = useUserStore();
 const notesStore = useNotesStore();
 const history = useHistoryStore();
 const preferencesStore = usePreferencesStore()
+const shootStore = useShootStore()
 
 const route = useRoute();
 const showTutorial = ref(false)
 
-onMounted(() => {
+onMounted(async () => {
   // Show tutorial if user hasn't seen it before
   if (!preferencesStore.hasSeenScoreCardTutorial) {
     showTutorial.value = true
   }
+
+  // Initialize WebSocket connection for leaderboard functionality
+  await shootStore.initializeWebSocket()
+
+  // Try to restore any persisted shoot state
+  await shootStore.tryRestoreFromPersistedState()
+})
+
+onUnmounted(() => {
+  // Clean up WebSocket connection when leaving the score card
+  shootStore.cleanup()
 })
 
 watch(() => route.query.selectedRound, (newRound) => {
@@ -57,6 +70,7 @@ watch(() => route.query.selectedRound, (newRound) => {
     router.replace({ query: {} });
   }
 }, { immediate: true });
+
 
 const validScores = computed(() => gameTypeStore.currentRound.getScores(userStore.user.bowType))
 const maxReached = computed(() => {
@@ -73,10 +87,12 @@ const hasStarted = computed(() => scoresStore.scores.length > 0);
 const currentEnd = computed(() => Math.floor(scoresStore.scores.length / gameTypeStore.currentRound.endSize));
 
 const showNoteTaker = ref(false);
-const showSaveModal = ref(false); // New ref for save modal
+const showSaveModal = ref(false);
+const showLeaderboardModal = ref(false); // New ref for leaderboard modal
 
 const classificationCalculator = ref(null);
 const availableClassifications = ref(null);
+
 const totals = computed(() => calculateSubtotals(scoresStore.scores, gameTypeStore.type));
 const averageScoresPerEnd = computed(() =>
   calculateAverageScorePerEnd(scoresStore.scores, gameTypeStore.currentRound.endSize, gameTypeStore.type)
@@ -147,6 +163,19 @@ const historyPreview = computed(() => {
   };
 });
 
+// Watch for score changes and update leaderboard if in a shoot
+watch(() => runningTotal.value, async (newTotal, oldTotal) => {
+  if (shootStore.isInShoot && userStore.user.name && newTotal !== oldTotal) {
+    // Update the leaderboard with the new score and arrows shot
+    await shootStore.updateScore(
+      userStore.user.name,
+      newTotal,
+      gameTypeStore.type,
+      scoresStore.scores.length
+    )
+  }
+})
+
 watch([() => gameTypeStore.type, userDetailsSaved, isPracticeRound], async () => {
   if (!userDetailsSaved.value || isPracticeRound.value) {
     classificationCalculator.value = null;
@@ -184,6 +213,10 @@ watch(() => maxReached.value, (isMaxReached) => {
 
 function showSaveConfirmation() {
   showSaveModal.value = true;
+}
+
+function showLeaderboard() {
+  showLeaderboardModal.value = true;
 }
 
 async function handleSaveFromModal(data) {
@@ -270,6 +303,7 @@ function closeTutorial() {
           @clear-scores="clearScores"
           @take-note="handleTakeNote"
           @save-scores="showSaveConfirmation"
+          @show-leaderboard="showLeaderboard"
         />
       </div>
 
@@ -314,6 +348,12 @@ function closeTutorial() {
         :initialStatus="DEFAULT_SHOOT_STATUS"
         @save="handleSaveFromModal"
         @cancel="cancelSave"
+      />
+
+      <!-- Leaderboard Modal -->
+      <LeaderboardModal
+        :visible="showLeaderboardModal"
+        @close="showLeaderboardModal = false"
       />
 
       <RoundScores v-if="hasStarted" :scores="scoresStore.scores"

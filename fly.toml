@@ -11,6 +11,7 @@ dockerfile = "Dockerfile"
 [env]
 PORT = "8080"
 NODE_ENV = "production"
+REDIS_URL = "redis://default:c7d3ab04d64448e1aa0cd9ae74afc090@fly-patient-tree-7880.upstash.io:6379"
 
 [experimental]
   allowed_public_ports = []

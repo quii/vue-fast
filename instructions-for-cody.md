@@ -528,4 +528,49 @@ Notice how:
 2. Variables have type annotations
 3. The test follows a clear structure without needing comments
 4. The page object provides query methods, not assertions
-5. The test makes assertions based on the page object's responses
+
+## Shared Code Import Conventions
+
+When working with code in the `shared` directory, which is used by both client and server:
+
+### Use explicit file extensions in imports
+
+For all imports within the shared code, always include the `.js` extension (not `.ts`), even though you're importing TypeScript files:
+
+```typescript
+// Correct:
+import { Shoot } from '../models/Shoot.js';
+
+// Incorrect:
+import { Shoot } from '../models/Shoot';
+import { Shoot } from '../models/Shoot.ts';
+```
+
+### Why this is necessary
+
+1. The `shared` directory uses `"moduleResolution": "NodeNext"` in its tsconfig.json, which follows the ECMAScript modules specification
+2. ECMAScript modules require explicit file extensions in relative imports
+3. We use `.js` (not `.ts`) because TypeScript compiles to JavaScript, and the import statements refer to the compiled output
+4. This approach ensures compatibility with both browser and Node.js environments
+
+### Avoid path aliases in shared code
+
+While the Vue application may use path aliases like `@/components`, avoid using these in shared code:
+
+```typescript
+// Don't use in shared code:
+import { Something } from '@/models/Something';
+```
+
+Path aliases are specific to the project configuration and can cause issues when the shared code is used in different contexts (client vs server).
+
+### Use relative imports consistently
+
+Always use relative imports in shared code to maintain clarity about dependencies:
+
+```typescript
+// From shared/services/SomeService.ts importing shared/models/Something.ts
+import { Something } from '../models/Something.js';
+```
+
+This approach ensures the shared code remains portable and can be used in different environments without configuration changes.5. The test makes assertions based on the page object's responses

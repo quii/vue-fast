@@ -4,16 +4,25 @@
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "esModuleInterop": true,
-    "outDir": "../dist/server",
+    "outDir": "../dist",
+    "rootDir": "..",
     "strict": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": "..",
+    "paths": {
+      "@shared/*": ["shared/*"]
+    }
   },
   "include": [
-    "**/*.ts"
+    "**/*.ts",
+    "../shared/**/*.ts"
   ],
   "exclude": [
     "**/__tests__/**",
-    "**/*.test.ts"
+    "**/*.test.ts",
+    "../shared/**/__tests__/**",
+    "../shared/**/*.spec.ts",
+    "../shared/**/*.test.ts"
   ]
 }

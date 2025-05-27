@@ -35,7 +35,6 @@ ENV NODE_ENV=production
 
 # Copy only the necessary built files
 COPY --from=build-stage /app/dist ./dist
-COPY --from=build-stage /app/dist/server ./dist/server
 COPY package*.json ./
 
 # Install production dependencies only
