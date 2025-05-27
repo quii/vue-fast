@@ -71,7 +71,8 @@ export class RedisShootRepository implements ShootRepository {
    * @returns The shoot or null if not found or expired
    */
   async getShootByCode(code: string): Promise<Shoot | null> {
-    const serializedShoot = await this.getStringFromRedis(`shoots:${code}`);
+    const client = await getRedisClient({ url: this.redisConfig.redisUrl });
+    const serializedShoot = await client.get(`shoots:${code}`);
 
     if (!serializedShoot) {
       return null;
@@ -141,6 +142,35 @@ export class RedisShootRepository implements ShootRepository {
   }
 
   /**
+   * Gets an array of string values from Redis set
+   * @param key The Redis key for a set
+   * @returns Array of string values
+   */
+  private async getStringArrayFromRedis(key: string): Promise<string[]> {
+    const client = await getRedisClient({ url: this.redisConfig.redisUrl });
+    const values = await client.sMembers(key);
+
+    // The vanilla redis client returns string arrays directly
+    return values;
+  }
+
+  /**
+   * Gets a string value from Redis, handling Buffer conversion
+   * @param key The Redis key
+   * @returns The string value or null if not found
+   */
+  private async getStringFromRedis(key: string): Promise<string | null> {
+    const client = await getRedisClient({ url: this.redisConfig.redisUrl });
+    const value = await client.get(key);
+
+    if (!value) {
+      return null;
+    }
+
+    return typeof value === 'string' ? value : String(value);
+  }
+
+  /**
    * Serializes a shoot object to a JSON string with special handling for Date objects
    * @param shoot The shoot to serialize
    * @returns Serialized shoot data
@@ -182,107 +212,5 @@ export class RedisShootRepository implements ShootRepository {
     };
 
     return shoot;
-  }
-
-  /**
-   * Cleans up expired shoots
-   * @returns The number of shoots cleaned up
-   */
-  async cleanupExpiredShoots(): Promise<number> {
-    // Get all active shoot codes
-    const stringCodes = await this.getStringArrayFromRedis('shoots:active');
-    let cleanedCount = 0;
-
-    // Check each shoot
-    for (const code of stringCodes) {
-      const shoot = await this.getShootByCode(code);
-
-      // If the shoot is null, it was already cleaned up by getShootByCode
-      if (shoot === null) {
-        cleanedCount++;
-      }
-    }
-
-    return cleanedCount;
-  }
-  /**
-   * Gets multiple shoots by their codes
-   * @param codes Array of shoot codes
-   * @returns Map of code to shoot (excluding expired or not found shoots)
-   */
-  async getShootsByCodes(codes: string[]): Promise<Map<string, Shoot>> {
-    const client = await getRedisClient({ url: this.redisConfig.redisUrl });
-    const result = new Map<string, Shoot>();
-
-    if (codes.length === 0) {
-      return result;
-    }
-
-    // Get all shoots in a single batch operation
-    const keys = codes.map(code => `shoots:${code}`);
-    const mGetResult = await client.mGet(keys);
-
-    // Ensure we have an array (convert from Set if needed)
-    const serializedShoots = Array.isArray(mGetResult) ? mGetResult : Array.from(mGetResult);
-
-    // Process each result
-    for (let i = 0; i < codes.length; i++) {
-      const code = codes[i];
-      const serializedShoot = serializedShoots[i];
-
-      if (serializedShoot) {
-        try {
-          const shootString = typeof serializedShoot === 'string'
-            ? serializedShoot
-            : String(serializedShoot);
-
-          const shoot = this.deserializeShoot(shootString);
-
-          // Check if the shoot has expired
-          if (new Date() <= shoot.expiresAt) {
-            result.set(code, shoot);
-          } else {
-            // Clean up expired shoot
-            await this.deleteShoot(code);
-          }
-        } catch (error) {
-          console.error(`Error deserializing shoot ${code}:`, error);
-        }
-      }
-    }
-
-    return result;
-  }
-
-  /**
-   * Gets an array of string values from Redis, handling Buffer conversion
-   * @param key The Redis key for a set
-   * @returns Array of string values
-   */
-  private async getStringArrayFromRedis(key: string): Promise<string[]> {
-    const client = await getRedisClient({ url: this.redisConfig.redisUrl });
-    const values = await client.sMembers(key);
-
-    // Convert to array if needed
-    const valueArray = Array.isArray(values) ? values : Array.from(values);
-
-    // Convert each value to string if needed
-    return valueArray.map((value: unknown) => typeof value === 'string' ? value : String(value));
-  }
-
-  /**
-   * Gets a string value from Redis, handling Buffer conversion
-   * @param key The Redis key
-   * @returns The string value or null if not found
-   */
-  private async getStringFromRedis(key: string): Promise<string | null> {
-    const client = await getRedisClient({ url: this.redisConfig.redisUrl });
-    const value = await client.get(key);
-
-    if (!value) {
-      return null;
-    }
-
-    return typeof value === 'string' ? value : String(value);
   }
 }

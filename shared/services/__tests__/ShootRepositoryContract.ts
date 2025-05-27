@@ -131,7 +131,8 @@ export function ShootRepositoryContract(
           totalScore: 30,
           lastUpdated: new Date(),
           currentPosition: 3,
-          previousPosition: 2
+          previousPosition: 2,
+          arrowsShot: 1
         },
         {
           id: 'p2',
@@ -139,7 +140,8 @@ export function ShootRepositoryContract(
           roundName: 'National',
           totalScore: 50,
           lastUpdated: new Date(),
-          currentPosition: 1
+          currentPosition: 1,
+          arrowsShot: 1
         },
         {
           id: 'p3',
@@ -148,7 +150,8 @@ export function ShootRepositoryContract(
           totalScore: 40,
           lastUpdated: new Date(),
           currentPosition: 2,
-          previousPosition: 3
+          previousPosition: 3,
+          arrowsShot: 1
         }
       ];
 
@@ -193,7 +196,8 @@ export function ShootRepositoryContract(
         roundName: 'Windsor',
         totalScore: 30,
         lastUpdated: new Date(baseTime),
-        currentPosition: 1
+        currentPosition: 1,
+        arrowsShot: 1
       });
 
       // Save the shoot
@@ -225,7 +229,8 @@ export function ShootRepositoryContract(
         roundName: 'Windsor',
         totalScore: 50,
         lastUpdated: new Date(time2),
-        currentPosition: 2
+        currentPosition: 2,
+        arrowsShot: 1
       });
       shoot2.lastUpdated = new Date(time2);
       await repository.saveShoot(shoot2);

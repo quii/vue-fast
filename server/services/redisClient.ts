@@ -33,11 +33,34 @@ export async function getRedisClient(config: RedisConfig = {}): Promise<ReturnTy
   const url = config.url ||
     `redis://${config.username ? `${config.username}:${config.password}@` : ''}${config.host || 'localhost'}:${config.port || 6379}`;
 
-  // Create a new client
-  redisClient = createClient({ url });
+  // Check if this is Upstash (or set via environment variable)
+  const isUpstash = url.includes('upstash.io') || process.env.REDIS_DISABLE_CLIENT_INFO === 'true';
 
-  // Set up error handling
+  // Create client configuration
+  const clientConfig: any = { url };
+
+  if (isUpstash) {
+    // Disable CLIENT commands for Upstash compatibility
+    clientConfig.socket = {
+      reconnectStrategy: false, // Better for serverless
+      connectTimeout: 10000,
+    };
+  }
+
+  // Create a new client
+  redisClient = createClient(clientConfig);
+
+  // Set up error handling - filter out Upstash compatibility errors
   redisClient.on('error', (err) => {
+    // Suppress known Upstash compatibility errors
+    if (err.message && (
+      err.message.includes('CLIENT SETINFO') ||
+      err.message.includes('CLIENT SETNAME') ||
+      err.message.includes('not available')
+    )) {
+      console.warn('Redis compatibility warning (can be ignored):', err.message);
+      return;
+    }
     console.error('Redis client error:', err);
   });
 
@@ -53,8 +76,7 @@ export async function getRedisClient(config: RedisConfig = {}): Promise<ReturnTy
 export async function closeRedisClient(): Promise<void> {
   if (redisClient) {
     if (redisClient.isOpen) {
-      // Use close() instead of quit() as recommended
-      await redisClient.close();
+      await redisClient.quit();
     }
     redisClient = null;
   }
