@@ -55,7 +55,7 @@
     "@types/supertest": "^6.0.3",
     "@types/ws": "^8.18.1",
     "@typescript-eslint/eslint-plugin": "^8.32.0",
-    "@typescript-eslint/parser": "^8.32.0",
+    "@typescript-eslint/parser": "^8.33.0",
     "@vitejs/plugin-vue": "^5.2.3",
     "@vitejs/plugin-vue-jsx": "^4.1.2",
     "@vue/cli-plugin-typescript": "~5.0.0",
