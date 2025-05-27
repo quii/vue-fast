@@ -40,6 +40,9 @@ export interface ShootParticipant {
   /** Current total score */
   totalScore: number;
 
+  /** Number of arrows shot so far */
+  arrowsShot: number;
+
   /** Current classification based on score */
   currentClassification?: string;
 

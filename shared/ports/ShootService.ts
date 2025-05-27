@@ -26,9 +26,10 @@ export interface ShootService {
    * @param archerName Name of the archer
    * @param totalScore Current total score
    * @param roundName Name of the round (in case it changed)
+   * @param arrowsShot Number of arrows shot so far
    * @returns Promise with success status and updated shoot details
    */
-  updateScore(code: string, archerName: string, totalScore: number, roundName: string): Promise<{ success: boolean; shoot?: Shoot }>;
+  updateScore(code: string, archerName: string, totalScore: number, roundName: string, arrowsShot: number): Promise<{ success: boolean; shoot?: Shoot }>;
 
   /**
    * Removes an archer from a shoot

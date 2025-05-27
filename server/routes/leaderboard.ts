@@ -110,16 +110,32 @@ export function createLeaderboardRouter(dependencies: {
   router.put('/:code/score', async (req: Request, res: Response) => {
     try {
       const { code } = req.params
-      const { archerName, totalScore, roundName } = req.body
+      const { archerName, totalScore, roundName, arrowsShot } = req.body
 
-      if (!archerName || totalScore === undefined || !roundName) {
+      if (!archerName || totalScore === undefined || !roundName || arrowsShot === undefined) {
         return res.status(400).json({
           success: false,
-          error: 'Archer name, total score, and round name are required'
+          error: 'Archer name, total score, round name, and arrows shot are required'
         })
       }
 
-      const result = await shootService.updateScore(code, archerName, totalScore, roundName)
+      // Validate that arrowsShot is a non-negative number
+      if (typeof arrowsShot !== 'number' || arrowsShot < 0) {
+        return res.status(400).json({
+          success: false,
+          error: 'Arrows shot must be a non-negative number'
+        })
+      }
+
+      // Validate that totalScore is a number
+      if (typeof totalScore !== 'number') {
+        return res.status(400).json({
+          success: false,
+          error: 'Total score must be a number'
+        })
+      }
+
+      const result = await shootService.updateScore(code, archerName, totalScore, roundName, arrowsShot)
 
       if (!result.success) {
         return res.status(404).json({

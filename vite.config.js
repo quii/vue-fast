@@ -54,11 +54,18 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url))
     }
   },
-  // Configure the dev server to proxy API requests to our backend server
+  // Configure the dev server to proxy API requests and WebSocket connections to our backend server
   server: {
     proxy: {
       '/api': {
         target: 'http://localhost:8080',
+        changeOrigin: true,
+        secure: false
+      },
+      // Add WebSocket proxy
+      '/ws': {
+        target: 'ws://localhost:8080',
+        ws: true, // Enable WebSocket proxying
         changeOrigin: true,
         secure: false
       }

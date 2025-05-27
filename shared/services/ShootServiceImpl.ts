@@ -89,6 +89,7 @@ export class ShootServiceImpl implements ShootService {
         archerName,
         roundName,
         totalScore: 0,
+        arrowsShot: 0,
         lastUpdated: new Date(),
       };
 
@@ -99,7 +100,8 @@ export class ShootServiceImpl implements ShootService {
       if (this.notificationService) {
         await this.notificationService.sendNotification(code, {
           type: NotificationType.JOINED_SHOOT,
-          archerName
+          archerName,
+          shoot: shoot
         });
       }
     }
@@ -110,6 +112,15 @@ export class ShootServiceImpl implements ShootService {
     // Save the updated shoot
     await this.repository.saveShoot(shoot);
 
+    // Send notification that a new archer joined - INCLUDE SHOOT DATA
+    if (this.notificationService) {
+      await this.notificationService.sendNotification(code, {
+        type: NotificationType.JOINED_SHOOT,
+        archerName,
+        shoot: shoot  // Add the updated shoot data
+      });
+    }
+
     return { success: true, shoot };
   }
 
@@ -119,9 +130,10 @@ export class ShootServiceImpl implements ShootService {
    * @param archerName Name of the archer
    * @param totalScore Current total score
    * @param roundName Name of the round (in case it changed)
+   * @param arrowsShot Number of arrows shot so far
    * @returns Promise with success status and updated shoot details
    */
-  async updateScore(code: string, archerName: string, totalScore: number, roundName: string): Promise<{ success: boolean; shoot?: Shoot }> {
+  async updateScore(code: string, archerName: string, totalScore: number, roundName: string, arrowsShot: number): Promise<{ success: boolean; shoot?: Shoot }> {
     const shoot = await this.repository.getShootByCode(code);
 
     if (!shoot) {
@@ -139,6 +151,7 @@ export class ShootServiceImpl implements ShootService {
 
     // Update participant data
     participant.totalScore = totalScore;
+    participant.arrowsShot = arrowsShot;
     participant.roundName = roundName;
     participant.lastUpdated = new Date();
     shoot.lastUpdated = new Date();
@@ -149,19 +162,32 @@ export class ShootServiceImpl implements ShootService {
     // Save the updated shoot
     await this.repository.saveShoot(shoot);
 
-    // Check if position changed and send notification
-    if (this.notificationService &&
-        previousPosition !== undefined &&
-        participant.currentPosition !== undefined &&
-        previousPosition !== participant.currentPosition) {
-
+    // Send notifications
+    if (this.notificationService) {
+      // Always send score update notification
       await this.notificationService.sendNotification(code, {
-        type: NotificationType.POSITION_CHANGE,
+        type: NotificationType.SCORE_UPDATE,
         archerName,
-        previousPosition,
-        currentPosition: participant.currentPosition,
-        totalParticipants: shoot.participants.length
+        totalScore,
+        arrowsShot,
+        roundName,
+        shoot: shoot
       });
+
+      // Also send position change notification if position changed
+      if (previousPosition !== undefined &&
+          participant.currentPosition !== undefined &&
+          previousPosition !== participant.currentPosition) {
+
+        await this.notificationService.sendNotification(code, {
+          type: NotificationType.POSITION_CHANGE,
+          archerName,
+          previousPosition,
+          currentPosition: participant.currentPosition,
+          totalParticipants: shoot.participants.length,
+          shoot: shoot
+        });
+      }
     }
 
     return { success: true, shoot };

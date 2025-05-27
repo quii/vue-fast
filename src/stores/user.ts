@@ -120,6 +120,13 @@ export const useUserStore = defineStore("user", () => {
     };
   }
 
+  function updateUser(updates) {
+    state.value = {
+      ...state.value,
+      ...updates
+    };
+  }
+
   function updateLastBackupDate() {
     state.value = {
       ...state.value,
@@ -184,6 +191,7 @@ export const useUserStore = defineStore("user", () => {
   return {
     user: state,
     save,
+    updateUser,
     updateLastBackupDate,
     needsBackup,
     isExperimentalUser,
