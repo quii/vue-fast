@@ -24,7 +24,7 @@ const constructiveCriticism = ref(userStore.user.constructiveCriticism ?? true);
 const experimentalTargetFace = ref(userStore.user.experimentalTargetFace ?? false);
 const knockColor = ref(userStore.user.knockColor ?? "#FF69B4"); // Hot pink default
 const showDevTools = ref(installationStore.showDevTools)
-
+const baseURL = window.location.origin;
 // Season dates
 const indoorSeasonStartDate = ref(userStore.user.indoorSeasonStartDate);
 const outdoorSeasonStartDate = ref(userStore.user.outdoorSeasonStartDate);
@@ -221,6 +221,7 @@ watchEffect(() => {
 
     <SectionCard title="Share Fast">
       <img class="qr" src="/qr.png" />
+      <a class="qr" href="baseURL" target="_blank">{{ baseURL }}</a>
     </SectionCard>
 
     <SectionCard title="Buy me a coffee?">
@@ -233,6 +234,7 @@ watchEffect(() => {
 .qr {
   margin: 0 auto;
   display: block;
+  text-align: center;
 }
 .profile-page {
   padding: 0.5rem;
