@@ -30,20 +30,25 @@ export async function getRedisClient(config: RedisConfig = {}): Promise<ReturnTy
   }
 
   // Determine the connection URL
-  const url = config.url ||
+  const url = config.url || process.env.REDIS_URL ||
     `redis://${config.username ? `${config.username}:${config.password}@` : ''}${config.host || 'localhost'}:${config.port || 6379}`;
 
   // Check if this is Upstash (or set via environment variable)
   const isUpstash = url.includes('upstash.io') || process.env.REDIS_DISABLE_CLIENT_INFO === 'true';
 
   // Create client configuration
-  const clientConfig: any = { url };
+  const clientConfig: any = {
+    url,
+    // Force Redis protocol version 6.2 for Upstash compatibility
+    RESP: 2, // Use RESP2 protocol (Redis 6.2 compatible)
+  };
 
   if (isUpstash) {
-    // Disable CLIENT commands for Upstash compatibility
+    // Additional Upstash-specific configuration
     clientConfig.socket = {
       reconnectStrategy: false, // Better for serverless
       connectTimeout: 10000,
+      keepAlive: false,
     };
   }
 
@@ -56,12 +61,22 @@ export async function getRedisClient(config: RedisConfig = {}): Promise<ReturnTy
     if (err.message && (
       err.message.includes('CLIENT SETINFO') ||
       err.message.includes('CLIENT SETNAME') ||
+      err.message.includes('CLIENT GETREDIR') ||
       err.message.includes('not available')
     )) {
-      console.warn('Redis compatibility warning (can be ignored):', err.message);
+      console.warn('Redis compatibility warning (suppressed):', err.message);
       return;
     }
     console.error('Redis client error:', err);
+  });
+
+  // Add connection event logging
+  redisClient.on('connect', () => {
+    console.log('✅ Connected to Redis');
+  });
+
+  redisClient.on('ready', () => {
+    console.log('✅ Redis client ready');
   });
 
   // Connect to Redis
@@ -75,8 +90,13 @@ export async function getRedisClient(config: RedisConfig = {}): Promise<ReturnTy
  */
 export async function closeRedisClient(): Promise<void> {
   if (redisClient) {
-    if (redisClient.isOpen) {
-      await redisClient.quit();
+    try {
+      if (redisClient.isOpen) {
+        await redisClient.quit();
+      }
+    } catch (error) {
+      // Ignore errors during cleanup
+      console.warn('Error during Redis cleanup (ignored):', error);
     }
     redisClient = null;
   }

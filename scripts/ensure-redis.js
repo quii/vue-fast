@@ -56,14 +56,14 @@ async function startRedisContainer() {
         console.log('Redis container is already running');
       }
     } else {
-      // Create and start a new container
+      // Create and start a new container using Redis 6.2 to match Upstash
       execSync(`
         docker run -d \
           --name fast-redis \
           -p 6379:6379 \
-          redis:6
+          redis:6.2
       `);
-      console.log('Created and started new Redis container');
+      console.log('Created and started new Redis 6.2 container');
     }
 
     return true;
@@ -90,7 +90,7 @@ async function main() {
     }
   }
 
-  console.log('Redis is running and available at localhost:6379');
+  console.log('Redis 6.2 is running and available at localhost:6379');
 }
 
 main().catch(error => {

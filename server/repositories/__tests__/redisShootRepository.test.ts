@@ -10,13 +10,13 @@ describe('RedisShootRepository', () => {
   let repository: RedisShootRepository;
 
   beforeAll(async () => {
-    // Start a Redis container for testing
-    container = await new GenericContainer('redis:6')
+    // Start a Redis 6.2 container for testing (matching Upstash version)
+    container = await new GenericContainer('redis:6.2')
       .withExposedPorts(6379)
       .start();
 
     redisUrl = `redis://${container.getHost()}:${container.getMappedPort(6379)}`;
-    console.log(`Redis test container running at ${redisUrl}`);
+    console.log(`Redis 6.2 test container running at ${redisUrl}`);
 
     repository = new RedisShootRepository({ redisUrl });
   }, 30000); // Increase timeout for container startup
