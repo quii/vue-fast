@@ -46,47 +46,34 @@ export class PushNotificationManager extends EventTarget {
   }
 
   private setupDefaultRules(): void {
-    // Rule: Leader update every dozen arrows
+    // Leader update every dozen arrows across all participants
     this.addRule({
       id: 'leader-dozen-arrows',
       name: 'Leader Update (Every 12 Arrows)',
       enabled: true,
-      cooldown: 30000, // 30 second cooldown minimum
-      condition: (data) => {
-        // Trigger when total arrows in the shoot is divisible by 12
-        const totalArrows = data.participants.reduce((sum, p) => sum + (p.arrowsShot || 0), 0)
-        return totalArrows > 0 && totalArrows % 12 === 0
-      },
-      message: (data) => {
-        const gap = data.participants.length > 1
-          ? data.leaderScore - (data.participants[1]?.totalScore || 0)
-          : 0
-
-        if (gap > 0) {
-          return `🏹 ${data.leaderName} leads by ${gap} points (${data.leaderScore})`
-        } else {
-          return `🏹 ${data.leaderName} is in the lead with ${data.leaderScore}`
-        }
-      }
+      condition: (data) => data.totalArrows > 0 && data.totalArrows % 12 === 0,
+      message: (data) => `🏹 After ${data.totalArrows} arrows: ${data.leaderName} leads with ${data.leaderScore}`,
+      cooldown: 30000 // 30 seconds
     })
 
-    // Rule: Close competition (within 5 points)
+    // Close competition alert
     this.addRule({
       id: 'close-competition',
       name: 'Close Competition Alert',
       enabled: true,
-      cooldown: 60000, // 1 minute cooldown
       condition: (data) => {
         if (data.participants.length < 2) return false
         const leader = data.participants[0]
         const second = data.participants[1]
-        const gap = leader.totalScore - second.totalScore
-        return gap <= 5 && gap > 0 && leader.totalScore > 50 // Only after some meaningful scoring
+        return (leader.totalScore - second.totalScore) <= 5 && leader.totalScore > 0
       },
       message: (data) => {
-        const gap = data.participants[0].totalScore - data.participants[1].totalScore
-        return `🔥 Tight race! ${data.participants[0].archerName} leads ${data.participants[1].archerName} by just ${gap} points`
-      }
+        const leader = data.participants[0]
+        const second = data.participants[1]
+        const gap = leader.totalScore - second.totalScore
+        return `🔥 Close competition! ${leader.archerName} leads ${second.archerName} by just ${gap} point${gap !== 1 ? 's' : ''}!`
+      },
+      cooldown: 60000 // 60 seconds
     })
   }
 
@@ -131,9 +118,11 @@ export class PushNotificationManager extends EventTarget {
   }
 
   processShootUpdate(shootCode: string, participants: ShootParticipant[], updatedArcher: string): void {
-    if (this.permission !== 'granted' || participants.length === 0) return
+    if (this.permission !== 'granted' || participants.length === 0) {
+      return
+    }
 
-    const shootSettings = this.getShootSettings(shootCode)
+    // Sort participants by score to get leader
     const sortedParticipants = [...participants].sort((a, b) => b.totalScore - a.totalScore)
     const leader = sortedParticipants[0]
 
@@ -145,6 +134,8 @@ export class PushNotificationManager extends EventTarget {
       leaderName: leader.archerName,
       leaderScore: leader.totalScore
     }
+
+    const shootSettings = this.getShootSettings(shootCode)
 
     // Check each rule, but only if enabled for this shoot
     for (const [ruleId, rule] of this.rules) {
@@ -172,17 +163,15 @@ export class PushNotificationManager extends EventTarget {
     if (this.permission === 'granted') {
       const notification = new Notification('Fast Archery', {
         body: message,
-        icon: '/favicon.ico', // or your app icon
+        icon: '/favicon.ico',
         badge: '/favicon.ico',
-        tag: `${shootCode}-${ruleId}`, // This replaces previous notifications with same tag
+        tag: `${shootCode}-${ruleId}`,
         requireInteraction: false,
         silent: false
       })
 
-      // Auto-close after 4 seconds
       setTimeout(() => notification.close(), 4000)
 
-      // Emit event for other parts of the app
       this.dispatchEvent(new CustomEvent('notification-sent', {
         detail: { message, ruleId, shootCode }
       }))

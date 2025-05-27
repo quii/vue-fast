@@ -43,6 +43,9 @@ const sortedParticipants = computed(() => {
     }))
 })
 
+// Add this computed property
+const shootCode = computed(() => props.shoot?.code || '')
+
 const currentUserParticipant = computed(() => {
   return sortedParticipants.value.find(p => p.archerName === userStore.user.name)
 })

@@ -23,21 +23,15 @@ export class WebSocketNotificationService extends EventTarget implements ShootNo
     // Default to current host with ws/wss protocol and /ws path
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
     this.url = url || `${protocol}//${window.location.host}/ws`
-    console.log('🔧 WebSocket service created with URL:', this.url)
   }
 
   /**
    * Connect to the WebSocket server
    */
   async connect(): Promise<void> {
-    console.log('🚀 Attempting to connect to WebSocket at:', this.url)
-
     return new Promise((resolve, reject) => {
       try {
         this.ws = new WebSocket(this.url)
-        console.log('📡 WebSocket object created, readyState:', this.ws.readyState)
-
-        // Set a timeout for connection
         const connectionTimeout = setTimeout(() => {
           console.error('⏰ WebSocket connection timeout after 10 seconds')
           if (this.ws) {
@@ -47,13 +41,11 @@ export class WebSocketNotificationService extends EventTarget implements ShootNo
         }, 10000)
 
         this.ws.onopen = () => {
-          console.log('✅ WebSocket onopen event fired')
           clearTimeout(connectionTimeout)
           this.reconnectAttempts = 0
 
           // Re-subscribe to any shoots we were subscribed to
           this.subscribedShoots.forEach(shootCode => {
-            console.log('🔄 Re-subscribing to shoot:', shootCode)
             this.subscribeToShoot(shootCode)
           })
 
@@ -64,7 +56,6 @@ export class WebSocketNotificationService extends EventTarget implements ShootNo
         }
 
         this.ws.onmessage = (event) => {
-          console.log('📨 WebSocket message received:', event.data)
           try {
             const message = JSON.parse(event.data) as WebSocketMessage
             this.handleMessage(message)
@@ -74,7 +65,6 @@ export class WebSocketNotificationService extends EventTarget implements ShootNo
         }
 
         this.ws.onclose = (event) => {
-          console.log('🔌 WebSocket onclose event fired. Code:', event.code, 'Reason:', event.reason)
           clearTimeout(connectionTimeout)
           this.ws = null
 
@@ -97,17 +87,6 @@ export class WebSocketNotificationService extends EventTarget implements ShootNo
 
           reject(error)
         }
-
-        // Log readyState changes
-        const checkReadyState = () => {
-          if (this.ws) {
-            console.log('📊 WebSocket readyState:', this.ws.readyState, this.getReadyStateString(this.ws.readyState))
-            if (this.ws.readyState === WebSocket.CONNECTING) {
-              setTimeout(checkReadyState, 1000)
-            }
-          }
-        }
-        checkReadyState()
 
       } catch (error) {
         console.error('❌ Error creating WebSocket:', error)
@@ -149,7 +128,6 @@ export class WebSocketNotificationService extends EventTarget implements ShootNo
         shootCode
       }
       this.ws.send(JSON.stringify(message))
-      console.log('📤 Subscribed to shoot:', shootCode)
     }
   }
 
@@ -165,7 +143,6 @@ export class WebSocketNotificationService extends EventTarget implements ShootNo
         shootCode
       }
       this.ws.send(JSON.stringify(message))
-      console.log('📤 Unsubscribed from shoot:', shootCode)
     }
   }
 
@@ -182,12 +159,9 @@ export class WebSocketNotificationService extends EventTarget implements ShootNo
    * Handle incoming WebSocket messages
    */
   private handleMessage(message: WebSocketMessage): void {
-    console.log('🎯 Handling WebSocket message:', message.type, 'for shoot:', message.shootCode)
-
     switch (message.type) {
       case 'notification':
         if (message.shootCode && message.data) {
-          console.log('🔔 Emitting shoot-notification event:', message.data)
           // Emit notification event
           this.dispatchEvent(new CustomEvent('shoot-notification', {
             detail: {
@@ -200,7 +174,6 @@ export class WebSocketNotificationService extends EventTarget implements ShootNo
 
       case 'update':
         if (message.shootCode && message.data?.shoot) {
-          console.log('🔄 Emitting shoot-updated event for shoot:', message.shootCode)
           // Emit shoot update event
           this.dispatchEvent(new CustomEvent('shoot-updated', {
             detail: {
@@ -214,7 +187,6 @@ export class WebSocketNotificationService extends EventTarget implements ShootNo
       case 'subscribe':
       case 'unsubscribe':
         // Acknowledgment messages - could log for debugging
-        console.log(`WebSocket: ${message.type} acknowledged for ${message.shootCode}`)
         break
 
       default:
@@ -234,8 +206,6 @@ export class WebSocketNotificationService extends EventTarget implements ShootNo
 
     this.reconnectAttempts++
     const delay = this.reconnectDelay * Math.pow(2, this.reconnectAttempts - 1) // Exponential backoff
-
-    console.log(`🔄 Attempting to reconnect in ${delay}ms (attempt ${this.reconnectAttempts}/${this.maxReconnectAttempts})`)
 
     this.dispatchEvent(new CustomEvent('websocket-reconnecting', {
       detail: { attempt: this.reconnectAttempts, delay }
