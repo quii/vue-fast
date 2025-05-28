@@ -22,16 +22,17 @@ export class RedisShootRepository implements ShootRepository {
     console.log('🔧 Environment REDIS_URL:', process.env.REDIS_URL);
 
     // Configure ioredis to not send CLIENT commands
-    const redisOptions = {
-      enableAutoPipelining: false,
-      lazyConnect: true,
-      // Disable client info commands that Upstash doesn't support
-      enableReadyCheck: false,
-      maxRetriesPerRequest: 3
-    };
+    // const redisOptions = {
+    //   enableAutoPipelining: false,
+    //   lazyConnect: true,
+    //   // Disable client info commands that Upstash doesn't support
+    //   enableReadyCheck: false,
+    //   maxRetriesPerRequest: 3
+    // };
 
     // @ts-ignore
-    this.redis = new Redis(redisUrl, redisOptions);
+    this.redis = new Redis(redisUrl);
+    // this.redis = new Redis(redisUrl, redisOptions);
 
     // @ts-ignore
     this.redis.on('error', (err) => {
