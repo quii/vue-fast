@@ -35,40 +35,10 @@ export async function getRedisClient(config: RedisConfig = {}): Promise<ReturnTy
   const url = config.url || process.env.REDIS_URL ||
     `redis://${config.username ? `${config.username}:${config.password}@` : ''}${config.host || 'localhost'}:${config.port || 6379}`;
 
-  // Check if this is Upstash (or set via environment variable)
-  const isUpstash = url.includes('upstash.io') || process.env.REDIS_DISABLE_CLIENT_INFO === 'true';
-
-  // Create client configuration
-  const clientConfig: any = {
-    url,
-    // Force Redis protocol version 6.2 for Upstash compatibility
-    RESP: 2, // Use RESP2 protocol (Redis 6.2 compatible)
-  };
-
-  if (isUpstash) {
-    // Additional Upstash-specific configuration
-    clientConfig.socket = {
-      reconnectStrategy: true,
-      connectTimeout: 5000,
-      keepAlive: true,
-    };
-  }
-
   // Create a new client
-  redisClient = createClient(clientConfig);
+  redisClient = createClient({url});
 
-  // Set up error handling - filter out Upstash compatibility errors
   redisClient.on('error', (err) => {
-    // Suppress known Upstash compatibility errors
-    if (err.message && (
-      err.message.includes('CLIENT SETINFO') ||
-      err.message.includes('CLIENT SETNAME') ||
-      err.message.includes('CLIENT GETREDIR') ||
-      err.message.includes('not available')
-    )) {
-      console.warn('Redis compatibility warning (suppressed):', err.message);
-      return;
-    }
     console.error('Redis client error:', err);
   });
 
