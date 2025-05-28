@@ -23,8 +23,10 @@ export async function getRedisClient(config: RedisConfig = {}): Promise<ReturnTy
     return redisClient;
   }
 
+
   // If we have a client but it's closed, destroy it
   if (redisClient) {
+    console.log('❓ Had a redis client that was closed, destroying it');
     redisClient.destroy();
     redisClient = null;
   }
@@ -46,9 +48,9 @@ export async function getRedisClient(config: RedisConfig = {}): Promise<ReturnTy
   if (isUpstash) {
     // Additional Upstash-specific configuration
     clientConfig.socket = {
-      reconnectStrategy: false, // Better for serverless
-      connectTimeout: 10000,
-      keepAlive: false,
+      reconnectStrategy: true,
+      connectTimeout: 5000,
+      keepAlive: true,
     };
   }
 
