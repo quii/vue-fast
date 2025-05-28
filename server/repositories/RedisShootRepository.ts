@@ -1,6 +1,6 @@
+import Redis from 'ioredis';
 import { Shoot, ShootParticipant } from '../../shared/models/Shoot.js';
 import { ShootRepository } from '../../shared/ports/ShootRepository.js';
-import { getRedisClient } from '../services/redisClient.js';
 import { mergeShootChanges } from '../../shared/utils/shootMergeUtils.js';
 
 export interface RedisShootRepositoryConfig {
@@ -11,78 +11,86 @@ export interface RedisShootRepositoryConfig {
  * Redis implementation of the ShootRepository interface
  */
 export class RedisShootRepository implements ShootRepository {
-  private redisConfig: RedisShootRepositoryConfig;
+  // @ts-ignore
+  private redis: Redis;
 
   constructor(config: RedisShootRepositoryConfig = {}) {
-    this.redisConfig = config;
+    const redisUrl = config.redisUrl || process.env.REDIS_URL || 'redis://localhost:6379';
+
+    // Configure ioredis to not send CLIENT commands
+    const redisOptions = {
+      enableAutoPipelining: false,
+      lazyConnect: true,
+      // Disable client info commands that Upstash doesn't support
+      enableReadyCheck: false,
+      maxRetriesPerRequest: 3
+    };
+
+    // @ts-ignore
+    this.redis = new Redis(redisUrl, redisOptions);
+
+    // @ts-ignore
+    this.redis.on('error', (err) => {
+      // Suppress CLIENT command errors
+      if (err.message && err.message.includes('CLIENT')) {
+        console.warn('Redis CLIENT command not supported:', err.message);
+        return;
+      }
+      console.error('Redis error:', err);
+    });
+
+    this.redis.on('connect', () => {
+      console.log('✅ Connected to Redis');
+    });
   }
 
   /**
    * Saves a shoot to Redis with optimistic locking
-   * @param shoot The shoot to save
-   * @param retries Number of retries for optimistic locking (default: 3)
    */
-  async saveShoot(shoot: Shoot, retries = 3): Promise<void> {
-    const client = await getRedisClient({ url: this.redisConfig.redisUrl });
+  async saveShoot(shoot: Shoot): Promise<void> {
     const key = `shoots:${shoot.code}`;
 
-    // Start a transaction
-    const multi = client.multi();
-
     // Watch the key for changes
-    await client.watch(key);
+    await this.redis.watch(key);
 
     // Get the current value
-    const currentValue = await this.getStringFromRedis(key);
+    const currentValue = await this.redis.get(key);
 
-    // If the key exists, check if it has been modified
+    // If the key exists, merge changes
     if (currentValue !== null) {
       const currentShoot = this.deserializeShoot(currentValue);
-
-      // Always merge changes from the incoming shoot to the current shoot
-      // This ensures we don't lose any updates
       mergeShootChanges(currentShoot, shoot);
-
-      // Use the merged shoot for saving
       shoot = currentShoot;
     }
 
     // Serialize the shoot data
     const serializedShoot = this.serializeShoot(shoot);
 
-    // Calculate TTL in seconds (time until expiration)
+    // Calculate TTL in seconds
     const ttlSeconds = Math.max(
-      1, // Minimum 1 second
+      1,
       Math.floor((shoot.expiresAt.getTime() - Date.now()) / 1000)
     );
 
-    // Add commands to the transaction
+    // Execute transaction
+    const multi = this.redis.multi();
     multi.set(key, serializedShoot);
     multi.expire(key, ttlSeconds);
-    multi.sAdd('shoots:active', shoot.code);
-
-    // Execute the transaction
+    multi.sadd('shoots:active', shoot.code);
     await multi.exec();
   }
 
-  /**
-   * Gets a shoot by its code
-   * @param code The shoot code
-   * @returns The shoot or null if not found or expired
-   */
   async getShootByCode(code: string): Promise<Shoot | null> {
-    const client = await getRedisClient({ url: this.redisConfig.redisUrl });
-    const serializedShoot = await client.get(`shoots:${code}`);
+    const serializedShoot = await this.redis.get(`shoots:${code}`);
 
     if (!serializedShoot) {
       return null;
     }
 
     try {
-      // Deserialize the shoot data
       const shoot = this.deserializeShoot(serializedShoot);
 
-      // Check if the shoot has expired
+      // Check if expired
       if (new Date() > shoot.expiresAt) {
         await this.deleteShoot(code);
         return null;
@@ -95,30 +103,13 @@ export class RedisShootRepository implements ShootRepository {
     }
   }
 
-  /**
-   * Deletes a shoot
-   * @param code The shoot code
-   */
   async deleteShoot(code: string): Promise<void> {
-    const client = await getRedisClient({ url: this.redisConfig.redisUrl });
-
-    // Delete the shoot data
-    await client.del(`shoots:${code}`);
-
-    // Remove from active shoots set
-    await client.sRem('shoots:active', code);
+    await this.redis.del(`shoots:${code}`);
+    await this.redis.srem('shoots:active', code);
   }
 
-  /**
-   * Checks if a shoot code exists
-   * @param code The shoot code to check
-   * @returns True if the code exists, false otherwise
-   */
   async codeExists(code: string): Promise<boolean> {
-    const client = await getRedisClient({ url: this.redisConfig.redisUrl });
-
-    // Check if the key exists
-    const exists = await client.exists(`shoots:${code}`);
+    const exists = await this.redis.exists(`shoots:${code}`);
     return exists === 1;
   }
 
@@ -126,57 +117,25 @@ export class RedisShootRepository implements ShootRepository {
    * Clears all data (for testing)
    */
   async clear(): Promise<void> {
-    const client = await getRedisClient({ url: this.redisConfig.redisUrl });
+    const stringCodes = await this.redis.smembers('shoots:active');
 
-    // Get all active shoot codes
-    const stringCodes = await this.getStringArrayFromRedis('shoots:active');
-
-    // Delete all shoot data
     if (stringCodes.length > 0) {
+      // @ts-ignore
       const keys = stringCodes.map(code => `shoots:${code}`);
-      await client.del(keys);
+      await this.redis.del(...keys);
     }
 
-    // Clear the active shoots set
-    await client.del('shoots:active');
+    await this.redis.del('shoots:active');
   }
 
   /**
-   * Gets an array of string values from Redis set
-   * @param key The Redis key for a set
-   * @returns Array of string values
+   * Close the Redis connection
    */
-  private async getStringArrayFromRedis(key: string): Promise<string[]> {
-    const client = await getRedisClient({ url: this.redisConfig.redisUrl });
-    const values = await client.sMembers(key);
-
-    // The vanilla redis client returns string arrays directly
-    return values;
+  async close(): Promise<void> {
+    await this.redis.quit();
   }
 
-  /**
-   * Gets a string value from Redis, handling Buffer conversion
-   * @param key The Redis key
-   * @returns The string value or null if not found
-   */
-  private async getStringFromRedis(key: string): Promise<string | null> {
-    const client = await getRedisClient({ url: this.redisConfig.redisUrl });
-    const value = await client.get(key);
-
-    if (!value) {
-      return null;
-    }
-
-    return typeof value === 'string' ? value : String(value);
-  }
-
-  /**
-   * Serializes a shoot object to a JSON string with special handling for Date objects
-   * @param shoot The shoot to serialize
-   * @returns Serialized shoot data
-   */
   private serializeShoot(shoot: Shoot): string {
-    // Create a deep copy with date markers
     const shootCopy = {
       ...shoot,
       createdAt: { __isDate: true, value: shoot.createdAt.toISOString() },
@@ -191,16 +150,10 @@ export class RedisShootRepository implements ShootRepository {
     return JSON.stringify(shootCopy);
   }
 
-  /**
-   * Deserializes a JSON string to a shoot object with special handling for Date objects
-   * @param serialized The serialized shoot data
-   * @returns Deserialized shoot object
-   */
   private deserializeShoot(serialized: string): Shoot {
     const parsed = JSON.parse(serialized);
 
-    // Convert date markers back to Date objects
-    const shoot = {
+    return {
       ...parsed,
       createdAt: new Date(parsed.createdAt.__isDate ? parsed.createdAt.value : parsed.createdAt),
       expiresAt: new Date(parsed.expiresAt.__isDate ? parsed.expiresAt.value : parsed.expiresAt),
@@ -210,7 +163,5 @@ export class RedisShootRepository implements ShootRepository {
         lastUpdated: new Date(p.lastUpdated.__isDate ? p.lastUpdated.value : p.lastUpdated)
       }))
     };
-
-    return shoot;
   }
 }

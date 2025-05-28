@@ -6,7 +6,6 @@ import dotenv from 'dotenv'
 import fs from 'fs'
 import { S3Service } from './services/s3Service.js'
 import { createApiRouter } from './routes/api.js'
-import { closeRedisClient } from './services/redisClient.js'
 import { RedisShootRepository } from './repositories/RedisShootRepository.js'
 import { InMemoryShootRepository } from '../shared/services/InMemoryShootRepository.js'
 import { ShootRepository } from '../shared/ports/ShootRepository.js'
@@ -120,9 +119,6 @@ process.on('SIGTERM', async () => {
   // Close WebSocket connections
   webSocketManager.close();
 
-  // Close Redis connection
-  await closeRedisClient();
-
   // Exit the process
   process.exit(0);
 });
@@ -132,9 +128,6 @@ process.on('SIGINT', async () => {
 
   // Close WebSocket connections
   webSocketManager.close();
-
-  // Close Redis connection
-  await closeRedisClient();
 
   // Exit the process
   process.exit(0);

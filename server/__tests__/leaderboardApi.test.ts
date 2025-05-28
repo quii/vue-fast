@@ -1,11 +1,10 @@
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
-import { GenericContainer, StartedTestContainer } from 'testcontainers'
+import { GenericContainer, StartedTestContainer, Wait } from 'testcontainers'
 import express from 'express'
 import request from 'supertest'
 import { createApiRouter } from '../routes/api.js'
 import { S3Service } from '../services/s3Service.js'
 import { RedisShootRepository } from '../repositories/RedisShootRepository.js'
-import { closeRedisClient } from '../services/redisClient.js'
 import { InMemoryShootNotificationService } from '../../shared/services/InMemoryShootNotificationService'
 import { ShootServiceImpl } from '../../shared/services/ShootServiceImpl'
 
@@ -17,16 +16,75 @@ describe('Leaderboard API Integration Tests', () => {
   let createdShootCode: string
 
   beforeAll(async () => {
-    // Start a Redis container for testing
-    redisContainer = await new GenericContainer('redis:6')
+    console.log('🚀 Starting Redis container...')
+
+    // Start a Redis container with proper wait strategy
+    redisContainer = await new GenericContainer('redis:6.2')
       .withExposedPorts(6379)
+      .withWaitStrategy(Wait.forLogMessage('Ready to accept connections'))
+      .withStartupTimeout(30000)
       .start()
 
-    redisUrl = `redis://${redisContainer.getHost()}:${redisContainer.getMappedPort(6379)}`
-    console.log(`Redis test container running at ${redisUrl}`)
+    const host = redisContainer.getHost()
+    const port = redisContainer.getMappedPort(6379)
+    redisUrl = `redis://${host}:${port}`
 
-    // Create the repository with the test container
+    console.log(`📍 Redis container ready at: ${redisUrl}`)
+
+    // Additional wait with retry logic
+    console.log('🧪 Testing Redis connection with retries...')
+    const Redis = require('ioredis')
+    let connected = false
+    let attempts = 0
+    const maxAttempts = 10
+
+    while (!connected && attempts < maxAttempts) {
+      attempts++
+      console.log(`   Attempt ${attempts}/${maxAttempts}`)
+
+      const testClient = new Redis(redisUrl, {
+        connectTimeout: 5000,
+        lazyConnect: true,
+        retryDelayOnFailover: 100,
+        maxRetriesPerRequest: 1
+      })
+
+      try {
+        await testClient.connect()
+        const result = await testClient.ping()
+        console.log(`✅ Redis ping successful: ${result}`)
+        await testClient.quit()
+        connected = true
+      } catch (error) {
+        console.log(`   ❌ Attempt ${attempts} failed: ${error.message}`)
+        try {
+          await testClient.quit()
+        } catch (e) {
+          // Ignore cleanup errors
+        }
+
+        if (attempts < maxAttempts) {
+          await new Promise(resolve => setTimeout(resolve, 1000))
+        }
+      }
+    }
+
+    if (!connected) {
+      throw new Error('Failed to connect to Redis after multiple attempts')
+    }
+
+    // Now create our repository
+    console.log('🏗️ Creating repository...')
     shootRepository = new RedisShootRepository({ redisUrl })
+
+    // Test repository connection
+    try {
+      await shootRepository.codeExists('test-connection')
+      console.log('✅ Repository connection successful')
+    } catch (error) {
+      console.error('❌ Repository connection failed:', error)
+      throw error
+    }
 
     // Create a proper instance of S3Service with minimal configuration
     const s3Service = new S3Service({
@@ -47,19 +105,31 @@ describe('Leaderboard API Integration Tests', () => {
     app = express()
     app.use(express.json())
     app.use('/api', createApiRouter({ s3Service, shootService }))
-  }, 30000) // Increase timeout for container startup
+  }, 90000) // Increased timeout
 
   afterAll(async () => {
-    // Close Redis client connections
-    await closeRedisClient()
+    // Close the repository's Redis connection
+    if (shootRepository) {
+      try {
+        await shootRepository.close()
+      } catch (error) {
+        console.warn('Error closing Redis connection:', error)
+      }
+    }
 
     // Stop the container after tests
     if (redisContainer) {
-      await redisContainer.stop()
+      try {
+        await redisContainer.stop()
+      } catch (error) {
+        console.warn('Error stopping container:', error)
+      }
     }
   })
 
   it('should create a new shoot', async () => {
+    console.log('🎯 Testing shoot creation...')
+
     const response = await request(app)
       .post('/api/shoots')
       .send({ creatorName: 'Test Creator' })

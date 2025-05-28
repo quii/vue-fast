@@ -1,8 +1,7 @@
 import { RedisShootRepository } from '../RedisShootRepository.js';
 import { ShootRepositoryContract } from '../../../shared/services/__tests__/ShootRepositoryContract.js';
-import { GenericContainer, StartedTestContainer } from 'testcontainers';
-import { describe, beforeAll, afterAll, beforeEach, it, expect } from 'vitest';
-import { closeRedisClient } from '../../services/redisClient'
+import { GenericContainer, StartedTestContainer, Wait } from 'testcontainers';
+import { describe, beforeAll, afterAll } from 'vitest';
 
 describe('RedisShootRepository', () => {
   let container: StartedTestContainer;
@@ -10,37 +9,103 @@ describe('RedisShootRepository', () => {
   let repository: RedisShootRepository;
 
   beforeAll(async () => {
-    // Start a Redis 6.2 container for testing (matching Upstash version)
+    console.log('🚀 Starting Redis container...')
+
+    // Use EXACTLY the same pattern as leaderboardApi.test.ts
     container = await new GenericContainer('redis:6.2')
       .withExposedPorts(6379)
-      .start();
+      .withWaitStrategy(Wait.forLogMessage('Ready to accept connections'))
+      .withStartupTimeout(30000)
+      .start()
 
-    redisUrl = `redis://${container.getHost()}:${container.getMappedPort(6379)}`;
-    console.log(`Redis 6.2 test container running at ${redisUrl}`);
+    const host = container.getHost()
+    const port = container.getMappedPort(6379)
+    redisUrl = `redis://${host}:${port}`
 
-    repository = new RedisShootRepository({ redisUrl });
-  }, 30000); // Increase timeout for container startup
+    console.log(`📍 Redis container ready at: ${redisUrl}`)
+
+    // Copy the EXACT retry logic from leaderboardApi.test.ts
+    console.log('🧪 Testing Redis connection with retries...')
+    const Redis = require('ioredis') // <-- Use require like the working test
+    let connected = false
+    let attempts = 0
+    const maxAttempts = 10
+
+    while (!connected && attempts < maxAttempts) {
+      attempts++
+      console.log(`   Attempt ${attempts}/${maxAttempts}`)
+
+      const testClient = new Redis(redisUrl, {
+        connectTimeout: 5000,
+        lazyConnect: true,
+        retryDelayOnFailover: 100,
+        maxRetriesPerRequest: 1
+      })
+
+      try {
+        await testClient.connect()
+        const result = await testClient.ping()
+        console.log(`✅ Redis ping successful: ${result}`)
+        await testClient.quit()
+        connected = true
+      } catch (error) {
+        console.log(`   ❌ Attempt ${attempts} failed: ${error.message}`)
+        try {
+          await testClient.quit()
+        } catch (e) {
+          // Ignore cleanup errors
+        }
+
+        if (attempts < maxAttempts) {
+          await new Promise(resolve => setTimeout(resolve, 1000))
+        }
+      }
+    }
+
+    if (!connected) {
+      throw new Error('Failed to connect to Redis after multiple attempts')
+    }
+
+    // Now create our repository
+    console.log('🏗️ Creating repository...')
+    repository = new RedisShootRepository({ redisUrl })
+
+    // Test repository connection
+    try {
+      await repository.codeExists('test-connection')
+      console.log('✅ Repository connection successful')
+    } catch (error) {
+      console.error('❌ Repository connection failed:', error)
+      throw error
+    }
+  }, 90000) // Same timeout as leaderboardApi.test.ts
 
   afterAll(async () => {
-    // Close Redis client connections
-    await closeRedisClient();
-
-    // Stop the container after tests
-    if (container) {
-      await container.stop();
+    // Close the repository's Redis connection
+    if (repository) {
+      try {
+        await repository.close()
+      } catch (error) {
+        console.warn('Error closing repository:', error)
+      }
     }
-  });
 
-  // Run the contract tests against the Redis implementation
+    // Stop the container
+    if (container) {
+      try {
+        await container.stop()
+      } catch (error) {
+        console.warn('Error stopping container:', error)
+      }
+    }
+  })
+
+  // Run the contract tests
   ShootRepositoryContract(
     'RedisShootRepository',
     async () => {
-      // Clear any existing data
       await repository.clear();
       return repository;
-    },
-    async () => {
-      // No additional cleanup needed as container will be stopped
     }
   );
 });
