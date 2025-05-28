@@ -17,6 +17,10 @@ export class RedisShootRepository implements ShootRepository {
   constructor(config: RedisShootRepositoryConfig = {}) {
     const redisUrl = config.redisUrl || process.env.REDIS_URL || 'redis://localhost:6379';
 
+    // Debug logging
+    console.log('🔧 Redis URL being used:', redisUrl);
+    console.log('🔧 Environment REDIS_URL:', process.env.REDIS_URL);
+
     // Configure ioredis to not send CLIENT commands
     const redisOptions = {
       enableAutoPipelining: false,
