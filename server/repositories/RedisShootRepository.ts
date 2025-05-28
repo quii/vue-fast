@@ -31,7 +31,7 @@ export class RedisShootRepository implements ShootRepository {
     // };
 
     // @ts-ignore
-    this.redis = new Redis(redisUrl);
+    this.redis = new Redis(redisUrl, {family: 6});
     // this.redis = new Redis(redisUrl, redisOptions);
 
     // @ts-ignore
