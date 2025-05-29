@@ -40,7 +40,7 @@
     "ioredis": "^5.6.1",
     "node-fetch": "^3.3.2",
     "pinia": "^3.0.2",
-    "redis": "^5.1.0",
+    "redis": "^5.1.1",
     "vue": "^3.5.15",
     "vue-class-component": "^8.0.0-0",
     "vue-router": "^4.5.1",
