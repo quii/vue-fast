@@ -48,6 +48,13 @@ const infoDisplays = computed(() => {
 
   const displays = [];
 
+  if (props.maxPossibleScore !== null) {
+    displays.push({
+      value: props.maxPossibleScore,
+      label: "Max Score"
+    });
+  }
+
   if (props.arrowsRemaining !== null) {
     displays.push({
       value: props.arrowsRemaining,
