@@ -30,14 +30,6 @@ export const useShootStore = defineStore('shoot', () => {
   const isInShoot = computed(() => currentShoot.value !== null)
   const shootCode = computed(() => currentShoot.value?.code || '')
 
-  // Check if current user is finished
-  const isCurrentUserFinished = computed(() => {
-    if (!currentShoot.value) return false
-    // You'll need to pass the current user's name to check this
-    // This might need to be updated based on how you track the current user
-    return false // Placeholder - implement based on your user tracking
-  })
-
   // LocalStorage helpers
   function saveShootState(shootCode: string, archerName: string, roundName: string) {
     const state: PersistedShootState = {
@@ -413,7 +405,6 @@ export const useShootStore = defineStore('shoot', () => {
     // Computed
     isInShoot,
     shootCode,
-    isCurrentUserFinished,
 
     // Services - expose for components
     pushNotificationManager: computed(() => pushNotificationManager),
