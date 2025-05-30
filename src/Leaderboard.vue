@@ -15,6 +15,7 @@ import { useGameTypeStore } from '@/stores/game_type'
 import { useScoresStore } from '@/stores/scores'
 import { calculateTotal } from '@/domain/scoring/subtotals.js'
 import { convertToValues } from '@/domain/scoring/scores.js'
+import BaseInput from '@/components/ui/BaseInput.vue'
 
 const shootStore = useShootStore()
 const userStore = useUserStore()
@@ -27,6 +28,22 @@ const showNamePrompt = ref(false)
 const showNotificationModal = ref(false)
 const pendingAction = ref(null) // 'create' or 'join'
 const userName = ref('')
+const nameError = ref('')
+const joinCodeRaw = ref('')
+const joinError = ref('')
+const isJoining = ref(false)
+const isCreating = ref(false)
+
+const joinCode = computed({
+  get() {
+    return joinCodeRaw.value
+  },
+  set(value) {
+    // Only allow digits and limit to 4 characters
+    const digits = value.replace(/\D/g, '').slice(0, 4)
+    joinCodeRaw.value = digits
+  }
+})
 
 // Computed
 const isInShoot = computed(() => shootStore.isInShoot)
@@ -41,12 +58,10 @@ const activeView = computed(() => {
   if (isInShoot.value) {
     return 'leaderboard'
   }
-  if (showNamePrompt.value) {
+  if (showNamePrompt.value || !hasUserName.value) {
     return 'name-prompt'
   }
-  if (showJoinForm.value) {
-    return 'join'
-  }
+  // Remove the showJoinForm check - we'll embed it in the menu
   return 'menu'
 })
 
@@ -106,13 +121,7 @@ function showJoinShoot() {
 }
 
 async function createShoot() {
-  if (!hasUserName.value) {
-    pendingAction.value = 'create'
-    userName.value = ''
-    showNamePrompt.value = true
-    return
-  }
-
+  isCreating.value = true
   try {
     await shootStore.createShoot(
       userStore.user.name,
@@ -122,6 +131,8 @@ async function createShoot() {
     )
   } catch (error) {
     console.error('Failed to create shoot:', error)
+  } finally {
+    isCreating.value = false
   }
 }
 
@@ -130,27 +141,63 @@ function backToMenu() {
   showNamePrompt.value = false
   pendingAction.value = null
   userName.value = ''
+  nameError.value = ''
+}
+
+function validateName(name) {
+  const trimmedName = name.trim()
+
+  if (trimmedName.length === 0) {
+    return 'Please enter your name'
+  }
+
+  if (trimmedName.length < 2) {
+    return 'Name must be at least 2 characters long'
+  }
+
+  // Check if it's a 4-digit number (likely a join code)
+  if (/^\d{4}$/.test(trimmedName)) {
+    return 'Please enter your name, not a join code'
+  }
+
+  return null
+}
+
+function handleNameInput() {
+  nameError.value = ''
 }
 
 function handleNameSubmit() {
+  const error = validateName(userName.value)
+  if (error) {
+    nameError.value = error
+    return
+  }
+
   const trimmedName = userName.value.trim()
-  if (trimmedName.length === 0) return
 
   // Update the user store with the new name
   userStore.updateUser({ name: trimmedName })
 
-  // Execute the pending action
+  // Execute the pending action or go to menu
   if (pendingAction.value === 'create') {
     showNamePrompt.value = false
     pendingAction.value = null
     userName.value = ''
+    nameError.value = ''
     // Create shoot immediately after setting name
     createShoot()
   } else if (pendingAction.value === 'join') {
     showNamePrompt.value = false
     pendingAction.value = null
     userName.value = ''
+    nameError.value = ''
     showJoinForm.value = true
+  } else {
+    // No pending action, just go to menu
+    showNamePrompt.value = false
+    userName.value = ''
+    nameError.value = ''
   }
 }
 
@@ -182,8 +229,11 @@ async function handleLeaveShoot() {
 }
 
 function handleNameKeyPress(event) {
-  if (event.key === 'Enter' && userName.value.trim().length > 0) {
-    handleNameSubmit()
+  if (event.key === 'Enter') {
+    const error = validateName(userName.value)
+    if (!error) {
+      handleNameSubmit()
+    }
   }
 }
 
@@ -194,6 +244,12 @@ function closeNotificationModal() {
 onMounted(async () => {
   await shootStore.initializeWebSocket()
   await shootStore.tryRestoreFromPersistedState()
+
+  // If user doesn't have a name, show the prompt immediately
+  if (!hasUserName.value) {
+    showNamePrompt.value = true
+    userName.value = ''
+  }
 })
 
 onUnmounted(() => {
@@ -219,23 +275,35 @@ onUnmounted(() => {
     <!-- Name prompt -->
     <div v-else-if="activeView === 'name-prompt'" class="content-container">
       <div class="name-prompt-container">
-        <h4 class="prompt-title">Enter Your Name</h4>
+        <div class="name-prompt-header">
+          <LiveIcon class="menu-icon" />
+
+          <h2 class="prompt-title">Welcome to Live Leaderboards!</h2>
+        </div>
+
         <p class="prompt-description">
-          Please enter your name to {{ pendingAction === 'create' ? 'create' : 'join' }} a live shoot.
+          <strong>Please enter your name</strong> to get started with live archery competitions.
+          <span v-if="pendingAction">
+            You'll then be able to {{ pendingAction === 'create' ? 'create' : 'join' }} a live shoot.
+          </span>
         </p>
 
         <div class="form-group">
-          <label for="user-name" class="form-label">Your Name</label>
-          <input
-            id="user-name"
+          <BaseInput
             v-model="userName"
             type="text"
-            class="form-input"
-            placeholder="Enter your name"
-            maxlength="50"
+            placeholder="Enter your full name (e.g. John Smith)"
+            :class="{ 'error': nameError }"
+            @input="handleNameInput"
             @keypress="handleNameKeyPress"
             autofocus
           />
+          <div v-if="nameError" class="error-message">
+            {{ nameError }}
+          </div>
+          <div class="input-hint">
+            This is your display name that other archers will see
+          </div>
         </div>
 
         <ButtonGroup>
@@ -247,6 +315,7 @@ onUnmounted(() => {
             Continue
           </BaseButton>
           <BaseButton
+            v-if="pendingAction"
             variant="text"
             @click="backToMenu"
           >
@@ -262,20 +331,39 @@ onUnmounted(() => {
         <div class="menu-header">
           <LiveIcon class="menu-icon" />
           <h2>Live Leaderboards</h2>
+          <p class="welcome-text">Welcome, {{ userStore.user.name }}!</p>
         </div>
 
-        <p class="menu-description">
-          Create or join a live leaderboard to compete with other archers in real-time.
-        </p>
+        <!-- Join Shoot Section -->
+        <div class="join-section">
+          <JoinShootForm
+            :user-name="userStore.user.name"
+            :round-type="gameTypeStore.type"
+            @shoot-joined="handleJoinShoot"
+            @cancel="() => {}"
+          />
+        </div>
 
-        <ButtonGroup>
-          <BaseButton @click="createShoot">
-            Create Live Shoot
+        <!-- Divider -->
+        <div class="section-divider">
+          <span>or</span>
+        </div>
+
+        <!-- Create Shoot Section -->
+        <div class="create-section">
+          <h3 class="section-title">Create a New Shoot</h3>
+          <p class="section-description">
+            Start a new live leaderboard for others to join
+          </p>
+
+          <BaseButton
+            variant="outline"
+            :disabled="isCreating"
+            @click="createShoot"
+          >
+            {{ isCreating ? 'Creating...' : 'Create Live Shoot' }}
           </BaseButton>
-          <BaseButton variant="outline" @click="showJoinShoot">
-            Join Live Shoot
-          </BaseButton>
-        </ButtonGroup>
+        </div>
       </div>
     </div>
 
@@ -307,7 +395,6 @@ onUnmounted(() => {
     />
   </div>
 </template>
-
 <style scoped>
 .page {
   padding: 0.5rem;
@@ -391,39 +478,66 @@ onUnmounted(() => {
   text-align: left;
 }
 
-.form-label {
-  display: block;
-  margin-bottom: 0.5rem;
+.join-section, .create-section {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  border: 1px solid var(--color-border, #e0e0e0);
+  border-radius: 8px;
+  background-color: var(--color-surface, #fafafa);
+}
+
+.section-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
   font-weight: 600;
   color: var(--color-text);
+}
+
+.section-description {
+  margin: 0 0 1rem 0;
+  font-size: 0.9rem;
+  color: var(--color-text-mute, #666);
+}
+
+.join-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.section-divider {
+  text-align: center;
+  margin: 1.5rem 0;
+  position: relative;
+  color: var(--color-text-mute, #666);
   font-size: 0.9rem;
 }
 
-.form-input {
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid var(--color-border, #ccc);
-  border-radius: 6px;
-  font-size: 1rem;
+.section-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: var(--color-border, #e0e0e0);
+  z-index: 1;
+}
+
+.section-divider span {
   background-color: var(--color-background);
-  color: var(--color-text);
-  box-sizing: border-box;
+  padding: 0 1rem;
+  position: relative;
+  z-index: 2;
 }
 
-.form-input:focus {
-  outline: none;
-  border-color: var(--color-highlight, #4CAF50);
-  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
-}
-
-@media (max-width: 480px) {
-  .form-input {
-    font-size: 16px; /* Prevents zoom on iOS */
-  }
-
-  .menu-container,
-  .name-prompt-container {
-    padding: 1rem 0.5rem;
-  }
+:deep(.code-input) {
+  text-align: center;
+  font-family: 'Courier New', monospace;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  max-width: 120px;
+  margin: 0 auto;
 }
 </style>

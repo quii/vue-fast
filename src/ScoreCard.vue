@@ -2,7 +2,6 @@
 import GameTypeSelector from "@/components/GameTypeSelector.vue";
 import NoteModal from "@/components/modals/NoteModal.vue";
 import ShootEditModal from "@/components/modals/ShootEditModal.vue";
-import LeaderboardModal from "@/components/modals/LeaderboardModal.vue";
 import RoundScores from "@/components/RoundScores.vue";
 import InteractiveTargetFace from "@/components/scoring/InteractiveTargetFace.vue";
 import ScoreButtons from "@/components/scoring/ScoreButtons.vue";
@@ -174,7 +173,7 @@ watch(() => runningTotal.value, async (newTotal, oldTotal) => {
     if (availableClassifications.value && availableClassifications.value.length > 0) {
       // Filter to only include achieved classifications and exclude "PB"
       const validClassifications = availableClassifications.value.filter(c =>
-        c.name !== "PB" && c.score <=maxPossibleScore.value
+        c.name !== "PB" && c.score <=maxPossibleScore.value && c.perEndDiff>=0
       );
 
       if (validClassifications.length > 0) {
@@ -375,12 +374,6 @@ function closeTutorial() {
         :initialStatus="DEFAULT_SHOOT_STATUS"
         @save="handleSaveFromModal"
         @cancel="cancelSave"
-      />
-
-      <!-- Leaderboard Modal -->
-      <LeaderboardModal
-        :visible="showLeaderboardModal"
-        @close="showLeaderboardModal = false"
       />
 
       <RoundScores v-if="hasStarted" :scores="scoresStore.scores"
