@@ -127,7 +127,7 @@ function handleJoin() {
           class="leaderboard-card"
           :class="{
             'is-current-user': participant.archerName === userStore.user.name,
-            'is-finished': participant.finished
+            [participant.currentClassification]: participant.currentClassification
           }"
         >
           <div class="position-indicator">
@@ -143,6 +143,8 @@ function handleJoin() {
                 </h3>
                 <div class="card-details">
                   <span class="round-name">{{ formatRoundName(participant.roundName) }}</span>
+                  <span v-if="participant.currentClassification && !participant.finished" class="classification-badge">On track for: {{ participant.currentClassification }}</span>
+                  <span v-if="participant.currentClassification && participant.finished" class="classification-badge">Achieved: {{ participant.currentClassification }}</span>
                   <span class="arrows-shot">{{ participant.arrowsShot }} arrow{{ participant.arrowsShot !== 1 ? 's' : '' }}</span>
                 </div>
               </div>
@@ -264,11 +266,66 @@ function handleJoin() {
 
 .leaderboard-card.is-finished {
   background-color: var(--color-background-mute, #f8f9fa);
-  border: 1px solid var(--color-success, #28a745);
 }
 
 .leaderboard-card.is-finished.is-current-user {
   border: 2px solid var(--color-success, #28a745);
+}
+
+/* Classification colors - copied from ClassificationFilterModal.vue */
+.leaderboard-card.B1 {
+  background-color: hsl(3, 84%, 36%);
+  color: white;
+}
+
+.leaderboard-card.B2 {
+  background-color: hsl(3, 84%, 46%);
+  color: white;
+}
+
+.leaderboard-card.B3 {
+  background-color: hsl(3, 84%, 56%);
+  color: white;
+}
+
+.leaderboard-card.A3 {
+  background-color: hsl(207, 85%, 90%);
+  color: #061345;
+}
+
+.leaderboard-card.A2 {
+  background-color: hsl(207, 85%, 80%);
+  color: #061345;
+}
+
+.leaderboard-card.A1 {
+  background-color: hsl(207, 85%, 72%);
+  color: #061345;
+}
+
+.leaderboard-card.MB,
+.leaderboard-card.GMB,
+.leaderboard-card.EMB {
+  background-color: rebeccapurple;
+  color: white;
+}
+
+/* Override position indicator colors for classifications */
+.leaderboard-card.B1 .position-indicator,
+.leaderboard-card.B2 .position-indicator,
+.leaderboard-card.B3 .position-indicator,
+.leaderboard-card.MB .position-indicator,
+.leaderboard-card.GMB .position-indicator,
+.leaderboard-card.EMB .position-indicator {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: white;
+}
+
+.leaderboard-card.A3 .position-indicator,
+.leaderboard-card.A2 .position-indicator,
+.leaderboard-card.A1 .position-indicator {
+  background-color: rgba(6, 19, 69, 0.2);
+  color: #061345;
 }
 
 .position-indicator {
@@ -349,6 +406,15 @@ function handleJoin() {
   color: var(--color-text-light, #666);
 }
 
+.classification-badge {
+  font-size: 0.75em;
+  font-weight: 600;
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+}
+
 .arrows-shot {
   font-size: 0.85em;
   color: var(--color-text-light, #666);
@@ -367,10 +433,35 @@ function handleJoin() {
   font-weight: 700;
   padding: 0.2em 0.4em;
   border-radius: 4px;
-  color: var(--color-text);
+  color: var(--color-text-light);
 }
 
 .leaderboard-card.is-finished .card-score {
   color: var(--color-success, #28a745);
+}
+
+/* Override text colors for classification cards to ensure readability */
+.leaderboard-card.B1 .you-indicator,
+.leaderboard-card.B2 .you-indicator,
+.leaderboard-card.B3 .you-indicator,
+.leaderboard-card.MB .you-indicator,
+.leaderboard-card.GMB .you-indicator,
+.leaderboard-card.EMB .you-indicator {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.leaderboard-card.B1 .round-name,
+.leaderboard-card.B2 .round-name,
+.leaderboard-card.B3 .round-name,
+.leaderboard-card.MB .round-name,
+.leaderboard-card.GMB .round-name,
+.leaderboard-card.EMB .round-name,
+.leaderboard-card.B1 .arrows-shot,
+.leaderboard-card.B2 .arrows-shot,
+.leaderboard-card.B3 .arrows-shot,
+.leaderboard-card.MB .arrows-shot,
+.leaderboard-card.GMB .arrows-shot,
+.leaderboard-card.EMB .arrows-shot {
+  color: rgba(255, 255, 255, 0.8);
 }
 </style>

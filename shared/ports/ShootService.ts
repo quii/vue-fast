@@ -27,9 +27,10 @@ export interface ShootService {
    * @param totalScore Current total score
    * @param roundName Name of the round (in case it changed)
    * @param arrowsShot Number of arrows shot so far
+   * @param currentClassification Current classification based on score
    * @returns Promise with success status and updated shoot details
    */
-  updateScore(code: string, archerName: string, totalScore: number, roundName: string, arrowsShot: number): Promise<{ success: boolean; shoot?: Shoot }>;
+  updateScore(code: string, archerName: string, totalScore: number, roundName: string, arrowsShot: number, currentClassification?: string): Promise<{ success: boolean; shoot?: Shoot }>;
 
   /**
    * Marks an archer as finished with their round and locks their final score
@@ -38,9 +39,10 @@ export interface ShootService {
    * @param totalScore Final total score
    * @param roundName Name of the round
    * @param arrowsShot Total number of arrows shot
+   * @param currentClassification Final classification based on score
    * @returns Promise with success status and updated shoot details
    */
-  finishShoot(code: string, archerName: string, totalScore: number, roundName: string, arrowsShot: number): Promise<{ success: boolean; shoot?: Shoot }>;
+  finishShoot(code: string, archerName: string, totalScore: number, roundName: string, arrowsShot: number, currentClassification?: string): Promise<{ success: boolean; shoot?: Shoot }>;
 
   /**
    * Removes an archer from a shoot

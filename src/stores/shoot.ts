@@ -352,11 +352,11 @@ export const useShootStore = defineStore('shoot', () => {
   }
 
   // Update score for current user
-  async function updateScore(archerName: string, totalScore: number, roundName: string, arrowsShot: number): Promise<void> {
+  async function updateScore(archerName: string, totalScore: number, roundName: string, arrowsShot: number, currentClassification? :string): Promise<void> {
     if (!shootService || !currentShoot.value) return
 
     try {
-      const result = await shootService.updateScore(currentShoot.value.code, archerName, totalScore, roundName, arrowsShot)
+      const result = await shootService.updateScore(currentShoot.value.code, archerName, totalScore, roundName, arrowsShot, currentClassification)
 
       if (result.success && result.shoot) {
       } else {
@@ -368,11 +368,11 @@ export const useShootStore = defineStore('shoot', () => {
   }
 
   // Finish shoot for current user
-  async function finishShoot(archerName: string, totalScore: number, roundName: string, arrowsShot: number): Promise<void> {
+  async function finishShoot(archerName: string, totalScore: number, roundName: string, arrowsShot: number, currentClassification? :string): Promise<void> {
     if (!shootService || !currentShoot.value) return
 
     try {
-      const result = await shootService.finishShoot(currentShoot.value.code, archerName, totalScore, roundName, arrowsShot)
+      const result = await shootService.finishShoot(currentShoot.value.code, archerName, totalScore, roundName, arrowsShot, currentClassification)
 
       if (result.success && result.shoot) {
         // Update local state immediately

@@ -99,16 +99,16 @@ export class HttpShootService implements ShootService {
   /**
    * Updates an archer's score via HTTP PUT
    */
-  async updateScore(code: string, archerName: string, totalScore: number, roundName: string, arrowsShot: number): Promise<{ success: boolean; shoot?: Shoot }> {
+  async updateScore(code: string, archerName: string, totalScore: number, roundName: string, arrowsShot: number, currentClassification?: string): Promise<{ success: boolean; shoot?: Shoot }> {
     try {
-      console.log('Updating score with:', { code, archerName, totalScore, roundName, arrowsShot });
+      console.log('Updating score with:', { code, archerName, totalScore, roundName, arrowsShot, currentClassification });
 
       const response = await fetch(`${this.baseUrl}/${code}/score`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ archerName, totalScore, roundName, arrowsShot }),
+        body: JSON.stringify({ archerName, totalScore, roundName, arrowsShot, currentClassification }),
       })
 
       if (response.status === 404) {
@@ -136,16 +136,16 @@ export class HttpShootService implements ShootService {
   /**
    * Finishes an archer's shoot via HTTP PUT
    */
-  async finishShoot(code: string, archerName: string, totalScore: number, roundName: string, arrowsShot: number): Promise<{ success: boolean; shoot?: Shoot }> {
+  async finishShoot(code: string, archerName: string, totalScore: number, roundName: string, arrowsShot: number, currentClassification?: string): Promise<{ success: boolean; shoot?: Shoot }> {
     try {
-      console.log('Finishing shoot with:', { code, archerName, totalScore, roundName, arrowsShot });
+      console.log('Finishing shoot with:', { code, archerName, totalScore, roundName, arrowsShot, currentClassification });
 
       const response = await fetch(`${this.baseUrl}/${code}/finish`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ archerName, totalScore, roundName, arrowsShot }),
+        body: JSON.stringify({ archerName, totalScore, roundName, arrowsShot, currentClassification }),
       })
 
       console.log('Finish shoot response status:', response.status);

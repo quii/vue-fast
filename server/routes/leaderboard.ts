@@ -110,7 +110,7 @@ export function createLeaderboardRouter(dependencies: {
   router.put('/:code/score', async (req: Request, res: Response) => {
     try {
       const { code } = req.params
-      const { archerName, totalScore, roundName, arrowsShot } = req.body
+      const { archerName, totalScore, roundName, arrowsShot, currentClassification } = req.body
 
       if (!archerName || totalScore === undefined || !roundName || arrowsShot === undefined) {
         return res.status(400).json({
@@ -135,7 +135,7 @@ export function createLeaderboardRouter(dependencies: {
         })
       }
 
-      const result = await shootService.updateScore(code, archerName, totalScore, roundName, arrowsShot)
+      const result = await shootService.updateScore(code, archerName, totalScore, roundName, arrowsShot, currentClassification)
 
       if (!result.success) {
         return res.status(404).json({
@@ -158,7 +158,7 @@ export function createLeaderboardRouter(dependencies: {
   router.put('/:code/finish', async (req: Request, res: Response) => {
     try {
       const { code } = req.params
-      const { archerName, totalScore, roundName, arrowsShot } = req.body
+      const { archerName, totalScore, roundName, arrowsShot, currentClassification } = req.body
 
       if (!archerName || totalScore === undefined || !roundName || arrowsShot === undefined) {
         return res.status(400).json({
@@ -183,7 +183,7 @@ export function createLeaderboardRouter(dependencies: {
         })
       }
 
-      const result = await shootService.finishShoot(code, archerName, totalScore, roundName, arrowsShot)
+      const result = await shootService.finishShoot(code, archerName, totalScore, roundName, arrowsShot, currentClassification)
 
       if (!result.success) {
         return res.status(404).json({

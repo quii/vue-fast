@@ -134,8 +134,8 @@ export class ShootServiceImpl implements ShootService {
    * @param arrowsShot Number of arrows shot so far
    * @returns Promise with success status and updated shoot details
    */
-  async updateScore(code: string, archerName: string, totalScore: number, roundName: string, arrowsShot: number): Promise<{ success: boolean; shoot?: Shoot }> {
-    return this.updateParticipantScore(code, archerName, totalScore, roundName, arrowsShot, false);
+  async updateScore(code: string, archerName: string, totalScore: number, roundName: string, arrowsShot: number, currentClassification?: string): Promise<{ success: boolean; shoot?: Shoot }> {
+    return this.updateParticipantScore(code, archerName, totalScore, roundName, arrowsShot, false, currentClassification);
   }
 
   /**
@@ -147,105 +147,8 @@ export class ShootServiceImpl implements ShootService {
    * @param arrowsShot Total number of arrows shot
    * @returns Promise with success status and updated shoot details
    */
-  async finishShoot(code: string, archerName: string, totalScore: number, roundName: string, arrowsShot: number): Promise<{ success: boolean; shoot?: Shoot }> {
-    return this.updateParticipantScore(code, archerName, totalScore, roundName, arrowsShot, true);
-  }
-
-  /**
-   * Common logic for updating participant scores
-   * @param code The 4-digit code of the shoot
-   * @param archerName Name of the archer
-   * @param totalScore Total score
-   * @param roundName Name of the round
-   * @param arrowsShot Number of arrows shot
-   * @param markAsFinished Whether to mark the participant as finished
-   * @returns Promise with success status and updated shoot details
-   */
-  private async updateParticipantScore(
-    code: string,
-    archerName: string,
-    totalScore: number,
-    roundName: string,
-    arrowsShot: number,
-    markAsFinished: boolean
-  ): Promise<{ success: boolean; shoot?: Shoot }> {
-    const shoot = await this.repository.getShootByCode(code);
-
-    if (!shoot) {
-      return { success: false };
-    }
-
-    const participant = shoot.participants.find(p => p.archerName === archerName);
-
-    if (!participant) {
-      return { success: false };
-    }
-
-    // Don't allow score updates for finished participants (unless this is a finish operation)
-    if (participant.finished && !markAsFinished) {
-      return { success: false };
-    }
-
-    // Store previous position for notification
-    const previousPosition = participant.currentPosition;
-
-    // Update participant data
-    participant.totalScore = totalScore;
-    participant.arrowsShot = arrowsShot;
-    participant.roundName = roundName;
-    participant.lastUpdated = new Date();
-    shoot.lastUpdated = new Date();
-
-    // Mark as finished if requested
-    if (markAsFinished) {
-      participant.finished = true;
-    }
-
-    // Update positions for all participants
-    this.updatePositions(shoot);
-
-    // Save the updated shoot
-    await this.repository.saveShoot(shoot);
-
-    // Send notifications
-    if (this.notificationService) {
-      // Always send score update notification
-      await this.notificationService.sendNotification(code, {
-        type: NotificationType.SCORE_UPDATE,
-        archerName,
-        totalScore,
-        arrowsShot,
-        roundName,
-        shoot: shoot
-      });
-
-      // Send position change notification if position changed
-      if (previousPosition !== undefined &&
-          participant.currentPosition !== undefined &&
-          previousPosition !== participant.currentPosition) {
-
-        await this.notificationService.sendNotification(code, {
-          type: NotificationType.POSITION_CHANGE,
-          archerName,
-          previousPosition,
-          currentPosition: participant.currentPosition,
-          totalParticipants: shoot.participants.length,
-          shoot: shoot
-        });
-      }
-
-      // Send finished notification if this was a finish operation
-      if (markAsFinished) {
-        await this.notificationService.sendNotification(code, {
-          type: NotificationType.ARCHER_FINISHED,
-          archerName,
-          totalScore,
-          shoot: shoot
-        });
-      }
-    }
-
-    return { success: true, shoot };
+  async finishShoot(code: string, archerName: string, totalScore: number, roundName: string, arrowsShot: number, currentClassification?: string): Promise<{ success: boolean; shoot?: Shoot }> {
+    return this.updateParticipantScore(code, archerName, totalScore, roundName, arrowsShot, true, currentClassification);
   }
 
   /**
@@ -294,6 +197,105 @@ export class ShootServiceImpl implements ShootService {
    */
   async getShoot(code: string): Promise<Shoot | null> {
     return this.repository.getShootByCode(code);
+  }
+
+  /**
+   * Common logic for updating participant scores
+   * @param code The 4-digit code of the shoot
+   * @param archerName Name of the archer
+   * @param totalScore Total score
+   * @param roundName Name of the round
+   * @param arrowsShot Number of arrows shot
+   * @param markAsFinished Whether to mark the participant as finished
+   * @returns Promise with success status and updated shoot details
+   */
+  private async updateParticipantScore(
+    code: string,
+    archerName: string,
+    totalScore: number,
+    roundName: string,
+    arrowsShot: number,
+    markAsFinished: boolean,
+    currentClassification?: string
+  ): Promise<{ success: boolean; shoot?: Shoot }> {
+    const shoot = await this.repository.getShootByCode(code);
+
+    if (!shoot) {
+      return { success: false };
+    }
+
+    const participant = shoot.participants.find(p => p.archerName === archerName);
+
+    if (!participant) {
+      return { success: false };
+    }
+
+    // Don't allow score updates for finished participants (unless this is a finish operation)
+    if (participant.finished && !markAsFinished) {
+      return { success: false };
+    }
+
+    // Store previous position for notification
+    const previousPosition = participant.currentPosition;
+
+    // Update participant data
+    participant.totalScore = totalScore;
+    participant.arrowsShot = arrowsShot;
+    participant.roundName = roundName;
+    participant.currentClassification = currentClassification;
+    participant.lastUpdated = new Date();
+    shoot.lastUpdated = new Date();
+
+    // Mark as finished if requested
+    if (markAsFinished) {
+      participant.finished = true;
+    }
+
+    // Update positions for all participants
+    this.updatePositions(shoot);
+
+    // Save the updated shoot
+    await this.repository.saveShoot(shoot);
+
+    // Send notifications
+    if (this.notificationService) {
+      // Always send score update notification
+      await this.notificationService.sendNotification(code, {
+        type: NotificationType.SCORE_UPDATE,
+        archerName,
+        totalScore,
+        arrowsShot,
+        roundName,
+        shoot: shoot
+      });
+
+      // Send position change notification if position changed
+      if (previousPosition !== undefined &&
+        participant.currentPosition !== undefined &&
+        previousPosition !== participant.currentPosition) {
+
+        await this.notificationService.sendNotification(code, {
+          type: NotificationType.POSITION_CHANGE,
+          archerName,
+          previousPosition,
+          currentPosition: participant.currentPosition,
+          totalParticipants: shoot.participants.length,
+          shoot: shoot
+        });
+      }
+
+      // Send finished notification if this was a finish operation
+      if (markAsFinished) {
+        await this.notificationService.sendNotification(code, {
+          type: NotificationType.ARCHER_FINISHED,
+          archerName,
+          totalScore,
+          shoot: shoot
+        });
+      }
+    }
+
+    return { success: true, shoot };
   }
 
   /**
