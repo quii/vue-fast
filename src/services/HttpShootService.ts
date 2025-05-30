@@ -111,7 +111,44 @@ export class HttpShootService implements ShootService {
         body: JSON.stringify({ archerName, totalScore, roundName, arrowsShot }),
       })
 
-      console.log('Update score response status:', response.status);
+      if (response.status === 404) {
+        console.log('Shoot not found or update failed');
+        console.log(response)
+        return { success: false }
+      }
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.log('Update score error response:', errorText);
+      }
+
+      const data = await response.json()
+      return data
+    } catch (error) {
+      console.error('Update score error:', error);
+      if (error instanceof TypeError && error.message.includes('fetch')) {
+        throw new Error('Network error: Unable to connect to server')
+      }
+      throw error
+    }
+  }
+
+  /**
+   * Finishes an archer's shoot via HTTP PUT
+   */
+  async finishShoot(code: string, archerName: string, totalScore: number, roundName: string, arrowsShot: number): Promise<{ success: boolean; shoot?: Shoot }> {
+    try {
+      console.log('Finishing shoot with:', { code, archerName, totalScore, roundName, arrowsShot });
+
+      const response = await fetch(`${this.baseUrl}/${code}/finish`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ archerName, totalScore, roundName, arrowsShot }),
+      })
+
+      console.log('Finish shoot response status:', response.status);
 
       if (response.status === 404) {
         return { success: false }
@@ -119,15 +156,15 @@ export class HttpShootService implements ShootService {
 
       if (!response.ok) {
         const errorText = await response.text();
-        console.log('Update score error response:', errorText);
+        console.log('Finish shoot error response:', errorText);
         throw new Error(`HTTP error! status: ${response.status}`)
       }
 
       const data = await response.json()
-      console.log('Update score response data:', data);
+      console.log('Finish shoot response data:', data);
       return data
     } catch (error) {
-      console.error('Update score error:', error);
+      console.error('Finish shoot error:', error);
       if (error instanceof TypeError && error.message.includes('fetch')) {
         throw new Error('Network error: Unable to connect to server')
       }

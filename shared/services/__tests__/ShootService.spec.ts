@@ -48,7 +48,7 @@ describe('ShootService', () => {
     const { code } = await shootService.createShoot('Archer 1');
     await shootService.joinShoot(code, 'Archer 2', 'Windsor');
 
-    const result = await shootService.updateScore(code, 'Archer 2', 42, 'Windsor');
+    const result = await shootService.updateScore(code, 'Archer 2', 42, 'Windsor', 12);
 
     expect(result.success).toBe(true);
     expect(result.shoot?.participants[0].totalScore).toBe(42);
@@ -61,9 +61,9 @@ describe('ShootService', () => {
     await shootService.joinShoot(code, 'Archer 3', 'Windsor');
 
     // Initial scores
-    await shootService.updateScore(code, 'Archer 1', 30, 'Windsor');
-    await shootService.updateScore(code, 'Archer 2', 50, 'Windsor');
-    await shootService.updateScore(code, 'Archer 3', 40, 'Windsor');
+    await shootService.updateScore(code, 'Archer 1', 30, 'Windsor', 12);
+    await shootService.updateScore(code, 'Archer 2', 50, 'Windsor', 12);
+    await shootService.updateScore(code, 'Archer 3', 40, 'Windsor', 12);
 
     const shoot = await shootService.getShoot(code);
 
@@ -77,7 +77,7 @@ describe('ShootService', () => {
     expect(archer3!.currentPosition).toBe(2); // Middle score
 
     // Update scores to change positions
-    await shootService.updateScore(code, 'Archer 1', 60, 'Windsor');
+    await shootService.updateScore(code, 'Archer 1', 60, 'Windsor', 24);
 
     const updatedShoot = await shootService.getShoot(code);
     const updatedArcher1 = updatedShoot!.participants.find(p => p.archerName === 'Archer 1');
@@ -92,14 +92,14 @@ describe('ShootService', () => {
     await shootService.joinShoot(code, 'Archer 2', 'Windsor');
 
     // Initial scores
-    await shootService.updateScore(code, 'Archer 1', 30, 'Windsor');
-    await shootService.updateScore(code, 'Archer 2', 50, 'Windsor');
+    await shootService.updateScore(code, 'Archer 1', 30, 'Windsor', 12);
+    await shootService.updateScore(code, 'Archer 2', 50, 'Windsor', 12);
 
     // Clear any notifications sent during setup
     notificationService.clearNotifications(code);
 
     // Change score to trigger position change
-    await shootService.updateScore(code, 'Archer 1', 60, 'Windsor');
+    await shootService.updateScore(code, 'Archer 1', 60, 'Windsor', 24);
 
     // Get notifications sent for this shoot
     const notifications = notificationService.getNotificationsForShoot(code);
@@ -143,10 +143,45 @@ describe('ShootService', () => {
     const joinResult = await shootService.joinShoot('1234', 'Archer', 'Windsor');
     expect(joinResult.success).toBe(false);
 
-    const updateResult = await shootService.updateScore('1234', 'Archer', 50, 'Windsor');
+    const updateResult = await shootService.updateScore('1234', 'Archer', 50, 'Windsor', 12);
     expect(updateResult.success).toBe(false);
 
     const leaveResult = await shootService.leaveShoot('1234', 'Archer');
     expect(leaveResult.success).toBe(false);
+  });
+
+  it('allows archers to finish their shoot and prevents further score updates', async () => {
+    const { code } = await shootService.createShoot('Creator');
+    await shootService.joinShoot(code, 'Archer 1', 'Windsor');
+
+    // Update score during the round
+    await shootService.updateScore(code, 'Archer 1', 50, 'Windsor', 24);
+
+    let shoot = await shootService.getShoot(code);
+    let participant = shoot!.participants.find(p => p.archerName === 'Archer 1');
+    expect(participant!.totalScore).toBe(50);
+    expect(participant!.finished).toBe(false);
+
+    // Finish the shoot with final score
+    const finishResult = await shootService.finishShoot(code, 'Archer 1', 72, 'Windsor', 36);
+    expect(finishResult.success).toBe(true);
+
+    // Verify the participant is marked as finished with the final score
+    shoot = await shootService.getShoot(code);
+    participant = shoot!.participants.find(p => p.archerName === 'Archer 1');
+    expect(participant!.totalScore).toBe(72);
+    expect(participant!.arrowsShot).toBe(36);
+    expect(participant!.finished).toBe(true);
+
+    // Attempt to update score after finishing - should fail
+    const updateResult = await shootService.updateScore(code, 'Archer 1', 30, 'Windsor', 12);
+    expect(updateResult.success).toBe(false);
+
+    // Verify the score hasn't changed
+    shoot = await shootService.getShoot(code);
+    participant = shoot!.participants.find(p => p.archerName === 'Archer 1');
+    expect(participant!.totalScore).toBe(72); // Should still be the finished score
+    expect(participant!.arrowsShot).toBe(36); // Should still be the finished arrows
+    expect(participant!.finished).toBe(true); // Should still be marked as finished
   });
 });

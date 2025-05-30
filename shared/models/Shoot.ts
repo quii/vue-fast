@@ -43,6 +43,9 @@ export interface ShootParticipant {
   /** Number of arrows shot so far */
   arrowsShot: number;
 
+  /** Whether this archer has finished their round */
+  finished: boolean;
+
   /** Current classification based on score */
   currentClassification?: string;
 

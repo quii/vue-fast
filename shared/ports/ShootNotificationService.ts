@@ -3,7 +3,8 @@ export enum NotificationType {
   END_COMPLETE = 'end_complete',
   JOINED_SHOOT = 'joined_shoot',
   LEFT_SHOOT = 'left_shoot',
-  SCORE_UPDATE = 'score_update'  // New notification type
+  SCORE_UPDATE = 'score_update',
+  ARCHER_FINISHED = 'archer_finished'  // New notification type for when an archer finishes
 }
 
 export interface PositionChangeNotification {
@@ -45,12 +46,20 @@ export interface ScoreUpdateNotification {
   shoot?: any; // Add optional shoot data for real-time sync
 }
 
+export interface ArcherFinishedNotification {
+  type: NotificationType.ARCHER_FINISHED;
+  archerName: string;
+  totalScore: number;
+  shoot?: any; // Add optional shoot data
+}
+
 export type ShootNotification =
   | PositionChangeNotification
   | EndCompleteNotification
   | JoinedShootNotification
   | LeftShootNotification
-  | ScoreUpdateNotification;
+  | ScoreUpdateNotification
+  | ArcherFinishedNotification;
 
 /**
  * Service interface for shoot notifications

@@ -30,6 +30,14 @@ export const useShootStore = defineStore('shoot', () => {
   const isInShoot = computed(() => currentShoot.value !== null)
   const shootCode = computed(() => currentShoot.value?.code || '')
 
+  // Check if current user is finished
+  const isCurrentUserFinished = computed(() => {
+    if (!currentShoot.value) return false
+    // You'll need to pass the current user's name to check this
+    // This might need to be updated based on how you track the current user
+    return false // Placeholder - implement based on your user tracking
+  })
+
   // LocalStorage helpers
   function saveShootState(shootCode: string, archerName: string, roundName: string) {
     const state: PersistedShootState = {
@@ -155,6 +163,10 @@ export const useShootStore = defineStore('shoot', () => {
         break
       case 'position_change':
       case 'score_update':
+        break
+      case 'archer_finished':
+        // Could show a toast when someone finishes
+        // toast.info(`${notification.archerName} has finished their round!`)
         break
       default:
         console.log('Unknown notification type:', notification.type)
@@ -360,7 +372,26 @@ export const useShootStore = defineStore('shoot', () => {
       }
     } catch (error) {
       console.error('Failed to update score:', error)
-      toast.error('Failed to update score')
+    }
+  }
+
+  // Finish shoot for current user
+  async function finishShoot(archerName: string, totalScore: number, roundName: string, arrowsShot: number): Promise<void> {
+    if (!shootService || !currentShoot.value) return
+
+    try {
+      const result = await shootService.finishShoot(currentShoot.value.code, archerName, totalScore, roundName, arrowsShot)
+
+      if (result.success && result.shoot) {
+        // Update local state immediately
+        currentShoot.value = result.shoot
+        toast.success('Round completed and score locked!')
+      } else {
+        toast.error('Failed to finish shoot')
+      }
+    } catch (error) {
+      console.error('Failed to finish shoot:', error)
+      toast.error('Failed to finish shoot')
     }
   }
 
@@ -382,6 +413,7 @@ export const useShootStore = defineStore('shoot', () => {
     // Computed
     isInShoot,
     shootCode,
+    isCurrentUserFinished,
 
     // Services - expose for components
     pushNotificationManager: computed(() => pushNotificationManager),
@@ -393,6 +425,7 @@ export const useShootStore = defineStore('shoot', () => {
     joinShoot,
     leaveShoot,
     updateScore,
+    finishShoot, // New method
     cleanup: () => {
       if (webSocketService) {
         webSocketService.disconnect()

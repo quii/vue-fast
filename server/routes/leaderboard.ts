@@ -154,6 +154,54 @@ export function createLeaderboardRouter(dependencies: {
     }
   })
 
+  // Finish shoot - new endpoint
+  router.put('/:code/finish', async (req: Request, res: Response) => {
+    try {
+      const { code } = req.params
+      const { archerName, totalScore, roundName, arrowsShot } = req.body
+
+      if (!archerName || totalScore === undefined || !roundName || arrowsShot === undefined) {
+        return res.status(400).json({
+          success: false,
+          error: 'Archer name, total score, round name, and arrows shot are required'
+        })
+      }
+
+      // Validate that arrowsShot is a non-negative number
+      if (typeof arrowsShot !== 'number' || arrowsShot < 0) {
+        return res.status(400).json({
+          success: false,
+          error: 'Arrows shot must be a non-negative number'
+        })
+      }
+
+      // Validate that totalScore is a number
+      if (typeof totalScore !== 'number') {
+        return res.status(400).json({
+          success: false,
+          error: 'Total score must be a number'
+        })
+      }
+
+      const result = await shootService.finishShoot(code, archerName, totalScore, roundName, arrowsShot)
+
+      if (!result.success) {
+        return res.status(404).json({
+          success: false,
+          error: 'Shoot not found or archer not found'
+        })
+      }
+
+      res.json(result)
+    } catch (error) {
+      console.error('Error finishing shoot:', error)
+      res.status(500).json({
+        success: false,
+        error: 'Failed to finish shoot'
+      })
+    }
+  })
+
   // Leave a shoot
   router.delete('/:code/archer/:archerName', async (req: Request, res: Response) => {
     try {

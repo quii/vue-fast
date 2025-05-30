@@ -168,7 +168,8 @@ function toggleNotificationSettings() {
           :key="participant.id"
           class="leaderboard-card"
           :class="{
-            'is-current-user': participant.archerName === userStore.user.name
+            'is-current-user': participant.archerName === userStore.user.name,
+            'is-finished': participant.finished
           }"
         >
           <div class="position-indicator">
@@ -180,6 +181,7 @@ function toggleNotificationSettings() {
                 <h3 class="archer-name">
                   {{ participant.archerName }}
                   <span v-if="participant.archerName === userStore.user.name" class="you-indicator">(You)</span>
+                  <span v-if="participant.finished" class="finished-indicator">✓ Finished</span>
                 </h3>
                 <div class="card-details">
                   <span class="round-name">{{ formatRoundName(participant.roundName) }}</span>
@@ -307,6 +309,15 @@ function toggleNotificationSettings() {
   border: 2px solid var(--color-border);
 }
 
+.leaderboard-card.is-finished {
+  background-color: var(--color-background-mute, #f8f9fa);
+  border: 1px solid var(--color-success, #28a745);
+}
+
+.leaderboard-card.is-finished.is-current-user {
+  border: 2px solid var(--color-success, #28a745);
+}
+
 .position-indicator {
   width: 40px;
   flex-shrink: 0;
@@ -315,6 +326,10 @@ function toggleNotificationSettings() {
   align-items: center;
   background-color: var(--color-text-light, #666);
   color: white;
+}
+
+.leaderboard-card.is-finished .position-indicator {
+  background-color: var(--color-success, #28a745);
 }
 
 .position-number {
@@ -345,12 +360,26 @@ function toggleNotificationSettings() {
   margin: 0;
   font-size: 1.3em;
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  flex-wrap: wrap;
 }
 
 .you-indicator {
   font-weight: 400;
   color: var(--color-text-light, #666);
   font-size: 0.8em;
+}
+
+.finished-indicator {
+  font-weight: 500;
+  color: var(--color-success, #28a745);
+  font-size: 0.75em;
+  background-color: var(--color-success-light, #d4edda);
+  padding: 0.2em 0.4em;
+  border-radius: 4px;
+  white-space: nowrap;
 }
 
 .card-details {
@@ -386,6 +415,10 @@ function toggleNotificationSettings() {
   padding: 0.2em 0.4em;
   border-radius: 4px;
   color: var(--color-text);
+}
+
+.leaderboard-card.is-finished .card-score {
+  color: var(--color-success, #28a745);
 }
 
 .notification-toggle {

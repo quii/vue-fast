@@ -163,10 +163,11 @@ const historyPreview = computed(() => {
   };
 });
 
-// Watch for score changes and update leaderboard if in a shoot
 watch(() => runningTotal.value, async (newTotal, oldTotal) => {
   if (shootStore.isInShoot && userStore.user.name && newTotal !== oldTotal) {
-    // Update the leaderboard with the new score and arrows shot
+    if(newTotal===0 && oldTotal >0) {
+      return;
+    }
     await shootStore.updateScore(
       userStore.user.name,
       newTotal,
@@ -224,6 +225,16 @@ async function handleSaveFromModal(data) {
   date.value = data.date;
 
   try {
+    // If we're in a shoot, finish the shoot first
+    if (shootStore.isInShoot && userStore.user.name) {
+      await shootStore.finishShoot(
+        userStore.user.name,
+        runningTotal.value,
+        gameTypeStore.type,
+        scoresStore.scores.length
+      )
+    }
+
     const id = await history.add(
       date.value,
       runningTotal.value,
