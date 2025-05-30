@@ -5,6 +5,11 @@ import DataMenuItem from '@/components/DataMenuItem.vue'
 export const routes = [
   { path: '/', component: ScoreCard },
   {
+    path: '/leaderboard',
+    name: 'leaderboard',
+    component: () => import('./Leaderboard.vue')
+  },
+  {
     path: '/history',
     component: () => import('./ScoreHistory.vue')
   },

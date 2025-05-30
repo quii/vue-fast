@@ -36,7 +36,7 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits(["clear-scores", "take-note", "save-scores", "show-leaderboard"]);
+const emit = defineEmits(["clear-scores", "take-note", "save-scores"]);
 const showConfirmation = ref(false);
 
 // Prepare info displays
@@ -74,14 +74,6 @@ const actionButtons = computed(() => {
     });
   }
 
-  // Add live leaderboard button
-  buttons.push({
-    iconComponent: LiveIcon,
-    label: "Live",
-    action: "show-leaderboard",
-    active: false
-  });
-
   // Add standard buttons
   buttons.push(
     {
@@ -115,8 +107,6 @@ function handleAction(actionData) {
     emit("take-note");
   } else if (actionData.action === "save-scores") {
     emit("save-scores");
-  } else if (actionData.action === "show-leaderboard") {
-    emit("show-leaderboard");
   }
 }
 

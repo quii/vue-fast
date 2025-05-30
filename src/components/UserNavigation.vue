@@ -8,6 +8,7 @@ import DiaryIcon from "@/components/icons/DiaryIcon.vue";
 import SightIcon from "@/components/icons/SightIcon.vue";
 import DataIcon from "@/components/icons/DataIcon.vue";
 import ProfileIcon from "@/components/icons/ProfileIcon.vue";
+import LiveIcon from "@/components/icons/LiveIcon.vue";
 
 const user = useUserStore();
 const route = useRoute();
@@ -27,6 +28,13 @@ const isActive = (path) => {
         <ScoreIcon class="nav-icon" />
       </div>
       <span class="nav-label">Score</span>
+    </router-link>
+
+    <router-link to="/leaderboard" class="nav-item" :class="{ active: isActive('/leaderboard') }">
+      <div class="icon-container">
+        <LiveIcon class="nav-icon" />
+      </div>
+      <span class="nav-label">Live</span>
     </router-link>
 
     <router-link to="/history" class="nav-item"
@@ -88,7 +96,7 @@ const isActive = (path) => {
   align-items: center;
   justify-content: center;
   padding: 0.85em 0;
-  width: 20%;
+  width: calc(100% / 7); /* Updated to accommodate 7 items */
   color: var(--color-text-light);
   text-decoration: none;
   transition: color 0.2s ease;

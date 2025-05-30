@@ -216,9 +216,6 @@ function showSaveConfirmation() {
   showSaveModal.value = true;
 }
 
-function showLeaderboard() {
-  showLeaderboardModal.value = true;
-}
 
 async function handleSaveFromModal(data) {
   // Update date and status from modal
@@ -314,7 +311,6 @@ function closeTutorial() {
           @clear-scores="clearScores"
           @take-note="handleTakeNote"
           @save-scores="showSaveConfirmation"
-          @show-leaderboard="showLeaderboard"
         />
       </div>
 

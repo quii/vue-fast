@@ -2,7 +2,6 @@
 import { computed, ref } from 'vue'
 import BaseButton from '../ui/BaseButton.vue'
 import ButtonGroup from '../ui/ButtonGroup.vue'
-import NotificationSettings from './NotificationSettings.vue'
 import { useUserStore } from '@/stores/user'
 import { useGameTypeStore } from '@/stores/game_type'
 import { formatRoundName } from '../../domain/scoring/round/formatting.js'
@@ -11,14 +10,10 @@ const props = defineProps({
   shoot: {
     type: Object,
     required: true
-  },
-  pushNotificationManager: {
-    type: Object,
-    default: null
   }
 })
 
-const emit = defineEmits(['leave', 'close', 'join'])
+const emit = defineEmits(['leave', 'join'])
 
 const userStore = useUserStore()
 const gameTypeStore = useGameTypeStore()
@@ -27,9 +22,6 @@ const gameTypeStore = useGameTypeStore()
 const showJoinForm = ref(false)
 const archerName = ref(userStore.user.name || '')
 const roundName = ref(gameTypeStore.type || '')
-
-// New state for notification settings
-const showNotificationSettings = ref(false)
 
 // Computed
 const sortedParticipants = computed(() => {
@@ -42,9 +34,6 @@ const sortedParticipants = computed(() => {
       position: index + 1
     }))
 })
-
-// Add this computed property
-const shootCode = computed(() => props.shoot?.code || '')
 
 const currentUserParticipant = computed(() => {
   return sortedParticipants.value.find(p => p.archerName === userStore.user.name)
@@ -59,14 +48,6 @@ const isJoinFormValid = computed(() => {
 })
 
 // Methods
-function handleLeave() {
-  emit('leave')
-}
-
-function handleClose() {
-  emit('close')
-}
-
 function showJoinShoot() {
   showJoinForm.value = true
 }
@@ -86,33 +67,10 @@ function handleJoin() {
 
   showJoinForm.value = false
 }
-
-function toggleNotificationSettings() {
-  showNotificationSettings.value = !showNotificationSettings.value
-}
 </script>
 
 <template>
   <div class="leaderboard-display">
-    <!-- Notification Settings Toggle -->
-    <div v-if="pushNotificationManager" class="notification-toggle">
-      <BaseButton
-        variant="text"
-        @click="toggleNotificationSettings"
-        class="notification-toggle-btn"
-      >
-        📱 {{ showNotificationSettings ? 'Hide' : 'Show' }} Notifications
-      </BaseButton>
-    </div>
-
-    <!-- Notification Settings (collapsible) -->
-    <div v-if="showNotificationSettings && pushNotificationManager" class="notification-settings-container">
-      <NotificationSettings
-        :shoot-code="shootCode"
-        :push-notification-manager="pushNotificationManager"
-      />
-    </div>
-
     <!-- Join form (when not participating) -->
     <div v-if="showJoinForm" class="join-form">
       <h5>Join This Shoot</h5>
@@ -197,27 +155,14 @@ function toggleNotificationSettings() {
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Actions -->
-    <ButtonGroup v-if="!showJoinForm">
-      <BaseButton
-        v-if="isCurrentUserInShoot"
-        variant="danger"
-        @click="handleLeave"
-      >
-        Leave Shoot
-      </BaseButton>
-      <BaseButton
-        v-else
-        @click="showJoinShoot"
-      >
-        Join Shoot
-      </BaseButton>
-      <BaseButton variant="outline" @click="handleClose">
-        Close
-      </BaseButton>
-    </ButtonGroup>
+      <!-- Join button for non-participants -->
+      <div v-if="!isCurrentUserInShoot" class="join-action">
+        <BaseButton @click="showJoinShoot">
+          Join This Shoot
+        </BaseButton>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -274,7 +219,8 @@ function toggleNotificationSettings() {
 .leaderboard-container {
   flex: 1;
   overflow-y: auto;
-  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .empty-state {
@@ -292,6 +238,13 @@ function toggleNotificationSettings() {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  flex: 1;
+}
+
+.join-action {
+  margin-top: 1rem;
+  text-align: center;
+  padding: 1rem 0;
 }
 
 /* Adapted from HistoryCard.vue */
@@ -419,43 +372,5 @@ function toggleNotificationSettings() {
 
 .leaderboard-card.is-finished .card-score {
   color: var(--color-success, #28a745);
-}
-
-.notification-toggle {
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-.notification-toggle-btn {
-  font-size: 0.9rem;
-  padding: 0.5rem 1rem;
-  color: var(--color-text-mute, #666);
-  text-decoration: none;
-  border: 1px solid var(--color-border, #eee);
-  border-radius: 6px;
-  background: var(--color-background-mute, #f8f9fa);
-  transition: all 0.2s;
-}
-
-.notification-toggle-btn:hover {
-  background: var(--color-background-soft, #e9ecef);
-  color: var(--color-text);
-}
-
-.notification-settings-container {
-  margin-bottom: 1.5rem;
-  animation: slideDown 0.3s ease-out;
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    max-height: 0;
-    overflow: hidden;
-  }
-  to {
-    opacity: 1;
-    max-height: 500px;
-  }
 }
 </style>
