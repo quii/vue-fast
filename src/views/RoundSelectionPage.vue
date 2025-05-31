@@ -13,6 +13,7 @@ import CloseIcon from '@/components/icons/CloseIcon.vue'
 import SectionCard from '@/components/ui/SectionCard.vue'
 import FormGroup from '@/components/ui/FormGroup.vue'
 import BaseSelect from '@/components/ui/BaseSelect.vue'
+import UserProfileForm from '@/components/forms/UserProfileForm.vue'
 import { meters, toMeters, toYards, yards } from "@/domain/distance/distance.js";
 import { classificationList } from "@/domain/scoring/classificationList.js";
 import { gameTypes } from "@/domain/scoring/game_types";
@@ -366,6 +367,18 @@ function dismissRoundSelectionTip() {
   manuallyTriggeredTip.value = false
 }
 
+function handleProfileSubmit(profileData) {
+  // Update the local reactive refs with the submitted data
+  selectedAgeGroup.value = profileData.ageGroup
+  selectedGender.value = profileData.gender
+  selectedBowtype.value = profileData.bowType
+  indoorClassifications.value = profileData.indoorClassifications
+  outdoorClassifications.value = profileData.outdoorClassifications
+
+  // Save to the user store
+  saveUserProfile()
+}
+
 </script>
 
 <template>
@@ -375,72 +388,18 @@ function dismissRoundSelectionTip() {
 
     <!-- User Profile Setup Section (shown when details are missing) -->
     <div v-if="!userHasRequiredDetails" class="profile-setup-section">
-      <SectionCard title="Complete Your Profile">
-        <p class="profile-intro">To see rounds that match your skill level, please provide the following
-          information:</p>
-
-        <FormGroup label="Age Group">
-          <BaseSelect v-model="selectedAgeGroup" @change="saveUserProfile">
-            <option disabled value="">Select age group</option>
-            <option>50+</option>
-            <option value="senior">Senior</option>
-            <option value="u21">Under 21</option>
-            <option value="u18">Under 18</option>
-            <option value="u16">Under 16</option>
-            <option value="u15">Under 15</option>
-            <option value="u14">Under 14</option>
-            <option value="u12">Under 12</option>
-          </BaseSelect>
-        </FormGroup>
-
-        <FormGroup label="Gender">
-          <BaseSelect v-model="selectedGender" @change="saveUserProfile">
-            <option disabled value="">Select gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-          </BaseSelect>
-        </FormGroup>
-
-        <FormGroup label="Bow Type">
-          <BaseSelect v-model="selectedBowtype" @change="saveUserProfile">
-            <option disabled value="">Select bow type</option>
-            <option value="recurve">Recurve</option>
-            <option value="barebow">Barebow</option>
-            <option value="longbow">Longbow</option>
-            <option value="compound">Compound</option>
-          </BaseSelect>
-        </FormGroup>
-
-        <FormGroup v-if="selectedBowtype"
-                   :label="`${selectedBowtype.charAt(0).toUpperCase() + selectedBowtype.slice(1)} Outdoor Classification`">
-          <BaseSelect
-            v-model="outdoorClassifications[selectedBowtype]"
-            @change="updateOutdoorClassification(selectedBowtype, outdoorClassifications[selectedBowtype]); saveUserProfile()"
-          >
-            <option>Unclassified</option>
-            <option v-for="option in classificationList" :value="option" v-bind:key="option">
-              {{ option }}
-            </option>
-          </BaseSelect>
-          <p class="help-text">If you're unsure, select "Unclassified"</p>
-        </FormGroup>
-
-        <FormGroup v-if="selectedBowtype"
-                   :label="`${selectedBowtype.charAt(0).toUpperCase() + selectedBowtype.slice(1)} Indoor Classification`">
-          <BaseSelect
-            v-model="indoorClassifications[selectedBowtype]"
-            @change="updateIndoorClassification(selectedBowtype, indoorClassifications[selectedBowtype]); saveUserProfile()"
-          >
-            <option>Unclassified</option>
-            <option v-for="option in classificationList" :value="option" v-bind:key="option">
-              {{ option }}
-            </option>
-          </BaseSelect>
-          <p class="help-text">If you're unsure, select "Unclassified"</p>
-        </FormGroup>
-
-        <p class="profile-note">You can update these details anytime in the "You" tab.</p>
-      </SectionCard>
+      <UserProfileForm
+        title="Complete Your Profile"
+        description="To see rounds that match your skill level, please provide the following information:"
+        :show-name="false"
+        :initial-age-group="selectedAgeGroup"
+        :initial-gender="selectedGender"
+        :initial-bow-type="selectedBowtype"
+        :initial-indoor-classifications="indoorClassifications"
+        :initial-outdoor-classifications="outdoorClassifications"
+        submit-text="Save Profile"
+        @submit="handleProfileSubmit"
+      />
     </div>
 
     <!-- Only show this section if user has required details -->

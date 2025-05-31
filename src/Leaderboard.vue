@@ -16,6 +16,7 @@ import { useScoresStore } from '@/stores/scores'
 import { calculateTotal } from '@/domain/scoring/subtotals.js'
 import { convertToValues } from '@/domain/scoring/scores.js'
 import BaseInput from '@/components/ui/BaseInput.vue'
+import UserProfileForm from '@/components/forms/UserProfileForm.vue'
 
 const shootStore = useShootStore()
 const userStore = useUserStore()
@@ -167,37 +168,33 @@ function handleNameInput() {
   nameError.value = ''
 }
 
-function handleNameSubmit() {
-  const error = validateName(userName.value)
-  if (error) {
-    nameError.value = error
-    return
-  }
-
-  const trimmedName = userName.value.trim()
-
-  // Update the user store with the new name
-  userStore.updateUser({ name: trimmedName })
+function handleProfileSubmit(profileData) {
+  // Update the user store with all the profile data
+  userStore.save(
+    profileData.ageGroup,
+    profileData.gender,
+    profileData.bowType,
+    profileData.indoorClassifications,
+    profileData.outdoorClassifications,
+    userStore.user.indoorSeasonStartDate || new Date().toISOString().split('T')[0],
+    userStore.user.outdoorSeasonStartDate || new Date().toISOString().split('T')[0],
+    profileData.name,
+    userStore.user.constructiveCriticism,
+    userStore.user.experimentalTargetFace,
+    userStore.user.knockColor
+  )
 
   // Execute the pending action or go to menu
   if (pendingAction.value === 'create') {
     showNamePrompt.value = false
     pendingAction.value = null
-    userName.value = ''
-    nameError.value = ''
-    // Create shoot immediately after setting name
     createShoot()
   } else if (pendingAction.value === 'join') {
     showNamePrompt.value = false
     pendingAction.value = null
-    userName.value = ''
-    nameError.value = ''
     showJoinForm.value = true
   } else {
-    // No pending action, just go to menu
     showNamePrompt.value = false
-    userName.value = ''
-    nameError.value = ''
   }
 }
 
@@ -274,54 +271,24 @@ onUnmounted(() => {
 
     <!-- Name prompt -->
     <div v-else-if="activeView === 'name-prompt'" class="content-container">
-      <div class="name-prompt-container">
-        <div class="name-prompt-header">
-          <LiveIcon class="menu-icon" />
-
-          <h2 class="prompt-title">Welcome to Live Leaderboards!</h2>
-        </div>
-
-        <p class="prompt-description">
-          <strong>Please enter your name</strong> to get started with live archery competitions.
-          <span v-if="pendingAction">
-            You'll then be able to {{ pendingAction === 'create' ? 'create' : 'join' }} a live shoot.
-          </span>
-        </p>
-
-        <div class="form-group">
-          <BaseInput
-            v-model="userName"
-            type="text"
-            placeholder="Enter your full name (e.g. John Smith)"
-            :class="{ 'error': nameError }"
-            @input="handleNameInput"
-            @keypress="handleNameKeyPress"
-            autofocus
-          />
-          <div v-if="nameError" class="error-message">
-            {{ nameError }}
-          </div>
-          <div class="input-hint">
-            This is your display name that other archers will see
-          </div>
-        </div>
-
-        <ButtonGroup>
-          <BaseButton
-            variant="primary"
-            :disabled="userName.trim().length === 0"
-            @click="handleNameSubmit"
-          >
-            Continue
-          </BaseButton>
-          <BaseButton
-            v-if="pendingAction"
-            variant="text"
-            @click="backToMenu"
-          >
-            Cancel
-          </BaseButton>
-        </ButtonGroup>
+      <div class="profile-form-container">
+        <UserProfileForm
+          title="Welcome to Live Leaderboards!"
+          :description="profileDescription"
+          :show-name="true"
+          name-label="Your Display Name"
+          name-placeholder="Enter your full name (e.g. John Smith)"
+          :show-classifications="false"
+          submit-text="Continue"
+          :show-cancel="!!pendingAction"
+          cancel-text="Cancel"
+          :initial-name="userStore.user.name || ''"
+          :initial-age-group="userStore.user.ageGroup || ''"
+          :initial-gender="userStore.user.gender || ''"
+          :initial-bow-type="userStore.user.bowType || ''"
+          @submit="handleProfileSubmit"
+          @cancel="backToMenu"
+        />
       </div>
     </div>
 
