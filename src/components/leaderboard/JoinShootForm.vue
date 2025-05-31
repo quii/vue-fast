@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import BaseButton from '@/components/ui/BaseButton.vue'
 import ButtonGroup from '@/components/ui/ButtonGroup.vue'
 import { useShootStore } from '@/stores/shoot'
@@ -12,6 +12,10 @@ const props = defineProps({
   roundType: {
     type: String,
     required: true
+  },
+  initialJoinCode: {
+    type: String,
+    default: ''
   }
 })
 
@@ -22,6 +26,18 @@ const shootStore = useShootStore()
 // Local state
 const shootCode = ref('')
 const isJoining = ref(false)
+
+// Initialize with the initial join code if provided
+if (props.initialJoinCode) {
+  shootCode.value = props.initialJoinCode
+}
+
+// Watch for changes to initialJoinCode prop
+watch(() => props.initialJoinCode, (newCode) => {
+  if (newCode) {
+    shootCode.value = newCode
+  }
+})
 
 // Computed
 const canJoin = computed(() => {

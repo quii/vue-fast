@@ -5,7 +5,6 @@ import LeaderboardDisplay from '@/components/leaderboard/LeaderboardDisplay.vue'
 import JoinShootForm from '@/components/leaderboard/JoinShootForm.vue'
 import NotificationModal from '@/components/modals/NotificationModal.vue'
 import BaseButton from '@/components/ui/BaseButton.vue'
-import ButtonGroup from '@/components/ui/ButtonGroup.vue'
 import LiveIcon from '@/components/icons/LiveIcon.vue'
 import LeaveIcon from '@/components/icons/LeaveIcon.vue'
 import AlertsIcon from '@/components/icons/AlertsIcon.vue'
@@ -15,8 +14,8 @@ import { useGameTypeStore } from '@/stores/game_type'
 import { useScoresStore } from '@/stores/scores'
 import { calculateTotal } from '@/domain/scoring/subtotals.js'
 import { convertToValues } from '@/domain/scoring/scores.js'
-import BaseInput from '@/components/ui/BaseInput.vue'
 import UserProfileForm from '@/components/forms/UserProfileForm.vue'
+import { useRoute } from 'vue-router'
 
 const shootStore = useShootStore()
 const userStore = useUserStore()
@@ -34,8 +33,10 @@ const joinCodeRaw = ref('')
 const joinError = ref('')
 const isJoining = ref(false)
 const isCreating = ref(false)
-
-const joinCode = computed({
+const route = useRoute()
+// Add this with the other local state
+const urlJoinCode = ref('') // Store the join code from URL
+computed({
   get() {
     return joinCodeRaw.value
   },
@@ -45,7 +46,6 @@ const joinCode = computed({
     joinCodeRaw.value = digits
   }
 })
-
 // Computed
 const isInShoot = computed(() => shootStore.isInShoot)
 const currentShoot = computed(() => shootStore.currentShoot)
@@ -54,7 +54,6 @@ const currentScore = computed(() => calculateTotal(convertToValues(scoresStore.s
 const arrowsShot = computed(() => scoresStore.scores.length)
 const hasUserName = computed(() => userStore.user.name && userStore.user.name.trim().length > 0)
 
-// Show appropriate view based on shoot state
 const activeView = computed(() => {
   if (isInShoot.value) {
     return 'leaderboard'
@@ -62,9 +61,10 @@ const activeView = computed(() => {
   if (showNamePrompt.value || !hasUserName.value) {
     return 'name-prompt'
   }
-  // Remove the showJoinForm check - we'll embed it in the menu
+  // Always return 'menu' - the JoinShootForm is embedded there
   return 'menu'
 })
+
 
 // Top bar configuration
 const infoDisplays = computed(() => {
@@ -143,6 +143,7 @@ function backToMenu() {
   pendingAction.value = null
   userName.value = ''
   nameError.value = ''
+  urlJoinCode.value = '' // Clear URL join code when going back
 }
 
 function validateName(name) {
@@ -209,6 +210,7 @@ async function handleJoinShoot(code) {
     )
     if (success) {
       showJoinForm.value = false
+      urlJoinCode.value = '' // Clear URL join code on successful join
     }
   } catch (error) {
     console.error('Failed to join shoot:', error)
@@ -224,26 +226,41 @@ async function handleLeaveShoot() {
     console.error('Failed to leave shoot:', error)
   }
 }
-
-function handleNameKeyPress(event) {
-  if (event.key === 'Enter') {
-    const error = validateName(userName.value)
-    if (!error) {
-      handleNameSubmit()
-    }
-  }
-}
-
 function closeNotificationModal() {
   showNotificationModal.value = false
+}
+
+function processUrlJoinCode() {
+  const joincode = route.query.joincode
+
+  if (joincode) {
+    // Validate the join code format (should be 4 digits)
+    const cleanCode = String(joincode).replace(/\D/g, '').slice(0, 4)
+
+    if (cleanCode.length === 4) {
+      urlJoinCode.value = cleanCode
+      console.log('Join code detected from URL:', cleanCode)
+
+      // If user doesn't have a name, we'll need to get it first
+      if (!hasUserName.value) {
+        pendingAction.value = 'join'
+        showNamePrompt.value = true
+      }
+    } else {
+      console.warn('Invalid join code in URL:', joincode)
+    }
+  }
 }
 
 onMounted(async () => {
   await shootStore.initializeWebSocket()
   await shootStore.tryRestoreFromPersistedState()
 
-  // If user doesn't have a name, show the prompt immediately
-  if (!hasUserName.value) {
+  // Process URL join code after stores are initialized
+  processUrlJoinCode()
+
+  // If user doesn't have a name and no URL join code, show the prompt immediately
+  if (!hasUserName.value && !urlJoinCode.value) {
     showNamePrompt.value = true
     userName.value = ''
   }
@@ -307,6 +324,7 @@ onUnmounted(() => {
             :user-name="userStore.user.name"
             :round-type="gameTypeStore.type"
             @shoot-joined="handleJoinShoot"
+            :initial-join-code="urlJoinCode"
             @cancel="() => {}"
           />
         </div>
@@ -332,16 +350,6 @@ onUnmounted(() => {
           </BaseButton>
         </div>
       </div>
-    </div>
-
-    <!-- Join shoot form -->
-    <div v-else-if="activeView === 'join'" class="content-container">
-      <JoinShootForm
-        :user-name="userStore.user.name"
-        :round-type="gameTypeStore.type"
-        @shoot-joined="handleJoinShoot"
-        @cancel="backToMenu"
-      />
     </div>
 
     <!-- Leaderboard display -->
