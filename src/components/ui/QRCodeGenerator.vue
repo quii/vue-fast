@@ -33,7 +33,6 @@ const qrOptions = computed(() => ({
 }))
 
 async function generateQRCode() {
-  console.log('generateQRCode called with:', props.url)
 
   if (!props.url) {
     console.log('Early return - missing url')
@@ -44,10 +43,8 @@ async function generateQRCode() {
     isLoading.value = true
     error.value = ''
 
-    console.log('About to generate QR code with options:', qrOptions.value)
     const dataUrl = await QRCode.toDataURL(props.url, qrOptions.value)
     qrDataUrl.value = dataUrl
-    console.log('QR code generated successfully, data URL length:', dataUrl.length)
   } catch (err) {
     console.error('Failed to generate QR code:', err)
     error.value = 'Failed to generate QR code'
