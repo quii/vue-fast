@@ -16,6 +16,8 @@ import { calculateTotal } from '@/domain/scoring/subtotals.js'
 import { convertToValues } from '@/domain/scoring/scores.js'
 import UserProfileForm from '@/components/forms/UserProfileForm.vue'
 import { useRoute } from 'vue-router'
+import ShareIcon from '@/components/icons/ShareIcon.vue'
+import ShareShootModal from '@/components/modals/ShareShootModal.vue'
 
 const shootStore = useShootStore()
 const userStore = useUserStore()
@@ -30,9 +32,8 @@ const pendingAction = ref(null) // 'create' or 'join'
 const userName = ref('')
 const nameError = ref('')
 const joinCodeRaw = ref('')
-const joinError = ref('')
-const isJoining = ref(false)
 const isCreating = ref(false)
+const showShareModal = ref(false)
 const route = useRoute()
 // Add this with the other local state
 const urlJoinCode = ref('') // Store the join code from URL
@@ -84,6 +85,13 @@ const actionButtons = computed(() => {
   const buttons = []
 
   if (activeView.value === 'leaderboard') {
+    // Add share button
+    buttons.push({
+      iconComponent: ShareIcon,
+      label: 'Share',
+      action: 'share-shoot'
+    })
+
     // Always add alerts button when in leaderboard
     buttons.push({
       iconComponent: AlertsIcon,
@@ -102,13 +110,19 @@ const actionButtons = computed(() => {
   return buttons
 })
 
-// Methods
 function handleTopBarAction(actionData) {
   if (actionData.action === 'leave-shoot') {
     handleLeaveShoot()
   } else if (actionData.action === 'show-notifications') {
     showNotificationModal.value = true
+  } else if (actionData.action === 'share-shoot') {
+    showShareModal.value = true
   }
+}
+
+// Add function to close share modal
+function closeShareModal() {
+  showShareModal.value = false
 }
 
 function showJoinShoot() {
@@ -144,29 +158,6 @@ function backToMenu() {
   userName.value = ''
   nameError.value = ''
   urlJoinCode.value = '' // Clear URL join code when going back
-}
-
-function validateName(name) {
-  const trimmedName = name.trim()
-
-  if (trimmedName.length === 0) {
-    return 'Please enter your name'
-  }
-
-  if (trimmedName.length < 2) {
-    return 'Name must be at least 2 characters long'
-  }
-
-  // Check if it's a 4-digit number (likely a join code)
-  if (/^\d{4}$/.test(trimmedName)) {
-    return 'Please enter your name, not a join code'
-  }
-
-  return null
-}
-
-function handleNameInput() {
-  nameError.value = ''
 }
 
 function handleProfileSubmit(profileData) {
@@ -273,6 +264,12 @@ onUnmounted(() => {
 
 <template>
   <div class="page">
+    <ShareShootModal
+      :visible="showShareModal"
+      :shoot-code="currentShoot?.code || ''"
+      @close="closeShareModal"
+    />
+
     <BaseTopBar
       v-if="activeView === 'leaderboard'"
       :info-displays="infoDisplays"
