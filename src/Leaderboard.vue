@@ -37,6 +37,7 @@ const showShareModal = ref(false)
 const route = useRoute()
 // Add this with the other local state
 const urlJoinCode = ref('') // Store the join code from URL
+const isAutoJoining = ref(false) // Track auto-join state
 computed({
   get() {
     return joinCodeRaw.value
@@ -50,7 +51,7 @@ computed({
 // Computed
 const isInShoot = computed(() => shootStore.isInShoot)
 const currentShoot = computed(() => shootStore.currentShoot)
-const isLoading = computed(() => shootStore.isLoading)
+const isLoading = computed(() => shootStore.isLoading || isAutoJoining.value)
 const currentScore = computed(() => calculateTotal(convertToValues(scoresStore.scores, gameTypeStore.type)))
 const arrowsShot = computed(() => scoresStore.scores.length)
 const hasUserName = computed(() => userStore.user.name && userStore.user.name.trim().length > 0)
@@ -184,7 +185,12 @@ function handleProfileSubmit(profileData) {
   } else if (pendingAction.value === 'join') {
     showNamePrompt.value = false
     pendingAction.value = null
-    showJoinForm.value = true
+    // Auto-join if we have a URL join code
+    if (urlJoinCode.value) {
+      handleJoinShoot(urlJoinCode.value)
+    } else {
+      showJoinForm.value = true
+    }
   } else {
     showNamePrompt.value = false
   }
@@ -202,9 +208,11 @@ async function handleJoinShoot(code) {
     if (success) {
       showJoinForm.value = false
       urlJoinCode.value = '' // Clear URL join code on successful join
+      isAutoJoining.value = false
     }
   } catch (error) {
     console.error('Failed to join shoot:', error)
+    isAutoJoining.value = false
   }
 }
 
@@ -221,7 +229,7 @@ function closeNotificationModal() {
   showNotificationModal.value = false
 }
 
-function processUrlJoinCode() {
+async function processUrlJoinCode() {
   const joincode = route.query.joincode
 
   if (joincode) {
@@ -232,8 +240,12 @@ function processUrlJoinCode() {
       urlJoinCode.value = cleanCode
       console.log('Join code detected from URL:', cleanCode)
 
-      // If user doesn't have a name, we'll need to get it first
-      if (!hasUserName.value) {
+      // If user has a name, join immediately
+      if (hasUserName.value) {
+        isAutoJoining.value = true
+        await handleJoinShoot(cleanCode)
+      } else {
+        // If user doesn't have a name, we'll need to get it first
         pendingAction.value = 'join'
         showNamePrompt.value = true
       }
@@ -248,7 +260,7 @@ onMounted(async () => {
   await shootStore.tryRestoreFromPersistedState()
 
   // Process URL join code after stores are initialized
-  processUrlJoinCode()
+  await processUrlJoinCode()
 
   // If user doesn't have a name and no URL join code, show the prompt immediately
   if (!hasUserName.value && !urlJoinCode.value) {
@@ -280,7 +292,7 @@ onUnmounted(() => {
 
     <!-- Loading state -->
     <div v-if="isLoading" class="loading-container">
-      <p>Loading...</p>
+      <p>{{ isAutoJoining ? 'Joining shoot...' : 'Loading...' }}</p>
     </div>
 
     <!-- Name prompt -->
