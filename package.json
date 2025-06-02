@@ -74,7 +74,7 @@
     "nodemon": "^3.0.1",
     "prettier": "^3.5.3",
     "start-server-and-test": "^2.0.12",
-    "supertest": "^7.1.0",
+    "supertest": "^7.1.1",
     "testcontainers": "^11.0.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.8.3",
