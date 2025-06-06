@@ -281,6 +281,22 @@ export const useShootStore = defineStore('shoot', () => {
     }
   }
 
+  // Add this method to try joining via WebSocket first
+  async function joinShootViaWebSocket(code: string, archerName: string, roundName: string): Promise<{ success: boolean; shoot?: any }> {
+    if (!webSocketService || !webSocketService.isConnected()) {
+      console.log('WebSocket not connected, falling back to HTTP for join')
+      return { success: false }
+    }
+
+    try {
+      console.log('Joining shoot via WebSocket')
+      return await webSocketService.joinShoot(code, archerName, roundName)
+    } catch (error) {
+      console.error('Failed to join shoot via WebSocket:', error)
+      return { success: false }
+    }
+  }
+
   // Join an existing shoot
   async function joinShoot(code: string, archerName: string, roundName: string, currentScore: number = 0, arrowsShot: number = 0): Promise<boolean> {
     await initializeServices()
@@ -288,6 +304,31 @@ export const useShootStore = defineStore('shoot', () => {
 
     try {
       isLoading.value = true
+
+      // Try WebSocket first
+      const wsResult = await joinShootViaWebSocket(code, archerName, roundName)
+
+      if (wsResult.success && wsResult.shoot) {
+        currentShoot.value = wsResult.shoot
+
+        // Save to localStorage
+        saveShootState(code, archerName, roundName)
+
+        // Connect WebSocket and subscribe to the shoot
+        await initializeWebSocket()
+        if (webSocketService && webSocketService.isConnected()) {
+          webSocketService.subscribeToShoot(code)
+        }
+
+        // Always update score/arrows to sync current state, even if both are 0
+        const scoreResult = await updateScore(archerName, currentScore, roundName, arrowsShot)
+
+        isLoading.value = false
+        return true
+      }
+
+      // Fall back to HTTP if WebSocket join failed
+      console.log('Falling back to HTTP for join')
       const result = await shootService.joinShoot(code, archerName, roundName)
 
       if (result.success && result.shoot) {
@@ -303,22 +344,18 @@ export const useShootStore = defineStore('shoot', () => {
         }
 
         // Always update score/arrows to sync current state, even if both are 0
-        const scoreResult = await shootService.updateScore(code, archerName, currentScore, roundName, arrowsShot)
-        if (scoreResult.success && scoreResult.shoot) {
-          // Immediately update the local state with the score update
-          currentShoot.value = scoreResult.shoot
-        }
+        const scoreResult = await updateScore(archerName, currentScore, roundName, arrowsShot)
 
+        isLoading.value = false
         return true
       } else {
-        toast.error('Failed to join shoot - shoot not found')
+        isLoading.value = false
         return false
       }
     } catch (error) {
-      toast.error('Failed to join shoot')
-      return false
-    } finally {
+      console.error('Failed to join shoot:', error)
       isLoading.value = false
+      return false
     }
   }
 
@@ -352,18 +389,81 @@ export const useShootStore = defineStore('shoot', () => {
   }
 
   // Update score for current user
-  async function updateScore(archerName: string, totalScore: number, roundName: string, arrowsShot: number, currentClassification? :string): Promise<void> {
-    if (!shootService || !currentShoot.value) return
+  async function updateScoreViaWebSocket(code: string, archerName: string, totalScore: number, roundName: string, arrowsShot: number, currentClassification?: string): Promise<boolean> {
+    if (!webSocketService || !webSocketService.isConnected()) {
+      console.log('WebSocket not connected, falling back to HTTP')
+      return false
+    }
 
     try {
-      const result = await shootService.updateScore(currentShoot.value.code, archerName, totalScore, roundName, arrowsShot, currentClassification)
+      console.log('Updating score via WebSocket')
+      const result = await webSocketService.updateScore(
+        code,
+        archerName,
+        totalScore,
+        roundName,
+        arrowsShot,
+        currentClassification
+      )
 
       if (result.success && result.shoot) {
-      } else {
-        toast.error('Failed to update score')
+        // Update the local state with the returned shoot
+        currentShoot.value = result.shoot
+        return true
       }
+
+      return false
+    } catch (error) {
+      console.error('Failed to update score via WebSocket:', error)
+      return false
+    }
+  }
+
+  async function updateScore(archerName: string, totalScore: number, roundName: string, arrowsShot: number, currentClassification? :string): Promise<boolean> {
+    if (!currentShoot.value) return false
+
+    isLoading.value = true
+
+    try {
+      // Try WebSocket first
+      const wsSuccess = await updateScoreViaWebSocket(
+        currentShoot.value.code,
+        archerName,
+        totalScore,
+        roundName,
+        arrowsShot,
+        currentClassification
+      )
+
+      // If WebSocket succeeded, we're done
+      if (wsSuccess) {
+        isLoading.value = false
+        return true
+      }
+
+      // Fall back to HTTP
+      console.log('Falling back to HTTP for score update')
+      const result = await shootService.updateScore(
+        currentShoot.value.code,
+        archerName,
+        totalScore,
+        roundName,
+        arrowsShot,
+        currentClassification
+      )
+
+      if (result.success && result.shoot) {
+        currentShoot.value = result.shoot
+        isLoading.value = false
+        return true
+      }
+
+      isLoading.value = false
+      return false
     } catch (error) {
       console.error('Failed to update score:', error)
+      isLoading.value = false
+      return false
     }
   }
 
