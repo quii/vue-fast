@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import BaseCard from '../BaseCard.vue'
 import { useUserStore } from '@/stores/user'
 import { formatRoundName } from '../../domain/scoring/round/formatting.js'
+import RoundCard from '@/components/RoundCard.vue'
 
 const props = defineProps({
   participants: {
@@ -74,8 +75,7 @@ function getPositionIndicatorClass(participant) {
 
 <template>
   <div class="participant-list">
-    <h4 v-if="title" class="list-title">{{ title }}</h4>
-
+    <RoundCard :round="{round: title}" :compact="true" />
     <div v-if="sortedParticipants.length === 0" class="empty-state">
       <p>No participants in this group.</p>
     </div>
@@ -117,15 +117,6 @@ function getPositionIndicatorClass(participant) {
 .participant-list {
   display: flex;
   flex-direction: column;
-}
-
-.list-title {
-  margin: 0 0 1rem 0;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--color-border, #eee);
-  color: var(--color-text);
-  font-size: 1.1em;
-  font-weight: 600;
 }
 
 .empty-state {

@@ -58,3 +58,32 @@ export interface ShootParticipant {
   /** Current position in the leaderboard */
   currentPosition?: number;
 }
+
+/**
+ * Groups participants by their round name
+ * @param participants - Array of ShootParticipant objects
+ * @returns Object with roundName as keys and arrays of participants as values
+ */
+export function groupParticipantsByRound(participants: ShootParticipant[]): Record<string, ShootParticipant[]> {
+  return participants.reduce((groups, participant) => {
+    const roundName = participant.roundName;
+
+    if (!groups[roundName]) {
+      groups[roundName] = [];
+    }
+
+    groups[roundName].push(participant);
+
+    return groups;
+  }, {} as Record<string, ShootParticipant[]>);
+}
+
+/**
+ * Gets all unique round names from a list of participants
+ * @param participants - Array of ShootParticipant objects
+ * @returns Array of unique round names, sorted alphabetically
+ */
+export function getUniqueRoundNames(participants: ShootParticipant[]): string[] {
+  const uniqueRounds = new Set(participants.map(p => p.roundName));
+  return Array.from(uniqueRounds).sort();
+}
