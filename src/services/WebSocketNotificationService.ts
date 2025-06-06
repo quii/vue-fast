@@ -1,15 +1,13 @@
 import { ShootNotificationService, ShootNotification } from '../../shared/ports/ShootNotificationService.js'
 
 interface WebSocketMessage {
-  type: 'subscribe' | 'unsubscribe' | 'update' | 'notification' | 'update-score' | 'response' | 'error' | 'join-shoot'
+  type: 'subscribe' | 'unsubscribe' | 'update' | 'notification'
   shootCode?: string
-  requestId?: string
   data?: any
 }
 
 /**
  * Client-side WebSocket service for receiving real-time shoot notifications
- * and sending score updates
  */
 export class WebSocketNotificationService extends EventTarget implements ShootNotificationService {
   private ws: WebSocket | null = null
@@ -18,12 +16,6 @@ export class WebSocketNotificationService extends EventTarget implements ShootNo
   private maxReconnectAttempts = 5
   private reconnectDelay = 1000
   private subscribedShoots: Set<string> = new Set()
-  private pendingRequests: Map<string, {
-    resolve: (value: any) => void,
-    reject: (reason: any) => void,
-    timeout: NodeJS.Timeout
-  }> = new Map()
-  private requestTimeout = 10000 // 10 seconds
 
   constructor(url?: string) {
     super() // Call EventTarget constructor
@@ -76,13 +68,6 @@ export class WebSocketNotificationService extends EventTarget implements ShootNo
           clearTimeout(connectionTimeout)
           this.ws = null
 
-          // Clear all pending requests with errors
-          this.pendingRequests.forEach((request, id) => {
-            clearTimeout(request.timeout)
-            request.reject(new Error('WebSocket connection closed'))
-          })
-          this.pendingRequests.clear()
-
           // Emit disconnection event
           this.dispatchEvent(new CustomEvent('websocket-disconnected', {
             detail: { code: event.code, reason: event.reason }
@@ -129,13 +114,6 @@ export class WebSocketNotificationService extends EventTarget implements ShootNo
       this.ws = null
     }
     this.subscribedShoots.clear()
-
-    // Clear all pending requests with errors
-    this.pendingRequests.forEach((request, id) => {
-      clearTimeout(request.timeout)
-      request.reject(new Error('WebSocket disconnected'))
-    })
-    this.pendingRequests.clear()
   }
 
   /**
@@ -169,113 +147,6 @@ export class WebSocketNotificationService extends EventTarget implements ShootNo
   }
 
   /**
-   * Send a message to the server and wait for a response
-   */
-  private async sendRequest<T>(message: WebSocketMessage): Promise<T> {
-    if (!this.ws || this.ws.readyState !== WebSocket.OPEN) {
-      try {
-        await this.connect()
-      } catch (error) {
-        throw new Error('Failed to connect to WebSocket server')
-      }
-    }
-
-    return new Promise<T>((resolve, reject) => {
-      // Generate a unique request ID
-      const requestId = `req_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`
-      message.requestId = requestId
-
-      // Set timeout to reject the promise if no response is received
-      const timeout = setTimeout(() => {
-        if (this.pendingRequests.has(requestId)) {
-          this.pendingRequests.delete(requestId)
-          reject(new Error(`Request timeout after ${this.requestTimeout}ms`))
-        }
-      }, this.requestTimeout)
-
-      // Store the promise callbacks to resolve/reject when response is received
-      this.pendingRequests.set(requestId, { resolve, reject, timeout })
-
-      // Send the message
-      try {
-        this.ws!.send(JSON.stringify(message))
-        console.log('📤 Sent WebSocket request:', message.type, 'with ID:', requestId)
-      } catch (error) {
-        clearTimeout(timeout)
-        this.pendingRequests.delete(requestId)
-        reject(error)
-      }
-    })
-  }
-
-  /**
-   * Update a score via WebSocket
-   * @param shootCode The shoot code
-   * @param archerName The archer's name
-   * @param totalScore The total score
-   * @param roundName The round name
-   * @param arrowsShot The number of arrows shot
-   * @param currentClassification Optional classification
-   * @returns Promise with the result
-   */
-  async updateScore(
-    shootCode: string,
-    archerName: string,
-    totalScore: number,
-    roundName: string,
-    arrowsShot: number,
-    currentClassification?: string
-  ): Promise<{ success: boolean; shoot?: any }> {
-    try {
-      const message: WebSocketMessage = {
-        type: 'update-score',
-        shootCode,
-        data: {
-          archerName,
-          totalScore,
-          roundName,
-          arrowsShot,
-          currentClassification
-        }
-      }
-
-      return await this.sendRequest<{ success: boolean; shoot?: any }>(message)
-    } catch (error) {
-      console.error('❌ Error updating score via WebSocket:', error)
-      throw error
-    }
-  }
-
-  /**
-   * Join a shoot via WebSocket
-   * @param code The shoot code
-   * @param archerName The archer's name
-   * @param roundName The round name
-   * @returns Promise with the result
-   */
-  async joinShoot(
-    code: string,
-    archerName: string,
-    roundName: string
-  ): Promise<{ success: boolean; shoot?: any }> {
-    try {
-      const message: WebSocketMessage = {
-        type: 'join-shoot',
-        shootCode: code,
-        data: {
-          archerName,
-          roundName
-        }
-      }
-
-      return await this.sendRequest<{ success: boolean; shoot?: any }>(message)
-    } catch (error) {
-      console.error('❌ Error joining shoot via WebSocket:', error)
-      throw error
-    }
-  }
-
-  /**
    * Implementation of ShootNotificationService interface
    * Note: Client-side doesn't send notifications, only receives them
    */
@@ -288,31 +159,6 @@ export class WebSocketNotificationService extends EventTarget implements ShootNo
    * Handle incoming WebSocket messages
    */
   private handleMessage(message: WebSocketMessage): void {
-    // Handle responses to requests
-    if (message.type === 'response' && message.requestId) {
-      const pendingRequest = this.pendingRequests.get(message.requestId)
-      if (pendingRequest) {
-        clearTimeout(pendingRequest.timeout)
-        this.pendingRequests.delete(message.requestId)
-        pendingRequest.resolve(message.data)
-        console.log('✅ Resolved WebSocket request:', message.requestId)
-        return
-      }
-    }
-
-    // Handle error responses
-    if (message.type === 'error' && message.requestId) {
-      const pendingRequest = this.pendingRequests.get(message.requestId)
-      if (pendingRequest) {
-        clearTimeout(pendingRequest.timeout)
-        this.pendingRequests.delete(message.requestId)
-        pendingRequest.reject(new Error(message.data?.message || 'Unknown error'))
-        console.error('❌ WebSocket request error:', message.data?.message)
-        return
-      }
-    }
-
-    // Handle other message types
     switch (message.type) {
       case 'notification':
         if (message.shootCode && message.data) {

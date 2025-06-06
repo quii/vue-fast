@@ -1,13 +1,11 @@
 import { WebSocket, WebSocketServer } from 'ws';
 import { Server } from 'http';
 import { ShootNotification, ShootNotificationService } from '../../shared/ports/ShootNotificationService.js'
-import { ShootService } from '../../shared/ports/ShootService.js'
 
 interface WebSocketMessage {
-  type: 'subscribe' | 'unsubscribe' | 'update' | 'notification' | 'update-score' | 'join-shoot' | 'response' | 'error'
-  shootCode?: string
-  requestId?: string
-  data?: any
+  type: 'subscribe' | 'unsubscribe' | 'update' | 'notification';
+  shootCode?: string;
+  data?: any;
 }
 
 interface WebSocketClient extends WebSocket {
@@ -15,11 +13,9 @@ interface WebSocketClient extends WebSocket {
   subscribedShoots: Set<string>;
 }
 
-//todo: This should just implement ShootService, and then we can remove the HTTP version
 export class WebSocketManager implements ShootNotificationService {
   private wss: WebSocketServer;
   private pingInterval: NodeJS.Timeout | null = null;
-  private shootService: ShootService | null = null;
 
   constructor(server: Server) {
     // Create WebSocket server with explicit path
@@ -29,12 +25,6 @@ export class WebSocketManager implements ShootNotificationService {
     });
     console.log('🔌 WebSocket server created on path /ws');
     this.initialize();
-  }
-
-  // Method to set the ShootService after initialization
-  setShootService(service: ShootService): void {
-    this.shootService = service;
-    console.log('✅ ShootService set in WebSocketManager');
   }
 
   private initialize(): void {
@@ -51,11 +41,11 @@ export class WebSocketManager implements ShootNotificationService {
       });
 
       // Handle messages from clients
-      client.on('message', async (message: string) => {
+      client.on('message', (message: string) => {
         try {
           console.log('📨 Received WebSocket message:', message);
           const parsedMessage = JSON.parse(message) as WebSocketMessage;
-          await this.handleMessage(client, parsedMessage);
+          this.handleMessage(client, parsedMessage);
         } catch (error) {
           console.error('❌ Error handling WebSocket message:', error);
           this.sendErrorMessage(client, 'Invalid message format');
@@ -99,7 +89,7 @@ export class WebSocketManager implements ShootNotificationService {
     console.log('✅ WebSocket server initialized with ping interval');
   }
 
-  private async handleMessage(client: WebSocketClient, message: WebSocketMessage): Promise<void> {
+  private handleMessage(client: WebSocketClient, message: WebSocketMessage): void {
     console.log('🎯 Handling message:', message.type, 'for shoot:', message.shootCode);
 
     switch (message.type) {
@@ -122,119 +112,15 @@ export class WebSocketManager implements ShootNotificationService {
         }
         break;
 
-      case 'update-score':
-        // Check if ShootService is available
-        if (!this.shootService) {
-          this.sendErrorResponse(client, message.requestId, 'ShootService not initialized');
-          return;
-        }
-        await this.handleUpdateScore(client, message);
-        break;
-
-      case 'join-shoot':
-        // Check if ShootService is available
-        if (!this.shootService) {
-          this.sendErrorResponse(client, message.requestId, 'ShootService not initialized');
-          return;
-        }
-        await this.handleJoinShoot(client, message);
-        break;
-
       default:
         this.sendErrorMessage(client, `Unknown message type: ${message.type}`);
-    }
-  }
-
-  private async handleUpdateScore(client: WebSocketClient, message: WebSocketMessage): Promise<void> {
-    if (!message.shootCode || !message.data || !this.shootService) {
-      this.sendErrorResponse(client, message.requestId, 'Missing shootCode, data, or ShootService');
-      return;
-    }
-
-    const { archerName, totalScore, roundName, arrowsShot, currentClassification } = message.data;
-
-    // Validate required fields
-    if (!archerName || totalScore === undefined || !roundName || arrowsShot === undefined) {
-      this.sendErrorResponse(client, message.requestId, 'Archer name, total score, round name, and arrows shot are required');
-      return;
-    }
-
-    // Validate that arrowsShot is a non-negative number
-    if (typeof arrowsShot !== 'number' || arrowsShot < 0) {
-      this.sendErrorResponse(client, message.requestId, 'Arrows shot must be a non-negative number');
-      return;
-    }
-
-    // Validate that totalScore is a number
-    if (typeof totalScore !== 'number') {
-      this.sendErrorResponse(client, message.requestId, 'Total score must be a number');
-      return;
-    }
-
-    try {
-      // Use the ShootService to update the score
-      const result = await this.shootService.updateScore(
-        message.shootCode,
-        archerName,
-        totalScore,
-        roundName,
-        arrowsShot,
-        currentClassification
-      );
-
-      // Send response back to the client
-      this.sendMessage(client, {
-        type: 'response',
-        requestId: message.requestId,
-        data: result
-      });
-
-      // No need to broadcast here as ShootService already does that through this WebSocketManager
-    } catch (error) {
-      console.error('❌ Error updating score:', error);
-      this.sendErrorResponse(client, message.requestId, 'Failed to update score');
-    }
-  }
-
-  private async handleJoinShoot(client: WebSocketClient, message: WebSocketMessage): Promise<void> {
-    if (!message.shootCode || !message.data || !this.shootService) {
-      this.sendErrorResponse(client, message.requestId, 'Missing shootCode, data, or ShootService');
-      return;
-    }
-
-    const { archerName, roundName } = message.data;
-
-    // Validate required fields
-    if (!archerName || !roundName) {
-      this.sendErrorResponse(client, message.requestId, 'Archer name and round name are required');
-      return;
-    }
-
-    try {
-      // Use the ShootService to join the shoot
-      const result = await this.shootService.joinShoot(
-        message.shootCode,
-        archerName,
-        roundName
-      );
-
-      // Send response back to the client
-      this.sendMessage(client, {
-        type: 'response',
-        requestId: message.requestId,
-        data: result
-      });
-
-      // No need to broadcast here as ShootService already does that through this WebSocketManager
-    } catch (error) {
-      console.error('❌ Error joining shoot:', error);
-      this.sendErrorResponse(client, message.requestId, 'Failed to join shoot');
     }
   }
 
   private sendMessage(client: WebSocketClient, message: WebSocketMessage): void {
     if (client.readyState === WebSocket.OPEN) {
       const messageStr = JSON.stringify(message);
+      console.log('📤 Sending message to client:', messageStr);
       client.send(messageStr);
     } else {
       console.log('⚠️ Cannot send message, client not ready. ReadyState:', client.readyState);
@@ -242,23 +128,15 @@ export class WebSocketManager implements ShootNotificationService {
   }
 
   private sendErrorMessage(client: WebSocketClient, errorMessage: string): void {
+    console.log('🚨 Sending error message:', errorMessage);
     this.sendMessage(client, {
       type: 'update',
       data: { error: errorMessage }
     });
   }
 
-  private sendErrorResponse(client: WebSocketClient, requestId: string | undefined, errorMessage: string): void {
-    if (!requestId) return;
-
-    this.sendMessage(client, {
-      type: 'error',
-      requestId,
-      data: { message: errorMessage }
-    });
-  }
-
   private broadcastToShoot(shootCode: string, message: WebSocketMessage): void {
+    console.log(`📢 Broadcasting to shoot ${shootCode}:`, message.type);
     let sentCount = 0;
 
     this.wss.clients.forEach((ws: WebSocket) => {
@@ -269,11 +147,12 @@ export class WebSocketManager implements ShootNotificationService {
       }
     });
 
-    console.log(`📊 Broadcast to ${sentCount} clients for shoot ${shootCode}`);
+    console.log(`📊 Broadcast sent to ${sentCount} clients for shoot ${shootCode}`);
   }
 
   // ShootNotificationService implementation
   async sendNotification(shootCode: string, notification: ShootNotification): Promise<void> {
+    console.log(`🔔 Sending notification for shoot ${shootCode}:`, notification);
     this.broadcastToShoot(shootCode, {
       type: 'notification',
       shootCode,
@@ -283,6 +162,7 @@ export class WebSocketManager implements ShootNotificationService {
 
   // Method to broadcast shoot updates
   async broadcastShootUpdate(shootCode: string, shootData: any): Promise<void> {
+    console.log(`🔄 Broadcasting shoot update for ${shootCode}`);
     this.broadcastToShoot(shootCode, {
       type: 'update',
       shootCode,
@@ -292,6 +172,8 @@ export class WebSocketManager implements ShootNotificationService {
 
   // Clean up resources
   close(): void {
+    console.log('🧹 Closing WebSocket server...');
+
     if (this.pingInterval) {
       clearInterval(this.pingInterval);
       this.pingInterval = null;
