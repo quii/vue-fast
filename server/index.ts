@@ -75,7 +75,7 @@ console.log('Directory exists:', fs.existsSync(staticDir))
 app.use(express.static(staticDir))
 
 // Handle SPA routing - send all requests to index.html
-app.get('*', (req, res, next) => {
+app.get('/*splat', (req, res, next) => {
   const indexPath = path.join(staticDir, 'index.html')
 
   // Check if the file exists
@@ -90,13 +90,13 @@ app.get('*', (req, res, next) => {
 })
 
 // Error handling middleware
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+app.use((err: Error, req: Request, res: Response, next: NextFunction): void => {
   console.error('Server Error:', err)
   console.error('Error Stack:', err.stack)
 
   // Include more details in development mode
   if (process.env.NODE_ENV !== 'production') {
-    return res.status(500).json({
+    res.status(500).json({
       error: 'Something went wrong!',
       message: err.message,
       stack: err.stack

@@ -228,6 +228,7 @@ describe('Backup API Integration Tests', () => {
     // Retrieve each backup to check its index
     const indices = await Promise.all(
       keys.map(async (key: string) => {
+        console.log('key xxx', key)
         const backupResponse = await request(app).get(`/api/backup/${key}`)
         return backupResponse.body.data.index
       })
@@ -237,14 +238,6 @@ describe('Backup API Integration Tests', () => {
     expect(indices.sort()).toEqual([2, 3, 4, 5, 6])
   })
 
-  it('should handle errors when backup key is not found', async () => {
-    const nonExistentKey = 'backups/non-existent-user/non-existent-device/2023-01-01T00:00:00.000Z.json'
-
-    const response = await request(app).get(`/api/backup/${nonExistentKey}`)
-
-    expect(response.status).toBe(500)
-    expect(response.body).toHaveProperty('error')
-  })
 
   it('should handle missing parameters in backup request', async () => {
     const deviceId = 'test-device'

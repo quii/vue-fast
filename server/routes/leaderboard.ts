@@ -21,15 +21,16 @@ export function createLeaderboardRouter(dependencies: {
   })
 
   // Create a new shoot
-  router.post('/', async (req: Request, res: Response) => {
+  router.post('/', async (req: Request, res: Response): Promise<void> => {
     try {
       const { creatorName } = req.body
 
       if (!creatorName) {
-        return res.status(400).json({
+        res.status(400).json({
           success: false,
           error: 'Creator name is required'
         })
+        return
       }
 
       const result = await shootService.createShoot(creatorName)
@@ -49,16 +50,17 @@ export function createLeaderboardRouter(dependencies: {
   })
 
   // Get a shoot by code
-  router.get('/:code', async (req: Request, res: Response) => {
+  router.get('/:code', async (req: Request, res: Response): Promise<void> => {
     try {
       const { code } = req.params
       const shoot = await shootService.getShoot(code)
 
       if (!shoot) {
-        return res.status(404).json({
+        res.status(404).json({
           success: false,
           error: 'Shoot not found'
         })
+        return
       }
 
       res.json({
@@ -75,25 +77,27 @@ export function createLeaderboardRouter(dependencies: {
   })
 
   // Join a shoot
-  router.post('/:code/join', async (req: Request, res: Response) => {
+  router.post('/:code/join', async (req: Request, res: Response): Promise<void> => {
     try {
       const { code } = req.params
       const { archerName, roundName } = req.body
 
       if (!archerName || !roundName) {
-        return res.status(400).json({
+        res.status(400).json({
           success: false,
           error: 'Archer name and round name are required'
         })
+        return
       }
 
       const result = await shootService.joinShoot(code, archerName, roundName)
 
       if (!result.success) {
-        return res.status(404).json({
+        res.status(404).json({
           success: false,
           error: 'Shoot not found or join failed'
         })
+        return
       }
 
       res.json(result)
@@ -107,41 +111,45 @@ export function createLeaderboardRouter(dependencies: {
   })
 
   // Update score
-  router.put('/:code/score', async (req: Request, res: Response) => {
+  router.put('/:code/score', async (req: Request, res: Response): Promise<void> => {
     try {
       const { code } = req.params
       const { archerName, totalScore, roundName, arrowsShot, currentClassification } = req.body
 
       if (!archerName || totalScore === undefined || !roundName || arrowsShot === undefined) {
-        return res.status(400).json({
+        res.status(400).json({
           success: false,
           error: 'Archer name, total score, round name, and arrows shot are required'
         })
+        return
       }
 
       // Validate that arrowsShot is a non-negative number
       if (typeof arrowsShot !== 'number' || arrowsShot < 0) {
-        return res.status(400).json({
+        res.status(400).json({
           success: false,
           error: 'Arrows shot must be a non-negative number'
         })
+        return
       }
 
       // Validate that totalScore is a number
       if (typeof totalScore !== 'number') {
-        return res.status(400).json({
+        res.status(400).json({
           success: false,
           error: 'Total score must be a number'
         })
+        return
       }
 
       const result = await shootService.updateScore(code, archerName, totalScore, roundName, arrowsShot, currentClassification)
 
       if (!result.success) {
-        return res.status(404).json({
+        res.status(404).json({
           success: false,
           error: 'Shoot not found or archer not found'
         })
+        return
       }
 
       res.json(result)
@@ -155,41 +163,45 @@ export function createLeaderboardRouter(dependencies: {
   })
 
   // Finish shoot - new endpoint
-  router.put('/:code/finish', async (req: Request, res: Response) => {
+  router.put('/:code/finish', async (req: Request, res: Response): Promise<void> => {
     try {
       const { code } = req.params
       const { archerName, totalScore, roundName, arrowsShot, currentClassification } = req.body
 
       if (!archerName || totalScore === undefined || !roundName || arrowsShot === undefined) {
-        return res.status(400).json({
+        res.status(400).json({
           success: false,
           error: 'Archer name, total score, round name, and arrows shot are required'
         })
+        return
       }
 
       // Validate that arrowsShot is a non-negative number
       if (typeof arrowsShot !== 'number' || arrowsShot < 0) {
-        return res.status(400).json({
+        res.status(400).json({
           success: false,
           error: 'Arrows shot must be a non-negative number'
         })
+        return
       }
 
       // Validate that totalScore is a number
       if (typeof totalScore !== 'number') {
-        return res.status(400).json({
+        res.status(400).json({
           success: false,
           error: 'Total score must be a number'
         })
+        return
       }
 
       const result = await shootService.finishShoot(code, archerName, totalScore, roundName, arrowsShot, currentClassification)
 
       if (!result.success) {
-        return res.status(404).json({
+        res.status(404).json({
           success: false,
           error: 'Shoot not found or archer not found'
         })
+        return
       }
 
       res.json(result)
@@ -203,17 +215,18 @@ export function createLeaderboardRouter(dependencies: {
   })
 
   // Leave a shoot
-  router.delete('/:code/archer/:archerName', async (req: Request, res: Response) => {
+  router.delete('/:code/archer/:archerName', async (req: Request, res: Response): Promise<void> => {
     try {
       const { code, archerName } = req.params
 
       const result = await shootService.leaveShoot(code, archerName)
 
       if (!result.success) {
-        return res.status(404).json({
+        res.status(404).json({
           success: false,
           error: 'Shoot not found or archer not found'
         })
+        return
       }
 
       res.json(result)

@@ -2,9 +2,7 @@ import express, { Router } from 'express'
 import { S3Service } from '../services/s3Service.js'
 import { createBackupRouter } from './backup.js'
 import { createLeaderboardRouter } from './leaderboard.js'
-import { ShootRepository } from '../../shared/ports/ShootRepository.js'
 import { ShootService } from '../../shared/ports/ShootService.js'
-import { WebSocketManager } from '../services/WebSocketManager.js'
 
 
 export function createApiRouter(dependencies: {

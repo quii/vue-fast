@@ -10,7 +10,7 @@ export function createBackupRouter(dependencies: { s3Service: S3Service }): Rout
   s3Service.initializeBucket().catch(console.error)
 
   // Health check endpoint
-  router.get('/health', (req: Request, res: Response) => {
+  router.get('/health', (req: Request, res: Response): void => {
     res.json({
       status: 'ok',
       message: 'Hello from the backup API!'
@@ -18,13 +18,14 @@ export function createBackupRouter(dependencies: { s3Service: S3Service }): Rout
   })
 
   // Store backup
-  router.post('/backup/:deviceId', async (req: Request, res: Response) => {
+  router.post('/backup/:deviceId', async (req: Request, res: Response): Promise<void> => {
     try {
       const { deviceId } = req.params
       const { data, userName } = req.body
 
       if (!deviceId || !data) {
-        return res.status(400).json({ error: 'Missing required parameters' })
+        res.status(400).json({ error: 'Missing required parameters' })
+        return
       }
 
       // Use provided userName or 'unknown'
@@ -48,7 +49,7 @@ export function createBackupRouter(dependencies: { s3Service: S3Service }): Rout
   })
 
   // List backups for a device
-  router.get('/backups/:deviceId', async (req: Request, res: Response) => {
+  router.get('/backups/:deviceId', async (req: Request, res: Response): Promise<void> => {
     try {
       const { deviceId } = req.params
       const backups = await s3Service.listBackupsByDevice(deviceId)
@@ -63,12 +64,13 @@ export function createBackupRouter(dependencies: { s3Service: S3Service }): Rout
   })
 
   // Find backups by user name (for cross-device recovery)
-  router.get('/find-backups', async (req: Request, res: Response) => {
+  router.get('/find-backups', async (req: Request, res: Response): Promise<void> => {
     try {
       const { name } = req.query
 
       if (!name) {
-        return res.status(400).json({ error: 'Name parameter is required' })
+        res.status(400).json({ error: 'Name parameter is required' })
+        return
       }
 
       const backups = await s3Service.findBackupsByName(String(name))
@@ -79,16 +81,24 @@ export function createBackupRouter(dependencies: { s3Service: S3Service }): Rout
     } catch (error) {
       console.error('Error finding backups:', error)
       res.status(500).json({
-        error: 'Failed' +
-          ' to find backups'
+        error: 'Failed to find backups'
       })
     }
   })
 
-  // Get a specific backup
-  router.get('/backup/:key(*)', async (req: Request, res: Response) => {
+  // Get a specific backup - Using regex for Express v5 compatibility
+  router.get(/^\/backup\/(.+)$/, async (req: Request, res: Response): Promise<void> => {
     try {
-      const key = req.params.key
+      const key = req.params[0]
+
+      if (!key) {
+        res.status(400).json({
+          error: 'Backup key is required',
+          message: 'No backup key provided in the URL'
+        })
+        return
+      }
+
       const data = await s3Service.getBackup(key)
 
       res.json({
@@ -106,13 +116,13 @@ export function createBackupRouter(dependencies: { s3Service: S3Service }): Rout
       res.status(500).json({
         error: 'Failed to retrieve backup',
         message: errorMessage,
-        key: req.params.key
+        key: req.params[0] || 'unknown'
       })
     }
   })
 
   // Add the delete-test-backups endpoint
-  router.delete('/delete-test-backups', async (req: Request, res: Response) => {
+  router.delete('/delete-test-backups', async (req: Request, res: Response): Promise<void> => {
     try {
       const result = await s3Service.deleteTestData()
 
