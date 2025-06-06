@@ -38,6 +38,9 @@ const route = useRoute()
 // Add this with the other local state
 const urlJoinCode = ref('') // Store the join code from URL
 const isAutoJoining = ref(false) // Track auto-join state
+const groupByRound = ref(true)
+
+
 computed({
   get() {
     return joinCodeRaw.value
@@ -86,6 +89,13 @@ const actionButtons = computed(() => {
   const buttons = []
 
   if (activeView.value === 'leaderboard') {
+    buttons.push({
+      iconComponent: null, // We'll use text for this button
+      label: groupByRound.value ? 'Ungroup' : 'Group by Round',
+      action: 'toggle-grouping',
+      variant: 'outline'
+    })
+
     // Add share button
     buttons.push({
       iconComponent: ShareIcon,
@@ -118,22 +128,14 @@ function handleTopBarAction(actionData) {
     showNotificationModal.value = true
   } else if (actionData.action === 'share-shoot') {
     showShareModal.value = true
+  } else if (actionData.action === 'toggle-grouping') {
+    groupByRound.value = !groupByRound.value
   }
 }
 
 // Add function to close share modal
 function closeShareModal() {
   showShareModal.value = false
-}
-
-function showJoinShoot() {
-  if (!hasUserName.value) {
-    pendingAction.value = 'join'
-    userName.value = ''
-    showNamePrompt.value = true
-  } else {
-    showJoinForm.value = true
-  }
 }
 
 async function createShoot() {
@@ -365,6 +367,7 @@ onUnmounted(() => {
     <div v-else-if="activeView === 'leaderboard'" class="content-container">
       <LeaderboardDisplay
         :shoot="currentShoot"
+        :group-by-round="groupByRound"
         @leave="handleLeaveShoot"
         @join="handleJoinShoot"
       />
@@ -390,7 +393,6 @@ onUnmounted(() => {
 .content-container {
   flex: 1;
   overflow-y: auto;
-  padding: 1rem 0;
 }
 
 .loading-container {
