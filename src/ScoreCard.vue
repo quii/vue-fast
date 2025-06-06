@@ -79,15 +79,15 @@ const maxReached = computed(() => {
 
 const toast = useToast();
 const noteText = ref("");
-const date = ref(new Date().toISOString().substr(0, 10));
+const date = ref(new Date().toISOString());
 const runningTotal = computed(() => calculateTotal(convertToValues(scoresStore.scores, gameTypeStore.type)));
 const hasStarted = computed(() => scoresStore.scores.length > 0);
 
 const currentEnd = computed(() => Math.floor(scoresStore.scores.length / gameTypeStore.currentRound.endSize));
 
 const showNoteTaker = ref(false);
-const showSaveModal = ref(false);
-const showLeaderboardModal = ref(false); // New ref for leaderboard modal
+const showSaveModal = ref(false);ref(false)
+// New ref for leaderboard modal
 
 const classificationCalculator = ref(null);
 const availableClassifications = ref(null);
