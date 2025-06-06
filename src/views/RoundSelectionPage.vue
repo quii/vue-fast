@@ -22,7 +22,7 @@ import { filterRounds } from "@/domain/scoring/round_filters";
 import { useSearchPreferencesStore } from "@/stores/searchPreferences";
 import { useUserStore } from "@/stores/user";
 import { computed, onMounted, ref, watchEffect } from "vue";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import { usePreferencesStore } from '@/stores/preferences'
 
 defineProps({
@@ -41,6 +41,7 @@ onMounted(() => {
 });
 
 const router = useRouter();
+const route = useRoute();
 const userStore = useUserStore();
 const searchPreferencesStore = useSearchPreferencesStore();
 const preferencesStore = usePreferencesStore()
@@ -324,10 +325,28 @@ function clearSearch() {
 }
 
 function selectRound(type) {
-  router.push({
-    path: "/",
-    query: { selectedRound: type }
-  });
+  if (route.query.manualEntry === 'true') {
+    router.push({
+      path: '/history',
+      query: {
+        selectedRound: type,
+        manualEntry: 'true'
+      }
+    });
+  } else if (route.query.returnTo === 'history') {
+    router.push({
+      path: '/history',
+      query: {
+        selectedRound: type,
+        manualEntry: 'true'
+      }
+    });
+  } else {
+    router.push({
+      path: "/",
+      query: { selectedRound: type }
+    });
+  }
 }
 
 function updateMinDistanceConstrained(value) {

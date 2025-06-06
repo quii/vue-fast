@@ -1,5 +1,14 @@
 <template>
   <HistoryTipModal v-if="showTip" @close="dismissTip" />
+  <ManualScoreEntryModal
+    :visible="showManualEntryModal"
+    :initialDate="today"
+    :initialStatus="DEFAULT_SHOOT_STATUS"
+    :selectedRound="selectedManualRound"
+    @save="handleSaveManualScore"
+    @cancel="showManualEntryModal = false"
+    @selectRound="openRoundSelectionForManualEntry"
+  />
   <div class="fullpage">
     <ScoreHistoryGraph
       :historyData="graphData"
@@ -26,52 +35,20 @@
         @filter-status="handleStatusFilter"
         @reset="handleReset"
       />
+      <!-- Actions section -->
+      <HistoryActions
+        :showRoundGraph="showGraphButton"
+        :showIndoorHandicapGraph="showIndoorHandicapGraphButton"
+        :showOutdoorHandicapGraph="showOutdoorHandicapGraphButton"
+        :showArrowsGraph="showArrowsGraphButton"
+        :roundName="capitalizedRoundName"
+        @addManualScore="openManualEntryModal"
+        @openRoundGraph="openGraph"
+        @openIndoorHandicapGraph="openIndoorHandicapGraph"
+        @openOutdoorHandicapGraph="openOutdoorHandicapGraph"
+        @openArrowsGraph="openArrowsGraph"
+      />
 
-      <ButtonGroup v-if="showGraphButton">
-        <BaseButton
-          variant="default"
-          size="medium"
-          @click="openGraph"
-          fullWidth
-        >
-          <GraphIcon />
-          <span>View {{ capitalizedRoundName }} Graph</span>
-        </BaseButton>
-      </ButtonGroup>
-      <ButtonGroup v-if="showIndoorHandicapGraphButton || showOutdoorHandicapGraphButton || showArrowsGraphButton">
-        <BaseButton
-          v-if="showIndoorHandicapGraphButton"
-          variant="default"
-          size="medium"
-          @click="openIndoorHandicapGraph"
-          class="handicap-button"
-        >
-          <GraphIcon />
-          <span>Indoor Handicap</span>
-        </BaseButton>
-
-        <BaseButton
-          v-if="showOutdoorHandicapGraphButton"
-          variant="default"
-          size="medium"
-          @click="openOutdoorHandicapGraph"
-          class="handicap-button"
-        >
-          <GraphIcon />
-          <span>Outdoor Handicap</span>
-        </BaseButton>
-
-        <BaseButton
-          v-if="showArrowsGraphButton"
-          variant="default"
-          size="medium"
-          @click="openArrowsGraph"
-          class="arrows-button"
-        >
-          <GraphIcon />
-          <span>Arrows Shot</span>
-        </BaseButton>
-      </ButtonGroup>
       <div v-if="hasClassificationProgress" class="classification-progress-section">
         <div v-for="(bowProgress, bowType) in classificationProgress" :key="bowType">
           <KeepAlive>
@@ -121,6 +98,8 @@ import HistoryTipModal from "@/components/modals/HistoryTipModal.vue";
 import ScoreHistoryGraph from "@/components/ScoreHistoryGraph.vue";
 import BaseButton from "@/components/ui/BaseButton.vue";
 import ButtonGroup from "@/components/ui/ButtonGroup.vue";
+import ManualScoreEntryModal from "@/components/modals/ManualScoreEntryModal.vue";
+import { DEFAULT_SHOOT_STATUS } from '@/domain/shoot/shoot_status.js';
 import { calculateAllClassificationProgress } from "@/domain/scoring/classification_progress.js";
 import { roundConfigManager } from "@/domain/scoring/game_types.js";
 import { formatRoundName } from "@/domain/scoring/round/formatting.js";
@@ -129,6 +108,7 @@ import { usePreferencesStore } from "@/stores/preferences";
 import { useUserStore } from "@/stores/user";
 import { computed, ref, watch, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import HistoryActions from '@/components/HistoryActions.vue'
 
 const store = useHistoryStore();
 const router = useRouter();
@@ -421,6 +401,66 @@ function dismissTip() {
 function view(id) {
   router.push({ name: "viewHistory", params: { id } });
 }
+
+const showManualEntryModal = ref(false);
+const showRoundSelectionForManualEntry = ref(false);
+const selectedManualRound = ref("");
+const today = new Date().toISOString().substr(0, 10);
+
+async function handleSaveManualScore(data) {
+  try {
+    // Create a shoot object with the manual score
+    const id = await store.add(
+      data.date,
+      data.score,
+      data.gameType,
+      [], // No individual arrow scores
+      roundConfigManager.getRound(data.gameType).unit,
+      user.user,
+      data.shootStatus
+    );
+
+    showManualEntryModal.value = false;
+    selectedManualRound.value = "";
+    toast.success("Manual score saved to history");
+
+    // Optionally refresh filters or navigate to the new entry
+    // router.push(`/history/${id}`);
+  } catch (error) {
+    console.error(error);
+    toast.error("Error saving manual score");
+  }
+}
+
+function openManualEntryModal() {
+  showManualEntryModal.value = true;
+}
+
+function openRoundSelectionForManualEntry() {
+  showManualEntryModal.value = false;
+  showRoundSelectionForManualEntry.value = true;
+  // Navigate to round selection page with a return parameter
+  router.push({
+    path: '/select-round',
+    query: {
+      returnTo: 'history',
+      manualEntry: 'true'
+    }
+  });
+}
+
+// Handle round selection from the round selection page
+watch(() => route.query.selectedRound, (newRound) => {
+  if (newRound && route.query.manualEntry === 'true') {
+    selectedManualRound.value = newRound;
+    showManualEntryModal.value = true;
+    // Clear the query parameters
+    router.replace({
+      path: '/history',
+      query: {}
+    });
+  }
+}, { immediate: true });
 </script>
 <style scoped>
 
@@ -453,5 +493,13 @@ function view(id) {
 
 .arrows-button {
   margin-top: 0.25rem;
+}
+
+.manual-entry-button-group {
+  margin-bottom: 1rem;
+}
+
+.button-icon {
+  margin-right: 0.5rem;
 }
 </style>
