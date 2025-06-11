@@ -49,7 +49,7 @@
     "ws": "^8.18.2"
   },
   "devDependencies": {
-    "@dagger.io/dagger": "^0.18.9",
+    "@dagger.io/dagger": "^0.18.10",
     "@eslint/eslintrc": "^3.3.1",
     "@rushstack/eslint-patch": "^1.11.0",
     "@types/express": "^5.0.3",
