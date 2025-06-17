@@ -47,6 +47,9 @@ const webSocketManager = new WebSocketManager(server);
 // Initialize ShootService with the WebSocket notification service
 const shootService = new ShootServiceImpl(shootRepository, webSocketManager);
 
+//todo: meh
+webSocketManager.setShootService(shootService);
+
 // Middleware
 app.use(express.json({ limit: '10mb' }))
 app.use(express.urlencoded({ extended: true }))
