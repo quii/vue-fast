@@ -26,7 +26,7 @@ function handleCancel() {
 </script>
 
 <template>
-  <BaseModal v-if="visible" title="Delete Score">
+  <BaseModal v-if="visible" title="Delete?">
     <div class="delete-modal-content">
       <p class="delete-message">
         Are you sure you want to delete {{ itemName }}? This action cannot be undone.

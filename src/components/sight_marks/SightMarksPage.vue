@@ -149,36 +149,37 @@
       </div>
     </BaseModal>
 
-    <BaseModal v-if="showDeleteConfirm">
-      <p>Delete {{ markToDelete.distance }}{{ markToDelete.unit }}?</p>
-      <div class="dialog-actions">
-        <button class="secondary" @click="cancelDelete">Cancel</button>
-        <button class="primary" @click="confirmDelete">Delete</button>
-      </div>
-    </BaseModal>
+    <!-- Use the DeleteConfirmationModal component -->
+    <DeleteConfirmationModal
+      :visible="showDeleteConfirm"
+      :item-name="markToDelete ? `${markToDelete.distance}${markToDelete.unit}` : ''"
+      @confirm="confirmDelete"
+      @cancel="cancelDelete"
+    />
 
     <div class="marks-list">
-      <div
+      <DeleteableCard
+        class="mark-card"
         v-for="mark in marks"
         :key="`${mark.distance}${mark.unit}`"
-        class="mark-card"
+        @click="editMark(mark)"
+        @delete="deleteMark(mark)"
       >
-        <div class="mark-content" @click="editMark(mark)" @touchstart="startLongPress(mark)"
-             @touchend="cancelLongPress">
+        <div class="mark-content">
           <div class="mark-distance">{{ mark.distance }}{{ mark.unit }}</div>
           <div class="mark-details">
             <div>Extension: {{ mark.notches }} notches</div>
             <div>Height: {{ formatVertical(mark.vertical) }}</div>
             <div v-if="mark.label" class="mark-label">{{ mark.label }}</div>
           </div>
+          <button
+            class="star-button"
+            @click.stop="togglePriority(mark)"
+          >
+            {{ mark.priority ? "⭐" : "☆" }}
+          </button>
         </div>
-        <button
-          class="star-button"
-          @click="togglePriority(mark)"
-        >
-          {{ mark.priority ? "⭐" : "☆" }}
-        </button>
-      </div>
+      </DeleteableCard>
     </div>
   </div>
 </template>
@@ -187,8 +188,10 @@
 import { computed, ref } from "vue";
 import { useSightMarksStore } from "@/stores/sight_marks";
 import BaseModal from "@/components/modals/BaseModal.vue";
+import DeleteConfirmationModal from "@/components/modals/DeleteConfirmationModal.vue";
 import NumberSpinner from "@/components/common/NumberSpinner.vue";
 import BaseTopBar from "@/components/ui/BaseTopBar.vue";
+import DeleteableCard from "@/components/DeleteableCard.vue";
 import {
   estimateSightMark,
   canEstimateSightMark,
@@ -220,7 +223,6 @@ const marks = computed<StoreSightMark[]>(() => store.getMarks());
 const showAddMark = ref(false);
 const showDeleteConfirm = ref(false);
 const markToDelete = ref<StoreSightMark | null>(null);
-const longPressTimer = ref<number | null>(null);
 
 // New refs for the estimate feature
 const showEstimateModal = ref(false);
@@ -406,18 +408,9 @@ function editMark(mark: StoreSightMark) {
   showAddMark.value = true;
 }
 
-function startLongPress(mark: StoreSightMark) {
-  longPressTimer.value = window.setTimeout(() => {
-    markToDelete.value = mark;
-    showDeleteConfirm.value = true;
-  }, 500);
-}
-
-function cancelLongPress() {
-  if (longPressTimer.value) {
-    clearTimeout(longPressTimer.value);
-    longPressTimer.value = null;
-  }
+function deleteMark(mark: StoreSightMark) {
+  markToDelete.value = mark;
+  showDeleteConfirm.value = true;
 }
 
 function confirmDelete() {
