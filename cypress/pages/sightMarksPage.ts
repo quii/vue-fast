@@ -36,9 +36,20 @@ class SightMarksPage {
   }
 
   checkSightMarkExists(distance, unit, notches, vertical) {
+    // First check that a mark card with the distance/unit exists
     cy.get(".mark-card").should("contain", `${distance}${unit}`);
-    cy.get(".mark-card").should("contain", `EXTENSION ${notches} notches`);
-    cy.get(".mark-card").should("contain", `HEIGHT ${vertical.major}.${vertical.minor}.${vertical.micro}`);
+
+    // Then check for the extension value within the definition list
+    cy.get(".mark-card").contains(`${distance}${unit}`)
+      .parents(".mark-card")
+      .find("dt").contains("Extension")
+      .siblings("dd").should("contain", `${notches} notches`);
+
+    // And check for the height value within the definition list
+    cy.get(".mark-card").contains(`${distance}${unit}`)
+      .parents(".mark-card")
+      .find("dt").contains("Height")
+      .siblings("dd").should("contain", `${vertical.major}.${vertical.minor}.${vertical.micro}`);
   }
 
   checkSightMarkNotExists(distance, unit) {

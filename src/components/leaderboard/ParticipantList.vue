@@ -20,17 +20,30 @@ const props = defineProps({
 
 const userStore = useUserStore()
 
-// Computed
 const sortedParticipants = computed(() => {
   if (!props.participants) return []
 
-  return [...props.participants]
+  const sorted = [...props.participants]
     .sort((a, b) => b.totalScore - a.totalScore)
     .map((participant, index) => ({
       ...participant,
       position: index + 1
     }))
+
+  // Calculate score differences
+  return sorted.map((participant, index) => {
+    if (index === 0) {
+      // First place has no difference
+      return { ...participant, scoreDifference: null }
+    } else {
+      // Calculate difference from the participant above
+      const prevScore = sorted[index - 1].totalScore
+      const difference = prevScore - participant.totalScore
+      return { ...participant, scoreDifference: difference }
+    }
+  })
 })
+
 
 // Helper function to get card classes for a participant
 function getCardClasses(participant) {
@@ -107,6 +120,9 @@ function getPositionIndicatorClass(participant) {
             <div class="card-score">
               {{ participant.totalScore }}
             </div>
+            <div v-if="participant.scoreDifference !== null" class="score-difference">
+              -{{ participant.scoreDifference }}
+            </div>
           </div>
         </div>
       </BaseCard>
@@ -115,6 +131,42 @@ function getPositionIndicatorClass(participant) {
 </template>
 
 <style scoped>
+.score-difference {
+  font-size: 0.75em;
+  margin-top: 0.2em;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.15); /* Semi-transparent background */
+  border-radius: 4px;
+  padding: 0.1em 0.4em;
+  display: inline-block;
+  font-weight: 500;
+}
+
+/* For dark backgrounds (B1, B2, B3, MB, GMB, EMB) */
+.participant-card.B1 .score-difference,
+.participant-card.B2 .score-difference,
+.participant-card.B3 .score-difference,
+.participant-card.MB .score-difference,
+.participant-card.GMB .score-difference,
+.participant-card.EMB .score-difference {
+  color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+/* For light backgrounds (A1, A2, A3) */
+.participant-card.A1 .score-difference,
+.participant-card.A2 .score-difference,
+.participant-card.A3 .score-difference {
+  color: rgba(6, 19, 69, 0.9);
+  background-color: rgba(6, 19, 69, 0.15);
+}
+
+/* For default background */
+.participant-card:not(.B1):not(.B2):not(.B3):not(.MB):not(.GMB):not(.EMB):not(.A1):not(.A2):not(.A3) .score-difference {
+  color: var(--color-text-light, #666);
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
 .participant-list {
   display: flex;
   flex-direction: column;
