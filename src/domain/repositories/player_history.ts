@@ -61,6 +61,11 @@ export interface StorageInterface {
 }
 
 // Define the interface for the repository
+export interface NavigationInfo {
+  previousId: number | string | null;
+  nextId: number | string | null;
+}
+
 export interface PlayerHistoryRepository {
   add(date: string, score: number, gameType: string, scores: any[], unit?: string, userProfile?: UserProfile, shootStatus?: ShootStatus): Promise<number | string>;
   remove(id: number | string): void;
@@ -80,6 +85,7 @@ export interface PlayerHistoryRepository {
   updateShoot(id: number | string, updates: Partial<HistoryItem>): boolean;
 
   backfillClassifications(): Promise<void>;
+  getNavigationInfo(id: number | string): NavigationInfo;
 }
 
 // Add this interface near the top of the file
@@ -250,6 +256,25 @@ export function createPlayerHistory(
     async backfillClassifications() {
       const withClassifications = await addClassificationsToHistory(storage.value)
       storage.value = await addHandicapToHistory(withClassifications)
+    },
+
+    getNavigationInfo(id) {
+      // Get the sorted history to determine the order
+      const sortedItems = this.sortedHistory();
+
+      // Find the index of the current item
+      const currentIndex = sortedItems.findIndex(item => item.id === id);
+
+      // If the item is not found, return null for both previous and next
+      if (currentIndex === -1) {
+        return { previousId: null, nextId: null };
+      }
+
+      // Get the previous and next IDs, if they exist
+      const previousId = currentIndex < sortedItems.length - 1 ? sortedItems[currentIndex + 1].id : null;
+      const nextId = currentIndex > 0 ? sortedItems[currentIndex - 1].id : null;
+
+      return { previousId, nextId };
     }
   };
 }

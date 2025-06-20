@@ -6,7 +6,7 @@ import { getShootStatusDisplayName } from "@/domain/shoot/shoot_status.js";
 import {useRoute, useRouter} from "vue-router";
 import {useHistoryStore} from "@/stores/history";
 import { roundConfigManager } from "@/domain/scoring/game_types";
-import {computed, ref} from "vue";
+import { computed, ref, onMounted, onBeforeUnmount, watch } from 'vue'
 import RoundScores from "@/components/RoundScores.vue";
 import {useUserStore} from "@/stores/user";
 import TipModal from "@/components/modals/TipModal.vue";
@@ -228,10 +228,68 @@ function handleSaveFromModal(data) {
     showEditModal.value = false;
   }
 }
+
+const navigationInfo = ref({ previousId: null, nextId: null });
+const touchStartX = ref(0);
+const touchEndX = ref(0);
+const swipeThreshold = 100; // Minimum distance to trigger a swipe
+
+const canNavigatePrevious = computed(() => navigationInfo.value.previousId !== null);
+const canNavigateNext = computed(() => navigationInfo.value.nextId !== null);
+
+function loadNavigationInfo() {
+  if (shoot.value) {
+    navigationInfo.value = history.getNavigationInfo(parseInt(route.params.id));
+  }
+}
+
+function navigateToPrevious() {
+  if (canNavigatePrevious.value) {
+    router.push(`/history/${navigationInfo.value.previousId}`);
+  }
+}
+
+function navigateToNext() {
+  if (canNavigateNext.value) {
+    router.push(`/history/${navigationInfo.value.nextId}`);
+  }
+}
+
+function handleTouchStart(event) {
+  touchStartX.value = event.touches[0].clientX;
+}
+
+function handleTouchEnd(event) {
+  touchEndX.value = event.changedTouches[0].clientX;
+  handleSwipe();
+}
+
+function handleSwipe() {
+  const swipeDistance = touchEndX.value - touchStartX.value;
+
+  // Check if the swipe distance exceeds the threshold
+  if (Math.abs(swipeDistance) > swipeThreshold) {
+    if (swipeDistance > 0 && canNavigateNext.value) {
+      // Swipe right -> go to next (newer) shoot
+      navigateToNext();
+    } else if (swipeDistance < 0 && canNavigatePrevious.value) {
+      // Swipe left -> go to previous (older) shoot
+      navigateToPrevious();
+    }
+  }
+}
+
+watch(() => route.params.id, () => {
+  loadNavigationInfo();
+});
+
+onMounted(() => {
+  loadNavigationInfo();
+});
 </script>
 
 <template>
-  <div class="page">
+  <div class="page" @touchstart="handleTouchStart" @touchend="handleTouchEnd">
     <BaseTopBar
         :info-displays="infoDisplays"
         :action-buttons="actionButtons"
@@ -319,4 +377,40 @@ function handleSaveFromModal(data) {
   border: none;
 }
 
+.navigation-indicators {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  opacity: 0.7;
+}
+
+.nav-indicator {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  color: var(--color-text-mute);
+  font-size: 0.9rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.nav-indicator.active {
+  color: var(--color-highlight);
+}
+
+.nav-arrow {
+  font-size: 1.2rem;
+  margin: 0 0.3rem;
+}
+
+.nav-label {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .nav-label {
+    display: inline;
+  }
+}
 </style>
