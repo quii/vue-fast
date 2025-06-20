@@ -167,11 +167,20 @@
         @delete="deleteMark(mark)"
       >
         <div class="mark-content">
-          <div class="mark-details">
-            <div>Extension: {{ mark.notches }} notches</div>
-            <div>Height: {{ formatVertical(mark.vertical) }}</div>
-            <div v-if="mark.label" class="mark-label">{{ mark.label }}</div>
-          </div>
+          <dl class="mark-details">
+            <div class="detail-row">
+              <dt>Extension</dt>
+              <dd>{{ mark.notches }} notches</dd>
+            </div>
+            <div class="detail-row">
+              <dt>Height</dt>
+              <dd>{{ formatVertical(mark.vertical) }}</dd>
+            </div>
+            <div v-if="mark.label" class="detail-row">
+              <dt>Label</dt>
+              <dd class="mark-label">{{ mark.label }}</dd>
+            </div>
+          </dl>
           <button
             class="star-button"
             @click.stop="togglePriority(mark)"
@@ -180,6 +189,7 @@
           </button>
         </div>
       </DeleteableCard>
+
     </div>
   </div>
 </template>
@@ -440,10 +450,45 @@ function togglePriority(mark: StoreSightMark) {
 </script>
 
 <style scoped>
+/* Styles for the definition list with increased gap between label and value */
+.mark-details {
+  flex: 1;
+  margin: 0;
+  padding: 0;
+}
+
+.detail-row {
+  display: flex;
+  margin-bottom: 0.5rem;
+  align-items: baseline;
+  gap: 1rem; /* Add explicit gap between dt and dd */
+}
+
+.detail-row:last-child {
+  margin-bottom: 0;
+}
+
+.mark-details dt {
+  width: 5rem; /* Fixed width for labels */
+  font-weight: 500;
+  color: var(--color-text-light, #666);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  flex-shrink: 0; /* Prevent label from shrinking */
+}
+
+.mark-details dd {
+  margin: 0;
+  flex: 1;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--color-text);
+}
+
 .mark-label {
   font-style: italic;
-  color: var(--color-text);
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .sight-marks {
@@ -544,20 +589,15 @@ function togglePriority(mark: StoreSightMark) {
 
 .mark-content {
   display: flex;
-  flex: 1;
-  gap: 1rem;
+  width: 100%;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 .mark-distance {
   font-size: 1.5rem;
   font-weight: bold;
   min-width: 4rem;
-}
-
-.mark-details {
-  flex: 1;
-  color: var(--color-text);
-  line-height: 1.4;
 }
 
 .star-button {
@@ -567,6 +607,7 @@ function togglePriority(mark: StoreSightMark) {
   cursor: pointer;
   padding: 0.5rem;
   color: var(--color-text);
+  margin-left: 0.5rem;
 }
 
 .estimated-mark {
