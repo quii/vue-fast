@@ -16,16 +16,15 @@ import {usePreferencesStore} from "@/stores/preferences";
 import {useArrowHistoryStore} from "@/stores/arrow_history";
 import PrintModal from "@/components/modals/PrintModal.vue";
 import BaseCard from "@/components/BaseCard.vue";
-import BaseButton from "@/components/ui/BaseButton.vue";
 import BaseTopBar from "@/components/ui/BaseTopBar.vue";
 import ClassificationDetailsTable from "@/components/ClassificationDetailsTable.vue";
 import ClassificationIcon from "@/components/icons/ClassificationIcon.vue";
-import SaveIcon from "@/components/icons/SaveIcon.vue";
 import ClearIcon from "@/components/icons/ClearIcon.vue"; // Reuse this for Delete
 import {createClassificationCalculator} from "@/domain/scoring/classification";
 import {calculateSubtotals} from "@/domain/scoring/subtotals";
 import {calculateAverageScorePerEnd} from "@/domain/scoring/distance_totals";
 import ShootEditModal from "@/components/modals/ShootEditModal.vue";
+import DeleteConfirmationModal from "@/components/modals/DeleteConfirmationModal.vue";
 
 const preferences = usePreferencesStore();
 const arrowHistoryStore = useArrowHistoryStore();
@@ -36,7 +35,7 @@ const userStore = useUserStore()
 
 const showPrintModal = ref(false);
 const showTip = ref(!preferences.hasSeenPrintTip);
-const showDeleteConfirmation = ref(false);
+const showDeleteConfirm = ref(false);
 const showClassificationDetails = ref(false);
 
 const showEditModal = ref(false);
@@ -138,17 +137,17 @@ function dismissTip() {
 }
 
 function confirmDelete() {
-  showDeleteConfirmation.value = true;
+  showDeleteConfirm.value = true;
 }
 
 function deleteShoot() {
   history.remove(shoot.value.id);
   router.push("/history");
-  showDeleteConfirmation.value = false;
+  showDeleteConfirm.value = false;
 }
 
 function cancelDelete() {
-  showDeleteConfirmation.value = false;
+  showDeleteConfirm.value = false;
 }
 
 function handlePrintClick() {
@@ -287,24 +286,12 @@ function handleSaveFromModal(data) {
     />
 
     <!-- Confirmation Modal -->
-    <div v-if="showDeleteConfirmation" class="modal-overlay">
-      <div class="modal-content">
-        <h3>Delete this shoot?</h3>
-        <p>Are you sure you want to delete this shoot? This action cannot be undone.</p>
-        <div class="confirmation-actions">
-          <BaseButton
-              variant="danger"
-              @click="deleteShoot">
-            Yes, delete this shoot
-          </BaseButton>
-          <BaseButton
-              variant="outline"
-              @click="cancelDelete">
-            Cancel
-          </BaseButton>
-        </div>
-      </div>
-    </div>
+    <DeleteConfirmationModal
+      :visible="showDeleteConfirm"
+      :itemName="shoot ? `the ${round.prettyRoundName()} score of ${totals?.totalScore || 0}` : 'this score'"
+      @confirm="deleteShoot"
+      @cancel="cancelDelete"
+    />
   </div>
 
   <ShootEditModal
@@ -331,41 +318,5 @@ function handleSaveFromModal(data) {
   padding-left: 1em;
   border: none;
 }
-
-/* Modal Styles */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  width: 90vw;
-  max-width: 400px;
-  background-color: var(--color-background);
-  border-radius: 8px;
-  padding: 1.5em;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-}
-
-.modal-content h3 {
-  margin-top: 0;
-  color: #dc3545;
-}
-
-.confirmation-actions {
-  display: flex;
-  gap: 1em;
-  margin-top: 1.5em;
-}
-
-
 
 </style>

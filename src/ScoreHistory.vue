@@ -83,9 +83,18 @@
           :key="item.id"
           :item="item"
           @click="view(item.id)"
+          @delete="promptDelete"
         />
       </div>
     </div>
+
+    <DeleteConfirmationModal
+      :itemName="deleteItemName"
+      :visible="showDeleteConfirm"
+      @confirm="confirmDelete"
+      @cancel="cancelDelete"
+    />
+
   </div>
 </template>
 
@@ -109,6 +118,7 @@ import { useUserStore } from "@/stores/user";
 import { computed, ref, watch, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import HistoryActions from '@/components/HistoryActions.vue'
+import DeleteConfirmationModal from '@/components/modals/DeleteConfirmationModal.vue'
 
 const store = useHistoryStore();
 const router = useRouter();
@@ -142,6 +152,21 @@ const showGraph = ref(false);
 const graphData = ref([]);
 const isHandicapGraph = ref(false);
 const isArrowsGraph = ref(false); // New state for arrows graph
+
+const showDeleteConfirm = ref(false)
+const itemToDelete = ref(null)
+
+const deleteItemName = computed(() => {
+  if (!itemToDelete.value) return "this score";
+
+  // Find the item in the filtered history
+  const item = filteredHistory.value.find(i => i.id === itemToDelete.value);
+  if (!item) return "this score";
+
+  // Create a descriptive name for the item
+  return `the ${formatRoundName(item.gameType)} score of ${item.score}`;
+});
+
 
 const filteredHistory = computed(() => {
   return store.getFilteredHistory({
@@ -334,6 +359,29 @@ function prepareArrowsGraphData(historyItems) {
       gameType: item.gameType
     };
   });
+}
+
+function promptDelete(id) {
+  itemToDelete.value = id;
+  showDeleteConfirm.value = true;
+}
+
+function cancelDelete() {
+  showDeleteConfirm.value = false
+  itemToDelete.value = null
+}
+
+async function confirmDelete() {
+  if (!itemToDelete.value) return
+
+  try {
+    await store.remove(itemToDelete.value)
+  } catch (error) {
+    console.error('Failed to delete score:', error)
+  } finally {
+    showDeleteConfirm.value = false
+    itemToDelete.value = null
+  }
 }
 
 const graphTitle = ref("");
