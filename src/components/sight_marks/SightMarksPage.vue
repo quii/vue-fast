@@ -162,11 +162,11 @@
         class="mark-card"
         v-for="mark in marks"
         :key="`${mark.distance}${mark.unit}`"
+        :indicator="getIndicatorForMark(mark)"
         @click="editMark(mark)"
         @delete="deleteMark(mark)"
       >
         <div class="mark-content">
-          <div class="mark-distance">{{ mark.distance }}{{ mark.unit }}</div>
           <div class="mark-details">
             <div>Extension: {{ mark.notches }} notches</div>
             <div>Height: {{ formatVertical(mark.vertical) }}</div>
@@ -231,6 +231,14 @@ const estimateUnit = ref<DistanceUnit>("meters");
 const estimatedMark = ref<SightMark | null>(null);
 const estimateLabel = ref("");
 const showSaveEstimateOptions = ref(false);
+
+// Function to create indicator object for each mark
+function getIndicatorForMark(mark: StoreSightMark) {
+  return {
+    text: `${mark.distance}${mark.unit}`,
+    class: mark.priority ? "priority" : ""
+  };
+}
 
 // Check if we have enough marks to enable estimation
 const canEstimate = computed(() => {
@@ -534,20 +542,6 @@ function togglePriority(mark: StoreSightMark) {
   font-size: 1rem;
 }
 
-.marks-list {
-  margin-top: 1rem;
-}
-
-.mark-card {
-  display: flex;
-  align-items: center;
-  background: var(--color-background-soft);
-  padding: 1rem;
-  margin: 1rem 0;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
 .mark-content {
   display: flex;
   flex: 1;
@@ -622,4 +616,21 @@ function togglePriority(mark: StoreSightMark) {
 .radio-label {
   font-size: 1rem;
 }
+
+/* Custom styles for the indicator in DeleteableCard */
+:deep(.mark-card .card-indicator) {
+  width: 40px; /* Make the indicator wider */
+  background-color: var(--color-background-mute);
+}
+
+:deep(.mark-card .indicator-text) {
+  font-size: 1.1em; /* Larger text */
+  font-weight: 700; /* Bolder text */
+}
+
+/* Style for priority marks */
+:deep(.mark-card .card-indicator.priority) {
+  background-color: rgba(255, 215, 0, 0.2); /* Gold background for priority items */
+}
+
 </style>
