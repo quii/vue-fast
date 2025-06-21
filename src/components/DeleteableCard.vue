@@ -3,10 +3,6 @@ import { ref, computed } from 'vue';
 import BaseCard from '@/components/BaseCard.vue';
 
 const props = defineProps({
-  highlight: {
-    type: Boolean,
-    default: false
-  },
   indicator: {
     type: Object,
     default: null
@@ -105,7 +101,7 @@ const cardStyle = computed(() => {
       @touchmove="handleTouchMove"
       @touchend="handleTouchEnd"
     >
-      <BaseCard :highlight="highlight" :indicator="indicator">
+      <BaseCard :indicator="indicator">
         <slot></slot>
       </BaseCard>
     </div>

@@ -53,7 +53,6 @@ describe("Notes and Classifications", () => {
     historyPage.checkClassificationExists("227", "A1");
 
     historyPage.selectHistoryItem("227");
-    historyPage.checkNoteIsHighlighted("Form getting worse, need to focus");
   });
 
   it("shows progression through classifications during shooting", () => {

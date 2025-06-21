@@ -21,7 +21,6 @@ describe("data management", () => {
     historyPage.selectHistoryItem('28/06/23')
     historyPage.checkTotalGolds("1");
     historyPage.checkNoteExists("Test note");
-    historyPage.checkNoteIsHighlighted("Test note");
   });
 });
 

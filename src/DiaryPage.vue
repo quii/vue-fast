@@ -84,7 +84,6 @@ h1 {
 .diary-entry {
   margin: 0.5rem 0;
   border-bottom: 1px solid var(--color-border-light, rgba(60, 60, 60, 0.1));
-  padding-bottom: 1rem;
 }
 
 .diary-entry:last-child {

@@ -23,8 +23,8 @@ import { useShootStore } from '@/stores/shoot'
 import { computed, ref, onMounted, onUnmounted, watch } from 'vue'
 import { useToast } from "vue-toastification";
 import {
-  createClassificationCalculator
-} from "@/domain/scoring/classification";
+  createClassificationCalculator, getHighestPossibleClassification
+} from '@/domain/scoring/classification'
 import { calculateSubtotals } from "@/domain/scoring/subtotals";
 import { calculateAverageScorePerEnd } from "@/domain/scoring/distance_totals";
 import { useRoute, useRouter } from "vue-router";
@@ -168,23 +168,12 @@ watch(() => runningTotal.value, async (newTotal, oldTotal) => {
       return;
     }
 
-    //todo: dry this thing up
-    let classification = null;
-    if (availableClassifications.value && availableClassifications.value.length > 0) {
-      // Filter to only include achieved classifications and exclude "PB"
-      const validClassifications = availableClassifications.value.filter(c =>
-        c.name !== "PB" && c.score <=maxPossibleScore.value && c.perEndDiff>=0
-      );
+    const highestClassification = getHighestPossibleClassification(
+      availableClassifications.value,
+      maxPossibleScore.value
+    );
 
-      if (validClassifications.length > 0) {
-        // Get the last item (highest valid classification)
-        const highestClassification = validClassifications[validClassifications.length - 1];
-        classification = highestClassification.name
-      }
-
-    }
-
-    //end todo
+    const classification = highestClassification ? highestClassification.name : null;
 
     await shootStore.updateScore(
       userStore.user.name,
@@ -401,6 +390,10 @@ function closeTutorial() {
 </template>
 
 <style scoped>
+.has-notes {
+  margin-top: 1rem;
+}
+
 .page {
   padding: 0.5rem;
   display: flex;

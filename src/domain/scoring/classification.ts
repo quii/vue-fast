@@ -278,3 +278,30 @@ export async function calculatePotentialClassificationWithoutOutliers(scores, cu
     achievable: potentialTotal >= targetTotal
   };
 }
+
+/**
+ * Gets the highest possible classification that can be achieved based on the current score,
+ * arrows remaining, and available classifications.
+ *
+ * @param availableClassifications Array of classification objects
+ * @param maxPossibleScore The maximum possible score that can be achieved
+ * @returns The highest achievable classification or null if none can be achieved
+ */
+export function getHighestPossibleClassification(availableClassifications, maxPossibleScore) {
+  if (!availableClassifications || availableClassifications.length === 0) {
+    return null;
+  }
+
+  // Filter to only include classifications that are achievable with the max possible score
+  // and exclude "PB" (Personal Best)
+  const achievableClassifications = availableClassifications.filter(c =>
+    c.name !== "PB" && c.score <= maxPossibleScore && c.perEndDiff >= 0
+  );
+
+  if (achievableClassifications.length === 0) {
+    return null;
+  }
+
+  // Get the highest classification (last item after sorting)
+  return achievableClassifications[achievableClassifications.length - 1];
+}

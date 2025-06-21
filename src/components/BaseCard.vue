@@ -1,9 +1,5 @@
 <script setup>
 defineProps({
-  highlight: {
-    type: Boolean,
-    default: false
-  },
   indicator: {
     type: Object,
     default: null
