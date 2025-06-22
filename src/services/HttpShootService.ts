@@ -7,92 +7,9 @@ import { Shoot } from '../../shared/models/Shoot.js'
  */
 export class HttpShootService implements ShootService {
   private baseUrl: string
-  private retryCount: number
-  private retryDelay: number
-  private connectionStatus: 'online' | 'offline' = 'online'
-  private pendingOperations: Array<() => Promise<any>> = []
 
-  constructor(baseUrl: string = '/api/shoots', retryCount: number = 3, retryDelay: number = 1000) {
+  constructor(baseUrl: string = '/api/shoots') {
     this.baseUrl = baseUrl
-    this.retryCount = retryCount
-    this.retryDelay = retryDelay
-
-    // Listen for online/offline events
-    if (typeof window !== 'undefined') {
-      window.addEventListener('online', this.handleOnline.bind(this))
-      window.addEventListener('offline', this.handleOffline.bind(this))
-      this.connectionStatus = navigator.onLine ? 'online' : 'offline'
-    }
-  }
-
-  /**
-   * Handles browser coming back online
-   */
-  private async handleOnline() {
-    console.log('Connection restored, processing pending operations')
-    this.connectionStatus = 'online'
-
-    // Process any pending operations
-    const operations = [...this.pendingOperations]
-    this.pendingOperations = []
-
-    for (const operation of operations) {
-      try {
-        await operation()
-      } catch (error) {
-        console.error('Failed to process pending operation:', error)
-      }
-    }
-  }
-
-  /**
-   * Handles browser going offline
-   */
-  private handleOffline() {
-    console.log('Connection lost, operations will be queued')
-    this.connectionStatus = 'offline'
-  }
-
-  /**
-   * Performs a fetch request with retry logic
-   */
-  private async fetchWithRetry(url: string, options: RequestInit, retries = this.retryCount): Promise<Response> {
-    try {
-      const response = await fetch(url, {
-        ...options,
-        // Ensure keep-alive is used
-        keepalive: true,
-        // Add cache control headers to prevent caching
-        headers: {
-          ...options.headers,
-          'Cache-Control': 'no-cache, no-store, must-revalidate',
-          'Pragma': 'no-cache',
-          'Expires': '0'
-        }
-      })
-
-      if (!response.ok && retries > 0) {
-        console.log(`Request failed with status ${response.status}, retrying... (${retries} retries left)`)
-        await new Promise(resolve => setTimeout(resolve, this.retryDelay))
-        return this.fetchWithRetry(url, options, retries - 1)
-      }
-
-      return response
-    } catch (error) {
-      if (retries > 0) {
-        console.log(`Network error, retrying... (${retries} retries left)`, error)
-        await new Promise(resolve => setTimeout(resolve, this.retryDelay))
-        return this.fetchWithRetry(url, options, retries - 1)
-      }
-
-      // If we're offline, queue the operation for later
-      if (this.connectionStatus === 'offline') {
-        console.log('Device is offline, queueing operation for later')
-        this.pendingOperations.push(() => this.fetchWithRetry(url, options))
-      }
-
-      throw error
-    }
   }
 
   /**
@@ -102,7 +19,7 @@ export class HttpShootService implements ShootService {
     try {
       console.log('Creating shoot with:', { creatorName });
 
-      const response = await this.fetchWithRetry(this.baseUrl, {
+      const response = await fetch(this.baseUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -112,6 +29,12 @@ export class HttpShootService implements ShootService {
 
       console.log('Create response status:', response.status);
       console.log('Create response headers:', response.headers);
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.log('Create error response:', errorText);
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
 
       const data = await response.json()
       console.log('Create response data:', data);
@@ -140,7 +63,7 @@ export class HttpShootService implements ShootService {
     try {
       console.log('Joining shoot with:', { code, archerName, roundName });
 
-      const response = await this.fetchWithRetry(`${this.baseUrl}/${code}/join`, {
+      const response = await fetch(`${this.baseUrl}/${code}/join`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -153,6 +76,12 @@ export class HttpShootService implements ShootService {
 
       if (response.status === 404) {
         return { success: false }
+      }
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.log('Join error response:', errorText);
+        throw new Error(`HTTP error! status: ${response.status}`)
       }
 
       const data = await response.json()
@@ -174,7 +103,7 @@ export class HttpShootService implements ShootService {
     try {
       console.log('Updating score with:', { code, archerName, totalScore, roundName, arrowsShot, currentClassification });
 
-      const response = await this.fetchWithRetry(`${this.baseUrl}/${code}/score`, {
+      const response = await fetch(`${this.baseUrl}/${code}/score`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -211,7 +140,7 @@ export class HttpShootService implements ShootService {
     try {
       console.log('Finishing shoot with:', { code, archerName, totalScore, roundName, arrowsShot, currentClassification });
 
-      const response = await this.fetchWithRetry(`${this.baseUrl}/${code}/finish`, {
+      const response = await fetch(`${this.baseUrl}/${code}/finish`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -223,6 +152,12 @@ export class HttpShootService implements ShootService {
 
       if (response.status === 404) {
         return { success: false }
+      }
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.log('Finish shoot error response:', errorText);
+        throw new Error(`HTTP error! status: ${response.status}`)
       }
 
       const data = await response.json()
@@ -244,7 +179,7 @@ export class HttpShootService implements ShootService {
     try {
       console.log('Leaving shoot with:', { code, archerName });
 
-      const response = await this.fetchWithRetry(`${this.baseUrl}/${code}/archer/${encodeURIComponent(archerName)}`, {
+      const response = await fetch(`${this.baseUrl}/${code}/archer/${encodeURIComponent(archerName)}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -255,6 +190,12 @@ export class HttpShootService implements ShootService {
 
       if (response.status === 404) {
         return { success: false }
+      }
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.log('Leave shoot error response:', errorText);
+        throw new Error(`HTTP error! status: ${response.status}`)
       }
 
       const data = await response.json()
@@ -276,7 +217,7 @@ export class HttpShootService implements ShootService {
     try {
       console.log('Getting shoot with code:', code);
 
-      const response = await this.fetchWithRetry(`${this.baseUrl}/${code}`, {
+      const response = await fetch(`${this.baseUrl}/${code}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -287,6 +228,12 @@ export class HttpShootService implements ShootService {
 
       if (response.status === 404) {
         return null
+      }
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.log('Get shoot error response:', errorText);
+        throw new Error(`HTTP error! status: ${response.status}`)
       }
 
       const data = await response.json()
