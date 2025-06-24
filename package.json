@@ -30,7 +30,7 @@
     "cleanup-test-data:live": "node scripts/cleanup-script.js --live"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "^3.832.0",
+    "@aws-sdk/client-s3": "^3.835.0",
     "@eslint/js": "^9.28.0",
     "@vitest/eslint-plugin": "^1.2.7",
     "@vueuse/core": "^13.4.0",
