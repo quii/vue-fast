@@ -162,8 +162,8 @@ const historyPreview = computed(() => {
   };
 });
 
-watch(() => runningTotal.value, async (newTotal, oldTotal) => {
-  if (shootStore.isInShoot && userStore.user.name && newTotal !== oldTotal) {
+watch([() => runningTotal.value, () => scoresStore.scores.length], async ([newTotal, newArrowCount], [oldTotal, oldArrowCount]) => {
+  if (shootStore.isInShoot && userStore.user.name && (newTotal !== oldTotal || newArrowCount !== oldArrowCount)) {
     if(newTotal===0 && oldTotal >0) {
       return;
     }
