@@ -8,6 +8,7 @@ import RoundScores from '@/components/RoundScores.vue'
 import BackIcon from '@/components/icons/BackIcon.vue'
 import { useShootStore } from '@/stores/shoot'
 import { roundConfigManager } from '@/domain/scoring/game_types'
+import { formatRoundName } from '@/domain/scoring/round/formatting'
 
 const route = useRoute()
 const router = useRouter()
@@ -149,7 +150,7 @@ onUnmounted(() => {
           <h2 class="participant-name">{{ participant.archerName }}'s Scorecard</h2>
           <div class="participant-details">
             <div class="detail-item">
-              <strong>Round:</strong> {{ participant.roundName }}
+              <strong>Round:</strong> {{ formatRoundName(participant.roundName) }}
             </div>
             <div class="detail-item">
               <strong>Status:</strong> {{ status }}
