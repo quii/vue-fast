@@ -57,6 +57,11 @@ export const routes = [
     path: '/admin/backups',
     name: 'backupDebugger',
     component: () => import('./components/admin/BackupDebugger.vue')
+  },
+  {
+    path: '/participant-scorecard/:shootCode/:participantId',
+    name: 'participantScorecard',
+    component: () => import('./views/ParticipantScorecard.vue')
   }
 ]
 

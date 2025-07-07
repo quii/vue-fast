@@ -134,8 +134,8 @@ export class ShootServiceImpl implements ShootService {
    * @param arrowsShot Number of arrows shot so far
    * @returns Promise with success status and updated shoot details
    */
-  async updateScore(code: string, archerName: string, totalScore: number, roundName: string, arrowsShot: number, currentClassification?: string): Promise<{ success: boolean; shoot?: Shoot }> {
-    return this.updateParticipantScore(code, archerName, totalScore, roundName, arrowsShot, false, currentClassification);
+  async updateScore(code: string, archerName: string, totalScore: number, roundName: string, arrowsShot: number, currentClassification?: string, scores?: (number | string)[]): Promise<{ success: boolean; shoot?: Shoot }> {
+    return this.updateParticipantScore(code, archerName, totalScore, roundName, arrowsShot, false, currentClassification, scores);
   }
 
   /**
@@ -147,8 +147,8 @@ export class ShootServiceImpl implements ShootService {
    * @param arrowsShot Total number of arrows shot
    * @returns Promise with success status and updated shoot details
    */
-  async finishShoot(code: string, archerName: string, totalScore: number, roundName: string, arrowsShot: number, currentClassification?: string): Promise<{ success: boolean; shoot?: Shoot }> {
-    return this.updateParticipantScore(code, archerName, totalScore, roundName, arrowsShot, true, currentClassification);
+  async finishShoot(code: string, archerName: string, totalScore: number, roundName: string, arrowsShot: number, currentClassification?: string, scores?: (number | string)[]): Promise<{ success: boolean; shoot?: Shoot }> {
+    return this.updateParticipantScore(code, archerName, totalScore, roundName, arrowsShot, true, currentClassification, scores);
   }
 
   /**
@@ -216,7 +216,8 @@ export class ShootServiceImpl implements ShootService {
     roundName: string,
     arrowsShot: number,
     markAsFinished: boolean,
-    currentClassification?: string
+    currentClassification?: string,
+    scores?: (number | string)[]
   ): Promise<{ success: boolean; shoot?: Shoot }> {
     const shoot = await this.repository.getShootByCode(code);
 
@@ -245,6 +246,11 @@ export class ShootServiceImpl implements ShootService {
     participant.currentClassification = currentClassification;
     participant.lastUpdated = new Date();
     shoot.lastUpdated = new Date();
+
+    // Update individual scores if provided
+    if (scores !== undefined) {
+      participant.scores = [...scores];
+    }
 
     // Mark as finished if requested
     if (markAsFinished) {

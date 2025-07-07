@@ -49,6 +49,9 @@ export interface ShootParticipant {
   /** Current classification based on score */
   currentClassification?: string;
 
+  /** Individual arrow scores for viewing scorecard */
+  scores?: (number | string)[];
+
   /** Timestamp of the last score update */
   lastUpdated: Date;
 

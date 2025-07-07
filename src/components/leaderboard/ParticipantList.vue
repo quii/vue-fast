@@ -1,7 +1,9 @@
 <script setup>
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 import BaseCard from '../BaseCard.vue'
 import { useUserStore } from '@/stores/user'
+import { useShootStore } from '@/stores/shoot'
 import { formatRoundName } from '../../domain/scoring/round/formatting.js'
 import RoundCard from '@/components/RoundCard.vue'
 
@@ -18,7 +20,21 @@ const props = defineProps({
   }
 })
 
+const emit = defineEmits(['participant-clicked'])
+
 const userStore = useUserStore()
+const router = useRouter()
+const shootStore = useShootStore()
+
+function handleParticipantClick(participant) {
+  // Navigate to the participant scorecard page
+  const shootCode = shootStore.currentShoot?.code
+  if (shootCode) {
+    router.push(`/participant-scorecard/${shootCode}/${participant.id}`)
+  } else {
+    console.warn('No shoot code available for navigation')
+  }
+}
 
 const sortedParticipants = computed(() => {
   if (!props.participants) return []
@@ -101,6 +117,9 @@ function getPositionIndicatorClass(participant) {
         :indicator="getPositionIndicator(participant)"
         :class="getCardClasses(participant)"
         class="participant-card"
+        data-cy="participant-entry"
+        @click="() => handleParticipantClick(participant)"
+        style="cursor: pointer;"
       >
         <div class="card-main">
           <div class="card-info">

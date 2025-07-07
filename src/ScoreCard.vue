@@ -181,6 +181,7 @@ watch(() => runningTotal.value, async (newTotal, oldTotal) => {
       gameTypeStore.type,
       scoresStore.scores.length,
       classification,
+      scoresStore.scores
     )
   }
 })
@@ -236,7 +237,9 @@ async function handleSaveFromModal(data) {
         userStore.user.name,
         runningTotal.value,
         gameTypeStore.type,
-        scoresStore.scores.length
+        scoresStore.scores.length,
+        undefined,
+        scoresStore.scores
       )
     }
 
