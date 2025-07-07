@@ -322,6 +322,38 @@ export const useShootStore = defineStore('shoot', () => {
     }
   }
 
+  // Connect as viewer only (no participation)
+  async function connectAsViewer(code: string): Promise<boolean> {
+    await initializeServices()
+    if (!shootService) throw new Error('Shoot service not available')
+
+    try {
+      isLoading.value = true
+      
+      // Get the shoot without joining as a participant
+      const shoot = await shootService.getShoot(code)
+      
+      if (shoot) {
+        currentShoot.value = shoot
+
+        // Connect WebSocket and subscribe to updates
+        await initializeWebSocket()
+        if (webSocketService && webSocketService.isConnected()) {
+          webSocketService.subscribeToShoot(code)
+        }
+
+        return true
+      } else {
+        return false
+      }
+    } catch (error) {
+      console.error('Failed to connect as viewer:', error)
+      return false
+    } finally {
+      isLoading.value = false
+    }
+  }
+
   // Leave the current shoot
   async function leaveShoot(archerName: string): Promise<void> {
     if (!shootService || !currentShoot.value) return
@@ -414,6 +446,7 @@ export const useShootStore = defineStore('shoot', () => {
     tryRestoreFromPersistedState,
     createShoot,
     joinShoot,
+    connectAsViewer,
     leaveShoot,
     updateScore,
     finishShoot, // New method

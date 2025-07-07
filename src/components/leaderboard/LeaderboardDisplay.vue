@@ -13,6 +13,10 @@ const props = defineProps({
   groupByRound: {
     type: Boolean,
     default: true
+  },
+  viewerMode: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -78,9 +82,9 @@ const isCurrentUserInShoot = computed(() => {
         :participants="participants"
       />
 
-      <!-- Join button for non-participants -->
-      <div v-if="!isCurrentUserInShoot" class="join-action">
-        <BaseButton @click="showJoinShoot">
+      <!-- Join button for non-participants (only if not in viewer mode) -->
+      <div v-if="!viewerMode && !isCurrentUserInShoot" class="join-action">
+        <BaseButton @click="$emit('join')">
           Join This Shoot
         </BaseButton>
       </div>

@@ -1,8 +1,9 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, inject } from 'vue'
 import BaseModal from './BaseModal.vue'
 import QRCodeGenerator from '@/components/ui/QRCodeGenerator.vue'
 import BaseButton from '@/components/ui/BaseButton.vue'
+import ButtonGroup from '@/components/ui/ButtonGroup.vue'
 
 const props = defineProps({
   visible: {
@@ -17,82 +18,132 @@ const props = defineProps({
 
 const emit = defineEmits(['close'])
 
-// Make shareUrl reactive by using computed
-const shareUrl = computed(() => `${window.location.origin}/leaderboard?joincode=${props.shootCode}`)
+// Inject sharing service
+const sharingService = inject('sharingService')
 
-const copySuccess = ref(false)
-const copyError = ref(false)
+// Make shareUrls reactive by using computed
+const joinUrl = computed(() => `${window.location.origin}/leaderboard?joincode=${props.shootCode}`)
+const viewUrl = computed(() => `${window.location.origin}/viewer/${props.shootCode}`)
+
+const shareMessage = computed(() => 
+  `Shoot Code: ${props.shootCode}\n\n` +
+  `🏹 Join and participate: ${joinUrl.value}\n\n` +
+  `👁️ View only: ${viewUrl.value}`
+)
+
+const copySuccess = ref('')
+const copyError = ref('')
+const shareSuccess = ref(false)
+const shareError = ref('')
 
 function closeModal() {
   emit('close')
 }
 
-async function copyToClipboard() {
+async function shareNatively() {
   try {
-    await navigator.clipboard.writeText(shareUrl.value) // Note: .value because it's computed
-    copySuccess.value = true
-    copyError.value = false
-
-    // Reset the success state after 2 seconds
-    setTimeout(() => {
-      copySuccess.value = false
-    }, 2000)
+    if (navigator.share) {
+      // Use Web Share API for native sharing
+      await navigator.share({
+        title: `Live Archery Leaderboard`,
+        text: shareMessage.value
+      })
+      
+      shareSuccess.value = true
+      setTimeout(() => {
+        shareSuccess.value = false
+      }, 2000)
+    } else {
+      // Fallback to copying the message to clipboard
+      await copyToClipboard(shareMessage.value, 'message')
+    }
   } catch (err) {
-    console.error('Failed to copy to clipboard:', err)
-    copyError.value = true
-    copySuccess.value = false
-
+    // If user cancels the share dialog, don't show it as an error
+    if (err.name === 'AbortError') {
+      console.log('Share was cancelled by user')
+      return
+    }
+    
+    console.error('Failed to share:', err)
+    shareError.value = 'Failed to share'
+    
     // Reset the error state after 3 seconds
     setTimeout(() => {
-      copyError.value = false
+      shareError.value = ''
     }, 3000)
   }
 }
+
+async function copyToClipboard(url, type) {
+  try {
+    await navigator.clipboard.writeText(url)
+    copySuccess.value = type
+    copyError.value = ''
+
+    // Reset the success state after 2 seconds
+    setTimeout(() => {
+      copySuccess.value = ''
+    }, 2000)
+  } catch (err) {
+    console.error('Failed to copy to clipboard:', err)
+    copyError.value = type
+    copySuccess.value = ''
+
+    // Reset the error state after 3 seconds
+    setTimeout(() => {
+      copyError.value = ''
+    }, 3000)
+  }
+}
+
+// Check if native sharing is available
+const canShareNatively = computed(() => {
+  // Check if Web Share API is available, regardless of device type
+  return !!navigator.share && !!sharingService
+})
 </script>
 
 <template>
   <BaseModal v-if="visible" title="Share Shoot">
     <div class="share-content">
       <p class="share-description">
-        Share this QR code with others so they can join your shoot:
+        Share shoot code <strong>#{{ shootCode }}</strong> with others
       </p>
 
-      <div class="qr-container">
-        <QRCodeGenerator
-          :url="shareUrl"
-          :size="350"
-        />
-      </div>
-
-      <div class="url-container">
-        <p class="url-label">Or share this link:</p>
-        <div
-          class="url-display"
-          :class="{ 'copy-success': copySuccess, 'copy-error': copyError }"
-          @click="copyToClipboard"
-          role="button"
-          tabindex="0"
-          @keydown.enter="copyToClipboard"
-          @keydown.space.prevent="copyToClipboard"
-        >
-          <span class="url-text">{{ shareUrl }}</span>
-          <span class="copy-hint" v-if="!copySuccess && !copyError">
-            👆 Tap to copy
-          </span>
-          <span class="copy-feedback success" v-if="copySuccess">
-            ✅ Copied!
-          </span>
-          <span class="copy-feedback error" v-if="copyError">
-            ❌ Copy failed
-          </span>
+      <!-- QR Code for easy scanning -->
+      <div class="qr-section">
+        <p class="section-label">Scan QR code to join:</p>
+        <div class="qr-container">
+          <QRCodeGenerator
+            :url="joinUrl"
+            :size="280"
+          />
         </div>
       </div>
 
-      <div class="modal-actions">
-        <BaseButton variant="primary" @click="closeModal">
+      <!-- Feedback messages -->
+      <div v-if="shareSuccess || shareError" class="feedback-section">
+        <div v-if="shareSuccess" class="feedback success">
+          ✅ Shared successfully!
+        </div>
+        <div v-if="shareError" class="feedback error">
+          ❌ {{ shareError }}
+        </div>
+      </div>
+
+      <ButtonGroup>
+        <BaseButton 
+          v-if="canShareNatively"
+          variant="primary" 
+          @click="shareNatively"
+          :disabled="!!shareError"
+        >
+          Share Shoot
+        </BaseButton>
+        <BaseButton variant="outline" @click="closeModal">
           Close
         </BaseButton>
-      </div>
+      </ButtonGroup>
     </div>
   </BaseModal>
 </template>
@@ -109,109 +160,28 @@ async function copyToClipboard() {
   line-height: 1.4;
 }
 
-.qr-container {
-  margin: 1.5rem 0;
+.qr-section {
+  margin-bottom: 1.5rem;
+}
+
+.feedback-section {
+  margin-bottom: 1.5rem;
+  min-height: 2rem;
   display: flex;
+  align-items: center;
   justify-content: center;
 }
 
-.url-container {
-  margin: 1.5rem 0;
-}
-
-.url-label {
-  margin: 0 0 0.5rem 0;
+.section-label {
+  margin: 0 0 1rem 0;
   font-size: 0.9rem;
   color: var(--color-text);
   font-weight: 600;
 }
 
-.url-display {
-  background-color: var(--color-surface, #f5f5f5);
-  border: 1px solid var(--color-border, #e0e0e0);
-  border-radius: 4px;
-  padding: 0.75rem;
-  font-family: monospace;
-  font-size: 0.8rem;
-  word-break: break-all;
-  color: var(--color-text);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  position: relative;
-  min-height: 2.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-.url-display:hover {
-  background-color: var(--color-highlight-light, #e8f5e8);
-  border-color: var(--color-highlight, #4CAF50);
-}
-
-.url-display:focus {
-  outline: none;
-  border-color: var(--color-highlight, #4CAF50);
-  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
-}
-
-.url-display.copy-success {
-  background-color: #d4edda;
-  border-color: #28a745;
-  color: #155724;
-}
-
-.url-display.copy-error {
-  background-color: #f8d7da;
-  border-color: #dc3545;
-  color: #721c24;
-}
-
-.url-text {
-  font-family: monospace;
-  font-size: 0.8rem;
-  word-break: break-all;
-}
-
-.copy-hint {
-  font-size: 0.7rem;
-  color: var(--color-text-mute, #666);
-  font-family: system-ui, sans-serif;
-  margin-top: 0.25rem;
-}
-
-.copy-feedback {
-  font-size: 0.8rem;
-  font-weight: 600;
-  font-family: system-ui, sans-serif;
-  margin-top: 0.25rem;
-}
-
-.copy-feedback.success {
-  color: #28a745;
-}
-
-.copy-feedback.error {
-  color: #dc3545;
-}
-
-.modal-actions {
-  margin-top: 1.5rem;
+.qr-container {
   display: flex;
   justify-content: center;
-}
-
-/* Mobile-specific improvements */
-@media (max-width: 480px) {
-  .url-display {
-    padding: 1rem;
-    font-size: 0.75rem;
-  }
-
-  .copy-hint {
-    font-size: 0.65rem;
-  }
 }
 </style>
+

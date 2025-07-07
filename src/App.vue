@@ -1,18 +1,25 @@
 <template>
-  <div id="app">
+  <div id="app" :class="{ 'viewer-mode': isViewerRoute }">
     <router-view></router-view>
-    <MainNavigation />
+    <MainNavigation v-if="!isViewerRoute" />
     <InstallBanner />
   </div>
 </template>
 
 <script setup>
 import InstallBanner from './components/InstallBanner.vue'
-import { onMounted } from 'vue'
+import { onMounted, computed, watchEffect } from 'vue'
 import { useInstallationStore } from './stores/installation'
+import { useRoute } from 'vue-router'
 import MainNavigation from '@/components/UserNavigation.vue'
 
 const installationStore = useInstallationStore()
+const route = useRoute()
+
+// Hide navigation for viewer routes
+const isViewerRoute = computed(() => {
+  return route.path.startsWith('/viewer')
+})
 
 onMounted(() => {
   // Listen for the beforeinstallprompt event
@@ -43,5 +50,9 @@ onMounted(() => {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+#app.viewer-mode {
+  margin-top: 0;
 }
 </style>

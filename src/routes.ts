@@ -1,4 +1,5 @@
 import * as VueRouter from 'vue-router'
+import type { RouteLocationNormalized } from 'vue-router'
 import ScoreCard from './ScoreCard.vue'
 import DataMenuItem from '@/components/DataMenuItem.vue'
 
@@ -8,6 +9,11 @@ export const routes = [
     path: '/leaderboard',
     name: 'leaderboard',
     component: () => import('./Leaderboard.vue')
+  },
+  {
+    path: '/viewer/:joincode?',
+    name: 'viewer', 
+    component: () => import('./LiveScoreViewer.vue')
   },
   {
     path: '/history',
@@ -42,7 +48,7 @@ export const routes = [
     path: '/select-round',
     name: 'selectRound',
     component: () => import('./views/RoundSelectionPage.vue'),
-    props: route => ({
+    props: (route: RouteLocationNormalized) => ({
       returnTo: route.query.returnTo || '/',
       currentRound: route.query.currentRound || ''
     })
