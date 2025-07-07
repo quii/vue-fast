@@ -55,6 +55,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use('/api', createApiRouter({
   s3Service,
   shootService,
+  webSocketManager, // Add WebSocket manager to dependencies
 }))
 
 // Determine the correct static directory

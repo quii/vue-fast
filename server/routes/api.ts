@@ -8,17 +8,25 @@ import { ShootService } from '../../shared/ports/ShootService.js'
 export function createApiRouter(dependencies: {
   s3Service: S3Service,
   shootService: ShootService,
+  webSocketManager?: any, // Add WebSocket manager dependency
 }): Router {
-  const { s3Service, shootService } = dependencies
+  const { s3Service, shootService, webSocketManager } = dependencies
   const router: Router = express.Router()
 
   router.get('/health', (req, res) => {
-    res.json({
+    const healthData: any = {
       status: 'API is running',
       environment: process.env.NODE_ENV,
       s3Endpoint: process.env.S3_ENDPOINT || 'not set',
       s3BucketName: process.env.S3_BUCKET_NAME || 'not set'
-    })
+    }
+
+    // Add WebSocket connection stats if available
+    if (webSocketManager && typeof webSocketManager.getConnectionStats === 'function') {
+      healthData.websocket = webSocketManager.getConnectionStats()
+    }
+
+    res.json(healthData)
   })
 
   router.get('/diagnose', async (req, res) => {

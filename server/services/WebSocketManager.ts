@@ -16,6 +16,8 @@ interface WebSocketClient extends WebSocket {
 export class WebSocketManager implements ShootNotificationService {
   private wss: WebSocketServer;
   private pingInterval: NodeJS.Timeout | null = null;
+  private maxConnections: number = 50; // Add connection limit
+  private connectionCount: number = 0;
 
   constructor(server: Server) {
     // Create WebSocket server with explicit path
@@ -29,7 +31,15 @@ export class WebSocketManager implements ShootNotificationService {
 
   private initialize(): void {
     this.wss.on('connection', (ws: WebSocket, request) => {
-      console.log('🔗 New WebSocket connection from:', request.socket.remoteAddress);
+      // Check connection limit
+      if (this.connectionCount >= this.maxConnections) {
+        console.log('� Connection limit reached, rejecting new connection');
+        ws.close(1008, 'Server at capacity');
+        return;
+      }
+
+      this.connectionCount++;
+      console.log(`�🔗 New WebSocket connection from: ${request.socket.remoteAddress} (${this.connectionCount}/${this.maxConnections})`);
 
       const client = ws as WebSocketClient;
       client.isAlive = true;
@@ -54,11 +64,13 @@ export class WebSocketManager implements ShootNotificationService {
 
       // Handle client disconnection
       client.on('close', () => {
-        console.log('🔌 WebSocket client disconnected');
+        this.connectionCount--;
+        console.log(`🔌 WebSocket client disconnected (${this.connectionCount}/${this.maxConnections})`);
       });
 
       client.on('error', (error) => {
         console.error('❌ WebSocket client error:', error);
+        this.connectionCount--; // Ensure we decrement on error too
       });
 
       // Send welcome message
@@ -78,13 +90,21 @@ export class WebSocketManager implements ShootNotificationService {
         const client = ws as WebSocketClient;
         if (client.isAlive === false) {
           console.log('💀 Terminating dead WebSocket connection');
+          this.connectionCount--; // Decrement when we terminate
           return client.terminate();
         }
 
         client.isAlive = false;
         client.ping();
       });
-    }, 30000); // Ping every 30 seconds
+      
+      // Sync the connection count with actual clients (safety check)
+      const actualCount = this.wss.clients.size;
+      if (this.connectionCount !== actualCount) {
+        console.warn(`⚠️ Connection count mismatch! Tracked: ${this.connectionCount}, Actual: ${actualCount}. Syncing...`);
+        this.connectionCount = actualCount;
+      }
+    }, 60000); // Ping every 60 seconds (increased from 30)
 
     console.log('✅ WebSocket server initialized with ping interval');
   }
@@ -168,6 +188,42 @@ export class WebSocketManager implements ShootNotificationService {
       shootCode,
       data: { shoot: shootData }
     });
+  }
+
+  // Method to get connection stats
+  getConnectionStats(): { total: number, max: number, shoots: Record<string, number>, debug?: any } {
+    const shootSubscriptions: Record<string, number> = {}
+    const actualConnections = this.wss.clients.size
+    const readyStates: Record<number, number> = {}
+    
+    this.wss.clients.forEach((ws: WebSocket) => {
+      const client = ws as WebSocketClient
+      
+      // Count by ready state
+      readyStates[client.readyState] = (readyStates[client.readyState] || 0) + 1
+      
+      // Only count subscriptions for OPEN connections
+      if (client.readyState === WebSocket.OPEN) {
+        client.subscribedShoots.forEach(shootCode => {
+          shootSubscriptions[shootCode] = (shootSubscriptions[shootCode] || 0) + 1
+        })
+      }
+    })
+
+    return {
+      total: this.connectionCount,
+      max: this.maxConnections,
+      shoots: shootSubscriptions,
+      debug: {
+        actualWsClients: actualConnections,
+        readyStates: {
+          [WebSocket.CONNECTING]: readyStates[WebSocket.CONNECTING] || 0,
+          [WebSocket.OPEN]: readyStates[WebSocket.OPEN] || 0,
+          [WebSocket.CLOSING]: readyStates[WebSocket.CLOSING] || 0,
+          [WebSocket.CLOSED]: readyStates[WebSocket.CLOSED] || 0
+        }
+      }
+    }
   }
 
   // Clean up resources

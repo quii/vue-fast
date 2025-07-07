@@ -13,9 +13,10 @@ export class WebSocketNotificationService extends EventTarget implements ShootNo
   private ws: WebSocket | null = null
   private url: string
   private reconnectAttempts = 0
-  private maxReconnectAttempts = 5
+  private maxReconnectAttempts = 10 // Increased from 5
   private reconnectDelay = 1000
   private subscribedShoots: Set<string> = new Set()
+  private connectionTimeout: number = 15000 // Increased from 10 seconds
 
   constructor(url?: string) {
     super() // Call EventTarget constructor
@@ -33,12 +34,12 @@ export class WebSocketNotificationService extends EventTarget implements ShootNo
       try {
         this.ws = new WebSocket(this.url)
         const connectionTimeout = setTimeout(() => {
-          console.error('⏰ WebSocket connection timeout after 10 seconds')
+          console.error(`⏰ WebSocket connection timeout after ${this.connectionTimeout / 1000} seconds`)
           if (this.ws) {
             this.ws.close()
           }
           reject(new Error('WebSocket connection timeout'))
-        }, 10000)
+        }, this.connectionTimeout)
 
         this.ws.onopen = () => {
           clearTimeout(connectionTimeout)
@@ -67,6 +68,14 @@ export class WebSocketNotificationService extends EventTarget implements ShootNo
         this.ws.onclose = (event) => {
           clearTimeout(connectionTimeout)
           this.ws = null
+
+          // Handle different close codes
+          if (event.code === 1008) {
+            console.warn('🚫 Server at capacity, will retry with longer delay')
+            // Don't attempt immediate reconnection for capacity issues
+            setTimeout(() => this.attemptReconnect(), 10000) // Wait 10 seconds
+            return
+          }
 
           // Emit disconnection event
           this.dispatchEvent(new CustomEvent('websocket-disconnected', {

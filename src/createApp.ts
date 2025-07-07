@@ -12,7 +12,6 @@ import { createRouter, routes } from '@/routes'
 import { useThemeStore } from '@/stores/theme'
 import { BrowserSharingService } from '@/domain/adapters/browser/browser_sharing_service'
 import { HttpShootService } from '@/services/HttpShootService'
-import { WebSocketNotificationService } from '@/services/WebSocketNotificationService'
 
 export function setupServiceWorker() {
   const intervalMS = 60 * 60 * 1000;
@@ -70,12 +69,10 @@ export function createAppInstance() {
 
   // Set up client-side services
   const httpShootService = new HttpShootService()
-  const webSocketNotificationService = new WebSocketNotificationService()
-
+  
   // Provide services for dependency injection
   app.provide('sharingService', new BrowserSharingService())
   app.provide('shootService', httpShootService)
-  app.provide('webSocketNotificationService', webSocketNotificationService)
 
   app.use(router)
   app.use(pinia)
