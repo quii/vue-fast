@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import BaseTopBar from '@/components/ui/BaseTopBar.vue'
 import BaseCard from '@/components/BaseCard.vue'
@@ -84,20 +84,41 @@ onMounted(async () => {
   console.log('ParticipantScorecard mounted. Route params:', route.params)
   console.log('Current shoot available:', !!currentShoot.value)
   
-  // If we don't have the shoot data, try to restore it from localStorage
+  // Initialize WebSocket connection first
+  await shootStore.initializeWebSocket()
+  
+  // If we don't have the shoot data, try to connect using the shoot code from URL
   if (!currentShoot.value) {
     isRestoring.value = true
     console.log('No current shoot data, attempting to restore from persisted state...')
-    const restored = await shootStore.tryRestoreFromPersistedState()
-    isRestoring.value = false
     
-    if (!restored) {
-      console.warn('Failed to restore shoot data, redirecting to leaderboard')
+    // First try to restore from localStorage
+    const restored = await shootStore.tryRestoreFromPersistedState()
+    
+    // If restoration failed but we have a shoot code, try connecting as viewer
+    if (!restored && shootCode.value) {
+      console.log('Restoration failed, attempting to connect as viewer to shoot:', shootCode.value)
+      try {
+        await shootStore.connectAsViewer(shootCode.value)
+        console.log('Successfully connected as viewer')
+      } catch (error) {
+        console.error('Failed to connect as viewer:', error)
+        router.push('/leaderboard')
+        return
+      }
+    } else if (!restored) {
+      console.warn('Failed to restore shoot data and no shoot code available, redirecting to leaderboard')
       router.push('/leaderboard')
-    } else {
-      console.log('Successfully restored shoot data')
+      return
     }
+    
+    isRestoring.value = false
   }
+})
+
+onUnmounted(() => {
+  // Clean up WebSocket connection when leaving the component
+  shootStore.cleanup()
 })
 </script>
 
