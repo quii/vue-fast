@@ -125,6 +125,7 @@ This approach creates a clean separation between:
 - New test cases should be added inside existing describe blocks, not outside them, to maintain proper test organization
   and scoping
 - In domain, the unit tests live in the same directory as the file under test. There is no separate test folder.
+- Unit tests should be self-documenting through clear naming and structure. They should not require README files or additional documentation - the test names and code should clearly communicate what is being tested.
 
 ## Dependency Injection and Testing Approach
 

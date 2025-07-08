@@ -15,41 +15,70 @@ const emit = defineEmits(['click', 'delete']);
 // State for swipe functionality
 const isDeleting = ref(false);
 const startX = ref(0);
+const startY = ref(0);
 const currentX = ref(0);
 const deleteThreshold = 80; // Pixels to swipe to reveal delete button
+const minHorizontalDistance = 10; // Minimum horizontal movement before considering it a swipe
+const isSwipeDetected = ref(false);
 
 // Touch event handlers
 function handleTouchStart(event) {
   startX.value = event.touches[0].clientX;
+  startY.value = event.touches[0].clientY;
   currentX.value = 0;
+  isSwipeDetected.value = false;
 }
 
 function handleTouchMove(event) {
-  // Only handle horizontal swipes to avoid interfering with vertical scrolling
   const touchX = event.touches[0].clientX;
   const touchY = event.touches[0].clientY;
   const diffX = touchX - startX.value;
+  const diffY = touchY - startY.value;
 
-  // Only allow swiping left (negative diffX)
-  if (diffX < 0) {
-    // Only try to prevent default if the swipe is more horizontal than vertical
-    // This avoids conflicts with scrolling
-    if (Math.abs(diffX) > Math.abs(touchY - event.touches[0].clientY) && event.cancelable) {
+  // Only process if we haven't detected the gesture type yet or if we're already swiping
+  if (!isSwipeDetected.value) {
+    const absX = Math.abs(diffX);
+    const absY = Math.abs(diffY);
+    
+    // Only consider it a horizontal swipe if:
+    // 1. Horizontal movement is greater than vertical movement
+    // 2. Horizontal movement exceeds minimum threshold
+    // 3. It's a leftward swipe (negative diffX)
+    if (absX > absY && absX > minHorizontalDistance && diffX < 0) {
+      isSwipeDetected.value = true;
+    } else if (absY > absX || absY > minHorizontalDistance) {
+      // If vertical movement is dominant, let the scroll happen
+      return;
+    } else {
+      // Movement is too small, don't interfere
+      return;
+    }
+  }
+
+  // Only handle the swipe if we've detected it's a horizontal gesture
+  if (isSwipeDetected.value && diffX < 0) {
+    // Prevent default only after we're sure it's a horizontal swipe
+    if (event.cancelable) {
       event.preventDefault();
     }
-
     currentX.value = diffX;
   }
 }
 
 function handleTouchEnd() {
-  // If swiped far enough, show delete button
-  if (currentX.value < -deleteThreshold) {
-    isDeleting.value = true;
-  } else {
-    // Reset position
-    resetSwipe();
+  // Only process if we detected a swipe gesture
+  if (isSwipeDetected.value) {
+    // If swiped far enough, show delete button
+    if (currentX.value < -deleteThreshold) {
+      isDeleting.value = true;
+    } else {
+      // Reset position
+      resetSwipe();
+    }
   }
+  
+  // Reset swipe detection
+  isSwipeDetected.value = false;
 }
 
 function resetSwipe() {
@@ -77,7 +106,7 @@ const cardStyle = computed(() => {
   if (isDeleting.value) {
     return { transform: `translateX(-${deleteThreshold}px)` };
   }
-  if (currentX.value < 0) {
+  if (isSwipeDetected.value && currentX.value < 0) {
     return { transform: `translateX(${currentX.value}px)` };
   }
   return {};
@@ -85,7 +114,7 @@ const cardStyle = computed(() => {
 </script>
 
 <template>
-  <div class="deleteable-card-container" :class="{ 'is-swiping': isDeleting || currentX < 0 }">
+  <div class="deleteable-card-container" :class="{ 'is-swiping': isDeleting || (isSwipeDetected && currentX < 0) }">
     <!-- Delete button that appears when swiped -->
     <div class="delete-button" @click.stop="handleDelete">
       <span>Delete</span>
