@@ -47,6 +47,9 @@ function handleClick() {
             <span class="card-date">{{ formatDateContextually(item.date) }}</span>
             <span v-if="item.averagePerEnd" class="average-score">{{ item.averagePerEnd }} / end</span>
           </div>
+          <div v-if="item.location?.placeName" class="location-row">
+            <span class="location-name">{{ item.location.placeName }}</span>
+          </div>
         </div>
         <div class="score-container">
           <div :class="['card-score', {'highlight': item.topScore}]" data-test="score">{{ item.score }}</div>
@@ -58,11 +61,6 @@ function handleClick() {
 </template>
 
 <style scoped>
-/* We can keep the .history-card class empty or add specific styles if needed */
-.history-card {
-  /* This class is used for test selection */
-}
-
 .card-main {
   display: flex;
   justify-content: space-between;
@@ -94,11 +92,23 @@ function handleClick() {
   color: var(--color-text-light, #666);
 }
 
+.location-row {
+  margin-top: 0.4em;
+  width: 100%;
+}
+
+.location-name {
+  font-size: 0.8em;
+  color: var(--color-text-light, #666);
+  font-style: italic;
+  line-height: 1.2;
+  word-break: break-word;
+}
+
 .average-score {
   font-size: 0.85em;
   color: var(--color-text-light, #666);
   font-weight: 500;
-  margin-left: auto;
 }
 
 .score-container {

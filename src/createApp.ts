@@ -12,6 +12,7 @@ import { createRouter, routes } from '@/routes'
 import { useThemeStore } from '@/stores/theme'
 import { BrowserSharingService } from '@/domain/adapters/browser/browser_sharing_service'
 import { HttpShootService } from '@/services/HttpShootService'
+import { BrowserLocationService } from '@/domain/adapters/browser/BrowserLocationService'
 
 export function setupServiceWorker() {
   const intervalMS = 60 * 60 * 1000;
@@ -69,10 +70,12 @@ export function createAppInstance() {
 
   // Set up client-side services
   const httpShootService = new HttpShootService()
+  const locationService = new BrowserLocationService()
   
   // Provide services for dependency injection
   app.provide('sharingService', new BrowserSharingService())
   app.provide('shootService', httpShootService)
+  app.provide('locationService', locationService)
 
   app.use(router)
   app.use(pinia)

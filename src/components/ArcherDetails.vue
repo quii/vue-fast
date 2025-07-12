@@ -29,6 +29,10 @@ const props = defineProps({
   classification: {
     type: Object,
     default: null
+  },
+  location: {
+    type: Object,
+    default: null
   }
 });
 
@@ -58,6 +62,9 @@ const capitalizedAgeGroup = computed(() => capitalize(props.ageGroup));
       <div v-if="classification && classification.name" class="info-chip">
         {{ classification.name }} ({{ classification.scheme }})
       </div>
+      <div v-if="location && location.placeName" class="info-chip location-chip">
+        📍 {{ location.placeName }}
+      </div>
     </div>
   </div>
 </template>
@@ -78,6 +85,12 @@ const capitalizedAgeGroup = computed(() => capitalize(props.ageGroup));
   font-weight: 500;
   font-size: 0.9rem;
   color: var(--color-text);
+}
+
+.location-chip {
+  background-color: var(--color-background-soft);
+  color: var(--color-text-light);
+  font-style: italic;
 }
 
 @media (min-width: 768px) {

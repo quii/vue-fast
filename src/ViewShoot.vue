@@ -316,6 +316,7 @@ onMounted(() => {
             :status="status"
             :handicap="shoot.handicap"
             :classification="shoot.classification"
+            :location="shoot.location"
         />
       </BaseCard>
 

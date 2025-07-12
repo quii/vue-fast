@@ -5,6 +5,7 @@ import { addClassificationsToHistory } from '@/domain/scoring/classification'
 import { filterByClassification, filterByDateRange, filterByPB, filterByRound } from '@/domain/history_filters'
 import { addHandicapToHistory } from '@/domain/scoring/handicap'
 import { DEFAULT_SHOOT_STATUS, ShootStatus } from '@/domain/shoot/shoot_status'
+import type { LocationData, LocationPort } from '@/domain/ports/location.js'
 
 // Extend Date prototype with addDays method
 declare global {
@@ -43,6 +44,7 @@ export interface HistoryItem {
   handicap?: number;
   averagePerEnd?: number | null;
   shootStatus?: ShootStatus;
+  location?: LocationData;
 }
 
 export interface HistoryFilters {
@@ -103,7 +105,8 @@ const noopEventEmitter: EventEmitter = {
 export function createPlayerHistory(
   storage: StorageInterface = { value: [] },
   currentUserProfile: UserProfile | null = null,
-  eventEmitter: EventEmitter = noopEventEmitter
+  eventEmitter: EventEmitter = noopEventEmitter,
+  locationService: LocationPort | null = null
 ): PlayerHistoryRepository {
   // Initialize the data
   storage.value = prepareHistoryData(storage.value, currentUserProfile);
@@ -111,6 +114,18 @@ export function createPlayerHistory(
   // Return an object with all the repository methods
   return {
     async add(date, score, gameType, scores, unit, userProfile, shootStatus = DEFAULT_SHOOT_STATUS) {
+      // Try to capture location if location service is available
+      let location: LocationData | undefined = undefined;
+      
+      if (locationService) {
+        try {
+          location = await locationService.getCurrentLocation() || undefined;
+        } catch (error) {
+          // Silently fail - location is not key functionality
+          console.debug('Failed to capture location during score save');
+        }
+      }
+
       const nextId = generateNextId(storage.value);
       storage.value.push({
         id: nextId,
@@ -120,7 +135,8 @@ export function createPlayerHistory(
         scores,
         unit,
         userProfile,
-        shootStatus
+        shootStatus,
+        location
       });
       await this.backfillClassifications()
 
@@ -202,7 +218,7 @@ export function createPlayerHistory(
       const filteredByRound = filterByRound(filteredByPB, filters.round);
       const filteredByDateRange = filterByDateRange(filteredByRound, filters.dateRange);
       const filteredByClassification = filterByClassification(filteredByDateRange, filters.classification);
-      return filterByShootStatus(filteredByClassification, filters.shootStatus)
+      return filterByShootStatus(filteredByClassification, filters.shootStatus || null)
     },
 
     getShootStatusesUsed() {
