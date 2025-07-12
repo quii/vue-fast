@@ -641,4 +641,72 @@ describe("location functionality", () => {
     const shoot = playerHistory.getById(id as number);
     expect(shoot?.location).toBeUndefined();
   });
+
+  test("stores shoot duration when provided", async () => {
+    const playerHistory = createPlayerHistory(
+      { value: [] },
+      null,
+      { emit: vi.fn() },
+      null
+    );
+
+    const shootDuration = 45 * 60 * 1000; // 45 minutes in milliseconds
+
+    const id = await playerHistory.add(
+      '2023-01-01',
+      123,
+      'national 50',
+      [1, 2, 3],
+      'yd',
+      undefined,
+      'Practice',
+      shootDuration
+    );
+    
+    const shoot = playerHistory.getById(id as number);
+    expect(shoot?.shootDuration).toBe(45 * 60 * 1000); // 45 minutes in milliseconds
+  });
+
+  test("handles shoots without duration", async () => {
+    const playerHistory = createPlayerHistory(
+      { value: [] },
+      null,
+      { emit: vi.fn() },
+      null
+    );
+
+    const id = await playerHistory.add(
+      '2023-01-01',
+      123,
+      'national 50',
+      [1, 2, 3],
+      'yd'
+    );
+    
+    const shoot = playerHistory.getById(id as number);
+    expect(shoot?.shootDuration).toBeUndefined();
+  });
+
+  test("handles shoots without duration", async () => {
+    const playerHistory = createPlayerHistory(
+      { value: [] },
+      null,
+      { emit: vi.fn() },
+      null
+    );
+
+    const id = await playerHistory.add(
+      '2023-01-01',
+      123,
+      'national 50',
+      [1, 2, 3],
+      'yd',
+      undefined,
+      'Practice'
+      // No shootDuration parameter
+    );
+    
+    const shoot = playerHistory.getById(id as number);
+    expect(shoot?.shootDuration).toBeUndefined();
+  });
 });

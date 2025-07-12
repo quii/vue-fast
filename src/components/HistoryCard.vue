@@ -1,6 +1,7 @@
 <script setup>
 import { formatRoundName, formatDateContextually } from '@/domain/scoring/round/formatting.js';
 import DeleteableCard from '@/components/DeleteableCard.vue';
+import { formatShootDuration } from '@/utils/duration.ts';
 import { computed } from 'vue';
 
 const props = defineProps({
@@ -21,6 +22,10 @@ const indicator = computed(() => {
     };
   }
   return null;
+});
+
+const formattedDuration = computed(() => {
+  return formatShootDuration(props.item.shootDuration);
 });
 
 function handleDelete() {
@@ -45,6 +50,7 @@ function handleClick() {
           <h3 class="round-name" data-test="round-name">{{ formatRoundName(item.gameType) }}</h3>
           <div class="card-details">
             <span class="card-date">{{ formatDateContextually(item.date) }}</span>
+            <span v-if="formattedDuration" class="shoot-duration">{{ formattedDuration }}</span>
             <span v-if="item.averagePerEnd" class="average-score">{{ item.averagePerEnd }} / end</span>
           </div>
           <div v-if="item.location?.placeName" class="location-row">
@@ -90,6 +96,13 @@ function handleClick() {
 .card-date {
   font-size: 0.85em;
   color: var(--color-text-light, #666);
+}
+
+.shoot-duration {
+  font-size: 0.85em;
+  color: var(--color-text-light, #666);
+  font-weight: 500;
+  opacity: 0.8;
 }
 
 .location-row {

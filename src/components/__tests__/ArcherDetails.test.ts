@@ -89,4 +89,25 @@ describe('ArcherDetails', () => {
 
     expect(wrapper.text()).toContain('B1 (AGB)');
   });
+
+  test('displays shoot duration when provided', () => {
+    const wrapper = mount(ArcherDetails, {
+      props: {
+        name: 'John Doe',
+        shootDuration: 45 * 60 * 1000 // 45 minutes in milliseconds
+      }
+    });
+
+    expect(wrapper.text()).toContain('⏱️ 45m');
+  });
+
+  test('does not display duration when not provided', () => {
+    const wrapper = mount(ArcherDetails, {
+      props: {
+        name: 'John Doe'
+      }
+    });
+
+    expect(wrapper.text()).not.toContain('⏱️');
+  });
 });

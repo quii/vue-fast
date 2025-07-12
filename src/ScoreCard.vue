@@ -16,6 +16,7 @@ import { useArrowHistoryStore } from "@/stores/arrow_history.js";
 import { useGameTypeStore } from "@/stores/game_type";
 import { useHistoryStore } from "@/stores/history";
 import { useScoresStore } from "@/stores/scores";
+import { useShootTimingStore } from "@/stores/shoot-timing";
 import { useUserStore } from "@/stores/user";
 import { useNotesStore } from "@/stores/user_notes";
 import { usePreferencesStore } from '@/stores/preferences'
@@ -41,6 +42,7 @@ const notesStore = useNotesStore();
 const history = useHistoryStore();
 const preferencesStore = usePreferencesStore()
 const shootStore = useShootStore()
+const shootTimingStore = useShootTimingStore()
 
 const route = useRoute();
 const showTutorial = ref(false)
@@ -243,6 +245,8 @@ async function handleSaveFromModal(data) {
       )
     }
 
+    const shootDuration = shootTimingStore.getShootDuration();
+
     const id = await history.add(
       date.value,
       runningTotal.value,
@@ -250,12 +254,14 @@ async function handleSaveFromModal(data) {
       [...scoresStore.scores],
       gameTypeStore.currentRound.unit,
       userStore.user,
-      data.shootStatus // Use the status from the modal
+      data.shootStatus, // Use the status from the modal
+      shootDuration // Pass the calculated duration
     );
 
     arrowHistoryStore.saveArrowsForShoot(id, [...scoresStore.arrows]);
     notesStore.assignPendingNotesToShoot(id);
     scoresStore.clear();
+    shootTimingStore.clearTiming(); // Clear timing data for next shoot
     showSaveModal.value = false;
 
     router.push(`/history/${id}`)
@@ -271,9 +277,24 @@ function cancelSave() {
 
 function clearScores() {
   scoresStore.clear();
+  shootTimingStore.clearTiming(); // Reset timing when scores are cleared
+}
+
+function handleUndo() {
+  scoresStore.undo();
+  // If no scores left, clear timing
+  if (scoresStore.scores.length === 0) {
+    shootTimingStore.clearTiming();
+  }
 }
 
 function handleScore(scoreData) {
+  // Record timing for shoot duration calculation
+  if (!shootTimingStore.hasStarted()) {
+    shootTimingStore.recordFirstArrow();
+  }
+  shootTimingStore.recordLastArrow();
+
   if (scoreData.position) {
     scoresStore.addArrow({
       id: Date.now(),
@@ -334,7 +355,7 @@ function closeTutorial() {
           :max-reached="maxReached"
           :knock-color="userStore.user.knockColor"
           @score="handleScore"
-          @undo="scoresStore.undo"
+          @undo="handleUndo"
         />
       </div>
       <div v-else class="score-buttons">
@@ -344,7 +365,7 @@ function closeTutorial() {
           :max-reached="maxReached"
           :scores="scoresStore.scores"
           :game-type="gameTypeStore.type"
-          @undo="scoresStore.undo"
+          @undo="handleUndo"
         />
       </div>
     </div>

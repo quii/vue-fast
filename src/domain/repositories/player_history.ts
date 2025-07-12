@@ -45,6 +45,7 @@ export interface HistoryItem {
   averagePerEnd?: number | null;
   shootStatus?: ShootStatus;
   location?: LocationData;
+  shootDuration?: number; // Duration in milliseconds from first to last arrow
 }
 
 export interface HistoryFilters {
@@ -69,7 +70,7 @@ export interface NavigationInfo {
 }
 
 export interface PlayerHistoryRepository {
-  add(date: string, score: number, gameType: string, scores: any[], unit?: string, userProfile?: UserProfile, shootStatus?: ShootStatus): Promise<number | string>;
+  add(date: string, score: number, gameType: string, scores: any[], unit?: string, userProfile?: UserProfile, shootStatus?: ShootStatus, shootDuration?: number): Promise<number | string>;
   remove(id: number | string): void;
   getById(id: number): HistoryItem | undefined;
   importHistory(history: HistoryItem[], currentUserProfile?: UserProfile | null): void;
@@ -113,7 +114,7 @@ export function createPlayerHistory(
 
   // Return an object with all the repository methods
   return {
-    async add(date, score, gameType, scores, unit, userProfile, shootStatus = DEFAULT_SHOOT_STATUS) {
+    async add(date, score, gameType, scores, unit, userProfile, shootStatus = DEFAULT_SHOOT_STATUS, shootDuration?: number) {
       // Try to capture location if location service is available
       let location: LocationData | undefined = undefined;
       
@@ -136,7 +137,8 @@ export function createPlayerHistory(
         unit,
         userProfile,
         shootStatus,
-        location
+        location,
+        shootDuration
       });
       await this.backfillClassifications()
 

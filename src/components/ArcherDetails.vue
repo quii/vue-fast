@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from "vue";
+import { formatShootDuration } from "@/utils/duration.ts";
 
 const props = defineProps({
   name: {
@@ -33,6 +34,10 @@ const props = defineProps({
   location: {
     type: Object,
     default: null
+  },
+  shootDuration: {
+    type: Number,
+    default: null
   }
 });
 
@@ -48,6 +53,10 @@ const capitalizedName = computed(() => capitalize(props.name));
 const capitalizedBowType = computed(() => capitalize(props.bowType));
 const capitalizedGender = computed(() => capitalize(props.gender));
 const capitalizedAgeGroup = computed(() => capitalize(props.ageGroup));
+
+const formattedDuration = computed(() => {
+  return formatShootDuration(props.shootDuration);
+});
 </script>
 
 <template>
@@ -64,6 +73,9 @@ const capitalizedAgeGroup = computed(() => capitalize(props.ageGroup));
       </div>
       <div v-if="location && location.placeName" class="info-chip location-chip">
         📍 {{ location.placeName }}
+      </div>
+      <div v-if="formattedDuration" class="info-chip duration-chip">
+        ⏱️ {{ formattedDuration }}
       </div>
     </div>
   </div>
@@ -91,6 +103,12 @@ const capitalizedAgeGroup = computed(() => capitalize(props.ageGroup));
   background-color: var(--color-background-soft);
   color: var(--color-text-light);
   font-style: italic;
+}
+
+.duration-chip {
+  background-color: var(--color-background-soft);
+  color: var(--color-text-light);
+  font-weight: 500;
 }
 
 @media (min-width: 768px) {
