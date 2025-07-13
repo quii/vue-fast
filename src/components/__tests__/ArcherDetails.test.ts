@@ -34,8 +34,9 @@ describe('ArcherDetails', () => {
       }
     });
 
-    expect(wrapper.text()).toContain('📍 London Archery Club');
-    expect(wrapper.find('.location-chip').exists()).toBe(true);
+    expect(wrapper.text()).toContain('London Archery Club');
+    expect(wrapper.find('.location-button').exists()).toBe(true);
+    expect(wrapper.find('.location-button').attributes('disabled')).toBeUndefined();
   });
 
   test('does not display location when not provided', () => {
@@ -45,8 +46,7 @@ describe('ArcherDetails', () => {
       }
     });
 
-    expect(wrapper.text()).not.toContain('📍');
-    expect(wrapper.find('.location-chip').exists()).toBe(false);
+    expect(wrapper.find('.location-button').exists()).toBe(false);
   });
 
   test('does not display location when location has no place name', () => {
@@ -61,8 +61,7 @@ describe('ArcherDetails', () => {
       }
     });
 
-    expect(wrapper.text()).not.toContain('📍');
-    expect(wrapper.find('.location-chip').exists()).toBe(false);
+    expect(wrapper.find('.location-button').exists()).toBe(false);
   });
 
   test('displays handicap when provided', () => {
@@ -98,7 +97,7 @@ describe('ArcherDetails', () => {
       }
     });
 
-    expect(wrapper.text()).toContain('⏱️ 45m');
+    expect(wrapper.text()).toContain('45m');
   });
 
   test('does not display duration when not provided', () => {
@@ -108,6 +107,41 @@ describe('ArcherDetails', () => {
       }
     });
 
-    expect(wrapper.text()).not.toContain('⏱️');
+    expect(wrapper.find('.duration-chip').exists()).toBe(false);
+  });
+
+  test('displays disabled location button when coordinates are missing', () => {
+    const wrapper = mount(ArcherDetails, {
+      props: {
+        name: 'John Doe',
+        location: {
+          latitude: 0,
+          longitude: 0,
+          placeName: 'Unknown Location',
+          timestamp: Date.now()
+        }
+      }
+    });
+
+    expect(wrapper.text()).toContain('Unknown Location');
+    expect(wrapper.find('.location-button').exists()).toBe(true);
+    expect(wrapper.find('.location-button').attributes('disabled')).toBeDefined();
+  });
+
+  test('displays map icon in location button', () => {
+    const wrapper = mount(ArcherDetails, {
+      props: {
+        name: 'John Doe',
+        location: {
+          latitude: 51.5074,
+          longitude: -0.1278,
+          placeName: 'London, UK',
+          timestamp: Date.now()
+        }
+      }
+    });
+
+    expect(wrapper.find('.location-button svg').exists()).toBe(true);
+    expect(wrapper.find('.location-icon').exists()).toBe(true);
   });
 });
