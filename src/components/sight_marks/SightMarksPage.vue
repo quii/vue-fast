@@ -95,7 +95,6 @@
           v-model="newMark.label"
           maxlength="100"
           class="label-input"
-          placeholder="pink arrows"
         />
         <label>Distance</label>
         <div class="distance-inputs">
