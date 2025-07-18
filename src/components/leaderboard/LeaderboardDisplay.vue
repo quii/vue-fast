@@ -4,6 +4,7 @@ import BaseButton from '../ui/BaseButton.vue'
 import { useUserStore } from '@/stores/user'
 import ParticipantList from '@/components/leaderboard/ParticipantList.vue'
 import { groupParticipantsByRound, getUniqueRoundNames } from '../../../shared/models/Shoot'
+import { findBestEnds } from '../../../shared/models/BestEnd'
 
 const props = defineProps({
   shoot: {
@@ -50,6 +51,13 @@ const currentUserParticipant = computed(() => {
 const isCurrentUserInShoot = computed(() => {
   return !!currentUserParticipant.value
 })
+
+const bestEnds = computed(() => {
+  if (!props.groupByRound || !props.shoot) {
+    return []
+  }
+  return findBestEnds(props.shoot)
+})
 </script>
 
 <template>
@@ -71,6 +79,7 @@ const isCurrentUserInShoot = computed(() => {
             :key="roundName"
             :participants="groupedParticipants[roundName]"
             :title="roundName || 'No Round Specified'"
+            :best-ends="bestEnds"
             class="round-group"
           />
         </div>

@@ -51,7 +51,8 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      "@": fileURLToPath(new URL("./src", import.meta.url))
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
+      "@shared": fileURLToPath(new URL("./shared", import.meta.url))
     }
   },
   // Configure the dev server to proxy API requests and WebSocket connections to our backend server

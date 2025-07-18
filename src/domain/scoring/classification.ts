@@ -1,5 +1,5 @@
 import { gameTypeConfig } from "@/domain/scoring/game_types";
-import { convertToValue } from "@/domain/scoring/scores";
+import { convertToValue } from "@shared/utils/scores";
 import {
   classificationList,
   getNextClassification,

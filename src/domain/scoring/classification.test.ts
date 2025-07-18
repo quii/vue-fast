@@ -6,7 +6,7 @@ import {
   calculateIfArcherIsOnTrackForNextClassification,
   calculatePotentialClassificationWithoutOutliers
 } from "@/domain/scoring/classification";
-import { calculateTotal } from "@/domain/scoring/subtotals";
+import { calculateTotal } from "@shared/utils/subtotals";
 
 beforeEach(() => {
   global.fetch = vi.fn(() =>

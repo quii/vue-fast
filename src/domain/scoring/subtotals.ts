@@ -1,4 +1,4 @@
-import { convertToValues } from "@/domain/scoring/scores";
+import { convertToValues } from "@shared/utils/scores";
 import { roundConfigManager } from '@/domain/scoring/game_types'
 import { Round } from '@/domain/scoring/round/round'
 

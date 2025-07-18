@@ -1,4 +1,4 @@
-import { convertToValue } from "@/domain/scoring/scores";
+import { convertToValue } from "@shared/utils/scores";
 import { gameTypeConfig } from "@/domain/scoring/game_types";
 
 const MAX_SCORE = Infinity;

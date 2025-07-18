@@ -5,6 +5,7 @@ import BaseCard from '../BaseCard.vue'
 import BaseButton from '../ui/BaseButton.vue'
 import GraphIcon from '@/components/icons/GraphIcon.vue'
 import LeaderboardGraph from '@/components/LeaderboardGraph.vue'
+import EndScores from '@/components/EndScores.vue'
 import { useUserStore } from '@/stores/user'
 import { useShootStore } from '@/stores/shoot'
 import { formatRoundName } from '../../domain/scoring/round/formatting.js'
@@ -20,6 +21,11 @@ const props = defineProps({
     type: String,
     required: false,
     default: ''
+  },
+  bestEnds: {
+    type: Array,
+    required: false,
+    default: () => []
   }
 })
 
@@ -127,6 +133,31 @@ function openGraph() {
 function closeGraph() {
   showGraph.value = false
 }
+
+// Helper function to check if a participant has the best end for this round
+function getParticipantBestEnd(participant) {
+  if (!props.bestEnds || props.bestEnds.length === 0) {
+    return null
+  }
+  
+  const bestEnd = props.bestEnds.find(end => 
+    end.roundName === props.title && end.archerName === participant.archerName
+  )
+  
+  return bestEnd || null
+}
+
+// Helper function to get score button class for best end display
+function getScoreClass(score) {
+  // Use the same logic as EndScores component
+  if (props.title && (props.title.toLowerCase().includes('worcester'))) {
+    if (score === 5) {
+      return 'worcester5'
+    }
+    return 'worcesterRest'
+  }
+  return `score${score}`
+}
 </script>
 
 <template>
@@ -187,6 +218,28 @@ function closeGraph() {
             </div>
             <div v-if="participant.scoreDifference !== null" class="score-difference">
               -{{ participant.scoreDifference }}
+            </div>
+          </div>
+        </div>
+        
+        <!-- Best End Display -->
+        <div v-if="getParticipantBestEnd(participant)" class="best-end-row">
+          <div class="best-end-label">
+            Round's best:
+          </div>
+          <div class="best-end-scores">
+            <div class="best-end-display">
+              <span 
+                v-for="(score, index) in getParticipantBestEnd(participant).endScores" 
+                :key="index"
+                :class="getScoreClass(score)"
+                class="best-end-score"
+              >
+                {{ score }}
+              </span>
+              <span class="best-end-total">
+                {{ getParticipantBestEnd(participant).totalScore }}
+              </span>
             </div>
           </div>
         </div>
@@ -465,6 +518,112 @@ function closeGraph() {
 .participant-card.GMB .arrows-shot,
 .participant-card.EMB .arrows-shot {
   color: rgba(255, 255, 255, 0.8);
+}
+
+/* Best End Display Styles - Integrated into participant card */
+.best-end-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  margin-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.best-end-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text);
+  flex-shrink: 0;
+  min-width: 65px;
+}
+
+.best-end-scores {
+  flex: 1;
+  overflow: hidden;
+}
+
+.best-end-display {
+  display: flex;
+  gap: 1px;
+  align-items: center;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.best-end-score {
+  padding: 0.25rem 0.4rem;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.75rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  min-width: 24px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.best-end-total {
+  padding: 0.25rem 0.5rem;
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+  background-color: var(--color-success, #28a745);
+  color: white;
+  border: 1px solid var(--color-success, #28a745);
+  min-width: 30px;
+  border-radius: 2px;
+  margin-left: 2px;
+  flex-shrink: 0;
+}
+
+/* Ensure best end display works on dark classification backgrounds */
+.participant-card.B1 .best-end-row,
+.participant-card.B2 .best-end-row,
+.participant-card.B3 .best-end-row,
+.participant-card.MB .best-end-row,
+.participant-card.GMB .best-end-row,
+.participant-card.EMB .best-end-row {
+  border-top-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.participant-card.B1 .best-end-label,
+.participant-card.B2 .best-end-label,
+.participant-card.B3 .best-end-label,
+.participant-card.MB .best-end-label,
+.participant-card.GMB .best-end-label,
+.participant-card.EMB .best-end-label {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.participant-card.B1 .best-end-score,
+.participant-card.B2 .best-end-score,
+.participant-card.B3 .best-end-score,
+.participant-card.MB .best-end-score,
+.participant-card.GMB .best-end-score,
+.participant-card.EMB .best-end-score {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Ensure best end display works on light classification backgrounds */
+.participant-card.A1 .best-end-row,
+.participant-card.A2 .best-end-row,
+.participant-card.A3 .best-end-row {
+  border-top-color: rgba(6, 19, 69, 0.2);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.participant-card.A1 .best-end-label,
+.participant-card.A2 .best-end-label,
+.participant-card.A3 .best-end-label {
+  color: rgba(6, 19, 69, 0.9);
+}
+
+.participant-card.A1 .best-end-score,
+.participant-card.A2 .best-end-score,
+.participant-card.A3 .best-end-score {
+  border-color: rgba(6, 19, 69, 0.3);
 }
 
 
