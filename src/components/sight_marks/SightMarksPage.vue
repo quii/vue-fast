@@ -12,8 +12,8 @@
         <label>Enter Distance</label>
         <div class="distance-input-container">
           <input type="number" v-model="estimateDistance" class="distance-number" />
-          <div class="unit-radio-group">
-            <label class="unit-radio">
+          <div class="estimate-unit-radio-group">
+            <label class="estimate-unit-radio">
               <input
                 type="radio"
                 v-model="estimateUnit"
@@ -22,7 +22,7 @@
               />
               <span class="radio-label">meters</span>
             </label>
-            <label class="unit-radio">
+            <label class="estimate-unit-radio">
               <input
                 type="radio"
                 v-model="estimateUnit"
@@ -87,60 +87,50 @@
       </div>
     </BaseModal>
 
-    <BaseModal v-if="showAddMark">
+    <BaseModal v-if="showAddMark" title="Add Sight Mark">
       <div class="form-group">
-        <label>Label (optional)</label>
-        <input
-          type="text"
-          v-model="newMark.label"
-          maxlength="100"
-          class="label-input"
-        />
-        <label>Distance</label>
-        <div class="distance-inputs">
-          <input type="number" v-model="newMark.distanceValue" class="distance-number" />
-          <select v-model="newMark.distanceUnit" class="unit-select">
-            <option value="meters">m</option>
-            <option value="yards">yd</option>
-          </select>
+        <div class="input-header">
+          <label>Label (optional)</label>
+          <input
+            type="text"
+            v-model="newMark.label"
+            maxlength="100"
+            class="label-input"
+          />
         </div>
       </div>
 
       <div class="form-group">
-        <label>Extension</label>
-        <div class="slider-value">{{ displayNotches }} notches</div>
-        <input
-          type="range"
-          v-model="notchesValue"
-          min="0"
-          max="15"
-          step="1"
-          class="horizontal-slider"
-        />
-      </div>
-
-      <div class="form-group">
-        <label>Height</label>
-        <div class="vertical-inputs">
-          <NumberSpinner
-            v-model="newMark.vertical.major"
-            :min="0"
-            :max="10"
-          />
-          <span class="separator">.</span>
-          <NumberSpinner
-            v-model="newMark.vertical.minor"
-            :min="0"
-            :max="10"
-          />
-          <span class="separator">.</span>
-          <NumberSpinner
-            v-model="newMark.vertical.micro"
-            :min="0"
-            :max="10"
-          />
+        <div class="input-header">
+          <label>Distance</label>
+          <div class="distance-inputs">
+            <input type="number" v-model="newMark.distanceValue" class="distance-number" />
+            <div class="unit-radio-group">
+              <label class="radio-option">
+                <input 
+                  type="radio" 
+                  v-model="newMark.distanceUnit" 
+                  value="meters"
+                  name="distanceUnit"
+                />
+                <span class="radio-label">m</span>
+              </label>
+              <label class="radio-option">
+                <input 
+                  type="radio" 
+                  v-model="newMark.distanceUnit" 
+                  value="yards"
+                  name="distanceUnit"
+                />
+                <span class="radio-label">yd</span>
+              </label>
+            </div>
+          </div>
         </div>
       </div>
+
+      <!-- Use the new SightMarkInput component -->
+      <SightMarkInput v-model="sightMarkValues" />
 
       <div class="dialog-actions">
         <button class="secondary" @click="showAddMark = false">Cancel</button>
@@ -199,6 +189,7 @@ import { useSightMarksStore } from "@/stores/sight_marks";
 import BaseModal from "@/components/modals/BaseModal.vue";
 import DeleteConfirmationModal from "@/components/modals/DeleteConfirmationModal.vue";
 import NumberSpinner from "@/components/common/NumberSpinner.vue";
+import SightMarkInput from "./SightMarkInput.vue";
 import BaseTopBar from "@/components/ui/BaseTopBar.vue";
 import DeleteableCard from "@/components/DeleteableCard.vue";
 import {
@@ -279,6 +270,20 @@ const newMark = ref<NewMarkForm>({
     major: 5,
     minor: 6,
     micro: 2
+  }
+});
+
+// Computed property for the SightMarkInput component
+const sightMarkValues = computed({
+  get() {
+    return {
+      notches: newMark.value.notches,
+      vertical: newMark.value.vertical
+    };
+  },
+  set(value) {
+    newMark.value.notches = value.notches;
+    newMark.value.vertical = value.vertical;
   }
 });
 
@@ -495,12 +500,8 @@ function togglePriority(mark: StoreSightMark) {
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
-  padding-bottom: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -508,35 +509,108 @@ function togglePriority(mark: StoreSightMark) {
   border-bottom: none;
 }
 
+.input-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem; /* Reduced gap */
+  width: 100%;
+  min-width: 0;
+}
+
 .distance-inputs {
   display: flex;
   gap: 0.5rem;
-  align-items: center;
-  justify-content: center;
+  align-items: stretch; /* Changed from center to stretch */
+  flex: 1;
+  justify-content: flex-end;
+  min-width: 0;
+  flex-wrap: nowrap; /* Prevent wrapping */
 }
 
 .form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0;
+  flex-shrink: 0;
+  text-align: left;
+}
+
+.label-input {
+  flex: 1;
+  font-size: 1rem;
+  padding: 0.3rem 0.8rem;
+  background: var(--color-background-soft);
+  color: var(--color-text);
+  border: 2px solid var(--color-border);
+  border-radius: 6px;
+  height: 2.2rem;
+  box-sizing: border-box;
+  min-width: 0;
 }
 
 .distance-number {
-  font-size: 1.2rem;
-  width: 4rem;
-  padding: 0.4rem;
+  font-size: 1rem;
+  width: 3.5rem;
+  padding: 0.3rem 0.6rem;
   background: var(--color-background-soft);
   color: var(--color-text);
   border: 2px solid var(--color-border);
-  border-radius: 8px;
+  border-radius: 6px;
+  height: 2.2rem;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
 }
 
-.unit-select {
-  font-size: 1rem;
-  padding: 0.4rem;
+.unit-radio-group {
+  display: flex;
+  gap: 0.25rem;
+  flex-shrink: 0;
+  align-items: stretch;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  cursor: pointer;
+  padding: 0.3rem 0.6rem;
   background: var(--color-background-soft);
-  color: var(--color-text);
   border: 2px solid var(--color-border);
-  border-radius: 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  min-width: 2.2rem;
+  height: 2.2rem;
+  box-sizing: border-box;
+  justify-content: center;
+}
+
+.radio-option:hover {
+  background: var(--color-background-mute);
+}
+
+.radio-option input[type="radio"] {
+  margin: 0;
+  accent-color: var(--color-highlight, #007AFF);
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.radio-option input[type="radio"]:checked + .radio-label {
+  font-weight: 600;
+  color: var(--color-highlight, #007AFF);
+}
+
+.radio-label {
+  font-size: 0.85rem;
+  color: var(--color-text);
+  user-select: none;
+  font-weight: 500;
+  white-space: nowrap;
 }
 
 .slider-value {
@@ -623,19 +697,19 @@ function togglePriority(mark: StoreSightMark) {
   line-height: 1.5;
 }
 
-.unit-radio-group {
+.estimate-unit-radio-group {
   display: flex;
   gap: 1rem;
   margin-top: 0.5rem;
 }
 
-.unit-radio {
+.estimate-unit-radio {
   display: flex;
   align-items: center;
   cursor: pointer;
 }
 
-.unit-radio input[type="radio"] {
+.estimate-unit-radio input[type="radio"] {
   margin-right: 0.5rem;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -648,7 +722,7 @@ function togglePriority(mark: StoreSightMark) {
   transition: all 0.2s ease;
 }
 
-.unit-radio input[type="radio"]:checked {
+.estimate-unit-radio input[type="radio"]:checked {
   border: 6px solid var(--color-highlight, #4CAF50);
   background-color: var(--color-background);
 }
@@ -671,6 +745,32 @@ function togglePriority(mark: StoreSightMark) {
 /* Style for priority marks */
 :deep(.mark-card .card-indicator.priority) {
   background-color: rgba(255, 215, 0, 0.2); /* Gold background for priority items */
+}
+
+/* Mobile responsive styles */
+@media (max-width: 480px) {
+  .input-header {
+    gap: 0.5rem;
+  }
+  
+  .distance-inputs {
+    justify-content: center;
+    gap: 0.75rem;
+  }
+  
+  .distance-number {
+    width: 4rem;
+  }
+  
+  .unit-radio-group {
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  
+  .radio-option {
+    padding: 0.4rem 0.8rem;
+    min-width: 3rem;
+  }
 }
 
 </style>

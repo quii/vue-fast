@@ -6,24 +6,31 @@ class SightMarksPage {
   addSightMark(distance, unit, notches, vertical) {
     cy.contains("Add Mark").click();
     cy.get(".distance-number").clear().type(distance);
-    cy.get(".unit-select").select(unit);
-    cy.get(".horizontal-slider").invoke("val", 15 - notches).trigger("input");
+    
+    // Select unit using radio buttons instead of dropdown
+    if (unit === "m" || unit === "meters") {
+      cy.get(".radio-option input[value='meters']").click();
+    } else if (unit === "yd" || unit === "yards") {
+      cy.get(".radio-option input[value='yards']").click();
+    }
+    
+    cy.get(".extension-slider").invoke("val", notches).trigger("input");
 
-    // Set vertical values using number spinners
-    cy.get(".vertical-inputs .number-spinner").eq(0).invoke("val", vertical.major).trigger("input");
-    cy.get(".vertical-inputs .number-spinner").eq(1).invoke("val", vertical.minor).trigger("input");
-    cy.get(".vertical-inputs .number-spinner").eq(2).invoke("val", vertical.micro).trigger("input");
+    // Set vertical values using component number inputs
+    cy.get(".component-inputs .component-number-input").eq(0).invoke("val", vertical.major).trigger("input");
+    cy.get(".component-inputs .component-number-input").eq(1).invoke("val", vertical.minor).trigger("input");
+    cy.get(".component-inputs .component-number-input").eq(2).invoke("val", vertical.micro).trigger("input");
 
     cy.get(".primary").click();
   }
 
   editSightMark(distance, unit, newNotches, newVertical) {
     cy.get(".mark-card").contains(`${distance}${unit}`).click();
-    cy.get(".horizontal-slider").invoke("val", 15 - newNotches).trigger("input");
+    cy.get(".extension-slider").invoke("val", newNotches).trigger("input");
 
-    cy.get(".vertical-inputs .spinner-input").eq(0).invoke("val", newVertical.major).trigger("input");
-    cy.get(".vertical-inputs .spinner-input").eq(1).invoke("val", newVertical.minor).trigger("input");
-    cy.get(".vertical-inputs .spinner-input").eq(2).invoke("val", newVertical.micro).trigger("input");
+    cy.get(".component-inputs .component-number-input").eq(0).invoke("val", newVertical.major).trigger("input");
+    cy.get(".component-inputs .component-number-input").eq(1).invoke("val", newVertical.minor).trigger("input");
+    cy.get(".component-inputs .component-number-input").eq(2).invoke("val", newVertical.micro).trigger("input");
 
     cy.get(".primary").click();
   }
