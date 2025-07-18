@@ -130,14 +130,14 @@ function closeGraph() {
 </script>
 
 <template>
-  <LeaderboardGraph
-    :participants="participants"
-    :graph-title="`${title ? title + ' - ' : ''}Cumulative Score Progress`"
-    :visible="showGraph"
-    @close="closeGraph"
-  />
+  <div class="participant-list-wrapper">
+    <LeaderboardGraph
+      :participants="participants"
+      :visible="showGraph"
+      @close="closeGraph"
+    />
 
-  <div class="participant-list">
+    <div class="participant-list">
     <div class="participant-list-header">
       <RoundCard :round="{round: title}" :compact="true" />
       <BaseButton
@@ -195,6 +195,7 @@ function closeGraph() {
 
 
   </div>
+</div>
 </template>
 
 <style scoped>

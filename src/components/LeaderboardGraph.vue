@@ -47,15 +47,12 @@ import ButtonGroup from "@/components/ui/ButtonGroup.vue";
 import ShareIcon from "@/components/icons/ShareIcon.vue";
 import { formatRoundName } from '@/domain/scoring/round/formatting';
 import { useShootStore } from '@/stores/shoot';
+import { roundConfigManager } from '@/domain/scoring/game_types';
 
 const props = defineProps({
   participants: {
     type: Array,
     required: true
-  },
-  graphTitle: {
-    type: String,
-    default: "Cumulative Score Progress"
   },
   visible: {
     type: Boolean,
@@ -136,12 +133,13 @@ const chartData = computed(() => {
     datasets.push({
       label: 'Demo Archer 1',
       data: [
-        { x: 1, y: 7 },
-        { x: 2, y: 15 },
-        { x: 3, y: 22 },
-        { x: 4, y: 31 },
-        { x: 5, y: 38 },
-        { x: 6, y: 45 }
+        { x: 0, y: 0 },   // Start
+        { x: 1, y: 42 },  // End 1
+        { x: 2, y: 78 },  // End 2
+        { x: 3, y: 125 }, // End 3
+        { x: 4, y: 158 }, // End 4
+        { x: 5, y: 201 }, // End 5
+        { x: 6, y: 245 }  // End 6
       ],
       borderColor: 'rgba(255, 99, 132, 1)',
       backgroundColor: 'rgba(255, 99, 132, 0.1)',
@@ -155,12 +153,13 @@ const chartData = computed(() => {
     datasets.push({
       label: 'Demo Archer 2',
       data: [
-        { x: 1, y: 5 },
-        { x: 2, y: 12 },
-        { x: 3, y: 20 },
-        { x: 4, y: 28 },
-        { x: 5, y: 35 },
-        { x: 6, y: 42 }
+        { x: 0, y: 0 },   // Start
+        { x: 1, y: 38 },  // End 1
+        { x: 2, y: 72 },  // End 2
+        { x: 3, y: 108 }, // End 3
+        { x: 4, y: 142 }, // End 4
+        { x: 5, y: 178 }, // End 5
+        { x: 6, y: 214 }  // End 6
       ],
       borderColor: 'rgba(54, 162, 235, 1)',
       backgroundColor: 'rgba(54, 162, 235, 0.1)',
@@ -181,14 +180,24 @@ const chartData = computed(() => {
     
     const dataPoints = [];
     
+    // Get the round configuration to determine end size
+    const roundConfig = roundConfigManager.getRound(participant.roundName);
+    const endSize = roundConfig?.endSize || 6; // Default to 6 arrows per end
+    
     // Ensure we have a valid timestamp
     const lastUpdated = participant.lastUpdated instanceof Date 
       ? participant.lastUpdated 
       : new Date(participant.lastUpdated || Date.now());
     
     if (participant.scores && participant.scores.length > 0) {
-      // Use individual arrow scores to build cumulative progression
+      // Use individual arrow scores to build cumulative progression by end
       let cumulative = 0;
+      let currentEndScore = 0;
+      let endNumber = 1;
+      
+      // Start with end 0 (before shooting)
+      dataPoints.push({ x: 0, y: 0 });
+      
       participant.scores.forEach((score, arrowIndex) => {
         // Convert string scores to numbers, skip invalid ones
         const numericScore = typeof score === 'number' ? score : 
@@ -196,25 +205,49 @@ const chartData = computed(() => {
         
         if (numericScore >= 0) { // Allow 0 scores
           cumulative += numericScore;
+          currentEndScore += numericScore;
         }
-        // Use arrow index as x value (simpler than time)
+        
+        // Check if we've completed an end
+        if ((arrowIndex + 1) % endSize === 0) {
+          dataPoints.push({
+            x: endNumber,
+            y: cumulative
+          });
+          endNumber++;
+          currentEndScore = 0;
+        }
+      });
+      
+      // If there are remaining arrows in an incomplete end, add a point for the current progress
+      if (participant.scores.length % endSize !== 0) {
         dataPoints.push({
-          x: arrowIndex + 1,
+          x: endNumber,
           y: cumulative
         });
-      });
-    } else if (participant.totalScore > 0) {
-      // For participants without detailed scores, create a simple progression
-      const arrowCount = participant.arrowsShot || Math.max(6, Math.ceil(participant.totalScore / 10)); // Estimate arrows
+      }
       
-      // Create progression points (start, middle, current)
-      const midScore = Math.floor(participant.totalScore * 0.5);
-      const midArrow = Math.floor(arrowCount / 2);
-      dataPoints.push(
-        { x: 1, y: 0 },
-        { x: midArrow, y: midScore },
-        { x: arrowCount, y: participant.totalScore }
-      );
+    } else if (participant.totalScore > 0) {
+      // For participants without detailed scores, create a simple progression by estimated ends
+      const totalArrows = participant.arrowsShot || Math.max(6, Math.ceil(participant.totalScore / 10));
+      const estimatedEnds = Math.ceil(totalArrows / endSize);
+      
+      // Create progression points (start, incremental ends, current)
+      dataPoints.push({ x: 0, y: 0 }); // Starting point
+      
+      for (let end = 1; end <= estimatedEnds; end++) {
+        const progressRatio = end / estimatedEnds;
+        const scoreAtEnd = Math.floor(participant.totalScore * progressRatio);
+        dataPoints.push({
+          x: end,
+          y: scoreAtEnd
+        });
+      }
+      
+      // Ensure final point shows exact total score
+      if (estimatedEnds > 0) {
+        dataPoints[dataPoints.length - 1].y = participant.totalScore;
+      }
     } else {
       // No score data available
       return;
@@ -254,14 +287,16 @@ const chartOptions = computed(() => {
     scales: {
       x: {
         type: 'linear',
+        beginAtZero: true,
         title: {
           display: true,
-          text: 'Arrow Number',
+          text: 'End Number',
           font: {
             size: isPortraitOrientation() ? 10 : 12
           }
         },
         ticks: {
+          stepSize: 1,
           font: {
             size: isPortraitOrientation() ? 8 : 10
           }
@@ -297,7 +332,8 @@ const chartOptions = computed(() => {
       tooltip: {
         callbacks: {
           title: function(tooltipItems) {
-            return `Arrow ${tooltipItems[0].parsed.x}`;
+            const endNum = tooltipItems[0].parsed.x;
+            return endNum === 0 ? 'Start' : `End ${endNum}`;
           },
           label: function(context) {
             return `${context.dataset.label}: ${context.parsed.y}`;
@@ -337,7 +373,7 @@ const updateChart = () => {
       options: chartOptions.value
     });
   } catch (error) {
-    console.error('Error creating chart:', error);
+    // Chart creation failed - silently handle or log to external service
   }
 };
 
@@ -401,7 +437,6 @@ const shareChart = async () => {
     }
     
   } catch (error) {
-    console.error('Failed to share chart:', error);
     shareError.value = 'Failed to share chart';
     setTimeout(() => shareError.value = '', 3000);
   }
