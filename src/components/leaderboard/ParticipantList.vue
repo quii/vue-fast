@@ -1,7 +1,10 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import BaseCard from '../BaseCard.vue'
+import BaseButton from '../ui/BaseButton.vue'
+import GraphIcon from '@/components/icons/GraphIcon.vue'
+import LeaderboardGraph from '@/components/LeaderboardGraph.vue'
 import { useUserStore } from '@/stores/user'
 import { useShootStore } from '@/stores/shoot'
 import { formatRoundName } from '../../domain/scoring/round/formatting.js'
@@ -101,11 +104,54 @@ function getPositionIndicatorClass(participant) {
 
   return classes.join(' ')
 }
+
+// Add graph modal state
+const showGraph = ref(false)
+
+// Check if we have enough data for a meaningful graph
+const hasGraphData = computed(() => {
+  if (!props.participants || props.participants.length < 1) return false
+  
+  // Count participants with any score data
+  const participantsWithData = props.participants.filter(p => 
+    (p.scores && p.scores.length > 0) || p.totalScore > 0
+  )
+  
+  return participantsWithData.length >= 1
+})
+
+function openGraph() {
+  showGraph.value = true
+}
+
+function closeGraph() {
+  showGraph.value = false
+}
 </script>
 
 <template>
+  <LeaderboardGraph
+    :participants="participants"
+    :graph-title="`${title ? title + ' - ' : ''}Cumulative Score Progress`"
+    :visible="showGraph"
+    @close="closeGraph"
+  />
+
   <div class="participant-list">
-    <RoundCard :round="{round: title}" :compact="true" />
+    <div class="participant-list-header">
+      <RoundCard :round="{round: title}" :compact="true" />
+      <BaseButton
+        v-if="hasGraphData"
+        @click="openGraph"
+        variant="outline"
+        class="graph-button"
+        title="View cumulative score progression chart"
+      >
+        <GraphIcon />
+        Graph
+      </BaseButton>
+    </div>
+    
     <div v-if="sortedParticipants.length === 0" class="empty-state">
       <p>No participants in this group.</p>
     </div>
@@ -146,6 +192,8 @@ function getPositionIndicatorClass(participant) {
         </div>
       </BaseCard>
     </div>
+
+
   </div>
 </template>
 
@@ -189,6 +237,24 @@ function getPositionIndicatorClass(participant) {
 .participant-list {
   display: flex;
   flex-direction: column;
+}
+
+.participant-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.graph-button {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.8rem;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .empty-state {
@@ -399,4 +465,6 @@ function getPositionIndicatorClass(participant) {
 .participant-card.EMB .arrows-shot {
   color: rgba(255, 255, 255, 0.8);
 }
+
+
 </style>
