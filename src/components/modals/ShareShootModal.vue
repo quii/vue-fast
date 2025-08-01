@@ -13,6 +13,10 @@ const props = defineProps({
   shootCode: {
     type: String,
     required: true
+  },
+  shootTitle: {
+    type: String,
+    default: ''
   }
 })
 
@@ -45,7 +49,7 @@ async function shareNatively() {
     if (navigator.share) {
       // Use Web Share API for native sharing
       await navigator.share({
-        title: `Live Archery Leaderboard`,
+        title: props.shootTitle || `Live Archery Leaderboard`,
         text: shareMessage.value
       })
       

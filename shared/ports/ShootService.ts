@@ -7,9 +7,10 @@ export interface ShootService {
   /**
    * Creates a new shoot with the given creator name
    * @param creatorName Name of the archer creating the shoot
+   * @param title Optional title for the shoot (max 100 characters)
    * @returns Promise with the created shoot details
    */
-  createShoot(creatorName: string): Promise<{ shoot: Shoot; code: string }>;
+  createShoot(creatorName: string, title?: string): Promise<{ shoot: Shoot; code: string }>;
 
   /**
    * Joins an existing shoot with the given code

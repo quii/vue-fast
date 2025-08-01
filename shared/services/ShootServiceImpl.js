@@ -23,18 +23,24 @@ export class ShootServiceImpl {
     /**
      * Creates a new shoot
      * @param creatorName Name of the archer creating the shoot
+     * @param title Optional title for the shoot (max 100 characters)
      * @returns Promise with the created shoot details
      */
-    async createShoot(creatorName) {
+    async createShoot(creatorName, title) {
         const code = await this.generateCode();
         const now = new Date();
         // Set expiration to end of current day
         const expiresAt = new Date(now);
         expiresAt.setHours(23, 59, 59, 999);
+        
+        // Validate and truncate title if provided
+        const shootTitle = title ? title.slice(0, 100).trim() : undefined;
+        
         const shoot = {
             id: `shoot_${Date.now()}`,
             code,
             creatorName,
+            title: shootTitle,
             createdAt: now,
             expiresAt,
             participants: [],

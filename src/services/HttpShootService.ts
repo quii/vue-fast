@@ -15,16 +15,16 @@ export class HttpShootService implements ShootService {
   /**
    * Creates a new shoot via HTTP POST
    */
-  async createShoot(creatorName: string): Promise<{ shoot: Shoot; code: string }> {
+  async createShoot(creatorName: string, title?: string): Promise<{ shoot: Shoot; code: string }> {
     try {
-      console.log('Creating shoot with:', { creatorName });
+      console.log('Creating shoot with:', { creatorName, title });
 
       const response = await fetch(this.baseUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ creatorName }),
+        body: JSON.stringify({ creatorName, title }),
       })
 
       console.log('Create response status:', response.status);

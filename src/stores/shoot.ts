@@ -237,14 +237,14 @@ export const useShootStore = defineStore('shoot', () => {
   }
 
   // Create a new shoot and automatically join it
-  async function createShoot(creatorName: string, roundName: string, currentScore: number = 0, arrowsShot: number = 0): Promise<void> {
-    console.log('🎯 createShoot called with:', { creatorName, roundName, currentScore, arrowsShot })
+  async function createShoot(creatorName: string, roundName: string, currentScore: number = 0, arrowsShot: number = 0, title?: string): Promise<void> {
+    console.log('🎯 createShoot called with:', { creatorName, roundName, currentScore, arrowsShot, title })
     await initializeServices()
     if (!shootService) throw new Error('Shoot service not available')
 
     try {
       isLoading.value = true
-      const result = await shootService.createShoot(creatorName)
+      const result = await shootService.createShoot(creatorName, title)
 
       // Connect WebSocket first
       await initializeWebSocket()

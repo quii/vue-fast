@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue'
 import BaseButton from '@/components/ui/BaseButton.vue'
 import ButtonGroup from '@/components/ui/ButtonGroup.vue'
+import BaseInput from '@/components/ui/BaseInput.vue'
 import { useShootStore } from '@/stores/shoot'
 
 const props = defineProps({
@@ -21,6 +22,7 @@ const shootStore = useShootStore()
 
 // Local state
 const isCreating = ref(false)
+const shootTitle = ref('')
 
 // Computed
 const canCreate = computed(() => {
@@ -34,13 +36,20 @@ const buttonText = computed(() => {
   return 'Create Shoot'
 })
 
+const trimmedTitle = computed(() => {
+  return shootTitle.value.trim()
+})
+
 // Methods
 async function handleCreateShoot() {
   if (!canCreate.value) return
 
   try {
     isCreating.value = true
-    const code = await shootStore.createShoot(props.userName)
+    const title = trimmedTitle.value || undefined
+    await shootStore.createShoot(props.userName, props.roundType, 0, 0, title)
+    // The store doesn't return a code, so we get it from the currentShoot
+    const code = shootStore.shootCode
     emit('shoot-created', code)
   } catch (error) {
     // Error handling is done in the store with toast notifications
@@ -57,6 +66,22 @@ async function handleCreateShoot() {
     <p class="action-description">
       Start a new shared leaderboard for <strong>{{ userName }}</strong> shooting <strong>{{ roundType }}</strong>.
     </p>
+
+    <div class="form-group">
+      <label for="shoot-title" class="form-label">Shoot Title (Optional)</label>
+      <BaseInput
+        id="shoot-title"
+        v-model="shootTitle"
+        type="text"
+        placeholder="e.g., Club Championship Round 1"
+        maxlength="100"
+        :disabled="!canCreate"
+        class="title-input"
+      />
+      <p class="form-hint">
+        Add a descriptive title for your shoot (up to 100 characters)
+      </p>
+    </div>
 
     <ButtonGroup>
       <BaseButton
@@ -88,5 +113,29 @@ async function handleCreateShoot() {
   color: var(--color-text-mute, #666);
   font-size: 0.9rem;
   line-height: 1.4;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--color-text, #333);
+  font-size: 0.9rem;
+}
+
+.title-input {
+  width: 100%;
+}
+
+.form-hint {
+  margin: 0.5rem 0 0 0;
+  color: var(--color-text-mute, #666);
+  font-size: 0.8rem;
+  line-height: 1.3;
 }
 </style>

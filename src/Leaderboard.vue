@@ -3,6 +3,7 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import BaseTopBar from '@/components/ui/BaseTopBar.vue'
 import LeaderboardDisplay from '@/components/leaderboard/LeaderboardDisplay.vue'
 import JoinShootForm from '@/components/leaderboard/JoinShootForm.vue'
+import CreateShootForm from '@/components/leaderboard/CreateShootForm.vue'
 import NotificationModal from '@/components/modals/NotificationModal.vue'
 import BaseButton from '@/components/ui/BaseButton.vue'
 import LiveIcon from '@/components/icons/LiveIcon.vue'
@@ -32,7 +33,6 @@ const pendingAction = ref(null) // 'create' or 'join'
 const userName = ref('')
 const nameError = ref('')
 const joinCodeRaw = ref('')
-const isCreating = ref(false)
 const showShareModal = ref(false)
 const route = useRoute()
 // Add this with the other local state
@@ -138,20 +138,9 @@ function closeShareModal() {
   showShareModal.value = false
 }
 
-async function createShoot() {
-  isCreating.value = true
-  try {
-    await shootStore.createShoot(
-      userStore.user.name,
-      gameTypeStore.type,
-      currentScore.value,
-      arrowsShot.value
-    )
-  } catch (error) {
-    console.error('Failed to create shoot:', error)
-  } finally {
-    isCreating.value = false
-  }
+async function handleShootCreated(code) {
+  // The shoot has been created successfully, store will be updated automatically
+  console.log('Shoot created with code:', code)
 }
 
 function backToMenu() {
@@ -281,6 +270,7 @@ onUnmounted(() => {
     <ShareShootModal
       :visible="showShareModal"
       :shoot-code="currentShoot?.code || ''"
+      :shoot-title="currentShoot?.title || ''"
       @close="closeShareModal"
     />
 
@@ -347,24 +337,22 @@ onUnmounted(() => {
 
         <!-- Create Shoot Section -->
         <div class="create-section">
-          <h3 class="section-title">Create a New Shoot</h3>
-          <p class="section-description">
-            Start a new live leaderboard for others to join
-          </p>
-
-          <BaseButton
-            variant="outline"
-            :disabled="isCreating"
-            @click="createShoot"
-          >
-            {{ isCreating ? 'Creating...' : 'Create Live Shoot' }}
-          </BaseButton>
+          <CreateShootForm
+            :user-name="userStore.user.name"
+            :round-type="gameTypeStore.type"
+            @shoot-created="handleShootCreated"
+          />
         </div>
       </div>
     </div>
 
     <!-- Leaderboard display -->
     <div v-else-if="activeView === 'leaderboard'" class="content-container">
+      <!-- Shoot Title (if present) -->
+      <div v-if="currentShoot?.title" class="shoot-title-header">
+        <h1 class="shoot-title">{{ currentShoot.title }}</h1>
+      </div>
+      
       <LeaderboardDisplay
         :shoot="currentShoot"
         :group-by-round="groupByRound"
@@ -515,6 +503,24 @@ onUnmounted(() => {
   padding: 0 1rem;
   position: relative;
   z-index: 2;
+}
+
+.shoot-title-header {
+  text-align: center;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--color-border, #e0e0e0);
+  margin-bottom: 1rem;
+  background-color: var(--color-surface, #fafafa);
+}
+
+.shoot-title {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.2;
+  word-wrap: break-word;
+  max-width: 100%;
 }
 
 :deep(.code-input) {

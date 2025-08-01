@@ -11,6 +11,9 @@ export interface Shoot {
   /** Name of the archer who created the shoot */
   creatorName: string;
 
+  /** Optional title for the shoot (max 100 characters) */
+  title?: string;
+
   /** Timestamp when the shoot was created */
   createdAt: Date;
 

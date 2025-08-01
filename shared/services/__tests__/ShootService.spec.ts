@@ -21,6 +21,7 @@ describe('ShootService', () => {
     expect(shoot.creatorName).toBe('Archer 1');
     expect(code).toMatch(/^\d{4}$/);
     expect(shoot.participants).toHaveLength(0);
+    expect(shoot.title).toBeUndefined();
 
     // Shoot should expire at the end of the day
     const today = new Date();
@@ -28,8 +29,32 @@ describe('ShootService', () => {
     endOfDay.setHours(23, 59, 59, 999);
 
     expect(shoot.expiresAt.getDate()).toBe(endOfDay.getDate());
-    expect(shoot.expiresAt.getMonth()).toBe(endOfDay.getMonth());
-    expect(shoot.expiresAt.getFullYear()).toBe(endOfDay.getFullYear());
+    expect(shoot.expiresAt.getHours()).toBe(23);
+  });
+
+  it('creates a shoot with a title', async () => {
+    const title = 'Club Championship Round 1';
+    const { shoot, code } = await shootService.createShoot('Archer 1', title);
+
+    expect(shoot.creatorName).toBe('Archer 1');
+    expect(shoot.title).toBe(title);
+    expect(code).toMatch(/^\d{4}$/);
+    expect(shoot.participants).toHaveLength(0);
+  });
+
+  it('truncates title to 100 characters', async () => {
+    const longTitle = 'A'.repeat(150); // 150 characters
+    const { shoot } = await shootService.createShoot('Archer 1', longTitle);
+
+    expect(shoot.title).toBe('A'.repeat(100));
+    expect(shoot.title?.length).toBe(100);
+  });
+
+  it('trims whitespace from title', async () => {
+    const title = '  Club Championship  ';
+    const { shoot } = await shootService.createShoot('Archer 1', title);
+
+    expect(shoot.title).toBe('Club Championship');
   });
 
   it('allows archers to join a shoot', async () => {

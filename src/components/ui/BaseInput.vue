@@ -13,6 +13,14 @@ const props = defineProps({
   placeholder: {
     type: String,
     default: ""
+  },
+  maxlength: {
+    type: [String, Number],
+    default: null
+  },
+  disabled: {
+    type: Boolean,
+    default: false
   }
 });
 
@@ -29,6 +37,8 @@ const value = computed({
     :type="type"
     v-model="value"
     :placeholder="placeholder"
+    :maxlength="maxlength"
+    :disabled="disabled"
     class="base-input"
   />
 </template>
@@ -48,6 +58,12 @@ const value = computed({
 .base-input:focus {
   outline: none;
   border-color: var(--color-highlight);
+}
+
+.base-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: var(--color-background-mute, #f5f5f5);
 }
 
 .base-input[type="color"] {

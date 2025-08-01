@@ -23,7 +23,7 @@ export function createLeaderboardRouter(dependencies: {
   // Create a new shoot
   router.post('/', async (req: Request, res: Response): Promise<void> => {
     try {
-      const { creatorName } = req.body
+      const { creatorName, title } = req.body
 
       if (!creatorName) {
         res.status(400).json({
@@ -33,7 +33,7 @@ export function createLeaderboardRouter(dependencies: {
         return
       }
 
-      const result = await shootService.createShoot(creatorName)
+      const result = await shootService.createShoot(creatorName, title)
 
       res.json({
         success: true,
