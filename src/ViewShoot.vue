@@ -26,6 +26,7 @@ import {calculateAverageScorePerEnd} from "@/domain/scoring/distance_totals";
 import ShootEditModal from "@/components/modals/ShootEditModal.vue";
 import DeleteConfirmationModal from "@/components/modals/DeleteConfirmationModal.vue";
 import EndTotalChart from "@/components/EndTotalChart.vue";
+import ScoreDistributionChart from "@/components/ScoreDistributionChart.vue";
 
 const preferences = usePreferencesStore();
 const arrowHistoryStore = useArrowHistoryStore();
@@ -337,6 +338,11 @@ onMounted(() => {
       />
 
     <EndTotalChart
+        :scores="scores"
+        :game-type="roundName"
+    />
+
+    <ScoreDistributionChart
         :scores="scores"
         :game-type="roundName"
     />
