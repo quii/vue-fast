@@ -17,6 +17,10 @@ const props = defineProps({
   shootTitle: {
     type: String,
     default: ''
+  },
+  currentShoot: {
+    type: Object,
+    default: null
   }
 })
 
@@ -39,6 +43,9 @@ const copySuccess = ref('')
 const copyError = ref('')
 const shareSuccess = ref(false)
 const shareError = ref('')
+const isExporting = ref(false)
+const exportSuccess = ref(false)
+const exportError = ref('')
 
 function closeModal() {
   emit('close')
@@ -100,6 +107,38 @@ async function copyToClipboard(url, type) {
   }
 }
 
+async function exportShootResults() {
+  if (!props.currentShoot || !sharingService) return
+
+  try {
+    isExporting.value = true
+    exportError.value = ''
+    
+    const exportOptions = {}
+    const exportData = await sharingService.generateLiveShootExport(props.currentShoot, exportOptions)
+    
+    const shareText = props.currentShoot.title 
+      ? `${props.currentShoot.title} - Results` 
+      : 'Live Shoot Results'
+    
+    await sharingService.shareLiveShootResults(exportData, shareText)
+    
+    exportSuccess.value = true
+    setTimeout(() => {
+      exportSuccess.value = false
+    }, 2000)
+  } catch (error) {
+    console.error('Failed to export shoot results:', error)
+    exportError.value = 'Failed to export results'
+    
+    setTimeout(() => {
+      exportError.value = ''
+    }, 3000)
+  } finally {
+    isExporting.value = false
+  }
+}
+
 // Check if native sharing is available
 const canShareNatively = computed(() => {
   // Check if Web Share API is available, regardless of device type
@@ -126,12 +165,18 @@ const canShareNatively = computed(() => {
       </div>
 
       <!-- Feedback messages -->
-      <div v-if="shareSuccess || shareError" class="feedback-section">
+      <div v-if="shareSuccess || shareError || exportSuccess || exportError" class="feedback-section">
         <div v-if="shareSuccess" class="feedback success">
           ✅ Shared successfully!
         </div>
+        <div v-if="exportSuccess" class="feedback success">
+          ✅ Results exported successfully!
+        </div>
         <div v-if="shareError" class="feedback error">
           ❌ {{ shareError }}
+        </div>
+        <div v-if="exportError" class="feedback error">
+          ❌ {{ exportError }}
         </div>
       </div>
 
@@ -143,6 +188,14 @@ const canShareNatively = computed(() => {
           :disabled="!!shareError"
         >
           Share Shoot
+        </BaseButton>
+        <BaseButton 
+          v-if="props.currentShoot && canShareNatively"
+          variant="outline" 
+          @click="exportShootResults"
+          :disabled="isExporting || !!exportError"
+        >
+          {{ isExporting ? 'Exporting...' : 'Export Results' }}
         </BaseButton>
         <BaseButton variant="outline" @click="closeModal">
           Close

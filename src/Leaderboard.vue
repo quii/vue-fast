@@ -271,6 +271,7 @@ onUnmounted(() => {
       :visible="showShareModal"
       :shoot-code="currentShoot?.code || ''"
       :shoot-title="currentShoot?.title || ''"
+      :current-shoot="currentShoot"
       @close="closeShareModal"
     />
 
