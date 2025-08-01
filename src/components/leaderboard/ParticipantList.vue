@@ -4,11 +4,12 @@ import { useRouter } from 'vue-router'
 import BaseCard from '../BaseCard.vue'
 import BaseButton from '../ui/BaseButton.vue'
 import GraphIcon from '@/components/icons/GraphIcon.vue'
-import LeaderboardGraph from '@/components/LeaderboardGraph.vue'
+import UnifiedGraphModal from '@/components/UnifiedGraphModal.vue'
 import EndScores from '@/components/EndScores.vue'
 import { useUserStore } from '@/stores/user'
 import { useShootStore } from '@/stores/shoot'
 import { formatRoundName } from '../../domain/scoring/round/formatting.js'
+import { roundConfigManager } from '@/domain/scoring/game_types'
 import RoundCard from '@/components/RoundCard.vue'
 
 const props = defineProps({
@@ -158,13 +159,268 @@ function getScoreClass(score) {
   }
   return `score${score}`
 }
+
+// Chart title that includes date and formatted round name
+const chartTitle = computed(() => {
+  // Get the date from the current shoot, default to today if not available
+  const shootDate = shootStore.currentShoot?.createdAt || new Date();
+  const dateStr = shootDate instanceof Date ? 
+    shootDate.toLocaleDateString() : 
+    new Date(shootDate).toLocaleDateString();
+  
+  // Get round name from the first participant (they should all be the same round in a group)
+  const roundName = props.participants?.[0]?.roundName || props.title || 'Unknown Round';
+  const formattedRound = formatRoundName(roundName);
+  
+  return `${dateStr} - ${formattedRound}`;
+});
+
+// Generate a distinct color for each participant
+const generateColor = (index) => {
+  const colors = [
+    'rgba(255, 99, 132, 1)',   // Red
+    'rgba(54, 162, 235, 1)',   // Blue
+    'rgba(255, 206, 86, 1)',   // Yellow
+    'rgba(75, 192, 192, 1)',   // Teal
+    'rgba(153, 102, 255, 1)',  // Purple
+    'rgba(255, 159, 64, 1)',   // Orange
+    'rgba(199, 199, 199, 1)',  // Gray
+    'rgba(83, 102, 255, 1)',   // Indigo
+    'rgba(255, 99, 255, 1)',   // Pink
+    'rgba(99, 255, 132, 1)',   // Green
+  ];
+  return colors[index % colors.length];
+};
+
+// Prepare cumulative score data for each participant
+const chartData = computed(() => {
+  const datasets = [];
+  
+  // If no real participants with data, create demo data for testing
+  if (!props.participants || props.participants.length === 0 || 
+      !props.participants.some(p => (p.scores && p.scores.length > 0) || p.totalScore > 0)) {
+    datasets.push({
+      label: 'Demo Archer 1',
+      data: [
+        { x: 0, y: 0 },   // Start
+        { x: 1, y: 42 },  // End 1
+        { x: 2, y: 78 },  // End 2
+        { x: 3, y: 125 }, // End 3
+        { x: 4, y: 158 }, // End 4
+        { x: 5, y: 201 }, // End 5
+        { x: 6, y: 245 }  // End 6
+      ],
+      borderColor: 'rgba(255, 99, 132, 1)',
+      backgroundColor: 'rgba(255, 99, 132, 0.1)',
+      borderWidth: 2,
+      fill: false,
+      tension: 0.1,
+      pointRadius: 3,
+      pointHoverRadius: 5
+    });
+    
+    datasets.push({
+      label: 'Demo Archer 2',
+      data: [
+        { x: 0, y: 0 },   // Start
+        { x: 1, y: 38 },  // End 1
+        { x: 2, y: 72 },  // End 2
+        { x: 3, y: 108 }, // End 3
+        { x: 4, y: 142 }, // End 4
+        { x: 5, y: 178 }, // End 5
+        { x: 6, y: 214 }  // End 6
+      ],
+      borderColor: 'rgba(54, 162, 235, 1)',
+      backgroundColor: 'rgba(54, 162, 235, 0.1)',
+      borderWidth: 2,
+      fill: false,
+      tension: 0.1,
+      pointRadius: 3,
+      pointHoverRadius: 5
+    });
+    
+    return { datasets };
+  }
+  
+  props.participants.forEach((participant, index) => {
+    const dataPoints = [];
+    
+    // Get the round configuration to determine end size
+    const roundConfig = roundConfigManager.getRound(participant.roundName);
+    const endSize = roundConfig?.endSize || 6; // Default to 6 arrows per end
+    
+    if (participant.scores && participant.scores.length > 0) {
+      // Use individual arrow scores to build cumulative progression by end
+      let cumulative = 0;
+      let endNumber = 1;
+      
+      // Start with end 0 (before shooting)
+      dataPoints.push({ x: 0, y: 0 });
+      
+      participant.scores.forEach((score, arrowIndex) => {
+        // Convert string scores to numbers, skip invalid ones
+        const numericScore = typeof score === 'number' ? score : 
+                           (typeof score === 'string' && !isNaN(Number(score))) ? Number(score) : 0;
+        
+        if (numericScore >= 0) { // Allow 0 scores
+          cumulative += numericScore;
+        }
+        
+        // Check if we've completed an end
+        if ((arrowIndex + 1) % endSize === 0) {
+          dataPoints.push({
+            x: endNumber,
+            y: cumulative
+          });
+          endNumber++;
+        }
+      });
+      
+      // If there are remaining arrows in an incomplete end, add a point for the current progress
+      if (participant.scores.length % endSize !== 0) {
+        dataPoints.push({
+          x: endNumber,
+          y: cumulative
+        });
+      }
+      
+    } else if (participant.totalScore > 0) {
+      // For participants without detailed scores, create a simple progression by estimated ends
+      const totalArrows = participant.arrowsShot || Math.max(6, Math.ceil(participant.totalScore / 10));
+      const estimatedEnds = Math.ceil(totalArrows / endSize);
+      
+      // Create progression points (start, incremental ends, current)
+      dataPoints.push({ x: 0, y: 0 }); // Starting point
+      
+      for (let end = 1; end <= estimatedEnds; end++) {
+        const progressRatio = end / estimatedEnds;
+        const scoreAtEnd = Math.floor(participant.totalScore * progressRatio);
+        dataPoints.push({
+          x: end,
+          y: scoreAtEnd
+        });
+      }
+      
+      // Ensure final point shows exact total score
+      if (estimatedEnds > 0) {
+        dataPoints[dataPoints.length - 1].y = participant.totalScore;
+      }
+    } else {
+      // No score data available
+      return;
+    }
+
+    const color = generateColor(index);
+    
+    datasets.push({
+      label: participant.archerName,
+      data: dataPoints,
+      borderColor: color,
+      backgroundColor: color.replace('1)', '0.1)'),
+      borderWidth: 2,
+      fill: false,
+      tension: 0.1,
+      pointRadius: 3,
+      pointHoverRadius: 5
+    });
+  });
+
+  return { datasets };
+});
+
+// Determine if we're on a portrait screen
+const isPortraitOrientation = () => {
+  return window.innerHeight > window.innerWidth;
+};
+
+// Chart options optimized for cumulative score progression
+const chartOptions = computed(() => {
+  return {
+    responsive: true,
+    maintainAspectRatio: false,
+    layout: {
+      padding: {
+        top: 10,
+        right: isPortraitOrientation() ? 30 : 20,
+        bottom: 10,
+        left: isPortraitOrientation() ? 15 : 20
+      }
+    },
+    scales: {
+      x: {
+        type: 'linear',
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: 'End Number',
+          font: {
+            size: isPortraitOrientation() ? 10 : 12
+          }
+        },
+        ticks: {
+          stepSize: 1,
+          font: {
+            size: isPortraitOrientation() ? 8 : 10
+          }
+        }
+      },
+      y: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: 'Cumulative Score',
+          font: {
+            size: isPortraitOrientation() ? 10 : 12
+          }
+        },
+        ticks: {
+          font: {
+            size: isPortraitOrientation() ? 9 : 11
+          }
+        }
+      }
+    },
+    plugins: {
+      legend: {
+        position: isPortraitOrientation() ? 'top' : 'top',
+        labels: {
+          boxWidth: 12,
+          font: {
+            size: isPortraitOrientation() ? 10 : 12
+          },
+          usePointStyle: true
+        }
+      },
+      tooltip: {
+        callbacks: {
+          title: function(tooltipItems) {
+            const endNum = tooltipItems[0].parsed.x;
+            return endNum === 0 ? 'Start' : `End ${endNum}`;
+          },
+          label: function(context) {
+            return `${context.dataset.label}: ${context.parsed.y}`;
+          }
+        }
+      }
+    },
+    interaction: {
+      intersect: false,
+      mode: 'index'
+    }
+  };
+});
 </script>
 
 <template>
   <div class="participant-list-wrapper">
-    <LeaderboardGraph
-      :participants="participants"
+    <UnifiedGraphModal
       :visible="showGraph"
+      :title="chartTitle"
+      :chart-data="chartData"
+      :chart-options="chartOptions"
+      chart-type="line"
+      :no-data-message="'No score progression data available to display.'"
+      :no-data-hint="'Score data will appear as participants shoot arrows.'"
       @close="closeGraph"
     />
 

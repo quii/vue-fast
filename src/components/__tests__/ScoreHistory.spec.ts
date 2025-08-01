@@ -187,7 +187,7 @@ describe('ScoreHistory.vue', () => {
       global: {
         plugins: [createPinia(), router, Toast],
         stubs: {
-          'ScoreHistoryGraph': true,
+          'UnifiedGraphModal': true,
           'ClassificationProgress': true
         }
       }

@@ -10,12 +10,15 @@
     @selectRound="openRoundSelectionForManualEntry"
   />
   <div class="fullpage">
-    <ScoreHistoryGraph
-      :historyData="graphData"
-      :isHandicapGraph="isHandicapGraph"
-      :isArrowsGraph="isArrowsGraph"
-      :graphTitle="graphTitle"
+    <UnifiedGraphModal
       :visible="showGraph"
+      :title="graphTitle"
+      :chart-data="chartData"
+      :chart-options="chartOptions"
+      :chart-type="chartType"
+      :no-data-message="noDataMessage"
+      :no-data-hint="noDataHint"
+      :enable-share="true"
       @close="showGraph = false"
     />
 
@@ -104,7 +107,7 @@ import HistoryCard from "@/components/HistoryCard.vue";
 import HistoryFilters from "@/components/HistoryFilters.vue";
 import GraphIcon from "@/components/icons/GraphIcon.vue";
 import HistoryTipModal from "@/components/modals/HistoryTipModal.vue";
-import ScoreHistoryGraph from "@/components/ScoreHistoryGraph.vue";
+import UnifiedGraphModal from "@/components/UnifiedGraphModal.vue";
 import BaseButton from "@/components/ui/BaseButton.vue";
 import ButtonGroup from "@/components/ui/ButtonGroup.vue";
 import ManualScoreEntryModal from "@/components/modals/ManualScoreEntryModal.vue";
@@ -155,6 +158,358 @@ const isArrowsGraph = ref(false); // New state for arrows graph
 
 const showDeleteConfirm = ref(false)
 const itemToDelete = ref(null)
+
+// Computed properties for unified graph modal
+const chartType = computed(() => {
+  return isArrowsGraph.value ? 'bar' : 'line';
+});
+
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString();
+};
+
+const chartData = computed(() => {
+  if (!graphData.value || graphData.value.length === 0) {
+    return { labels: [], datasets: [] };
+  }
+
+  // Sort the history data by date (oldest first)
+  const sortedData = [...graphData.value].sort((a, b) =>
+    new Date(a.date).getTime() - new Date(b.date).getTime()
+  );
+
+  if (isArrowsGraph.value) {
+    return {
+      labels: sortedData.map(item => formatDate(item.date)),
+      datasets: [
+        {
+          label: 'Arrows per Session',
+          data: sortedData.map(item => item.arrowCount),
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1,
+          type: 'bar'
+        },
+        {
+          label: 'Cumulative Arrows',
+          data: sortedData.map(item => item.cumulativeArrows),
+          backgroundColor: 'rgba(153, 102, 255, 0.2)',
+          borderColor: 'rgba(153, 102, 255, 1)',
+          borderWidth: 2,
+          type: 'line',
+          tension: 0.5,
+          yAxisID: 'y1'
+        }
+      ]
+    };
+  } else if (isHandicapGraph.value) {
+    return {
+      labels: sortedData.map(item => formatDate(item.date)),
+      datasets: [{
+        label: 'Handicap',
+        data: sortedData.map(item => item.handicap),
+        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 1,
+        fill: false,
+        tension: 0.5
+      }]
+    };
+  } else {
+    // Regular score graph
+    return {
+      labels: sortedData.map(item => formatDate(item.date)),
+      datasets: [{
+        label: 'Score',
+        data: sortedData.map(item => item.score),
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgba(255, 99, 132, 1)',
+        borderWidth: 1,
+        fill: false,
+        tension: 0.3
+      }]
+    };
+  }
+});
+
+// Helper functions for chart options
+const isPortraitOrientation = () => {
+  return window.innerHeight > window.innerWidth;
+};
+
+const getMaxYValue = (data, property) => {
+  if (!data || data.length === 0) return 100;
+  return Math.max(...data.map(item => item[property] || 0)) * 1.1; // Add 10% headroom
+};
+
+const getMinYValue = (data, property) => {
+  if (!data || data.length === 0) return 0;
+  const min = Math.min(...data.map(item => item[property] || 0));
+  return Math.max(0, min * 0.9); // Subtract 10% but don't go below 0
+};
+
+const calculateTickSpacing = (min, max) => {
+  const range = max - min;
+
+  // For portrait orientation, use fewer ticks
+  if (isPortraitOrientation()) {
+    if (range > 500) return Math.ceil(range / 5 / 100) * 100;
+    if (range > 200) return Math.ceil(range / 5 / 50) * 50;
+    if (range > 100) return Math.ceil(range / 5 / 20) * 20;
+    if (range > 50) return 10;
+    return 5;
+  } else {
+    // For landscape, we can use more ticks
+    if (range > 500) return Math.ceil(range / 10 / 50) * 50;
+    if (range > 200) return Math.ceil(range / 10 / 20) * 20;
+    if (range > 100) return Math.ceil(range / 10 / 10) * 10;
+    if (range > 50) return 5;
+    return 2;
+  }
+};
+
+const chartOptions = computed(() => {
+  // Base options that apply to all chart types
+  const baseOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    layout: {
+      padding: {
+        top: 10,
+        right: isPortraitOrientation() ? 30 : 20,
+        bottom: 10,
+        left: isPortraitOrientation() ? 15 : 20
+      }
+    },
+    plugins: {
+      legend: {
+        position: isPortraitOrientation() ? 'top' : 'top',
+        labels: {
+          boxWidth: 12,
+          font: {
+            size: isPortraitOrientation() ? 10 : 12
+          }
+        }
+      }
+    }
+  };
+
+  if (isArrowsGraph.value) {
+    // Calculate appropriate tick spacing for arrows graph
+    const maxArrowsPerSession = getMaxYValue(graphData.value, 'arrowCount');
+    const maxCumulativeArrows = getMaxYValue(graphData.value, 'cumulativeArrows');
+
+    const arrowsTickSpacing = calculateTickSpacing(0, maxArrowsPerSession);
+    const cumulativeTickSpacing = calculateTickSpacing(0, maxCumulativeArrows);
+
+    return {
+      ...baseOptions,
+      scales: {
+        y: {
+          suggestedMax: maxArrowsPerSession,
+          ticks: {
+            stepSize: arrowsTickSpacing,
+            font: {
+              size: isPortraitOrientation() ? 9 : 11
+            }
+          },
+          title: {
+            display: true,
+            text: 'Arrows per Session',
+            font: {
+              size: isPortraitOrientation() ? 10 : 12
+            }
+          }
+        },
+        y1: {
+          position: 'right',
+          beginAtZero: true,
+          suggestedMax: maxCumulativeArrows,
+          ticks: {
+            stepSize: cumulativeTickSpacing,
+            font: {
+              size: isPortraitOrientation() ? 9 : 11
+            }
+          },
+          title: {
+            display: true,
+            text: 'Total Arrows',
+            font: {
+              size: isPortraitOrientation() ? 10 : 12
+            }
+          },
+          grid: {
+            drawOnChartArea: false
+          }
+        },
+        x: {
+          ticks: {
+            maxRotation: 90,
+            minRotation: isPortraitOrientation() ? 45 : 0,
+            font: {
+              size: isPortraitOrientation() ? 8 : 10
+            }
+          },
+          title: {
+            display: true,
+            text: 'Date',
+            font: {
+              size: isPortraitOrientation() ? 10 : 12
+            }
+          }
+        }
+      },
+      plugins: {
+        ...baseOptions.plugins,
+        tooltip: {
+          callbacks: {
+            title: function(tooltipItems) {
+              const item = graphData.value[tooltipItems[0].dataIndex];
+              return `${formatDate(item.date)} - ${item.gameType}`;
+            },
+            label: function(context) {
+              const item = graphData.value[context.dataIndex];
+              if (context.datasetIndex === 0) {
+                return `Arrows: ${item.arrowCount}`;
+              } else {
+                return `Total Arrows: ${item.cumulativeArrows}`;
+              }
+            }
+          }
+        }
+      }
+    };
+  } else if (isHandicapGraph.value) {
+    // Calculate appropriate tick spacing for handicap graph
+    const minHandicap = getMinYValue(graphData.value, 'handicap');
+    const maxHandicap = getMaxYValue(graphData.value, 'handicap');
+    const handicapTickSpacing = calculateTickSpacing(minHandicap, maxHandicap);
+
+    return {
+      ...baseOptions,
+      scales: {
+        y: {
+          ticks: {
+            stepSize: handicapTickSpacing,
+            font: {
+              size: isPortraitOrientation() ? 9 : 11
+            }
+          },
+          title: {
+            display: true,
+            text: 'Handicap (lower is better)',
+            font: {
+              size: isPortraitOrientation() ? 10 : 12
+            }
+          }
+        },
+        x: {
+          ticks: {
+            maxRotation: 90,
+            minRotation: isPortraitOrientation() ? 45 : 0,
+            font: {
+              size: isPortraitOrientation() ? 8 : 10
+            }
+          },
+          title: {
+            display: true,
+            text: 'Date',
+            font: {
+              size: isPortraitOrientation() ? 10 : 12
+            }
+          }
+        }
+      },
+      plugins: {
+        ...baseOptions.plugins,
+        tooltip: {
+          callbacks: {
+            title: function(tooltipItems) {
+              const item = graphData.value[tooltipItems[0].dataIndex];
+              return `${formatDate(item.date)} - ${item.gameType}`;
+            },
+            label: function(context) {
+              const item = graphData.value[context.dataIndex];
+              return `Handicap: ${item.handicap}`;
+            }
+          }
+        }
+      }
+    };
+  } else {
+    // Calculate appropriate tick spacing for score graph
+    const minScore = getMinYValue(graphData.value, 'score');
+    const maxScore = getMaxYValue(graphData.value, 'score');
+    const scoreTickSpacing = calculateTickSpacing(minScore, maxScore);
+
+    return {
+      ...baseOptions,
+      scales: {
+        y: {
+          suggestedMin: minScore,
+          suggestedMax: maxScore,
+          ticks: {
+            stepSize: scoreTickSpacing,
+            font: {
+              size: isPortraitOrientation() ? 9 : 11
+            }
+          },
+          title: {
+            display: true,
+            text: 'Score',
+            font: {
+              size: isPortraitOrientation() ? 10 : 12
+            }
+          }
+        },
+        x: {
+          ticks: {
+            maxRotation: 90,
+            minRotation: isPortraitOrientation() ? 45 : 0,
+            font: {
+              size: isPortraitOrientation() ? 8 : 10
+            }
+          },
+          title: {
+            display: true,
+            text: 'Date',
+            font: {
+              size: isPortraitOrientation() ? 10 : 12
+            }
+          }
+        }
+      },
+      plugins: {
+        ...baseOptions.plugins,
+        tooltip: {
+          callbacks: {
+            title: function(tooltipItems) {
+              const item = graphData.value[tooltipItems[0].dataIndex];
+              return `${formatDate(item.date)} - ${item.gameType}`;
+            },
+            label: function(context) {
+              const item = graphData.value[context.dataIndex];
+              return `Score: ${item.score}`;
+            }
+          }
+        }
+      }
+    };
+  }
+});
+
+const noDataMessage = computed(() => {
+  if (isArrowsGraph.value) return 'No arrow data available to display.';
+  if (isHandicapGraph.value) return 'No handicap data available to display.';
+  return 'No score data available to display.';
+});
+
+const noDataHint = computed(() => {
+  if (isArrowsGraph.value) return 'Arrow data will appear as you complete shoots.';
+  if (isHandicapGraph.value) return 'Handicap data will appear when handicaps are calculated.';
+  return 'Score data will appear as you complete shoots.';
+});
 
 const deleteItemName = computed(() => {
   if (!itemToDelete.value) return "this score";
