@@ -67,7 +67,7 @@ describe("calculateAppropriateRounds", () => {
     // Filter to only include outdoor rounds (excluding frostbite which is special)
     const outdoorRounds = result.filter(r => {
       const config = gameTypeConfig[r];
-      return config && config.isOutdoor && r !== "frostbite";
+      return config && config.isOutdoor && r !== "frostbite" && r !== "360 qualification round";
     });
 
     expect(outdoorRounds.length).toBe(0);

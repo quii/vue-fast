@@ -25,19 +25,21 @@ export function getRoundDetails(roundName: string): RoundDetails | null {
   const distances = []
 
   // For indoor rounds, use the original unit regardless of isImperial flag
-  if (!config.isOutdoor) {
-    // Indoor rounds - use the original unit that was specified
-    if (config.maxDistanceYards) {
-      distances.push(`${config.maxDistanceYards}yd`)
-    } else if (config.maxDistanceMetres) {
-      distances.push(`${config.maxDistanceMetres}m`)
-    }
-  } else {
-    // Outdoor rounds - use the unit based on isImperial flag
-    if (config.isImperial) {
-      distances.push(`${config.maxDistanceYards}yd`)
+  if(config.maxDistanceMetres || config.maxDistanceYards) {
+    if (!config.isOutdoor) {
+      // Indoor rounds - use the original unit that was specified
+      if (config.maxDistanceYards) {
+        distances.push(`${config.maxDistanceYards}yd`)
+      } else if (config.maxDistanceMetres) {
+        distances.push(`${config.maxDistanceMetres}m`)
+      }
     } else {
-      distances.push(`${config.maxDistanceMetres}m`)
+      // Outdoor rounds - use the unit based on isImperial flag
+      if (config.isImperial) {
+        distances.push(`${config.maxDistanceYards}yd`)
+      } else {
+        distances.push(`${config.maxDistanceMetres}m`)
+      }
     }
   }
 

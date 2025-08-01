@@ -12,7 +12,8 @@ export async function calculateAppropriateRounds(
   const classificationNumber: number = classificationList.indexOf(classification);
   const improvementModifier = classificationNumber > 4 ? 5 : classificationNumber + 1;
 
-  const improvementRounds: GameTypeConfig[] = [gameTypeConfig["frostbite"]];
+  // bit hacky this
+  const improvementRounds: GameTypeConfig[] = [gameTypeConfig["frostbite"], gameTypeConfig["360 qualification round"]];
 
   const distanceAppropriateRounds: GameTypeConfig[] = gameTypes
     .map(name => gameTypeConfig[name])

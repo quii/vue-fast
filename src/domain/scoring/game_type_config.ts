@@ -492,6 +492,12 @@ export const baseConfig: GameTypeBase[] = [
     maxDistanceMetres: 30
   },
   {
+    name: "360 qualification round",
+    isOutdoor: true,
+    isImperial: false,
+    distancesRoundSizes: [3],
+  },
+  {
     name: "portsmouth",
     isOutdoor: false,
     isImperial: false,

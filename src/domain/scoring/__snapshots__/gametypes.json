@@ -1,4 +1,34 @@
 {
+  "360 qualification round": {
+    "name": "360 qualification round",
+    "distancesRoundSizes": [
+      3
+    ],
+    "scores": [
+      "X",
+      10,
+      9,
+      8,
+      7,
+      6,
+      5,
+      4,
+      3,
+      2,
+      1,
+      "M"
+    ],
+    "unit": "m",
+    "endSize": 6,
+    "isOutdoor": true,
+    "maxArrows": 36,
+    "canSaveAnytime": false,
+    "isPracticeRound": false,
+    "numberOfEnds": 6,
+    "isImperial": false,
+    "maxDistanceMetres": 0,
+    "maxDistanceYards": 0
+  },
   "albion / long windsor": {
     "name": "albion / long windsor",
     "distancesRoundSizes": [
