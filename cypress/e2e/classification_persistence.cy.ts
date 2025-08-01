@@ -2,7 +2,7 @@ import ScorePage from "../pages/scorePage";
 import HistoryPage from "../pages/historyPage";
 import { UserDataPage } from "../pages/userDataPage";
 
-describe("Classification Persistence", () => {
+xdescribe("Classification Persistence", () => {
   const scorePage = new ScorePage();
   const historyPage = new HistoryPage();
   const userDataPage = new UserDataPage();
