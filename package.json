@@ -36,6 +36,7 @@
     "@vueuse/core": "^13.6.0",
     "chart.js": "^4.5.0",
     "chartjs-adapter-date-fns": "^3.0.0",
+    "chartjs-plugin-annotation": "^3.1.0",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "ioredis": "^5.7.0",

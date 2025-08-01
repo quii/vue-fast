@@ -25,6 +25,7 @@ import {calculateSubtotals} from "@/domain/scoring/subtotals";
 import {calculateAverageScorePerEnd} from "@/domain/scoring/distance_totals";
 import ShootEditModal from "@/components/modals/ShootEditModal.vue";
 import DeleteConfirmationModal from "@/components/modals/DeleteConfirmationModal.vue";
+import EndTotalChart from "@/components/EndTotalChart.vue";
 
 const preferences = usePreferencesStore();
 const arrowHistoryStore = useArrowHistoryStore();
@@ -334,6 +335,11 @@ onMounted(() => {
           :user-profile="shoot.userProfile"
           :game-type="roundName"
       />
+
+    <EndTotalChart
+        :scores="scores"
+        :game-type="roundName"
+    />
 
     <UserNotes :shoot-id="shoot.id" :allow-highlight="true" />
 
