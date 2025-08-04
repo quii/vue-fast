@@ -76,7 +76,7 @@
     "minio": "^8.0.5",
     "nodemon": "^3.0.1",
     "prettier": "^3.6.2",
-    "start-server-and-test": "^2.0.12",
+    "start-server-and-test": "^2.0.13",
     "supertest": "^7.1.4",
     "testcontainers": "^11.5.0",
     "ts-node": "^10.9.1",
