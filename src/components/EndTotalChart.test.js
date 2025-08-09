@@ -1,3 +1,4 @@
+/* global HTMLCanvasElement */
 import { mount } from '@vue/test-utils'
 import { describe, test, expect, vi } from 'vitest'
 import EndTotalChart from './EndTotalChart.vue'
@@ -10,7 +11,18 @@ vi.mock('chart.js/auto', () => ({
   }))
 }))
 
-vi.mock('chartjs-plugin-annotation', () => ({}))
+// Mock canvas context to prevent getContext errors
+Object.defineProperty(HTMLCanvasElement.prototype, 'getContext', {
+  value: vi.fn().mockReturnValue({
+    fillRect: vi.fn(),
+    clearRect: vi.fn(),
+    // Add other canvas 2D context methods as needed
+  })
+})
+
+vi.mock('chartjs-plugin-annotation', () => ({
+  default: {}
+}))
 
 describe('EndTotalChart Configuration Tests', () => {
   const defaultProps = {

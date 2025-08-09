@@ -30,6 +30,36 @@ The goal is to work in small, easy to understand, safe steps, that we can freque
 - Work in small incremental steps. Keep running the unit tests (`npm run test:unit`) to check
 - Once you have a working end to end slice, run `npm test` to run the full test suite. You should then summarise the changes to me so i can decide whether to commit
 
+## Git Workflow - Trunk-Based Development
+
+We use strict trunk-based development. **No branches, no pull requests - only direct commits to main.**
+
+### Core Principles
+- Make change -> Run tests -> Commit -> Push to main
+- **Always use `npm run ship` to push** - this ensures tests pass before pushing
+- **Never amend commits that have been pushed** 
+- **Never use `git push --force` or similar destructive operations**
+- If your local branch diverges from origin/main, use `git rebase origin/main` to sync
+
+### Git Commands to Use
+- `git fetch origin` - get latest changes from remote
+- `git rebase origin/main` - rebase local commits on top of remote main
+- `npm run ship` - run full test suite and push (equivalent to `npm run test && git push`)
+- `git status` - check working directory status
+
+### Git Commands to AVOID
+- `git push --force` or `git push -f` - destroys history
+- `git commit --amend` after pushing - changes pushed history
+- Creating branches - we work directly on main
+- `git push` directly - always use `npm run ship` instead
+
+### Handling Diverged Branches
+If `git status` shows "Your branch and 'origin/main' have diverged":
+1. `git fetch origin` 
+2. `git rebase origin/main` 
+3. Continue with your work
+4. Use `npm run ship` when ready to push
+
 ### Error Handling During Development
 
 - If tests fail, fix them before moving to the next task
