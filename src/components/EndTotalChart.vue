@@ -18,9 +18,6 @@ import { convertToValues } from "@shared/utils/scores"
 import { calculateTotal } from "@shared/utils/subtotals"
 import { gameTypeConfig } from "@/domain/scoring/game_types"
 
-// Register the annotation plugin
-Chart.register(annotationPlugin)
-
 const props = defineProps({
   scores: {
     type: Array,
@@ -34,6 +31,7 @@ const props = defineProps({
 
 const chartCanvas = ref(null)
 const chart = ref(null)
+const isUpdating = ref(false)
 
 // Determine end size based on game type
 const endSize = computed(() => {
@@ -171,14 +169,15 @@ const chartOptions = computed(() => {
       type: 'line',
       xMin: 0,
       xMax: 0,
+      yMin: yMin,
+      yMax: yMax,
       borderColor: 'rgba(75, 192, 192, 0.6)',
       borderWidth: 2,
       borderDash: [3, 3],
       label: {
         display: true,
         content: `${completeEnds[0].distance}${completeEnds[0].distanceUnit}`,
-        enabled: true,
-        position: 'top',
+        position: 'start',
         backgroundColor: 'rgba(75, 192, 192, 0.9)',
         borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 1,
@@ -204,14 +203,15 @@ const chartOptions = computed(() => {
         type: 'line',
         xMin: index,
         xMax: index,
+        yMin: yMin,
+        yMax: yMax,
         borderColor: 'rgba(255, 99, 132, 0.8)',
         borderWidth: 2,
         borderDash: [5, 5],
         label: {
           display: true,
           content: `${end.distance}${end.distanceUnit}`,
-          enabled: true,
-          position: 'top',
+          position: 'start',
           backgroundColor: 'rgba(255, 99, 132, 0.9)',
           borderColor: 'rgba(255, 99, 132, 1)',
           borderWidth: 1,
@@ -260,9 +260,9 @@ const chartOptions = computed(() => {
           }
         }
       },
-      annotation: {
-        annotations: distanceChangeAnnotations
-      }
+      // annotation: {
+      //   annotations: distanceChangeAnnotations
+      // }
     },
     scales: {
       x: {
@@ -305,24 +305,28 @@ const chartOptions = computed(() => {
 
 // Create or update the chart
 const updateChart = async () => {
-  if (!chartCanvas.value || !hasData.value) return
+  if (!chartCanvas.value || !hasData.value || isUpdating.value) return
 
-  if (chart.value) {
-    chart.value.destroy()
-  }
-
-  await nextTick()
-
-  const ctx = chartCanvas.value.getContext('2d')
-  
+  isUpdating.value = true
   try {
+    if (chart.value) {
+      chart.value.destroy()
+    }
+
+    await nextTick()
+
+    const ctx = chartCanvas.value.getContext('2d')
+    
     chart.value = new Chart(ctx, {
       type: 'line',
       data: chartData.value,
       options: chartOptions.value
+      // plugins: [annotationPlugin] // Instance-specific plugin registration - temporarily disabled
     })
   } catch (error) {
     console.error('End Total chart creation failed:', error)
+  } finally {
+    isUpdating.value = false
   }
 }
 
@@ -351,6 +355,7 @@ onMounted(() => {
 onUnmounted(() => {
   if (chart.value) {
     chart.value.destroy()
+    chart.value = null
   }
   window.removeEventListener('resize', handleResize)
 })

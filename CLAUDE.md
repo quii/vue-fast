@@ -1,4 +1,41 @@
-# Notes for cody about this application
+# Notes for the AI agent
+
+## AI Assistant Behavior Guidelines
+
+### Response Style
+- Be concise and direct - minimize output tokens while maintaining helpfulness
+- Answer questions directly without unnecessary preamble or explanation
+- Only provide code summaries/explanations when explicitly requested
+- Use TodoWrite tool proactively for multi-step tasks (3+ steps or complex planning required)
+
+### Workflow Approach  
+- Always read files before editing them
+- Run unit tests (`npm run test:unit`) frequently during development
+- Run full test suite (`npm test`) after completing a feature slice
+- Run linting/typechecking commands before declaring tasks complete
+- Never commit code unless explicitly requested by the user
+- Summarize changes and ask for commit approval after full test suite passes
+
+### Tool Usage
+- Prefer Task tool for open-ended searches requiring multiple rounds
+- Use parallel tool execution when possible for performance
+- Use Read tool for specific files, Glob for pattern matching, Grep for content search
+- Always ask for component lists before assuming they don't exist
+
+## Expected workflow
+
+The goal is to work in small, easy to understand, safe steps, that we can frequently commit and ship. We must not commit unless the tests are passing.
+
+- Strict TDD. Write a test, make it pass, refactor. 
+- Work in small incremental steps. Keep running the unit tests (`npm run test:unit`) to check
+- Once you have a working end to end slice, run `npm test` to run the full test suite. You should then summarise the changes to me so i can decide whether to commit
+
+### Error Handling During Development
+
+- If tests fail, fix them before moving to the next task
+- If linting/typechecking fails, resolve issues before task completion
+- If you encounter missing dependencies or components, ask for guidance rather than guessing
+- Mark TodoWrite tasks as "blocked" rather than "completed" if issues prevent finishing
 
 ## Purpose
 
@@ -193,6 +230,13 @@ maintaining a clean public API for our Vue components.
 - When asserting elements don't exist, use cy.contains(selector, text).should('not.exist') rather than trying to assert
   on content that may never be found
 - This pattern ensures Cypress properly handles non-existent elements without timing out
+
+## Current Codebase State
+
+- Primary language: **TypeScript** (with some legacy JavaScript being migrated)
+- Testing: Jest for unit tests, Cypress for e2e tests
+- When creating new files, use TypeScript (.ts/.vue) unless modifying existing JavaScript
+- Follow TypeScript Migration Strategy when converting existing JS files
 
 ## JavaScript
 
@@ -437,12 +481,16 @@ CSS.
 ### Component Reuse and Zero-CSS Approach
 
 - **New pages or sections should require NO custom CSS**
+- Before implementing any feature, use `ls src/components` and `ls src/components/icons` to discover existing components
+- Always ask: "What existing components can I use for this?" before writing markup
 - Always compose pages from existing components rather than writing new markup with custom styles
-- Before implementing any feature, ask for a list of available components that might serve your needs
 - For UI elements, check if we have components like:
   - `BaseButton`, `ButtonGroup`, `BaseTopBar`, `SectionCard`, etc.
   - Specialized components for common patterns in the application
-- If you believe custom CSS is needed, first prompt me to confirm there isn't an existing component
+- The only exceptions to zero-CSS are:
+  - Brand new UI patterns that don't exist in the component library
+  - Temporary styling that will be moved to a component later
+- If custom CSS seems necessary, first ask the user to confirm no existing component can be used
 - The goal is to maintain a consistent look and feel through strict component reuse
 - Creating new CSS should be considered a last resort and requires explicit approval
 
@@ -484,7 +532,6 @@ CSS.
 - Keep test setup code minimal and focused on what's relevant to the specific test.
 - Use beforeEach for common setup, but keep test-specific setup within the test itself.
 - When testing async code, always use `async/await` rather than callbacks or promise chains.
-- Page objects should represent the UI and provide methods to interact with it, but they shouldn't contain assertions themselves.
 
 ## Test Assertion Principles
 
@@ -519,8 +566,8 @@ it('disables higher score buttons after scoring a lower value', async () => {
   
   await page.score(7)
   
-  expect(await page.isButtonDisabled('9')).toBe(true)
-  expect(await page.isButtonEnabled('7')).toBe(true)
+  expect(await page.button('9')).toBeDisabled()
+  expect(await page.button('7')).toBeEnabled()
 })
 ```
 

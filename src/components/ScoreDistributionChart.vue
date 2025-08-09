@@ -55,9 +55,6 @@ import ChartDataLabels from 'chartjs-plugin-datalabels'
 import { gameTypeConfig } from "@/domain/scoring/game_types"
 import { calculateDistanceTotals } from "@/domain/scoring/distance_totals"
 
-// Register the datalabels plugin
-Chart.register(ChartDataLabels)
-
 const props = defineProps({
   scores: {
     type: Array,
@@ -73,6 +70,8 @@ const chartCanvas = ref(null)
 const distanceCanvases = ref([])
 const chart = ref(null)
 const distanceCharts = ref([])
+const distanceChartInstances = ref([])
+const isUpdating = ref(false)
 
 // Get the score color mapping from CSS classes
 const getScoreColor = (score, gameType) => {
@@ -320,7 +319,13 @@ const getChartOptions = (distribution, hideIndividualLegend = false) => {
 const updateDistanceCharts = async () => {
   if (!hasData.value || distanceCharts.value.length <= 1) return
 
-  // Destroy existing charts
+  // Destroy existing distance charts
+  distanceChartInstances.value.forEach(chart => {
+    if (chart) chart.destroy()
+  })
+  distanceChartInstances.value = []
+
+  // Destroy single chart if it exists
   if (chart.value) {
     chart.value.destroy()
     chart.value = null
@@ -338,11 +343,14 @@ const updateDistanceCharts = async () => {
       const chartData = createChartData(distanceData.distribution)
       const options = getChartOptions(distanceData.distribution, true) // Hide individual legends
       
-      new Chart(ctx, {
+      const chartInstance = new Chart(ctx, {
         type: 'pie',
         data: chartData,
-        options: options
+        options: options,
+        plugins: [ChartDataLabels] // Instance-specific plugin registration
       })
+      
+      distanceChartInstances.value[index] = chartInstance
     } catch (error) {
       console.error(`Distance chart ${index} creation failed:`, error)
     }
@@ -352,6 +360,12 @@ const updateDistanceCharts = async () => {
 // Create or update the single chart
 const updateSingleChart = async () => {
   if (!chartCanvas.value || !hasData.value || distanceCharts.value.length > 1) return
+
+  // Destroy existing distance charts
+  distanceChartInstances.value.forEach(chart => {
+    if (chart) chart.destroy()
+  })
+  distanceChartInstances.value = []
 
   if (chart.value) {
     chart.value.destroy()
@@ -366,7 +380,8 @@ const updateSingleChart = async () => {
     chart.value = new Chart(ctx, {
       type: 'pie',
       data: createChartData(distribution),
-      options: getChartOptions(distribution, false) // Show legend for single charts
+      options: getChartOptions(distribution, false), // Show legend for single charts
+      plugins: [ChartDataLabels] // Instance-specific plugin registration
     })
   } catch (error) {
     console.error('Score distribution chart creation failed:', error)
@@ -375,12 +390,17 @@ const updateSingleChart = async () => {
 
 // Main update function
 const updateCharts = async () => {
-  if (!hasData.value) return
+  if (!hasData.value || isUpdating.value) return
   
-  if (distanceCharts.value.length > 1) {
-    await updateDistanceCharts()
-  } else {
-    await updateSingleChart()
+  isUpdating.value = true
+  try {
+    if (distanceCharts.value.length > 1) {
+      await updateDistanceCharts()
+    } else {
+      await updateSingleChart()
+    }
+  } finally {
+    isUpdating.value = false
   }
 }
 
@@ -389,6 +409,9 @@ const handleResize = () => {
   if (chart.value) {
     chart.value.resize()
   }
+  distanceChartInstances.value.forEach(chart => {
+    if (chart) chart.resize()
+  })
 }
 
 // Watch for data changes
@@ -409,7 +432,12 @@ onMounted(() => {
 onUnmounted(() => {
   if (chart.value) {
     chart.value.destroy()
+    chart.value = null
   }
+  distanceChartInstances.value.forEach(chart => {
+    if (chart) chart.destroy()
+  })
+  distanceChartInstances.value = []
   window.removeEventListener('resize', handleResize)
 })
 </script>
