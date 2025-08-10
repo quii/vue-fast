@@ -158,7 +158,12 @@ const chartOptions = computed(() => {
   const yMin = Math.max(0, minTotal - padding)
   const yMax = maxTotal + padding
   
-  // Distance change annotations are now handled in the afterDraw plugin
+  // Get computed CSS variables for dark mode support
+  const rootStyle = getComputedStyle(document.documentElement)
+  const textColor = rootStyle.getPropertyValue('--color-text').trim()
+  
+  // Get filtered end data for tooltip callbacks
+  const completeEnds = endTotals.value.filter(end => end.isComplete)
   
   return {
     responsive: true,
@@ -197,7 +202,7 @@ const chartOptions = computed(() => {
           display: false
         },
         ticks: {
-          color: 'var(--color-text)',
+          color: textColor,
           font: {
             size: 12
           }
@@ -210,7 +215,7 @@ const chartOptions = computed(() => {
           color: 'rgba(0, 0, 0, 0.1)'
         },
         ticks: {
-          color: 'var(--color-text)',
+          color: textColor,
           font: {
             size: 12
           },
@@ -219,7 +224,7 @@ const chartOptions = computed(() => {
         title: {
           display: true,
           text: 'End Total',
-          color: 'var(--color-text)',
+          color: textColor,
           font: {
             size: 14,
             weight: 'bold'

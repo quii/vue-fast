@@ -245,7 +245,7 @@ const createChartData = (distribution) => {
     datasets: [{
       data: distribution.map(item => item.count),
       backgroundColor: distribution.map(item => item.color.backgroundColor),
-      borderColor: distribution.map(item => item.color.borderColor),
+      borderColor: '#000000', // Use consistent black border for all slices
       borderWidth: 2
     }]
   }

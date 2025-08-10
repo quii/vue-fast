@@ -8,7 +8,9 @@
       "Bash(git fetch:*)",
       "Bash(git rebase:*)",
       "Bash(npm run ship:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(grep:*)",
+      "Bash(git restore:*)"
     ],
     "deny": [
       "Bash(git push*)",

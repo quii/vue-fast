@@ -185,21 +185,24 @@ const chartData = computed(() => {
       datasets: [
         {
           label: 'Arrows per Session',
-          data: sortedData.map(item => item.arrowCount),
+          data: sortedData.map(item => item.arrowCount || 0),
           backgroundColor: 'rgba(75, 192, 192, 0.2)',
           borderColor: 'rgba(75, 192, 192, 1)',
           borderWidth: 1,
-          type: 'bar'
+          type: 'bar',
+          order: 2
         },
         {
           label: 'Cumulative Arrows',
-          data: sortedData.map(item => item.cumulativeArrows),
+          data: sortedData.map(item => item.cumulativeArrows || 0),
           backgroundColor: 'rgba(153, 102, 255, 0.2)',
           borderColor: 'rgba(153, 102, 255, 1)',
           borderWidth: 2,
           type: 'line',
           tension: 0.5,
-          yAxisID: 'y1'
+          yAxisID: 'y1',
+          order: 1,
+          fill: false
         }
       ]
     };
@@ -208,7 +211,7 @@ const chartData = computed(() => {
       labels: sortedData.map(item => formatDate(item.date)),
       datasets: [{
         label: 'Handicap',
-        data: sortedData.map(item => item.handicap),
+        data: sortedData.map(item => item.handicap || 0),
         backgroundColor: 'rgba(54, 162, 235, 0.2)',
         borderColor: 'rgba(54, 162, 235, 1)',
         borderWidth: 1,
@@ -222,7 +225,7 @@ const chartData = computed(() => {
       labels: sortedData.map(item => formatDate(item.date)),
       datasets: [{
         label: 'Score',
-        data: sortedData.map(item => item.score),
+        data: sortedData.map(item => item.score || 0),
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         borderColor: 'rgba(255, 99, 132, 1)',
         borderWidth: 1,
@@ -270,6 +273,10 @@ const calculateTickSpacing = (min, max) => {
 };
 
 const chartOptions = computed(() => {
+  // Get computed CSS variables for dark mode support
+  const rootStyle = getComputedStyle(document.documentElement)
+  const textColor = rootStyle.getPropertyValue('--color-text').trim()
+  
   // Base options that apply to all chart types
   const baseOptions = {
     responsive: true,
@@ -287,6 +294,7 @@ const chartOptions = computed(() => {
         position: isPortraitOrientation() ? 'top' : 'top',
         labels: {
           boxWidth: 12,
+          color: textColor,
           font: {
             size: isPortraitOrientation() ? 10 : 12
           }
@@ -310,6 +318,7 @@ const chartOptions = computed(() => {
           suggestedMax: maxArrowsPerSession,
           ticks: {
             stepSize: arrowsTickSpacing,
+            color: textColor,
             font: {
               size: isPortraitOrientation() ? 9 : 11
             }
@@ -317,6 +326,7 @@ const chartOptions = computed(() => {
           title: {
             display: true,
             text: 'Arrows per Session',
+            color: textColor,
             font: {
               size: isPortraitOrientation() ? 10 : 12
             }
@@ -328,6 +338,7 @@ const chartOptions = computed(() => {
           suggestedMax: maxCumulativeArrows,
           ticks: {
             stepSize: cumulativeTickSpacing,
+            color: textColor,
             font: {
               size: isPortraitOrientation() ? 9 : 11
             }
@@ -335,6 +346,7 @@ const chartOptions = computed(() => {
           title: {
             display: true,
             text: 'Total Arrows',
+            color: textColor,
             font: {
               size: isPortraitOrientation() ? 10 : 12
             }
@@ -347,6 +359,7 @@ const chartOptions = computed(() => {
           ticks: {
             maxRotation: 90,
             minRotation: isPortraitOrientation() ? 45 : 0,
+            color: textColor,
             font: {
               size: isPortraitOrientation() ? 8 : 10
             }
@@ -354,6 +367,7 @@ const chartOptions = computed(() => {
           title: {
             display: true,
             text: 'Date',
+            color: textColor,
             font: {
               size: isPortraitOrientation() ? 10 : 12
             }
@@ -392,6 +406,7 @@ const chartOptions = computed(() => {
         y: {
           ticks: {
             stepSize: handicapTickSpacing,
+            color: textColor,
             font: {
               size: isPortraitOrientation() ? 9 : 11
             }
@@ -399,6 +414,7 @@ const chartOptions = computed(() => {
           title: {
             display: true,
             text: 'Handicap (lower is better)',
+            color: textColor,
             font: {
               size: isPortraitOrientation() ? 10 : 12
             }
@@ -408,6 +424,7 @@ const chartOptions = computed(() => {
           ticks: {
             maxRotation: 90,
             minRotation: isPortraitOrientation() ? 45 : 0,
+            color: textColor,
             font: {
               size: isPortraitOrientation() ? 8 : 10
             }
@@ -415,6 +432,7 @@ const chartOptions = computed(() => {
           title: {
             display: true,
             text: 'Date',
+            color: textColor,
             font: {
               size: isPortraitOrientation() ? 10 : 12
             }
@@ -451,6 +469,7 @@ const chartOptions = computed(() => {
           suggestedMax: maxScore,
           ticks: {
             stepSize: scoreTickSpacing,
+            color: textColor,
             font: {
               size: isPortraitOrientation() ? 9 : 11
             }
@@ -458,6 +477,7 @@ const chartOptions = computed(() => {
           title: {
             display: true,
             text: 'Score',
+            color: textColor,
             font: {
               size: isPortraitOrientation() ? 10 : 12
             }
@@ -467,6 +487,7 @@ const chartOptions = computed(() => {
           ticks: {
             maxRotation: 90,
             minRotation: isPortraitOrientation() ? 45 : 0,
+            color: textColor,
             font: {
               size: isPortraitOrientation() ? 8 : 10
             }
@@ -474,6 +495,7 @@ const chartOptions = computed(() => {
           title: {
             display: true,
             text: 'Date',
+            color: textColor,
             font: {
               size: isPortraitOrientation() ? 10 : 12
             }
