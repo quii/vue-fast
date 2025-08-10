@@ -298,34 +298,39 @@ const updateChart = async () => {
             ctx.lineTo(x, chartArea.bottom)
             ctx.stroke()
             
-            // Draw label in a square box halfway up the line
-            const labelText = `${change.distance}${change.distanceUnit}`
+            // Draw label in a rectangle halfway up the line
+            const roundedDistance = Math.round(change.distance || 0)
+            const labelText = `${roundedDistance}${change.distanceUnit}`
             ctx.font = 'bold 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
             ctx.textAlign = 'center'
             ctx.textBaseline = 'middle'
             
+            // Calculate text dimensions for rectangle size
+            const textMetrics = ctx.measureText(labelText)
+            const textWidth = textMetrics.width
+            const padding = 8
+            const rectWidth = textWidth + (padding * 2)
+            const rectHeight = 20
+            
             // Position the label halfway up the line
             const lineHeight = chartArea.bottom - chartArea.top
             const labelY = chartArea.top + (lineHeight / 2)
-            
-            // Create a square box for the label
-            const boxSize = 40
-            const labelX = x - (boxSize / 2)
-            const labelBoxY = labelY - (boxSize / 2)
+            const labelX = x - (rectWidth / 2)
+            const labelBoxY = labelY - (rectHeight / 2)
             
             // Draw shadow
             ctx.fillStyle = 'rgba(0, 0, 0, 0.2)'
-            ctx.fillRect(labelX + 1, labelBoxY + 1, boxSize, boxSize)
+            ctx.fillRect(labelX + 1, labelBoxY + 1, rectWidth, rectHeight)
             
-            // Draw background box
-            ctx.fillStyle = change.isFirstDistance ? 'rgba(75, 192, 192, 0.95)' : 'rgba(255, 99, 132, 0.95)'
-            ctx.fillRect(labelX, labelBoxY, boxSize, boxSize)
+            // Draw background rectangle (same color for all labels)
+            ctx.fillStyle = 'rgba(255, 99, 132, 0.95)'
+            ctx.fillRect(labelX, labelBoxY, rectWidth, rectHeight)
             
             // Draw border
             ctx.strokeStyle = 'white'
             ctx.lineWidth = 2
             ctx.setLineDash([])
-            ctx.strokeRect(labelX, labelBoxY, boxSize, boxSize)
+            ctx.strokeRect(labelX, labelBoxY, rectWidth, rectHeight)
             
             // Draw text
             ctx.fillStyle = 'white'
