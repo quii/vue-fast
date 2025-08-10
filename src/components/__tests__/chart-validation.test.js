@@ -39,8 +39,8 @@ describe('Chart.js Configuration Validation', () => {
 
   function validateLineAnnotation(key, annotation) {
     // For line annotations, we need either:
-    // 1. xMin/xMax/yMin/yMax (boundary format)
-    // 2. scaleID + value (scale-relative format)
+    // 1. xMin/xMax/yMin/yMax with scale IDs (boundary format)
+    // 2. scaleID + value (scale-relative format) - PREFERRED in v3.1.0
     
     const hasBoundaryFormat = 
       typeof annotation.xMin === 'number' && 
@@ -69,6 +69,14 @@ describe('Chart.js Configuration Validation', () => {
     
     if (annotation.borderDash && !Array.isArray(annotation.borderDash)) {
       throw new Error(`Annotation '${key}' borderDash must be an array`)
+    }
+    
+    if (annotation.borderCapStyle && typeof annotation.borderCapStyle !== 'string') {
+      throw new Error(`Annotation '${key}' borderCapStyle must be a string`)
+    }
+    
+    if (annotation.borderJoinStyle && typeof annotation.borderJoinStyle !== 'string') {
+      throw new Error(`Annotation '${key}' borderJoinStyle must be a string`)
     }
   }
 
@@ -105,7 +113,9 @@ describe('Chart.js Configuration Validation', () => {
         yMax: 100,
         borderColor: 'rgba(75, 192, 192, 0.6)',
         borderWidth: 2,
-        borderDash: [3, 3]
+        borderDash: [3, 3],
+        borderCapStyle: 'butt',
+        borderJoinStyle: 'miter'
       }
     }
 
@@ -119,7 +129,9 @@ describe('Chart.js Configuration Validation', () => {
         scaleID: 'x',
         value: 5,
         borderColor: 'rgba(75, 192, 192, 0.6)',
-        borderWidth: 2
+        borderWidth: 2,
+        borderCapStyle: 'butt',
+        borderJoinStyle: 'miter'
       }
     }
 
@@ -254,8 +266,8 @@ export function validateAnnotationConfig(annotations) {
 
   function validateLineAnnotation(key, annotation) {
     // For line annotations, we need either:
-    // 1. xMin/xMax/yMin/yMax (boundary format)
-    // 2. scaleID + value (scale-relative format)
+    // 1. xMin/xMax/yMin/yMax with scale IDs (boundary format)
+    // 2. scaleID + value (scale-relative format) - PREFERRED in v3.1.0
     
     const hasBoundaryFormat = 
       typeof annotation.xMin === 'number' && 
@@ -284,6 +296,14 @@ export function validateAnnotationConfig(annotations) {
     
     if (annotation.borderDash && !Array.isArray(annotation.borderDash)) {
       throw new Error(`Annotation '${key}' borderDash must be an array`)
+    }
+    
+    if (annotation.borderCapStyle && typeof annotation.borderCapStyle !== 'string') {
+      throw new Error(`Annotation '${key}' borderCapStyle must be a string`)
+    }
+    
+    if (annotation.borderJoinStyle && typeof annotation.borderJoinStyle !== 'string') {
+      throw new Error(`Annotation '${key}' borderJoinStyle must be a string`)
     }
   }
 

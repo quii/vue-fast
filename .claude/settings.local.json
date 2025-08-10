@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run test:unit:*)",
+      "Bash(npm test)",
+      "Bash(npm run lint)",
+      "Bash(npm run test:e2e:docker:*)",
+      "Bash(git fetch:*)",
+      "Bash(git rebase:*)",
+      "Bash(npm run ship:*)",
+      "Bash(git add:*)"
+    ],
+    "deny": [
+      "Bash(git push*)",
+      "Bash(git push *)",
+      "Bash(git push --force*)",
+      "Bash(git push -f*)",
+      "Bash(git rebase -i*)"
+    ]
+  }
+}

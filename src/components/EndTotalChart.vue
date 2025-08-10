@@ -12,7 +12,6 @@
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
 import Chart from 'chart.js/auto'
-import annotationPlugin from 'chartjs-plugin-annotation'
 import { splitIntoChunks } from "@shared/utils/splitter"
 import { convertToValues } from "@shared/utils/scores"
 import { calculateTotal } from "@shared/utils/subtotals"
@@ -159,77 +158,7 @@ const chartOptions = computed(() => {
   const yMin = Math.max(0, minTotal - padding)
   const yMax = maxTotal + padding
   
-  // Create distance change annotations
-  const completeEnds = endTotals.value.filter(end => end.isComplete)
-  const distanceChangeAnnotations = {}
-  
-  // Add label for the first distance (at the start of the chart)
-  if (completeEnds.length > 0 && completeEnds[0].distance) {
-    distanceChangeAnnotations['firstDistance'] = {
-      type: 'line',
-      xMin: 0,
-      xMax: 0,
-      yMin: yMin,
-      yMax: yMax,
-      borderColor: 'rgba(75, 192, 192, 0.6)',
-      borderWidth: 2,
-      borderDash: [3, 3],
-      label: {
-        display: true,
-        content: `${completeEnds[0].distance}${completeEnds[0].distanceUnit}`,
-        position: 'start',
-        backgroundColor: 'rgba(75, 192, 192, 0.9)',
-        borderColor: 'rgba(75, 192, 192, 1)',
-        borderWidth: 1,
-        borderRadius: 4,
-        color: 'white',
-        font: {
-          size: 11,
-          weight: 'bold'
-        },
-        padding: {
-          x: 6,
-          y: 4
-        },
-        yAdjust: -10
-      }
-    }
-  }
-  
-  // Add labels for distance changes
-  completeEnds.forEach((end, index) => {
-    if (end.isDistanceChange) {
-      distanceChangeAnnotations[`distanceChange${index}`] = {
-        type: 'line',
-        xMin: index,
-        xMax: index,
-        yMin: yMin,
-        yMax: yMax,
-        borderColor: 'rgba(255, 99, 132, 0.8)',
-        borderWidth: 2,
-        borderDash: [5, 5],
-        label: {
-          display: true,
-          content: `${end.distance}${end.distanceUnit}`,
-          position: 'start',
-          backgroundColor: 'rgba(255, 99, 132, 0.9)',
-          borderColor: 'rgba(255, 99, 132, 1)',
-          borderWidth: 1,
-          borderRadius: 4,
-          color: 'white',
-          font: {
-            size: 11,
-            weight: 'bold'
-          },
-          padding: {
-            x: 6,
-            y: 4
-          },
-          yAdjust: -10
-        }
-      }
-    }
-  })
+  // Distance change annotations are now handled in the afterDraw plugin
   
   return {
     responsive: true,
@@ -259,10 +188,8 @@ const chartOptions = computed(() => {
             return `Total: ${context.parsed.y}${distance}`
           }
         }
-      },
-      // annotation: {
-      //   annotations: distanceChangeAnnotations
-      // }
+      }
+      // Distance change annotations are now handled in the afterDraw plugin
     },
     scales: {
       x: {
@@ -320,8 +247,94 @@ const updateChart = async () => {
     chart.value = new Chart(ctx, {
       type: 'line',
       data: chartData.value,
-      options: chartOptions.value
-      // plugins: [annotationPlugin] // Instance-specific plugin registration - temporarily disabled
+      options: chartOptions.value,
+      plugins: [{
+        id: 'distanceAnnotations',
+        afterDraw: (chart) => {
+          const ctx = chart.ctx
+          const chartArea = chart.chartArea
+          
+          // Get distance changes from the current computed values
+          const currentDistanceChanges = []
+          const currentCompleteEnds = endTotals.value.filter(end => end.isComplete)
+          
+          // Add first distance at start of chart
+          if (currentCompleteEnds.length > 0 && currentCompleteEnds[0].distance) {
+            currentDistanceChanges.push({
+              endIndex: 0,
+              distance: currentCompleteEnds[0].distance,
+              distanceUnit: currentCompleteEnds[0].distanceUnit,
+              color: 'rgba(75, 192, 192, 0.8)',
+              isFirstDistance: true
+            })
+          }
+          
+          // Add distance changes
+          currentCompleteEnds.forEach((end, index) => {
+            if (end.isDistanceChange) {
+              currentDistanceChanges.push({
+                endIndex: index,
+                distance: end.distance,
+                distanceUnit: end.distanceUnit,
+                color: 'rgba(255, 99, 132, 0.8)',
+                isFirstDistance: false
+              })
+            }
+          })
+          
+          // Draw distance change lines and labels
+          currentDistanceChanges.forEach(change => {
+            const x = chart.scales.x.getPixelForValue(change.endIndex)
+            
+            // Set up line style
+            ctx.save()
+            ctx.strokeStyle = change.color
+            ctx.lineWidth = 2
+            ctx.setLineDash(change.isFirstDistance ? [3, 3] : [5, 5])
+            
+            // Draw vertical line
+            ctx.beginPath()
+            ctx.moveTo(x, chartArea.top)
+            ctx.lineTo(x, chartArea.bottom)
+            ctx.stroke()
+            
+            // Draw label in a square box halfway up the line
+            const labelText = `${change.distance}${change.distanceUnit}`
+            ctx.font = 'bold 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+            ctx.textAlign = 'center'
+            ctx.textBaseline = 'middle'
+            
+            // Position the label halfway up the line
+            const lineHeight = chartArea.bottom - chartArea.top
+            const labelY = chartArea.top + (lineHeight / 2)
+            
+            // Create a square box for the label
+            const boxSize = 40
+            const labelX = x - (boxSize / 2)
+            const labelBoxY = labelY - (boxSize / 2)
+            
+            // Draw shadow
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.2)'
+            ctx.fillRect(labelX + 1, labelBoxY + 1, boxSize, boxSize)
+            
+            // Draw background box
+            ctx.fillStyle = change.isFirstDistance ? 'rgba(75, 192, 192, 0.95)' : 'rgba(255, 99, 132, 0.95)'
+            ctx.fillRect(labelX, labelBoxY, boxSize, boxSize)
+            
+            // Draw border
+            ctx.strokeStyle = 'white'
+            ctx.lineWidth = 2
+            ctx.setLineDash([])
+            ctx.strokeRect(labelX, labelBoxY, boxSize, boxSize)
+            
+            // Draw text
+            ctx.fillStyle = 'white'
+            ctx.fillText(labelText, x, labelY)
+            
+            ctx.restore()
+          })
+        }
+      }]
     })
   } catch (error) {
     console.error('End Total chart creation failed:', error)

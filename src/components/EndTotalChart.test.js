@@ -198,13 +198,13 @@ describe('EndTotalChart Configuration Tests', () => {
       const testAnnotations = {
         firstDistance: {
           type: 'line',
-          xMin: 0,
-          xMax: 0,
-          yMin: 0,
-          yMax: 100,
+          scaleID: 'x',
+          value: 0,
           borderColor: 'rgba(75, 192, 192, 0.6)',
           borderWidth: 2,
           borderDash: [3, 3],
+          borderCapStyle: 'butt',
+          borderJoinStyle: 'miter',
           label: {
             display: true,
             content: '60yd',
@@ -227,13 +227,13 @@ describe('EndTotalChart Configuration Tests', () => {
         },
         distanceChange1: {
           type: 'line',
-          xMin: 8,
-          xMax: 8,
-          yMin: 0,
-          yMax: 100,
+          scaleID: 'x',
+          value: 8,
           borderColor: 'rgba(255, 99, 132, 0.8)',
           borderWidth: 2,
           borderDash: [5, 5],
+          borderCapStyle: 'butt',
+          borderJoinStyle: 'miter',
           label: {
             display: true,
             content: '50yd',
