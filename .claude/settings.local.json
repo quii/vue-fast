@@ -10,7 +10,9 @@
       "Bash(npm run ship:*)",
       "Bash(git add:*)",
       "Bash(grep:*)",
-      "Bash(git restore:*)"
+      "Bash(git restore:*)",
+      "Bash(npm run test:e2e:headless:*)",
+      "Bash(npm run:*)"
     ],
     "deny": [
       "Bash(git push*)",

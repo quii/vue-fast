@@ -6,6 +6,7 @@ describe("Round recommendations", () => {
     const scorePage = new ScorePage();
 
     scorePage.visit()
+    cy.disableAllTips();
     scorePage.navigateTo()
     userDataPage.navigateTo();
     userDataPage.setArcherDetails("male", "recurve", "senior");

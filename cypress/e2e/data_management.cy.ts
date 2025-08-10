@@ -10,6 +10,7 @@ describe("data management", () => {
 
   beforeEach(() => {
     scorePage.visit()
+    cy.disableAllTips();
     dataManagementPage.navigateTo();
     dataManagementPage.resetData();
   });

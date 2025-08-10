@@ -11,6 +11,7 @@
   />
   <div class="fullpage">
     <UnifiedGraphModal
+      v-if="showGraph"
       :visible="showGraph"
       :title="graphTitle"
       :chart-data="chartData"
@@ -171,7 +172,16 @@ const formatDate = (dateString) => {
 
 const chartData = computed(() => {
   if (!graphData.value || graphData.value.length === 0) {
-    return { labels: [], datasets: [] };
+    return { 
+      labels: [], 
+      datasets: [{
+        label: 'No Data',
+        data: [],
+        hidden: false,
+        clip: false,
+        disabled: false
+      }] 
+    };
   }
 
   // Sort the history data by date (oldest first)
@@ -190,7 +200,9 @@ const chartData = computed(() => {
           borderColor: 'rgba(75, 192, 192, 1)',
           borderWidth: 1,
           type: 'bar',
-          order: 2
+          order: 2,
+          hidden: false,
+          clip: false
         },
         {
           label: 'Cumulative Arrows',
@@ -202,7 +214,9 @@ const chartData = computed(() => {
           tension: 0.5,
           yAxisID: 'y1',
           order: 1,
-          fill: false
+          fill: false,
+          hidden: false,
+          clip: false
         }
       ]
     };
@@ -216,7 +230,10 @@ const chartData = computed(() => {
         borderColor: 'rgba(54, 162, 235, 1)',
         borderWidth: 1,
         fill: false,
-        tension: 0.5
+        tension: 0.5,
+        hidden: false,
+        clip: false,
+        disabled: false
       }]
     };
   } else {
@@ -230,7 +247,10 @@ const chartData = computed(() => {
         borderColor: 'rgba(255, 99, 132, 1)',
         borderWidth: 1,
         fill: false,
-        tension: 0.3
+        tension: 0.3,
+        hidden: false,
+        clip: false,
+        disabled: false
       }]
     };
   }

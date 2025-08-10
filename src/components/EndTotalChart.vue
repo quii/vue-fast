@@ -122,7 +122,16 @@ const hasData = computed(() => {
 
 // Chart data
 const chartData = computed(() => {
-  if (!hasData.value) return { labels: [], datasets: [] }
+  if (!hasData.value) return { 
+    labels: [], 
+    datasets: [{
+      label: 'No Data',
+      data: [],
+      hidden: false,
+      clip: false,
+      disabled: false
+    }] 
+  }
   
   const completeEnds = endTotals.value.filter(end => end.isComplete)
   
@@ -130,7 +139,7 @@ const chartData = computed(() => {
     labels: completeEnds.map(end => `End ${end.endNumber}`),
     datasets: [{
       label: 'End Total',
-      data: completeEnds.map(end => end.total),
+      data: completeEnds.map(end => end.total || 0),
       backgroundColor: 'rgba(75, 192, 192, 0.2)',
       borderColor: 'rgba(75, 192, 192, 1)',
       borderWidth: 2,
@@ -140,7 +149,10 @@ const chartData = computed(() => {
       pointBorderColor: '#fff',
       pointBorderWidth: 2,
       pointRadius: 4,
-      pointHoverRadius: 6
+      pointHoverRadius: 6,
+      hidden: false,
+      clip: false,
+      disabled: false
     }]
   }
 })
@@ -249,9 +261,16 @@ const updateChart = async () => {
 
     const ctx = chartCanvas.value.getContext('2d')
     
+    // Ensure chart data is properly structured
+    const safeChartData = chartData.value
+    if (!safeChartData || !safeChartData.datasets || safeChartData.datasets.length === 0) {
+      isUpdating.value = false
+      return
+    }
+    
     chart.value = new Chart(ctx, {
       type: 'line',
-      data: chartData.value,
+      data: safeChartData,
       options: chartOptions.value,
       plugins: [{
         id: 'distanceAnnotations',

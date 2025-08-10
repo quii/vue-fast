@@ -10,6 +10,7 @@ describe("Print scoresheet", () => {
       cy.stub(win, "print");
     });
     scorePage.visit()
+    cy.disableAllTips();
     userDataPage.navigateTo();
     userDataPage.setArcherDetails('male', 'recurve', 'senior', 'Test Archer 1')
 
