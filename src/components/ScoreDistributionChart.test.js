@@ -4,12 +4,18 @@ import { describe, test, expect, vi } from 'vitest'
 import ScoreDistributionChart from './ScoreDistributionChart.vue'
 
 // Mock Chart.js to avoid actual chart rendering in tests
-vi.mock('chart.js/auto', () => {
+vi.mock('chart.js', () => {
+  const Chart = vi.fn().mockImplementation(() => ({
+    destroy: vi.fn(),
+    resize: vi.fn()
+  }))
+  Chart.register = vi.fn()
   return {
-    default: vi.fn().mockImplementation(() => ({
-      destroy: vi.fn(),
-      resize: vi.fn()
-    }))
+    Chart,
+    PieController: vi.fn(),
+    ArcElement: vi.fn(),
+    Legend: vi.fn(),
+    Tooltip: vi.fn()
   }
 })
 
@@ -22,9 +28,6 @@ Object.defineProperty(HTMLCanvasElement.prototype, 'getContext', {
   })
 })
 
-vi.mock('chartjs-plugin-datalabels', () => ({
-  default: {}
-}))
 
 describe('ScoreDistributionChart', () => {
   const defaultProps = {
@@ -204,9 +207,28 @@ describe('ScoreDistributionChart', () => {
     })
   })
 
-  describe('shared legend', () => {
-    test('generates shared legend for multiple distance charts', async () => {
-      // Mock a multi-distance scenario
+  describe('single chart legend', () => {
+    test('generates legend data for single distance charts', () => {
+      const wrapper = createWrapper({
+        scores: [9, 8, 7],
+        gameType: 'bray i'
+      })
+
+      const legend = wrapper.vm.singleChartLegend
+      expect(legend).toBeDefined()
+      expect(legend.length).toBeGreaterThan(0)
+      
+      // Check that legend items have required properties
+      legend.forEach(item => {
+        expect(item.score).toBeDefined()
+        expect(item.count).toBeDefined()
+        expect(item.percentage).toBeDefined()
+        expect(item.backgroundColor).toBeDefined()
+        expect(item.borderColor).toBeDefined()
+      })
+    })
+
+    test('returns empty legend for multiple distance charts', () => {
       const wrapper = createWrapper({
         scores: new Array(72).fill(9), // Full National round
         gameType: 'national'
@@ -218,21 +240,7 @@ describe('ScoreDistributionChart', () => {
         { distribution: [{ score: '8', count: 3, color: { backgroundColor: '#fc2e2a', borderColor: '#fff' } }] }
       ]
 
-      await wrapper.vm.$nextTick()
-
-      const legend = wrapper.vm.sharedLegend
-      expect(legend).toHaveLength(2)
-      expect(legend.find(item => item.score === '9')).toBeDefined()
-      expect(legend.find(item => item.score === '8')).toBeDefined()
-    })
-
-    test('returns empty legend for single distance charts', () => {
-      const wrapper = createWrapper({
-        scores: [9, 8, 7],
-        gameType: 'bray i'
-      })
-
-      expect(wrapper.vm.sharedLegend).toEqual([])
+      expect(wrapper.vm.singleChartLegend).toEqual([])
     })
   })
 })

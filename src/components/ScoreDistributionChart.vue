@@ -1,26 +1,5 @@
 <template>
   <div v-if="hasData" class="score-distribution-container">
-    <!-- Shared legend for multiple distance charts -->
-    <div v-if="distanceCharts.length > 1 && sharedLegend.length > 0" class="shared-legend">
-      <div class="legend-items">
-        <div 
-          v-for="legendItem in sharedLegend" 
-          :key="legendItem.score"
-          class="legend-item"
-        >
-          <div 
-            class="legend-color" 
-            :style="{ 
-              backgroundColor: legendItem.backgroundColor,
-              borderColor: legendItem.borderColor,
-              borderWidth: '2px',
-              borderStyle: 'solid'
-            }"
-          ></div>
-          <span class="legend-text">{{ legendItem.score }}</span>
-        </div>
-      </div>
-    </div>
 
     <!-- Show multiple distance charts for multi-distance rounds -->
     <div v-if="distanceCharts.length > 1" class="multi-distance-charts">
@@ -33,6 +12,29 @@
         <div class="chart-wrapper">
           <canvas :ref="el => distanceCanvases[index] = el"></canvas>
         </div>
+        <!-- Custom legend for each distance chart -->
+        <div v-if="distanceData.distribution.length > 0" class="custom-legend">
+          <div class="legend-items">
+            <div 
+              v-for="item in distanceData.distribution" 
+              :key="item.score"
+              class="legend-item"
+            >
+              <div 
+                class="legend-color" 
+                :style="{ 
+                  backgroundColor: item.color.backgroundColor,
+                  borderColor: item.color.borderColor,
+                  borderWidth: '2px',
+                  borderStyle: 'solid'
+                }"
+              ></div>
+              <span class="legend-text">{{ item.score }}</span>
+              <span class="legend-count">{{ item.count }}</span>
+              <span class="legend-percentage">({{ (item.percentage || 0).toFixed(1) }}%)</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     
@@ -40,6 +42,30 @@
     <div v-else class="single-distance-chart">
       <div class="chart-wrapper">
         <canvas ref="chartCanvas"></canvas>
+      </div>
+      <!-- Custom legend for single chart -->
+      <div v-if="singleChartLegend.length > 0" class="custom-legend">
+        <div class="legend-title">Score Distribution</div>
+        <div class="legend-items">
+          <div 
+            v-for="legendItem in singleChartLegend" 
+            :key="legendItem.score"
+            class="legend-item"
+          >
+            <div 
+              class="legend-color" 
+              :style="{ 
+                backgroundColor: legendItem.backgroundColor,
+                borderColor: legendItem.borderColor,
+                borderWidth: '2px',
+                borderStyle: 'solid'
+              }"
+            ></div>
+            <span class="legend-text">{{ legendItem.score }}</span>
+            <span class="legend-count">{{ legendItem.count }}</span>
+            <span class="legend-percentage">({{ legendItem.percentage }}%)</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -208,42 +234,32 @@ const scoreDistribution = computed(() => {
   return calculateScoreDistribution(props.scores, props.gameType)
 })
 
+// Create legend data for single chart
+const singleChartLegend = computed(() => {
+  if (distanceCharts.value.length > 1) return []
+  
+  const distribution = distanceCharts.value[0]?.distribution || scoreDistribution.value
+  return distribution.map(item => ({
+    score: item.score,
+    count: item.count,
+    percentage: item.percentage.toFixed(1),
+    backgroundColor: item.color.backgroundColor,
+    borderColor: item.color.borderColor
+  })).sort((a, b) => {
+    // Sort by score value, with special handling for X and M
+    if (a.score === 'X') return -1
+    if (b.score === 'X') return 1
+    if (a.score === 'M') return 1
+    if (b.score === 'M') return -1
+    return parseInt(b.score) - parseInt(a.score)
+  })
+})
+
 // Update distanceCharts ref when computed value changes
 watch(distanceChartData, (newChartData) => {
   distanceCharts.value = newChartData
 }, { immediate: true })
 
-// Create shared legend for multiple distance charts
-const sharedLegend = computed(() => {
-  if (distanceCharts.value.length <= 1) return []
-  
-  // Get all unique scores across all distance charts
-  const allScores = new Set()
-  distanceCharts.value.forEach(chart => {
-    chart.distribution.forEach(item => {
-      allScores.add(item.score)
-    })
-  })
-  
-  // Convert to sorted array with color information
-  return Array.from(allScores)
-    .map(score => {
-      const color = getScoreColor(score, props.gameType)
-      return {
-        score,
-        backgroundColor: color.backgroundColor,
-        borderColor: color.borderColor
-      }
-    })
-    .sort((a, b) => {
-      // Sort by score value, with special handling for X and M
-      if (a.score === 'X') return -1
-      if (b.score === 'X') return 1
-      if (a.score === 'M') return 1
-      if (b.score === 'M') return -1
-      return parseInt(b.score) - parseInt(a.score)
-    })
-})
 
 // Check if we have meaningful data to display
 const hasData = computed(() => {
@@ -281,31 +297,7 @@ const getChartOptions = (distribution, hideIndividualLegend = false) => {
     },
     plugins: {
       legend: {
-        display: !hideIndividualLegend, // Hide individual legends when we have a shared legend
-        position: 'right',
-        labels: {
-          usePointStyle: true,
-          font: {
-            size: 14
-          },
-          generateLabels: function(chart) {
-            const data = chart.data
-            if (data.labels.length && data.datasets.length) {
-              return data.labels.map((label, i) => {
-                const dataset = data.datasets[0]
-                
-                return {
-                  text: label, // Just the score, no counts or percentages
-                  fillStyle: dataset.backgroundColor[i],
-                  strokeStyle: dataset.borderColor[i],
-                  lineWidth: dataset.borderWidth,
-                  index: i
-                }
-              })
-            }
-            return []
-          }
-        }
+        display: false // Always hide Chart.js legend, we use custom HTML legends
       },
       tooltip: {
         backgroundColor: 'rgba(0, 0, 0, 0.8)',
@@ -319,7 +311,7 @@ const getChartOptions = (distribution, hideIndividualLegend = false) => {
             const count = context.parsed
             const total = context.dataset.data.reduce((sum, val) => sum + val, 0)
             const percentage = ((count / total) * 100).toFixed(1)
-            return `${score}: ${percentage}%`
+            return `${score}: ${count} arrows (${percentage}%)`
           }
         }
       }
@@ -465,38 +457,63 @@ onUnmounted(() => {
   padding: 2rem 1rem;
 }
 
-.shared-legend {
-  margin-bottom: 1.5rem;
+/* Removed shared-legend styles - now using custom legends only */
+
+.custom-legend {
+  margin-top: 1rem;
   padding: 1rem;
   background-color: var(--color-background-mute, rgba(255, 255, 255, 0.05));
   border-radius: 6px;
   border: 1px solid var(--color-border, rgba(255, 255, 255, 0.1));
 }
 
-.legend-items {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
+.legend-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 0.75rem;
+  text-align: center;
 }
 
-.legend-item {
+.custom-legend .legend-items {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 0.5rem;
 }
 
-.legend-color {
+.custom-legend .legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.25rem 0;
+}
+
+.custom-legend .legend-color {
   width: 16px;
   height: 16px;
   border-radius: 50%;
   flex-shrink: 0;
 }
 
-.legend-text {
-  font-size: 0.9rem;
+.custom-legend .legend-text {
+  font-size: 1rem;
+  color: var(--color-text);
+  font-weight: 600;
+  min-width: 2rem;
+  text-align: center;
+}
+
+.legend-count {
+  font-size: 0.95rem;
   color: var(--color-text);
   font-weight: 500;
+  min-width: 3rem;
+}
+
+.legend-percentage {
+  font-size: 0.9rem;
+  color: var(--color-text-light, #666);
+  font-style: italic;
 }
 
 .multi-distance-charts {
@@ -535,17 +552,21 @@ onUnmounted(() => {
 }
 
 @media (max-width: 768px) {
-  .shared-legend {
-    margin-bottom: 1rem;
+  .custom-legend {
+    margin-top: 0.75rem;
     padding: 0.75rem;
   }
   
-  .legend-items {
-    gap: 0.75rem;
+  .custom-legend .legend-text {
+    font-size: 0.9rem;
   }
   
-  .legend-text {
+  .legend-count {
     font-size: 0.85rem;
+  }
+  
+  .legend-percentage {
+    font-size: 0.8rem;
   }
   
   .multi-distance-charts {
@@ -566,17 +587,27 @@ onUnmounted(() => {
     padding: 0.75rem;
   }
   
-  .shared-legend {
-    margin-bottom: 0.75rem;
+  .custom-legend {
+    margin-top: 0.5rem;
     padding: 0.5rem;
   }
   
-  .legend-items {
+  .custom-legend .legend-item {
     gap: 0.5rem;
   }
   
-  .legend-text {
+  .custom-legend .legend-text {
+    font-size: 0.85rem;
+    min-width: 1.5rem;
+  }
+  
+  .legend-count {
     font-size: 0.8rem;
+    min-width: 2.5rem;
+  }
+  
+  .legend-percentage {
+    font-size: 0.75rem;
   }
   
   .multi-distance-charts {
