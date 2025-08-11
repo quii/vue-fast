@@ -39,8 +39,30 @@
 
 <script setup>
 import { ref, watch, onMounted, computed, inject, nextTick } from 'vue';
-import Chart from 'chart.js/auto';
-import 'chartjs-adapter-date-fns';
+import {
+  Chart,
+  LineController,
+  BarController,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  Legend,
+  Tooltip
+} from 'chart.js';
+
+Chart.register(
+  LineController,
+  BarController,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  Legend,
+  Tooltip
+);
 import BaseModal from "@/components/modals/BaseModal.vue";
 import BaseButton from "@/components/ui/BaseButton.vue";
 import ButtonGroup from "@/components/ui/ButtonGroup.vue";

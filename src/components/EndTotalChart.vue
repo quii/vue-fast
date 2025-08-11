@@ -11,7 +11,26 @@
 
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
-import Chart from 'chart.js/auto'
+import {
+  Chart,
+  LineController,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Legend,
+  Tooltip
+} from 'chart.js';
+
+Chart.register(
+  LineController,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Legend,
+  Tooltip
+);
 import { splitIntoChunks } from "@shared/utils/splitter"
 import { convertToValues } from "@shared/utils/scores"
 import { calculateTotal } from "@shared/utils/subtotals"
@@ -275,6 +294,8 @@ const updateChart = async () => {
       plugins: [{
         id: 'distanceAnnotations',
         afterDraw: (chart) => {
+          if (!chart || !chart.ctx || !chart.chartArea) return
+          
           const ctx = chart.ctx
           const chartArea = chart.chartArea
           

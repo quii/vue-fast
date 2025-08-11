@@ -50,8 +50,20 @@
 
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
-import Chart from 'chart.js/auto'
-import ChartDataLabels from 'chartjs-plugin-datalabels'
+import {
+  Chart,
+  PieController,
+  ArcElement,
+  Legend,
+  Tooltip
+} from 'chart.js';
+
+Chart.register(
+  PieController,
+  ArcElement,
+  Legend,
+  Tooltip
+);
 import { gameTypeConfig } from "@/domain/scoring/game_types"
 import { calculateDistanceTotals } from "@/domain/scoring/distance_totals"
 
@@ -310,9 +322,6 @@ const getChartOptions = (distribution, hideIndividualLegend = false) => {
             return `${score}: ${percentage}%`
           }
         }
-      },
-      datalabels: {
-        display: false // Remove labels from inside the pie slices
       }
     }
   }
@@ -349,8 +358,7 @@ const updateDistanceCharts = async () => {
       const chartInstance = new Chart(ctx, {
         type: 'pie',
         data: chartData,
-        options: options,
-        plugins: [ChartDataLabels] // Instance-specific plugin registration
+        options: options
       })
       
       distanceChartInstances.value[index] = chartInstance
@@ -383,8 +391,7 @@ const updateSingleChart = async () => {
     chart.value = new Chart(ctx, {
       type: 'pie',
       data: createChartData(distribution),
-      options: getChartOptions(distribution, false), // Show legend for single charts
-      plugins: [ChartDataLabels] // Instance-specific plugin registration
+      options: getChartOptions(distribution, false) // Show legend for single charts
     })
   } catch (error) {
     console.error('Score distribution chart creation failed:', error)

@@ -2,15 +2,15 @@ import ScorePage from "../pages/scorePage";
 import HistoryPage from "../pages/historyPage";
 import { UserDataPage } from "../pages/userDataPage";
 
-describe.skip("Classification Persistence", () => {
+describe("Classification Persistence", () => {
   const scorePage = new ScorePage();
   const historyPage = new HistoryPage();
   const userDataPage = new UserDataPage();
 
   beforeEach(() => {
+    cy.disableAllTips();
     scorePage.visit();
     scorePage.clearData();
-    cy.disableAllTips();
   });
 
   it("maintains historical classifications when user profile changes", () => {

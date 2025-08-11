@@ -6,7 +6,26 @@ import { roundConfigManager } from '@/domain/scoring/game_types'
 import { createApp, h } from 'vue'
 import { formatRoundName } from '@/domain/scoring/round/formatting'
 import RoundScores from '@/components/RoundScores.vue'
-import Chart from 'chart.js/auto'
+import {
+  Chart,
+  LineController,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Legend,
+  Tooltip
+} from 'chart.js';
+
+Chart.register(
+  LineController,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Legend,
+  Tooltip
+);
 
 /**
  * Get the correct classification colors matching the project's color scheme

@@ -3,7 +3,7 @@ import { userDataPage } from '../pages/userDataPage'
 import HistoryPage from '../pages/historyPage'
 import DataManagementPage from '../pages/dataManagementPage'
 
-describe.skip('Cloud Backup and Restore', () => {
+describe('Cloud Backup and Restore', () => {
   const scorePage = new ScorePage()
   const historyPage = new HistoryPage()
   const dataManagementPage = new DataManagementPage()
