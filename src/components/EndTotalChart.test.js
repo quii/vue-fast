@@ -4,11 +4,23 @@ import { describe, test, expect, vi } from 'vitest'
 import EndTotalChart from './EndTotalChart.vue'
 
 // Mock Chart.js to avoid actual chart rendering but capture configuration
-vi.mock('chart.js/auto', () => ({
-  default: vi.fn().mockImplementation(() => ({
-    destroy: vi.fn(),
-    resize: vi.fn()
-  }))
+vi.mock('chart.js', () => ({
+  Chart: Object.assign(
+    vi.fn().mockImplementation(() => ({
+      destroy: vi.fn(),
+      resize: vi.fn()
+    })),
+    {
+      register: vi.fn()
+    }
+  ),
+  LineController: {},
+  CategoryScale: {},
+  LinearScale: {},
+  PointElement: {},
+  LineElement: {},
+  Legend: {},
+  Tooltip: {}
 }))
 
 // Mock canvas context to prevent getContext errors
@@ -125,7 +137,7 @@ describe('EndTotalChart Configuration Tests', () => {
         backgroundColor: expect.any(String),
         borderColor: expect.any(String),
         borderWidth: expect.any(Number),
-        fill: true,
+        fill: false,
         tension: expect.any(Number),
         pointBackgroundColor: expect.any(String),
         pointBorderColor: expect.any(String),

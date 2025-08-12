@@ -24,6 +24,31 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
+Cypress.Commands.add(
+  "mockGeolocation",
+  (coords: { latitude: number; longitude: number }) => {
+    cy.window().then((win) => {
+      cy.stub(win.navigator.geolocation, "getCurrentPosition").callsFake(
+        (success) => {
+          const position = {
+            coords: {
+              latitude: coords.latitude,
+              longitude: coords.longitude,
+              accuracy: 50,
+              altitude: null,
+              altitudeAccuracy: null,
+              heading: null,
+              speed: null,
+            },
+            timestamp: Date.now(),
+          };
+          success(position);
+        },
+      );
+    });
+  },
+);
+
 /**
  * This command scores a number.
  * @name score

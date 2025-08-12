@@ -1,6 +1,7 @@
 class ScorePage {
   visit() {
     cy.visit("/");
+    cy.mockGeolocation({ latitude: 0, longitude: 0 })
   }
 
   navigateTo() {

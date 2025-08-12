@@ -30,6 +30,7 @@ Chart.register(
   LineElement,
   Legend,
   Tooltip
+  // Note: Filler plugin NOT registered globally to prevent interference with other charts
 );
 import { splitIntoChunks } from "@shared/utils/splitter"
 import { convertToValues } from "@shared/utils/scores"
@@ -145,10 +146,7 @@ const chartData = computed(() => {
     labels: [], 
     datasets: [{
       label: 'No Data',
-      data: [],
-      hidden: false,
-      clip: false,
-      disabled: false
+      data: []
     }] 
   }
   
@@ -162,16 +160,13 @@ const chartData = computed(() => {
       backgroundColor: 'rgba(75, 192, 192, 0.2)',
       borderColor: 'rgba(75, 192, 192, 1)',
       borderWidth: 2,
-      fill: true,
+      fill: false,
       tension: 0.4,
       pointBackgroundColor: 'rgba(75, 192, 192, 1)',
       pointBorderColor: '#fff',
       pointBorderWidth: 2,
       pointRadius: 4,
-      pointHoverRadius: 6,
-      hidden: false,
-      clip: false,
-      disabled: false
+      pointHoverRadius: 6
     }]
   }
 })
@@ -272,17 +267,30 @@ const updateChart = async () => {
 
   isUpdating.value = true
   try {
+    // Ensure complete cleanup before creating new chart
     if (chart.value) {
       chart.value.destroy()
+      chart.value = null
     }
 
     await nextTick()
 
-    const ctx = chartCanvas.value.getContext('2d')
+    const ctx = chartCanvas.value?.getContext('2d')
+    if (!ctx) {
+      isUpdating.value = false
+      return
+    }
     
-    // Ensure chart data is properly structured
+    // Ensure chart data is properly structured with defensive checks
     const safeChartData = chartData.value
     if (!safeChartData || !safeChartData.datasets || safeChartData.datasets.length === 0) {
+      isUpdating.value = false
+      return
+    }
+    
+    // Validate dataset structure before creating chart
+    const validDataset = safeChartData.datasets[0]
+    if (!validDataset || !Array.isArray(validDataset.data)) {
       isUpdating.value = false
       return
     }
@@ -291,7 +299,8 @@ const updateChart = async () => {
       type: 'line',
       data: safeChartData,
       options: chartOptions.value,
-      plugins: [{
+      plugins: [
+        {
         id: 'distanceAnnotations',
         afterDraw: (chart) => {
           if (!chart || !chart.ctx || !chart.chartArea) return
@@ -388,6 +397,8 @@ const updateChart = async () => {
     })
   } catch (error) {
     console.error('End Total chart creation failed:', error)
+    // Ensure chart value is null on error
+    chart.value = null
   } finally {
     isUpdating.value = false
   }
@@ -417,8 +428,12 @@ onMounted(() => {
 
 onUnmounted(() => {
   if (chart.value) {
-    chart.value.destroy()
-    chart.value = null
+    //todo: MR AI, i have commented this out which is what is causing the issue in the tests
+    // i suspect that by destroying it, *something else* was trying to operate on it.
+    // what can we do?
+
+    // chart.value.destroy()
+    // chart.value = null
   }
   window.removeEventListener('resize', handleResize)
 })

@@ -3,7 +3,7 @@
     <div v-if="hasData" class="chart-wrapper">
       <canvas ref="chartCanvas"></canvas>
     </div>
-    
+
     <div v-else class="no-data-message">
       <p>{{ noDataMessage || 'No data available to display.' }}</p>
       <p class="hint">{{ noDataHint || 'Data will appear when available.' }}</p>
@@ -26,19 +26,14 @@
         <ShareIcon />
         {{ shareSuccess ? 'Shared!' : shareError ? 'Error' : 'Share' }}
       </BaseButton>
-      
-      <BaseButton
-        variant="primary"
-        @click="$emit('close')"
-      >
-        Close
-      </BaseButton>
+
+      <BaseButton variant="primary" @click="$emit('close')"> Close </BaseButton>
     </ButtonGroup>
   </BaseModal>
 </template>
 
 <script setup>
-import { ref, watch, onMounted, computed, inject, nextTick } from 'vue';
+import { ref, watch, onMounted, computed, inject, nextTick, onUnmounted } from 'vue'
 import {
   Chart,
   LineController,
@@ -50,7 +45,7 @@ import {
   BarElement,
   Legend,
   Tooltip
-} from 'chart.js';
+} from 'chart.js'
 
 Chart.register(
   LineController,
@@ -62,11 +57,11 @@ Chart.register(
   BarElement,
   Legend,
   Tooltip
-);
-import BaseModal from "@/components/modals/BaseModal.vue";
-import BaseButton from "@/components/ui/BaseButton.vue";
-import ButtonGroup from "@/components/ui/ButtonGroup.vue";
-import ShareIcon from "@/components/icons/ShareIcon.vue";
+)
+import BaseModal from '@/components/modals/BaseModal.vue'
+import BaseButton from '@/components/ui/BaseButton.vue'
+import ButtonGroup from '@/components/ui/ButtonGroup.vue'
+import ShareIcon from '@/components/icons/ShareIcon.vue'
 
 const props = defineProps({
   // Modal visibility
@@ -74,194 +69,211 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
-  
+
   // Chart title displayed in modal header
   title: {
     type: String,
     required: true
   },
-  
+
   // Chart.js data object
   chartData: {
     type: Object,
     required: true
   },
-  
+
   // Chart.js options object
   chartOptions: {
     type: Object,
     required: true
   },
-  
+
   // Chart type (line, bar, etc.)
   chartType: {
     type: String,
     default: 'line'
   },
-  
+
   // No data message
   noDataMessage: {
     type: String,
     default: 'No data available to display.'
   },
-  
+
   // No data hint
   noDataHint: {
     type: String,
     default: 'Data will appear when available.'
   },
-  
+
   // Enable/disable share functionality
   enableShare: {
     type: Boolean,
     default: true
   },
-  
+
   // Custom share title (defaults to modal title)
   shareTitle: {
     type: String,
     default: ''
   }
-});
+})
 
-defineEmits(['close']);
+defineEmits(['close'])
 
-const sharingService = inject('sharingService');
-const chartCanvas = ref(null);
-const chart = ref(null);
+const sharingService = inject('sharingService')
+const chartCanvas = ref(null)
+const chart = ref(null)
 
 // Share state
-const shareSuccess = ref(false);
-const shareError = ref('');
+const shareSuccess = ref(false)
+const shareError = ref('')
 
 // Check if we have data to display
 const hasData = computed(() => {
-  return props.chartData && 
-         props.chartData.datasets && 
-         props.chartData.datasets.length > 0 &&
-         props.chartData.datasets.some(dataset => dataset.data && dataset.data.length > 0);
-});
+  return (
+    props.chartData &&
+    props.chartData.datasets &&
+    props.chartData.datasets.length > 0 &&
+    props.chartData.datasets.some((dataset) => dataset.data && dataset.data.length > 0)
+  )
+})
 
 // Function to create or update the chart
 const updateChart = async () => {
-  if (!chartCanvas.value || !hasData.value) return;
+  if (!chartCanvas.value || !hasData.value) return
 
   if (chart.value) {
-    chart.value.destroy();
+    chart.value.destroy()
   }
 
-  await nextTick();
+  await nextTick()
 
-  const ctx = chartCanvas.value.getContext('2d');
-  
+  const ctx = chartCanvas.value.getContext('2d')
+
   try {
     chart.value = new Chart(ctx, {
       type: props.chartType,
       data: props.chartData,
       options: props.chartOptions
-    });
+    })
   } catch (error) {
-    console.error('Chart creation failed:', error);
+    console.error('Chart creation failed:', error)
   }
-};
+}
 
 // Handle window resize to update chart layout
 const handleResize = () => {
   if (props.visible && chart.value) {
-    chart.value.resize();
+    chart.value.resize()
   }
-};
+}
 
 // Share the chart as an image
 const shareChart = async () => {
   if (!chart.value || !chartCanvas.value) {
-    shareError.value = 'Chart not available for sharing';
-    setTimeout(() => shareError.value = '', 3000);
-    return;
+    shareError.value = 'Chart not available for sharing'
+    setTimeout(() => (shareError.value = ''), 3000)
+    return
   }
 
-  shareSuccess.value = false;
-  shareError.value = '';
+  shareSuccess.value = false
+  shareError.value = ''
 
   try {
     // Convert chart to image data URL
-    const dataUrl = chart.value.toBase64Image('image/png', 1.0);
-    
+    const dataUrl = chart.value.toBase64Image('image/png', 1.0)
+
     // Create share text
-    const shareText = `📊 ${props.shareTitle || props.title}\n\nGenerated from Archery Score Tracker`;
-    
+    const shareText = `📊 ${props.shareTitle || props.title}\n\nGenerated from Archery Score Tracker`
+
     // Try native sharing first
     if (navigator.share && navigator.canShare) {
       try {
-        const response = await fetch(dataUrl);
-        const blob = await response.blob();
-        
-        const filesArray = [new File([blob], 'archery-chart.png', { type: 'image/png' })];
-        
+        const response = await fetch(dataUrl)
+        const blob = await response.blob()
+
+        const filesArray = [new File([blob], 'archery-chart.png', { type: 'image/png' })]
+
         if (navigator.canShare({ files: filesArray })) {
           await navigator.share({
             title: 'Archery Chart',
             text: shareText,
             files: filesArray
-          });
-          
-          shareSuccess.value = true;
-          setTimeout(() => shareSuccess.value = false, 2000);
-          return;
+          })
+
+          shareSuccess.value = true
+          setTimeout(() => (shareSuccess.value = false), 2000)
+          return
         }
       } catch (error) {
-        console.log('Native sharing failed, trying fallback:', error);
+        console.log('Native sharing failed, trying fallback:', error)
       }
     }
-    
+
     // Fallback: use sharing service if available
     if (sharingService) {
-      await sharingService.shareScoresheet(dataUrl, shareText);
-      shareSuccess.value = true;
-      setTimeout(() => shareSuccess.value = false, 2000);
+      await sharingService.shareScoresheet(dataUrl, shareText)
+      shareSuccess.value = true
+      setTimeout(() => (shareSuccess.value = false), 2000)
     } else {
       // Last resort: try to copy share text to clipboard
-      await navigator.clipboard.writeText(shareText + '\n\n(Chart image could not be shared directly)');
-      shareSuccess.value = true;
-      setTimeout(() => shareSuccess.value = false, 2000);
+      await navigator.clipboard.writeText(
+        shareText + '\n\n(Chart image could not be shared directly)'
+      )
+      shareSuccess.value = true
+      setTimeout(() => (shareSuccess.value = false), 2000)
     }
-    
   } catch (error) {
-    console.error('Error sharing chart:', error);
-    shareError.value = 'Failed to share chart';
-    setTimeout(() => shareError.value = '', 3000);
+    console.error('Error sharing chart:', error)
+    shareError.value = 'Failed to share chart'
+    setTimeout(() => (shareError.value = ''), 3000)
   }
-};
+}
 
 // Watch for changes in visibility or data
-watch(() => props.visible, (newValue) => {
-  if (newValue && hasData.value) {
-    // Small delay to ensure the canvas is in the DOM
-    setTimeout(() => {
-      updateChart();
-      window.addEventListener('resize', handleResize);
-    }, 100);
-  } else {
-    window.removeEventListener('resize', handleResize);
-    // Reset share state when modal closes
-    shareSuccess.value = false;
-    shareError.value = '';
+watch(
+  () => props.visible,
+  (newValue) => {
+    if (newValue && hasData.value) {
+      // Small delay to ensure the canvas is in the DOM
+      setTimeout(() => {
+        console.log('DRAWINGGGGGG')
+        updateChart()
+        window.addEventListener('resize', handleResize)
+      }, 250)
+    } else {
+      window.removeEventListener('resize', handleResize)
+      // Reset share state when modal closes
+      shareSuccess.value = false
+      shareError.value = ''
+    }
   }
-});
+)
 
-watch(() => [props.chartData, props.chartOptions], () => {
-  if (props.visible && hasData.value) {
-    updateChart();
-  }
-}, { deep: true });
+watch(
+  () => [props.chartData, props.chartOptions],
+  () => {
+    if (props.visible && hasData.value) {
+      updateChart()
+    }
+  },
+  { deep: true }
+)
 
 // Clean up when component is unmounted
 onMounted(() => {
   if (props.visible && hasData.value) {
-    updateChart();
-    window.addEventListener('resize', handleResize);
+    updateChart()
+    window.addEventListener('resize', handleResize)
   }
-});
+})
+
+onUnmounted(() => {
+  if (chart.value) {
+    chart.value.destroy();
+  }
+})
 </script>
 
 <style scoped>

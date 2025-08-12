@@ -106,11 +106,8 @@
 import ClassificationProgress from "@/components/ClassificationProgress.vue";
 import HistoryCard from "@/components/HistoryCard.vue";
 import HistoryFilters from "@/components/HistoryFilters.vue";
-import GraphIcon from "@/components/icons/GraphIcon.vue";
 import HistoryTipModal from "@/components/modals/HistoryTipModal.vue";
 import UnifiedGraphModal from "@/components/UnifiedGraphModal.vue";
-import BaseButton from "@/components/ui/BaseButton.vue";
-import ButtonGroup from "@/components/ui/ButtonGroup.vue";
 import ManualScoreEntryModal from "@/components/modals/ManualScoreEntryModal.vue";
 import { DEFAULT_SHOOT_STATUS } from '@/domain/shoot/shoot_status.js';
 import { calculateAllClassificationProgress } from "@/domain/scoring/classification_progress.js";

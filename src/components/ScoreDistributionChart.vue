@@ -9,29 +9,43 @@
         class="distance-chart"
       >
         <h4 class="distance-title">{{ distanceData.title }}</h4>
-        <div class="chart-wrapper">
-          <canvas :ref="el => distanceCanvases[index] = el"></canvas>
+        
+        <!-- Chart view -->
+        <div v-if="!distanceLegendToggles.get(index)" class="chart-container">
+          <div class="chart-wrapper" @click="toggleDistanceView(index)">
+            <canvas :ref="el => distanceCanvases[index] = el"></canvas>
+          </div>
+          <div v-if="distanceData.distribution.length > 0" class="chart-toggle-hint">
+            Tap chart to view score details
+          </div>
         </div>
-        <!-- Custom legend for each distance chart -->
-        <div v-if="distanceData.distribution.length > 0" class="custom-legend">
-          <div class="legend-items">
-            <div 
-              v-for="item in distanceData.distribution" 
-              :key="item.score"
-              class="legend-item"
-            >
+        
+        <!-- Legend table view -->
+        <div v-else class="legend-table-view" @click="toggleDistanceView(index)">
+          <div class="legend-table-header">
+            <div class="legend-title">Score Distribution</div>
+            <div class="back-to-chart-hint">Tap anywhere to return to chart</div>
+          </div>
+          <div v-if="distanceData.distribution.length > 0" class="custom-legend">
+            <div class="legend-items">
               <div 
-                class="legend-color" 
-                :style="{ 
-                  backgroundColor: item.color.backgroundColor,
-                  borderColor: item.color.borderColor,
-                  borderWidth: '2px',
-                  borderStyle: 'solid'
-                }"
-              ></div>
-              <span class="legend-text">{{ item.score }}</span>
-              <span class="legend-count">{{ item.count }}</span>
-              <span class="legend-percentage">({{ (item.percentage || 0).toFixed(1) }}%)</span>
+                v-for="item in distanceData.distribution" 
+                :key="item.score"
+                class="legend-item"
+              >
+                <div 
+                  class="legend-color" 
+                  :style="{ 
+                    backgroundColor: item.color.backgroundColor,
+                    borderColor: item.color.borderColor,
+                    borderWidth: '2px',
+                    borderStyle: 'solid'
+                  }"
+                ></div>
+                <span class="legend-text">{{ item.score }}</span>
+                <span class="legend-count">{{ item.count }}</span>
+                <span class="legend-percentage">({{ (item.percentage || 0).toFixed(1) }}%)</span>
+              </div>
             </div>
           </div>
         </div>
@@ -40,30 +54,42 @@
     
     <!-- Show single chart for single-distance rounds -->
     <div v-else class="single-distance-chart">
-      <div class="chart-wrapper">
-        <canvas ref="chartCanvas"></canvas>
+      <!-- Chart view -->
+      <div v-if="!showLegendTable" class="chart-container">
+        <div class="chart-wrapper" @click="toggleView">
+          <canvas ref="chartCanvas"></canvas>
+        </div>
+        <div v-if="singleChartLegend.length > 0" class="chart-toggle-hint">
+          Tap chart to view score details
+        </div>
       </div>
-      <!-- Custom legend for single chart -->
-      <div v-if="singleChartLegend.length > 0" class="custom-legend">
-        <div class="legend-title">Score Distribution</div>
-        <div class="legend-items">
-          <div 
-            v-for="legendItem in singleChartLegend" 
-            :key="legendItem.score"
-            class="legend-item"
-          >
+      
+      <!-- Legend table view -->
+      <div v-else class="legend-table-view" @click="toggleView">
+        <div class="legend-table-header">
+          <div class="legend-title">Score Distribution</div>
+          <div class="back-to-chart-hint">Tap anywhere to return to chart</div>
+        </div>
+        <div v-if="singleChartLegend.length > 0" class="custom-legend">
+          <div class="legend-items">
             <div 
-              class="legend-color" 
-              :style="{ 
-                backgroundColor: legendItem.backgroundColor,
-                borderColor: legendItem.borderColor,
-                borderWidth: '2px',
-                borderStyle: 'solid'
-              }"
-            ></div>
-            <span class="legend-text">{{ legendItem.score }}</span>
-            <span class="legend-count">{{ legendItem.count }}</span>
-            <span class="legend-percentage">({{ legendItem.percentage }}%)</span>
+              v-for="legendItem in singleChartLegend" 
+              :key="legendItem.score"
+              class="legend-item"
+            >
+              <div 
+                class="legend-color" 
+                :style="{ 
+                  backgroundColor: legendItem.backgroundColor,
+                  borderColor: legendItem.borderColor,
+                  borderWidth: '2px',
+                  borderStyle: 'solid'
+                }"
+              ></div>
+              <span class="legend-text">{{ legendItem.score }}</span>
+              <span class="legend-count">{{ legendItem.count }}</span>
+              <span class="legend-percentage">({{ legendItem.percentage }}%)</span>
+            </div>
           </div>
         </div>
       </div>
@@ -80,15 +106,13 @@ import {
   Chart,
   PieController,
   ArcElement,
-  Legend,
-  Tooltip
+  Legend
 } from 'chart.js';
 
 Chart.register(
   PieController,
   ArcElement,
-  Legend,
-  Tooltip
+  Legend
 );
 import { gameTypeConfig } from "@/domain/scoring/game_types"
 import { calculateDistanceTotals } from "@/domain/scoring/distance_totals"
@@ -110,6 +134,8 @@ const chart = ref(null)
 const distanceCharts = ref([])
 const distanceChartInstances = ref([])
 const isUpdating = ref(false)
+const showLegendTable = ref(false)
+const distanceLegendToggles = ref(new Map())
 
 // Get the score color mapping from CSS classes
 const getScoreColor = (score, gameType) => {
@@ -300,22 +326,27 @@ const getChartOptions = (distribution, hideIndividualLegend = false) => {
         display: false // Always hide Chart.js legend, we use custom HTML legends
       },
       tooltip: {
-        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-        titleColor: '#fff',
-        bodyColor: '#fff',
-        borderColor: 'rgba(255, 255, 255, 0.3)',
-        borderWidth: 1,
-        callbacks: {
-          label: function(context) {
-            const score = context.label
-            const count = context.parsed
-            const total = context.dataset.data.reduce((sum, val) => sum + val, 0)
-            const percentage = ((count / total) * 100).toFixed(1)
-            return `${score}: ${count} arrows (${percentage}%)`
-          }
-        }
+        enabled: false // Disable tooltips entirely - we have custom HTML legends instead
+      },
+      filler: {
+        propagate: false // Disable filler plugin - pie charts don't use fill
       }
-    }
+    },
+    // Disable all interactions to prevent tooltip and event handling issues
+    interaction: {
+      intersect: false,
+      mode: false // Disable interaction mode entirely
+    },
+    // Disable hover events
+    hover: {
+      mode: null
+    },
+    // Add animation config to prevent issues during transitions
+    animation: {
+      duration: 300
+    },
+    // Disable all event handling
+    events: [] // Empty array disables all Chart.js event processing
   }
 }
 
@@ -406,6 +437,29 @@ const updateCharts = async () => {
   }
 }
 
+// Toggle between chart and legend table
+const toggleView = async () => {
+  showLegendTable.value = !showLegendTable.value
+  
+  // If switching back to chart view, recreate the chart after DOM update
+  if (!showLegendTable.value) {
+    await nextTick()
+    updateCharts()
+  }
+}
+
+// Toggle individual distance chart view
+const toggleDistanceView = async (index) => {
+  const current = distanceLegendToggles.value.get(index) || false
+  distanceLegendToggles.value.set(index, !current)
+  
+  // If switching back to chart view (current was true, now false), recreate the chart after DOM update
+  if (current) {
+    await nextTick()
+    updateCharts()
+  }
+}
+
 // Handle window resize
 const handleResize = () => {
   if (chart.value) {
@@ -465,6 +519,13 @@ onUnmounted(() => {
   background-color: var(--color-background-mute, rgba(255, 255, 255, 0.05));
   border-radius: 6px;
   border: 1px solid var(--color-border, rgba(255, 255, 255, 0.1));
+}
+
+.legend-table-view .custom-legend {
+  margin-top: 0;
+  padding: 0.5rem;
+  background-color: transparent;
+  border: none;
 }
 
 .legend-title {
@@ -543,6 +604,59 @@ onUnmounted(() => {
   max-width: 700px;
   margin: 0 auto;
   position: relative;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.single-distance-chart .chart-wrapper:hover,
+.distance-chart .chart-wrapper:hover {
+  opacity: 0.9;
+}
+
+.chart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chart-toggle-hint {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--color-text-light, #666);
+  text-align: center;
+  font-style: italic;
+}
+
+.legend-table-view {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 2px solid var(--color-border, rgba(255, 255, 255, 0.1));
+  background-color: var(--color-background-soft);
+  transition: all 0.2s ease;
+  padding: 0.5rem;
+}
+
+.legend-table-view:hover {
+  border-color: var(--color-border, rgba(255, 255, 255, 0.3));
+  background-color: var(--color-background-mute, rgba(255, 255, 255, 0.1));
+}
+
+.legend-table-header {
+  padding: 0.5rem;
+  text-align: center;
+  border-radius: 6px;
+  background-color: var(--color-background-mute, rgba(255, 255, 255, 0.05));
+  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.1));
+  margin-bottom: 1rem;
+}
+
+.back-to-chart-hint {
+  font-size: 0.75rem;
+  color: var(--color-text-light, #666);
+  font-style: italic;
+  margin-top: 0.25rem;
 }
 
 .no-data-message {
@@ -578,6 +692,15 @@ onUnmounted(() => {
   .distance-chart .chart-wrapper {
     height: 350px;
     max-width: 600px;
+  }
+  
+  .chart-toggle-hint {
+    font-size: 0.85rem;
+    margin-top: 0.75rem;
+  }
+  
+  .back-to-chart-hint {
+    font-size: 0.8rem;
   }
 }
 
@@ -622,6 +745,15 @@ onUnmounted(() => {
   
   .distance-title {
     font-size: 1rem;
+  }
+  
+  .chart-toggle-hint {
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+  }
+  
+  .back-to-chart-hint {
+    font-size: 0.75rem;
   }
 }
 </style>

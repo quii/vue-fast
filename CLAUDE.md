@@ -392,6 +392,19 @@ classification:
   component
 - When in doubt about whether to extend an existing component or create a new one, prefer creating a new component
 
+## Chart.js Plugin Guidelines
+
+**CRITICAL**: Chart.js plugins registered with `Chart.register()` are GLOBAL and affect ALL Chart.js instances in the application, even if individual charts try to disable them.
+
+- **Never register Chart.js plugins globally** unless they are needed by ALL charts in the application
+- **Global plugin interference**: Even if a chart disables a plugin (e.g., `tooltip: { enabled: false }`), the globally registered plugin can still interfere with event handling and cause errors
+- **Troubleshooting Chart.js errors**: If experiencing strange Chart.js errors (especially tooltip-related ones like "Cannot read properties of null"), check if global plugin registration is the root cause
+- **Solution approaches**:
+  - Disable events entirely on charts that don't need interaction: `events: []`
+  - Disable interaction modes: `interaction: { mode: false }`
+  - Only register plugins that are essential for the specific chart instance
+- **Example of the problem**: `EndTotalChart.vue` registers `Tooltip` globally, which can cause errors in `ScoreDistributionChart.vue` even when tooltips are disabled there
+
 ## TypeScript Migration Strategy
 
 When converting JavaScript domain code to TypeScript with stronger type guarantees, follow these principles:
