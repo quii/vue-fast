@@ -22,10 +22,6 @@
         
         <!-- Legend table view -->
         <div v-else class="legend-table-view" @click="toggleDistanceView(index)">
-          <div class="legend-table-header">
-            <div class="legend-title">Score Distribution</div>
-            <div class="back-to-chart-hint">Tap anywhere to return to chart</div>
-          </div>
           <div v-if="distanceData.distribution.length > 0" class="custom-legend">
             <div class="legend-items">
               <div 
@@ -38,8 +34,6 @@
                   :style="{ 
                     backgroundColor: item.color.backgroundColor,
                     borderColor: item.color.borderColor,
-                    borderWidth: '2px',
-                    borderStyle: 'solid'
                   }"
                 ></div>
                 <span class="legend-text">{{ item.score }}</span>
@@ -81,9 +75,6 @@
                 class="legend-color" 
                 :style="{ 
                   backgroundColor: legendItem.backgroundColor,
-                  borderColor: legendItem.borderColor,
-                  borderWidth: '2px',
-                  borderStyle: 'solid'
                 }"
               ></div>
               <span class="legend-text">{{ legendItem.score }}</span>
@@ -518,7 +509,6 @@ onUnmounted(() => {
   padding: 1rem;
   background-color: var(--color-background-mute, rgba(255, 255, 255, 0.05));
   border-radius: 6px;
-  border: 1px solid var(--color-border, rgba(255, 255, 255, 0.1));
 }
 
 .legend-table-view .custom-legend {
@@ -526,14 +516,6 @@ onUnmounted(() => {
   padding: 0.5rem;
   background-color: transparent;
   border: none;
-}
-
-.legend-title {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--color-text);
-  margin-bottom: 0.75rem;
-  text-align: center;
 }
 
 .custom-legend .legend-items {
@@ -550,8 +532,10 @@ onUnmounted(() => {
 }
 
 .custom-legend .legend-color {
-  width: 16px;
-  height: 16px;
+  width: 1.5em;
+  height: 1.5em;
+  border-style: none;
+  border-width: 0;
   border-radius: 50%;
   flex-shrink: 0;
 }
@@ -632,10 +616,10 @@ onUnmounted(() => {
   flex-direction: column;
   cursor: pointer;
   border-radius: 8px;
-  border: 2px solid var(--color-border, rgba(255, 255, 255, 0.1));
   background-color: var(--color-background-soft);
   transition: all 0.2s ease;
   padding: 0.5rem;
+
 }
 
 .legend-table-view:hover {
