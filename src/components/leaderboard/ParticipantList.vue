@@ -175,21 +175,23 @@ const chartTitle = computed(() => {
   return `${dateStr} - ${formattedRound}`;
 });
 
-// Generate a distinct color for each participant
+// Generate a distinct color for each participant using CSS variables
 const generateColor = (index) => {
+  // Get CSS variable values from root
+  const root = document.documentElement;
   const colors = [
-    'rgba(255, 99, 132, 1)',   // Red
-    'rgba(54, 162, 235, 1)',   // Blue
-    'rgba(255, 206, 86, 1)',   // Yellow
-    'rgba(75, 192, 192, 1)',   // Teal
-    'rgba(153, 102, 255, 1)',  // Purple
-    'rgba(255, 159, 64, 1)',   // Orange
-    'rgba(199, 199, 199, 1)',  // Gray
-    'rgba(83, 102, 255, 1)',   // Indigo
-    'rgba(255, 99, 255, 1)',   // Pink
-    'rgba(99, 255, 132, 1)',   // Green
+    getComputedStyle(root).getPropertyValue('--color-chart-1').trim(),
+    getComputedStyle(root).getPropertyValue('--color-chart-2').trim(),
+    getComputedStyle(root).getPropertyValue('--color-chart-3').trim(),
+    getComputedStyle(root).getPropertyValue('--color-chart-4').trim(),
+    getComputedStyle(root).getPropertyValue('--color-chart-5').trim(),
+    getComputedStyle(root).getPropertyValue('--color-chart-6').trim(),
+    getComputedStyle(root).getPropertyValue('--color-chart-7').trim(),
+    getComputedStyle(root).getPropertyValue('--color-chart-8').trim(),
+    getComputedStyle(root).getPropertyValue('--color-chart-9').trim(),
+    getComputedStyle(root).getPropertyValue('--color-chart-10').trim(),
   ];
-  return colors[index % colors.length];
+  return colors[index % colors.length] || '#6b7280'; // fallback to gray
 };
 
 // Prepare cumulative score data for each participant
@@ -210,8 +212,8 @@ const chartData = computed(() => {
         { x: 5, y: 201 }, // End 5
         { x: 6, y: 245 }  // End 6
       ],
-      borderColor: 'rgba(255, 99, 132, 1)',
-      backgroundColor: 'rgba(255, 99, 132, 0.1)',
+      borderColor: generateColor(0),
+      backgroundColor: generateColor(0) + '1A', // Add alpha for hex colors
       borderWidth: 2,
       fill: false,
       tension: 0.1,
@@ -230,8 +232,8 @@ const chartData = computed(() => {
         { x: 5, y: 178 }, // End 5
         { x: 6, y: 214 }  // End 6
       ],
-      borderColor: 'rgba(54, 162, 235, 1)',
-      backgroundColor: 'rgba(54, 162, 235, 0.1)',
+      borderColor: generateColor(1),
+      backgroundColor: generateColor(1) + '1A', // Add alpha for hex colors
       borderWidth: 2,
       fill: false,
       tension: 0.1,
@@ -316,7 +318,7 @@ const chartData = computed(() => {
       label: participant.archerName,
       data: dataPoints,
       borderColor: color,
-      backgroundColor: color.replace('1)', '0.1)'),
+      backgroundColor: color + '1A', // Add alpha for hex colors
       borderWidth: 2,
       fill: false,
       tension: 0.1,
@@ -534,7 +536,7 @@ const chartOptions = computed(() => {
 .participant-card.A1 .score-difference,
 .participant-card.A2 .score-difference,
 .participant-card.A3 .score-difference {
-  color: rgba(6, 19, 69, 0.9);
+  color: var(--color-classification-text-light);
   background-color: rgba(6, 19, 69, 0.15);
 }
 
@@ -599,40 +601,40 @@ const chartOptions = computed(() => {
 
 /* Classification colors */
 .participant-card.B1 {
-  background-color: hsl(3, 84%, 36%);
-  color: white;
+  background-color: var(--color-classification-b1);
+  color: var(--color-classification-text-dark);
 }
 
 .participant-card.B2 {
-  background-color: hsl(3, 84%, 46%);
-  color: white;
+  background-color: var(--color-classification-b2);
+  color: var(--color-classification-text-dark);
 }
 
 .participant-card.B3 {
-  background-color: hsl(3, 84%, 56%);
-  color: white;
+  background-color: var(--color-classification-b3);
+  color: var(--color-classification-text-dark);
 }
 
 .participant-card.A3 {
-  background-color: hsl(207, 85%, 90%);
-  color: #061345;
+  background-color: var(--color-classification-a3);
+  color: var(--color-classification-text-light);
 }
 
 .participant-card.A2 {
-  background-color: hsl(207, 85%, 80%);
-  color: #061345;
+  background-color: var(--color-classification-a2);
+  color: var(--color-classification-text-light);
 }
 
 .participant-card.A1 {
-  background-color: hsl(207, 85%, 72%);
-  color: #061345;
+  background-color: var(--color-classification-a1);
+  color: var(--color-classification-text-light);
 }
 
 .participant-card.MB,
 .participant-card.GMB,
 .participant-card.EMB {
-  background-color: rebeccapurple;
-  color: white;
+  background-color: var(--color-classification-mb);
+  color: var(--color-classification-text-dark);
 }
 
 /* Position indicator styling */
@@ -655,14 +657,14 @@ const chartOptions = computed(() => {
 :deep(.position-indicator.GMB),
 :deep(.position-indicator.EMB) {
   background-color: rgba(0, 0, 0, 0.2);
-  color: white;
+  color: var(--color-classification-text-dark);
 }
 
 :deep(.position-indicator.A3),
 :deep(.position-indicator.A2),
 :deep(.position-indicator.A1) {
   background-color: rgba(6, 19, 69, 0.2);
-  color: #061345;
+  color: var(--color-classification-text-light);
 }
 
 /* Card content styling */
@@ -776,6 +778,22 @@ const chartOptions = computed(() => {
   color: rgba(255, 255, 255, 0.8);
 }
 
+/* For blue classification backgrounds (A1, A2, A3) - improve contrast */
+.participant-card.A1 .you-indicator,
+.participant-card.A2 .you-indicator,
+.participant-card.A3 .you-indicator {
+  color: var(--color-classification-text-light);
+}
+
+.participant-card.A1 .round-name,
+.participant-card.A2 .round-name,
+.participant-card.A3 .round-name,
+.participant-card.A1 .arrows-shot,
+.participant-card.A2 .arrows-shot,
+.participant-card.A3 .arrows-shot {
+  color: var(--color-classification-text-light);
+}
+
 /* Best End Display Styles - Integrated into participant card */
 .best-end-row {
   display: flex;
@@ -873,7 +891,7 @@ const chartOptions = computed(() => {
 .participant-card.A1 .best-end-label,
 .participant-card.A2 .best-end-label,
 .participant-card.A3 .best-end-label {
-  color: rgba(6, 19, 69, 0.9);
+  color: var(--color-classification-text-light);
 }
 
 .participant-card.A1 .best-end-score,

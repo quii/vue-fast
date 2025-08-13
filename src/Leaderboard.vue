@@ -411,7 +411,7 @@ onUnmounted(() => {
   width: 48px;
   height: 48px;
   margin-bottom: 1rem;
-  color: var(--color-highlight, #4CAF50);
+  color: var(--color-highlight);
 }
 
 .menu-header h2 {
@@ -423,7 +423,7 @@ onUnmounted(() => {
 
 .menu-description {
   margin-bottom: 2rem;
-  color: var(--color-text-mute, #666);
+  color: var(--color-text-mute);
   line-height: 1.4;
 }
 
@@ -436,14 +436,14 @@ onUnmounted(() => {
 
 .prompt-title {
   margin: 0 0 0.5rem 0;
-  color: var(--color-highlight, #4CAF50);
+  color: var(--color-highlight);
   font-size: 1.1rem;
   font-weight: 600;
 }
 
 .prompt-description {
   margin: 0 0 1.5rem 0;
-  color: var(--color-text-mute, #666);
+  color: var(--color-text-mute);
   font-size: 0.9rem;
   line-height: 1.4;
 }
@@ -456,9 +456,9 @@ onUnmounted(() => {
 .join-section, .create-section {
   margin-bottom: 2rem;
   padding: 1.5rem;
-  border: 1px solid var(--color-border, #e0e0e0);
+  border: 1px solid var(--color-border);
   border-radius: 8px;
-  background-color: var(--color-surface, #fafafa);
+  background-color: var(--color-background-soft);
 }
 
 .section-title {
@@ -471,7 +471,7 @@ onUnmounted(() => {
 .section-description {
   margin: 0 0 1rem 0;
   font-size: 0.9rem;
-  color: var(--color-text-mute, #666);
+  color: var(--color-text-mute);
 }
 
 .join-form {
@@ -484,7 +484,7 @@ onUnmounted(() => {
   text-align: center;
   margin: 1.5rem 0;
   position: relative;
-  color: var(--color-text-mute, #666);
+  color: var(--color-text-mute);
   font-size: 0.9rem;
 }
 
@@ -495,7 +495,7 @@ onUnmounted(() => {
   left: 0;
   right: 0;
   height: 1px;
-  background-color: var(--color-border, #e0e0e0);
+  background-color: var(--color-border);
   z-index: 1;
 }
 
@@ -509,9 +509,9 @@ onUnmounted(() => {
 .shoot-title-header {
   text-align: center;
   padding: 0.75rem 1rem;
-  border-bottom: 1px solid var(--color-border, #e0e0e0);
+  border-bottom: 1px solid var(--color-border);
   margin-bottom: 1rem;
-  background-color: var(--color-surface, #fafafa);
+  background-color: var(--color-background-soft);
 }
 
 .shoot-title {

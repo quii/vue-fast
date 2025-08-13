@@ -34,13 +34,42 @@
 
   --color-heading: var(--vt-c-text-light-1);
   --color-text: var(--vt-c-text-light-1);
+  --color-text-mute: var(--vt-c-text-light-2);
 
   --color-link: var(--vt-c-link);
+  --color-highlight: #4CAF50;
 
   --section-gap: 160px;
 
   --color-on-track: lightseagreen;
   --color-off-track: darkred;
+  
+  /* Classification colors - Light theme */
+  --color-classification-b1: hsl(3, 84%, 36%);
+  --color-classification-b2: hsl(3, 84%, 46%);
+  --color-classification-b3: hsl(3, 84%, 56%);
+  --color-classification-a3: hsl(207, 85%, 90%);
+  --color-classification-a2: hsl(207, 85%, 80%);
+  --color-classification-a1: hsl(207, 85%, 72%);
+  --color-classification-mb: #663399;
+  --color-classification-gmb: #663399;
+  --color-classification-emb: #663399;
+  
+  /* Classification text colors */
+  --color-classification-text-light: #061345;
+  --color-classification-text-dark: white;
+  
+  /* Chart colors - optimized for both light and dark themes */
+  --color-chart-1: #ef4444; /* red-500 */
+  --color-chart-2: #3b82f6; /* blue-500 */
+  --color-chart-3: #f59e0b; /* amber-500 */
+  --color-chart-4: #10b981; /* emerald-500 */
+  --color-chart-5: #8b5cf6; /* violet-500 */
+  --color-chart-6: #f97316; /* orange-500 */
+  --color-chart-7: #6b7280; /* gray-500 */
+  --color-chart-8: #6366f1; /* indigo-500 */
+  --color-chart-9: #ec4899; /* pink-500 */
+  --color-chart-10: #84cc16; /* lime-500 */
 }
 
 /* Dark theme variables - applied when data-theme="dark" is set */
@@ -54,11 +83,24 @@
 
   --color-heading: var(--vt-c-text-dark-1);
   --color-text: var(--vt-c-text-dark-2);
+  --color-text-mute: var(--vt-c-text-dark-2);
 
   --color-on-track: lightseagreen;
   --color-off-track: red;
 
   --color-link: #0099ff;
+  --color-highlight: #66BB6A;
+  
+  /* Classification colors - Dark theme (slightly adjusted for better contrast) */
+  --color-classification-b1: hsl(3, 70%, 45%);
+  --color-classification-b2: hsl(3, 70%, 55%);
+  --color-classification-b3: hsl(3, 70%, 65%);
+  --color-classification-a3: hsl(207, 75%, 25%);
+  --color-classification-a2: hsl(207, 75%, 35%);
+  --color-classification-a1: hsl(207, 75%, 45%);
+  --color-classification-mb: #7c3aed;
+  --color-classification-gmb: #7c3aed;
+  --color-classification-emb: #7c3aed;
 }
 
 /* Keep the media query for automatic theme switching when preference is 'device' */
@@ -76,6 +118,17 @@
 
     --color-on-track: lightseagreen;
     --color-off-track: red;
+    
+    /* Classification colors - Dark theme (media query) */
+    --color-classification-b1: hsl(3, 70%, 45%);
+    --color-classification-b2: hsl(3, 70%, 55%);
+    --color-classification-b3: hsl(3, 70%, 65%);
+    --color-classification-a3: hsl(207, 75%, 25%);
+    --color-classification-a2: hsl(207, 75%, 35%);
+    --color-classification-a1: hsl(207, 75%, 45%);
+    --color-classification-mb: #7c3aed;
+    --color-classification-gmb: #7c3aed;
+    --color-classification-emb: #7c3aed;
   }
 }
 

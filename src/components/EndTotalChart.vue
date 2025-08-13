@@ -264,6 +264,9 @@ const chartOptions = computed(() => {
 // Create or update the chart
 const updateChart = async () => {
   if (!chartCanvas.value || !hasData.value || isUpdating.value) return
+  
+  // Add safety check to prevent updating during component destruction
+  if (!chartCanvas.value.isConnected) return
 
   isUpdating.value = true
   try {
@@ -276,7 +279,7 @@ const updateChart = async () => {
     await nextTick()
 
     const ctx = chartCanvas.value?.getContext('2d')
-    if (!ctx) {
+    if (!ctx || !chartCanvas.value.isConnected) {
       isUpdating.value = false
       return
     }
@@ -427,15 +430,20 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  if (chart.value) {
-    //todo: MR AI, i have commented this out which is what is causing the issue in the tests
-    // i suspect that by destroying it, *something else* was trying to operate on it.
-    // what can we do?
-
-    // chart.value.destroy()
-    // chart.value = null
-  }
   window.removeEventListener('resize', handleResize)
+  
+  // Use nextTick to ensure any pending Chart.js operations complete
+  nextTick(() => {
+    if (chart.value) {
+      try {
+        chart.value.destroy()
+      } catch (error) {
+        console.warn('Chart destruction failed:', error)
+      } finally {
+        chart.value = null
+      }
+    }
+  })
 })
 </script>
 
