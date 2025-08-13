@@ -148,6 +148,19 @@ function getParticipantBestEnd(participant) {
   return bestEnd || null
 }
 
+// Helper function to get all best ends for a participant in this round
+function getParticipantBestEnds(participant) {
+  if (!props.bestEnds || props.bestEnds.length === 0) {
+    return []
+  }
+  
+  const bestEnds = props.bestEnds.filter(end => 
+    end.roundName === props.title && end.archerName === participant.archerName
+  )
+  
+  return bestEnds
+}
+
 // Helper function to get score button class for best end display
 function getScoreClass(score) {
   // Use the same logic as EndScores component
@@ -480,15 +493,20 @@ const chartOptions = computed(() => {
           </div>
         </div>
         
-        <!-- Best End Display -->
-        <div v-if="getParticipantBestEnd(participant)" class="best-end-row">
+        <!-- Best End Display - Multiple distances support -->
+        <div v-for="bestEnd in getParticipantBestEnds(participant)" :key="`${bestEnd.distance || 'single'}-${bestEnd.totalScore}`" class="best-end-row">
           <div class="best-end-label">
-            Round's best:
+            <template v-if="bestEnd.distance && bestEnd.distanceUnit">
+              Best at {{ bestEnd.distance }}{{ bestEnd.distanceUnit }}:
+            </template>
+            <template v-else>
+              Round's best:
+            </template>
           </div>
           <div class="best-end-scores">
             <div class="best-end-display">
               <span 
-                v-for="(score, index) in getParticipantBestEnd(participant).endScores" 
+                v-for="(score, index) in bestEnd.endScores" 
                 :key="index"
                 :class="getScoreClass(score)"
                 class="best-end-score"
@@ -496,7 +514,7 @@ const chartOptions = computed(() => {
                 {{ score }}
               </span>
               <span class="best-end-total">
-                {{ getParticipantBestEnd(participant).totalScore }}
+                {{ bestEnd.totalScore }}
               </span>
             </div>
           </div>

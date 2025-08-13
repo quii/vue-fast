@@ -4,7 +4,8 @@ import BaseButton from '../ui/BaseButton.vue'
 import { useUserStore } from '@/stores/user'
 import ParticipantList from '@/components/leaderboard/ParticipantList.vue'
 import { groupParticipantsByRound, getUniqueRoundNames } from '../../../shared/models/Shoot'
-import { findBestEnds } from '../../../shared/models/BestEnd'
+import { findBestEndsByDistance } from '../../../shared/models/BestEnd.js'
+import { roundConfigManager } from '@/domain/scoring/game_types'
 
 const props = defineProps({
   shoot: {
@@ -56,7 +57,20 @@ const bestEnds = computed(() => {
   if (!props.groupByRound || !props.shoot) {
     return []
   }
-  return findBestEnds(props.shoot)
+  return findBestEndsByDistance(props.shoot, (roundName) => {
+    const round = roundConfigManager.getRound(roundName)
+    if (!round) return null
+    
+    return {
+      distancesRoundSizes: round.distancesRoundSizes,
+      isImperial: round.isImperial,
+      maxDistanceYards: round.maxDistanceYards,
+      maxDistanceMetres: round.maxDistanceMetres,
+      otherDistancesYards: round.otherDistancesYards,
+      otherDistancesMetres: round.otherDistancesMetres,
+      endSize: round.endSize
+    }
+  })
 })
 </script>
 
