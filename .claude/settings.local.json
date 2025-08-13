@@ -13,7 +13,8 @@
       "Bash(git restore:*)",
       "Bash(npm run test:e2e:headless:*)",
       "Bash(npm run:*)",
-      "Bash(npx cypress run:*)"
+      "Bash(npx cypress run:*)",
+      "WebFetch(domain:github.com)"
     ],
     "deny": [
       "Bash(git push*)",

@@ -664,4 +664,124 @@ Always use relative imports in shared code to maintain clarity about dependencie
 import { Something } from '../models/Something.js';
 ```
 
-This approach ensures the shared code remains portable and can be used in different environments without configuration changes.5. The test makes assertions based on the page object's responses
+This approach ensures the shared code remains portable and can be used in different environments without configuration changes.
+
+## GitHub Issue-Driven Development Workflow
+
+### Process Overview
+
+We follow a structured, issue-driven development process that emphasizes very small incremental steps with continuous verification.
+
+### Workflow Steps
+
+1. **Issue Reading & Analysis**
+   - User provides GitHub issue number
+   - I use `gh issue view <number> -R quii/vue-fast --json title,body,comments,labels` to read full context
+   - I analyze requirements, constraints, and any discussion in comments
+
+2. **Implementation Planning**
+   - Break down the feature into very small steps (5-10 minutes each)
+   - Each step should be:
+     - **Micro-incremental**: Single focused change that can be completed quickly
+     - **Safe**: Can be easily reverted, all tests pass before next step
+     - **Verifiable**: Has clear success criteria and tests
+     - **Commitable**: Results in a working state worthy of commit + push
+   - For "big" features: Start with a failing Cypress test to guide development (can be ignored initially)
+   - Identify dependencies on existing domain logic and components
+
+3. **Test Strategy Definition**
+   - **Unit tests**: Describe what specific behavior/business logic is verified
+   - **Component tests**: Describe what UI interactions/state changes are verified  
+   - **Integration tests**: Describe what system interactions are verified
+   - **E2E tests**: Describe what user journeys are verified
+   - **Coverage gaps**: Explicitly state what we're NOT testing and why
+   - Specify behavioral confidence each test provides
+
+4. **Clarification Process**
+   - Ask clarifying questions about:
+     - Scope boundaries and edge cases
+     - User experience expectations  
+     - Technical constraints or preferences
+     - Integration points with existing features
+   - Continue until implementation plan is unambiguous
+
+5. **Specification Documentation**
+   - Create detailed implementation specification
+   - Post specification as comment on GitHub issue using:
+     ```bash
+     gh issue comment <number> -R quii/vue-fast --body "Implementation plan ready..."
+     ```
+
+6. **Implementation Execution**
+   - Follow planned steps in strict order
+   - **Never proceed unless `npm test` passes completely**
+   - Commit and push after each successful step
+   - Update issue with progress if it helps track complex features
+
+### Implementation Plan Template
+
+```markdown
+## Implementation Plan for Issue #<number>
+
+### Overview
+[Brief summary of feature/improvement]
+
+### Test-First Approach
+- **Guiding E2E Test**: [Failing Cypress test that defines success - can be ignored initially]
+  - Verifies: [End-to-end user behavior]
+  - Coverage gap: [What this doesn't test]
+
+### Step-by-Step Breakdown
+1. **Step 1** (5-10 min): [Very specific, small change]
+   - Files: [Exact files/functions to modify]
+   - Tests: [Specific test to write/modify]
+   - Verifies: [Exact behavior being tested]
+   - Success: All tests pass, feature X works
+   - Commit: "Step 1: Add basic structure for Y"
+
+2. **Step 2** (5-10 min): [Next small change]
+   - [Same structure]
+
+[Continue for all micro-steps]
+
+### Test Coverage Strategy
+- **Unit Tests**: 
+  - Verifies: [Specific domain logic behaviors]
+  - Coverage gap: [What domain logic isn't covered]
+- **Component Tests**:
+  - Verifies: [Specific UI state changes and interactions]  
+  - Coverage gap: [What UI behaviors aren't covered]
+- **Integration Tests**:
+  - Verifies: [Specific component interactions]
+  - Coverage gap: [What integrations aren't covered]
+- **E2E Tests**:
+  - Verifies: [Critical user journey behaviors]
+  - Coverage gap: [Edge cases and less critical paths]
+
+### Technical Decisions
+- [Key architectural choices with rationale]
+- [Dependencies and integration points]
+
+### Success Criteria
+- All tests passing (`npm test`)
+- [Specific acceptance criteria from issue]
+- Guiding Cypress test passes (if applicable)
+```
+
+### Iron Rules
+- **Never move to next step unless `npm test` passes completely**
+- **Each step should be 5-10 minutes maximum**
+- **Each step results in commit + push**
+- **Code is documentation - no separate docs needed**
+
+### Commands Reference
+```bash
+# Read issue
+gh issue view <number> -R quii/vue-fast --json title,body,comments,labels
+
+# Comment with plan
+gh issue comment <number> -R quii/vue-fast --body "Implementation plan..."
+
+# Update progress
+gh issue comment <number> -R quii/vue-fast --body "Completed steps 1-3, all tests passing"
+```
