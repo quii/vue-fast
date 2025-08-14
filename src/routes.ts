@@ -30,6 +30,11 @@ export const routes = [
     title: DataMenuItem
   },
   {
+    path: '/achievements',
+    name: 'achievements',
+    component: () => import('./AchievementsPage.vue')
+  },
+  {
     path: '/history/:id',
     name: 'viewHistory',
     component: () => import('./ViewShoot.vue')

@@ -1,19 +1,15 @@
 <script setup>
-import { computed } from "vue";
-import { useUserStore } from "@/stores/user";
 import { useRoute } from "vue-router";
 import ScoreIcon from "@/components/icons/ScoreIcon.vue";
 import HistoryIcon from "@/components/icons/HistoryIcon.vue";
 import DiaryIcon from "@/components/icons/DiaryIcon.vue";
 import SightIcon from "@/components/icons/SightIcon.vue";
-import DataIcon from "@/components/icons/DataIcon.vue";
+import AchievementsIcon from "@/components/icons/AchievementsIcon.vue";
 import ProfileIcon from "@/components/icons/ProfileIcon.vue";
 import LiveIcon from "@/components/icons/LiveIcon.vue";
 
-const user = useUserStore();
 const route = useRoute();
 
-const needsBackup = computed(() => user.needsBackup());
 
 // Helper to determine if a route is active
 const isActive = (path) => {
@@ -59,12 +55,11 @@ const isActive = (path) => {
       <span class="nav-label">Sight</span>
     </router-link>
 
-    <router-link to="/data" class="nav-item" :class="{ active: isActive('/data') }">
+    <router-link to="/achievements" class="nav-item" :class="{ active: isActive('/achievements') }">
       <div class="icon-container">
-        <DataIcon class="nav-icon" />
-        <span v-if="needsBackup" class="notification-badge"></span>
+        <AchievementsIcon class="nav-icon" />
       </div>
-      <span class="nav-label">Data</span>
+      <span class="nav-label">Achievements</span>
     </router-link>
 
     <router-link to="/you" class="nav-item" :class="{ active: isActive('/you') }">
