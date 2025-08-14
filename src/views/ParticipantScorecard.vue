@@ -85,15 +85,12 @@ onMounted(async () => {
   console.log('ParticipantScorecard mounted. Route params:', route.params)
   console.log('Current shoot available:', !!currentShoot.value)
   
-  // Initialize WebSocket connection first
-  await shootStore.initializeWebSocket()
-  
   // If we don't have the shoot data, try to connect using the shoot code from URL
   if (!currentShoot.value) {
     isRestoring.value = true
     console.log('No current shoot data, attempting to restore from persisted state...')
     
-    // First try to restore from localStorage
+    // First try to restore from localStorage - this will initialize WebSocket if needed
     const restored = await shootStore.tryRestoreFromPersistedState()
     
     // If restoration failed but we have a shoot code, try connecting as viewer

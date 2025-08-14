@@ -14,7 +14,8 @@
       "Bash(npm run test:e2e:headless:*)",
       "Bash(npm run:*)",
       "Bash(npx cypress run:*)",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "Bash(gh issue view:*)"
     ],
     "deny": [
       "Bash(git push*)",

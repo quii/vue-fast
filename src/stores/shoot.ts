@@ -19,6 +19,7 @@ export const useShootStore = defineStore('shoot', () => {
   const currentShoot = ref<Shoot | null>(null)
   const isLoading = ref(false)
   const connectionStatus = ref<'disconnected' | 'connecting' | 'connected' | 'error'>('disconnected')
+  const lastUpdateTime = ref<Date | null>(null)
 
   // Services
   let shootService: ShootService | null = null
@@ -117,6 +118,7 @@ export const useShootStore = defineStore('shoot', () => {
       const { shootCode: updatedShootCode, shoot } = event.detail
       if (currentShoot.value?.code === updatedShootCode) {
         currentShoot.value = shoot
+        lastUpdateTime.value = new Date()
       }
     })
 
@@ -127,6 +129,7 @@ export const useShootStore = defineStore('shoot', () => {
       // Only show notifications for the current shoot
       if (currentShoot.value?.code === notificationShootCode) {
         handleShootNotification(notification)
+        lastUpdateTime.value = new Date()
       }
     })
   }
@@ -232,7 +235,7 @@ export const useShootStore = defineStore('shoot', () => {
     } catch (error) {
       console.error('❌ Failed to connect WebSocket:', error)
       connectionStatus.value = 'error'
-      toast.error('Failed to connect to real-time updates')
+      // No toast error - let the UI show connection status instead
     }
   }
 
@@ -433,6 +436,7 @@ export const useShootStore = defineStore('shoot', () => {
     currentShoot,
     isLoading,
     connectionStatus,
+    lastUpdateTime,
 
     // Computed
     isInShoot,

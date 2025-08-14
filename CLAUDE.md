@@ -617,6 +617,7 @@ We follow a structured, issue-driven development process that emphasizes very sm
      - **Verifiable**: Has clear success criteria and tests
      - **Commitable**: Results in a working state worthy of commit + push
    - For "big" features: Start with a failing Cypress test to guide development (can be ignored initially)
+   - **Post the implementation plan as a comment on the GitHub issue** using `gh issue comment <number> -R quii/vue-fast --body "<plan>"`
    - Identify dependencies on existing domain logic and components
 
 3. **Test Strategy Definition**

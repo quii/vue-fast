@@ -53,11 +53,12 @@ onMounted(async () => {
     showTutorial.value = true
   }
 
-  // Initialize WebSocket connection for leaderboard functionality
-  await shootStore.initializeWebSocket()
-
-  // Try to restore any persisted shoot state
-  await shootStore.tryRestoreFromPersistedState()
+  // Only initialize WebSocket if we might be restoring a live shoot
+  // Try to restore any persisted shoot state first
+  const restored = await shootStore.tryRestoreFromPersistedState()
+  
+  // If we successfully restored a live shoot, WebSocket is already initialized
+  // No need to initialize WebSocket for regular scoring
 })
 
 onUnmounted(() => {

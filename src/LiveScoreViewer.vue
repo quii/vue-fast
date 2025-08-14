@@ -90,7 +90,7 @@ async function processJoinCode() {
 }
 
 onMounted(async () => {
-  await shootStore.initializeWebSocket()
+  // processJoinCode() will initialize WebSocket via connectAsViewer() if needed
   await processJoinCode()
   isLoading.value = false
 })

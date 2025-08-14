@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import BaseTopBar from '@/components/ui/BaseTopBar.vue'
+import ConnectionStatusIndicator from '@/components/ui/ConnectionStatusIndicator.vue'
 import LeaderboardDisplay from '@/components/leaderboard/LeaderboardDisplay.vue'
 import JoinShootForm from '@/components/leaderboard/JoinShootForm.vue'
 import CreateShootForm from '@/components/leaderboard/CreateShootForm.vue'
@@ -247,8 +248,17 @@ async function processUrlJoinCode() {
 }
 
 onMounted(async () => {
-  await shootStore.initializeWebSocket()
-  await shootStore.tryRestoreFromPersistedState()
+  // Check if we have a URL join code or might restore a persisted shoot
+  const joincode = route.query.joincode
+  const hasJoinCode = joincode && String(joincode).replace(/\D/g, '').slice(0, 4).length === 4
+  
+  // Try to restore persisted state first - this will initialize WebSocket if needed
+  const restored = await shootStore.tryRestoreFromPersistedState()
+  
+  // Only initialize WebSocket if we have a join code and didn't restore a shoot
+  if (hasJoinCode && !restored) {
+    await shootStore.initializeWebSocket()
+  }
 
   // Process URL join code after stores are initialized
   await processUrlJoinCode()
@@ -353,6 +363,13 @@ onUnmounted(() => {
       <div v-if="currentShoot?.title" class="shoot-title-header">
         <h1 class="shoot-title">{{ currentShoot.title }}</h1>
       </div>
+      
+      <!-- Connection Status Indicator -->
+      <ConnectionStatusIndicator
+        :connection-status="shootStore.connectionStatus"
+        :is-in-shoot="shootStore.isInShoot"
+        :last-update-time="shootStore.lastUpdateTime"
+      />
       
       <LeaderboardDisplay
         :shoot="currentShoot"
