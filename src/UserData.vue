@@ -4,6 +4,7 @@ import { useUserStore } from "@/stores/user";
 import { useHistoryStore } from "@/stores/history";
 import { useInstallationStore } from '@/stores/installation'
 import { classificationList, classificationListWithoutPB } from "@/domain/scoring/classificationList.js";
+import BaseTopBar from "@/components/ui/BaseTopBar.vue";
 import SectionCard from "@/components/ui/SectionCard.vue";
 import FormGroup from "@/components/ui/FormGroup.vue";
 import BaseInput from "@/components/ui/BaseInput.vue";
@@ -12,10 +13,13 @@ import BaseCheckbox from "@/components/ui/BaseCheckbox.vue";
 import BaseButton from "@/components/ui/BaseButton.vue";
 import ThemeToggle from '@/components/ui/ThemeToggle.vue'
 import WebSocketStats from '@/components/debug/WebSocketStats.vue'
+import DataIcon from '@/components/icons/DataIcon.vue'
+import { useRouter } from 'vue-router'
 
 const userStore = useUserStore();
 const historyStore = useHistoryStore();
-const installationStore = useInstallationStore()
+const installationStore = useInstallationStore();
+const router = useRouter();
 
 const selectedAgeGroup = ref(userStore.user.ageGroup);
 const selectedGender = ref(userStore.user.gender);
@@ -43,6 +47,15 @@ const usedBowTypes = computed(() => {
 const isDevelopment = computed(() => {
   return import.meta.env.MODE === 'development'
 })
+
+// Top bar configuration
+const actionButtons = computed(() => [
+  {
+    iconComponent: DataIcon,
+    label: 'Data Management',
+    action: 'data-management'
+  }
+])
 
 // Initialize classifications for bow types
 watchEffect(() => {
@@ -87,6 +100,16 @@ function toggleDevTools(value) {
   installationStore.toggleDevTools(value)
 }
 
+function navigateToDataManagement() {
+  router.push('/data')
+}
+
+function handleTopBarAction(actionData) {
+  if (actionData.action === 'data-management') {
+    navigateToDataManagement()
+  }
+}
+
 watch(showDevTools, (newValue) => {
   console.log('UserData: showDevTools changed to:', newValue)
   toggleDevTools(newValue)
@@ -110,6 +133,11 @@ watchEffect(() => {
 </script>
 <template>
   <div class="profile-page">
+    <BaseTopBar
+      :action-buttons="actionButtons"
+      alignment="right"
+      @action="handleTopBarAction"
+    />
     <SectionCard title="Personal Information">
       <FormGroup label="Name">
         <BaseInput v-model="name" placeholder="Name" />

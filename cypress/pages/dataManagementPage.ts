@@ -1,11 +1,12 @@
 class DataManagementPage {
   navigateTo() {
-    cy.visit("/");
-    cy.get("a").contains("Data").click();
+    cy.visit("/you");
+    cy.get('button[aria-label="Data Management"]').click();
   }
 
   visit() {
-    cy.get('a').contains('Data').click()
+    cy.visit("/you");
+    cy.get('button[aria-label="Data Management"]').click();
   }
 
   resetData() {

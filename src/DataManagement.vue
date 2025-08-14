@@ -10,15 +10,34 @@ import SectionCard from "@/components/ui/SectionCard.vue";
 import BaseButton from "@/components/ui/BaseButton.vue";
 import BaseInput from '@/components/ui/BaseInput.vue'
 import FormGroup from '@/components/ui/FormGroup.vue'
+import BaseTopBar from "@/components/ui/BaseTopBar.vue";
+import BackIcon from '@/components/icons/BackIcon.vue'
+import { useRouter } from 'vue-router'
 
 const history = useHistoryStore();
 const notes = useNotesStore();
 const user = useUserStore();
 const toast = useToast();
+const router = useRouter();
 
 const backupWarning = computed(() => user.needsBackup());
 const userName = ref(user.user.name || '')
 const hasName = computed(() => user.user.name && user.user.name.trim() !== '')
+
+// Top bar configuration
+const actionButtons = computed(() => [
+  {
+    iconComponent: BackIcon,
+    label: 'Back',
+    action: 'back'
+  }
+])
+
+function handleTopBarAction(actionData) {
+  if (actionData.action === 'back') {
+    router.push('/you')
+  }
+}
 
 function saveUserName() {
   if (!userName.value.trim()) {
@@ -144,6 +163,11 @@ function hardReset() {
 
 <template>
   <div class="data-management">
+    <BaseTopBar
+      :action-buttons="actionButtons"
+      alignment="right"
+      @action="handleTopBarAction"
+    />
     <SectionCard v-if="backupWarning" class="warning-card" title="Time for a backup!">
       <div class="warning-content">
         <p class="explanation">
