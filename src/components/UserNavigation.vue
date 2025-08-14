@@ -59,7 +59,7 @@ const isActive = (path) => {
       <div class="icon-container">
         <AchievementsIcon class="nav-icon" />
       </div>
-      <span class="nav-label">Achievements</span>
+      <span class="nav-label">Awards</span>
     </router-link>
 
     <router-link to="/you" class="nav-item" :class="{ active: isActive('/you') }">

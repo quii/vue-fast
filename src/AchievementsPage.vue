@@ -3,18 +3,18 @@
     <div class="content">
       <div class="placeholder-content">
         <AchievementsIcon class="achievement-icon" />
-        <h1>Achievements</h1>
+        <h1>Awards</h1>
         <p class="description">
-          Track your archery progress and unlock achievements based on your performance.
+          Track your archery progress and unlock awards based on your performance.
         </p>
         <div class="coming-soon">
           <h2>Coming Soon</h2>
           <ul class="feature-list">
-            <li>Score-based achievements</li>
+            <li>Score-based awards</li>
             <li>Consistency milestones</li>
             <li>Personal records tracking</li>
             <li>Classification progress</li>
-            <li>Season achievements</li>
+            <li>Season awards</li>
           </ul>
         </div>
         <div class="note">
