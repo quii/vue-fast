@@ -6,7 +6,8 @@
 
 import type { Achievement } from './types.js';
 import { TWO_FIFTY_TWO_ACHIEVEMENTS } from './two_fifty_two_awards.js';
-import { ARROW_COUNT_GROUP, IMPERIAL_PRECISION_GROUP, METRIC_EXCELLENCE_GROUP } from './groups.js';
+import { GOLDEN_END_ACHIEVEMENTS } from './imperial_golden_end.js';
+import { ARROW_COUNT_GROUP, IMPERIAL_PRECISION_GROUP, IMPERIAL_GOLDEN_END_GROUP, METRIC_EXCELLENCE_GROUP } from './groups.js';
 
 export const ONE_THOUSAND_ARROWS: Achievement = {
   id: 'one_thousand_arrows',
@@ -60,7 +61,8 @@ export const ALL_ACHIEVEMENTS: Achievement[] = [
   TEN_THOUSAND_ARROWS,
   TWENTY_FIVE_THOUSAND_ARROWS,
   SIX_HUNDRED_AT_WA70,
-  ...TWO_FIFTY_TWO_ACHIEVEMENTS
+  ...TWO_FIFTY_TWO_ACHIEVEMENTS,
+  ...GOLDEN_END_ACHIEVEMENTS
 ];
 
 export function getAchievementById(id: string): Achievement | undefined {

@@ -20,9 +20,16 @@ export const IMPERIAL_PRECISION_GROUP: AchievementGroup = {
   order: 2
 };
 
+export const IMPERIAL_GOLDEN_END_GROUP: AchievementGroup = {
+  id: 'imperial_golden_end',
+  name: 'Imperial Golden End',
+  description: 'Score 6 9s (54 points) in a single end at imperial distances',
+  order: 3
+};
+
 export const METRIC_EXCELLENCE_GROUP: AchievementGroup = {
   id: 'metric_excellence',
   name: 'Metric Excellence', 
   description: 'High scores on metric rounds',
-  order: 3
+  order: 4
 };

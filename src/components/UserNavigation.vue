@@ -1,5 +1,4 @@
 <script setup>
-import { computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import ScoreIcon from "@/components/icons/ScoreIcon.vue";
 import HistoryIcon from "@/components/icons/HistoryIcon.vue";
@@ -8,31 +7,13 @@ import SightIcon from "@/components/icons/SightIcon.vue";
 import AchievementsIcon from "@/components/icons/AchievementsIcon.vue";
 import ProfileIcon from "@/components/icons/ProfileIcon.vue";
 import LiveIcon from "@/components/icons/LiveIcon.vue";
-import { useAchievementStore } from "@/stores/achievements.js";
-import { useHistoryStore } from "@/stores/history.js";
 
 const route = useRoute();
-const achievementStore = useAchievementStore();
-const historyStore = useHistoryStore();
 
 // Helper to determine if a route is active
 const isActive = (path) => {
   return route.path === path;
 };
-
-// Update achievement progress on mount
-onMounted(() => {
-  const history = historyStore.sortedHistory();
-  const currentShoot = { scores: [] };
-  achievementStore.updateProgress(currentShoot, history);
-});
-
-// Calculate progress percentage for the ring
-const progressPercentage = computed(() => {
-  const progress = achievementStore.getProgress();
-  return Math.min((progress.totalArrows / progress.targetArrows) * 100, 100);
-});
-
 </script>
 
 <template>
@@ -75,24 +56,7 @@ const progressPercentage = computed(() => {
 
     <router-link to="/achievements" class="nav-item" :class="{ active: isActive('/achievements') }" data-cy="nav-achievements">
       <div class="icon-container">
-        <div class="achievement-progress">
-          <svg class="progress-ring" viewBox="0 0 36 36">
-            <path
-              class="progress-ring-background"
-              d="M18 2.0845
-                a 15.9155 15.9155 0 0 1 0 31.831
-                a 15.9155 15.9155 0 0 1 0 -31.831"
-            />
-            <path
-              class="progress-ring-fill"
-              :style="`stroke-dasharray: ${progressPercentage}, 100`"
-              d="M18 2.0845
-                a 15.9155 15.9155 0 0 1 0 31.831
-                a 15.9155 15.9155 0 0 1 0 -31.831"
-            />
-          </svg>
-          <AchievementsIcon class="nav-icon" />
-        </div>
+        <AchievementsIcon class="nav-icon" />
       </div>
       <span class="nav-label">Awards</span>
     </router-link>
@@ -165,36 +129,6 @@ const progressPercentage = computed(() => {
   border-radius: 50%;
   background-color: #dc3545;
 }
-
-.achievement-progress {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.progress-ring {
-  position: absolute;
-  width: 32px;
-  height: 32px;
-  transform: rotate(-90deg);
-}
-
-.progress-ring-background {
-  fill: none;
-  stroke: var(--color-border-light);
-  stroke-width: 2;
-}
-
-.progress-ring-fill {
-  fill: none;
-  stroke: var(--color-highlight);
-  stroke-width: 2;
-  stroke-linecap: round;
-  transition: stroke-dasharray 0.3s ease;
-}
-
-
 
 /* Add safe area padding for iOS devices */
 @supports (padding-bottom: env(safe-area-inset-bottom)) {
