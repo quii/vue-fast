@@ -22,7 +22,7 @@ export const useAchievementStore = defineStore('achievement', () => {
   function updateProgress(currentShoot: any, shootHistory: any[]) {
     const context = {
       currentShoot: { scores: currentShoot.scores || [] },
-      shootHistory: shootHistory.map(shoot => ({ scores: shoot.scores || [] }))
+      shootHistory: shootHistory // Use full HistoryItem objects directly
     };
 
     const previousProgress = progress.value;

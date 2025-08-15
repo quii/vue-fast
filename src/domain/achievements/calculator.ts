@@ -1,0 +1,85 @@
+/**
+ * Achievement Calculator
+ * 
+ * Domain function that takes context and returns all achievement data needed for rendering
+ */
+
+import type { AchievementContext } from './types.js';
+import { getAllAchievements } from './registry.js';
+import { check1kArrowsAchieved } from './one_thousand_arrows.js';
+import { check10kArrowsAchieved } from './ten_thousand_arrows.js';
+import { check25kArrowsAchieved } from './twenty_five_thousand_arrows.js';
+import { check600AtWA70Achieved } from './six_hundred_at_wa70.js';
+import { checkAgincourtArrowsAchieved } from './agincourt_arrows.js';
+
+export interface AchievementData {
+  id: string;
+  name: string;
+  description: string;
+  tier: string;
+  targetArrows?: number;
+  targetScore?: number;
+  gameType?: string;
+  progress: {
+    totalArrows?: number;
+    targetArrows?: number;
+    currentScore?: number;
+    targetScore?: number;
+    isUnlocked: boolean;
+    unlockedAt?: string;
+  };
+  progressPercentage: number;
+}
+
+export function calculateAchievements(context: AchievementContext): AchievementData[] {
+  const allAchievements = getAllAchievements();
+  
+  return allAchievements.map(achievement => {
+    let progress;
+    let progressPercentage = 0;
+    
+    // Call the appropriate achievement function based on ID
+    switch (achievement.id) {
+      case 'one_thousand_arrows':
+        progress = check1kArrowsAchieved(context);
+        progressPercentage = Math.min((progress.totalArrows! / progress.targetArrows!) * 100, 100);
+        break;
+        
+      case 'agincourt_arrows':
+        progress = checkAgincourtArrowsAchieved(context);
+        progressPercentage = Math.min((progress.totalArrows! / progress.targetArrows!) * 100, 100);
+        break;
+        
+      case 'ten_thousand_arrows':
+        progress = check10kArrowsAchieved(context);
+        progressPercentage = Math.min((progress.totalArrows! / progress.targetArrows!) * 100, 100);
+        break;
+        
+      case 'twenty_five_thousand_arrows':
+        progress = check25kArrowsAchieved(context);
+        progressPercentage = Math.min((progress.totalArrows! / progress.targetArrows!) * 100, 100);
+        break;
+        
+      case 'six_hundred_at_wa70':
+        progress = check600AtWA70Achieved(context);
+        progressPercentage = progress.isUnlocked ? 100 : Math.min((progress.currentScore! / progress.targetScore!) * 100, 100);
+        break;
+        
+      default:
+        // Default fallback for unknown achievements
+        progress = { 
+          totalArrows: 0, 
+          targetArrows: achievement.targetArrows || 0, 
+          isUnlocked: false 
+        };
+        progressPercentage = 0;
+        break;
+    }
+
+    return {
+      ...achievement,
+      progress,
+      progressPercentage
+    };
+  });
+}

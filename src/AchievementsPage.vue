@@ -30,22 +30,28 @@ import { computed, ref } from 'vue'
 import BaseTopBar from '@/components/ui/BaseTopBar.vue'
 import AchievementBadge from '@/components/AchievementBadge.vue'
 import { useHistoryStore } from '@/stores/history.js'
-import { getAllAchievements } from '@/domain/achievements/registry.js'
-import { check1kArrowsAchieved } from '@/domain/achievements/one_thousand_arrows.js'
-import { check10kArrowsAchieved } from '@/domain/achievements/ten_thousand_arrows.js'
-import { check25kArrowsAchieved } from '@/domain/achievements/twenty_five_thousand_arrows.js'
-import { check600AtWA70Achieved } from '@/domain/achievements/six_hundred_at_wa70.js'
+import { calculateAchievements } from '@/domain/achievements/calculator.js'
 
 // Achievement icons
 import BeginnerTargetIcon from '@/components/icons/achievements/BeginnerTargetIcon.vue'
 import MedalIcon from '@/components/icons/achievements/MedalIcon.vue'
 import TrophyIcon from '@/components/icons/achievements/TrophyIcon.vue'
 import BullseyeIcon from '@/components/icons/achievements/BullseyeIcon.vue'
-import { checkAgincourtArrowsAchieved } from '@/domain/achievements/agincourt_arrows.js'
 
 const historyStore = useHistoryStore()
 
 const currentFilter = ref('all')
+
+const achievements = computed(() => {
+  const history = historyStore.sortedHistory()
+  const currentShoot = { scores: [] } // No current shoot on this page
+  const context = {
+    currentShoot,
+    shootHistory: history // Use full HistoryItem objects directly
+  }
+
+  return calculateAchievements(context)
+})
 
 const filterButtons = computed(() => {
   const allAchievements = achievements.value
@@ -85,54 +91,6 @@ function handleFilterAction({ action }) {
   }
 }
 
-const achievements = computed(() => {
-  const history = historyStore.sortedHistory()
-  const currentShoot = { scores: [] } // No current shoot on this page
-  const context = {
-    currentShoot,
-    shootHistory: history.map(shoot => ({ 
-      scores: shoot.scores || [], 
-      score: shoot.score || 0,
-      gameType: shoot.gameType || ''
-    }))
-  }
-
-  const allAchievements = getAllAchievements()
-  
-  return allAchievements.map(achievement => {
-    let progress
-    let progressPercentage = 0
-    
-    // Call the appropriate achievement function
-    if (achievement.id === 'one_thousand_arrows') {
-      progress = check1kArrowsAchieved(context)
-      progressPercentage = Math.min((progress.totalArrows / progress.targetArrows) * 100, 100)
-    } else if (achievement.id === 'agincourt_arrows') {
-      progress = checkAgincourtArrowsAchieved(context)
-      progressPercentage = Math.min((progress.totalArrows / progress.targetArrows) * 100, 100)
-    } else if (achievement.id === 'ten_thousand_arrows') {
-      progress = check10kArrowsAchieved(context)
-      progressPercentage = Math.min((progress.totalArrows / progress.targetArrows) * 100, 100)
-    } else if (achievement.id === 'twenty_five_thousand_arrows') {
-      progress = check25kArrowsAchieved(context)
-      progressPercentage = Math.min((progress.totalArrows / progress.targetArrows) * 100, 100)
-    } else if (achievement.id === 'six_hundred_at_wa70') {
-      progress = check600AtWA70Achieved(context)
-      progressPercentage = progress.isUnlocked ? 100 : Math.min((progress.currentScore / progress.targetScore) * 100, 100)
-    } else {
-      // Default fallback
-      progress = { totalArrows: 0, targetArrows: achievement.targetArrows || 0, isUnlocked: false }
-      progressPercentage = 0
-    }
-
-    return {
-      ...achievement,
-      progress,
-      progressPercentage
-    }
-  })
-})
-
 const filteredAchievements = computed(() => {
   const allAchievements = achievements.value
   
@@ -148,6 +106,7 @@ const filteredAchievements = computed(() => {
 function getAchievementIcon(achievementId) {
   const iconMap = {
     'one_thousand_arrows': BeginnerTargetIcon,
+    'agincourt_arrows': BeginnerTargetIcon,
     'ten_thousand_arrows': MedalIcon,
     'twenty_five_thousand_arrows': TrophyIcon,
     'six_hundred_at_wa70': BullseyeIcon

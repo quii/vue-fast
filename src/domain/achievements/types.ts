@@ -36,9 +36,9 @@ export interface AchievementContext {
     gameType?: string; // Type of round
   };
   
-  shootHistory: Array<{
-    scores: any[];
-    score?: number;
-    gameType?: string;
-  }>;
+  // Use the existing HistoryItem type - we'll need the full data later
+  shootHistory: HistoryItem[];
 }
+
+// Import HistoryItem from the player history repository
+import type { HistoryItem } from '../repositories/player_history';
