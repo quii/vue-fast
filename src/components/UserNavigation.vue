@@ -33,9 +33,6 @@ const progressPercentage = computed(() => {
   return Math.min((progress.totalArrows / progress.targetArrows) * 100, 100);
 });
 
-const isUnlocked = computed(() => {
-  return achievementStore.getProgress().isUnlocked;
-});
 </script>
 
 <template>
@@ -78,7 +75,7 @@ const isUnlocked = computed(() => {
 
     <router-link to="/achievements" class="nav-item" :class="{ active: isActive('/achievements') }">
       <div class="icon-container">
-        <div class="achievement-progress" :class="{ unlocked: isUnlocked }">
+        <div class="achievement-progress">
           <svg class="progress-ring" viewBox="0 0 36 36">
             <path
               class="progress-ring-background"
@@ -95,7 +92,6 @@ const isUnlocked = computed(() => {
             />
           </svg>
           <AchievementsIcon class="nav-icon" />
-          <div v-if="isUnlocked" class="unlock-badge">🏆</div>
         </div>
       </div>
       <span class="nav-label">Awards</span>
@@ -198,24 +194,7 @@ const isUnlocked = computed(() => {
   transition: stroke-dasharray 0.3s ease;
 }
 
-.achievement-progress.unlocked .progress-ring-fill {
-  stroke: #28a745;
-}
 
-.unlock-badge {
-  position: absolute;
-  top: -4px;
-  right: -4px;
-  font-size: 12px;
-  background: white;
-  border-radius: 50%;
-  width: 16px;
-  height: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-}
 
 /* Add safe area padding for iOS devices */
 @supports (padding-bottom: env(safe-area-inset-bottom)) {

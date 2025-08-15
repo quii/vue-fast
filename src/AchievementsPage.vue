@@ -7,27 +7,32 @@
         Track your archery progress and complete awards based on your performance.
       </p>
       
-      <div class="achievement-card">
+      <div 
+        v-for="achievement in achievements" 
+        :key="achievement.id"
+        class="achievement-card"
+        :class="{ completed: achievement.progress.isUnlocked }"
+      >
         <div class="achievement-header">
-          <div class="achievement-title">{{ achievementInfo.name }}</div>
+          <div class="achievement-title">{{ achievement.name }}</div>
         </div>
         
         <div class="achievement-description">
-          {{ achievementInfo.description }}
+          {{ achievement.description }}
         </div>
         
         <div class="progress-section">
           <div class="progress-text">
-            {{ progress.totalArrows.toLocaleString() }} / {{ progress.targetArrows.toLocaleString() }} arrows
+            {{ achievement.progress.totalArrows.toLocaleString() }} / {{ achievement.progress.targetArrows.toLocaleString() }} arrows
           </div>
           <div class="progress-bar">
             <div 
               class="progress-fill" 
-              :style="{ width: progressPercentage + '%' }"
+              :style="{ width: achievement.progressPercentage + '%' }"
             ></div>
           </div>
           <div class="progress-percentage">
-            {{ Math.round(progressPercentage) }}% complete
+            {{ Math.round(achievement.progressPercentage) }}% complete
           </div>
         </div>
       </div>
@@ -38,24 +43,42 @@
 <script setup>
 import { computed, onMounted } from 'vue'
 import AchievementsIcon from '@/components/icons/AchievementsIcon.vue'
-import { useAchievementStore } from '@/stores/achievements.js'
 import { useHistoryStore } from '@/stores/history.js'
+import { getAllAchievements } from '@/domain/achievements/registry.js'
+import { check10kArrowsAchieved } from '@/domain/achievements/ten_thousand_arrows.js'
+import { check25kArrowsAchieved } from '@/domain/achievements/twenty_five_thousand_arrows.js'
 
-const achievementStore = useAchievementStore()
 const historyStore = useHistoryStore()
 
-const achievementInfo = computed(() => achievementStore.getAchievementInfo())
-const progress = computed(() => achievementStore.getProgress())
-
-const progressPercentage = computed(() => {
-  return Math.min((progress.value.totalArrows / progress.value.targetArrows) * 100, 100)
-})
-
-onMounted(() => {
-  // Update achievement progress when page loads
+const achievements = computed(() => {
   const history = historyStore.sortedHistory()
   const currentShoot = { scores: [] } // No current shoot on this page
-  achievementStore.updateProgress(currentShoot, history)
+  const context = {
+    currentShoot,
+    shootHistory: history.map(shoot => ({ scores: shoot.scores || [] }))
+  }
+
+  const allAchievements = getAllAchievements()
+  
+  return allAchievements.map(achievement => {
+    let progress
+    if (achievement.id === 'ten_thousand_arrows') {
+      progress = check10kArrowsAchieved(context)
+    } else if (achievement.id === 'twenty_five_thousand_arrows') {
+      progress = check25kArrowsAchieved(context)
+    } else {
+      // Default fallback
+      progress = { totalArrows: 0, targetArrows: achievement.targetArrows, isUnlocked: false }
+    }
+
+    const progressPercentage = Math.min((progress.totalArrows / progress.targetArrows) * 100, 100)
+
+    return {
+      ...achievement,
+      progress,
+      progressPercentage
+    }
+  })
 })
 </script>
 
@@ -97,6 +120,11 @@ h1 {
   margin-bottom: 1rem;
   text-align: left;
   border: 2px solid var(--color-border);
+}
+
+.achievement-card.completed {
+  border-color: var(--color-highlight);
+  background-color: var(--color-background-mute);
 }
 
 .achievement-header {

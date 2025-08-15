@@ -8,7 +8,7 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import type { AchievementProgress } from '@/domain/achievements/types.js';
 import { check10kArrowsAchieved } from '@/domain/achievements/ten_thousand_arrows.js';
-import { getAchievement } from '@/domain/achievements/registry.js';
+import { TEN_THOUSAND_ARROWS } from '@/domain/achievements/registry.js';
 
 export const useAchievementStore = defineStore('achievement', () => {
   // State
@@ -30,14 +30,14 @@ export const useAchievementStore = defineStore('achievement', () => {
     
     // Check if achievement was just unlocked
     if (!previousProgress.isUnlocked && progress.value.isUnlocked) {
-      return { justUnlocked: true, achievement: getAchievement() };
+      return { justUnlocked: true, achievement: TEN_THOUSAND_ARROWS };
     }
     
     return { justUnlocked: false };
   }
 
   function getAchievementInfo() {
-    return getAchievement();
+    return TEN_THOUSAND_ARROWS;
   }
 
   function getProgress() {
