@@ -14,6 +14,14 @@ export const ONE_THOUSAND_ARROWS: Achievement = {
   targetArrows: 1000
 };
 
+export const AGINCOURT_ARROWS: Achievement = {
+  id: 'agincourt_arrows',
+  name: 'Agincourt',
+  description: 'Shoot 1415 arrows',
+  tier: 'bronze',
+  targetArrows: 1415
+}
+
 export const TEN_THOUSAND_ARROWS: Achievement = {
   id: 'ten_thousand_arrows',
   name: '10k Club',
@@ -41,6 +49,7 @@ export const SIX_HUNDRED_AT_WA70: Achievement = {
 
 export const ALL_ACHIEVEMENTS: Achievement[] = [
   ONE_THOUSAND_ARROWS,
+  AGINCOURT_ARROWS,
   TEN_THOUSAND_ARROWS,
   TWENTY_FIVE_THOUSAND_ARROWS,
   SIX_HUNDRED_AT_WA70

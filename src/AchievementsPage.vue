@@ -41,6 +41,7 @@ import BeginnerTargetIcon from '@/components/icons/achievements/BeginnerTargetIc
 import MedalIcon from '@/components/icons/achievements/MedalIcon.vue'
 import TrophyIcon from '@/components/icons/achievements/TrophyIcon.vue'
 import BullseyeIcon from '@/components/icons/achievements/BullseyeIcon.vue'
+import { checkAgincourtArrowsAchieved } from '@/domain/achievements/agincourt_arrows.js'
 
 const historyStore = useHistoryStore()
 
@@ -105,6 +106,9 @@ const achievements = computed(() => {
     // Call the appropriate achievement function
     if (achievement.id === 'one_thousand_arrows') {
       progress = check1kArrowsAchieved(context)
+      progressPercentage = Math.min((progress.totalArrows / progress.targetArrows) * 100, 100)
+    } else if (achievement.id === 'agincourt_arrows') {
+      progress = checkAgincourtArrowsAchieved(context)
       progressPercentage = Math.min((progress.totalArrows / progress.targetArrows) * 100, 100)
     } else if (achievement.id === 'ten_thousand_arrows') {
       progress = check10kArrowsAchieved(context)
