@@ -20,31 +20,31 @@ class AchievementsPage {
   }
 
   shouldShowCompletionPercentage(achievementName: string, percentage: string) {
-    cy.contains('.badge-title', achievementName).closest('.achievement-badge')
+    cy.contains('.badge-title', achievementName).closest('.achievement-badge, .compact-achievement-badge')
       .should('contain', `${percentage}% complete`);
     return this;
   }
 
   shouldShowArrowProgress(achievementName: string, current: string, target: string) {
-    cy.contains('.badge-title', achievementName).closest('.achievement-badge')
+    cy.contains('.badge-title', achievementName).closest('.achievement-badge, .compact-achievement-badge')
       .should('contain', `${current} / ${target} arrows`);
     return this;
   }
 
   shouldShowScoreProgress(achievementName: string, current: string, target: string, gameType: string) {
-    cy.contains('.badge-title', achievementName).closest('.achievement-badge')
+    cy.contains('.badge-title', achievementName).closest('.achievement-badge, .compact-achievement-badge')
       .should('contain', `${current} / ${target} points on ${gameType}`);
     return this;
   }
 
   shouldShowAsCompleted(achievementName: string) {
-    cy.contains('.badge-title', achievementName).closest('.achievement-badge')
+    cy.contains('.badge-title', achievementName).closest('.achievement-badge, .compact-achievement-badge')
       .should('have.class', 'earned');
     return this;
   }
 
   shouldNotShowAsCompleted(achievementName: string) {
-    cy.contains('.badge-title', achievementName).closest('.achievement-badge')
+    cy.contains('.badge-title', achievementName).closest('.achievement-badge, .compact-achievement-badge')
       .should('not.have.class', 'earned');
     return this;
   }
@@ -75,7 +75,7 @@ class AchievementsPage {
   }
 
   shouldHaveAchievementCount(count: number) {
-    cy.get('.achievement-badge').should('have.length', count);
+    cy.get('.achievement-badge, .compact-achievement-badge').should('have.length', count);
     return this;
   }
 }

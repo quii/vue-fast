@@ -12,6 +12,7 @@
         :key="group.group.id"
         :group="group.group"
         :achievements="group.achievements"
+        :current-filter="currentFilter"
       />
       
       <!-- Ungrouped achievements (fallback for achievements without groups) -->

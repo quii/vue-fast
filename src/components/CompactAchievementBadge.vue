@@ -22,6 +22,11 @@
       </div>
     </div>
     
+    <!-- Tier indicator for unearned achievements -->
+    <div v-if="!isEarned" class="tier-indicator" :class="tier">
+      <span class="tier-text">{{ tier.charAt(0).toUpperCase() + tier.slice(1) }}</span>
+    </div>
+    
     <div v-if="isEarned" class="earned-indicator">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
         <path d="M20 6L9 17l-5-5"></path>
@@ -77,9 +82,10 @@ const props = defineProps({
 
 .compact-achievement-badge.bronze:not(.earned) {
   --badge-background: var(--color-background-mute);
-  --badge-border: var(--color-border);
+  --badge-border: #cd7f32;
   --badge-text-color: var(--color-text-mute);
   opacity: 0.7;
+  border-left: 3px solid #cd7f32;
 }
 
 .compact-achievement-badge.silver {
@@ -95,9 +101,10 @@ const props = defineProps({
 
 .compact-achievement-badge.silver:not(.earned) {
   --badge-background: var(--color-background-mute);
-  --badge-border: var(--color-border);
+  --badge-border: #c0c0c0;
   --badge-text-color: var(--color-text-mute);
   opacity: 0.7;
+  border-left: 3px solid #c0c0c0;
 }
 
 .compact-achievement-badge.gold {
@@ -116,6 +123,7 @@ const props = defineProps({
   --badge-border: var(--color-border);
   --badge-text-color: var(--color-text-mute);
   opacity: 0.7;
+  border-left: 3px solid #ffd700;
 }
 
 .compact-achievement-badge.diamond {
@@ -134,6 +142,7 @@ const props = defineProps({
   --badge-border: var(--color-border);
   --badge-text-color: var(--color-text-mute);
   opacity: 0.7;
+  border-left: 3px solid #87ceeb;
 }
 
 /* Shimmer effect for earned badges */
@@ -165,13 +174,15 @@ const props = defineProps({
 .badge-content {
   flex: 1;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .badge-title {
   font-size: 1.1rem;
   font-weight: 600;
   color: var(--badge-text-color);
-  margin-bottom: 0.25rem;
   line-height: 1.2;
 }
 
@@ -187,6 +198,53 @@ const props = defineProps({
   height: 20px;
   color: var(--badge-text-color);
   opacity: 0.9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tier-indicator {
+  flex-shrink: 0;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.8;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+}
+
+.tier-indicator.bronze {
+  background: linear-gradient(135deg, #8b4513, #cd7f32);
+  color: white;
+  box-shadow: 0 1px 3px rgba(139, 69, 19, 0.3);
+}
+
+.tier-indicator.silver {
+  background: linear-gradient(135deg, #708090, #c0c0c0);
+  color: #2c2c2c;
+  box-shadow: 0 1px 3px rgba(112, 128, 144, 0.3);
+}
+
+.tier-indicator.gold {
+  background: linear-gradient(135deg, #b8860b, #ffd700);
+  color: #2c2c2c;
+  box-shadow: 0 1px 3px rgba(184, 134, 11, 0.3);
+}
+
+.tier-indicator.diamond {
+  background: linear-gradient(135deg, #4169e1, #87ceeb);
+  color: white;
+  box-shadow: 0 1px 3px rgba(65, 105, 225, 0.3);
+}
+
+.tier-text {
+  font-size: 0.65rem;
 }
 
 /* Hover effects */
@@ -206,7 +264,7 @@ const props = defineProps({
   }
   
   .badge-title {
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
   
   .progress-text {

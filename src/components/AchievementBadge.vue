@@ -38,6 +38,11 @@
       </div>
     </div>
     
+    <!-- Tier indicator for unearned achievements -->
+    <div v-if="!isEarned" class="tier-indicator" :class="tier">
+      <span class="tier-text">{{ tier.charAt(0).toUpperCase() + tier.slice(1) }}</span>
+    </div>
+    
     <div v-if="isEarned" class="earned-indicator">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
         <path d="M20 6L9 17l-5-5"></path>
@@ -117,13 +122,14 @@ const props = defineProps({
 /* Unearned bronze - muted, desaturated */
 .achievement-badge.bronze:not(.earned) {
   --badge-background: var(--color-background-mute);
-  --badge-border: var(--color-border);
+  --badge-border: #cd7f32;
   --badge-text-color: var(--color-text-mute);
   --badge-icon-bg: rgba(255, 255, 255, 0.1);
-  --badge-accent: var(--color-border);
+  --badge-accent: #cd7f32;
   background: var(--badge-background);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   opacity: 0.7;
+  border-left: 4px solid #cd7f32;
 }
 
 /* Only earned achievements get shimmer */
@@ -179,13 +185,14 @@ const props = defineProps({
 /* Unearned silver - muted, desaturated */
 .achievement-badge.silver:not(.earned) {
   --badge-background: var(--color-background-mute);
-  --badge-border: var(--color-border);
+  --badge-border: #c0c0c0;
   --badge-text-color: var(--color-text-mute);
   --badge-icon-bg: rgba(255, 255, 255, 0.1);
-  --badge-accent: var(--color-border);
+  --badge-accent: #c0c0c0;
   background: var(--badge-background);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   opacity: 0.7;
+  border-left: 4px solid #c0c0c0;
 }
 
 .achievement-badge.silver.earned::after {
@@ -239,13 +246,14 @@ const props = defineProps({
 /* Unearned gold - muted, desaturated */
 .achievement-badge.gold:not(.earned) {
   --badge-background: var(--color-background-mute);
-  --badge-border: var(--color-border);
+  --badge-border: #ffd700;
   --badge-text-color: var(--color-text-mute);
   --badge-icon-bg: rgba(255, 255, 255, 0.1);
-  --badge-accent: var(--color-border);
+  --badge-accent: #ffd700;
   background: var(--badge-background);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   opacity: 0.7;
+  border-left: 4px solid #ffd700;
 }
 
 /* Only earned achievements get shimmer */
@@ -301,13 +309,14 @@ const props = defineProps({
 /* Unearned diamond - muted, desaturated */
 .achievement-badge.diamond:not(.earned) {
   --badge-background: var(--color-background-mute);
-  --badge-border: var(--color-border);
+  --badge-border: #87ceeb;
   --badge-text-color: var(--color-text-mute);
   --badge-icon-bg: rgba(255, 255, 255, 0.1);
-  --badge-accent: var(--color-border);
+  --badge-accent: #87ceeb;
   background: var(--badge-background);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   opacity: 0.7;
+  border-left: 4px solid #87ceeb;
 }
 
 /* Only earned achievements get shimmer */
@@ -396,6 +405,9 @@ const props = defineProps({
 .badge-content {
   flex: 1;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .badge-title {
@@ -451,6 +463,53 @@ const props = defineProps({
   height: 24px;
   color: var(--badge-text-color);
   opacity: 0.9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tier-indicator {
+  flex-shrink: 0;
+  padding: 0.375rem 0.75rem;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.9;
+  min-width: 60px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tier-indicator.bronze {
+  background: linear-gradient(135deg, #8b4513, #cd7f32);
+  color: white;
+  box-shadow: 0 2px 4px rgba(139, 69, 19, 0.3);
+}
+
+.tier-indicator.silver {
+  background: linear-gradient(135deg, #708090, #c0c0c0);
+  color: #2c2c2c;
+  box-shadow: 0 2px 4px rgba(112, 128, 144, 0.3);
+}
+
+.tier-indicator.gold {
+  background: linear-gradient(135deg, #b8860b, #ffd700);
+  color: #2c2c2c;
+  box-shadow: 0 2px 4px rgba(184, 134, 11, 0.3);
+}
+
+.tier-indicator.diamond {
+  background: linear-gradient(135deg, #4169e1, #87ceeb);
+  color: white;
+  box-shadow: 0 2px 4px rgba(65, 105, 225, 0.3);
+}
+
+.tier-text {
+  font-size: 0.75rem;
 }
 
 /* Responsive adjustments */

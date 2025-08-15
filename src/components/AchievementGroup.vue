@@ -3,8 +3,15 @@
     <div class="group-header">
       <h3 class="group-title">{{ group.name }}</h3>
       <p class="group-description">{{ group.description }}</p>
-      <div class="group-stats">
-        {{ earnedCount }} / {{ totalCount }} earned
+      <div class="group-stats" v-if="currentFilter === 'all'">
+        <div 
+          v-for="tierProgress in groupProgress.tierProgress" 
+          :key="tierProgress.tier"
+          class="tier-pill"
+          :class="tierProgress.tier"
+        >
+          {{ tierProgress.earned }} / {{ tierProgress.total }}
+        </div>
       </div>
     </div>
     
@@ -27,6 +34,7 @@
 <script setup>
 import { computed } from 'vue'
 import CompactAchievementBadge from './CompactAchievementBadge.vue'
+import { calculateGroupProgress } from '@/domain/achievements/group_progress.js'
 
 const props = defineProps({
   group: {
@@ -36,15 +44,24 @@ const props = defineProps({
   achievements: {
     type: Array,
     required: true
+  },
+  currentFilter: {
+    type: String,
+    default: 'all'
   }
 })
 
+const groupProgress = computed(() => {
+  return calculateGroupProgress(props.achievements)
+})
+
+// Keep the old computed properties for backward compatibility if needed
 const earnedCount = computed(() => {
-  return props.achievements.filter(achievement => achievement.progress.isUnlocked).length
+  return groupProgress.value.totalEarned
 })
 
 const totalCount = computed(() => {
-  return props.achievements.length
+  return groupProgress.value.totalAchievements
 })
 </script>
 
@@ -87,14 +104,45 @@ const totalCount = computed(() => {
 }
 
 .group-stats {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tier-pill {
   display: inline-block;
-  background: var(--color-highlight);
-  color: var(--color-classification-text-dark);
-  padding: 0.4rem 0.8rem;
-  border-radius: 20px;
-  font-size: 0.85rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 16px;
+  font-size: 0.8rem;
   font-weight: 600;
-  border: 1px solid var(--color-border);
+  border: 1px solid transparent;
+  min-width: 50px;
+  text-align: center;
+}
+
+.tier-pill.bronze {
+  background: linear-gradient(135deg, #8b4513, #cd7f32);
+  color: white;
+  border-color: #cd7f32;
+}
+
+.tier-pill.silver {
+  background: linear-gradient(135deg, #708090, #c0c0c0);
+  color: #2c2c2c;
+  border-color: #c0c0c0;
+}
+
+.tier-pill.gold {
+  background: linear-gradient(135deg, #b8860b, #ffd700);
+  color: #2c2c2c;
+  border-color: #ffd700;
+}
+
+.tier-pill.diamond {
+  background: linear-gradient(135deg, #4169e1, #87ceeb);
+  color: #2c2c2c;
+  border-color: #87ceeb;
 }
 
 .group-content {
