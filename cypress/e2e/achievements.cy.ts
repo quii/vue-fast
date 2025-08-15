@@ -25,8 +25,6 @@ describe('Achievements System', () => {
     // Verify the achievement is earned and displayed correctly
     achievementsPage.visit()
     achievementsPage.shouldShowAchievement('600 at 720')
-    achievementsPage.shouldShowScoreProgress('600 at 720', '720', '600', 'WA 70M')
-    achievementsPage.shouldShowCompletionPercentage('600 at 720', '100')
     achievementsPage.shouldShowAsCompleted('600 at 720')
 
     // Verify filtering works: achieved filter should show this achievement

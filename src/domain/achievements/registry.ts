@@ -10,6 +10,7 @@ export const ONE_THOUSAND_ARROWS: Achievement = {
   id: 'one_thousand_arrows',
   name: '1k Club',
   description: 'Shoot 1,000 arrows in total',
+  tier: 'bronze',
   targetArrows: 1000
 };
 
@@ -17,6 +18,7 @@ export const TEN_THOUSAND_ARROWS: Achievement = {
   id: 'ten_thousand_arrows',
   name: '10k Club',
   description: 'Shoot 10,000 arrows in total',
+  tier: 'silver',
   targetArrows: 10000
 };
 
@@ -24,6 +26,7 @@ export const TWENTY_FIVE_THOUSAND_ARROWS: Achievement = {
   id: 'twenty_five_thousand_arrows',
   name: '25k Club',
   description: 'Shoot 25,000 arrows in total',
+  tier: 'gold',
   targetArrows: 25000
 };
 
@@ -31,6 +34,7 @@ export const SIX_HUNDRED_AT_WA70: Achievement = {
   id: 'six_hundred_at_wa70',
   name: '600 at 720',
   description: 'Score 600 or more on a WA 70m round',
+  tier: 'gold',
   targetScore: 600,
   gameType: 'wa 70m'
 };

@@ -6,40 +6,21 @@
     />
     
     <div class="content">
-      <div 
+      <AchievementBadge
         v-for="achievement in filteredAchievements" 
         :key="achievement.id"
-        class="achievement-card"
-        :class="{ completed: achievement.progress.isUnlocked }"
-      >
-        <div class="achievement-header">
-          <div class="achievement-title">{{ achievement.name }}</div>
-        </div>
-        
-        <div class="achievement-description">
-          {{ achievement.description }}
-        </div>
-        
-        <div class="progress-section">
-          <div class="progress-text">
-            <span v-if="achievement.targetArrows">
-              {{ achievement.progress.totalArrows.toLocaleString() }} / {{ achievement.progress.targetArrows.toLocaleString() }} arrows
-            </span>
-            <span v-else-if="achievement.targetScore">
-              {{ achievement.progress.currentScore || 0 }} / {{ achievement.progress.targetScore }} points on {{ achievement.gameType?.toUpperCase() }}
-            </span>
-          </div>
-          <div class="progress-bar">
-            <div 
-              class="progress-fill" 
-              :style="{ width: achievement.progressPercentage + '%' }"
-            ></div>
-          </div>
-          <div class="progress-percentage">
-            {{ Math.round(achievement.progressPercentage) }}% complete
-          </div>
-        </div>
-      </div>
+        :title="achievement.name"
+        :description="achievement.description"
+        :icon-component="getAchievementIcon(achievement.id)"
+        :tier="achievement.tier"
+        :is-earned="achievement.progress.isUnlocked"
+        :progress-percentage="achievement.progressPercentage"
+        :target-arrows="achievement.targetArrows"
+        :current-arrows="achievement.progress.totalArrows"
+        :target-score="achievement.targetScore"
+        :current-score="achievement.progress.currentScore"
+        :game-type="achievement.gameType"
+      />
     </div>
   </div>
 </template>
@@ -47,12 +28,19 @@
 <script setup>
 import { computed, ref } from 'vue'
 import BaseTopBar from '@/components/ui/BaseTopBar.vue'
+import AchievementBadge from '@/components/AchievementBadge.vue'
 import { useHistoryStore } from '@/stores/history.js'
 import { getAllAchievements } from '@/domain/achievements/registry.js'
 import { check1kArrowsAchieved } from '@/domain/achievements/one_thousand_arrows.js'
 import { check10kArrowsAchieved } from '@/domain/achievements/ten_thousand_arrows.js'
 import { check25kArrowsAchieved } from '@/domain/achievements/twenty_five_thousand_arrows.js'
 import { check600AtWA70Achieved } from '@/domain/achievements/six_hundred_at_wa70.js'
+
+// Achievement icons
+import BeginnerTargetIcon from '@/components/icons/achievements/BeginnerTargetIcon.vue'
+import MedalIcon from '@/components/icons/achievements/MedalIcon.vue'
+import TrophyIcon from '@/components/icons/achievements/TrophyIcon.vue'
+import BullseyeIcon from '@/components/icons/achievements/BullseyeIcon.vue'
 
 const historyStore = useHistoryStore()
 
@@ -152,79 +140,26 @@ const filteredAchievements = computed(() => {
   
   return allAchievements
 })
+
+function getAchievementIcon(achievementId) {
+  const iconMap = {
+    'one_thousand_arrows': BeginnerTargetIcon,
+    'ten_thousand_arrows': MedalIcon,
+    'twenty_five_thousand_arrows': TrophyIcon,
+    'six_hundred_at_wa70': BullseyeIcon
+  }
+  return iconMap[achievementId] || BeginnerTargetIcon
+}
 </script>
 
 <style scoped>
 .page {
   padding: 0.5rem;
-  max-width: 600px;
+  max-width: 700px;
   margin: 0 auto;
 }
 
 .content {
   margin-top: 0.5rem;
-}
-
-.achievement-card {
-  background-color: var(--color-background-soft);
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin-bottom: 1rem;
-  text-align: left;
-  border: 2px solid var(--color-border);
-}
-
-.achievement-card.completed {
-  border-color: var(--color-highlight);
-  background-color: var(--color-background-mute);
-}
-
-.achievement-header {
-  margin-bottom: 1rem;
-}
-
-.achievement-title {
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: var(--color-text);
-}
-
-.achievement-description {
-  color: var(--color-text-light);
-  margin-bottom: 1.5rem;
-  line-height: 1.4;
-}
-
-.progress-section {
-  margin-top: 1rem;
-}
-
-.progress-text {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--color-text);
-  margin-bottom: 0.5rem;
-}
-
-.progress-bar {
-  background-color: var(--color-background-mute);
-  border-radius: 10px;
-  height: 20px;
-  overflow: hidden;
-  margin-bottom: 0.5rem;
-}
-
-.progress-fill {
-  background-color: var(--color-highlight);
-  height: 100%;
-  border-radius: 10px;
-  transition: width 0.3s ease;
-  min-width: 2px;
-}
-
-.progress-percentage {
-  font-size: 0.9rem;
-  color: var(--color-text-mute);
-  text-align: right;
 }
 </style>

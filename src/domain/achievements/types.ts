@@ -4,11 +4,15 @@
  * Starting with just one achievement: shoot 10,000 arrows total
  */
 
+// Achievement tier levels
+export type AchievementTier = 'bronze' | 'silver' | 'gold';
+
 // Simple achievement definition
 export interface Achievement {
   id: string;
   name: string;
   description: string;
+  tier: AchievementTier;
   targetArrows?: number; // For arrow-count achievements
   targetScore?: number; // For score-based achievements
   gameType?: string; // For round-specific achievements
