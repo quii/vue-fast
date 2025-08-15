@@ -125,4 +125,170 @@ function getAchievementIcon(achievementId) {
 .content {
   margin-top: 0.5rem;
 }
+
+/* Premium Achievement Page Styling - Override BaseTopBar */
+.page :deep(.filters-container) {
+  background: linear-gradient(135deg, 
+    #f8f9fa 0%, 
+    #e9ecef 50%, 
+    #f8f9fa 100%);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  margin-bottom: 1rem;
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.05),
+    0 2px 6px rgba(0, 0, 0, 0.08);
+  position: relative;
+}
+
+.page :deep(.filters-container::before) {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.8), 
+    transparent);
+}
+
+.page :deep(.filters) {
+  padding: 1rem;
+  gap: 0.75rem;
+}
+
+.page :deep(.filter-button), 
+.page :deep(.info-display) {
+  min-width: 100px;
+  height: 55px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, 
+    #ffffff 0%, 
+    #f8f9fa 50%, 
+    #ffffff 100%);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0.5rem 1rem;
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.05),
+    0 1px 2px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.page :deep(.filter-button::before), 
+.page :deep(.info-display::before) {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.9), 
+    transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.page :deep(.filter-button:hover) {
+  transform: translateY(-1px);
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.1),
+    0 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+.page :deep(.filter-button:hover::before),
+.page :deep(.info-display.clickable:hover::before) {
+  opacity: 1;
+}
+
+.page :deep(.filter-button.active), 
+.page :deep(.info-display.active) {
+  background: linear-gradient(135deg, 
+    #4a90e2 0%, 
+    #357abd 25%, 
+    #5ba0f0 50%, 
+    #357abd 75%, 
+    #4a90e2 100%);
+  color: white;
+  border-color: #357abd;
+  box-shadow: 
+    0 4px 12px rgba(74, 144, 226, 0.3),
+    0 2px 6px rgba(53, 122, 189, 0.2);
+}
+
+.page :deep(.filter-button.active::after), 
+.page :deep(.info-display.active::after) {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.3), 
+    transparent);
+  animation: topBarShimmer 2s infinite;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+@keyframes topBarShimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.page :deep(.info-value) {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.page :deep(.info-label), 
+.page :deep(.filter-label) {
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+/* Responsive adjustments for premium styling */
+@media (min-width: 768px) {
+  .page :deep(.filter-button), 
+  .page :deep(.info-display) {
+    min-width: 110px;
+    height: 60px;
+  }
+  
+  .page :deep(.filters) {
+    gap: 1rem;
+  }
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .page :deep(.filters-container) {
+    background: linear-gradient(135deg, 
+      #2c3e50 0%, 
+      #34495e 50%, 
+      #2c3e50 100%);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  .page :deep(.filter-button), 
+  .page :deep(.info-display) {
+    background: linear-gradient(135deg, 
+      #34495e 0%, 
+      #2c3e50 50%, 
+      #34495e 100%);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #ecf0f1;
+  }
+}
 </style>

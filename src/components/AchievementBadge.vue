@@ -52,7 +52,7 @@ const props = defineProps({
   tier: {
     type: String,
     default: 'bronze',
-    validator: value => ['bronze', 'silver', 'gold'].includes(value)
+    validator: value => ['bronze', 'silver', 'gold', 'diamond'].includes(value)
   },
   isEarned: Boolean,
   progressPercentage: Number,
@@ -70,11 +70,11 @@ const props = defineProps({
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 1.5rem;
+  padding: 1rem 1.25rem;
   background: var(--badge-background);
   border: 2px solid var(--badge-border);
-  border-radius: 16px;
-  margin-bottom: 1rem;
+  border-radius: 12px;
+  margin-bottom: 0.75rem;
   transition: all 0.3s ease;
   overflow: hidden;
   color: var(--badge-text-color);
@@ -96,34 +96,257 @@ const props = defineProps({
   opacity: 1;
 }
 
-/* Bold tier-themed backgrounds */
+/* Metallic tier-themed backgrounds with shimmer effects */
 .achievement-badge.bronze {
-  --badge-background: linear-gradient(135deg, #cd7f32, #daa520);
+  --badge-background: linear-gradient(135deg, 
+    #8b4513 0%, 
+    #cd7f32 25%, 
+    #e6a85c 50%, 
+    #cd7f32 75%, 
+    #8b4513 100%);
   --badge-border: #cd7f32;
   --badge-text-color: white;
-  --badge-icon-bg: rgba(255, 255, 255, 0.2);
+  --badge-icon-bg: rgba(255, 255, 255, 0.15);
   --badge-accent: #cd7f32;
+  position: relative;
+  background: var(--badge-background);
+  box-shadow: 0 2px 8px rgba(139, 69, 19, 0.2);
+}
+
+/* Unearned bronze - muted, desaturated */
+.achievement-badge.bronze:not(.earned) {
+  --badge-background: linear-gradient(135deg, 
+    #4a4a4a 0%, 
+    #6b6b6b 25%, 
+    #8a8a8a 50%, 
+    #6b6b6b 75%, 
+    #4a4a4a 100%);
+  --badge-border: #666;
+  --badge-text-color: #bbb;
+  --badge-icon-bg: rgba(255, 255, 255, 0.1);
+  --badge-accent: #666;
+  background: var(--badge-background);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  opacity: 0.7;
+}
+
+/* Only earned achievements get shimmer */
+.achievement-badge.bronze.earned::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.3), 
+    transparent);
+  animation: shimmer 3s infinite;
+  border-radius: inherit;
+  pointer-events: none;
 }
 
 .achievement-badge.silver {
-  --badge-background: linear-gradient(135deg, #c0c0c0, #e5e5e5);
+  --badge-background: linear-gradient(135deg, 
+    #708090 0%, 
+    #c0c0c0 25%, 
+    #e8e8e8 50%, 
+    #c0c0c0 75%, 
+    #708090 100%);
   --badge-border: #c0c0c0;
   --badge-text-color: #2c2c2c;
-  --badge-icon-bg: rgba(0, 0, 0, 0.1);
+  --badge-icon-bg: rgba(0, 0, 0, 0.08);
   --badge-accent: #c0c0c0;
+  position: relative;
+  background: var(--badge-background);
+  box-shadow: 0 2px 8px rgba(192, 192, 192, 0.25);
+}
+
+/* Unearned silver - muted, desaturated */
+.achievement-badge.silver:not(.earned) {
+  --badge-background: linear-gradient(135deg, 
+    #4a4a4a 0%, 
+    #6b6b6b 25%, 
+    #8a8a8a 50%, 
+    #6b6b6b 75%, 
+    #4a4a4a 100%);
+  --badge-border: #666;
+  --badge-text-color: #bbb;
+  --badge-icon-bg: rgba(255, 255, 255, 0.1);
+  --badge-accent: #666;
+  background: var(--badge-background);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  opacity: 0.7;
+}
+
+.achievement-badge.silver.earned::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.4), 
+    transparent);
+  animation: shimmer 2.5s infinite;
+  border-radius: inherit;
+  pointer-events: none;
 }
 
 .achievement-badge.gold {
-  --badge-background: linear-gradient(135deg, #ffd700, #ffed4e);
+  --badge-background: linear-gradient(135deg, 
+    #b8860b 0%, 
+    #ffd700 25%, 
+    #ffef94 50%, 
+    #ffd700 75%, 
+    #b8860b 100%);
   --badge-border: #ffd700;
   --badge-text-color: #2c2c2c;
-  --badge-icon-bg: rgba(0, 0, 0, 0.1);
+  --badge-icon-bg: rgba(0, 0, 0, 0.08);
   --badge-accent: #ffd700;
+  position: relative;
+  background: var(--badge-background);
+  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+}
+
+/* Unearned gold - muted, desaturated */
+.achievement-badge.gold:not(.earned) {
+  --badge-background: linear-gradient(135deg, 
+    #4a4a4a 0%, 
+    #6b6b6b 25%, 
+    #8a8a8a 50%, 
+    #6b6b6b 75%, 
+    #4a4a4a 100%);
+  --badge-border: #666;
+  --badge-text-color: #bbb;
+  --badge-icon-bg: rgba(255, 255, 255, 0.1);
+  --badge-accent: #666;
+  background: var(--badge-background);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  opacity: 0.7;
+}
+
+/* Only earned achievements get shimmer */
+.achievement-badge.gold.earned::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.5), 
+    transparent);
+  animation: shimmer 2s infinite;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.achievement-badge.diamond {
+  --badge-background: linear-gradient(135deg, 
+    #4169e1 0%, 
+    #87ceeb 25%, 
+    #f0f8ff 50%, 
+    #87ceeb 75%, 
+    #4169e1 100%);
+  --badge-border: #87ceeb;
+  --badge-text-color: #2c2c2c;
+  --badge-icon-bg: rgba(0, 0, 0, 0.08);
+  --badge-accent: #87ceeb;
+  position: relative;
+  background: var(--badge-background);
+  box-shadow: 0 2px 8px rgba(135, 206, 235, 0.3);
+}
+
+/* Unearned diamond - muted, desaturated */
+.achievement-badge.diamond:not(.earned) {
+  --badge-background: linear-gradient(135deg, 
+    #4a4a4a 0%, 
+    #6b6b6b 25%, 
+    #8a8a8a 50%, 
+    #6b6b6b 75%, 
+    #4a4a4a 100%);
+  --badge-border: #666;
+  --badge-text-color: #bbb;
+  --badge-icon-bg: rgba(255, 255, 255, 0.1);
+  --badge-accent: #666;
+  background: var(--badge-background);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  opacity: 0.7;
+}
+
+/* Only earned achievements get shimmer */
+.achievement-badge.diamond.earned::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.6), 
+    transparent);
+  animation: shimmer 1.5s infinite;
+  border-radius: inherit;
+  pointer-events: none;
 }
 
 .achievement-badge.earned {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.15),
+    0 2px 6px rgba(0, 0, 0, 0.1);
   transform: translateY(-1px);
+}
+
+.achievement-badge.earned.bronze {
+  box-shadow: 
+    0 4px 12px rgba(139, 69, 19, 0.25),
+    0 2px 6px rgba(205, 127, 50, 0.2);
+}
+
+.achievement-badge.earned.silver {
+  box-shadow: 
+    0 4px 12px rgba(192, 192, 192, 0.3),
+    0 2px 6px rgba(169, 169, 169, 0.25);
+}
+
+.achievement-badge.earned.gold {
+  box-shadow: 
+    0 4px 12px rgba(255, 215, 0, 0.4),
+    0 2px 6px rgba(218, 165, 32, 0.3);
+}
+
+.achievement-badge.earned.diamond {
+  box-shadow: 
+    0 4px 12px rgba(135, 206, 235, 0.4),
+    0 2px 6px rgba(70, 130, 180, 0.3);
+}
+
+/* Shimmer animation for metallic effect */
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Enhanced metallic progress bar */
+.progress-fill {
+  background: linear-gradient(90deg, 
+    rgba(255, 255, 255, 0.4), 
+    rgba(255, 255, 255, 0.7), 
+    rgba(255, 255, 255, 0.4));
+  height: 100%;
+  border-radius: 6px;
+  transition: width 0.4s ease;
+  min-width: 2px;
 }
 
 .badge-icon {
@@ -145,46 +368,46 @@ const props = defineProps({
 }
 
 .badge-title {
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-size: 1.6rem;
+  font-weight: 700;
   color: var(--badge-text-color);
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.15rem;
+  line-height: 1.2;
 }
 
 .badge-description {
   color: var(--badge-text-color);
-  opacity: 0.9;
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
-  line-height: 1.4;
+  opacity: 0.85;
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+/* Reduce bottom spacing for earned achievements */
+.achievement-badge.earned .badge-description {
+  margin-bottom: 0;
 }
 
 .progress-section {
-  margin-top: 0.5rem;
+  margin-top: 0.25rem;
 }
 
 .progress-text {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 500;
   color: var(--badge-text-color);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
 }
 
 .progress-bar {
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
-  height: 8px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  height: 5px;
   overflow: hidden;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
 }
 
-.progress-fill {
-  background: rgba(255, 255, 255, 0.8);
-  height: 100%;
-  border-radius: 8px;
-  transition: width 0.4s ease;
-  min-width: 2px;
-}
+
 
 .progress-percentage {
   font-size: 0.8rem;
@@ -204,7 +427,7 @@ const props = defineProps({
 /* Responsive adjustments */
 @media (max-width: 640px) {
   .achievement-badge {
-    padding: 1rem;
+    padding: 0.875rem 1rem;
     gap: 0.75rem;
   }
   
@@ -214,22 +437,50 @@ const props = defineProps({
   }
   
   .badge-title {
-    font-size: 1.1rem;
+    font-size: 1.4rem;
   }
 }
 
-/* Dark mode adjustments - slightly darker gradients */
+/* Dark mode adjustments - enhanced metallic gradients */
 @media (prefers-color-scheme: dark) {
   .achievement-badge.bronze {
-    --badge-background: linear-gradient(135deg, #a0632a, #b8722b);
+    --badge-background: linear-gradient(135deg, 
+      #6b3410 0%, 
+      #a0632a 25%, 
+      #c8945a 50%, 
+      #a0632a 75%, 
+      #6b3410 100%);
+    box-shadow: 0 2px 8px rgba(107, 52, 16, 0.3);
   }
   
   .achievement-badge.silver {
-    --badge-background: linear-gradient(135deg, #a0a0a0, #c0c0c0);
+    --badge-background: linear-gradient(135deg, 
+      #505050 0%, 
+      #a0a0a0 25%, 
+      #c8c8c8 50%, 
+      #a0a0a0 75%, 
+      #505050 100%);
+    box-shadow: 0 2px 8px rgba(160, 160, 160, 0.2);
   }
   
   .achievement-badge.gold {
-    --badge-background: linear-gradient(135deg, #e6c200, #ffed4e);
+    --badge-background: linear-gradient(135deg, 
+      #9a7209 0%, 
+      #e6c200 25%, 
+      #ffed80 50%, 
+      #e6c200 75%, 
+      #9a7209 100%);
+    box-shadow: 0 2px 8px rgba(230, 194, 0, 0.25);
+  }
+  
+  .achievement-badge.diamond {
+    --badge-background: linear-gradient(135deg, 
+      #2f4f4f 0%, 
+      #708090 25%, 
+      #b0c4de 50%, 
+      #708090 75%, 
+      #2f4f4f 100%);
+    box-shadow: 0 2px 8px rgba(112, 128, 144, 0.25);
   }
 }
 </style>
