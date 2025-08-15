@@ -7,6 +7,7 @@
 
 import type { AchievementContext, AchievementProgress, Achievement } from './types';
 import { roundConfigManager } from '../scoring/game_types';
+import { IMPERIAL_PRECISION_GROUP } from './groups.js';
 
 // Imperial distances for 252 awards
 const IMPERIAL_DISTANCES = [10, 20, 30, 40, 50, 60, 80, 100] as const;
@@ -16,12 +17,28 @@ type ImperialDistance = typeof IMPERIAL_DISTANCES[number];
  * Higher-order function to create a 252 achievement for a specific distance
  */
 function create252Achievement(distance: ImperialDistance): Achievement {
+  // Determine tier based on distance
+  let tier: string;
+  if (distance === 20 || distance === 30) {
+    tier = 'bronze';
+  } else if (distance === 40 || distance === 50) {
+    tier = 'silver';
+  } else if (distance === 60 || distance === 80) {
+    tier = 'gold';
+  } else if (distance === 100) {
+    tier = 'diamond';
+  } else {
+    // Default for 10yd (keeping as bronze)
+    tier = 'bronze';
+  }
+
   return {
     id: `two_fifty_two_at_${distance}yd`,
     name: `252 at ${distance}yd`,
     description: `Score 252 or more in the first 3 dozen arrows at ${distance} yards`,
-    tier: 'silver',
-    targetScore: 252
+    tier: tier as any,
+    targetScore: 252,
+    group: IMPERIAL_PRECISION_GROUP
     // No gameType field - the achievement name already indicates the distance
   };
 }

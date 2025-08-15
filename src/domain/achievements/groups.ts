@@ -1,0 +1,28 @@
+/**
+ * Achievement Groups
+ * 
+ * Definitions for achievement groupings to organize related achievements
+ */
+
+import type { AchievementGroup } from './types.js';
+
+export const ARROW_COUNT_GROUP: AchievementGroup = {
+  id: 'arrow_count',
+  name: 'Shoot Lots of Arrows',
+  description: 'Practice makes improvement',
+  order: 1
+};
+
+export const IMPERIAL_PRECISION_GROUP: AchievementGroup = {
+  id: 'imperial_precision', 
+  name: '252 Awards',
+  description: 'Score 252+ in the first 3 dozen arrows at imperial distances',
+  order: 2
+};
+
+export const METRIC_EXCELLENCE_GROUP: AchievementGroup = {
+  id: 'metric_excellence',
+  name: 'Metric Excellence', 
+  description: 'High scores on metric rounds',
+  order: 3
+};

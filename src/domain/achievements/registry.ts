@@ -6,21 +6,24 @@
 
 import type { Achievement } from './types.js';
 import { TWO_FIFTY_TWO_ACHIEVEMENTS } from './two_fifty_two_awards.js';
+import { ARROW_COUNT_GROUP, IMPERIAL_PRECISION_GROUP, METRIC_EXCELLENCE_GROUP } from './groups.js';
 
 export const ONE_THOUSAND_ARROWS: Achievement = {
   id: 'one_thousand_arrows',
   name: '1k Club',
   description: 'Shoot 1,000 arrows in total',
   tier: 'bronze',
-  targetArrows: 1000
+  targetArrows: 1000,
+  group: ARROW_COUNT_GROUP
 };
 
 export const AGINCOURT_ARROWS: Achievement = {
   id: 'agincourt_arrows',
-  name: 'Agincourt',
+  name: 'Agincourt 1415',
   description: 'Shoot 1415 arrows',
   tier: 'bronze',
-  targetArrows: 1415
+  targetArrows: 1415,
+  group: ARROW_COUNT_GROUP
 }
 
 export const TEN_THOUSAND_ARROWS: Achievement = {
@@ -28,7 +31,8 @@ export const TEN_THOUSAND_ARROWS: Achievement = {
   name: '10k Club',
   description: 'Shoot 10,000 arrows in total',
   tier: 'silver',
-  targetArrows: 10000
+  targetArrows: 10000,
+  group: ARROW_COUNT_GROUP
 };
 
 export const TWENTY_FIVE_THOUSAND_ARROWS: Achievement = {
@@ -36,7 +40,8 @@ export const TWENTY_FIVE_THOUSAND_ARROWS: Achievement = {
   name: '25k Club',
   description: 'Shoot 25,000 arrows in total',
   tier: 'gold',
-  targetArrows: 25000
+  targetArrows: 25000,
+  group: ARROW_COUNT_GROUP
 };
 
 export const SIX_HUNDRED_AT_WA70: Achievement = {
@@ -45,7 +50,8 @@ export const SIX_HUNDRED_AT_WA70: Achievement = {
   description: 'Score 600 or more on a WA 70m round',
   tier: 'gold',
   targetScore: 600,
-  gameType: 'wa 70m'
+  gameType: 'wa 70m',
+  group: METRIC_EXCELLENCE_GROUP
 };
 
 export const ALL_ACHIEVEMENTS: Achievement[] = [

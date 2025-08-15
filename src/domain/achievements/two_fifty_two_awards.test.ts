@@ -45,15 +45,25 @@ vi.mock('../scoring/game_types', () => ({
 }));
 
 describe('252 Achievement System', () => {
-  test('generates 8 achievements for imperial distances', () => {
+  test('generates 8 achievements for imperial distances with correct tiers', () => {
     expect(TWO_FIFTY_TWO_ACHIEVEMENTS).toHaveLength(8);
     
-    const expectedDistances = [10, 20, 30, 40, 50, 60, 80, 100];
-    expectedDistances.forEach(distance => {
+    const expectedTiers = {
+      10: 'bronze',
+      20: 'bronze', 
+      30: 'bronze',
+      40: 'silver',
+      50: 'silver', 
+      60: 'gold',
+      80: 'gold',
+      100: 'diamond'
+    };
+    
+    Object.entries(expectedTiers).forEach(([distance, expectedTier]) => {
       const achievement = TWO_FIFTY_TWO_ACHIEVEMENTS.find(a => a.id === `two_fifty_two_at_${distance}yd`);
       expect(achievement).toBeDefined();
       expect(achievement?.name).toBe(`252 at ${distance}yd`);
-      expect(achievement?.tier).toBe('silver');
+      expect(achievement?.tier).toBe(expectedTier);
       expect(achievement?.targetScore).toBe(252);
     });
   });

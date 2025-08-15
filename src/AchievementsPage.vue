@@ -6,21 +6,32 @@
     />
     
     <div class="content">
-      <AchievementBadge
-        v-for="achievement in filteredAchievements" 
-        :key="achievement.id"
-        :title="achievement.name"
-        :description="achievement.description"
-        :icon-component="getAchievementIcon(achievement.id)"
-        :tier="achievement.tier"
-        :is-earned="achievement.progress.isUnlocked"
-        :progress-percentage="achievement.progressPercentage"
-        :target-arrows="achievement.targetArrows"
-        :current-arrows="achievement.progress.totalArrows"
-        :target-score="achievement.targetScore"
-        :current-score="achievement.progress.currentScore"
-        :game-type="achievement.gameType"
+      <!-- Grouped achievements display -->
+      <AchievementGroup
+        v-for="group in groupedAchievements"
+        :key="group.group.id"
+        :group="group.group"
+        :achievements="group.achievements"
       />
+      
+      <!-- Ungrouped achievements (fallback for achievements without groups) -->
+      <div v-if="ungroupedAchievements.length > 0" class="ungrouped-section">
+        <h3 class="section-title">Other Achievements</h3>
+        <AchievementBadge
+          v-for="achievement in ungroupedAchievements" 
+          :key="achievement.id"
+          :title="achievement.name"
+          :description="achievement.description"
+          :tier="achievement.tier"
+          :is-earned="achievement.progress.isUnlocked"
+          :progress-percentage="achievement.progressPercentage"
+          :target-arrows="achievement.targetArrows"
+          :current-arrows="achievement.progress.totalArrows"
+          :target-score="achievement.targetScore"
+          :current-score="achievement.progress.currentScore"
+          :game-type="achievement.gameType"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -29,14 +40,9 @@
 import { computed, ref } from 'vue'
 import BaseTopBar from '@/components/ui/BaseTopBar.vue'
 import AchievementBadge from '@/components/AchievementBadge.vue'
+import AchievementGroup from '@/components/AchievementGroup.vue'
 import { useHistoryStore } from '@/stores/history.js'
 import { calculateAchievements } from '@/domain/achievements/calculator.js'
-
-// Achievement icons
-import BeginnerTargetIcon from '@/components/icons/achievements/BeginnerTargetIcon.vue'
-import MedalIcon from '@/components/icons/achievements/MedalIcon.vue'
-import TrophyIcon from '@/components/icons/achievements/TrophyIcon.vue'
-import BullseyeIcon from '@/components/icons/achievements/BullseyeIcon.vue'
 
 const historyStore = useHistoryStore()
 
@@ -103,16 +109,35 @@ const filteredAchievements = computed(() => {
   return allAchievements
 })
 
-function getAchievementIcon(achievementId) {
-  const iconMap = {
-    'one_thousand_arrows': BeginnerTargetIcon,
-    'agincourt_arrows': BeginnerTargetIcon,
-    'ten_thousand_arrows': MedalIcon,
-    'twenty_five_thousand_arrows': TrophyIcon,
-    'six_hundred_at_wa70': BullseyeIcon
-  }
-  return iconMap[achievementId] || BeginnerTargetIcon
-}
+// Group achievements by their group property
+const groupedAchievements = computed(() => {
+  const filtered = filteredAchievements.value
+  const grouped = new Map()
+  
+  // Group achievements that have a group property
+  filtered.forEach(achievement => {
+    if (achievement.group) {
+      const groupId = achievement.group.id
+      if (!grouped.has(groupId)) {
+        grouped.set(groupId, {
+          group: achievement.group,
+          achievements: []
+        })
+      }
+      grouped.get(groupId).achievements.push(achievement)
+    }
+  })
+  
+  // Convert Map to array and sort by group order if available
+  return Array.from(grouped.values()).sort((a, b) => {
+    return (a.group.order || 0) - (b.group.order || 0)
+  })
+})
+
+// Achievements without groups (fallback)
+const ungroupedAchievements = computed(() => {
+  return filteredAchievements.value.filter(achievement => !achievement.group)
+})
 </script>
 
 <style scoped>
@@ -126,13 +151,24 @@ function getAchievementIcon(achievementId) {
   margin-top: 0.5rem;
 }
 
+.ungrouped-section {
+  margin-top: 1.5rem;
+}
+
+.section-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--color-heading);
+  margin-bottom: 0.75rem;
+  padding-left: 0.5rem;
+}
+
+
+
 /* Premium Achievement Page Styling - Override BaseTopBar */
 .page :deep(.filters-container) {
-  background: linear-gradient(135deg, 
-    #f8f9fa 0%, 
-    #e9ecef 50%, 
-    #f8f9fa 100%);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: var(--color-background-soft);
+  border: 1px solid var(--color-border);
   border-radius: 16px;
   margin-bottom: 1rem;
   box-shadow: 
@@ -164,11 +200,8 @@ function getAchievementIcon(achievementId) {
   min-width: 100px;
   height: 55px;
   border-radius: 12px;
-  background: linear-gradient(135deg, 
-    #ffffff 0%, 
-    #f8f9fa 50%, 
-    #ffffff 100%);
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   padding: 0.5rem 1rem;
   box-shadow: 
@@ -176,6 +209,7 @@ function getAchievementIcon(achievementId) {
     0 1px 2px rgba(0, 0, 0, 0.08);
   position: relative;
   overflow: hidden;
+  color: var(--color-text);
 }
 
 .page :deep(.filter-button::before), 
@@ -196,6 +230,7 @@ function getAchievementIcon(achievementId) {
 
 .page :deep(.filter-button:hover) {
   transform: translateY(-1px);
+  background: var(--color-background-mute);
   box-shadow: 
     0 4px 8px rgba(0, 0, 0, 0.1),
     0 2px 4px rgba(0, 0, 0, 0.12);
@@ -208,14 +243,9 @@ function getAchievementIcon(achievementId) {
 
 .page :deep(.filter-button.active), 
 .page :deep(.info-display.active) {
-  background: linear-gradient(135deg, 
-    #4a90e2 0%, 
-    #357abd 25%, 
-    #5ba0f0 50%, 
-    #357abd 75%, 
-    #4a90e2 100%);
-  color: white;
-  border-color: #357abd;
+  background: var(--color-highlight);
+  color: var(--color-classification-text-dark);
+  border-color: var(--color-highlight);
   box-shadow: 
     0 4px 12px rgba(74, 144, 226, 0.3),
     0 2px 6px rgba(53, 122, 189, 0.2);
@@ -268,27 +298,6 @@ function getAchievementIcon(achievementId) {
   
   .page :deep(.filters) {
     gap: 1rem;
-  }
-}
-
-/* Dark mode adjustments */
-@media (prefers-color-scheme: dark) {
-  .page :deep(.filters-container) {
-    background: linear-gradient(135deg, 
-      #2c3e50 0%, 
-      #34495e 50%, 
-      #2c3e50 100%);
-    border-color: rgba(255, 255, 255, 0.1);
-  }
-  
-  .page :deep(.filter-button), 
-  .page :deep(.info-display) {
-    background: linear-gradient(135deg, 
-      #34495e 0%, 
-      #2c3e50 50%, 
-      #34495e 100%);
-    border-color: rgba(255, 255, 255, 0.1);
-    color: #ecf0f1;
   }
 }
 </style>

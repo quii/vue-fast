@@ -50,7 +50,6 @@
 const props = defineProps({
   title: String,
   description: String,
-  iconComponent: Object,
   tier: {
     type: String,
     default: 'bronze',
@@ -117,19 +116,31 @@ const props = defineProps({
 
 /* Unearned bronze - muted, desaturated */
 .achievement-badge.bronze:not(.earned) {
-  --badge-background: linear-gradient(135deg, 
-    #4a4a4a 0%, 
-    #6b6b6b 25%, 
-    #8a8a8a 50%, 
-    #6b6b6b 75%, 
-    #4a4a4a 100%);
-  --badge-border: #666;
-  --badge-text-color: #bbb;
+  --badge-background: var(--color-background-mute);
+  --badge-border: var(--color-border);
+  --badge-text-color: var(--color-text-mute);
   --badge-icon-bg: rgba(255, 255, 255, 0.1);
-  --badge-accent: #666;
+  --badge-accent: var(--color-border);
   background: var(--badge-background);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   opacity: 0.7;
+}
+
+/* Only earned achievements get shimmer */
+.achievement-badge.bronze.earned::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.3), 
+    transparent);
+  animation: shimmer 3s infinite;
+  border-radius: inherit;
+  pointer-events: none;
 }
 
 /* Only earned achievements get shimmer */
@@ -167,19 +178,30 @@ const props = defineProps({
 
 /* Unearned silver - muted, desaturated */
 .achievement-badge.silver:not(.earned) {
-  --badge-background: linear-gradient(135deg, 
-    #4a4a4a 0%, 
-    #6b6b6b 25%, 
-    #8a8a8a 50%, 
-    #6b6b6b 75%, 
-    #4a4a4a 100%);
-  --badge-border: #666;
-  --badge-text-color: #bbb;
+  --badge-background: var(--color-background-mute);
+  --badge-border: var(--color-border);
+  --badge-text-color: var(--color-text-mute);
   --badge-icon-bg: rgba(255, 255, 255, 0.1);
-  --badge-accent: #666;
+  --badge-accent: var(--color-border);
   background: var(--badge-background);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   opacity: 0.7;
+}
+
+.achievement-badge.silver.earned::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.4), 
+    transparent);
+  animation: shimmer 2.5s infinite;
+  border-radius: inherit;
+  pointer-events: none;
 }
 
 .achievement-badge.silver.earned::after {
@@ -216,19 +238,31 @@ const props = defineProps({
 
 /* Unearned gold - muted, desaturated */
 .achievement-badge.gold:not(.earned) {
-  --badge-background: linear-gradient(135deg, 
-    #4a4a4a 0%, 
-    #6b6b6b 25%, 
-    #8a8a8a 50%, 
-    #6b6b6b 75%, 
-    #4a4a4a 100%);
-  --badge-border: #666;
-  --badge-text-color: #bbb;
+  --badge-background: var(--color-background-mute);
+  --badge-border: var(--color-border);
+  --badge-text-color: var(--color-text-mute);
   --badge-icon-bg: rgba(255, 255, 255, 0.1);
-  --badge-accent: #666;
+  --badge-accent: var(--color-border);
   background: var(--badge-background);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   opacity: 0.7;
+}
+
+/* Only earned achievements get shimmer */
+.achievement-badge.gold.earned::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.5), 
+    transparent);
+  animation: shimmer 2s infinite;
+  border-radius: inherit;
+  pointer-events: none;
 }
 
 /* Only earned achievements get shimmer */
@@ -266,16 +300,11 @@ const props = defineProps({
 
 /* Unearned diamond - muted, desaturated */
 .achievement-badge.diamond:not(.earned) {
-  --badge-background: linear-gradient(135deg, 
-    #4a4a4a 0%, 
-    #6b6b6b 25%, 
-    #8a8a8a 50%, 
-    #6b6b6b 75%, 
-    #4a4a4a 100%);
-  --badge-border: #666;
-  --badge-text-color: #bbb;
+  --badge-background: var(--color-background-mute);
+  --badge-border: var(--color-border);
+  --badge-text-color: var(--color-text-mute);
   --badge-icon-bg: rgba(255, 255, 255, 0.1);
-  --badge-accent: #666;
+  --badge-accent: var(--color-border);
   background: var(--badge-background);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
   opacity: 0.7;
@@ -409,8 +438,6 @@ const props = defineProps({
   margin-bottom: 0.4rem;
 }
 
-
-
 .progress-percentage {
   font-size: 0.8rem;
   color: var(--badge-text-color);
@@ -440,49 +467,6 @@ const props = defineProps({
   
   .badge-title {
     font-size: 1.4rem;
-  }
-}
-
-/* Dark mode adjustments - enhanced metallic gradients */
-@media (prefers-color-scheme: dark) {
-  .achievement-badge.bronze {
-    --badge-background: linear-gradient(135deg, 
-      #6b3410 0%, 
-      #a0632a 25%, 
-      #c8945a 50%, 
-      #a0632a 75%, 
-      #6b3410 100%);
-    box-shadow: 0 2px 8px rgba(107, 52, 16, 0.3);
-  }
-  
-  .achievement-badge.silver {
-    --badge-background: linear-gradient(135deg, 
-      #505050 0%, 
-      #a0a0a0 25%, 
-      #c8c8c8 50%, 
-      #a0a0a0 75%, 
-      #505050 100%);
-    box-shadow: 0 2px 8px rgba(160, 160, 160, 0.2);
-  }
-  
-  .achievement-badge.gold {
-    --badge-background: linear-gradient(135deg, 
-      #9a7209 0%, 
-      #e6c200 25%, 
-      #ffed80 50%, 
-      #e6c200 75%, 
-      #9a7209 100%);
-    box-shadow: 0 2px 8px rgba(230, 194, 0, 0.25);
-  }
-  
-  .achievement-badge.diamond {
-    --badge-background: linear-gradient(135deg, 
-      #2f4f4f 0%, 
-      #708090 25%, 
-      #b0c4de 50%, 
-      #708090 75%, 
-      #2f4f4f 100%);
-    box-shadow: 0 2px 8px rgba(112, 128, 144, 0.25);
   }
 }
 </style>

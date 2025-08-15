@@ -5,7 +5,16 @@
  */
 
 // Achievement tier levels
-export type AchievementTier = 'bronze' | 'silver' | 'gold';
+export type AchievementTier = 'bronze' | 'silver' | 'gold' | 'diamond';
+
+// Achievement group information
+export interface AchievementGroup {
+  id: string;
+  name: string;
+  description: string;
+  icon?: string; // Optional icon for the group
+  order?: number; // Optional ordering for display
+}
 
 // Simple achievement definition
 export interface Achievement {
@@ -16,6 +25,7 @@ export interface Achievement {
   targetArrows?: number; // For arrow-count achievements
   targetScore?: number; // For score-based achievements
   gameType?: string; // For round-specific achievements
+  group?: AchievementGroup; // Optional grouping information
 }
 
 // Progress tracking for the achievement

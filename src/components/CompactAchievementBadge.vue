@@ -1,0 +1,216 @@
+<template>
+  <div 
+    class="compact-achievement-badge"
+    :class="{ 
+      'earned': isEarned,
+      'bronze': tier === 'bronze',
+      'silver': tier === 'silver', 
+      'gold': tier === 'gold',
+      'diamond': tier === 'diamond'
+    }"
+  >
+    <div class="badge-content">
+      <div class="badge-title">{{ title }}</div>
+      
+      <div v-if="!isEarned" class="progress-text">
+        <span v-if="targetArrows">
+          {{ currentArrows.toLocaleString() }} / {{ targetArrows.toLocaleString() }} arrows
+        </span>
+        <span v-else-if="targetScore">
+          Best: {{ currentScore || 0 }} / {{ targetScore }} points
+        </span>
+      </div>
+    </div>
+    
+    <div v-if="isEarned" class="earned-indicator">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+        <path d="M20 6L9 17l-5-5"></path>
+      </svg>
+    </div>
+  </div>
+</template>
+
+<script setup>
+const props = defineProps({
+  title: String,
+  tier: {
+    type: String,
+    default: 'bronze',
+    validator: value => ['bronze', 'silver', 'gold', 'diamond'].includes(value)
+  },
+  isEarned: Boolean,
+  targetArrows: Number,
+  currentArrows: Number,
+  targetScore: Number,
+  currentScore: Number
+})
+</script>
+
+<style scoped>
+.compact-achievement-badge {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: var(--badge-background);
+  border: 1px solid var(--badge-border);
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  color: var(--badge-text-color);
+  min-height: 60px;
+}
+
+/* Use the same tier styling as regular badges but more compact */
+.compact-achievement-badge.bronze {
+  --badge-background: linear-gradient(135deg, 
+    #8b4513 0%, 
+    #cd7f32 25%, 
+    #e6a85c 50%, 
+    #cd7f32 75%, 
+    #8b4513 100%);
+  --badge-border: #cd7f32;
+  --badge-text-color: white;
+}
+
+.compact-achievement-badge.bronze:not(.earned) {
+  --badge-background: var(--color-background-mute);
+  --badge-border: var(--color-border);
+  --badge-text-color: var(--color-text-mute);
+  opacity: 0.7;
+}
+
+.compact-achievement-badge.silver {
+  --badge-background: linear-gradient(135deg, 
+    #708090 0%, 
+    #c0c0c0 25%, 
+    #e8e8e8 50%, 
+    #c0c0c0 75%, 
+    #708090 100%);
+  --badge-border: #c0c0c0;
+  --badge-text-color: #2c2c2c;
+}
+
+.compact-achievement-badge.silver:not(.earned) {
+  --badge-background: var(--color-background-mute);
+  --badge-border: var(--color-border);
+  --badge-text-color: var(--color-text-mute);
+  opacity: 0.7;
+}
+
+.compact-achievement-badge.gold {
+  --badge-background: linear-gradient(135deg, 
+    #b8860b 0%, 
+    #ffd700 25%, 
+    #ffef94 50%, 
+    #ffd700 75%, 
+    #b8860b 100%);
+  --badge-border: #ffd700;
+  --badge-text-color: #2c2c2c;
+}
+
+.compact-achievement-badge.gold:not(.earned) {
+  --badge-background: var(--color-background-mute);
+  --badge-border: var(--color-border);
+  --badge-text-color: var(--color-text-mute);
+  opacity: 0.7;
+}
+
+.compact-achievement-badge.diamond {
+  --badge-background: linear-gradient(135deg, 
+    #4169e1 0%, 
+    #87ceeb 25%, 
+    #f0f8ff 50%, 
+    #87ceeb 75%, 
+    #4169e1 100%);
+  --badge-border: #87ceeb;
+  --badge-text-color: #2c2c2c;
+}
+
+.compact-achievement-badge.diamond:not(.earned) {
+  --badge-background: var(--color-background-mute);
+  --badge-border: var(--color-border);
+  --badge-text-color: var(--color-text-mute);
+  opacity: 0.7;
+}
+
+/* Shimmer effect for earned badges */
+.compact-achievement-badge.earned::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.3), 
+    transparent);
+  animation: shimmer 3s infinite;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.badge-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.badge-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--badge-text-color);
+  margin-bottom: 0.25rem;
+  line-height: 1.2;
+}
+
+.progress-text {
+  font-size: 0.85rem;
+  color: var(--badge-text-color);
+  opacity: 0.8;
+}
+
+.earned-indicator {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: var(--badge-text-color);
+  opacity: 0.9;
+}
+
+/* Hover effects */
+.compact-achievement-badge.earned:hover {
+  transform: translateY(-1px);
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.15),
+    0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .compact-achievement-badge {
+    padding: 0.6rem 0.8rem;
+    gap: 0.6rem;
+    min-height: 50px;
+  }
+  
+  .badge-title {
+    font-size: 1rem;
+  }
+  
+  .progress-text {
+    font-size: 0.8rem;
+  }
+}
+</style>
