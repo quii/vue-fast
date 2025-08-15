@@ -13,6 +13,20 @@ import { check600AtWA70Achieved } from './six_hundred_at_wa70.js';
 import { checkAgincourtArrowsAchieved } from './agincourt_arrows.js';
 import { TWO_FIFTY_TWO_CHECK_FUNCTIONS } from './two_fifty_two_awards.js';
 import { GOLDEN_END_CHECK_FUNCTIONS } from './imperial_golden_end.js';
+import { 
+  checkOlympianEffortBronzeAchieved,
+  checkOlympianEffortSilverAchieved,
+  checkOlympianEffortGoldAchieved,
+  checkOlympianEffortDiamondAchieved
+} from './olympian_effort.js';
+
+// Olympian Effort achievement check functions
+const OLYMPIAN_EFFORT_CHECK_FUNCTIONS = {
+  olympian_effort_bronze: checkOlympianEffortBronzeAchieved,
+  olympian_effort_silver: checkOlympianEffortSilverAchieved,
+  olympian_effort_gold: checkOlympianEffortGoldAchieved,
+  olympian_effort_diamond: checkOlympianEffortDiamondAchieved
+} as const;
 
 export interface AchievementData {
   id: string;
@@ -78,6 +92,11 @@ export function calculateAchievements(context: AchievementContext): AchievementD
           const checkFunction = GOLDEN_END_CHECK_FUNCTIONS[achievement.id as keyof typeof GOLDEN_END_CHECK_FUNCTIONS];
           progress = checkFunction(context);
           progressPercentage = progress.isUnlocked ? 100 : Math.min((progress.currentScore! / progress.targetScore!) * 100, 100);
+        } else if (achievement.id in OLYMPIAN_EFFORT_CHECK_FUNCTIONS) {
+          // Check if it's an Olympian Effort achievement
+          const checkFunction = OLYMPIAN_EFFORT_CHECK_FUNCTIONS[achievement.id as keyof typeof OLYMPIAN_EFFORT_CHECK_FUNCTIONS];
+          progress = checkFunction(context);
+          progressPercentage = progress.isUnlocked ? 100 : Math.min((progress.totalArrows! / progress.targetArrows!) * 100, 100);
         } else {
           // Default fallback for unknown achievements
           progress = { 

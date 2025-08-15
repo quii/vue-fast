@@ -14,7 +14,7 @@
       
       <div v-if="!isEarned" class="progress-text">
         <span v-if="targetArrows">
-          {{ currentArrows.toLocaleString() }} / {{ targetArrows.toLocaleString() }} arrows
+          {{ (currentArrows || 0).toLocaleString() }} / {{ targetArrows.toLocaleString() }} arrows
         </span>
         <span v-else-if="targetScore">
           Best: {{ currentScore || 0 }} / {{ targetScore }} points

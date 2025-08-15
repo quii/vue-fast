@@ -33,3 +33,10 @@ export const METRIC_EXCELLENCE_GROUP: AchievementGroup = {
   description: 'High scores on metric rounds',
   order: 4
 };
+
+export const OLYMPIAN_EFFORT_GROUP: AchievementGroup = {
+  id: 'olympian_effort',
+  name: 'Olympian Effort',
+  description: 'Shoot a high number of arrows within any 3-day period',
+  order: 5
+};
