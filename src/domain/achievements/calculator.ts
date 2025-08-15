@@ -11,6 +11,7 @@ import { check10kArrowsAchieved } from './ten_thousand_arrows.js';
 import { check25kArrowsAchieved } from './twenty_five_thousand_arrows.js';
 import { check600AtWA70Achieved } from './six_hundred_at_wa70.js';
 import { checkAgincourtArrowsAchieved } from './agincourt_arrows.js';
+import { TWO_FIFTY_TWO_CHECK_FUNCTIONS } from './two_fifty_two_awards.js';
 
 export interface AchievementData {
   id: string;
@@ -66,13 +67,20 @@ export function calculateAchievements(context: AchievementContext): AchievementD
         break;
         
       default:
-        // Default fallback for unknown achievements
-        progress = { 
-          totalArrows: 0, 
-          targetArrows: achievement.targetArrows || 0, 
-          isUnlocked: false 
-        };
-        progressPercentage = 0;
+        // Check if it's a 252 achievement
+        if (achievement.id in TWO_FIFTY_TWO_CHECK_FUNCTIONS) {
+          const checkFunction = TWO_FIFTY_TWO_CHECK_FUNCTIONS[achievement.id as keyof typeof TWO_FIFTY_TWO_CHECK_FUNCTIONS];
+          progress = checkFunction(context);
+          progressPercentage = progress.isUnlocked ? 100 : Math.min((progress.currentScore! / progress.targetScore!) * 100, 100);
+        } else {
+          // Default fallback for unknown achievements
+          progress = { 
+            totalArrows: 0, 
+            targetArrows: achievement.targetArrows || 0, 
+            isUnlocked: false 
+          };
+          progressPercentage = 0;
+        }
         break;
     }
 

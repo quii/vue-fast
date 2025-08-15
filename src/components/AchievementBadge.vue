@@ -19,18 +19,20 @@
             {{ currentArrows.toLocaleString() }} / {{ targetArrows.toLocaleString() }} arrows
           </span>
           <span v-else-if="targetScore">
-            {{ currentScore || 0 }} / {{ targetScore }} points on {{ gameType?.toUpperCase() }}
+            Best: {{ currentScore || 0 }} / {{ targetScore }} points<span v-if="gameType"> on {{ gameType.toUpperCase() }}</span>
           </span>
         </div>
         
-        <div class="progress-bar">
+        <!-- Only show progress bar for arrow-count achievements -->
+        <div v-if="targetArrows" class="progress-bar">
           <div 
             class="progress-fill" 
             :style="{ width: progressPercentage + '%' }"
           ></div>
         </div>
         
-        <div class="progress-percentage">
+        <!-- Only show percentage for arrow-count achievements -->
+        <div v-if="targetArrows" class="progress-percentage">
           {{ Math.round(progressPercentage) }}% complete
         </div>
       </div>

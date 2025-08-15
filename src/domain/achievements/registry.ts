@@ -5,6 +5,7 @@
  */
 
 import type { Achievement } from './types.js';
+import { TWO_FIFTY_TWO_ACHIEVEMENTS } from './two_fifty_two_awards.js';
 
 export const ONE_THOUSAND_ARROWS: Achievement = {
   id: 'one_thousand_arrows',
@@ -52,7 +53,8 @@ export const ALL_ACHIEVEMENTS: Achievement[] = [
   AGINCOURT_ARROWS,
   TEN_THOUSAND_ARROWS,
   TWENTY_FIVE_THOUSAND_ARROWS,
-  SIX_HUNDRED_AT_WA70
+  SIX_HUNDRED_AT_WA70,
+  ...TWO_FIFTY_TWO_ACHIEVEMENTS
 ];
 
 export function getAchievementById(id: string): Achievement | undefined {
