@@ -21,6 +21,7 @@ import { useUserStore } from "@/stores/user";
 import { useNotesStore } from "@/stores/user_notes";
 import { usePreferencesStore } from '@/stores/preferences'
 import { useShootStore } from '@/stores/shoot'
+import { useAchievementStore } from '@/stores/achievements'
 import { computed, ref, onMounted, onUnmounted, watch } from 'vue'
 import { useToast } from "vue-toastification";
 import {
@@ -43,6 +44,7 @@ const history = useHistoryStore();
 const preferencesStore = usePreferencesStore()
 const shootStore = useShootStore()
 const shootTimingStore = useShootTimingStore()
+const achievementStore = useAchievementStore()
 
 const route = useRoute();
 const showTutorial = ref(false)
@@ -261,6 +263,19 @@ async function handleSaveFromModal(data) {
 
     arrowHistoryStore.saveArrowsForShoot(id, [...scoresStore.arrows]);
     notesStore.assignPendingNotesToShoot(id);
+    
+    // Update achievement progress with the new score
+    const currentShoot = { scores: [...scoresStore.scores] };
+    const shootHistory = history.sortedHistory();
+    const achievementResult = achievementStore.updateProgress(currentShoot, shootHistory);
+    
+    // Show notification if achievement was just completed
+    if (achievementResult.justUnlocked) {
+      toast.success(`🏆 Achievement Completed: ${achievementResult.achievement.name}!`, {
+        timeout: 5000
+      });
+    }
+    
     scoresStore.clear();
     shootTimingStore.clearTiming(); // Clear timing data for next shoot
     showSaveModal.value = false;
