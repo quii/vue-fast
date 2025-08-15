@@ -171,6 +171,19 @@ const props = defineProps({
   }
 }
 
+/* Improved contrast for unachieved badges in dark mode */
+[data-theme="dark"] .compact-achievement-badge:not(.earned) {
+  --badge-text-color: rgba(255, 255, 255, 0.9);
+  opacity: 0.85;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .compact-achievement-badge:not(.earned) {
+    --badge-text-color: rgba(255, 255, 255, 0.9);
+    opacity: 0.85;
+  }
+}
+
 .badge-content {
   flex: 1;
   min-width: 0;

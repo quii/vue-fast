@@ -319,6 +319,19 @@ const props = defineProps({
   border-left: 4px solid #87ceeb;
 }
 
+/* Improved contrast for unachieved badges in dark mode */
+[data-theme="dark"] .achievement-badge:not(.earned) {
+  --badge-text-color: rgba(255, 255, 255, 0.9);
+  opacity: 0.85;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .achievement-badge:not(.earned) {
+    --badge-text-color: rgba(255, 255, 255, 0.9);
+    opacity: 0.85;
+  }
+}
+
 /* Only earned achievements get shimmer */
 .achievement-badge.diamond.earned::after {
   content: '';
