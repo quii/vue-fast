@@ -48,10 +48,10 @@ describe('720 Mastery Achievement System', () => {
     expect(SEVEN_TWENTY_MASTERY_ACHIEVEMENTS).toHaveLength(4);
     
     const expectedAchievements = [
-      { id: 'seven_twenty_mastery_recurve_bronze', name: '720 Mastery Bronze (Recurve)', targetScore: 450, tier: 'bronze' },
-      { id: 'seven_twenty_mastery_recurve_silver', name: '720 Mastery Silver (Recurve)', targetScore: 500, tier: 'silver' },
-      { id: 'seven_twenty_mastery_recurve_gold', name: '720 Mastery Gold (Recurve)', targetScore: 550, tier: 'gold' },
-      { id: 'seven_twenty_mastery_recurve_diamond', name: '720 Mastery Diamond (Recurve)', targetScore: 600, tier: 'diamond' }
+      { id: 'seven_twenty_mastery_recurve_bronze', name: '450 @ 720 (Recurve)', targetScore: 450, tier: 'bronze' },
+      { id: 'seven_twenty_mastery_recurve_silver', name: '500 @ 720 (Recurve)', targetScore: 500, tier: 'silver' },
+      { id: 'seven_twenty_mastery_recurve_gold', name: '550 @ 720 (Recurve)', targetScore: 550, tier: 'gold' },
+      { id: 'seven_twenty_mastery_recurve_diamond', name: '600 @ 720 (Recurve)', targetScore: 600, tier: 'diamond' }
     ];
     
     expectedAchievements.forEach((expected, index) => {

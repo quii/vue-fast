@@ -25,13 +25,13 @@ describe('Achievements System', () => {
 
     // Verify the achievement is earned and displayed correctly
     achievementsPage.visit()
-    achievementsPage.shouldShowAchievement('720 Mastery Diamond (Recurve)')
-    achievementsPage.shouldShowAsCompleted('720 Mastery Diamond (Recurve)')
+    achievementsPage.shouldShowAchievement('600 @ 720 (Recurve)')
+    achievementsPage.shouldShowAsCompleted('600 @ 720 (Recurve)')
 
     // Verify filtering works: achieved filter should show this achievement
     achievementsPage.clickFilter('Achieved')
     achievementsPage.shouldShowFilterAsActive('Achieved')
-    achievementsPage.shouldShowAchievement('720 Mastery Diamond (Recurve)')
+    achievementsPage.shouldShowAchievement('600 @ 720 (Recurve)')
     
     achievementsPage.shouldShowFilterCount('Achieved', '4')
   })

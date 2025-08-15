@@ -24,7 +24,7 @@ function create720MasteryAchievement(tier: keyof typeof SCORE_THRESHOLDS): Achie
   
   return {
     id: `seven_twenty_mastery_recurve_${tier}`,
-    name: `720 Mastery ${tier.charAt(0).toUpperCase() + tier.slice(1)} (Recurve)`,
+    name: `${targetScore} @ 720 (Recurve)`,
     description: `Score ${targetScore} or more on a WA 70m round using recurve bow`,
     tier: tier,
     targetScore: targetScore,
