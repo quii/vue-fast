@@ -29,8 +29,8 @@ export const IMPERIAL_GOLDEN_END_GROUP: AchievementGroup = {
 
 export const METRIC_EXCELLENCE_GROUP: AchievementGroup = {
   id: 'metric_excellence',
-  name: 'Metric Excellence', 
-  description: 'High scores on metric rounds',
+  name: '720 mastery (recurve)', 
+  description: 'High scores on WA 70m rounds with recurve bow',
   order: 4
 };
 

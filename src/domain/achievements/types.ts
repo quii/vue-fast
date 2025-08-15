@@ -44,6 +44,12 @@ export interface AchievementContext {
     scores: any[];
     score?: number; // Total score of the shoot
     gameType?: string; // Type of round
+    userProfile?: {
+      gender?: string;
+      ageGroup?: string;
+      bowType?: string;
+      classification?: string;
+    };
   };
   
   // Use the existing HistoryItem type - we'll need the full data later

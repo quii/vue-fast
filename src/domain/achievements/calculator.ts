@@ -9,10 +9,10 @@ import { getAllAchievements } from './registry.js';
 import { check1kArrowsAchieved } from './one_thousand_arrows.js';
 import { check10kArrowsAchieved } from './ten_thousand_arrows.js';
 import { check25kArrowsAchieved } from './twenty_five_thousand_arrows.js';
-import { check600AtWA70Achieved } from './six_hundred_at_wa70.js';
 import { checkAgincourtArrowsAchieved } from './agincourt_arrows.js';
 import { TWO_FIFTY_TWO_CHECK_FUNCTIONS } from './two_fifty_two_awards.js';
 import { GOLDEN_END_CHECK_FUNCTIONS } from './imperial_golden_end.js';
+import { SEVEN_TWENTY_MASTERY_CHECK_FUNCTIONS } from './seven_twenty_mastery_recurve.js';
 import { 
   checkOlympianEffortBronzeAchieved,
   checkOlympianEffortSilverAchieved,
@@ -76,14 +76,13 @@ export function calculateAchievements(context: AchievementContext): AchievementD
         progressPercentage = Math.min((progress.totalArrows! / progress.targetArrows!) * 100, 100);
         break;
         
-      case 'six_hundred_at_wa70':
-        progress = check600AtWA70Achieved(context);
-        progressPercentage = progress.isUnlocked ? 100 : Math.min((progress.currentScore! / progress.targetScore!) * 100, 100);
-        break;
-        
       default:
-        // Check if it's a 252 achievement
-        if (achievement.id in TWO_FIFTY_TWO_CHECK_FUNCTIONS) {
+        // Check if it's a 720 mastery achievement
+        if (achievement.id in SEVEN_TWENTY_MASTERY_CHECK_FUNCTIONS) {
+          const checkFunction = SEVEN_TWENTY_MASTERY_CHECK_FUNCTIONS[achievement.id as keyof typeof SEVEN_TWENTY_MASTERY_CHECK_FUNCTIONS];
+          progress = checkFunction(context);
+          progressPercentage = progress.isUnlocked ? 100 : Math.min((progress.currentScore! / progress.targetScore!) * 100, 100);
+        } else if (achievement.id in TWO_FIFTY_TWO_CHECK_FUNCTIONS) {
           const checkFunction = TWO_FIFTY_TWO_CHECK_FUNCTIONS[achievement.id as keyof typeof TWO_FIFTY_TWO_CHECK_FUNCTIONS];
           progress = checkFunction(context);
           progressPercentage = progress.isUnlocked ? 100 : Math.min((progress.currentScore! / progress.targetScore!) * 100, 100);

@@ -114,3 +114,16 @@ Cypress.Commands.add('disableAllTips', () => {
   localStorage.setItem('hasSeenScoreCardTutorial', 'true')
   localStorage.setItem('hasSeenInstallPrompt', 'true')
 })
+
+// TypeScript declarations for custom commands
+declare global {
+  namespace Cypress {
+    interface Chainable {
+      mockGeolocation(coords: { latitude: number; longitude: number }): Chainable
+      score(number: number): Chainable
+      dismissToasters(): Chainable
+      safeClick(options?: any): Chainable
+      disableAllTips(): Chainable
+    }
+  }
+}

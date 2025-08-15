@@ -18,7 +18,8 @@ function createTestContext(): AchievementContext {
       score: 100,
       scores: [8, 7, 6, 8, 7, 6], // 6 arrows
       unit: 'yd',
-      topScore: false
+      topScore: false,
+      userProfile: { bowType: 'recurve' }
     },
     {
       id: 2,
@@ -27,13 +28,15 @@ function createTestContext(): AchievementContext {
       score: 620,
       scores: [7, 6, 5, 7, 6, 5], // 6 arrows
       unit: 'm',
-      topScore: false
+      topScore: false,
+      userProfile: { bowType: 'recurve' }
     }
   ];
 
   return {
     currentShoot: {
-      scores: [9, 8, 7, 9, 8, 7] // 6 arrows
+      scores: [9, 8, 7, 9, 8, 7], // 6 arrows
+      userProfile: { bowType: 'recurve' }
     },
     shootHistory: historyItems
   };
@@ -80,7 +83,7 @@ describe('Achievement Calculator', () => {
     const context = createTestContext();
     
     const achievements = calculateAchievements(context);
-    const scoreAchievement = achievements.find(a => a.id === 'six_hundred_at_wa70');
+    const scoreAchievement = achievements.find(a => a.id === 'seven_twenty_mastery_recurve_diamond');
     
     expect(scoreAchievement).toBeDefined();
     expect(scoreAchievement!.progress.currentScore).toBe(620); // Best WA 70m score
