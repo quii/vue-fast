@@ -9,13 +9,17 @@ export interface Achievement {
   id: string;
   name: string;
   description: string;
-  targetArrows: number;
+  targetArrows?: number; // For arrow-count achievements
+  targetScore?: number; // For score-based achievements
+  gameType?: string; // For round-specific achievements
 }
 
 // Progress tracking for the achievement
 export interface AchievementProgress {
-  totalArrows: number;
-  targetArrows: number;
+  totalArrows?: number; // For arrow-count achievements
+  targetArrows?: number; // For arrow-count achievements
+  currentScore?: number; // For score-based achievements
+  targetScore?: number; // For score-based achievements
   isUnlocked: boolean;
   unlockedAt?: string; // ISO date string
 }
@@ -24,9 +28,13 @@ export interface AchievementProgress {
 export interface AchievementContext {
   currentShoot: {
     scores: any[];
+    score?: number; // Total score of the shoot
+    gameType?: string; // Type of round
   };
   
   shootHistory: Array<{
     scores: any[];
+    score?: number;
+    gameType?: string;
   }>;
 }

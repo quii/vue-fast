@@ -73,7 +73,7 @@ const progressPercentage = computed(() => {
       <span class="nav-label">Sight</span>
     </router-link>
 
-    <router-link to="/achievements" class="nav-item" :class="{ active: isActive('/achievements') }">
+    <router-link to="/achievements" class="nav-item" :class="{ active: isActive('/achievements') }" data-cy="nav-achievements">
       <div class="icon-container">
         <div class="achievement-progress">
           <svg class="progress-ring" viewBox="0 0 36 36">
