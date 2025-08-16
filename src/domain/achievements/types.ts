@@ -36,11 +36,15 @@ export interface AchievementProgress {
   targetScore?: number; // For score-based achievements
   isUnlocked: boolean;
   unlockedAt?: string; // ISO date string
+  achievingShootId?: number | string; // ID of the shoot that achieved this milestone
+  achievedDate?: string; // Date when this achievement was unlocked (from achieving shoot)
 }
 
 // Context for checking achievements
 export interface AchievementContext {
   currentShoot: {
+    id?: number | string; // ID of the current shoot
+    date?: string; // Date of the current shoot
     scores: any[];
     score?: number; // Total score of the shoot
     gameType?: string; // Type of round

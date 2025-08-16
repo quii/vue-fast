@@ -3,11 +3,13 @@
     class="achievement-badge"
     :class="{ 
       'earned': isEarned,
+      'clickable': isEarned && achievingShootId,
       'bronze': tier === 'bronze',
       'silver': tier === 'silver', 
       'gold': tier === 'gold',
       'diamond': tier === 'diamond'
     }"
+    @click="handleClick"
   >
     <div class="badge-content">
       <div class="badge-title">{{ title }}</div>
@@ -43,15 +45,18 @@
       <span class="tier-text">{{ tier.charAt(0).toUpperCase() + tier.slice(1) }}</span>
     </div>
     
-    <div v-if="isEarned" class="earned-indicator">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-        <path d="M20 6L9 17l-5-5"></path>
-      </svg>
+    <!-- Show achieved date instead of tick for earned achievements -->
+    <div v-if="isEarned && achievedDate" class="earned-date-indicator">
+      {{ formatAchievedDate(achievedDate) }}
     </div>
   </div>
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
 const props = defineProps({
   title: String,
   description: String,
@@ -66,8 +71,25 @@ const props = defineProps({
   currentArrows: Number,
   targetScore: Number,
   currentScore: Number,
-  gameType: String
+  gameType: String,
+  achievingShootId: [Number, String],
+  achievedDate: String
 })
+
+function handleClick() {
+  if (props.isEarned && props.achievingShootId) {
+    router.push(`/history/${props.achievingShootId}`)
+  }
+}
+
+function formatAchievedDate(dateString) {
+  const date = new Date(dateString)
+  return date.toLocaleDateString(undefined, { 
+    year: 'numeric', 
+    month: 'short', 
+    day: 'numeric' 
+  })
+}
 </script>
 
 <style scoped>
@@ -356,6 +378,22 @@ const props = defineProps({
   transform: translateY(-1px);
 }
 
+.achievement-badge.clickable {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.achievement-badge.clickable:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 16px rgba(0, 0, 0, 0.2),
+    0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.achievement-badge.clickable:active {
+  transform: translateY(-1px);
+}
+
 .achievement-badge.earned.bronze {
   box-shadow: 
     0 4px 12px rgba(139, 69, 19, 0.25),
@@ -444,6 +482,7 @@ const props = defineProps({
   margin-bottom: 0;
 }
 
+
 .progress-section {
   margin-top: 0.25rem;
 }
@@ -470,15 +509,20 @@ const props = defineProps({
   text-align: right;
 }
 
-.earned-indicator {
+.earned-date-indicator {
   flex-shrink: 0;
-  width: 24px;
-  height: 24px;
   color: var(--badge-text-color);
   opacity: 0.9;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 0.25rem 0.5rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  min-width: 60px;
 }
 
 .tier-indicator {

@@ -69,4 +69,74 @@ describe('Arrows Achievement HOF', () => {
     expect(progress.isUnlocked).toBe(false);
     expect(progress.unlockedAt).toBeUndefined();
   });
+
+  test('tracks achieving shoot from history', () => {
+    const context: AchievementContext = {
+      currentShoot: { 
+        id: 3,
+        date: '2023-01-15',
+        scores: [9, 8] // 2 arrows
+      },
+      shootHistory: [
+        { 
+          id: 1, 
+          date: '2023-01-01', 
+          scores: Array(5).fill(9), // 5 arrows
+          score: 45,
+          gameType: 'Test'
+        },
+        { 
+          id: 2, 
+          date: '2023-01-10', 
+          scores: Array(8).fill(9), // 8 arrows - this should cross threshold of 10
+          score: 72,
+          gameType: 'Test'
+        }
+      ]
+    };
+    
+    const progress = checkArrowsAchievement(context, 10); // Target 10 arrows
+    
+    expect(progress.totalArrows).toBe(15); // 5 + 8 + 2
+    expect(progress.isUnlocked).toBe(true);
+    expect(progress.achievingShootId).toBe(2); // Second shoot crosses threshold (5 + 8 >= 10)
+    expect(progress.achievedDate).toBe('2023-01-10');
+  });
+
+  test('tracks achieving shoot from current shoot', () => {
+    const context: AchievementContext = {
+      currentShoot: { 
+        id: 2,
+        date: '2023-01-10',
+        scores: Array(8).fill(9) // 8 arrows - this should cross threshold
+      },
+      shootHistory: [
+        { 
+          id: 1, 
+          date: '2023-01-01', 
+          scores: Array(5).fill(9), // 5 arrows
+          score: 45,
+          gameType: 'Test'
+        }
+      ]
+    };
+    
+    const progress = checkArrowsAchievement(context, 10); // Target 10 arrows
+    
+    expect(progress.totalArrows).toBe(13); // 5 + 8
+    expect(progress.isUnlocked).toBe(true);
+    expect(progress.achievingShootId).toBe(2); // Current shoot crosses threshold
+    expect(progress.achievedDate).toBe('2023-01-10');
+  });
+
+  test('does not set achieving shoot data when not unlocked', () => {
+    const context = createTestContext(); // 18 arrows total
+    
+    const progress = checkArrowsAchievement(context, 100); // Target 100 arrows
+    
+    expect(progress.totalArrows).toBe(18);
+    expect(progress.isUnlocked).toBe(false);
+    expect(progress.achievingShootId).toBeUndefined();
+    expect(progress.achievedDate).toBeUndefined();
+  });
 });

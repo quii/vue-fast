@@ -155,7 +155,9 @@ function findExistingGoldenEndAchievement(context: AchievementContext, distance:
             currentScore: bestEndScore,
             targetScore: 54,
             isUnlocked: true,
-            unlockedAt: historyItem.date
+            unlockedAt: historyItem.date,
+            achievingShootId: historyItem.id,
+            achievedDate: historyItem.date
           };
         }
       }
@@ -196,7 +198,9 @@ function checkGoldenEndInCurrentShoot(context: AchievementContext, distance: Imp
     currentScore: bestEndScore,
     targetScore: 54,
     isUnlocked: bestEndScore >= 54,
-    unlockedAt: bestEndScore >= 54 ? new Date().toISOString() : undefined
+    unlockedAt: bestEndScore >= 54 ? new Date().toISOString() : undefined,
+    achievingShootId: bestEndScore >= 54 ? currentShoot.id : undefined,
+    achievedDate: bestEndScore >= 54 ? currentShoot.date : undefined
   };
 }
 

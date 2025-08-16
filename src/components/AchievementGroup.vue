@@ -26,6 +26,8 @@
         :current-arrows="achievement.progress.totalArrows"
         :target-score="achievement.targetScore"
         :current-score="achievement.progress.currentScore"
+        :achieving-shoot-id="achievement.progress.achievingShootId"
+        :achieved-date="achievement.progress.achievedDate"
       />
     </div>
   </div>

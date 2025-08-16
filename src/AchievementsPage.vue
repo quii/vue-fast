@@ -31,6 +31,8 @@
           :target-score="achievement.targetScore"
           :current-score="achievement.progress.currentScore"
           :game-type="achievement.gameType"
+          :achieving-shoot-id="achievement.progress.achievingShootId"
+          :achieved-date="achievement.progress.achievedDate"
         />
       </div>
     </div>

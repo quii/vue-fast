@@ -43,6 +43,8 @@ export interface AchievementData {
     targetScore?: number;
     isUnlocked: boolean;
     unlockedAt?: string;
+    achievingShootId?: number | string;
+    achievedDate?: string;
   };
   progressPercentage: number;
 }

@@ -96,7 +96,9 @@ function findExisting720MasteryAchievement(
         currentScore: historyItem.score || 0,
         targetScore: targetScore,
         isUnlocked: true,
-        unlockedAt: historyItem.date
+        unlockedAt: historyItem.date,
+        achievingShootId: historyItem.id,
+        achievedDate: historyItem.date
       };
     }
   }
@@ -134,7 +136,9 @@ function check720MasteryInCurrentShoot(
     currentScore: currentScore,
     targetScore: targetScore,
     isUnlocked: hasAchieved,
-    unlockedAt: hasAchieved ? new Date().toISOString() : undefined
+    unlockedAt: hasAchieved ? new Date().toISOString() : undefined,
+    achievingShootId: hasAchieved ? currentShoot.id : undefined,
+    achievedDate: hasAchieved ? currentShoot.date : undefined
   };
 }
 
@@ -149,6 +153,8 @@ function check720MasteryInHistory(
 ): AchievementProgress {
   let bestScore = 0;
   let unlockedAt: string | undefined;
+  let achievingShootId: number | string | undefined;
+  let achievedDate: string | undefined;
 
   for (const historyItem of context.shootHistory) {
     if (historyItem.gameType?.toLowerCase() === requiredGameType && 
@@ -158,6 +164,8 @@ function check720MasteryInHistory(
         bestScore = score;
         if (score >= targetScore) {
           unlockedAt = historyItem.date;
+          achievingShootId = historyItem.id;
+          achievedDate = historyItem.date;
         }
       }
     }
@@ -167,7 +175,9 @@ function check720MasteryInHistory(
     currentScore: bestScore,
     targetScore: targetScore,
     isUnlocked: bestScore >= targetScore,
-    unlockedAt: unlockedAt
+    unlockedAt: unlockedAt,
+    achievingShootId: achievingShootId,
+    achievedDate: achievedDate
   };
 }
 

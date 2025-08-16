@@ -21,7 +21,11 @@ export const useAchievementStore = defineStore('achievement', () => {
   // Actions
   function updateProgress(currentShoot: any, shootHistory: any[]) {
     const context = {
-      currentShoot: { scores: currentShoot.scores || [] },
+      currentShoot: { 
+        id: currentShoot.id,
+        date: currentShoot.date,
+        scores: currentShoot.scores || [] 
+      },
       shootHistory: shootHistory // Use full HistoryItem objects directly
     };
 

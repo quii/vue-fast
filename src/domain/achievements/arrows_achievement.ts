@@ -7,10 +7,37 @@
 import type { AchievementContext, AchievementProgress } from './types.js';
 
 export function checkArrowsAchievement(context: AchievementContext, targetArrows: number): AchievementProgress {
-  // Count total arrows from all shoots
-  const totalArrows = context.shootHistory.reduce((total, shoot) => {
-    return total + (Array.isArray(shoot.scores) ? shoot.scores.length : 0);
-  }, 0) + (Array.isArray(context.currentShoot.scores) ? context.currentShoot.scores.length : 0);
+  let runningTotal = 0;
+  let achievingShootId: number | string | undefined;
+  let achievedDate: string | undefined;
+  
+  // Process history shoots in chronological order to find the achieving shoot
+  const chronologicalHistory = [...context.shootHistory].sort((a, b) => 
+    new Date(a.date).getTime() - new Date(b.date).getTime()
+  );
+  
+  // Check each historical shoot
+  for (const shoot of chronologicalHistory) {
+    const shootArrows = Array.isArray(shoot.scores) ? shoot.scores.length : 0;
+    const previousTotal = runningTotal;
+    runningTotal += shootArrows;
+    
+    // If this shoot crosses the threshold, track it
+    if (previousTotal < targetArrows && runningTotal >= targetArrows) {
+      achievingShootId = shoot.id;
+      achievedDate = shoot.date;
+      break;
+    }
+  }
+  
+  // Check current shoot if achievement not yet unlocked
+  const currentShootArrows = Array.isArray(context.currentShoot.scores) ? context.currentShoot.scores.length : 0;
+  const totalArrows = runningTotal + currentShootArrows;
+  
+  if (!achievingShootId && runningTotal < targetArrows && totalArrows >= targetArrows) {
+    achievingShootId = context.currentShoot.id;
+    achievedDate = context.currentShoot.date;
+  }
   
   const isUnlocked = totalArrows >= targetArrows;
   
@@ -18,6 +45,8 @@ export function checkArrowsAchievement(context: AchievementContext, targetArrows
     totalArrows,
     targetArrows,
     isUnlocked,
-    unlockedAt: isUnlocked ? new Date().toISOString() : undefined
+    unlockedAt: isUnlocked ? new Date().toISOString() : undefined,
+    achievingShootId: isUnlocked ? achievingShootId : undefined,
+    achievedDate: isUnlocked ? achievedDate : undefined
   };
 }

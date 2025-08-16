@@ -161,7 +161,9 @@ function findExisting252Achievement(context: AchievementContext, distance: Imper
             currentScore: scoreAtDistance,
             targetScore: 252,
             isUnlocked: true,
-            unlockedAt: historyItem.date
+            unlockedAt: historyItem.date,
+            achievingShootId: historyItem.id,
+            achievedDate: historyItem.date
           };
         }
       }
@@ -202,7 +204,9 @@ function check252InCurrentShoot(context: AchievementContext, distance: ImperialD
     currentScore,
     targetScore: 252,
     isUnlocked: currentScore >= 252,
-    unlockedAt: currentScore >= 252 ? new Date().toISOString() : undefined
+    unlockedAt: currentScore >= 252 ? new Date().toISOString() : undefined,
+    achievingShootId: currentScore >= 252 ? currentShoot.id : undefined,
+    achievedDate: currentScore >= 252 ? currentShoot.date : undefined
   };
 }
 
