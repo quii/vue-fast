@@ -40,3 +40,10 @@ export const OLYMPIAN_EFFORT_GROUP: AchievementGroup = {
   description: 'Shoot a high number of arrows within any 3-day period',
   order: 5
 };
+
+export const SPIDER_AWARDS_GROUP: AchievementGroup = {
+  id: 'spider_awards',
+  name: 'Are you afraid of spiders?',
+  description: 'Score an X at different outdoor metric distances',
+  order: 6
+};
