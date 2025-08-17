@@ -132,7 +132,10 @@ class ScorePage {
         this.score(score);
       });
     } else {
-      cy.get('.score-buttons button').contains(new RegExp('^' + input.toString() + '$', 'g')).click({ force: true })
+      // Ensure we're on the score page and score buttons are available
+      cy.url().should('include', '/')
+      cy.get('.score-buttons', { timeout: 10000 }).should('be.visible')
+      cy.get('.score-buttons button').contains(new RegExp('^' + input.toString() + '$', 'g')).should('be.visible').click({ force: true })
     }
     return this;
   }
@@ -173,12 +176,68 @@ class ScorePage {
   }
 
   save() {
-    cy.get(".save-button").click();
+    // cy.get(".save-button").click(); ???
+
+    // Save to history
+    this.saveToHistory();
+
+    // Simple pattern: dismiss any achievement popups that appear, then save
+    this.dismissAnyAchievementPopups();
+    
+    // Return a resolved promise to maintain compatibility with existing tests
+    return cy.wrap(null);
+  }
+
+  // Simple method to dismiss any achievement popups that might appear
+  dismissAnyAchievementPopups() {
+    cy.wait(500)
+    // Use Cypress's built-in conditional pattern
+    cy.get('body').then($body => {
+      if ($body.find('.celebration-overlay:visible').length > 0) {
+        cy.get('button').contains('Awesome!').click();
+        // Wait a moment for any additional popups and check again
+        cy.wait(500);
+        this.dismissAnyAchievementPopups(); // Recursive call for multiple achievements
+      }
+    });
   }
 
   saveToHistory() {
-    cy.contains('Save to history').click()
+    // Wait for the modal to be stable before clicking
+    cy.get('button').contains('Save to History').should('be.visible').should('not.be.disabled')
+    cy.get('button').contains('Save to History').click()
   }
+
+  // Achievement celebration methods
+  waitForAchievementCelebration() {
+    cy.get('.celebration-overlay', { timeout: 10000 }).should('be.visible')
+    return this
+  }
+
+  shouldShowAchievementTitle(achievementName = null) {
+    cy.contains('Achievement Unlocked!').should('be.visible')
+    if (achievementName) {
+      cy.contains(achievementName).should('be.visible')
+    }
+    return this
+  }
+
+  dismissAchievement() {
+    cy.contains('button', 'Awesome!').click()
+    return this
+  }
+
+  shouldHaveNavigatedToHistory() {
+    cy.wait(500); // wait for any achievements to be dismissed
+    cy.url().should('include', '/history/')
+    return this
+  }
+
+  shouldStillBeOnScorePage() {
+    cy.url().should('not.include', '/history/')
+    return this
+  }
+
 
   assertButtonIsDisabled(buttonValue) {
     this.checkButtonState(buttonValue, "be.disabled");

@@ -33,6 +33,10 @@ const props = defineProps({
   maxReached: {
     type: Boolean,
     default: false
+  },
+  isSaving: {
+    type: Boolean,
+    default: false
   }
 });
 
@@ -73,11 +77,12 @@ const actionButtons = computed(() => {
   if (props.canSave) {
     buttons.push({
       iconComponent: SaveIcon,
-      label: "Save to history",
+      label: props.isSaving ? "Saving..." : "Save to history",
       action: "save-scores",
       class: "wide-button",
       variant: "highlight",
-      active: props.maxReached
+      active: props.maxReached,
+      disabled: props.isSaving
     });
   }
 

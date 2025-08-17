@@ -1,23 +1,33 @@
 export class UserDataPage {
   navigateTo() {
-    cy.get("a").contains("Profile").click();
+    // Check for and dismiss any tutorial backdrop that might be blocking navigation
+    cy.get('body').then($body => {
+      if ($body.find('.tutorial-backdrop').length > 0) {
+        cy.get('.tutorial-backdrop').click({ force: true });
+        cy.wait(500);
+      }
+    });
+    
+    // Navigate to Profile
+    cy.get("a").contains("Profile").click({ force: true });
   }
 
   setArcherDetails(gender, bowType, ageGroup, name = null) {
+
     if (name) {
       // Updated to target BaseInput for name
-      cy.get("input[placeholder=\"Name\"]").clear().type(name);
+      cy.get("input[placeholder=\"Name\"]").scrollIntoView().should('be.visible').clear().type(name);
     }
 
     // Updated to target BaseSelect components in order
-    // Age Group is the first BaseSelect
-    cy.get("select").eq(0).select(ageGroup);
+    // Age Group is the first BaseSelect - wait for it to be enabled
+    cy.get("select").eq(0).should('not.be.disabled').select(ageGroup);
 
-    // Gender is the second BaseSelect
-    cy.get("select").eq(1).select(gender);
+    // Gender is the second BaseSelect - wait for it to be enabled
+    cy.get("select").eq(1).should('not.be.disabled').select(gender);
 
-    // Bow Type is the third BaseSelect
-    cy.get("select").eq(2).select(bowType);
+    // Bow Type is the third BaseSelect - wait for it to be enabled
+    cy.get("select").eq(2).should('not.be.disabled').select(bowType);
   }
 
   setClassification(classification) {

@@ -17,7 +17,21 @@
       "WebFetch(domain:github.com)",
       "Bash(gh issue view:*)",
       "Bash(rm:*)",
-      "Bash(mv:*)"
+      "Bash(mv:*)",
+      "Bash(CYPRESS_BASE_URL=http://localhost:4179 npx cypress run --spec \"cypress/e2e/achievements.cy.ts\" --config video=false --headless)",
+      "Bash(find:*)",
+      "Bash(CYPRESS_BASE_URL=http://localhost:5174 npx cypress run --spec \"cypress/e2e/achievements.cy.ts\" --config video=false --headless)",
+      "Bash(CYPRESS_BASE_URL=http://localhost:5174 npx cypress run --spec \"cypress/e2e/notes_and_classifications.cy.ts\" --config video=false --headless)",
+      "Bash(CYPRESS_BASE_URL=http://localhost:5175 npx cypress run --spec \"cypress/e2e/classification_persistence.cy.ts\" --config video=false --headless)",
+      "Bash(CYPRESS_BASE_URL=http://localhost:5175 npx cypress run --spec \"cypress/e2e/print_scoresheet.cy.ts\" --config video=false --headless)",
+      "Bash(CYPRESS_BASE_URL=http://localhost:5176 npx cypress run --spec \"cypress/e2e/classification_persistence.cy.ts\" --config video=false --headless)",
+      "Bash(CYPRESS_BASE_URL=http://localhost:5176 npx cypress run --spec \"cypress/e2e/achievements.cy.ts\" --config video=false --headless)",
+      "Bash(CYPRESS_BASE_URL=http://localhost:5176 npx cypress run --spec \"cypress/e2e/print_scoresheet.cy.ts\" --config video=false --headless)",
+      "Bash(CYPRESS_BASE_URL=http://localhost:5177 npx cypress run --spec \"cypress/e2e/classification_persistence.cy.ts\" --config video=false --headless)",
+      "Bash(CYPRESS_BASE_URL=http://localhost:5177 npx cypress run --spec \"cypress/e2e/achievements.cy.ts\" --config video=false --headless)",
+      "Bash(CYPRESS_BASE_URL=http://localhost:5178 npx cypress run --spec \"cypress/e2e/achievements.cy.ts\" --config video=false --headless)",
+      "Bash(CYPRESS_BASE_URL=http://localhost:5178 npx cypress run --spec \"cypress/e2e/classification_persistence.cy.ts\" --config video=false --headless)",
+      "Bash(CYPRESS_BASE_URL=http://localhost:5179 npx cypress run --spec \"cypress/e2e/classification_persistence.cy.ts\" --config video=false --headless)"
     ],
     "deny": [
       "Bash(git push*)",

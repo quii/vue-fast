@@ -113,6 +113,12 @@ Cypress.Commands.add('disableAllTips', () => {
   localStorage.setItem('hasSeenRoundSelectionTip', 'true')
   localStorage.setItem('hasSeenScoreCardTutorial', 'true')
   localStorage.setItem('hasSeenInstallPrompt', 'true')
+  localStorage.setItem('hasSeenProfileTutorial', 'true')
+  localStorage.setItem('hasSeenNavigationTutorial', 'true')
+  localStorage.setItem('hasSeenUserDataTutorial', 'true')
+  localStorage.setItem('hasSeenAppTutorial', 'true')
+  localStorage.setItem('tutorialCompleted', 'true')
+  localStorage.setItem('skipTutorial', 'true')
 })
 
 // TypeScript declarations for custom commands

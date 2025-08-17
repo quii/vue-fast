@@ -18,7 +18,6 @@ describe('Cloud Backup and Restore', () => {
     scorePage.visit()
     dataManagementPage.navigateTo()
     dataManagementPage.resetData()
-    cy.disableAllTips()
 
     userDataPage.navigateTo()
     userDataPage.setArcherDetails('male', 'recurve', 'senior', archerName)
@@ -26,7 +25,7 @@ describe('Cloud Backup and Restore', () => {
 
   it('should backup and restore data correctly', () => {
     // First shoot - Score a Bray I round
-    scorePage.navigateTo()
+    scorePage.visit()
     scorePage.selectGame('Bray i')
 
     // First dozen

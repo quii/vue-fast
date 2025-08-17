@@ -1,5 +1,6 @@
 <script setup>
 import { useRoute } from "vue-router";
+import { computed } from "vue";
 import ScoreIcon from "@/components/icons/ScoreIcon.vue";
 import HistoryIcon from "@/components/icons/HistoryIcon.vue";
 import DiaryIcon from "@/components/icons/DiaryIcon.vue";
@@ -7,13 +8,20 @@ import SightIcon from "@/components/icons/SightIcon.vue";
 import AchievementsIcon from "@/components/icons/AchievementsIcon.vue";
 import ProfileIcon from "@/components/icons/ProfileIcon.vue";
 import LiveIcon from "@/components/icons/LiveIcon.vue";
+import { useAchievementStore } from "@/stores/achievements.js";
 
 const route = useRoute();
+const achievementStore = useAchievementStore();
 
 // Helper to determine if a route is active
 const isActive = (path) => {
   return route.path === path;
 };
+
+// Show notification badge when there are unread achievements
+const showNotificationBadge = computed(() => {
+  return achievementStore.hasUnreadAchievements && !isActive('/achievements');
+});
 </script>
 
 <template>
@@ -57,6 +65,7 @@ const isActive = (path) => {
     <router-link to="/achievements" class="nav-item" :class="{ active: isActive('/achievements') }" data-cy="nav-achievements">
       <div class="icon-container">
         <AchievementsIcon class="nav-icon" />
+        <div v-if="showNotificationBadge" class="notification-badge"></div>
       </div>
       <span class="nav-label">Awards</span>
     </router-link>

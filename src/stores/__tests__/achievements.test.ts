@@ -2,80 +2,89 @@
  * Achievement Store Tests
  */
 
-import { describe, test, expect, beforeEach } from 'vitest';
+import { describe, test, expect, beforeEach, vi } from 'vitest';
 import { setActivePinia, createPinia } from 'pinia';
 import { useAchievementStore } from '../achievements.js';
 
 describe('Achievement Store', () => {
   beforeEach(() => {
     setActivePinia(createPinia());
+    
+    // Clear localStorage before each test
+    localStorage.clear();
+    
+    // Mock console.warn to avoid noise in tests
+    vi.spyOn(console, 'warn').mockImplementation(() => {});
   });
 
-  test('initializes with default progress', () => {
+  test('initializes with default values', () => {
     const store = useAchievementStore();
     
-    expect(store.progress.totalArrows).toBe(0);
-    expect(store.progress.targetArrows).toBe(10000);
-    expect(store.progress.isUnlocked).toBe(false);
+    expect(store.unreadAchievements).toEqual([]);
+    expect(store.popupsEnabled).toBe(true);
+    expect(store.unreadCount).toBe(0);
+    expect(store.hasUnreadAchievements).toBe(false);
   });
 
-  test('gets achievement info correctly', () => {
+  test('manages unread achievements', () => {
     const store = useAchievementStore();
     
-    const info = store.getAchievementInfo();
+    const context = {
+      currentShoot: { 
+        id: 'test',
+        date: '2023-01-01',
+        scores: Array(1000).fill(9),
+        gameType: 'practice'
+      },
+      shootHistory: [
+        { 
+          id: 1,
+          date: '2022-01-01',
+          scores: Array(9000).fill(8),
+          gameType: 'practice'
+        }
+      ]
+    };
     
-    expect(info.id).toBe('ten_thousand_arrows');
-    expect(info.name).toBe('10k Club');
-    expect(info.description).toBe('Shoot 10,000 arrows in total');
-    expect(info.targetArrows).toBe(10000);
+    const newAchievements = store.updateAchievements(context);
+    
+    expect(newAchievements.length).toBeGreaterThan(0);
+    expect(store.unreadCount).toBeGreaterThan(0);
+    expect(store.hasUnreadAchievements).toBe(true);
   });
 
-  test('updates progress based on shoot data', () => {
+  test('marks achievements as read', () => {
     const store = useAchievementStore();
     
-    const currentShoot = { scores: [9, 8, 7, 9, 8, 7] }; // 6 arrows
-    const shootHistory = [
-      { scores: [8, 7, 6, 8, 7, 6] }, // 6 arrows
-      { scores: [7, 6, 5] } // 3 arrows
-    ];
+    // Manually add an unread achievement
+    store.unreadAchievements.push({
+      id: 'test_achievement',
+      name: 'Test',
+      description: 'Test achievement',
+      tier: 'bronze',
+      unlockedAt: new Date().toISOString()
+    });
     
-    const result = store.updateProgress(currentShoot, shootHistory);
+    expect(store.unreadCount).toBe(1);
     
-    expect(store.progress.totalArrows).toBe(15); // 6 + 6 + 3
-    expect(store.progress.isUnlocked).toBe(false);
-    expect(result.justUnlocked).toBe(false);
+    store.markAsRead('test_achievement');
+    
+    expect(store.unreadCount).toBe(0);
+    expect(store.hasUnreadAchievements).toBe(false);
   });
 
-  test('marks achievement as unlocked when target reached', () => {
+  test('handles popup preferences', () => {
     const store = useAchievementStore();
     
-    const currentShoot = { scores: Array(1000).fill(9) }; // 1000 arrows
-    const shootHistory = [
-      { scores: Array(9000).fill(8) } // 9000 arrows
-    ];
+    expect(store.popupsEnabled).toBe(true);
     
-    const result = store.updateProgress(currentShoot, shootHistory);
+    store.setPopupsEnabled(false);
     
-    expect(store.progress.totalArrows).toBe(10000);
-    expect(store.progress.isUnlocked).toBe(true);
-    expect(store.progress.unlockedAt).toBeDefined();
-    expect(result.justUnlocked).toBe(true);
-    expect(result.achievement.name).toBe('10k Club');
+    expect(store.popupsEnabled).toBe(false);
+    
+    // Check that it persists
+    const newStore = useAchievementStore();
+    expect(newStore.popupsEnabled).toBe(false);
   });
 
-  test('handles empty scores arrays', () => {
-    const store = useAchievementStore();
-    
-    const currentShoot = { scores: [] };
-    const shootHistory = [
-      { scores: [] },
-      { scores: [9, 8, 7] }
-    ];
-    
-    const result = store.updateProgress(currentShoot, shootHistory);
-    
-    expect(store.progress.totalArrows).toBe(3);
-    expect(store.progress.isUnlocked).toBe(false);
-    expect(result.justUnlocked).toBe(false);
-  });
 });

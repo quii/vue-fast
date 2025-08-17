@@ -22,7 +22,9 @@ import { useNotesStore } from "@/stores/user_notes";
 import { usePreferencesStore } from '@/stores/preferences'
 import { useShootStore } from '@/stores/shoot'
 import { useAchievementStore } from '@/stores/achievements'
-import { computed, ref, onMounted, onUnmounted, watch } from 'vue'
+import { useAchievementNotifications } from '@/composables/useAchievementNotifications.js'
+import AchievementCelebrationModal from '@/components/modals/AchievementCelebrationModal.vue'
+import { computed, ref, onMounted, onUnmounted, watch, nextTick } from 'vue'
 import { useToast } from "vue-toastification";
 import {
   createClassificationCalculator, getHighestPossibleClassification
@@ -45,6 +47,7 @@ const preferencesStore = usePreferencesStore()
 const shootStore = useShootStore()
 const shootTimingStore = useShootTimingStore()
 const achievementStore = useAchievementStore()
+const achievementNotifications = useAchievementNotifications()
 
 const route = useRoute();
 const showTutorial = ref(false)
@@ -54,6 +57,7 @@ onMounted(async () => {
   if (!preferencesStore.hasSeenScoreCardTutorial) {
     showTutorial.value = true
   }
+
 
   // Only initialize WebSocket if we might be restoring a live shoot
   // Try to restore any persisted shoot state first
@@ -91,7 +95,8 @@ const hasStarted = computed(() => scoresStore.scores.length > 0);
 const currentEnd = computed(() => Math.floor(scoresStore.scores.length / gameTypeStore.currentRound.endSize));
 
 const showNoteTaker = ref(false);
-const showSaveModal = ref(false);ref(false)
+const showSaveModal = ref(false);
+const isSaving = ref(false);
 // New ref for leaderboard modal
 
 const classificationCalculator = ref(null);
@@ -220,18 +225,33 @@ watch([() => scoresStore.scores, classificationCalculator, totals, averageScores
 }, { immediate: true });
 
 watch(() => maxReached.value, (isMaxReached) => {
-  if (isMaxReached) {
+  if (isMaxReached && !isSaving.value && !showSaveModal.value) {
     // Automatically show the save modal when the shoot is completed
+    // Only if we're not already saving and the modal isn't already open
     showSaveModal.value = true
   }
 }, { immediate: false })
 
 function showSaveConfirmation() {
+  // Prevent double-saves by checking if we're already saving
+  if (isSaving.value) {
+    return;
+  }
   showSaveModal.value = true;
 }
 
 
+// Store the shoot ID for navigation after achievement celebration
+const pendingNavigationShootId = ref(null);
+
 async function handleSaveFromModal(data) {
+  // Prevent double-saves
+  if (isSaving.value) {
+    return;
+  }
+  
+  isSaving.value = true;
+  
   // Update date and status from modal
   date.value = data.date;
 
@@ -264,31 +284,75 @@ async function handleSaveFromModal(data) {
     arrowHistoryStore.saveArrowsForShoot(id, [...scoresStore.arrows]);
     notesStore.assignPendingNotesToShoot(id);
     
-    // Update achievement progress with the new score
-    const currentShoot = { scores: [...scoresStore.scores] };
-    const shootHistory = history.sortedHistory();
-    const achievementResult = achievementStore.updateProgress(currentShoot, shootHistory);
+    // Check for new achievements
+    const context = {
+      currentShoot: { 
+        id: id,
+        date: date.value,
+        scores: [...scoresStore.scores],
+        gameType: gameTypeStore.type
+      },
+      shootHistory: history.sortedHistory()
+    };
     
-    // Show notification if achievement was just completed
-    if (achievementResult.justUnlocked) {
-      toast.success(`🏆 Achievement Completed: ${achievementResult.achievement.name}!`, {
-        timeout: 5000
-      });
-    }
+    const willShowAchievementModal = await achievementNotifications.checkAchievements(context);
+    
+    // Wait for Vue's reactive updates to be processed
+    await nextTick();
     
     scoresStore.clear();
     shootTimingStore.clearTiming(); // Clear timing data for next shoot
     showSaveModal.value = false;
 
-    router.push(`/history/${id}`)
+    // If achievement modal will show, wait for celebration completion
+    // Otherwise navigate immediately
+    if (willShowAchievementModal && achievementNotifications.shouldShowCelebrationModal.value) {
+      pendingNavigationShootId.value = id;
+    } else {
+      router.push(`/history/${id}`);
+    }
   } catch (error) {
     console.log(error);
     toast.error("Error saving scores", error);
+  } finally {
+    // Always reset saving state, even if there's an error
+    isSaving.value = false;
+  }
+}
+
+// Handle navigation after achievement celebration
+function handleAchievementDismissed() {
+  achievementNotifications.dismissCelebrationPopup();
+  
+  // Navigate to the shoot only if we have a pending navigation AND no more achievements to show
+  if (pendingNavigationShootId.value) {
+    // Wait a moment for the queue to be processed, then check if more achievements remain
+    setTimeout(() => {
+      const hasMoreAchievements = achievementNotifications.shouldShowCelebrationModal.value;
+      
+      if (!hasMoreAchievements) {
+        const shootId = pendingNavigationShootId.value;
+        pendingNavigationShootId.value = null;
+        router.push(`/history/${shootId}`);
+      }
+    }, 600); // Slightly longer than the 500ms delay in the composable
+  }
+}
+
+function handleDisablePopups() {
+  achievementNotifications.disablePopups();
+  
+  // When popups are disabled, navigate immediately (no more celebrations will show)
+  if (pendingNavigationShootId.value) {
+    const shootId = pendingNavigationShootId.value;
+    pendingNavigationShootId.value = null;
+    router.push(`/history/${shootId}`);
   }
 }
 
 function cancelSave() {
   showSaveModal.value = false;
+  isSaving.value = false; // Reset saving state when canceling
 }
 
 function clearScores() {
@@ -356,6 +420,7 @@ function closeTutorial() {
           :availableClassifications="availableClassifications"
           :canSave="canSave"
           :maxReached="maxReached"
+          :isSaving="isSaving"
           @clear-scores="clearScores"
           @take-note="handleTakeNote"
           @save-scores="showSaveConfirmation"
@@ -404,6 +469,15 @@ function closeTutorial() {
         @save="handleSaveFromModal"
         @cancel="cancelSave"
       />
+
+      <!-- Achievement Celebration Modal -->
+      <AchievementCelebrationModal
+        v-if="achievementNotifications.shouldShowCelebrationModal.value && achievementNotifications.currentAchievement.value"
+        :achievement="achievementNotifications.currentAchievement.value"
+        @dismiss="handleAchievementDismissed"
+        @disable-popups="handleDisablePopups"
+      />
+
 
       <RoundScores v-if="hasStarted" :scores="scoresStore.scores"
                    :game-type="gameTypeStore.type"

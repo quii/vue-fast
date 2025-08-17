@@ -40,16 +40,23 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import BaseTopBar from '@/components/ui/BaseTopBar.vue'
 import AchievementBadge from '@/components/AchievementBadge.vue'
 import AchievementGroup from '@/components/AchievementGroup.vue'
 import { useHistoryStore } from '@/stores/history.js'
+import { useAchievementStore } from '@/stores/achievements.js'
 import { calculateAchievements } from '@/domain/achievements/calculator.js'
 
 const historyStore = useHistoryStore()
+const achievementStore = useAchievementStore()
 
 const currentFilter = ref('all')
+
+// Mark all achievements as read when the page is visited
+onMounted(() => {
+  achievementStore.markAllAsRead()
+})
 
 const achievements = computed(() => {
   const history = historyStore.sortedHistory()

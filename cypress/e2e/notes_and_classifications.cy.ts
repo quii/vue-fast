@@ -86,6 +86,7 @@ describe("Notes and Classifications", () => {
 
 
     scorePage.save();
+
     historyPage.navigateTo();
     historyPage.checkClassificationExists("834", "B3");
   });
