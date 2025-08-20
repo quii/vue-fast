@@ -13,10 +13,12 @@ let redisContainer
 let network
 
 async function runDockerE2ETests() {
+  console.log('Setting up test environment...')
   network = await new Network().start()
 
   try {
     // Start MinIO container
+    console.log('Starting MinIO container...')
     minioContainer = await new GenericContainer('minio/minio')
       .withNetwork(network)
       .withNetworkAliases('minio')
@@ -29,12 +31,14 @@ async function runDockerE2ETests() {
       .start()
 
     // Start Redis container
+    console.log('Starting Redis container...')
     redisContainer = await new GenericContainer('redis:alpine')
       .withNetwork(network)
       .withNetworkAliases('redis')
       .withExposedPorts(6379)
       .start()
 
+    console.log('Building Docker image...')
     execSync(
       'docker build ' +
       '--build-arg AWS_ENDPOINT_URL_S3=http://minio:9000 ' +
@@ -46,11 +50,12 @@ async function runDockerE2ETests() {
       '-t vue-fast-test .',
       {
         cwd: projectRoot,
-        stdio: 'inherit'
+        stdio: 'inherit' // Show all Docker output so we can see and fix warnings
       }
     )
 
     // Start the Vue app container
+    console.log('Starting Vue app container...')
     vueContainer = await new GenericContainer('vue-fast-test')
       .withNetwork(network)
       .withNetworkAliases('app')
@@ -63,24 +68,28 @@ async function runDockerE2ETests() {
         BUCKET_NAME: 'archery-backups-test',
         REDIS_URL: 'redis://redis:6379',
         NODE_ENV: 'development',
-        DEBUG: 'true'
+        DEBUG: 'false', // Reduce debug output
+        NODE_NO_WARNINGS: '1' // Suppress Node.js warnings
       })
       .start()
+    console.log('All containers started successfully')
 
     // Get the network name
     const networkName = network.getName()
 
-    // Run Cypress using Docker directly with the browser set to electron
-    // Enable video recording and ensure videos are saved to the host
-    const cypressCommand = `docker run --rm --network ${networkName} -v "${projectRoot}:/e2e" -w /e2e -e CYPRESS_TSCONFIG=cypress/tsconfig.json cypress/included:12.17.4 run --headless --browser electron --config baseUrl=http://app:8080,video=false,videosFolder=/e2e/cypress/videos`
+    // Run Cypress using Docker with minimal output
+    console.log('Running Cypress tests...')
+    const cypressCommand = `docker run --rm --network ${networkName} -v "${projectRoot}:/e2e" -w /e2e -e CYPRESS_TSCONFIG=cypress/tsconfig.json -e NODE_NO_WARNINGS=1 cypress/included:12.17.4 run --headless --browser electron --quiet --reporter min --config baseUrl=http://app:8080,video=false,videosFolder=/e2e/cypress/videos`
 
     try {
       execSync(cypressCommand, { stdio: 'inherit' })
+      console.log('✅ All Cypress tests passed')
       await stopContainers()
 
       return 0 // Success
     } catch (error) {
-      console.error('Cypress tests failed:', error.message)
+      console.error('❌ Cypress tests failed')
+      console.error('Exit code:', error.status)
 
       // Stop all containers
       await stopContainers()

@@ -37,7 +37,10 @@
       "Bash(CYPRESS_BASE_URL=http://localhost:5173 npx cypress run --spec \"cypress/e2e/print_scoresheet.cy.ts\" --config video=false --headless)",
       "Bash(npx vitest:*)",
       "Bash(NODE_NO_WARNINGS=1 npm run test:unit)",
-      "Bash(vitest --reporter=verbose --run)"
+      "Bash(vitest --reporter=verbose --run)",
+      "Bash(timeout 600 npm run test:e2e:docker)",
+      "Bash(docker build:*)",
+      "Bash(npm audit:*)"
     ],
     "deny": [
       "Bash(git push*)",

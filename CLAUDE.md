@@ -32,6 +32,7 @@ The goal is to work in small, easy to understand, safe steps, that we can freque
 
 ### Test Commands
 - `npm run test:unit` - Run unit tests with minimal output (dots only, failures show details)
+- `npm run test:e2e:docker` - Run e2e tests in Docker with minimal output (quiet mode, failures show details)
 - `npm test` - Run full test suite (build + lint + unit tests + e2e tests)
 
 ## Git Workflow - Trunk-Based Development

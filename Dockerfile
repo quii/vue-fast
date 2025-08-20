@@ -1,10 +1,10 @@
 # Build stage
-FROM node:18-alpine as build-stage
+FROM node:20-alpine as build-stage
 WORKDIR /app
 
 # Copy package files for dependency installation
 COPY package*.json ./
-RUN npm ci
+RUN npm ci --no-fund
 
 # Copy all source files needed for build
 # Instead of selectively copying files, copy everything except what's in .dockerignore
@@ -15,7 +15,7 @@ RUN npm run build
 RUN npm run server:build
 
 # Production stage
-FROM node:18-alpine as production-stage
+FROM node:20-alpine as production-stage
 WORKDIR /app
 
 # Set build arguments for S3 configuration
@@ -38,7 +38,7 @@ COPY --from=build-stage /app/dist ./dist
 COPY package*.json ./
 
 # Install production dependencies only
-RUN npm ci --only=production && npm cache clean --force
+RUN npm ci --omit=dev --no-fund && npm cache clean --force
 
 # Expose port
 EXPOSE 8080
