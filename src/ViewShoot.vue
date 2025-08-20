@@ -27,6 +27,8 @@ import ShootEditModal from "@/components/modals/ShootEditModal.vue";
 import DeleteConfirmationModal from "@/components/modals/DeleteConfirmationModal.vue";
 import EndTotalChart from "@/components/EndTotalChart.vue";
 import ScoreDistributionChart from "@/components/ScoreDistributionChart.vue";
+import { useAchievementNotifications } from '@/composables/useAchievementNotifications.js';
+import AchievementCelebrationModal from '@/components/modals/AchievementCelebrationModal.vue';
 
 const preferences = usePreferencesStore();
 const arrowHistoryStore = useArrowHistoryStore();
@@ -34,11 +36,15 @@ const route = useRoute()
 const router = useRouter()
 const history = useHistoryStore()
 const userStore = useUserStore()
+const achievementNotifications = useAchievementNotifications()
 
 const showPrintModal = ref(false);
 const showTip = ref(!preferences.hasSeenPrintTip);
 const showDeleteConfirm = ref(false);
 const showClassificationDetails = ref(false);
+
+// Achievement tracking - use a Set to track which shoots have already been checked
+const achievementsChecked = ref(new Set());
 
 const showEditModal = ref(false);
 const editedStatus = ref(null);
@@ -103,6 +109,28 @@ async function initClassificationCalculator() {
 
 // Call the initialization function
 initClassificationCalculator();
+
+// Check achievements only once per shoot visit
+async function checkAchievementsOnce() {
+  const shootId = parseInt(route.params.id);
+  
+  // Only check if we haven't already checked for this shoot
+  if (!achievementsChecked.value.has(shootId) && shoot.value) {
+    achievementsChecked.value.add(shootId);
+    
+    const context = {
+      currentShoot: { 
+        id: shootId,
+        date: shoot.value.date,
+        scores: shoot.value.scores,
+        gameType: shoot.value.gameType
+      },
+      shootHistory: history.sortedHistory()
+    };
+    
+    await achievementNotifications.checkAchievements(context);
+  }
+}
 
 const editShootData = computed(() => {
   if (!shoot) return null;
@@ -219,6 +247,15 @@ function cancelEdit() {
   showEditModal.value = false;
 }
 
+// Achievement handlers
+function handleAchievementDismissed() {
+  achievementNotifications.dismissCelebrationPopup();
+}
+
+function handleDisablePopups() {
+  achievementNotifications.disablePopups();
+}
+
 function handleSaveFromModal(data) {
   // Update the shoot with both status and date
   const success = history.updateShoot(shoot.value.id, {
@@ -281,12 +318,14 @@ function handleSwipe() {
   }
 }
 
-watch(() => route.params.id, () => {
+watch(() => route.params.id, async () => {
   loadNavigationInfo();
+  await checkAchievementsOnce();
 });
 
-onMounted(() => {
+onMounted(async () => {
   loadNavigationInfo();
+  await checkAchievementsOnce();
 });
 </script>
 
@@ -355,6 +394,14 @@ onMounted(() => {
         :shoot="shoot"
         :archer-name="userStore.user.name"
         @close="showPrintModal = false"
+    />
+
+    <!-- Achievement Celebration Modal -->
+    <AchievementCelebrationModal
+      v-if="achievementNotifications.shouldShowCelebrationModal.value && achievementNotifications.currentAchievement.value"
+      :achievement="achievementNotifications.currentAchievement.value"
+      @dismiss="handleAchievementDismissed"
+      @disable-popups="handleDisablePopups"
     />
 
     <!-- Confirmation Modal -->

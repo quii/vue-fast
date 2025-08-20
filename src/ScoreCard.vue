@@ -21,9 +21,6 @@ import { useUserStore } from "@/stores/user";
 import { useNotesStore } from "@/stores/user_notes";
 import { usePreferencesStore } from '@/stores/preferences'
 import { useShootStore } from '@/stores/shoot'
-import { useAchievementStore } from '@/stores/achievements'
-import { useAchievementNotifications } from '@/composables/useAchievementNotifications.js'
-import AchievementCelebrationModal from '@/components/modals/AchievementCelebrationModal.vue'
 import { computed, ref, onMounted, onUnmounted, watch, nextTick } from 'vue'
 import { useToast } from "vue-toastification";
 import {
@@ -46,8 +43,6 @@ const history = useHistoryStore();
 const preferencesStore = usePreferencesStore()
 const shootStore = useShootStore()
 const shootTimingStore = useShootTimingStore()
-const achievementStore = useAchievementStore()
-const achievementNotifications = useAchievementNotifications()
 
 const route = useRoute();
 const showTutorial = ref(false)
@@ -241,8 +236,6 @@ function showSaveConfirmation() {
 }
 
 
-// Store the shoot ID for navigation after achievement celebration
-const pendingNavigationShootId = ref(null);
 
 async function handleSaveFromModal(data) {
   // Prevent double-saves
@@ -284,19 +277,6 @@ async function handleSaveFromModal(data) {
     arrowHistoryStore.saveArrowsForShoot(id, [...scoresStore.arrows]);
     notesStore.assignPendingNotesToShoot(id);
     
-    // Check for new achievements
-    const context = {
-      currentShoot: { 
-        id: id,
-        date: date.value,
-        scores: [...scoresStore.scores],
-        gameType: gameTypeStore.type
-      },
-      shootHistory: history.sortedHistory()
-    };
-    
-    const willShowAchievementModal = await achievementNotifications.checkAchievements(context);
-    
     // Wait for Vue's reactive updates to be processed
     await nextTick();
     
@@ -304,13 +284,8 @@ async function handleSaveFromModal(data) {
     shootTimingStore.clearTiming(); // Clear timing data for next shoot
     showSaveModal.value = false;
 
-    // If achievement modal will show, wait for celebration completion
-    // Otherwise navigate immediately
-    if (willShowAchievementModal && achievementNotifications.shouldShowCelebrationModal.value) {
-      pendingNavigationShootId.value = id;
-    } else {
-      router.push(`/history/${id}`);
-    }
+    // Navigate to the saved shoot
+    router.push(`/history/${id}`);
   } catch (error) {
     console.log(error);
     toast.error("Error saving scores", error);
@@ -320,35 +295,6 @@ async function handleSaveFromModal(data) {
   }
 }
 
-// Handle navigation after achievement celebration
-function handleAchievementDismissed() {
-  achievementNotifications.dismissCelebrationPopup();
-  
-  // Navigate to the shoot only if we have a pending navigation AND no more achievements to show
-  if (pendingNavigationShootId.value) {
-    // Wait a moment for the queue to be processed, then check if more achievements remain
-    setTimeout(() => {
-      const hasMoreAchievements = achievementNotifications.shouldShowCelebrationModal.value;
-      
-      if (!hasMoreAchievements) {
-        const shootId = pendingNavigationShootId.value;
-        pendingNavigationShootId.value = null;
-        router.push(`/history/${shootId}`);
-      }
-    }, 600); // Slightly longer than the 500ms delay in the composable
-  }
-}
-
-function handleDisablePopups() {
-  achievementNotifications.disablePopups();
-  
-  // When popups are disabled, navigate immediately (no more celebrations will show)
-  if (pendingNavigationShootId.value) {
-    const shootId = pendingNavigationShootId.value;
-    pendingNavigationShootId.value = null;
-    router.push(`/history/${shootId}`);
-  }
-}
 
 function cancelSave() {
   showSaveModal.value = false;
@@ -470,13 +416,6 @@ function closeTutorial() {
         @cancel="cancelSave"
       />
 
-      <!-- Achievement Celebration Modal -->
-      <AchievementCelebrationModal
-        v-if="achievementNotifications.shouldShowCelebrationModal.value && achievementNotifications.currentAchievement.value"
-        :achievement="achievementNotifications.currentAchievement.value"
-        @dismiss="handleAchievementDismissed"
-        @disable-popups="handleDisablePopups"
-      />
 
 
       <RoundScores v-if="hasStarted" :scores="scoresStore.scores"
