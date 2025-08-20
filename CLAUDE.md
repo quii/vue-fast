@@ -30,6 +30,10 @@ The goal is to work in small, easy to understand, safe steps, that we can freque
 - Work in small incremental steps. Keep running the unit tests (`npm run test:unit`) to check
 - Once you have a working end to end slice, run `npm test` to run the full test suite. You should then summarise the changes to me so i can decide whether to commit
 
+### Test Commands
+- `npm run test:unit` - Run unit tests with minimal output (dots only, failures show details)
+- `npm test` - Run full test suite (build + lint + unit tests + e2e tests)
+
 ## Git Workflow - Trunk-Based Development
 
 We use strict trunk-based development. **No branches, no pull requests - only direct commits to main.**

@@ -12,7 +12,10 @@ export default mergeConfig(
       root: fileURLToPath(new URL('./', import.meta.url)),
       transformMode: {
         web: [/\.[jt]sx$/]
-      }
+      },
+      // Reduce noise in test output
+      silent: 'passed-only', // Only show output for failing tests
+      hideSkippedTests: true // Hide skipped test logs
     }
   })
 )

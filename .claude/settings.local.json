@@ -34,7 +34,9 @@
       "Bash(CYPRESS_BASE_URL=http://localhost:5179 npx cypress run --spec \"cypress/e2e/classification_persistence.cy.ts\" --config video=false --headless)",
       "Bash(CYPRESS_BASE_URL=http://localhost:5173 npx cypress run --spec \"cypress/e2e/achievements.cy.ts\" --config video=false --headless)",
       "Bash(CYPRESS_BASE_URL=http://localhost:5173 npx cypress run --spec \"cypress/e2e/classification_persistence.cy.ts\" --config video=false --headless)",
-      "Bash(CYPRESS_BASE_URL=http://localhost:5173 npx cypress run --spec \"cypress/e2e/print_scoresheet.cy.ts\" --config video=false --headless)"
+      "Bash(CYPRESS_BASE_URL=http://localhost:5173 npx cypress run --spec \"cypress/e2e/print_scoresheet.cy.ts\" --config video=false --headless)",
+      "Bash(npx vitest:*)",
+      "Bash(NODE_NO_WARNINGS=1 npm run test:unit)"
     ],
     "deny": [
       "Bash(git push*)",
