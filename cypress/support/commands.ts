@@ -119,6 +119,9 @@ Cypress.Commands.add('disableAllTips', () => {
   localStorage.setItem('hasSeenAppTutorial', 'true')
   localStorage.setItem('tutorialCompleted', 'true')
   localStorage.setItem('skipTutorial', 'true')
+  
+  // Clear achievement state to ensure test isolation
+  localStorage.removeItem('achievement-preferences')
 })
 
 // TypeScript declarations for custom commands

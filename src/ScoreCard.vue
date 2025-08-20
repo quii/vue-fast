@@ -30,6 +30,7 @@ import { calculateSubtotals } from "@/domain/scoring/subtotals";
 import { calculateAverageScorePerEnd } from "@/domain/scoring/distance_totals";
 import { useRoute, useRouter } from "vue-router";
 import { DEFAULT_SHOOT_STATUS } from '@/domain/shoot/shoot_status.js'
+import { useAchievementStore } from '@/stores/achievements.js';
 
 const synth = window.speechSynthesis;
 const router = useRouter();
@@ -43,6 +44,7 @@ const history = useHistoryStore();
 const preferencesStore = usePreferencesStore()
 const shootStore = useShootStore()
 const shootTimingStore = useShootTimingStore()
+const achievementStore = useAchievementStore()
 
 const route = useRoute();
 const showTutorial = ref(false)
@@ -276,6 +278,22 @@ async function handleSaveFromModal(data) {
 
     arrowHistoryStore.saveArrowsForShoot(id, [...scoresStore.arrows]);
     notesStore.assignPendingNotesToShoot(id);
+    
+    // Calculate achievements for the new shoot
+    const achievementContext = {
+      currentShoot: {
+        id: id,
+        date: date.value,
+        scores: [...scoresStore.scores],
+        score: runningTotal.value,
+        gameType: gameTypeStore.type,
+        userProfile: userStore.user
+      },
+      shootHistory: history.sortedHistory()
+    };
+    
+    // Update achievements with the new shoot data
+    achievementStore.updateAchievements(achievementContext);
     
     // Wait for Vue's reactive updates to be processed
     await nextTick();

@@ -82,8 +82,7 @@ export const useAchievementStore = defineStore('achievement', () => {
         const hasBeenCelebrated = celebratedAchievements.value.has(achievement.id);
 
         if (!alreadyUnread && !hasBeenCelebrated) {
-          // Mark as celebrated so we don't show popup again
-          celebratedAchievements.value.add(achievement.id);
+          // Don't mark as celebrated yet - only when actually dismissed
           const newUnread: UnreadAchievement = {
             id: achievement.id,
             name: achievement.name,
@@ -110,6 +109,8 @@ export const useAchievementStore = defineStore('achievement', () => {
     const index = unreadAchievements.value.findIndex(achievement => achievement.id === achievementId);
     if (index !== -1) {
       unreadAchievements.value.splice(index, 1);
+      // Mark as celebrated so we don't show popup again for this achievement
+      celebratedAchievements.value.add(achievementId);
       savePreferences();
     }
   }

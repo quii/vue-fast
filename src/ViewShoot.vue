@@ -118,17 +118,13 @@ async function checkAchievementsOnce() {
   if (!achievementsChecked.value.has(shootId) && shoot.value) {
     achievementsChecked.value.add(shootId);
     
-    const context = {
-      currentShoot: { 
-        id: shootId,
-        date: shoot.value.date,
-        scores: shoot.value.scores,
-        gameType: shoot.value.gameType
-      },
-      shootHistory: history.sortedHistory()
-    };
+    // Look for unread achievements that were earned by this specific shoot
+    const achievementsForThisShoot = achievementNotifications.achievementStore.unreadAchievements.filter(achievement => 
+      achievement.achievingShootId === shootId
+    );
     
-    await achievementNotifications.checkAchievements(context);
+    // Show achievements that were earned by this specific shoot
+    achievementNotifications.showAchievementsForShoot(achievementsForThisShoot);
   }
 }
 

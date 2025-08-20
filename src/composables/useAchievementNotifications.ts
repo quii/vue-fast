@@ -104,6 +104,15 @@ export function useAchievementNotifications() {
     notificationService.destroy();
   });
   
+  // Method to show specific achievements without full calculation
+  function showAchievementsForShoot(achievements: any[]) {
+    if (achievements.length > 0 && achievementStore.popupsEnabled) {
+      // Add achievements to queue and start showing them
+      achievementQueue.value.push(...achievements);
+      showNextAchievement();
+    }
+  }
+
   return {
     // State
     showCelebrationPopup,
@@ -115,6 +124,7 @@ export function useAchievementNotifications() {
     checkAchievements,
     dismissCelebrationPopup,
     disablePopups,
+    showAchievementsForShoot,
     
     // Store access
     achievementStore

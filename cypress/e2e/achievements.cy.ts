@@ -56,38 +56,20 @@ describe('Achievements System', () => {
     scorePage.navigateTo()
     scorePage.clearData()
     
-    // Score enough to potentially trigger an achievement
-    scorePage.selectGame('Bray I')
-    const testArrows = Array(30).fill(5) // Use Bray I (30 arrows)
+    // Score enough to trigger achievements (first shoot should trigger multiple achievements)
+    scorePage.selectGame('National 40')
+    const testArrows = Array(72).fill(9) // Use good scores to ensure achievements trigger
     scorePage.score(testArrows)
 
-
-    scorePage.save().then(() => {
-      scorePage.shouldHaveNavigatedToHistory()
-    })
-  })
-  
-  it('handles multiple achievements in sequence before navigating', () => {
-    const scorePage = new ScorePage()
-
-    // Setup: disable tips and clear data
-    // @ts-ignore - Custom command defined in commands.ts
-    cy.disableAllTips()
-    scorePage.visit()
+    // Save and test that achievement popup appears
+    scorePage.saveAndWaitForAchievements()
+      .waitForAchievementCelebration()
+      .shouldShowAchievementTitle()
     
-    // Set archer details to ensure proper setup
-    userDataPage.navigateTo()
-    userDataPage.setArcherDetails("male", "recurve", "senior")
-    scorePage.navigateTo()
-    scorePage.clearData()
+    // Dismiss the achievement popup
+    cy.get('button').contains('Awesome!').click()
     
-    // Score enough to trigger multiple achievements
-    scorePage.selectGame('Bray I')
-    const manyArrows = Array(30).fill(10) // Perfect score on Bray I (should trigger achievements)
-    scorePage.score(manyArrows)
-
-    scorePage.save().then(() => {
-      scorePage.shouldHaveNavigatedToHistory()
-    })
+    // Should navigate to history after achievements are dismissed
+    scorePage.shouldHaveNavigatedToHistory()
   })
 })

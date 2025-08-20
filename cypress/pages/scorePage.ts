@@ -188,6 +188,12 @@ class ScorePage {
     return cy.wrap(null);
   }
 
+  // Save and wait for achievement popups to appear (for testing popup functionality)
+  saveAndWaitForAchievements() {
+    this.saveToHistory();
+    return this; // Return this to allow method chaining
+  }
+
   // Simple method to dismiss any achievement popups that might appear
   dismissAnyAchievementPopups() {
     cy.wait(500)
