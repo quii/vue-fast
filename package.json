@@ -10,7 +10,7 @@
     "minio:ensure": "node scripts/ensure-minio.js",
     "redis:ensure": "node scripts/ensure-redis.js",
     "dev:all": "concurrently \"npm run minio:ensure\" \"npm run redis:ensure\" \"npm run dev\" \"npm run server:build:watch\" \"npm run server:start\"",
-    "test:unit": "NODE_NO_WARNINGS=1 vitest --reporter=dot --run --silent=passed-only",
+    "test:unit": "vitest --reporter=dot --run --silent=passed-only",
     "test:e2e": "start-server-and-test preview http://localhost:4173 'cypress run --config video=false'",
     "lint": "eslint . --fix",
     "analyze": "vite build --mode analyze",

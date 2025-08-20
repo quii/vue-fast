@@ -206,6 +206,15 @@ export class BasePage {
   }
 }
 
+// Mock global addEventListener for toast dragging
+function setupGlobalEventListenerMock() {
+  // If addEventListener is called globally, forward it to window
+  if (typeof global !== 'undefined' && !global.addEventListener) {
+    global.addEventListener = window.addEventListener.bind(window)
+    global.removeEventListener = window.removeEventListener.bind(window)
+  }
+}
+
 // Setup function to mount the app and return the wrapper
 export async function setupApp() {
   // Mock window.matchMedia before creating the app
@@ -213,6 +222,9 @@ export async function setupApp() {
 
   // Mock Web Speech API
   setupSpeechSynthesisMock()
+
+  // Mock global addEventListener
+  setupGlobalEventListenerMock()
 
   // Mock localStorage
   Object.defineProperty(window, 'localStorage', {
@@ -232,10 +244,18 @@ export async function setupApp() {
   // Create a pinia instance
   const pinia = createPinia()
 
+  // Configure Toast for test environment (disable dragging to avoid DOM issues)
+  const toastOptions = {
+    draggable: false,
+    dragData: {
+      enabled: false
+    }
+  }
+
   // Mount the App component directly
   let wrapper = createEnhancedWrapper(mount(App, {
     global: {
-      plugins: [router, pinia, Toast],
+      plugins: [router, pinia, [Toast, toastOptions]],
       stubs: {
         'DevTools': true
       }
