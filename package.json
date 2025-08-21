@@ -41,7 +41,7 @@
     "node-fetch": "^3.3.2",
     "pinia": "^3.0.3",
     "qrcode": "^1.5.4",
-    "redis": "^5.8.1",
+    "redis": "^5.8.2",
     "vue": "^3.5.18",
     "vue-class-component": "^8.0.0-0",
     "vue-router": "^4.5.1",
