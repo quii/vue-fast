@@ -47,3 +47,10 @@ export const SPIDER_AWARDS_GROUP: AchievementGroup = {
   description: 'Score an X at different outdoor metric distances',
   order: 6
 };
+
+export const FROSTBITE_GROUP: AchievementGroup = {
+  id: 'frostbite',
+  name: 'Frostbite',
+  description: 'Score thresholds achieved shooting Frostbite rounds',
+  order: 7
+};

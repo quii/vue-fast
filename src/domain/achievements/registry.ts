@@ -10,7 +10,8 @@ import { GOLDEN_END_ACHIEVEMENTS } from './imperial_golden_end.js';
 import { OLYMPIAN_EFFORT_ACHIEVEMENTS } from './olympian_effort.js';
 import { SEVEN_TWENTY_MASTERY_ACHIEVEMENTS } from './seven_twenty_mastery_recurve.js';
 import { SPIDER_ACHIEVEMENTS } from './spider_awards.js';
-import { ARROW_COUNT_GROUP, IMPERIAL_PRECISION_GROUP, IMPERIAL_GOLDEN_END_GROUP, METRIC_EXCELLENCE_GROUP, OLYMPIAN_EFFORT_GROUP, SPIDER_AWARDS_GROUP } from './groups.js';
+import { FROSTBITE_ACHIEVEMENTS } from './frostbite.js';
+import { ARROW_COUNT_GROUP, IMPERIAL_PRECISION_GROUP, IMPERIAL_GOLDEN_END_GROUP, METRIC_EXCELLENCE_GROUP, OLYMPIAN_EFFORT_GROUP, SPIDER_AWARDS_GROUP, FROSTBITE_GROUP } from './groups.js';
 
 export const ONE_THOUSAND_ARROWS: Achievement = {
   id: 'one_thousand_arrows',
@@ -67,7 +68,8 @@ export const ALL_ACHIEVEMENTS: Achievement[] = [
   ...TWO_FIFTY_TWO_ACHIEVEMENTS,
   ...GOLDEN_END_ACHIEVEMENTS,
   ...OLYMPIAN_EFFORT_ACHIEVEMENTS,
-  ...SPIDER_ACHIEVEMENTS
+  ...SPIDER_ACHIEVEMENTS,
+  ...FROSTBITE_ACHIEVEMENTS
 ];
 
 export function getAchievementById(id: string): Achievement | undefined {

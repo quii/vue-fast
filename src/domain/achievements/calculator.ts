@@ -14,6 +14,7 @@ import { TWO_FIFTY_TWO_CHECK_FUNCTIONS } from './two_fifty_two_awards.js';
 import { GOLDEN_END_CHECK_FUNCTIONS } from './imperial_golden_end.js';
 import { SEVEN_TWENTY_MASTERY_CHECK_FUNCTIONS } from './seven_twenty_mastery_recurve.js';
 import { SPIDER_CHECK_FUNCTIONS } from './spider_awards.js';
+import { FROSTBITE_CHECK_FUNCTIONS } from './frostbite.js';
 import { 
   checkOlympianEffortBronzeAchieved,
   checkOlympianEffortSilverAchieved,
@@ -102,6 +103,11 @@ export function calculateAchievements(context: AchievementContext): AchievementD
         } else if (achievement.id in SPIDER_CHECK_FUNCTIONS) {
           // Check if it's a Spider achievement
           const checkFunction = SPIDER_CHECK_FUNCTIONS[achievement.id as keyof typeof SPIDER_CHECK_FUNCTIONS];
+          progress = checkFunction(context);
+          progressPercentage = progress.isUnlocked ? 100 : Math.min((progress.currentScore! / progress.targetScore!) * 100, 100);
+        } else if (achievement.id in FROSTBITE_CHECK_FUNCTIONS) {
+          // Check if it's a Frostbite achievement
+          const checkFunction = FROSTBITE_CHECK_FUNCTIONS[achievement.id as keyof typeof FROSTBITE_CHECK_FUNCTIONS];
           progress = checkFunction(context);
           progressPercentage = progress.isUnlocked ? 100 : Math.min((progress.currentScore! / progress.targetScore!) * 100, 100);
         } else {
