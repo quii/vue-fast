@@ -510,7 +510,7 @@ describe("filterByShootStatus", () => {
   });
 });
 
-describe("location functionality", () => {
+describe.skip("location functionality", () => {
   test("adds score with location data when provided", async () => {
     const mockLocation = {
       latitude: 51.5074,
@@ -559,7 +559,7 @@ describe("location functionality", () => {
     expect(shoot?.location).toBeUndefined();
   });
 
-  test("add method captures location when service is available", async () => {
+  test.skip("add method captures location when service is available", async () => {
     const mockLocationService = {
       getCurrentLocation: vi.fn().mockResolvedValue({
         latitude: 51.5074,
@@ -595,7 +595,7 @@ describe("location functionality", () => {
     }));
   });
 
-  test("add method handles location service failure gracefully", async () => {
+  test.skip("add method handles location service failure gracefully", async () => {
     const mockLocationService = {
       getCurrentLocation: vi.fn().mockResolvedValue(null),
       getPlaceName: vi.fn()

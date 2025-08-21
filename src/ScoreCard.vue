@@ -244,7 +244,7 @@ async function handleSaveFromModal(data) {
   if (isSaving.value) {
     return;
   }
-  
+
   isSaving.value = true;
   
   // Update date and status from modal
@@ -279,31 +279,15 @@ async function handleSaveFromModal(data) {
     arrowHistoryStore.saveArrowsForShoot(id, [...scoresStore.arrows]);
     notesStore.assignPendingNotesToShoot(id);
     
-    // Calculate achievements for the new shoot
-    const achievementContext = {
-      currentShoot: {
-        id: id,
-        date: date.value,
-        scores: [...scoresStore.scores],
-        score: runningTotal.value,
-        gameType: gameTypeStore.type,
-        userProfile: userStore.user
-      },
-      shootHistory: history.sortedHistory()
-    };
-    
-    // Update achievements with the new shoot data
-    achievementStore.updateAchievements(achievementContext);
-    
+
     // Wait for Vue's reactive updates to be processed
-    await nextTick();
-    
+
     scoresStore.clear();
     shootTimingStore.clearTiming(); // Clear timing data for next shoot
     showSaveModal.value = false;
 
-    // Navigate to the saved shoot
-    router.push(`/history/${id}`);
+    // Navigate to the saved shoot with flag to check achievements
+    router.push(`/history/${id}?checkAchievements=true`);
   } catch (error) {
     console.log(error);
     toast.error("Error saving scores", error);

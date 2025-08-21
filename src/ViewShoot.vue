@@ -118,13 +118,53 @@ async function checkAchievementsOnce() {
   if (!achievementsChecked.value.has(shootId) && shoot.value) {
     achievementsChecked.value.add(shootId);
     
-    // Look for unread achievements that were earned by this specific shoot
-    const achievementsForThisShoot = achievementNotifications.achievementStore.unreadAchievements.filter(achievement => 
-      achievement.achievingShootId === shootId
-    );
+    // Check if we should calculate achievements (from fresh save)
+    const shouldCheckAchievements = route.query.checkAchievements === 'true';
     
-    // Show achievements that were earned by this specific shoot
-    achievementNotifications.showAchievementsForShoot(achievementsForThisShoot);
+    if (shouldCheckAchievements) {
+      // Do achievement calculation asynchronously, non-blocking
+      setTimeout(async () => {
+        try {
+          const achievementContext = {
+            currentShoot: {
+              id: shootId,
+              date: shoot.value.date,
+              scores: shoot.value.scores,
+              score: shoot.value.score,
+              gameType: shoot.value.gameType,
+              userProfile: shoot.value.userProfile
+            },
+            shootHistory: history.sortedHistory()
+          };
+          
+          const newlyUnlocked = achievementNotifications.achievementStore.updateAchievements(achievementContext);
+
+          // Show celebration for newly unlocked achievements
+          if (newlyUnlocked.length > 0) {
+            achievementNotifications.showAchievementsForShoot(newlyUnlocked);
+          } else {
+          }
+        } catch (error) {
+          console.error('[ACHIEVEMENT DEBUG] Full error:', error);
+        }
+      }, 100); // Small delay to ensure page renders first
+      
+      // Clean up the query parameter
+      router.replace({ 
+        path: route.path, 
+        query: { ...route.query, checkAchievements: undefined } 
+      });
+    } else {
+      // Look for unread achievements that were earned by this specific shoot
+      const achievementsForThisShoot = achievementNotifications.achievementStore.unreadAchievements.filter(achievement => 
+        achievement.achievingShootId === shootId
+      );
+      
+      // Show achievements that were earned by this specific shoot
+      if (achievementsForThisShoot.length > 0) {
+        achievementNotifications.showAchievementsForShoot(achievementsForThisShoot);
+      }
+    }
   }
 }
 

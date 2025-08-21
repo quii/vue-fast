@@ -32,10 +32,18 @@ export function useAchievementNotifications() {
   );
   
   function showNextAchievement() {
+    console.log('[POPUP DEBUG] showNextAchievement called');
+    console.log('[POPUP DEBUG] Queue length:', achievementQueue.value.length);
+    console.log('[POPUP DEBUG] showCelebrationPopup.value:', showCelebrationPopup.value);
+    
     if (achievementQueue.value.length > 0 && !showCelebrationPopup.value) {
       const nextAchievement = achievementQueue.value.shift();
+      console.log('[POPUP DEBUG] Setting current achievement:', nextAchievement);
       currentAchievement.value = nextAchievement;
       showCelebrationPopup.value = true;
+      console.log('[POPUP DEBUG] Set showCelebrationPopup to true');
+    } else {
+      console.log('[POPUP DEBUG] Not showing - queue empty or popup already showing');
     }
   }
   
@@ -78,9 +86,11 @@ export function useAchievementNotifications() {
            achievement !== undefined &&
            typeof achievement === 'object' &&
            typeof achievement.name === 'string' && 
-           typeof achievement.description === 'string' &&
            achievement.name.length > 0 &&
-           achievement.description.length > 0;
+           // Description is optional - if present, it should be a string, but can be empty/undefined
+           (achievement.description === undefined || 
+            achievement.description === null || 
+            typeof achievement.description === 'string');
     
     // Debug logging to see what's happening
     if (!isValid && showCelebrationPopup.value) {
@@ -106,10 +116,25 @@ export function useAchievementNotifications() {
   
   // Method to show specific achievements without full calculation
   function showAchievementsForShoot(achievements: any[]) {
+    console.log('[POPUP DEBUG] showAchievementsForShoot called with', achievements.length, 'achievements');
+    console.log('[POPUP DEBUG] popupsEnabled:', achievementStore.popupsEnabled);
+    console.log('[POPUP DEBUG] current queue length:', achievementQueue.value.length);
+    console.log('[POPUP DEBUG] showCelebrationPopup.value:', showCelebrationPopup.value);
+    
+    // Temporarily force enable popups for debugging
+    if (!achievementStore.popupsEnabled) {
+      console.log('[POPUP DEBUG] Popups are disabled - enabling them for debugging');
+      achievementStore.setPopupsEnabled(true);
+    }
+    
     if (achievements.length > 0 && achievementStore.popupsEnabled) {
+      console.log('[POPUP DEBUG] Adding achievements to queue and showing...');
       // Add achievements to queue and start showing them
       achievementQueue.value.push(...achievements);
+      console.log('[POPUP DEBUG] Queue length after adding:', achievementQueue.value.length);
       showNextAchievement();
+    } else {
+      console.log('[POPUP DEBUG] Not showing popup - either no achievements or popups disabled');
     }
   }
 

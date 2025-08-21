@@ -1,10 +1,23 @@
 import { splitIntoChunks } from "@shared/utils/splitter";
 import { gameTypeConfig } from "@/domain/scoring/game_types";
-import { calculateSubtotals } from "@/domain/scoring/subtotals";
+import { calculateSubtotals, Subtotals } from "@/domain/scoring/subtotals";
 import { calculateTotal } from "@shared/utils/subtotals";
 import { convertToValues } from "@shared/utils/scores";
 
-export function calculateDistanceTotals(scores, gameType = "national", endSize = 6) {
+export interface EndPairBreakdown {
+  firstEnd: any[];
+  secondEnd: any[];
+  subTotals: Subtotals & { runningTotal: number };
+}
+
+export interface DistanceRound {
+  roundBreakdown: EndPairBreakdown[];
+  subTotals: Subtotals;
+  distance?: number | null;
+  unit?: string;
+}
+
+export function calculateDistanceTotals(scores: any[], gameType: string = "national", endSize: number = 6): DistanceRound[] {
   const config = gameTypeConfig[gameType];
   const { distancesRoundSizes } = config;
   const rounds = [];

@@ -8,6 +8,9 @@
 import type { AchievementContext, AchievementProgress, Achievement } from './types';
 import { roundConfigManager } from '../scoring/game_types';
 import { IMPERIAL_GOLDEN_END_GROUP } from './groups.js';
+import { calculateTotal } from '@/domain/scoring/subtotals.js';
+import { convertToValues } from '@/domain/scoring/scores.js';
+import { calculateDistanceTotals, type DistanceRound } from '../scoring/distance_totals.js';
 
 // Imperial distances for golden end awards
 const IMPERIAL_DISTANCES = [10, 20, 30, 40, 50, 60, 80, 100] as const;
@@ -100,42 +103,46 @@ function canAwardGoldenEndAtDistance(roundName: string, targetDistance: number):
 }
 
 /**
- * Calculate which arrows are shot at a specific distance in a round
+ * Find the best end score at a specific distance using domain functions
  */
-function getArrowsAtDistance(roundName: string, targetDistance: number): { startArrow: number; endArrow: number } | null {
-  const config = roundConfigManager.getConfig(roundName);
-  if (!config || !config.isImperial) {
-    return null;
+function findBestEndAtDistance(scores: any[], gameType: string, targetDistance: number): number {
+  if (!scores || scores.length === 0) {
+    return 0;
   }
 
-  // Get all distances for this round
-  const distances: number[] = [];
-  if (config.maxDistanceYards) {
-    distances.push(config.maxDistanceYards);
-  }
-  if (config.otherDistancesYards) {
-    distances.push(...config.otherDistancesYards);
+  // Use domain function to get distance breakdown
+  const distanceRounds = calculateDistanceTotals(scores, gameType, 6);
+  
+  // Find the round at the target distance
+  const targetDistanceRound = distanceRounds.find(round => round.distance === targetDistance);
+  if (!targetDistanceRound) {
+    return 0;
   }
 
-  // Find the index of our target distance
-  const distanceIndex = distances.indexOf(targetDistance);
-  if (distanceIndex === -1) {
-    return null;
+  // Extract all individual ends from the round breakdown
+  const allEnds: any[] = [];
+  for (const endPair of targetDistanceRound.roundBreakdown) {
+    if (endPair.firstEnd && endPair.firstEnd.length > 0) {
+      allEnds.push(endPair.firstEnd);
+    }
+    if (endPair.secondEnd && endPair.secondEnd.length > 0) {
+      allEnds.push(endPair.secondEnd);
+    }
   }
 
-  // Calculate arrow range for this distance
-  const distancesRoundSizes = config.distancesRoundSizes || [];
-  let startArrow = 0;
+  if (allEnds.length === 0) {
+    return 0;
+  }
+
+  // Calculate score for each end and find the best
+  let bestEndScore = 0;
   
-  for (let i = 0; i < distanceIndex; i++) {
-    const dozensAtDistance = distancesRoundSizes[i] || 0;
-    startArrow += dozensAtDistance * 12; // 12 arrows per dozen
+  for (const end of allEnds) {
+    const endScore = calculateTotal(convertToValues(end, gameType));
+    bestEndScore = Math.max(bestEndScore, endScore);
   }
   
-  const dozensAtTargetDistance = distancesRoundSizes[distanceIndex] || 0;
-  const endArrow = startArrow + (dozensAtTargetDistance * 12) - 1;
-  
-  return { startArrow, endArrow };
+  return bestEndScore;
 }
 
 /**
@@ -144,21 +151,17 @@ function getArrowsAtDistance(roundName: string, targetDistance: number): { start
 function findExistingGoldenEndAchievement(context: AchievementContext, distance: ImperialDistance): AchievementProgress | null {
   for (const historyItem of context.shootHistory) {
     if (historyItem.gameType && canAwardGoldenEndAtDistance(historyItem.gameType, distance)) {
-      const arrowRange = getArrowsAtDistance(historyItem.gameType, distance);
-      if (arrowRange) {
-        const relevantScores = historyItem.scores.slice(arrowRange.startArrow, arrowRange.endArrow + 1);
-        const bestEndScore = findBestEndAtDistance(relevantScores);
-        
-        if (bestEndScore >= 54) {
-          return {
-            currentScore: bestEndScore,
-            targetScore: 54,
-            isUnlocked: true,
-            unlockedAt: historyItem.date,
-            achievingShootId: historyItem.id,
-            achievedDate: historyItem.date
-          };
-        }
+      const bestEndScore = findBestEndAtDistance(historyItem.scores, historyItem.gameType, distance);
+      
+      if (bestEndScore >= 54) {
+        return {
+          currentScore: bestEndScore,
+          targetScore: 54,
+          isUnlocked: true,
+          unlockedAt: historyItem.date,
+          achievingShootId: historyItem.id,
+          achievedDate: historyItem.date
+        };
       }
     }
   }
@@ -180,18 +183,8 @@ function checkGoldenEndInCurrentShoot(context: AchievementContext, distance: Imp
     };
   }
 
-  const arrowRange = getArrowsAtDistance(currentShoot.gameType, distance);
-  if (!arrowRange) {
-    return {
-      currentScore: 0,
-      targetScore: 54,
-      isUnlocked: false
-    };
-  }
-
-  // Get scores for this distance
-  const relevantScores = currentShoot.scores.slice(arrowRange.startArrow, arrowRange.endArrow + 1);
-  const bestEndScore = findBestEndAtDistance(relevantScores);
+  // Get best end score for this distance
+  const bestEndScore = findBestEndAtDistance(currentShoot.scores, currentShoot.gameType, distance);
 
   return {
     currentScore: bestEndScore,
@@ -211,12 +204,8 @@ function checkGoldenEndInHistory(context: AchievementContext, distance: Imperial
 
   for (const historyItem of context.shootHistory) {
     if (historyItem.gameType && canAwardGoldenEndAtDistance(historyItem.gameType, distance)) {
-      const arrowRange = getArrowsAtDistance(historyItem.gameType, distance);
-      if (arrowRange) {
-        const relevantScores = historyItem.scores.slice(arrowRange.startArrow, arrowRange.endArrow + 1);
-        const endScore = findBestEndAtDistance(relevantScores);
-        bestEndScore = Math.max(bestEndScore, endScore);
-      }
+      const endScore = findBestEndAtDistance(historyItem.scores, historyItem.gameType, distance);
+      bestEndScore = Math.max(bestEndScore, endScore);
     }
   }
 
@@ -225,45 +214,6 @@ function checkGoldenEndInHistory(context: AchievementContext, distance: Imperial
     targetScore: 54,
     isUnlocked: false
   };
-}
-
-/**
- * Find the best single end score from an array of arrow scores
- */
-function findBestEndAtDistance(scores: any[]): number {
-  if (!scores || scores.length === 0) {
-    return 0;
-  }
-
-  const config = roundConfigManager.getConfig('default') || { endSize: 6 };
-  const endSize = config.endSize || 6;
-  
-  let bestEndScore = 0;
-  
-  // Process scores in groups of endSize
-  for (let i = 0; i <= scores.length - endSize; i += endSize) {
-    const endScores = scores.slice(i, i + endSize);
-    const endTotal = calculateEndScore(endScores);
-    bestEndScore = Math.max(bestEndScore, endTotal);
-  }
-  
-  return bestEndScore;
-}
-
-/**
- * Calculate score from array of arrow values for a single end
- */
-function calculateEndScore(scores: any[]): number {
-  return scores.reduce((total, score) => {
-    if (typeof score === 'number' && score >= 0) {
-      return total + score;
-    } else if (score === 'X') {
-      return total + 10; // X counts as 10 for scoring
-    } else if (score === 'M' || score === null || score === undefined) {
-      return total + 0; // Miss
-    }
-    return total;
-  }, 0);
 }
 
 /**

@@ -8,6 +8,8 @@
 import type { AchievementContext, AchievementProgress, Achievement } from './types';
 import { roundConfigManager } from '../scoring/game_types';
 import { IMPERIAL_PRECISION_GROUP } from './groups.js';
+import { calculateTotal } from '@/domain/scoring/subtotals.js';
+import { convertToValues } from '@/domain/scoring/scores.js';
 
 // Imperial distances for 252 awards
 const IMPERIAL_DISTANCES = [10, 20, 30, 40, 50, 60, 80, 100] as const;
@@ -241,15 +243,7 @@ function calculateScore(scores: any[], gameType: string): number {
     return 0;
   }
 
-  return scores.reduce((total, score) => {
-    if (score === 'M' || score === 'm' || score === null || score === undefined) {
-      return total; // Miss = 0 points
-    }
-    
-    // Handle numeric scores and X values
-    const numericScore = typeof score === 'number' ? score : parseInt(score, 10);
-    return total + (isNaN(numericScore) ? 0 : numericScore);
-  }, 0);
+  return calculateTotal(convertToValues(scores, gameType));
 }
 
 /**

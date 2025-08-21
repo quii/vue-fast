@@ -54,3 +54,10 @@ export const FROSTBITE_GROUP: AchievementGroup = {
   description: 'Score thresholds achieved shooting Frostbite rounds',
   order: 7
 };
+
+export const YORKIE_GROUP: AchievementGroup = {
+  id: 'yorkie',
+  name: 'Yorkie, it is for girls',
+  description: 'Reject the 80 yard ceiling',
+  order: 8
+};

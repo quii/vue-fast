@@ -60,9 +60,8 @@ onMounted(() => {
 
 const achievements = computed(() => {
   const history = historyStore.sortedHistory()
-  const currentShoot = { scores: [] } // No current shoot on this page
   const context = {
-    currentShoot,
+    currentShoot: { scores: [], id: '', date: '', gameType: '', userProfile: {} }, // Empty current shoot
     shootHistory: history // Use full HistoryItem objects directly
   }
 

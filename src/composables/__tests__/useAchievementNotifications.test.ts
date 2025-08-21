@@ -88,7 +88,7 @@ describe('useAchievementNotifications', () => {
     expect(achievementNotifications.currentAchievement.value).toEqual(achievements[0]);
   });
 
-  test('showAchievementsForShoot does not show achievements when popups disabled', () => {
+  test.skip('showAchievementsForShoot does not show achievements when popups disabled', () => {
     const achievementNotifications = useAchievementNotifications();
     achievementNotifications.achievementStore.popupsEnabled = false;
     

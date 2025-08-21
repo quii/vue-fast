@@ -4,50 +4,13 @@
  * Tests for the 6 9s (54 points) in a single end at imperial distances
  */
 
-import { describe, test, expect, vi } from 'vitest';
+import { describe, test, expect } from 'vitest';
 import { 
   checkGoldenEndAt50ydAchieved,
   checkGoldenEndAt60ydAchieved,
   GOLDEN_END_ACHIEVEMENTS 
 } from './imperial_golden_end.js';
 import type { AchievementContext } from './types.js';
-
-// Mock the roundConfigManager
-vi.mock('../scoring/game_types', () => ({
-  roundConfigManager: {
-    getConfig: vi.fn((roundName: string) => {
-      const configs = {
-        'windsor 50': {
-          isImperial: true,
-          isOutdoor: true,
-          maxDistanceYards: 50,
-          otherDistancesYards: [],
-          distancesRoundSizes: [6], // 6 dozen at 50yd
-          endSize: 6
-        },
-        'national': {
-          isImperial: true,
-          isOutdoor: true,
-          maxDistanceYards: 60,
-          otherDistancesYards: [50],
-          distancesRoundSizes: [4, 2], // 4 dozen at 60yd, 2 dozen at 50yd
-          endSize: 6
-        },
-        'wa 70m': {
-          isImperial: false,
-          isOutdoor: true,
-          maxDistanceMetres: 70,
-          distancesRoundSizes: [6],
-          endSize: 6
-        },
-        'default': {
-          endSize: 6
-        }
-      };
-      return configs[roundName as keyof typeof configs];
-    })
-  }
-}));
 
 describe('Imperial Golden End Achievement System', () => {
   test('generates 8 achievements for imperial distances with correct tiers', () => {

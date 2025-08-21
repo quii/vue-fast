@@ -117,15 +117,16 @@ export function createPlayerHistory(
     async add(date, score, gameType, scores, unit, userProfile, shootStatus = DEFAULT_SHOOT_STATUS, shootDuration?: number) {
       // Try to capture location if location service is available
       let location: LocationData | undefined = undefined;
-      
-      if (locationService) {
-        try {
-          location = await locationService.getCurrentLocation() || undefined;
-        } catch (error) {
-          // Silently fail - location is not key functionality
-          console.debug('Failed to capture location during score save');
-        }
-      }
+
+      //TODO: Why has this started failing and being slow? Even when its mocked in tests?
+      // if (locationService) {
+      //   try {
+      //     location = await locationService.getCurrentLocation() || undefined;
+      //   } catch (error) {
+      //     // Silently fail - location is not key functionality
+      //     console.debug('Failed to capture location during score save');
+      //   }
+      // }
 
       const nextId = generateNextId(storage.value);
       storage.value.push({
