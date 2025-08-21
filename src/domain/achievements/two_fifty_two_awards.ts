@@ -35,7 +35,6 @@ function create252Achievement(distance: ImperialDistance): Achievement {
   return {
     id: `two_fifty_two_at_${distance}yd`,
     name: `252 at ${distance}yd`,
-    description: `Score 252 or more in the first 3 dozen arrows at ${distance} yards`,
     tier: tier as any,
     targetScore: 252,
     group: IMPERIAL_PRECISION_GROUP

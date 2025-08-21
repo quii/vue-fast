@@ -61,8 +61,6 @@ describe('720 Mastery Achievement System', () => {
       expect(achievement.targetScore).toBe(expected.targetScore);
       expect(achievement.tier).toBe(expected.tier);
       expect(achievement.gameType).toBe('wa 70m');
-      expect(achievement.description).toContain(expected.targetScore.toString());
-      expect(achievement.description).toContain('recurve bow');
     });
   });
 });

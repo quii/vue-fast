@@ -30,7 +30,6 @@ function createFrostbiteAchievement(threshold: typeof FROSTBITE_THRESHOLDS[numbe
   return {
     id: `frostbite_${threshold.score}`,
     name: `Frostbite ${threshold.score}`,
-    description: `Score ${threshold.score} or more on a Frostbite round`,
     tier: threshold.tier,
     targetScore: threshold.score,
     gameType: 'frostbite',

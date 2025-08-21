@@ -13,6 +13,7 @@
   >
     <div class="badge-content">
       <div class="badge-title">{{ title }}</div>
+      <div v-if="description" class="badge-description">{{ description }}</div>
       
       <div v-if="!isEarned" class="progress-text">
         <span v-if="targetArrows">
@@ -43,6 +44,7 @@ const router = useRouter()
 
 const props = defineProps({
   title: String,
+  description: String,
   tier: {
     type: String,
     default: 'bronze',
@@ -221,6 +223,15 @@ function formatAchievedDate(dateString) {
   line-height: 1.2;
 }
 
+.badge-description {
+  font-size: 0.85rem;
+  color: var(--badge-text-color);
+  opacity: 0.75;
+  line-height: 1.3;
+  margin-top: 0.25rem;
+  font-style: italic;
+}
+
 .progress-text {
   font-size: 0.85rem;
   color: var(--badge-text-color);
@@ -322,6 +333,11 @@ function formatAchievedDate(dateString) {
   
   .badge-title {
     font-size: 1.2rem;
+  }
+  
+  .badge-description {
+    font-size: 0.8rem;
+    margin-top: 0.2rem;
   }
   
   .progress-text {

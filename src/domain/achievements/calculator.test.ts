@@ -55,11 +55,11 @@ describe('Achievement Calculator', () => {
     achievements.forEach(achievement => {
       expect(achievement).toHaveProperty('id');
       expect(achievement).toHaveProperty('name');
-      expect(achievement).toHaveProperty('description');
       expect(achievement).toHaveProperty('tier');
       expect(achievement).toHaveProperty('progress');
       expect(achievement).toHaveProperty('progressPercentage');
       expect(typeof achievement.progressPercentage).toBe('number');
+      // Note: description is optional and may not be present for all achievements
     });
   });
 

@@ -32,7 +32,6 @@ function createSpiderAchievement(distance: SpiderDistance): Achievement {
   return {
     id: `spider_at_${distance}m`,
     name: `X at ${distance}m`,
-    description: `Score an X at ${distance} metres on an outdoor metric round`,
     tier: tier,
     targetScore: 1, // Just need 1 X
     group: SPIDER_AWARDS_GROUP

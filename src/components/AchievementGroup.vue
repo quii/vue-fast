@@ -20,6 +20,7 @@
         v-for="achievement in achievements" 
         :key="achievement.id"
         :title="achievement.name"
+        :description="achievement.description"
         :tier="achievement.tier"
         :is-earned="achievement.progress.isUnlocked"
         :target-arrows="achievement.targetArrows"

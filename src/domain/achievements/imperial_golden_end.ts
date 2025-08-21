@@ -34,7 +34,6 @@ function createGoldenEndAchievement(distance: ImperialDistance): Achievement {
   return {
     id: `golden_end_at_${distance}yd`,
     name: `Golden End at ${distance}yd`,
-    description: `Score 6 9s (54 points) in a single end at ${distance} yards`,
     tier: tier as any,
     targetScore: 54,
     group: IMPERIAL_GOLDEN_END_GROUP

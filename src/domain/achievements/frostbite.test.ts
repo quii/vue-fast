@@ -72,8 +72,6 @@ describe('Frostbite Achievement System', () => {
       expect(achievement.targetScore).toBe(expected.targetScore);
       expect(achievement.tier).toBe(expected.tier);
       expect(achievement.gameType).toBe('frostbite');
-      expect(achievement.description).toContain(expected.targetScore.toString());
-      expect(achievement.description).toContain('Frostbite round');
     });
   });
 });
