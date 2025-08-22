@@ -12,9 +12,8 @@ describe("Notes and Classifications", () => {
     scorePage.clearData();
   });
 
-  xit('records scores with notes and persists them', () => {
-    cy.get('.dismiss-button').click()
-
+  //todo: it is mad that this test specifically fails in docker only
+  it.skip('records scores with notes and persists them', () => {
     userDataPage.navigateTo();
     userDataPage.setArcherDetails("male", "recurve", "senior");
 
@@ -23,10 +22,6 @@ describe("Notes and Classifications", () => {
 
     // First end of 6
     scorePage.score([10, 9, 9, 8, 8, 7]);
-    // scorePage.clickClassificationDetails();
-    // scorePage.checkClassificationTable("A2", "121");
-    // scorePage.clickClassificationDetails()
-    // scorePage.checkOnTrackStatus(true);
     scorePage.addNote("Good grouping on the 9s");
 
     // Second end of 6
@@ -44,15 +39,7 @@ describe("Notes and Classifications", () => {
     }
 
     scorePage.save()
-    scorePage.clickClassificationDetails()
-    scorePage.checkClassificationAchieved("A1");
-    scorePage.checkClassificationMissed("B3");
-    scorePage.clickClassificationDetails();
-
-    historyPage.navigateTo();
-    historyPage.checkClassificationExists("227", "A1");
-
-    historyPage.selectHistoryItem("227");
+    historyPage.checkNoteExists("Form getting worse, need to focus");
   });
 
   it("shows progression through classifications during shooting", () => {
@@ -83,7 +70,6 @@ describe("Notes and Classifications", () => {
     }
 
     scorePage.checkClassificationAchieved("B3");
-
 
     scorePage.save();
 

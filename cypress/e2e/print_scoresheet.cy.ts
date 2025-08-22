@@ -15,7 +15,6 @@ describe("Print scoresheet", () => {
     scorePage.visit()
     
     // Wait for any potential tutorials to finish loading before navigating
-    // cy.wait(1000);
     userDataPage.navigateTo();
     userDataPage.setArcherDetails('male', 'recurve', 'senior', 'Test Archer 1')
 

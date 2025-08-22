@@ -7,7 +7,6 @@ class HistoryPage {
     // Update to work with card layout - look for the item text in the card
     cy.dismissToasters()
     cy.get('.history-card').contains(item).click()
-    cy.wait(500)
   }
 
   checkTotalGolds(expectedGolds) {

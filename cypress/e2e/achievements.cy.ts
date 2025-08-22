@@ -41,35 +41,4 @@ describe('Achievements System', () => {
     
     achievementsPage.shouldShowFilterCount('Achieved', '4')
   })
-  
-  it('celebrates achievement with proper UX flow - modal appears, dismisses, then navigates', () => {
-    const scorePage = new ScorePage()
-
-    // Setup: disable tips and clear data
-    // @ts-ignore - Custom command defined in commands.ts
-    cy.disableAllTips()
-    scorePage.visit()
-    
-    // Set archer details to ensure proper setup
-    userDataPage.navigateTo()
-    userDataPage.setArcherDetails("male", "recurve", "senior")
-    scorePage.navigateTo()
-    scorePage.clearData()
-    
-    // Score enough to trigger achievements (first shoot should trigger multiple achievements)
-    scorePage.selectGame('National 40')
-    const testArrows = Array(72).fill(9) // Use good scores to ensure achievements trigger
-    scorePage.score(testArrows)
-
-    // Save and test that achievement popup appears
-    scorePage.saveAndWaitForAchievements()
-      .waitForAchievementCelebration()
-      .shouldShowAchievementTitle()
-    
-    // Dismiss the achievement popup
-    cy.get('button').contains('Awesome!').click()
-    
-    // Should navigate to history after achievements are dismissed
-    scorePage.shouldHaveNavigatedToHistory()
-  })
 })

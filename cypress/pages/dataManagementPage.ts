@@ -53,8 +53,8 @@ class DataManagementPage {
   }
 
   waitForBackupsToLoad() {
-    cy.wait(1000) // Wait for the score to be saved
     // Wait for the "Loading backups..." message to disappear
+    cy.wait(1000)
     cy.contains('Loading backups...', { timeout: 10000 }).should('not.exist')
 
     // Scroll to the cloud backup section to ensure it's in view

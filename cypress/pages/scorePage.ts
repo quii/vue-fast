@@ -18,7 +18,6 @@ class ScorePage {
 
   tapRoundSelector() {
     cy.get(".round-card-wrapper").click();
-    cy.wait(250)
     cy.get('body').then(($body) => {
       if ($body.find('.profile-setup-section').length > 0) {
         cy.contains('label', 'Age Group').parent().find('select').select('Senior')
@@ -61,8 +60,6 @@ class ScorePage {
         cy.contains('Got it!').click()
       }
     });
-
-    cy.wait(250)
 
     cy.get('body').then(($body) => {
       if ($body.find('.profile-setup-section').length > 0) {
@@ -196,13 +193,13 @@ class ScorePage {
 
   // Simple method to dismiss any achievement popups that might appear
   dismissAnyAchievementPopups() {
-    cy.wait(500)
+    // cy.wait(500)
     // Use Cypress's built-in conditional pattern
     cy.get('body').then($body => {
       if ($body.find('.celebration-overlay:visible').length > 0) {
         cy.get('button').contains('Awesome!').click();
         // Wait a moment for any additional popups and check again
-        cy.wait(500);
+        // cy.wait(500);
         this.dismissAnyAchievementPopups(); // Recursive call for multiple achievements
       }
     });
@@ -234,7 +231,6 @@ class ScorePage {
   }
 
   shouldHaveNavigatedToHistory() {
-    cy.wait(500); // wait for any achievements to be dismissed
     cy.url().should('include', '/history/')
     return this
   }
@@ -263,22 +259,15 @@ class ScorePage {
     // Clear the textarea first to ensure it's empty
     cy.get('.note-textarea').clear()
 
-    // Type the note text with a delay to ensure it's properly entered
-    cy.get('.note-textarea').type(noteText, { delay: 10 })
+    cy.get('.note-textarea').type(noteText)
 
     // Verify the text was entered correctly
     cy.get('.note-textarea').should('have.value', noteText)
 
-    cy.wait(500) // Add a small wait to ensure the note is rendered
     // Click the Save Note button
     // cy.contains(" Save Note ").click({ force: true });
     cy.get('[data-test="save-note-button"]').click({ force: true })
-
-    // Take a screenshot after saving
-    cy.screenshot('after-saving-note')
-
-    // Wait for the note to be added to the DOM
-    cy.wait(500) // Add a small wait to ensure the note is rendered
+    cy.wait(500)
   }
 
   highlightNote(noteText) {
