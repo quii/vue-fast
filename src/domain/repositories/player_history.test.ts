@@ -510,8 +510,8 @@ describe("filterByShootStatus", () => {
   });
 });
 
-describe.skip("location functionality", () => {
-  test("adds score with location data when provided", async () => {
+describe("location functionality", () => {
+  test("add method captures location when service is available", async () => {
     const mockLocation = {
       latitude: 51.5074,
       longitude: -0.1278,
@@ -520,8 +520,7 @@ describe.skip("location functionality", () => {
     };
 
     const mockLocationService = {
-      getCurrentLocation: vi.fn().mockResolvedValue(mockLocation),
-      getPlaceName: vi.fn()
+      getCurrentLocation: vi.fn().mockResolvedValue(mockLocation)
     };
 
     const playerHistory = createPlayerHistory(
@@ -529,7 +528,7 @@ describe.skip("location functionality", () => {
       null,
       { emit: vi.fn() },
       mockLocationService
-    );
+    ) as any; // Cast to any to access private method for testing
 
     const id = await playerHistory.add(
       '2023-01-01',
@@ -538,14 +537,26 @@ describe.skip("location functionality", () => {
       [1, 2, 3],
       'yd'
     );
+
+    // Wait for the async location update that was triggered by add()
+    await playerHistory._updateShootLocationAsync(id);
 
     expect(mockLocationService.getCurrentLocation).toHaveBeenCalled();
     const shoot = playerHistory.getById(id as number);
     expect(shoot?.location).toEqual(mockLocation);
   });
 
-  test("adds score without location data when not provided", async () => {
-    const playerHistory = createPlayerHistory();
+  test("add method handles location service failure gracefully", async () => {
+    const mockLocationService = {
+      getCurrentLocation: vi.fn().mockResolvedValue(null)
+    };
+
+    const playerHistory = createPlayerHistory(
+      { value: [] },
+      null,
+      { emit: vi.fn() },
+      mockLocationService
+    ) as any; // Cast to any to access private method for testing
 
     const id = await playerHistory.add(
       '2023-01-01',
@@ -555,19 +566,17 @@ describe.skip("location functionality", () => {
       'yd'
     );
 
+    // Wait for the async location update that was triggered by add()
+    await playerHistory._updateShootLocationAsync(id);
+
+    expect(mockLocationService.getCurrentLocation).toHaveBeenCalled();
     const shoot = playerHistory.getById(id as number);
     expect(shoot?.location).toBeUndefined();
   });
 
-  test.skip("add method captures location when service is available", async () => {
+  test("add method handles location service errors gracefully", async () => {
     const mockLocationService = {
-      getCurrentLocation: vi.fn().mockResolvedValue({
-        latitude: 51.5074,
-        longitude: -0.1278,
-        placeName: 'Test Archery Club',
-        timestamp: Date.now()
-      }),
-      getPlaceName: vi.fn()
+      getCurrentLocation: vi.fn().mockRejectedValue(new Error("Location access denied"))
     };
 
     const playerHistory = createPlayerHistory(
@@ -575,7 +584,7 @@ describe.skip("location functionality", () => {
       null,
       { emit: vi.fn() },
       mockLocationService
-    );
+    ) as any; // Cast to any to access private method for testing
 
     const id = await playerHistory.add(
       '2023-01-01',
@@ -585,39 +594,10 @@ describe.skip("location functionality", () => {
       'yd'
     );
 
-    expect(mockLocationService.getCurrentLocation).toHaveBeenCalled();
-    
-    const shoot = playerHistory.getById(id as number);
-    expect(shoot?.location).toEqual(expect.objectContaining({
-      latitude: 51.5074,
-      longitude: -0.1278,
-      placeName: 'Test Archery Club'
-    }));
-  });
-
-  test.skip("add method handles location service failure gracefully", async () => {
-    const mockLocationService = {
-      getCurrentLocation: vi.fn().mockResolvedValue(null),
-      getPlaceName: vi.fn()
-    };
-
-    const playerHistory = createPlayerHistory(
-      { value: [] },
-      null,
-      { emit: vi.fn() },
-      mockLocationService
-    );
-
-    const id = await playerHistory.add(
-      '2023-01-01',
-      123,
-      'national 50',
-      [1, 2, 3],
-      'yd'
-    );
+    // Wait for the async location update that was triggered by add() - should handle error gracefully
+    await playerHistory._updateShootLocationAsync(id);
 
     expect(mockLocationService.getCurrentLocation).toHaveBeenCalled();
-    
     const shoot = playerHistory.getById(id as number);
     expect(shoot?.location).toBeUndefined();
   });

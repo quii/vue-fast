@@ -115,19 +115,6 @@ export function createPlayerHistory(
   // Return an object with all the repository methods
   return {
     async add(date, score, gameType, scores, unit, userProfile, shootStatus = DEFAULT_SHOOT_STATUS, shootDuration?: number) {
-      // Try to capture location if location service is available
-      let location: LocationData | undefined = undefined;
-
-      //TODO: Why has this started failing and being slow? Even when its mocked in tests?
-      // if (locationService) {
-      //   try {
-      //     location = await locationService.getCurrentLocation() || undefined;
-      //   } catch (error) {
-      //     // Silently fail - location is not key functionality
-      //     console.debug('Failed to capture location during score save');
-      //   }
-      // }
-
       const nextId = generateNextId(storage.value);
       storage.value.push({
         id: nextId,
@@ -138,9 +125,13 @@ export function createPlayerHistory(
         unit,
         userProfile,
         shootStatus,
-        location,
+        location: undefined, // Will be updated asynchronously if location service is available
         shootDuration
       });
+
+      // Update location asynchronously (fire-and-forget)
+      this._updateShootLocationAsync(nextId);
+
       await this.backfillClassifications()
 
       // Emit event when a score is added
@@ -294,6 +285,23 @@ export function createPlayerHistory(
       const nextId = currentIndex > 0 ? sortedItems[currentIndex - 1].id : null;
 
       return { previousId, nextId };
+    },
+
+    async _updateShootLocationAsync(shootId: number | string): Promise<void> {
+      if (!locationService) {
+        return; // No location service available
+      }
+
+      try {
+        const location = await locationService.getCurrentLocation();
+        if (location) {
+          // Update the specific shoot with location data
+          this.updateShoot(shootId, { location });
+        }
+      } catch (error) {
+        // Silently fail - location is not critical functionality
+        console.debug(`Failed to update location for shoot ${shootId}:`, error);
+      }
     }
   };
 }
