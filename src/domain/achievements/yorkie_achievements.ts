@@ -16,8 +16,8 @@ import { calculateDistanceTotals, type DistanceRound } from '../scoring/distance
 const YORKIE_ACHIEVEMENTS_DATA = [
   { id: 'smash_the_patriarchy', name: 'Smash the patriarchy', description: 'Complete a York round', tier: 'diamond' as const, type: 'completion' },
   { id: 'yorkie_not_for_girls', name: "Yorkie, it's not for girls?", description: 'Score 0 for an end at 100 yards', tier: 'bronze' as const, type: 'end_score', targetScore: 0 },
-  { id: 'yorkie_for_girls_silver', name: "Yorkie, it's for girls", description: 'Score over 250 for an end at 100 yards', tier: 'silver' as const, type: 'end_score', targetScore: 26 },
-  { id: 'yorkie_for_girls_gold', name: "Yorkie it's for girls", description: 'Score over 32 for an end at 100 yards', tier: 'gold' as const, type: 'end_score', targetScore: 33 },
+  { id: 'yorkie_for_girls_silver', name: "Yorkie, it's for girls", description: 'Score over 24 for an end at 100 yards', tier: 'silver' as const, type: 'end_score', targetScore: 25 },
+  { id: 'yorkie_for_girls_gold', name: "Yorkie it's for girls", description: 'Score over 31 for an end at 100 yards', tier: 'gold' as const, type: 'end_score', targetScore: 32 },
   { id: 'yorkie_for_girls_diamond', name: "Yorkie, it's for girls", description: 'Score over 41 in an end at 100 yards', tier: 'diamond' as const, type: 'end_score', targetScore: 42 }
 ] as const;
 
@@ -100,9 +100,6 @@ function findEndScoreAt100Yards(scores: any[], gameType: string, findType: 'best
  */
 function createYorkCompletionCheckFunction() {
   return function checkSmashThePatriarchyAchieved(context: AchievementContext): AchievementProgress {
-    console.log('Yorkie: Checking Smash the Patriarchy achievement');
-    
-    // Only check history for completed York shoots by female archers
     return findExistingYorkCompletion(context) || {
       isUnlocked: false,
       currentScore: 0,
@@ -116,8 +113,6 @@ function createYorkCompletionCheckFunction() {
  */
 function createYorkEndScoreCheckFunction(targetScore: number, checkType: 'min' | 'max' = 'min') {
   return function checkYorkEndScoreAchieved(context: AchievementContext): AchievementProgress {
-    console.log(`Yorkie: Checking end score achievement (target: ${targetScore}, type: ${checkType})`);
-    
     // Only check history for completed York shoots by female archers
     return findExistingYorkEndScore(context, targetScore, checkType) || 
            checkYorkEndScoreInHistory(context, targetScore, checkType);
@@ -128,13 +123,10 @@ function createYorkEndScoreCheckFunction(targetScore: number, checkType: 'min' |
  * Check for existing York completion achievement in history
  */
 function findExistingYorkCompletion(context: AchievementContext): AchievementProgress | null {
-  console.log('Yorkie: Checking', context.shootHistory.length, 'history items');
   for (const historyItem of context.shootHistory) {
-    console.log('History item:', historyItem.gameType, 'gender:', historyItem.userProfile?.gender);
-    if (isFemaleArcher(historyItem.userProfile) && 
+    if (isFemaleArcher(historyItem.userProfile) &&
         historyItem.gameType && 
         isYorkRound(historyItem.gameType)) {
-      console.log('Yorkie: Found York completion in history!');
       return {
         isUnlocked: true,
         unlockedAt: historyItem.date,
@@ -145,7 +137,6 @@ function findExistingYorkCompletion(context: AchievementContext): AchievementPro
       };
     }
   }
-  console.log('Yorkie: No York completion found in history');
   return null;
 }
 
