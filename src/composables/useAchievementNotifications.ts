@@ -14,9 +14,9 @@ export function useAchievementNotifications() {
   
   // State for popups
   const showCelebrationPopup = ref(false);
-  const currentAchievement = ref(null);
+  const currentAchievements = ref<any[]>([]);
   
-  // Queue for multiple achievements
+  // Queue for batched achievements
   const achievementQueue = ref<any[]>([]);
   
   // Notification service
@@ -24,22 +24,24 @@ export function useAchievementNotifications() {
     achievementStore,
     {
       onNewAchievements: (achievements) => {
-        // Add achievements to queue
-        achievementQueue.value.push(...achievements);
-        showNextAchievement();
+        // Add achievements to queue as a batch
+        if (achievements.length > 0) {
+          achievementQueue.value.push(achievements);
+          showNextAchievementBatch();
+        }
       }
     }
   );
   
-  function showNextAchievement() {
-    console.log('[POPUP DEBUG] showNextAchievement called');
+  function showNextAchievementBatch() {
+    console.log('[POPUP DEBUG] showNextAchievementBatch called');
     console.log('[POPUP DEBUG] Queue length:', achievementQueue.value.length);
     console.log('[POPUP DEBUG] showCelebrationPopup.value:', showCelebrationPopup.value);
     
     if (achievementQueue.value.length > 0 && !showCelebrationPopup.value) {
-      const nextAchievement = achievementQueue.value.shift();
-      console.log('[POPUP DEBUG] Setting current achievement:', nextAchievement);
-      currentAchievement.value = nextAchievement;
+      const nextBatch = achievementQueue.value.shift();
+      console.log('[POPUP DEBUG] Setting current achievements batch:', nextBatch);
+      currentAchievements.value = nextBatch;
       showCelebrationPopup.value = true;
       console.log('[POPUP DEBUG] Set showCelebrationPopup to true');
     } else {
@@ -48,16 +50,12 @@ export function useAchievementNotifications() {
   }
   
   function dismissCelebrationPopup() {
-    if (currentAchievement.value) {
-      achievementStore.markAsRead(currentAchievement.value.id);
-    }
-    
     showCelebrationPopup.value = false;
-    currentAchievement.value = null;
+    currentAchievements.value = [];
     
-    // Show next achievement in queue after a brief delay
+    // Show next achievement batch in queue after a brief delay
     setTimeout(() => {
-      showNextAchievement();
+      showNextAchievementBatch();
     }, 500);
   }
   
@@ -68,10 +66,8 @@ export function useAchievementNotifications() {
     // Clear any queued achievements
     achievementQueue.value = [];
     
-    // Mark any current achievement as read
-    if (currentAchievement.value) {
-      achievementStore.markAsRead(currentAchievement.value.id);
-    }
+    // Clear current achievements
+    currentAchievements.value = [];
   }
   
   async function checkAchievements(context: AchievementContext): Promise<boolean> {
@@ -80,29 +76,35 @@ export function useAchievementNotifications() {
 
 
   // Computed property to ensure we have valid achievement data before showing modal
-  const hasValidCurrentAchievement = computed(() => {
-    const achievement = currentAchievement.value;
-    const isValid = achievement !== null && 
-           achievement !== undefined &&
-           typeof achievement === 'object' &&
-           typeof achievement.name === 'string' && 
-           achievement.name.length > 0 &&
-           // Description is optional - if present, it should be a string, but can be empty/undefined
-           (achievement.description === undefined || 
-            achievement.description === null || 
-            typeof achievement.description === 'string');
-    
-    // Debug logging to see what's happening
-    if (!isValid && showCelebrationPopup.value) {
-      console.warn('Invalid achievement data but popup is showing:', achievement);
+  const hasValidCurrentAchievements = computed(() => {
+    const achievements = currentAchievements.value;
+    if (!Array.isArray(achievements) || achievements.length === 0) {
+      return false;
     }
     
-    return isValid;
+    const allValid = achievements.every(achievement => {
+      return achievement !== null && 
+             achievement !== undefined &&
+             typeof achievement === 'object' &&
+             typeof achievement.name === 'string' && 
+             achievement.name.length > 0 &&
+             // Description is optional - if present, it should be a string, but can be empty/undefined
+             (achievement.description === undefined || 
+              achievement.description === null || 
+              typeof achievement.description === 'string');
+    });
+    
+    // Debug logging to see what's happening
+    if (!allValid && showCelebrationPopup.value) {
+      console.warn('Invalid achievement data but popup is showing:', achievements);
+    }
+    
+    return allValid;
   });
 
   // Computed property that combines both conditions for safety
   const shouldShowCelebrationModal = computed(() => {
-    return showCelebrationPopup.value && hasValidCurrentAchievement.value;
+    return showCelebrationPopup.value && hasValidCurrentAchievements.value;
   });
   
   // Lifecycle
@@ -128,11 +130,11 @@ export function useAchievementNotifications() {
     }
     
     if (achievements.length > 0 && achievementStore.popupsEnabled) {
-      console.log('[POPUP DEBUG] Adding achievements to queue and showing...');
-      // Add achievements to queue and start showing them
-      achievementQueue.value.push(...achievements);
-      console.log('[POPUP DEBUG] Queue length after adding:', achievementQueue.value.length);
-      showNextAchievement();
+      console.log('[POPUP DEBUG] Adding achievements batch to queue and showing...');
+      // Add achievements as a single batch to queue
+      achievementQueue.value.push(achievements);
+      console.log('[POPUP DEBUG] Queue length after adding batch:', achievementQueue.value.length);
+      showNextAchievementBatch();
     } else {
       console.log('[POPUP DEBUG] Not showing popup - either no achievements or popups disabled');
     }
@@ -141,8 +143,8 @@ export function useAchievementNotifications() {
   return {
     // State
     showCelebrationPopup,
-    currentAchievement,
-    hasValidCurrentAchievement,
+    currentAchievements,
+    hasValidCurrentAchievements,
     shouldShowCelebrationModal,
     
     // Actions

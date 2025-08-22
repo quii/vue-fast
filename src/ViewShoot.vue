@@ -28,6 +28,7 @@ import DeleteConfirmationModal from "@/components/modals/DeleteConfirmationModal
 import EndTotalChart from "@/components/EndTotalChart.vue";
 import ScoreDistributionChart from "@/components/ScoreDistributionChart.vue";
 import { useAchievementNotifications } from '@/composables/useAchievementNotifications.js';
+import { calculateAchievements } from '@/domain/achievements/calculator.js';
 import AchievementCelebrationModal from '@/components/modals/AchievementCelebrationModal.vue';
 
 const preferences = usePreferencesStore();
@@ -118,11 +119,11 @@ async function checkAchievementsOnce() {
   if (!achievementsChecked.value.has(shootId) && shoot.value) {
     achievementsChecked.value.add(shootId);
     
-    // Check if we should calculate achievements (from fresh save)
+    // Check if we should show achievements for this shoot (from fresh save)
     const shouldCheckAchievements = route.query.checkAchievements === 'true';
     
     if (shouldCheckAchievements) {
-      // Do achievement calculation asynchronously, non-blocking
+      // Calculate achievements and show those earned by this specific shoot
       setTimeout(async () => {
         try {
           const achievementContext = {
@@ -137,12 +138,18 @@ async function checkAchievementsOnce() {
             shootHistory: history.sortedHistory()
           };
           
-          const newlyUnlocked = achievementNotifications.achievementStore.updateAchievements(achievementContext);
+          // Calculate all achievements
+          const allAchievements = calculateAchievements(achievementContext);
+          
+          // Filter to only achievements earned by this specific shoot
+          const achievementsForThisShoot = allAchievements.filter(achievement => 
+            achievement.progress.isUnlocked && 
+            achievement.progress.achievingShootId === shootId
+          );
 
-          // Show celebration for newly unlocked achievements
-          if (newlyUnlocked.length > 0) {
-            achievementNotifications.showAchievementsForShoot(newlyUnlocked);
-          } else {
+          // Show achievements earned by this shoot
+          if (achievementsForThisShoot.length > 0) {
+            achievementNotifications.showAchievementsForShoot(achievementsForThisShoot);
           }
         } catch (error) {
           console.error('[ACHIEVEMENT DEBUG] Full error:', error);
@@ -154,16 +161,6 @@ async function checkAchievementsOnce() {
         path: route.path, 
         query: { ...route.query, checkAchievements: undefined } 
       });
-    } else {
-      // Look for unread achievements that were earned by this specific shoot
-      const achievementsForThisShoot = achievementNotifications.achievementStore.unreadAchievements.filter(achievement => 
-        achievement.achievingShootId === shootId
-      );
-      
-      // Show achievements that were earned by this specific shoot
-      if (achievementsForThisShoot.length > 0) {
-        achievementNotifications.showAchievementsForShoot(achievementsForThisShoot);
-      }
     }
   }
 }
@@ -434,8 +431,8 @@ onMounted(async () => {
 
     <!-- Achievement Celebration Modal -->
     <AchievementCelebrationModal
-      v-if="achievementNotifications.shouldShowCelebrationModal.value && achievementNotifications.currentAchievement.value"
-      :achievement="achievementNotifications.currentAchievement.value"
+      v-if="achievementNotifications.shouldShowCelebrationModal.value && achievementNotifications.currentAchievements.value.length > 0"
+      :achievements="achievementNotifications.currentAchievements.value"
       @dismiss="handleAchievementDismissed"
       @disable-popups="handleDisablePopups"
     />

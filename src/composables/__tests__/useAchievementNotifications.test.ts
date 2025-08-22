@@ -83,9 +83,9 @@ describe('useAchievementNotifications', () => {
     // Call the method
     achievementNotifications.showAchievementsForShoot(achievements);
 
-    // Should show the popup
+    // Should show the popup with all achievements
     expect(achievementNotifications.shouldShowCelebrationModal.value).toBe(true);
-    expect(achievementNotifications.currentAchievement.value).toEqual(achievements[0]);
+    expect(achievementNotifications.currentAchievements.value).toEqual(achievements);
   });
 
   test.skip('showAchievementsForShoot does not show achievements when popups disabled', () => {
@@ -119,12 +119,11 @@ describe('useAchievementNotifications', () => {
 
     // Should not show popup
     expect(achievementNotifications.shouldShowCelebrationModal.value).toBe(false);
-    expect(achievementNotifications.currentAchievement.value).toBe(null);
+    expect(achievementNotifications.currentAchievements.value).toEqual([]);
   });
 
-  test('dismissCelebrationPopup marks achievement as read', () => {
+  test('dismissCelebrationPopup clears current achievements', () => {
     const achievementNotifications = useAchievementNotifications();
-    const markAsReadSpy = vi.spyOn(achievementNotifications.achievementStore, 'markAsRead');
     
     const achievement = {
       id: 'achievement_1',
@@ -137,18 +136,17 @@ describe('useAchievementNotifications', () => {
 
     // Show achievement first
     achievementNotifications.showAchievementsForShoot([achievement]);
-    expect(achievementNotifications.currentAchievement.value).toEqual(achievement);
+    expect(achievementNotifications.currentAchievements.value).toEqual([achievement]);
 
     // Dismiss the popup
     achievementNotifications.dismissCelebrationPopup();
 
-    // Should mark as read
-    expect(markAsReadSpy).toHaveBeenCalledWith('achievement_1');
-    expect(achievementNotifications.currentAchievement.value).toBe(null);
+    // Should clear achievements and hide popup
+    expect(achievementNotifications.currentAchievements.value).toEqual([]);
     expect(achievementNotifications.showCelebrationPopup.value).toBe(false);
   });
 
-  test('handles multiple achievements in sequence', () => {
+  test('handles multiple achievements in a single modal', () => {
     const achievementNotifications = useAchievementNotifications();
     
     const achievements = [
@@ -173,20 +171,40 @@ describe('useAchievementNotifications', () => {
     // Show multiple achievements
     achievementNotifications.showAchievementsForShoot(achievements);
 
-    // Should show first achievement
+    // Should show all achievements in one modal
     expect(achievementNotifications.shouldShowCelebrationModal.value).toBe(true);
-    expect(achievementNotifications.currentAchievement.value?.id).toBe('achievement_1');
+    expect(achievementNotifications.currentAchievements.value).toEqual(achievements);
+    expect(achievementNotifications.currentAchievements.value).toHaveLength(2);
 
-    // Dismiss first achievement
+    // Dismiss should clear all achievements
     achievementNotifications.dismissCelebrationPopup();
 
-    // Should eventually show second achievement (after timeout)
-    return new Promise<void>((resolve) => {
-      setTimeout(() => {
-        expect(achievementNotifications.shouldShowCelebrationModal.value).toBe(true);
-        expect(achievementNotifications.currentAchievement.value?.id).toBe('achievement_2');
-        resolve();
-      }, 600);
-    });
+    expect(achievementNotifications.currentAchievements.value).toEqual([]);
+  });
+
+  test('handles more than 3 achievements correctly', () => {
+    const achievementNotifications = useAchievementNotifications();
+    
+    // Create 5 achievements to test the limit
+    const achievements = Array.from({ length: 5 }, (_, i) => ({
+      id: `achievement_${i + 1}`,
+      name: `Achievement ${i + 1}`,
+      description: `Description ${i + 1}`,
+      tier: 'bronze',
+      achievingShootId: 123,
+      unlockedAt: new Date().toISOString()
+    }));
+
+    // Show all achievements
+    achievementNotifications.showAchievementsForShoot(achievements);
+
+    // Should show popup with all achievements stored
+    expect(achievementNotifications.shouldShowCelebrationModal.value).toBe(true);
+    expect(achievementNotifications.currentAchievements.value).toHaveLength(5);
+
+    // Dismiss should clear all achievements
+    achievementNotifications.dismissCelebrationPopup();
+
+    expect(achievementNotifications.currentAchievements.value).toEqual([]);
   });
 });

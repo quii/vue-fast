@@ -3,29 +3,26 @@
     <div class="celebration-content" @click.stop>
       <!-- Celebration header -->
       <div class="celebration-header">
-        <div class="celebration-icon">🎉</div>
-        <h2 class="celebration-title">Achievement Unlocked!</h2>
+        <h2 class="celebration-title">{{ modalTitle }}</h2>
       </div>
 
       <!-- Achievement details -->
       <div class="achievement-details">
-        <div 
-          class="achievement-badge celebration-badge"
-          :class="{ 
-            'bronze': (achievement?.tier || 'bronze') === 'bronze',
-            'silver': (achievement?.tier || 'bronze') === 'silver', 
-            'gold': (achievement?.tier || 'bronze') === 'gold',
-            'diamond': (achievement?.tier || 'bronze') === 'diamond'
-          }"
-        >
-          <div class="badge-content">
-            <div class="badge-title">{{ achievement?.name || 'Achievement' }}</div>
-            <div class="badge-description">{{ achievement?.description || 'Achievement unlocked!' }}</div>
-          </div>
-          
-          <!-- Tier indicator -->
-          <div class="tier-indicator" :class="achievement?.tier || 'bronze'">
-            <span class="tier-text">{{ (achievement?.tier || 'bronze').charAt(0).toUpperCase() + (achievement?.tier || 'bronze').slice(1) }}</span>
+        <AchievementBadge
+          v-for="achievement in displayedAchievements"
+          :key="achievement.id || achievement.name"
+          :title="achievement.name || 'Achievement'"
+          :description="achievement.description || 'Achievement unlocked!'"
+          :tier="achievement.tier || 'bronze'"
+          :is-earned="true"
+          :achieved-date="achievement.progress?.achievedDate || achievement.achievedDate"
+          class="celebration-badge"
+        />
+        
+        <!-- "Plus N more" indicator -->
+        <div v-if="hasMoreAchievements" class="extra-achievements">
+          <div class="extra-achievements-text">
+            Plus {{ extraAchievementsCount }} more achievement{{ extraAchievementsCount !== 1 ? 's' : '' }}!
           </div>
         </div>
       </div>
@@ -59,30 +56,60 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
+import AchievementBadge from '@/components/AchievementBadge.vue'
 
 const props = defineProps({
-  achievement: {
-    type: Object,
+  achievements: {
+    type: Array,
     required: true,
     validator: (value) => {
-      if (!value || typeof value !== 'object') {
-        console.warn('Achievement prop validation failed: not an object', value);
+      if (!Array.isArray(value) || value.length === 0) {
+        console.warn('Achievements prop validation failed: not a non-empty array', value);
         return false;
       }
-      if (typeof value.name !== 'string' || value.name.length === 0) {
-        console.warn('Achievement prop validation failed: invalid name', value);
-        return false;
-      }
-      if (typeof value.description !== 'string' || value.description.length === 0) {
-        console.warn('Achievement prop validation failed: invalid description', value);
-        return false;
-      }
-      return true;
+      // Validate each achievement
+      return value.every(achievement => {
+        if (!achievement || typeof achievement !== 'object') {
+          console.warn('Achievement prop validation failed: not an object', achievement);
+          return false;
+        }
+        if (typeof achievement.name !== 'string' || achievement.name.length === 0) {
+          console.warn('Achievement prop validation failed: invalid name', achievement);
+          return false;
+        }
+        if (typeof achievement.description !== 'string' || achievement.description.length === 0) {
+          console.warn('Achievement prop validation failed: invalid description', achievement);
+          return false;
+        }
+        return true;
+      });
     }
   }
 })
 
 const emit = defineEmits(['dismiss', 'disable-popups'])
+
+// Computed properties for modal display
+const modalTitle = computed(() => {
+  if (props.achievements.length === 1) {
+    return 'Achievement Unlocked!';
+  } else {
+    return `${props.achievements.length} Achievements Unlocked!`;
+  }
+});
+
+const displayedAchievements = computed(() => {
+  return props.achievements.slice(0, 4); // Show up to 4 achievements
+});
+
+const hasMoreAchievements = computed(() => {
+  return props.achievements.length > 4;
+});
+
+const extraAchievementsCount = computed(() => {
+  return Math.max(0, props.achievements.length - 4);
+});
 
 function handleOverlayClick() {
   handleDismiss()
@@ -164,11 +191,6 @@ function getParticleStyle(index) {
   margin-bottom: 1.5rem;
 }
 
-.celebration-icon {
-  font-size: 3rem;
-  margin-bottom: 0.5rem;
-  animation: celebrationBounce 1s ease-in-out infinite;
-}
 
 .celebration-title {
   margin: 0;
@@ -185,94 +207,31 @@ function getParticleStyle(index) {
   margin-bottom: 2rem;
 }
 
+/* Enhanced celebration styling for the achievement badge */
 .celebration-badge {
-  border: 3px solid transparent;
-  background: linear-gradient(var(--color-background), var(--color-background)) padding-box,
-              linear-gradient(45deg, #FFD700, #FFA500) border-box;
   animation: celebrationGlow 3s ease-in-out infinite;
+  margin-bottom: 1rem; /* Space between multiple badges */
 }
 
-.celebration-badge.bronze {
-  background: linear-gradient(var(--color-background), var(--color-background)) padding-box,
-              linear-gradient(45deg, #CD7F32, #B87333) border-box;
+.celebration-badge:last-of-type {
+  margin-bottom: 0; /* Remove margin from last badge when no extra indicator */
 }
 
-.celebration-badge.silver {
-  background: linear-gradient(var(--color-background), var(--color-background)) padding-box,
-              linear-gradient(45deg, #C0C0C0, #A8A8A8) border-box;
+.extra-achievements {
+  margin-top: 1rem;
+  text-align: center;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 215, 0, 0.1);
+  border: 2px dashed rgba(255, 215, 0, 0.3);
+  border-radius: 12px;
+  animation: celebrationPulse 2s ease-in-out infinite;
 }
 
-.celebration-badge.gold {
-  background: linear-gradient(var(--color-background), var(--color-background)) padding-box,
-              linear-gradient(45deg, #FFD700, #FFA500) border-box;
-}
-
-.celebration-badge.diamond {
-  background: linear-gradient(var(--color-background), var(--color-background)) padding-box,
-              linear-gradient(45deg, #B9F2FF, #87CEEB) border-box;
-}
-
-/* Inherit achievement badge styles but with celebration enhancements */
-.achievement-badge {
-  border-radius: 16px;
-  padding: 1.5rem;
-  position: relative;
-  background-color: var(--color-background-soft);
-  box-shadow: 
-    0 8px 16px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
-}
-
-.badge-content {
-  position: relative;
-  z-index: 2;
-}
-
-.badge-title {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--color-heading);
-  margin-bottom: 0.5rem;
-}
-
-.badge-description {
-  font-size: 0.95rem;
-  color: var(--color-text-soft);
-  line-height: 1.4;
-  margin-bottom: 1rem;
-}
-
-.tier-indicator {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.75rem;
+.extra-achievements-text {
+  font-size: 0.9rem;
   font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.tier-indicator.bronze {
-  background: linear-gradient(135deg, #CD7F32, #B87333);
-  color: white;
-}
-
-.tier-indicator.silver {
-  background: linear-gradient(135deg, #C0C0C0, #A8A8A8);
-  color: #333;
-}
-
-.tier-indicator.gold {
-  background: linear-gradient(135deg, #FFD700, #FFA500);
-  color: #333;
-}
-
-.tier-indicator.diamond {
-  background: linear-gradient(135deg, #B9F2FF, #87CEEB);
-  color: #333;
+  color: var(--color-heading);
+  opacity: 0.9;
 }
 
 .celebration-actions {
@@ -378,17 +337,6 @@ function getParticleStyle(index) {
   }
 }
 
-@keyframes celebrationBounce {
-  0%, 20%, 50%, 80%, 100% {
-    transform: translateY(0);
-  }
-  40% {
-    transform: translateY(-10px);
-  }
-  60% {
-    transform: translateY(-5px);
-  }
-}
 
 @keyframes celebrationPulse {
   0%, 100% {
