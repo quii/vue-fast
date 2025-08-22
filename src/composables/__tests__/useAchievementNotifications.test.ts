@@ -88,7 +88,7 @@ describe('useAchievementNotifications', () => {
     expect(achievementNotifications.currentAchievements.value).toEqual(achievements);
   });
 
-  test.skip('showAchievementsForShoot does not show achievements when popups disabled', () => {
+  test('showAchievementsForShoot does not show achievements when popups disabled', () => {
     const achievementNotifications = useAchievementNotifications();
     achievementNotifications.achievementStore.popupsEnabled = false;
     
@@ -108,7 +108,7 @@ describe('useAchievementNotifications', () => {
 
     // Should not show popup
     expect(achievementNotifications.shouldShowCelebrationModal.value).toBe(false);
-    expect(achievementNotifications.currentAchievement.value).toBe(null);
+    expect(achievementNotifications.currentAchievements.value).toEqual([]);
   });
 
   test('showAchievementsForShoot handles empty achievement array', () => {
@@ -182,10 +182,10 @@ describe('useAchievementNotifications', () => {
     expect(achievementNotifications.currentAchievements.value).toEqual([]);
   });
 
-  test('handles more than 3 achievements correctly', () => {
+  test('handles multiple achievements in single popup', () => {
     const achievementNotifications = useAchievementNotifications();
     
-    // Create 5 achievements to test the limit
+    // Create 5 achievements to test multiple achievements in single popup
     const achievements = Array.from({ length: 5 }, (_, i) => ({
       id: `achievement_${i + 1}`,
       name: `Achievement ${i + 1}`,
@@ -198,7 +198,7 @@ describe('useAchievementNotifications', () => {
     // Show all achievements
     achievementNotifications.showAchievementsForShoot(achievements);
 
-    // Should show popup with all achievements stored
+    // Should show popup with all achievements in a single modal
     expect(achievementNotifications.shouldShowCelebrationModal.value).toBe(true);
     expect(achievementNotifications.currentAchievements.value).toHaveLength(5);
 

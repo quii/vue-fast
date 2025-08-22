@@ -16,56 +16,27 @@ export function useAchievementNotifications() {
   const showCelebrationPopup = ref(false);
   const currentAchievements = ref<any[]>([]);
   
-  // Queue for batched achievements
-  const achievementQueue = ref<any[]>([]);
-  
   // Notification service
   const notificationService = createAchievementNotificationService(
     achievementStore,
     {
       onNewAchievements: (achievements) => {
-        // Add achievements to queue as a batch
-        if (achievements.length > 0) {
-          achievementQueue.value.push(achievements);
-          showNextAchievementBatch();
+        // Show achievements immediately if popups are enabled
+        if (achievements.length > 0 && achievementStore.popupsEnabled) {
+          currentAchievements.value = achievements;
+          showCelebrationPopup.value = true;
         }
       }
     }
   );
   
-  function showNextAchievementBatch() {
-    console.log('[POPUP DEBUG] showNextAchievementBatch called');
-    console.log('[POPUP DEBUG] Queue length:', achievementQueue.value.length);
-    console.log('[POPUP DEBUG] showCelebrationPopup.value:', showCelebrationPopup.value);
-    
-    if (achievementQueue.value.length > 0 && !showCelebrationPopup.value) {
-      const nextBatch = achievementQueue.value.shift();
-      console.log('[POPUP DEBUG] Setting current achievements batch:', nextBatch);
-      currentAchievements.value = nextBatch;
-      showCelebrationPopup.value = true;
-      console.log('[POPUP DEBUG] Set showCelebrationPopup to true');
-    } else {
-      console.log('[POPUP DEBUG] Not showing - queue empty or popup already showing');
-    }
-  }
-  
   function dismissCelebrationPopup() {
     showCelebrationPopup.value = false;
     currentAchievements.value = [];
-    
-    // Show next achievement batch in queue after a brief delay
-    setTimeout(() => {
-      showNextAchievementBatch();
-    }, 500);
   }
-  
   
   function disablePopups() {
     achievementStore.setPopupsEnabled(false);
-    
-    // Clear any queued achievements
-    achievementQueue.value = [];
-    
     // Clear current achievements
     currentAchievements.value = [];
   }
@@ -118,25 +89,9 @@ export function useAchievementNotifications() {
   
   // Method to show specific achievements without full calculation
   function showAchievementsForShoot(achievements: any[]) {
-    console.log('[POPUP DEBUG] showAchievementsForShoot called with', achievements.length, 'achievements');
-    console.log('[POPUP DEBUG] popupsEnabled:', achievementStore.popupsEnabled);
-    console.log('[POPUP DEBUG] current queue length:', achievementQueue.value.length);
-    console.log('[POPUP DEBUG] showCelebrationPopup.value:', showCelebrationPopup.value);
-    
-    // Temporarily force enable popups for debugging
-    if (!achievementStore.popupsEnabled) {
-      console.log('[POPUP DEBUG] Popups are disabled - enabling them for debugging');
-      achievementStore.setPopupsEnabled(true);
-    }
-    
     if (achievements.length > 0 && achievementStore.popupsEnabled) {
-      console.log('[POPUP DEBUG] Adding achievements batch to queue and showing...');
-      // Add achievements as a single batch to queue
-      achievementQueue.value.push(achievements);
-      console.log('[POPUP DEBUG] Queue length after adding batch:', achievementQueue.value.length);
-      showNextAchievementBatch();
-    } else {
-      console.log('[POPUP DEBUG] Not showing popup - either no achievements or popups disabled');
+      currentAchievements.value = achievements;
+      showCelebrationPopup.value = true;
     }
   }
 

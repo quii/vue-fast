@@ -2,7 +2,8 @@
 import { computed, ref, watch, watchEffect } from 'vue'
 import { useUserStore } from "@/stores/user";
 import { useHistoryStore } from "@/stores/history";
-import { useInstallationStore } from '@/stores/installation'
+import { useInstallationStore } from '@/stores/installation';
+import { useAchievementStore } from '@/stores/achievements.js';
 import { classificationList, classificationListWithoutPB } from "@/domain/scoring/classificationList.js";
 import BaseTopBar from "@/components/ui/BaseTopBar.vue";
 import SectionCard from "@/components/ui/SectionCard.vue";
@@ -19,6 +20,7 @@ import { useRouter } from 'vue-router'
 const userStore = useUserStore();
 const historyStore = useHistoryStore();
 const installationStore = useInstallationStore();
+const achievementStore = useAchievementStore();
 const router = useRouter();
 
 const selectedAgeGroup = ref(userStore.user.ageGroup);
@@ -234,6 +236,12 @@ watchEffect(() => {
       <BaseCheckbox
         v-model="experimentalTargetFace"
         label="Experimental target face scoring enabled"
+      />
+
+      <BaseCheckbox
+        v-model="achievementStore.popupsEnabled"
+        @update:model-value="achievementStore.setPopupsEnabled($event)"
+        label="Achievement popup notifications"
       />
 
       <FormGroup label="Choose knock colour">
