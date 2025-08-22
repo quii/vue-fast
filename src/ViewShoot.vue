@@ -29,7 +29,9 @@ import EndTotalChart from "@/components/EndTotalChart.vue";
 import ScoreDistributionChart from "@/components/ScoreDistributionChart.vue";
 import { useAchievementNotifications } from '@/composables/useAchievementNotifications.js';
 import { calculateAchievements } from '@/domain/achievements/calculator.js';
+import { getAchievementsForShoot } from '@/domain/achievements/shoot_achievements.js';
 import AchievementCelebrationModal from '@/components/modals/AchievementCelebrationModal.vue';
+import AchievementBadge from '@/components/AchievementBadge.vue';
 
 const preferences = usePreferencesStore();
 const arrowHistoryStore = useArrowHistoryStore();
@@ -59,6 +61,31 @@ const endSize = computed(() => round.value.endSize);
 const scores = computed(() => shoot.value.scores);
 const date = computed(() => shoot.value.date);
 const status = computed(() => getShootStatusDisplayName(shoot.value.shootStatus));
+
+// Calculate achievements earned by this specific shoot
+const earnedAchievements = computed(() => {
+  if (!shoot.value) return [];
+  
+  try {
+    const achievementContext = {
+      currentShoot: {
+        id: parseInt(route.params.id),
+        date: shoot.value.date,
+        scores: shoot.value.scores,
+        score: shoot.value.score,
+        gameType: shoot.value.gameType,
+        userProfile: shoot.value.userProfile
+      },
+      shootHistory: history.sortedHistory()
+    };
+    
+    const shootId = parseInt(route.params.id);
+    return getAchievementsForShoot(achievementContext, shootId);
+  } catch (error) {
+    console.error('Error calculating achievements for display:', error);
+    return [];
+  }
+});
 
 const formattedDate = computed(() => {
   if (!date.value) return "";
@@ -138,14 +165,8 @@ async function checkAchievementsOnce() {
             shootHistory: history.sortedHistory()
           };
           
-          // Calculate all achievements
-          const allAchievements = calculateAchievements(achievementContext);
-          
-          // Filter to only achievements earned by this specific shoot
-          const achievementsForThisShoot = allAchievements.filter(achievement => 
-            achievement.progress.isUnlocked && 
-            achievement.progress.achievingShootId === shootId
-          );
+          // Get achievements earned by this specific shoot
+          const achievementsForThisShoot = getAchievementsForShoot(achievementContext, shootId);
 
           // Show achievements earned by this shoot
           if (achievementsForThisShoot.length > 0) {
@@ -409,6 +430,22 @@ onMounted(async () => {
           :game-type="roundName"
       />
 
+    <!-- Achievements Section -->
+    <BaseCard v-if="earnedAchievements.length > 0">
+      <div class="achievements-list">
+        <AchievementBadge
+          v-for="achievement in earnedAchievements"
+          :key="achievement.id"
+          :title="achievement.name"
+          :description="achievement.description"
+          :tier="achievement.tier"
+          :is-earned="true"
+          :achieved-date="achievement.progress.achievedDate || achievement.progress.unlockedAt"
+          :achieving-shoot-id="achievement.progress.achievingShootId"
+        />
+      </div>
+    </BaseCard>
+
     <EndTotalChart
         :scores="scores"
         :game-type="roundName"
@@ -506,5 +543,11 @@ onMounted(async () => {
   .nav-label {
     display: inline;
   }
+}
+
+.achievements-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 </style>
