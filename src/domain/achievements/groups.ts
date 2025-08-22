@@ -65,6 +65,6 @@ export const YORKIE_GROUP: AchievementGroup = {
 export const RED_ALERT_GROUP: AchievementGroup = {
   id: 'red_alert',
   name: 'Red Alert',
-  description: 'Score an end of all 7s (imperial) or all 7s/8s (metric)',
+  description: 'Score an end of all 7s (imperial) or all 7s/8s (metric) - tiers based on distance difficulty',
   order: 9
 };

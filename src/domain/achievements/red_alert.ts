@@ -14,18 +14,34 @@ import { calculateDistanceTotals } from '../scoring/distance_totals.js';
 import { convertToValues } from '@/domain/scoring/scores.js';
 
 // All possible distances for red alert awards
-const IMPERIAL_DISTANCES = [10, 20, 30, 40, 50, 60, 80, 100] as const;
-const METRIC_DISTANCES = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100] as const;
+const IMPERIAL_DISTANCES = [20, 30, 40, 50, 60, 80, 100] as const;
+const METRIC_DISTANCES = [20, 30, 40, 50, 60, 70, 90] as const;
 
 type ImperialDistance = typeof IMPERIAL_DISTANCES[number];
 type MetricDistance = typeof METRIC_DISTANCES[number];
 type Distance = ImperialDistance | MetricDistance;
 
 /**
+ * Determine tier based on distance
+ */
+function getTierForDistance(distance: Distance): 'bronze' | 'silver' | 'gold' | 'diamond' {
+  if (distance <= 30) {
+    return 'bronze';
+  } else if (distance <= 50) {
+    return 'silver';
+  } else if (distance <= 70) {
+    return 'gold';
+  } else {
+    return 'diamond';
+  }
+}
+
+/**
  * Higher-order function to create a red alert achievement for a specific distance
  */
 function createRedAlertAchievement(distance: Distance, isImperial: boolean): Achievement {
   const unit = isImperial ? 'yd' : 'm';
+  const tier = getTierForDistance(distance);
   const description = isImperial 
     ? `Score an end of all 7s at ${distance}${unit}`
     : `Score an end of all 7s or 8s (or mixed) at ${distance}${unit}`;
@@ -34,18 +50,33 @@ function createRedAlertAchievement(distance: Distance, isImperial: boolean): Ach
     id: `red_alert_at_${distance}${unit}`,
     name: `Red Alert at ${distance}${unit}`,
     description,
-    tier: 'silver',
+    tier,
     group: RED_ALERT_GROUP
   };
 }
 
 /**
- * Generate all red alert achievements
+ * Generate all red alert achievements, ordered by distance (mixed imperial/metric)
  */
-export const RED_ALERT_ACHIEVEMENTS: Achievement[] = [
-  ...IMPERIAL_DISTANCES.map(d => createRedAlertAchievement(d, true)),
-  ...METRIC_DISTANCES.map(d => createRedAlertAchievement(d, false))
-];
+export const RED_ALERT_ACHIEVEMENTS: Achievement[] = (() => {
+  const allAchievements = [
+    ...IMPERIAL_DISTANCES.map(d => ({ distance: d, isImperial: true })),
+    ...METRIC_DISTANCES.map(d => ({ distance: d, isImperial: false }))
+  ];
+  
+  // Sort by distance first, then by unit (imperial first for same distance)
+  allAchievements.sort((a, b) => {
+    if (a.distance !== b.distance) {
+      return a.distance - b.distance;
+    }
+    // If same distance, imperial (yards) comes before metric (meters)
+    return a.isImperial ? -1 : 1;
+  });
+  
+  return allAchievements.map(({ distance, isImperial }) => 
+    createRedAlertAchievement(distance, isImperial)
+  );
+})();
 
 /**
  * Check if an end meets red alert criteria
@@ -260,7 +291,6 @@ function checkRedAlertInHistory(
 /**
  * Export individual check functions for each distance
  */
-export const checkRedAlertAt10ydAchieved = createRedAlertCheckFunction(10, true);
 export const checkRedAlertAt20ydAchieved = createRedAlertCheckFunction(20, true);
 export const checkRedAlertAt30ydAchieved = createRedAlertCheckFunction(30, true);
 export const checkRedAlertAt40ydAchieved = createRedAlertCheckFunction(40, true);
@@ -269,22 +299,18 @@ export const checkRedAlertAt60ydAchieved = createRedAlertCheckFunction(60, true)
 export const checkRedAlertAt80ydAchieved = createRedAlertCheckFunction(80, true);
 export const checkRedAlertAt100ydAchieved = createRedAlertCheckFunction(100, true);
 
-export const checkRedAlertAt10mAchieved = createRedAlertCheckFunction(10, false);
 export const checkRedAlertAt20mAchieved = createRedAlertCheckFunction(20, false);
 export const checkRedAlertAt30mAchieved = createRedAlertCheckFunction(30, false);
 export const checkRedAlertAt40mAchieved = createRedAlertCheckFunction(40, false);
 export const checkRedAlertAt50mAchieved = createRedAlertCheckFunction(50, false);
 export const checkRedAlertAt60mAchieved = createRedAlertCheckFunction(60, false);
 export const checkRedAlertAt70mAchieved = createRedAlertCheckFunction(70, false);
-export const checkRedAlertAt80mAchieved = createRedAlertCheckFunction(80, false);
 export const checkRedAlertAt90mAchieved = createRedAlertCheckFunction(90, false);
-export const checkRedAlertAt100mAchieved = createRedAlertCheckFunction(100, false);
 
 /**
  * Map of achievement IDs to their check functions
  */
 export const RED_ALERT_CHECK_FUNCTIONS = {
-  'red_alert_at_10yd': checkRedAlertAt10ydAchieved,
   'red_alert_at_20yd': checkRedAlertAt20ydAchieved,
   'red_alert_at_30yd': checkRedAlertAt30ydAchieved,
   'red_alert_at_40yd': checkRedAlertAt40ydAchieved,
@@ -292,14 +318,11 @@ export const RED_ALERT_CHECK_FUNCTIONS = {
   'red_alert_at_60yd': checkRedAlertAt60ydAchieved,
   'red_alert_at_80yd': checkRedAlertAt80ydAchieved,
   'red_alert_at_100yd': checkRedAlertAt100ydAchieved,
-  'red_alert_at_10m': checkRedAlertAt10mAchieved,
   'red_alert_at_20m': checkRedAlertAt20mAchieved,
   'red_alert_at_30m': checkRedAlertAt30mAchieved,
   'red_alert_at_40m': checkRedAlertAt40mAchieved,
   'red_alert_at_50m': checkRedAlertAt50mAchieved,
   'red_alert_at_60m': checkRedAlertAt60mAchieved,
   'red_alert_at_70m': checkRedAlertAt70mAchieved,
-  'red_alert_at_80m': checkRedAlertAt80mAchieved,
   'red_alert_at_90m': checkRedAlertAt90mAchieved,
-  'red_alert_at_100m': checkRedAlertAt100mAchieved,
 } as const;

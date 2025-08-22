@@ -15,24 +15,125 @@ import {
 import type { AchievementContext } from './types.js';
 
 describe('Red Alert Achievement System', () => {
-  test('generates achievements for all imperial and metric distances', () => {
-    // 8 imperial + 10 metric = 18 total achievements
-    expect(RED_ALERT_ACHIEVEMENTS).toHaveLength(18);
+  test('achievements are ordered by distance with imperial first for same distance', () => {
+    // Extract distances and units from the achievement IDs
+    const achievementOrder = RED_ALERT_ACHIEVEMENTS.map(achievement => {
+      const match = achievement.id.match(/red_alert_at_(\d+)(yd|m)/);
+      if (!match) throw new Error(`Invalid achievement ID: ${achievement.id}`);
+      
+      return {
+        distance: parseInt(match[1]),
+        unit: match[2],
+        isImperial: match[2] === 'yd'
+      };
+    });
     
-    // Check some specific achievements exist with correct properties
-    const imperial50yd = RED_ALERT_ACHIEVEMENTS.find(a => a.id === 'red_alert_at_50yd');
-    expect(imperial50yd).toBeDefined();
-    expect(imperial50yd?.name).toBe('Red Alert at 50yd');
-    expect(imperial50yd?.tier).toBe('silver');
-    expect(imperial50yd?.description).toContain('all 7s');
-    expect(imperial50yd?.description).toContain('50yd');
+    // Verify they are sorted correctly
+    for (let i = 1; i < achievementOrder.length; i++) {
+      const current = achievementOrder[i];
+      const previous = achievementOrder[i - 1];
+      
+      // Distance should be ascending
+      if (current.distance < previous.distance) {
+        throw new Error(`Distance not ascending: ${previous.distance} before ${current.distance}`);
+      }
+      
+      // If same distance, imperial (yd) should come before metric (m)
+      if (current.distance === previous.distance) {
+        if (previous.isImperial === false && current.isImperial === true) {
+          throw new Error(`Same distance ordering wrong: ${previous.unit} should come after ${current.unit}`);
+        }
+      }
+    }
     
-    const metric70m = RED_ALERT_ACHIEVEMENTS.find(a => a.id === 'red_alert_at_70m');
-    expect(metric70m).toBeDefined();
-    expect(metric70m?.name).toBe('Red Alert at 70m');
-    expect(metric70m?.tier).toBe('silver');
-    expect(metric70m?.description).toContain('all 7s or 8s');
-    expect(metric70m?.description).toContain('70m');
+    // Verify we have the expected complete ordering (removed 10yd, 10m, 80m, 100m)
+    const expectedOrder = [
+      '20yd', '20m', '30yd', '30m', '40yd', '40m', 
+      '50yd', '50m', '60yd', '60m', '70m', '80yd', '90m', '100yd'
+    ];
+    
+    const actualOrder = RED_ALERT_ACHIEVEMENTS.map(a => {
+      const match = a.id.match(/red_alert_at_(\d+)(yd|m)/);
+      return `${match![1]}${match![2]}`;
+    });
+    
+    expect(actualOrder).toEqual(expectedOrder);
+  });
+
+  test('tier progression follows distance difficulty correctly', () => {
+    // Test that the tier progression makes logical sense (removed 10m distance)
+    const bronzeDistances = [20, 30];
+    const silverDistances = [40, 50]; 
+    const goldDistances = [60, 70];
+    const diamondDistances = [90]; // Note: 80yd exists but 80m and 100m don't
+    
+    // Bronze: easier distances
+    bronzeDistances.forEach(distance => {
+      const achievement = RED_ALERT_ACHIEVEMENTS.find(a => a.id === `red_alert_at_${distance}m`);
+      expect(achievement?.tier).toBe('bronze');
+    });
+    
+    // Silver: medium distances  
+    silverDistances.forEach(distance => {
+      const achievement = RED_ALERT_ACHIEVEMENTS.find(a => a.id === `red_alert_at_${distance}m`);
+      expect(achievement?.tier).toBe('silver');
+    });
+    
+    // Gold: challenging distances
+    goldDistances.forEach(distance => {
+      const achievement = RED_ALERT_ACHIEVEMENTS.find(a => a.id === `red_alert_at_${distance}m`);
+      expect(achievement?.tier).toBe('gold');
+    });
+    
+    // Diamond: hardest distances
+    diamondDistances.forEach(distance => {
+      const achievement = RED_ALERT_ACHIEVEMENTS.find(a => a.id === `red_alert_at_${distance}m`);
+      expect(achievement?.tier).toBe('diamond');
+    });
+  });
+
+  test('generates achievements for all imperial and metric distances with correct tiers', () => {
+    // 7 imperial + 7 metric = 14 total achievements (removed 10yd, 10m, 80m, 100m)
+    expect(RED_ALERT_ACHIEVEMENTS).toHaveLength(14);
+    
+    // Test tier assignments based on distance (removed 10yd, 10m, 80m)
+    const expectedTiers = {
+      20: 'bronze',   // <= 30
+      30: 'bronze',   // <= 30
+      40: 'silver',   // <= 50
+      50: 'silver',   // <= 50
+      60: 'gold',     // <= 70
+      70: 'gold',     // <= 70
+      80: 'diamond',  // > 70 (only imperial - no 80m)
+      90: 'diamond',  // > 70 (only metric - no 90yd)
+      100: 'diamond'  // > 70
+    };
+    
+    // Check imperial achievements (available distances: 20, 30, 40, 50, 60, 80, 100)
+    Object.entries(expectedTiers).forEach(([distance, expectedTier]) => {
+      const imperialDistance = parseInt(distance);
+      if ([20, 30, 40, 50, 60, 80, 100].includes(imperialDistance)) {
+        const achievement = RED_ALERT_ACHIEVEMENTS.find(a => a.id === `red_alert_at_${distance}yd`);
+        expect(achievement).toBeDefined();
+        expect(achievement?.name).toBe(`Red Alert at ${distance}yd`);
+        expect(achievement?.tier).toBe(expectedTier);
+        expect(achievement?.description).toContain('all 7s');
+        expect(achievement?.description).toContain(`${distance}yd`);
+      }
+    });
+    
+    // Check metric achievements (available distances: 20, 30, 40, 50, 60, 70, 90)
+    Object.entries(expectedTiers).forEach(([distance, expectedTier]) => {
+      const metricDistance = parseInt(distance);
+      if ([20, 30, 40, 50, 60, 70, 90].includes(metricDistance)) {
+        const achievement = RED_ALERT_ACHIEVEMENTS.find(a => a.id === `red_alert_at_${distance}m`);
+        expect(achievement).toBeDefined();
+        expect(achievement?.name).toBe(`Red Alert at ${distance}m`);
+        expect(achievement?.tier).toBe(expectedTier);
+        expect(achievement?.description).toContain('all 7s or 8s');
+        expect(achievement?.description).toContain(`${distance}m`);
+      }
+    });
   });
 
   test('checkRedAlertAt50ydAchieved - achievement with end of all 7s in imperial round', () => {
