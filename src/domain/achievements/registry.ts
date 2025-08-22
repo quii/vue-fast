@@ -12,6 +12,7 @@ import { SEVEN_TWENTY_MASTERY_ACHIEVEMENTS } from './seven_twenty_mastery_recurv
 import { SPIDER_ACHIEVEMENTS } from './spider_awards.js';
 import { FROSTBITE_ACHIEVEMENTS } from './frostbite.js';
 import { YORKIE_ACHIEVEMENTS } from './yorkie_achievements.js';
+import { RED_ALERT_ACHIEVEMENTS } from './red_alert.js';
 import { ARROW_COUNT_GROUP, IMPERIAL_PRECISION_GROUP, IMPERIAL_GOLDEN_END_GROUP, METRIC_EXCELLENCE_GROUP, OLYMPIAN_EFFORT_GROUP, SPIDER_AWARDS_GROUP, FROSTBITE_GROUP } from './groups.js';
 
 export const ONE_THOUSAND_ARROWS: Achievement = {
@@ -71,7 +72,8 @@ export const ALL_ACHIEVEMENTS: Achievement[] = [
   ...OLYMPIAN_EFFORT_ACHIEVEMENTS,
   ...SPIDER_ACHIEVEMENTS,
   ...FROSTBITE_ACHIEVEMENTS,
-  ...YORKIE_ACHIEVEMENTS
+  ...YORKIE_ACHIEVEMENTS,
+  ...RED_ALERT_ACHIEVEMENTS
 ];
 
 export function getAchievementById(id: string): Achievement | undefined {

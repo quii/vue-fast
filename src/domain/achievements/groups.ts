@@ -61,3 +61,10 @@ export const YORKIE_GROUP: AchievementGroup = {
   description: 'Reject the 80 yard ceiling',
   order: 8
 };
+
+export const RED_ALERT_GROUP: AchievementGroup = {
+  id: 'red_alert',
+  name: 'Red Alert',
+  description: 'Score an end of all 7s (imperial) or all 7s/8s (metric)',
+  order: 9
+};

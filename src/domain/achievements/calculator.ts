@@ -16,6 +16,7 @@ import { SEVEN_TWENTY_MASTERY_CHECK_FUNCTIONS } from './seven_twenty_mastery_rec
 import { SPIDER_CHECK_FUNCTIONS } from './spider_awards.js';
 import { FROSTBITE_CHECK_FUNCTIONS } from './frostbite.js';
 import { YORKIE_CHECK_FUNCTIONS } from './yorkie_achievements.js';
+import { RED_ALERT_CHECK_FUNCTIONS } from './red_alert.js';
 import { 
   checkOlympianEffortBronzeAchieved,
   checkOlympianEffortSilverAchieved,
@@ -116,6 +117,11 @@ export function calculateAchievements(context: AchievementContext): AchievementD
           const checkFunction = YORKIE_CHECK_FUNCTIONS[achievement.id as keyof typeof YORKIE_CHECK_FUNCTIONS];
           progress = checkFunction(context);
           progressPercentage = progress.isUnlocked ? 100 : Math.min((progress.currentScore! / progress.targetScore!) * 100, 100);
+        } else if (achievement.id in RED_ALERT_CHECK_FUNCTIONS) {
+          // Check if it's a Red Alert achievement
+          const checkFunction = RED_ALERT_CHECK_FUNCTIONS[achievement.id as keyof typeof RED_ALERT_CHECK_FUNCTIONS];
+          progress = checkFunction(context);
+          progressPercentage = progress.isUnlocked ? 100 : 0; // Red Alert is binary - either achieved or not
         } else {
           // Default fallback for unknown achievements
           progress = { 
