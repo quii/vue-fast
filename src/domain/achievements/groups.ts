@@ -89,3 +89,10 @@ export const FOR_THE_GERT_LUSH_GROUP: AchievementGroup = {
   description: 'Complete 12 dozen imperial rounds - tiers based on total rounds completed',
   order: 12
 };
+
+export const CUSHTY_POMPEY_GROUP: AchievementGroup = {
+  id: 'cushty_pompey',
+  name: 'Cushty Pompey!',
+  description: 'Score specific thresholds on Portsmouth rounds - based on UK badge scheme',
+  order: 13
+};

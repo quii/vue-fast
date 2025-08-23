@@ -20,6 +20,7 @@ import { RED_ALERT_CHECK_FUNCTIONS } from './red_alert.js';
 import { DONT_BE_BLUE_CHECK_FUNCTIONS } from './dont_be_blue.js';
 import { WINDSOR_CHECK_FUNCTIONS } from './windsor_achievements.js';
 import { GERT_LUSH_CHECK_FUNCTIONS } from './gert_lush_achievements.js';
+import { CUSHTY_POMPEY_CHECK_FUNCTIONS } from './cushty_pompey_achievements.js';
 import { 
   checkOlympianEffortBronzeAchieved,
   checkOlympianEffortSilverAchieved,
@@ -140,6 +141,11 @@ export function calculateAchievements(context: AchievementContext): AchievementD
           const checkFunction = GERT_LUSH_CHECK_FUNCTIONS[achievement.id as keyof typeof GERT_LUSH_CHECK_FUNCTIONS];
           progress = checkFunction(context);
           progressPercentage = progress.isUnlocked ? 100 : Math.min((progress.totalArrows! / progress.targetArrows!) * 100, 100);
+        } else if (achievement.id in CUSHTY_POMPEY_CHECK_FUNCTIONS) {
+          // Check if it's a Cushty Pompey achievement
+          const checkFunction = CUSHTY_POMPEY_CHECK_FUNCTIONS[achievement.id as keyof typeof CUSHTY_POMPEY_CHECK_FUNCTIONS];
+          progress = checkFunction(context);
+          progressPercentage = progress.isUnlocked ? 100 : Math.min((progress.currentScore! / progress.targetScore!) * 100, 100);
         } else {
           // Default fallback for unknown achievements
           progress = { 

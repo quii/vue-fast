@@ -16,6 +16,7 @@ import { RED_ALERT_ACHIEVEMENTS } from './red_alert.js';
 import { DONT_BE_BLUE_ACHIEVEMENTS } from './dont_be_blue.js';
 import { WINDSOR_ACHIEVEMENTS } from './windsor_achievements.js';
 import { GERT_LUSH_ACHIEVEMENTS } from './gert_lush_achievements.js';
+import { CUSHTY_POMPEY_ACHIEVEMENTS } from './cushty_pompey_achievements.js';
 import { ARROW_COUNT_GROUP, IMPERIAL_PRECISION_GROUP, IMPERIAL_GOLDEN_END_GROUP, METRIC_EXCELLENCE_GROUP, OLYMPIAN_EFFORT_GROUP, SPIDER_AWARDS_GROUP, FROSTBITE_GROUP } from './groups.js';
 
 export const ONE_THOUSAND_ARROWS: Achievement = {
@@ -79,7 +80,8 @@ export const ALL_ACHIEVEMENTS: Achievement[] = [
   ...RED_ALERT_ACHIEVEMENTS,
   ...DONT_BE_BLUE_ACHIEVEMENTS,
   ...WINDSOR_ACHIEVEMENTS,
-  ...GERT_LUSH_ACHIEVEMENTS
+  ...GERT_LUSH_ACHIEVEMENTS,
+  ...CUSHTY_POMPEY_ACHIEVEMENTS
 ];
 
 export function getAchievementById(id: string): Achievement | undefined {
