@@ -42,7 +42,8 @@
       "Bash(docker build:*)",
       "Bash(npm audit:*)",
       "Bash(gh issue comment:*)",
-      "Bash(timeout 30 npm run test:e2e:headless -- --spec \"cypress/e2e/achievements.cy.ts\")"
+      "Bash(timeout 30 npm run test:e2e:headless -- --spec \"cypress/e2e/achievements.cy.ts\")",
+      "Bash(sed:*)"
     ],
     "deny": [
       "Bash(git push*)",

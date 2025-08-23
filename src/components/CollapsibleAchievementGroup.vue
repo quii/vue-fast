@@ -40,6 +40,7 @@
           :current-score="achievement.progress.currentScore"
           :achieving-shoot-id="achievement.progress.achievingShootId"
           :achieved-date="achievement.progress.achievedDate"
+          :unit-type="getUnitType(achievement.id)"
         />
       </div>
     </div>
@@ -83,6 +84,14 @@ const earnedCount = computed(() => {
 const totalCount = computed(() => {
   return groupProgress.value.totalAchievements
 })
+
+function getUnitType(achievementId) {
+  // Windsor achievements count shoots, not arrows
+  if (achievementId.startsWith('for_the_windsor')) {
+    return 'shoots';
+  }
+  return 'arrows';
+}
 </script>
 
 <style scoped>

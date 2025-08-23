@@ -18,7 +18,7 @@
       <div v-if="!isEarned" class="progress-section">
         <div class="progress-text">
           <span v-if="targetArrows">
-            {{ (currentArrows || 0).toLocaleString() }} / {{ targetArrows.toLocaleString() }} arrows
+            {{ (currentArrows || 0).toLocaleString() }} / {{ targetArrows.toLocaleString() }} {{ unitType || 'arrows' }}
           </span>
           <span v-else-if="targetScore">
             Best: {{ currentScore || 0 }} / {{ targetScore }} points<span v-if="gameType"> on {{ gameType.toUpperCase() }}</span>
@@ -73,7 +73,11 @@ const props = defineProps({
   currentScore: Number,
   gameType: String,
   achievingShootId: [Number, String],
-  achievedDate: String
+  achievedDate: String,
+  unitType: {
+    type: String,
+    default: 'arrows'
+  }
 })
 
 function handleClick() {

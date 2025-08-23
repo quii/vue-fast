@@ -25,6 +25,7 @@
             :current-score="achievement.progress.currentScore"
             :achieving-shoot-id="achievement.progress.achievingShootId"
             :achieved-date="achievement.progress.achievedDate"
+            :unit-type="getUnitType(achievement.id)"
           />
         </div>
       </div>
@@ -42,13 +43,14 @@
             :is-earned="true"
             :achieving-shoot-id="achievement.progress.achievingShootId"
             :achieved-date="achievement.progress.achievedDate"
+            :unit-type="getUnitType(achievement.id)"
           />
         </div>
       </div>
 
       <!-- All Achievement Groups Section -->
       <div class="priority-section priority-section-secondary">
-        <h2 class="priority-title">All Achievement Groups</h2>
+        <h2 class="priority-title">All Achievements</h2>
         
         <!-- Collapsible Achievement Groups -->
         <CollapsibleAchievementGroup
@@ -208,6 +210,14 @@ const recentAchievements = computed(() => {
     })
     .slice(0, RECENT_ACHIEVEMENTS_COUNT)
 })
+
+function getUnitType(achievementId) {
+  // Windsor achievements count shoots, not arrows
+  if (achievementId.startsWith('for_the_windsor')) {
+    return 'shoots';
+  }
+  return 'arrows';
+}
 </script>
 
 <style scoped>

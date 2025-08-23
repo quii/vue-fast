@@ -18,6 +18,7 @@ import { FROSTBITE_CHECK_FUNCTIONS } from './frostbite.js';
 import { YORKIE_CHECK_FUNCTIONS } from './yorkie_achievements.js';
 import { RED_ALERT_CHECK_FUNCTIONS } from './red_alert.js';
 import { DONT_BE_BLUE_CHECK_FUNCTIONS } from './dont_be_blue.js';
+import { WINDSOR_CHECK_FUNCTIONS } from './windsor_achievements.js';
 import { 
   checkOlympianEffortBronzeAchieved,
   checkOlympianEffortSilverAchieved,
@@ -104,10 +105,10 @@ export function calculateAchievements(context: AchievementContext): AchievementD
           progress = checkFunction(context);
           progressPercentage = progress.isUnlocked ? 100 : Math.min((progress.totalArrows! / progress.targetArrows!) * 100, 100);
         } else if (achievement.id in SPIDER_CHECK_FUNCTIONS) {
-          // Check if it's a Spider achievement
+          // Check if it's a Spider achievement (binary - no progress tracking)
           const checkFunction = SPIDER_CHECK_FUNCTIONS[achievement.id as keyof typeof SPIDER_CHECK_FUNCTIONS];
           progress = checkFunction(context);
-          progressPercentage = progress.isUnlocked ? 100 : Math.min((progress.currentScore! / progress.targetScore!) * 100, 100);
+          progressPercentage = progress.isUnlocked ? 100 : 0;
         } else if (achievement.id in FROSTBITE_CHECK_FUNCTIONS) {
           // Check if it's a Frostbite achievement
           const checkFunction = FROSTBITE_CHECK_FUNCTIONS[achievement.id as keyof typeof FROSTBITE_CHECK_FUNCTIONS];
@@ -128,6 +129,11 @@ export function calculateAchievements(context: AchievementContext): AchievementD
           const checkFunction = DONT_BE_BLUE_CHECK_FUNCTIONS[achievement.id as keyof typeof DONT_BE_BLUE_CHECK_FUNCTIONS];
           progress = checkFunction(context);
           progressPercentage = progress.isUnlocked ? 100 : 0; // Don't Be Blue is binary - either achieved or not
+        } else if (achievement.id in WINDSOR_CHECK_FUNCTIONS) {
+          // Check if it's a Windsor achievement
+          const checkFunction = WINDSOR_CHECK_FUNCTIONS[achievement.id as keyof typeof WINDSOR_CHECK_FUNCTIONS];
+          progress = checkFunction(context);
+          progressPercentage = progress.isUnlocked ? 100 : Math.min((progress.totalArrows! / progress.targetArrows!) * 100, 100);
         } else {
           // Default fallback for unknown achievements
           progress = { 

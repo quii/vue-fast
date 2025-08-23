@@ -32,8 +32,8 @@ function createSpiderAchievement(distance: SpiderDistance): Achievement {
   return {
     id: `spider_at_${distance}m`,
     name: `X at ${distance}m`,
+    description: `Score an X at ${distance}m`,
     tier: tier,
-    targetScore: 1, // Just need 1 X
     group: SPIDER_AWARDS_GROUP
   };
 }
@@ -60,13 +60,8 @@ function createSpiderCheckFunction(distance: SpiderDistance) {
       return existingAchievement;
     }
 
-    // Check historical shoots for best attempt (without X)
-    const historicalProgress = checkSpiderInHistory(context, distance);
-
-    // Return the best progress so far (current vs historical)
+    // Not achieved yet - binary achievement, no progress tracking
     return {
-      currentScore: Math.max(currentShootProgress.currentScore || 0, historicalProgress.currentScore || 0),
-      targetScore: 1,
       isUnlocked: false
     };
   };
@@ -191,8 +186,6 @@ function checkSpiderInCurrentShoot(context: AchievementContext, distance: Spider
   // Check if current shoot is outdoor metric and has our target distance
   if (!currentShoot.gameType || !canAwardSpiderAtDistance(currentShoot.gameType, distance)) {
     return {
-      currentScore: 0,
-      targetScore: 1,
       isUnlocked: false
     };
   }
@@ -200,8 +193,6 @@ function checkSpiderInCurrentShoot(context: AchievementContext, distance: Spider
   const arrowRange = getArrowsAtDistance(currentShoot.gameType, distance);
   if (!arrowRange) {
     return {
-      currentScore: 0,
-      targetScore: 1,
       isUnlocked: false
     };
   }
@@ -210,39 +201,20 @@ function checkSpiderInCurrentShoot(context: AchievementContext, distance: Spider
   const relevantScores = currentShoot.scores.slice(arrowRange.startArrow, arrowRange.endArrow + 1);
   const xCount = countXScores(relevantScores);
 
-  return {
-    currentScore: xCount,
-    targetScore: 1,
-    isUnlocked: xCount > 0,
-    unlockedAt: xCount > 0 ? new Date().toISOString() : undefined,
-    achievingShootId: xCount > 0 ? currentShoot.id : undefined,
-    achievedDate: xCount > 0 ? currentShoot.date : undefined
-  };
-}
-
-/**
- * Check history for spider achievement
- */
-function checkSpiderInHistory(context: AchievementContext, distance: SpiderDistance): AchievementProgress {
-  let bestXCount = 0;
-
-  for (const historyItem of context.shootHistory) {
-    if (historyItem.gameType && canAwardSpiderAtDistance(historyItem.gameType, distance)) {
-      const arrowRange = getArrowsAtDistance(historyItem.gameType, distance);
-      if (arrowRange) {
-        const relevantScores = historyItem.scores.slice(arrowRange.startArrow, arrowRange.endArrow + 1);
-        const xCount = countXScores(relevantScores);
-        bestXCount = Math.max(bestXCount, xCount);
-      }
-    }
+  if (xCount > 0) {
+    return {
+      isUnlocked: true,
+      unlockedAt: new Date().toISOString(),
+      achievingShootId: currentShoot.id,
+      achievedDate: currentShoot.date
+    };
   }
 
   return {
-    currentScore: bestXCount,
-    targetScore: 1,
     isUnlocked: false
   };
 }
+
 
 /**
  * Count X scores from array of arrow values

@@ -75,3 +75,10 @@ export const DONT_BE_BLUE_GROUP: AchievementGroup = {
   description: 'Score an end of all 5s (imperial) or all 5s/6s (metric) - tiers based on distance difficulty',
   order: 10
 };
+
+export const FOR_THE_WINDSOR_GROUP: AchievementGroup = {
+  id: 'for_the_windsor',
+  name: 'For the Windsor',
+  description: 'Complete 9 dozen imperial rounds - tiers based on total rounds completed',
+  order: 11
+};
