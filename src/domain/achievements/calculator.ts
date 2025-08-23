@@ -17,6 +17,7 @@ import { SPIDER_CHECK_FUNCTIONS } from './spider_awards.js';
 import { FROSTBITE_CHECK_FUNCTIONS } from './frostbite.js';
 import { YORKIE_CHECK_FUNCTIONS } from './yorkie_achievements.js';
 import { RED_ALERT_CHECK_FUNCTIONS } from './red_alert.js';
+import { DONT_BE_BLUE_CHECK_FUNCTIONS } from './dont_be_blue.js';
 import { 
   checkOlympianEffortBronzeAchieved,
   checkOlympianEffortSilverAchieved,
@@ -122,6 +123,11 @@ export function calculateAchievements(context: AchievementContext): AchievementD
           const checkFunction = RED_ALERT_CHECK_FUNCTIONS[achievement.id as keyof typeof RED_ALERT_CHECK_FUNCTIONS];
           progress = checkFunction(context);
           progressPercentage = progress.isUnlocked ? 100 : 0; // Red Alert is binary - either achieved or not
+        } else if (achievement.id in DONT_BE_BLUE_CHECK_FUNCTIONS) {
+          // Check if it's a Don't Be Blue achievement
+          const checkFunction = DONT_BE_BLUE_CHECK_FUNCTIONS[achievement.id as keyof typeof DONT_BE_BLUE_CHECK_FUNCTIONS];
+          progress = checkFunction(context);
+          progressPercentage = progress.isUnlocked ? 100 : 0; // Don't Be Blue is binary - either achieved or not
         } else {
           // Default fallback for unknown achievements
           progress = { 

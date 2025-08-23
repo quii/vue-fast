@@ -68,3 +68,10 @@ export const RED_ALERT_GROUP: AchievementGroup = {
   description: 'Score an end of all 7s (imperial) or all 7s/8s (metric) - tiers based on distance difficulty',
   order: 9
 };
+
+export const DONT_BE_BLUE_GROUP: AchievementGroup = {
+  id: 'dont_be_blue',
+  name: 'Don\'t Be Blue',
+  description: 'Score an end of all 5s (imperial) or all 5s/6s (metric) - tiers based on distance difficulty',
+  order: 10
+};
