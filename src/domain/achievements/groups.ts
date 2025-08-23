@@ -82,3 +82,10 @@ export const FOR_THE_WINDSOR_GROUP: AchievementGroup = {
   description: 'Complete 9 dozen imperial rounds - tiers based on total rounds completed',
   order: 11
 };
+
+export const FOR_THE_GERT_LUSH_GROUP: AchievementGroup = {
+  id: 'for_the_gert_lush',
+  name: 'Gert Lush',
+  description: 'Complete 12 dozen imperial rounds - tiers based on total rounds completed',
+  order: 12
+};

@@ -69,8 +69,8 @@ const totalCount = computed(() => {
 })
 
 function getUnitType(achievementId) {
-  // Windsor achievements count shoots, not arrows
-  if (achievementId.startsWith('for_the_windsor')) {
+  // Windsor and Gert Lush achievements count shoots, not arrows
+  if (achievementId.startsWith('for_the_windsor') || achievementId.startsWith('gert_lush')) {
     return 'shoots';
   }
   return 'arrows';
