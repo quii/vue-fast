@@ -13,6 +13,36 @@ import { useThemeStore } from '@/stores/theme'
 import { BrowserSharingService } from '@/domain/adapters/browser/browser_sharing_service'
 import { HttpShootService } from '@/services/HttpShootService'
 import { BrowserLocationService } from '@/domain/adapters/browser/BrowserLocationService'
+import {
+  Chart,
+  LineController,
+  BarController,
+  PieController,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  ArcElement
+} from 'chart.js'
+
+// Centralized Chart.js component registration
+// Register all structural components globally once (safe for global registration)
+// Note: Interactive plugins like Legend and Tooltip should be registered per-chart to avoid interference
+function setupChartJS() {
+  Chart.register(
+    LineController,
+    BarController,
+    PieController,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    BarElement,
+    ArcElement
+    // Deliberately excluding Legend and Tooltip - these should be registered per-chart
+  )
+}
 
 export function setupServiceWorker() {
   const intervalMS = 60 * 60 * 1000;
@@ -52,6 +82,9 @@ export function setupBackupEventListener() {
 }
 
 export function createAppInstance() {
+  // Set up Chart.js components globally once
+  setupChartJS()
+  
   const router = createRouter()
   const pinia = createPinia()
 

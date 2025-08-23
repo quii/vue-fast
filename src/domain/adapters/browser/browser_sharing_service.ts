@@ -17,15 +17,24 @@ import {
   Tooltip
 } from 'chart.js';
 
-Chart.register(
-  LineController,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Legend,
-  Tooltip
-);
+// Register only essential Chart.js components globally (these are safe)
+// Avoid registering interactive plugins globally to prevent interference
+let componentsRegistered = false;
+
+function ensureComponentsRegistered() {
+  if (!componentsRegistered) {
+    // Register core components that are needed for chart structure
+    Chart.register(
+      LineController,
+      CategoryScale,
+      LinearScale,
+      PointElement,
+      LineElement
+      // Note: Legend and Tooltip are NOT registered globally to avoid interference
+    );
+    componentsRegistered = true;
+  }
+}
 
 /**
  * Get the correct classification colors matching the project's color scheme
@@ -720,6 +729,9 @@ async function generateCumulativeScoreGraph(participants: any[], title: string):
       canvas.height = 400
       document.body.appendChild(canvas) // Add to DOM temporarily
       
+      // Ensure Chart.js components are registered before creating chart
+      ensureComponentsRegistered();
+      
       // Create Chart.js chart
       const chart = new Chart(canvas, {
         type: 'line',
@@ -781,7 +793,8 @@ async function generateCumulativeScoreGraph(participants: any[], title: string):
               }
             }
           }
-        }
+        },
+        plugins: [Legend, Tooltip] // Register Legend and Tooltip plugins per-chart to avoid global interference
       })
 
       // Wait for chart to render, then convert to data URL

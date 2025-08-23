@@ -100,11 +100,8 @@ import {
   Legend
 } from 'chart.js';
 
-Chart.register(
-  PieController,
-  ArcElement,
-  Legend
-);
+// Chart.js components are now registered globally in createApp.ts
+// No need to register them here
 import { gameTypeConfig } from "@/domain/scoring/game_types"
 import { calculateDistanceTotals } from "@/domain/scoring/distance_totals"
 
@@ -372,7 +369,8 @@ const updateDistanceCharts = async () => {
       const chartInstance = new Chart(ctx, {
         type: 'pie',
         data: chartData,
-        options: options
+        options: options,
+        plugins: [Legend] // Register Legend plugin per-chart to avoid global interference
       })
       
       distanceChartInstances.value[index] = chartInstance
@@ -405,7 +403,8 @@ const updateSingleChart = async () => {
     chart.value = new Chart(ctx, {
       type: 'pie',
       data: createChartData(distribution),
-      options: getChartOptions(distribution, false) // Show legend for single charts
+      options: getChartOptions(distribution, false), // Show legend for single charts
+      plugins: [Legend] // Register Legend plugin per-chart to avoid global interference
     })
   } catch (error) {
     console.error('Score distribution chart creation failed:', error)

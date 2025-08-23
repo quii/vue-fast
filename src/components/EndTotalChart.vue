@@ -22,16 +22,8 @@ import {
   Tooltip
 } from 'chart.js';
 
-Chart.register(
-  LineController,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Legend,
-  Tooltip
-  // Note: Filler plugin NOT registered globally to prevent interference with other charts
-);
+// Chart.js components are now registered globally in createApp.ts
+// No need to register them here
 import { splitIntoChunks } from "@shared/utils/splitter"
 import { convertToValues } from "@shared/utils/scores"
 import { calculateTotal } from "@shared/utils/subtotals"
@@ -303,6 +295,9 @@ const updateChart = async () => {
       data: safeChartData,
       options: chartOptions.value,
       plugins: [
+        // Register Legend and Tooltip plugins per-chart to avoid global interference
+        Legend,
+        Tooltip,
         {
         id: 'distanceAnnotations',
         afterDraw: (chart) => {

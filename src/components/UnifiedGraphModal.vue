@@ -47,17 +47,8 @@ import {
   Tooltip
 } from 'chart.js'
 
-Chart.register(
-  LineController,
-  BarController,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  BarElement,
-  Legend,
-  Tooltip
-)
+// Chart.js components are now registered globally in createApp.ts
+// No need to register them here
 import BaseModal from '@/components/modals/BaseModal.vue'
 import BaseButton from '@/components/ui/BaseButton.vue'
 import ButtonGroup from '@/components/ui/ButtonGroup.vue'
@@ -155,7 +146,8 @@ const updateChart = async () => {
     chart.value = new Chart(ctx, {
       type: props.chartType,
       data: props.chartData,
-      options: props.chartOptions
+      options: props.chartOptions,
+      plugins: [Legend, Tooltip] // Register Legend and Tooltip plugins per-chart to avoid global interference
     })
   } catch (error) {
     console.error('Chart creation failed:', error)
