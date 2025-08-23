@@ -1,16 +1,40 @@
 <template>
   <div class="diary-page">
-    <div v-if="shootsWithNotes.length > 0" class="diary-view">
-      <article v-for="shoot in shootsWithNotes"
-               :key="shoot.id"
-               class="diary-entry"
-               @click="view(shoot.id)">
-        <HistoryCard :item="shoot" />
-        <UserNotes :shoot-id="shoot.id" />
-      </article>
+    <div v-if="timelineItems.length > 0" class="diary-view">
+      <div class="timeline-container">
+        <!-- Timeline items (notes and achievements interwoven) -->
+        <template v-for="item in timelineItems" :key="`${item.type}-${item.type === 'note' ? item.shootId : item.achievement?.id}`">
+          
+          <!-- Achievement entries -->
+          <AchievementDiaryEntry
+            v-if="item.type === 'achievement' && item.achievement && item.achievement.name && item.achievement.tier && item.achievement.achievedDate"
+            :title="item.achievement.name"
+            :description="item.achievement.description || ''"
+            :tier="item.achievement.tier"
+            :achieved-date="item.achievement.achievedDate"
+            :achieving-shoot-id="item.achievement.achievingShootId"
+          />
+          
+          <!-- Note entries -->
+          <article
+            v-else-if="item.type === 'note' && item.shoot"
+            class="diary-entry"
+            @click="view(item.shoot.id)"
+          >
+            <div class="note-timeline-marker">
+              <div class="note-icon">📝</div>
+            </div>
+            <div class="note-content">
+              <HistoryCard :item="item.shoot" />
+              <UserNotes :shoot-id="item.shoot.id" />
+            </div>
+          </article>
+          
+        </template>
+      </div>
     </div>
 
-    <div v-else class="empty-state">
+    <div v-else-if="shootsWithNotes.length === 0 && diaryAchievements.length === 0" class="empty-state">
       <div class="empty-icon">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
              stroke-linecap="round" stroke-linejoin="round" width="48" height="48">
@@ -47,10 +71,12 @@
 <script setup>
 import HistoryCard from '@/components/HistoryCard.vue'
 import UserNotes from '@/components/UserNotes.vue'
+import AchievementDiaryEntry from '@/components/AchievementDiaryEntry.vue'
 import { useHistoryStore } from '@/stores/history'
 import { useNotesStore } from '@/stores/user_notes'
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { getDiaryAchievements, createDiaryTimeline } from '@/domain/achievements/diary_achievements'
 
 const router = useRouter()
 const historyStore = useHistoryStore()
@@ -61,6 +87,16 @@ const shootsWithNotes = computed(() =>
   historyStore.sortedHistory().filter(shoot =>
     notesStore.getNotesByShootId(shoot.id).length > 0
   )
+)
+
+// Get all earned achievements for diary display
+const diaryAchievements = computed(() =>
+  getDiaryAchievements(historyStore.sortedHistory())
+)
+
+// Create interwoven timeline of notes and achievements
+const timelineItems = computed(() =>
+  createDiaryTimeline(shootsWithNotes.value, diaryAchievements.value)
 )
 
 function view(id) {
@@ -81,13 +117,72 @@ h1 {
   text-align: center;
 }
 
-.diary-entry {
-  margin: 0.5rem 0;
-  border-bottom: 1px solid var(--color-border-light, rgba(60, 60, 60, 0.1));
+.timeline-container {
+  position: relative;
 }
 
-.diary-entry:last-child {
-  border-bottom: none;
+/* Note entries in timeline */
+.diary-entry {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+/* Timeline connector line for note entries */
+.diary-entry:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 14px;
+  top: 28px;
+  bottom: -1.5rem;
+  width: 1px;
+  background: linear-gradient(to bottom, 
+    var(--color-border, rgba(0, 0, 0, 0.2)), 
+    var(--color-border, rgba(0, 0, 0, 0.2)) 70%,
+    transparent);
+  z-index: 0;
+}
+
+.note-timeline-marker {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-background-mute);
+  border: 2px solid var(--color-background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1;
+}
+
+.note-icon {
+  font-size: 0.9rem;
+}
+
+.note-content {
+  flex: 1;
+  background: var(--color-background-soft);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+/* Speech bubble pointer for notes */
+.note-content::before {
+  content: '';
+  position: absolute;
+  left: -6px;
+  top: 16px;
+  width: 0;
+  height: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-right: 6px solid var(--color-background-soft);
 }
 
 .empty-state {
