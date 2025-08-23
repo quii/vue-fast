@@ -10,6 +10,7 @@ import { describe, test, expect } from 'vitest';
 import { 
   checkRedAlertAt50ydAchieved,
   checkRedAlertAt70mAchieved,
+  checkRedAlertAt80ydAchieved,
   RED_ALERT_ACHIEVEMENTS 
 } from './red_alert.js';
 import type { AchievementContext } from './types.js';
@@ -423,6 +424,86 @@ describe('Red Alert Achievement System', () => {
 
     const result = checkRedAlertAt50ydAchieved(context);
     
+    expect(result.isUnlocked).toBe(false);
+  });
+
+  test('checkRedAlertAt80ydAchieved - should NOT unlock with end containing misses (bug reproduction)', () => {
+    const context: AchievementContext = {
+      currentShoot: {
+        scores: [],
+        gameType: 'hereford'
+      },
+      shootHistory: [{
+        id: 'test-shoot',
+        date: '2023-01-01',
+        gameType: 'hereford', // Imperial round that includes 80yd
+        scores: [
+          // First end at 80yd - 4 sevens and 2 misses (should NOT be Red Alert)
+          7, 7, 7, 7, 'M', 'M',
+          // Second end at 80yd - normal scores
+          9, 8, 7, 6, 5, 4,
+          // Continue with more arrows for a complete Hereford round
+          // At 60yd
+          9, 8, 7, 6, 5, 4,
+          8, 7, 6, 5, 4, 3,
+          // At 50yd  
+          9, 8, 7, 6, 5, 4,
+          8, 7, 6, 5, 4, 3,
+          // At 40yd
+          9, 8, 7, 6, 5, 4,
+          8, 7, 6, 5, 4, 3
+        ],
+        score: 195,
+        userProfile: { bowType: 'Recurve', gender: 'Men', ageGroup: 'Senior' }
+      }]
+    };
+
+    const result = checkRedAlertAt80ydAchieved(context);
+    
+    // This should be false because the end [7,7,7,7,'M','M'] is not all 7s
+    expect(result.isUnlocked).toBe(false);
+  });
+
+  test('checkRedAlertAt80ydAchieved - ACTUAL BUG: Long Western 80yd scores should NOT unlock', () => {
+    const context: AchievementContext = {
+      currentShoot: {
+        scores: [],
+        gameType: 'long western'
+      },
+      shootHistory: [{
+        id: 'bug-shoot',
+        date: '2023-01-01',
+        gameType: 'long western', // Long Western: 4 dozen at 80yd, 4 dozen at 60yd
+        scores: [
+          // 80 yards - 8 ends (48 arrows total) - NONE of these ends are all 7s
+          7, 7, 7, 7, 5, 1,  // End 1: 4 sevens but also 5,1 - NOT all 7s
+          9, 5, 3, 3, 3, 1,  // End 2: no all-7s
+          7, 5, 5, 3, 1, 1,  // End 3: no all-7s
+          9, 5, 3, 3, 3, 1,  // End 4: no all-7s
+          9, 7, 5, 3, 3, 1,  // End 5: no all-7s
+          9, 7, 7, 5, 1, 'M',// End 6: no all-7s
+          9, 5, 5, 5, 3, 'M',// End 7: no all-7s
+          7, 7, 7, 7, 5, 1,  // End 8: 4 sevens but also 5,1 - NOT all 7s
+          
+          // 60 yards - 8 ends (48 arrows) 
+          9, 8, 7, 6, 5, 4,
+          8, 7, 6, 5, 4, 3,
+          9, 8, 7, 6, 5, 4,
+          8, 7, 6, 5, 4, 3,
+          9, 8, 7, 6, 5, 4,
+          8, 7, 6, 5, 4, 3,
+          9, 8, 7, 6, 5, 4,
+          8, 7, 6, 5, 4, 3
+        ],
+        score: 400,
+        userProfile: { bowType: 'Recurve', gender: 'Men', ageGroup: 'Senior' }
+      }]
+    };
+
+    const result = checkRedAlertAt80ydAchieved(context);
+    
+    // This should be FALSE because there's no end with all 7s at 80yd
+    // The closest ends are [7,7,7,7,5,1] which have 4 sevens but also 5 and 1
     expect(result.isUnlocked).toBe(false);
   });
 

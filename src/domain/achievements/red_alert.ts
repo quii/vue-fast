@@ -79,6 +79,27 @@ export const RED_ALERT_ACHIEVEMENTS: Achievement[] = (() => {
 })();
 
 /**
+ * Convert scores to numeric values for Red Alert checking (includes misses as 0)
+ * Unlike the general convertToValues, this preserves all arrows including misses
+ */
+function convertScoresForRedAlert(scores: any[], gameType: string): number[] {
+  return scores.map(score => {
+    if (score === 'M' || score === 'MISS') {
+      return 0;
+    }
+    if (score === 'X') {
+      // Handle Worcester special case
+      if (gameType?.toLowerCase().includes('worcester')) {
+        return 5;
+      }
+      return 10;
+    }
+    // Return the score as-is if it's already a number, or try to convert
+    return typeof score === 'number' ? score : Number(score) || 0;
+  });
+}
+
+/**
  * Check if an end meets red alert criteria
  */
 function isRedAlertEnd(end: any[], gameType: string, isImperial: boolean): boolean {
@@ -86,8 +107,8 @@ function isRedAlertEnd(end: any[], gameType: string, isImperial: boolean): boole
     return false;
   }
 
-  // Use existing domain function to convert scores to numeric values
-  const numericScores = convertToValues(end, gameType);
+  // Use Red Alert-specific conversion that includes misses as 0s
+  const numericScores = convertScoresForRedAlert(end, gameType);
 
   if (isImperial) {
     // Imperial: all scores must be 7
