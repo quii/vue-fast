@@ -21,10 +21,11 @@
             class="diary-entry"
             @click="view(item.shoot.id)"
           >
-            <div class="note-timeline-marker">
-              <div class="note-icon">📝</div>
-            </div>
             <div class="note-content">
+              <div class="note-header">
+                <h4 class="note-title">Session Notes</h4>
+                <time class="note-date">{{ formatShootDate(item.shoot.date) }}</time>
+              </div>
               <HistoryCard :item="item.shoot" />
               <UserNotes :shoot-id="item.shoot.id" />
             </div>
@@ -102,6 +103,16 @@ const timelineItems = computed(() =>
 function view(id) {
   router.push({ name: 'viewHistory', params: { id } })
 }
+
+function formatShootDate(dateString) {
+  const date = new Date(dateString)
+  return date.toLocaleDateString(undefined, { 
+    weekday: 'long',
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric'
+  })
+}
 </script>
 
 <style scoped>
@@ -117,72 +128,45 @@ h1 {
   text-align: center;
 }
 
-.timeline-container {
-  position: relative;
-}
-
-/* Note entries in timeline */
+/* Note entries */
 .diary-entry {
-  display: flex;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
-  position: relative;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
-/* Timeline connector line for note entries */
-.diary-entry:not(:last-child)::after {
-  content: '';
-  position: absolute;
-  left: 14px;
-  top: 28px;
-  bottom: -1.5rem;
-  width: 1px;
-  background: linear-gradient(to bottom, 
-    var(--color-border, rgba(0, 0, 0, 0.2)), 
-    var(--color-border, rgba(0, 0, 0, 0.2)) 70%,
-    transparent);
-  z-index: 0;
-}
-
-.note-timeline-marker {
-  flex-shrink: 0;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: var(--color-background-mute);
-  border: 2px solid var(--color-background);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-  position: relative;
-  z-index: 1;
-}
-
-.note-icon {
-  font-size: 0.9rem;
+.diary-entry:hover {
+  transform: translateY(-1px);
 }
 
 .note-content {
-  flex: 1;
   background: var(--color-background-soft);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 1rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  position: relative;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid var(--color-border, rgba(0, 0, 0, 0.2));
 }
 
-/* Speech bubble pointer for notes */
-.note-content::before {
-  content: '';
-  position: absolute;
-  left: -6px;
-  top: 16px;
-  width: 0;
-  height: 0;
-  border-top: 6px solid transparent;
-  border-bottom: 6px solid transparent;
-  border-right: 6px solid var(--color-background-soft);
+.note-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-border, rgba(0, 0, 0, 0.1));
+}
+
+.note-title {
+  font-weight: 600;
+  color: var(--color-text);
+  font-size: 1rem;
+  margin: 0;
+}
+
+.note-date {
+  font-size: 0.85rem;
+  color: var(--color-text-light, #666);
+  font-style: italic;
 }
 
 .empty-state {
