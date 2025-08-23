@@ -6,33 +6,65 @@
     />
     
     <div class="content">
-      <!-- Grouped achievements display -->
-      <AchievementGroup
-        v-for="group in groupedAchievements"
-        :key="group.group.id"
-        :group="group.group"
-        :achievements="group.achievements"
-        :current-filter="currentFilter"
-      />
+      <!-- Priority Sections -->
       
-      <!-- Ungrouped achievements (fallback for achievements without groups) -->
-      <div v-if="ungroupedAchievements.length > 0" class="ungrouped-section">
-        <h3 class="section-title">Other Achievements</h3>
-        <AchievementBadge
-          v-for="achievement in ungroupedAchievements" 
-          :key="achievement.id"
-          :title="achievement.name"
-          :description="achievement.description"
-          :tier="achievement.tier"
-          :is-earned="achievement.progress.isUnlocked"
-          :progress-percentage="achievement.progressPercentage"
-          :target-arrows="achievement.targetArrows"
-          :current-arrows="achievement.progress.totalArrows"
-          :target-score="achievement.targetScore"
-          :current-score="achievement.progress.currentScore"
-          :game-type="achievement.gameType"
-          :achieving-shoot-id="achievement.progress.achievingShootId"
-          :achieved-date="achievement.progress.achievedDate"
+      <!-- Close to Completion Section -->
+      <div v-if="closeToCompletionAchievements.length > 0" class="priority-section">
+        <h2 class="priority-title">Close to Completion</h2>
+        <div class="priority-achievements">
+          <CompactAchievementBadge
+            v-for="achievement in closeToCompletionAchievements"
+            :key="achievement.id"
+            :title="achievement.name"
+            :description="achievement.description"
+            :tier="achievement.tier"
+            :is-earned="achievement.progress.isUnlocked"
+            :target-arrows="achievement.targetArrows"
+            :current-arrows="achievement.progress.totalArrows"
+            :target-score="achievement.targetScore"
+            :current-score="achievement.progress.currentScore"
+            :achieving-shoot-id="achievement.progress.achievingShootId"
+            :achieved-date="achievement.progress.achievedDate"
+          />
+        </div>
+      </div>
+
+      <!-- Recent Achievements Section -->
+      <div v-if="recentAchievements.length > 0" class="priority-section priority-section-secondary">
+        <h2 class="priority-title">Recent Achievements</h2>
+        <div class="priority-achievements">
+          <CompactAchievementBadge
+            v-for="achievement in recentAchievements"
+            :key="achievement.id"
+            :title="achievement.name"
+            :description="achievement.description"
+            :tier="achievement.tier"
+            :is-earned="true"
+            :achieving-shoot-id="achievement.progress.achievingShootId"
+            :achieved-date="achievement.progress.achievedDate"
+          />
+        </div>
+      </div>
+
+      <!-- All Achievement Groups Section -->
+      <div class="priority-section priority-section-secondary">
+        <h2 class="priority-title">All Achievement Groups</h2>
+        
+        <!-- Collapsible Achievement Groups -->
+        <CollapsibleAchievementGroup
+          v-for="group in groupedAchievements"
+          :key="group.group.id"
+          :group="group.group"
+          :achievements="group.achievements"
+          :current-filter="currentFilter"
+        />
+        
+        <!-- Ungrouped achievements (fallback for achievements without groups) -->
+        <CollapsibleAchievementGroup
+          v-if="ungroupedAchievements.length > 0"
+          :group="{ id: 'other', name: 'Other Achievements', description: 'Miscellaneous achievements' }"
+          :achievements="ungroupedAchievements"
+          :current-filter="currentFilter"
         />
       </div>
     </div>
@@ -42,8 +74,9 @@
 <script setup>
 import { computed, ref, onMounted } from 'vue'
 import BaseTopBar from '@/components/ui/BaseTopBar.vue'
-import AchievementBadge from '@/components/AchievementBadge.vue'
+import CompactAchievementBadge from '@/components/CompactAchievementBadge.vue'
 import AchievementGroup from '@/components/AchievementGroup.vue'
+import CollapsibleAchievementGroup from '@/components/CollapsibleAchievementGroup.vue'
 import { useHistoryStore } from '@/stores/history.js'
 import { useAchievementStore } from '@/stores/achievements.js'
 import { calculateAchievements } from '@/domain/achievements/calculator.js'
@@ -52,6 +85,10 @@ const historyStore = useHistoryStore()
 const achievementStore = useAchievementStore()
 
 const currentFilter = ref('all')
+
+// Configuration for "Close to Completion" count (easily changeable)
+const CLOSE_TO_COMPLETION_COUNT = 3
+const RECENT_ACHIEVEMENTS_COUNT = 3
 
 // Mark all achievements as read when the page is visited
 onMounted(() => {
@@ -147,6 +184,30 @@ const groupedAchievements = computed(() => {
 const ungroupedAchievements = computed(() => {
   return filteredAchievements.value.filter(achievement => !achievement.group)
 })
+
+// Priority Section: Close to Completion
+const closeToCompletionAchievements = computed(() => {
+  if (currentFilter.value !== 'all') return []
+  
+  return achievements.value
+    .filter(achievement => !achievement.progress.isUnlocked && achievement.progressPercentage > 0)
+    .sort((a, b) => b.progressPercentage - a.progressPercentage)
+    .slice(0, CLOSE_TO_COMPLETION_COUNT)
+})
+
+// Priority Section: Recent Achievements  
+const recentAchievements = computed(() => {
+  if (currentFilter.value !== 'all') return []
+  
+  return achievements.value
+    .filter(achievement => achievement.progress.isUnlocked && achievement.progress.achievedDate)
+    .sort((a, b) => {
+      const dateA = new Date(a.progress.achievedDate)
+      const dateB = new Date(b.progress.achievedDate)
+      return dateB - dateA
+    })
+    .slice(0, RECENT_ACHIEVEMENTS_COUNT)
+})
 </script>
 
 <style scoped>
@@ -158,6 +219,31 @@ const ungroupedAchievements = computed(() => {
 
 .content {
   margin-top: 0.5rem;
+}
+
+.priority-section {
+  margin-bottom: 2.5rem;
+}
+
+.priority-section-secondary {
+  margin-bottom: 2.5rem;
+  margin-top: -1rem;
+}
+
+.priority-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 1.25rem 0;
+  padding-left: 0.25rem;
+  line-height: 1.2;
+}
+
+.priority-achievements {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
 }
 
 .ungrouped-section {
