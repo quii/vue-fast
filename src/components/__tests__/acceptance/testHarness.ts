@@ -208,10 +208,16 @@ export class BasePage {
 
 // Mock global addEventListener for toast dragging
 function setupGlobalEventListenerMock() {
-  // If addEventListener is called globally, forward it to window
-  if (typeof global !== 'undefined' && !global.addEventListener) {
-    global.addEventListener = window.addEventListener.bind(window)
-    global.removeEventListener = window.removeEventListener.bind(window)
+  // Mock global addEventListener and removeEventListener
+  if (typeof globalThis !== 'undefined') {
+    globalThis.addEventListener = vi.fn()
+    globalThis.removeEventListener = vi.fn()
+  }
+  
+  // Also ensure they're available on the global object
+  if (typeof global !== 'undefined') {
+    global.addEventListener = vi.fn()
+    global.removeEventListener = vi.fn()
   }
 }
 
