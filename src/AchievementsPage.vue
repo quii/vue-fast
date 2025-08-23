@@ -10,7 +10,7 @@
       
       <!-- Close to Completion Section -->
       <div v-if="closeToCompletionAchievements.length > 0" class="priority-section">
-        <h2 class="priority-title">Close to Completion</h2>
+        <h2 class="priority-title">Nearly achieved</h2>
         <div class="priority-achievements">
           <CompactAchievementBadge
             v-for="achievement in closeToCompletionAchievements"
