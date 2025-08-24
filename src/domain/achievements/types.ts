@@ -62,3 +62,20 @@ export interface AchievementContext {
 
 // Import HistoryItem from the player history repository
 import type { HistoryItem } from '../repositories/player_history';
+
+/**
+ * Ensures that the AchievementContext has chronologically sorted history
+ * (oldest first), which is required for achievements to link to the first 
+ * occurrence rather than the most recent.
+ * 
+ * This function should be used whenever creating an AchievementContext
+ * from history that comes from sortedHistory() (which is reverse chronological).
+ */
+export function ensureChronologicalContext(context: AchievementContext): AchievementContext {
+  return {
+    ...context,
+    shootHistory: [...context.shootHistory].sort((a, b) => 
+      new Date(a.date).getTime() - new Date(b.date).getTime()
+    )
+  };
+}

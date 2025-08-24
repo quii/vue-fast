@@ -3,6 +3,7 @@
  */
 
 import type { AchievementContext } from './types.js';
+import { ensureChronologicalContext } from './types.js';
 import { calculateAchievements, type AchievementData } from './calculator.js';
 import type { HistoryItem } from '../repositories/player_history.js';
 
@@ -24,7 +25,7 @@ export function getDiaryAchievements(shootHistory: HistoryItem[]): DiaryAchievem
   if (shootHistory.length === 0) return [];
 
   // Create context with all shoots to get current achievement state
-  const context: AchievementContext = {
+  const context = ensureChronologicalContext({
     currentShoot: {
       // Use the most recent shoot as current
       id: shootHistory[0]?.id,
@@ -35,7 +36,7 @@ export function getDiaryAchievements(shootHistory: HistoryItem[]): DiaryAchievem
       userProfile: shootHistory[0]?.userProfile
     },
     shootHistory
-  };
+  });
 
   const allAchievements = calculateAchievements(context);
   

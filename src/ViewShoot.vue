@@ -30,6 +30,7 @@ import ScoreDistributionChart from "@/components/ScoreDistributionChart.vue";
 import { useAchievementNotifications } from '@/composables/useAchievementNotifications.js';
 import { calculateAchievements } from '@/domain/achievements/calculator.js';
 import { getAchievementsForShoot } from '@/domain/achievements/shoot_achievements.js';
+import { ensureChronologicalContext } from '@/domain/achievements/types.js';
 import AchievementCelebrationModal from '@/components/modals/AchievementCelebrationModal.vue';
 import AchievementBadge from '@/components/AchievementBadge.vue';
 
@@ -67,7 +68,7 @@ const earnedAchievements = computed(() => {
   if (!shoot.value) return [];
   
   try {
-    const achievementContext = {
+    const achievementContext = ensureChronologicalContext({
       currentShoot: {
         id: parseInt(route.params.id),
         date: shoot.value.date,
@@ -77,7 +78,7 @@ const earnedAchievements = computed(() => {
         userProfile: shoot.value.userProfile
       },
       shootHistory: history.sortedHistory()
-    };
+    });
     
     const shootId = parseInt(route.params.id);
     return getAchievementsForShoot(achievementContext, shootId);
@@ -153,7 +154,7 @@ async function checkAchievementsOnce() {
       // Calculate achievements and show those earned by this specific shoot
       setTimeout(async () => {
         try {
-          const achievementContext = {
+          const achievementContext = ensureChronologicalContext({
             currentShoot: {
               id: shootId,
               date: shoot.value.date,
@@ -163,7 +164,7 @@ async function checkAchievementsOnce() {
               userProfile: shoot.value.userProfile
             },
             shootHistory: history.sortedHistory()
-          };
+          });
           
           // Get achievements earned by this specific shoot
           const achievementsForThisShoot = getAchievementsForShoot(achievementContext, shootId);

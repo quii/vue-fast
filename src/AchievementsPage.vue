@@ -82,6 +82,7 @@ import CollapsibleAchievementGroup from '@/components/CollapsibleAchievementGrou
 import { useHistoryStore } from '@/stores/history.js'
 import { useAchievementStore } from '@/stores/achievements.js'
 import { calculateAchievements } from '@/domain/achievements/calculator.js'
+import { ensureChronologicalContext } from '@/domain/achievements/types.js'
 
 const historyStore = useHistoryStore()
 const achievementStore = useAchievementStore()
@@ -99,10 +100,10 @@ onMounted(() => {
 
 const achievements = computed(() => {
   const history = historyStore.sortedHistory()
-  const context = {
+  const context = ensureChronologicalContext({
     currentShoot: { scores: [], id: '', date: '', gameType: '', userProfile: {} }, // Empty current shoot
     shootHistory: history // Use full HistoryItem objects directly
-  }
+  })
 
   return calculateAchievements(context)
 })
