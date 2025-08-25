@@ -84,7 +84,7 @@ function endTouch() {
   color: var(--color-text);
   border: 2px solid var(--color-border);
   border-radius: 8px;
-  touch-action: none;
+  touch-action: manipulation;
   user-select: none;
 }
 

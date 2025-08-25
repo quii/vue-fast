@@ -20,6 +20,7 @@ const currentX = ref(0);
 const deleteThreshold = 80; // Pixels to swipe to reveal delete button
 const minHorizontalDistance = 10; // Minimum horizontal movement before considering it a swipe
 const isSwipeDetected = ref(false);
+let touchTimeoutId = null;
 
 // Touch event handlers
 function handleTouchStart(event) {
@@ -27,6 +28,18 @@ function handleTouchStart(event) {
   startY.value = event.touches[0].clientY;
   currentX.value = 0;
   isSwipeDetected.value = false;
+  
+  // Clear any existing timeout
+  if (touchTimeoutId) {
+    clearTimeout(touchTimeoutId);
+  }
+  
+  // Set a safety timeout to reset touch state if touch events get stuck
+  touchTimeoutId = setTimeout(() => {
+    isSwipeDetected.value = false;
+    currentX.value = 0;
+    touchTimeoutId = null;
+  }, 2000); // 2 second timeout
 }
 
 function handleTouchMove(event) {
@@ -40,39 +53,60 @@ function handleTouchMove(event) {
     const absX = Math.abs(diffX);
     const absY = Math.abs(diffY);
     
-    // Only consider it a horizontal swipe if:
-    // 1. Horizontal movement is greater than vertical movement
-    // 2. Horizontal movement exceeds minimum threshold
-    // 3. It's a leftward swipe (negative diffX)
-    if (absX > absY && absX > minHorizontalDistance && diffX < 0) {
+    // Be more conservative: only capture horizontal swipes if they're more horizontal than vertical
+    // Allow leftward swipes (to show delete) or rightward swipes when already in delete mode
+    const isLeftwardSwipe = diffX < -minHorizontalDistance;
+    const isRightwardSwipe = diffX > minHorizontalDistance && isDeleting.value;
+    
+    if (absX >= absY && absX > minHorizontalDistance && (isLeftwardSwipe || isRightwardSwipe)) {
       isSwipeDetected.value = true;
-    } else if (absY > absX || absY > minHorizontalDistance) {
-      // If vertical movement is dominant, let the scroll happen
+    } else if (absY > absX && absY > minHorizontalDistance) {
+      // If vertical movement is clearly dominant, let the scroll happen
+      return;
+    } else if (absX < minHorizontalDistance && absY < minHorizontalDistance) {
+      // Movement is too small, don't interfere
       return;
     } else {
-      // Movement is too small, don't interfere
+      // For edge cases, don't interfere with scrolling
       return;
     }
   }
 
-  // Only handle the swipe if we've detected it's a horizontal gesture
-  if (isSwipeDetected.value && diffX < 0) {
-    // Prevent default only after we're sure it's a horizontal swipe
-    if (event.cancelable) {
-      event.preventDefault();
+  // Handle the swipe if we've detected it's a horizontal gesture
+  if (isSwipeDetected.value) {
+    const isValidSwipe = (diffX < -minHorizontalDistance) || // leftward swipe
+                         (diffX > minHorizontalDistance && isDeleting.value); // rightward swipe when in delete mode
+    
+    if (isValidSwipe) {
+      // Extra safety: only prevent default if the event is cancelable and we have a clear horizontal gesture
+      if (event.cancelable && Math.abs(diffX) >= Math.abs(diffY)) {
+        event.preventDefault();
+      }
+      currentX.value = diffX;
     }
-    currentX.value = diffX;
   }
 }
 
 function handleTouchEnd() {
+  // Clear the safety timeout
+  if (touchTimeoutId) {
+    clearTimeout(touchTimeoutId);
+    touchTimeoutId = null;
+  }
+  
   // Only process if we detected a swipe gesture
   if (isSwipeDetected.value) {
-    // If swiped far enough, show delete button
     if (currentX.value < -deleteThreshold) {
+      // Swiped left far enough, show delete button
       isDeleting.value = true;
+    } else if (currentX.value > deleteThreshold && isDeleting.value) {
+      // Swiped right far enough while in delete mode, reset
+      resetSwipe();
+    } else if (currentX.value >= 0 && isDeleting.value) {
+      // Any rightward movement while in delete mode should reset
+      resetSwipe();
     } else {
-      // Reset position
+      // Not swiped far enough in either direction, reset position
       resetSwipe();
     }
   }
