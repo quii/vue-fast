@@ -1,9 +1,16 @@
 <template>
   <div class="diary-page">
-    <div v-if="timelineItems.length > 0" class="diary-view">
+    <BaseTopBar
+      v-if="timelineItems.length > 0"
+      :action-buttons="filterButtons"
+      alignment="spread"
+      @action="handleFilterAction"
+    />
+    
+    <div v-if="filteredTimelineItems.length > 0" class="diary-view">
       <div class="timeline-container">
-        <!-- Timeline items (notes and achievements interwoven) -->
-        <template v-for="item in timelineItems" :key="`${item.type}-${item.type === 'note' ? item.shootId : item.achievement?.id}`">
+        <!-- Enhanced timeline items (notes, achievements, venues, and PBs) -->
+        <template v-for="item in filteredTimelineItems" :key="`${item.type}-${item.shootId || item.achievement?.id || item.date}`">
           
           <!-- Achievement entries -->
           <AchievementDiaryEntry
@@ -13,6 +20,27 @@
             :tier="item.achievement.tier"
             :achieved-date="item.achievement.achievedDate"
             :achieving-shoot-id="item.achievement.achievingShootId"
+          />
+          
+          <!-- New venue entries -->
+          <VenueDiaryEntry
+            v-else-if="item.type === 'new-venue' && item.location && item.shoot"
+            :date="item.date"
+            :location="item.location"
+            :shoot="item.shoot"
+            :is-first-ever="item.isFirstEver"
+            :show-map="true"
+          />
+          
+          <!-- Personal best entries -->
+          <PersonalBestDiaryEntry
+            v-else-if="(item.type === 'personal-best' || item.type === 'first-time-round') && item.shoot"
+            :date="item.date"
+            :game-type="item.gameType"
+            :score="item.score"
+            :previous-best="item.previousBest"
+            :is-first-time-round="item.type === 'first-time-round'"
+            :shoot="item.shoot"
           />
           
           <!-- Note entries -->
@@ -35,7 +63,7 @@
       </div>
     </div>
 
-    <div v-else-if="shootsWithNotes.length === 0 && diaryAchievements.length === 0" class="empty-state">
+    <div v-else-if="timelineItems.length === 0" class="empty-state">
       <div class="empty-icon">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
              stroke-linecap="round" stroke-linejoin="round" width="48" height="48">
@@ -73,11 +101,22 @@
 import HistoryCard from '@/components/HistoryCard.vue'
 import UserNotes from '@/components/UserNotes.vue'
 import AchievementDiaryEntry from '@/components/AchievementDiaryEntry.vue'
+import VenueDiaryEntry from '@/components/VenueDiaryEntry.vue'
+import PersonalBestDiaryEntry from '@/components/PersonalBestDiaryEntry.vue'
+import BaseTopBar from '@/components/ui/BaseTopBar.vue'
 import { useHistoryStore } from '@/stores/history'
 import { useNotesStore } from '@/stores/user_notes'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { getDiaryAchievements, createDiaryTimeline } from '@/domain/achievements/diary_achievements'
+import { getDiaryAchievements } from '@/domain/achievements/diary_achievements'
+import { createEnhancedDiaryTimeline } from '@/domain/diary/enhanced_diary_timeline'
+
+// Import icons for filter buttons
+import NoteIcon from '@/components/icons/NoteIcon.vue'
+import ClassificationIcon from '@/components/icons/ClassificationIcon.vue'
+import MapIcon from '@/components/icons/MapIcon.vue'
+import PersonalBestIcon from '@/components/icons/PersonalBestIcon.vue'
+import ResetIcon from '@/components/icons/ResetIcon.vue'
 
 const router = useRouter()
 const historyStore = useHistoryStore()
@@ -95,10 +134,73 @@ const diaryAchievements = computed(() =>
   getDiaryAchievements(historyStore.sortedHistory())
 )
 
-// Create interwoven timeline of notes and achievements
+// Create enhanced timeline of notes, achievements, venues, and personal bests
 const timelineItems = computed(() =>
-  createDiaryTimeline(shootsWithNotes.value, diaryAchievements.value)
+  createEnhancedDiaryTimeline(shootsWithNotes.value, diaryAchievements.value, historyStore.sortedHistory())
 )
+
+// Filter state
+const activeFilters = ref(new Set())
+
+// Filter buttons configuration
+const filterButtons = computed(() => [
+  {
+    iconComponent: NoteIcon,
+    label: 'Notes',
+    action: 'notes',
+    active: activeFilters.value.has('note'),
+    disabled: false
+  },
+  {
+    iconComponent: ClassificationIcon,
+    label: 'Awards',
+    action: 'awards',
+    active: activeFilters.value.has('achievement'),
+    disabled: false
+  },
+  {
+    iconComponent: MapIcon,
+    label: 'Venues',
+    action: 'venues',
+    active: activeFilters.value.has('new-venue'),
+    disabled: false
+  },
+  {
+    iconComponent: PersonalBestIcon,
+    label: 'PBs',
+    action: 'pbs',
+    active: activeFilters.value.has('personal-best') || activeFilters.value.has('first-time-round'),
+    disabled: false
+  },
+  {
+    iconComponent: ResetIcon,
+    label: 'Reset',
+    action: 'reset',
+    active: false,
+    disabled: activeFilters.value.size === 0
+  }
+])
+
+// Filtered timeline items
+const filteredTimelineItems = computed(() => {
+  if (activeFilters.value.size === 0) {
+    return timelineItems.value
+  }
+  
+  return timelineItems.value.filter(item => {
+    if (activeFilters.value.has(item.type)) {
+      return true
+    }
+    
+    // Special handling for PB filter (includes both personal-best and first-time-round)
+    if ((activeFilters.value.has('personal-best') || activeFilters.value.has('first-time-round')) && 
+        (item.type === 'personal-best' || item.type === 'first-time-round')) {
+      return true
+    }
+    
+    return false
+  })
+})
 
 function view(id) {
   router.push({ name: 'viewHistory', params: { id } })
@@ -112,6 +214,50 @@ function formatShootDate(dateString) {
     month: 'long', 
     day: 'numeric'
   })
+}
+
+function handleFilterAction({ action }) {
+  switch (action) {
+    case 'notes':
+      toggleFilter('note')
+      break
+    case 'awards':
+      toggleFilter('achievement')
+      break
+    case 'venues':
+      toggleFilter('new-venue')
+      break
+    case 'pbs':
+      togglePBFilter()
+      break
+    case 'reset':
+      activeFilters.value.clear()
+      break
+  }
+}
+
+function toggleFilter(filterType) {
+  if (activeFilters.value.has(filterType)) {
+    activeFilters.value.delete(filterType)
+  } else {
+    activeFilters.value.add(filterType)
+  }
+  // Force reactivity update
+  activeFilters.value = new Set(activeFilters.value)
+}
+
+function togglePBFilter() {
+  const hasPBFilter = activeFilters.value.has('personal-best') || activeFilters.value.has('first-time-round')
+  
+  if (hasPBFilter) {
+    activeFilters.value.delete('personal-best')
+    activeFilters.value.delete('first-time-round')
+  } else {
+    activeFilters.value.add('personal-best')
+    activeFilters.value.add('first-time-round')
+  }
+  // Force reactivity update
+  activeFilters.value = new Set(activeFilters.value)
 }
 </script>
 
@@ -144,7 +290,6 @@ h1 {
   border-radius: 8px;
   padding: 1rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  border-left: 4px solid var(--color-border, rgba(0, 0, 0, 0.2));
 }
 
 .note-header {

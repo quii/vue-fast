@@ -59,15 +59,15 @@ function formatDate(dateString) {
 
 <style scoped>
 .achievement-diary-entry {
-  margin-bottom: 1rem;
+  margin-bottom: 0;
 }
 
 .achievement-content {
   background: var(--color-background-soft);
   border-radius: 8px;
-  padding: 1.5rem;
+  padding: 1rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  border-left: 4px solid #ffd700; /* Gold left border for achievements */
+  margin-bottom: 0.75rem;
 }
 
 .achievement-header {
@@ -80,14 +80,10 @@ function formatDate(dateString) {
 }
 
 .achievement-milestone {
-  color: var(--color-highlight, #4CAF50);
+  color: #ffd700;
   font-size: 1.1rem;
   font-weight: 700;
   margin: 0;
-  background: linear-gradient(45deg, var(--color-highlight, #4CAF50), #66bb6a);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .achievement-date {
@@ -103,7 +99,7 @@ function formatDate(dateString) {
 /* Responsive design */
 @media (max-width: 640px) {
   .achievement-diary-entry {
-    margin-bottom: 1.25rem;
+    margin-bottom: 0;
   }
   
   .achievement-content {
