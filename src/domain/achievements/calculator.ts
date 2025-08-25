@@ -22,6 +22,7 @@ import { WINDSOR_CHECK_FUNCTIONS } from './windsor_achievements.js';
 import { GERT_LUSH_CHECK_FUNCTIONS } from './gert_lush_achievements.js';
 import { CUSHTY_POMPEY_CHECK_FUNCTIONS } from './cushty_pompey_achievements.js';
 import { checkYesIdoHaveOtherHobbiesAchieved } from './yes_i_do_have_other_hobbies.js';
+import { checkDeliberatePracticeAchieved } from './deliberate_practice.js';
 import { 
   checkOlympianEffortBronzeAchieved,
   checkOlympianEffortSilverAchieved,
@@ -89,6 +90,11 @@ export function calculateAchievements(context: AchievementContext): AchievementD
         
       case 'yes_i_do_have_other_hobbies':
         progress = checkYesIdoHaveOtherHobbiesAchieved(context);
+        progressPercentage = Math.min((progress.totalArrows! / progress.targetArrows!) * 100, 100);
+        break;
+        
+      case 'deliberate_practice':
+        progress = checkDeliberatePracticeAchieved(context);
         progressPercentage = Math.min((progress.totalArrows! / progress.targetArrows!) * 100, 100);
         break;
         
