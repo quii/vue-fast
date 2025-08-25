@@ -21,6 +21,7 @@ import { DONT_BE_BLUE_CHECK_FUNCTIONS } from './dont_be_blue.js';
 import { WINDSOR_CHECK_FUNCTIONS } from './windsor_achievements.js';
 import { GERT_LUSH_CHECK_FUNCTIONS } from './gert_lush_achievements.js';
 import { CUSHTY_POMPEY_CHECK_FUNCTIONS } from './cushty_pompey_achievements.js';
+import { checkYesIdoHaveOtherHobbiesAchieved } from './yes_i_do_have_other_hobbies.js';
 import { 
   checkOlympianEffortBronzeAchieved,
   checkOlympianEffortSilverAchieved,
@@ -83,6 +84,11 @@ export function calculateAchievements(context: AchievementContext): AchievementD
         
       case 'twenty_five_thousand_arrows':
         progress = check25kArrowsAchieved(context);
+        progressPercentage = Math.min((progress.totalArrows! / progress.targetArrows!) * 100, 100);
+        break;
+        
+      case 'yes_i_do_have_other_hobbies':
+        progress = checkYesIdoHaveOtherHobbiesAchieved(context);
         progressPercentage = Math.min((progress.totalArrows! / progress.targetArrows!) * 100, 100);
         break;
         

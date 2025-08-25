@@ -73,6 +73,10 @@ function getUnitType(achievementId) {
   if (achievementId.startsWith('for_the_windsor') || achievementId.startsWith('gert_lush')) {
     return 'shoots';
   }
+  // "Yes I do have other hobbies" achievement counts shoots per month
+  if (achievementId === 'yes_i_do_have_other_hobbies') {
+    return 'shoots';
+  }
   return 'arrows';
 }
 </script>

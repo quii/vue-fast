@@ -17,6 +17,7 @@ import { DONT_BE_BLUE_ACHIEVEMENTS } from './dont_be_blue.js';
 import { WINDSOR_ACHIEVEMENTS } from './windsor_achievements.js';
 import { GERT_LUSH_ACHIEVEMENTS } from './gert_lush_achievements.js';
 import { CUSHTY_POMPEY_ACHIEVEMENTS } from './cushty_pompey_achievements.js';
+import { YES_I_DO_HAVE_OTHER_HOBBIES_ACHIEVEMENT } from './yes_i_do_have_other_hobbies.js';
 import { ARROW_COUNT_GROUP, IMPERIAL_PRECISION_GROUP, IMPERIAL_GOLDEN_END_GROUP, METRIC_EXCELLENCE_GROUP, OLYMPIAN_EFFORT_GROUP, SPIDER_AWARDS_GROUP, FROSTBITE_GROUP } from './groups.js';
 
 export const ONE_THOUSAND_ARROWS: Achievement = {
@@ -70,6 +71,7 @@ export const ALL_ACHIEVEMENTS: Achievement[] = [
   AGINCOURT_ARROWS,
   TEN_THOUSAND_ARROWS,
   TWENTY_FIVE_THOUSAND_ARROWS,
+  YES_I_DO_HAVE_OTHER_HOBBIES_ACHIEVEMENT,
   ...SEVEN_TWENTY_MASTERY_ACHIEVEMENTS,
   ...TWO_FIFTY_TWO_ACHIEVEMENTS,
   ...GOLDEN_END_ACHIEVEMENTS,
