@@ -76,11 +76,15 @@ function getMilestoneTitle() {
 }
 
 .pb-content {
-  background: var(--color-background-soft);
+  background: color-mix(in srgb, var(--color-background-soft) 85%, #FF9800 15%);
   border-radius: 8px;
   padding: 1rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   margin-bottom: 0.75rem;
+}
+
+.pb-content.first-time {
+  background: color-mix(in srgb, var(--color-background-soft) 85%, #4CAF50 15%);
 }
 
 
@@ -94,17 +98,13 @@ function getMilestoneTitle() {
 }
 
 .pb-milestone {
-  color: #FF9800;
+  color: var(--color-text);
   font-size: 1rem;
   font-weight: 700;
   margin: 0;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-}
-
-.pb-milestone.first-time {
-  color: #4CAF50;
 }
 
 .pb-icon {
@@ -114,7 +114,7 @@ function getMilestoneTitle() {
 
 .pb-date {
   font-size: 0.85rem;
-  color: var(--color-text-light, #666);
+  color: var(--color-text-secondary, #888);
   font-style: italic;
 }
 

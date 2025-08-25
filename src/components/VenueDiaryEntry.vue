@@ -77,7 +77,7 @@ function openMap() {
 }
 
 .venue-content {
-  background: var(--color-background-soft);
+  background: color-mix(in srgb, var(--color-background-soft) 85%, #2196F3 15%);
   border-radius: 8px;
   padding: 1rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -94,7 +94,7 @@ function openMap() {
 }
 
 .venue-milestone {
-  color: #2196F3;
+  color: var(--color-text);
   font-size: 1.1rem;
   font-weight: 700;
   margin: 0;
@@ -110,7 +110,7 @@ function openMap() {
 
 .venue-date {
   font-size: 0.85rem;
-  color: var(--color-text-light, #666);
+  color: var(--color-text-secondary, #888);
   font-style: italic;
 }
 
@@ -129,7 +129,7 @@ function openMap() {
   background: var(--color-background-mute);
   border-radius: 6px;
   font-size: 0.85rem;
-  color: var(--color-text-light);
+  color: var(--color-text-secondary, #888);
   font-family: monospace;
   white-space: nowrap;
   flex-shrink: 0;
@@ -145,7 +145,7 @@ function openMap() {
   cursor: pointer;
   transition: background-color 0.2s ease;
   font-size: 0.85rem;
-  color: var(--color-text-light);
+  color: var(--color-text-secondary, #888);
   white-space: nowrap;
   flex-shrink: 0;
 }

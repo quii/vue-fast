@@ -63,7 +63,7 @@ function formatDate(dateString) {
 }
 
 .achievement-content {
-  background: var(--color-background-soft);
+  background: color-mix(in srgb, var(--color-background-soft) 85%, #ffd700 15%);
   border-radius: 8px;
   padding: 1rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -80,7 +80,7 @@ function formatDate(dateString) {
 }
 
 .achievement-milestone {
-  color: #ffd700;
+  color: var(--color-text);
   font-size: 1.1rem;
   font-weight: 700;
   margin: 0;
@@ -88,7 +88,7 @@ function formatDate(dateString) {
 
 .achievement-date {
   font-size: 0.85rem;
-  color: var(--color-text-light, #666);
+  color: var(--color-text-secondary, #888);
   font-style: italic;
 }
 

@@ -35,6 +35,7 @@
   --color-heading: var(--vt-c-text-light-1);
   --color-text: var(--vt-c-text-light-1);
   --color-text-mute: var(--vt-c-text-light-2);
+  --color-text-secondary: #666;
 
   --color-link: var(--vt-c-link);
   --color-highlight: #4CAF50;
@@ -84,6 +85,7 @@
   --color-heading: var(--vt-c-text-dark-1);
   --color-text: var(--vt-c-text-dark-2);
   --color-text-mute: var(--vt-c-text-dark-2);
+  --color-text-secondary: #bbb;
 
   --color-on-track: lightseagreen;
   --color-off-track: red;
@@ -115,6 +117,7 @@
 
     --color-heading: var(--vt-c-text-dark-1);
     --color-text: var(--vt-c-text-dark-2);
+    --color-text-secondary: #bbb;
 
     --color-on-track: lightseagreen;
     --color-off-track: red;

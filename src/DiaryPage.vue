@@ -286,7 +286,7 @@ h1 {
 }
 
 .note-content {
-  background: var(--color-background-soft);
+  background: color-mix(in srgb, var(--color-background-soft) 90%, #9E9E9E 10%);
   border-radius: 8px;
   padding: 1rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -310,7 +310,7 @@ h1 {
 
 .note-date {
   font-size: 0.85rem;
-  color: var(--color-text-light, #666);
+  color: var(--color-text-secondary, #888);
   font-style: italic;
 }
 
