@@ -19,7 +19,8 @@ import { GERT_LUSH_ACHIEVEMENTS } from './gert_lush_achievements.js';
 import { CUSHTY_POMPEY_ACHIEVEMENTS } from './cushty_pompey_achievements.js';
 import { YES_I_DO_HAVE_OTHER_HOBBIES_ACHIEVEMENT } from './yes_i_do_have_other_hobbies.js';
 import { DELIBERATE_PRACTICE_ACHIEVEMENT } from './deliberate_practice.js';
-import { ARROW_COUNT_GROUP, IMPERIAL_PRECISION_GROUP, IMPERIAL_GOLDEN_END_GROUP, METRIC_EXCELLENCE_GROUP, OLYMPIAN_EFFORT_GROUP, SPIDER_AWARDS_GROUP, FROSTBITE_GROUP } from './groups.js';
+import { SIGHT_MARK_ACHIEVEMENTS } from './sight_mark.js';
+import { ARROW_COUNT_GROUP, IMPERIAL_PRECISION_GROUP, IMPERIAL_GOLDEN_END_GROUP, METRIC_EXCELLENCE_GROUP, OLYMPIAN_EFFORT_GROUP, SPIDER_AWARDS_GROUP, FROSTBITE_GROUP, YES_I_DO_HAVE_A_SIGHT_MARK_GROUP } from './groups.js';
 
 export const ONE_THOUSAND_ARROWS: Achievement = {
   id: 'one_thousand_arrows',
@@ -85,7 +86,8 @@ export const ALL_ACHIEVEMENTS: Achievement[] = [
   ...DONT_BE_BLUE_ACHIEVEMENTS,
   ...WINDSOR_ACHIEVEMENTS,
   ...GERT_LUSH_ACHIEVEMENTS,
-  ...CUSHTY_POMPEY_ACHIEVEMENTS
+  ...CUSHTY_POMPEY_ACHIEVEMENTS,
+  ...SIGHT_MARK_ACHIEVEMENTS
 ];
 
 export function getAchievementById(id: string): Achievement | undefined {

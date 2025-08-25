@@ -23,6 +23,7 @@ import { GERT_LUSH_CHECK_FUNCTIONS } from './gert_lush_achievements.js';
 import { CUSHTY_POMPEY_CHECK_FUNCTIONS } from './cushty_pompey_achievements.js';
 import { checkYesIdoHaveOtherHobbiesAchieved } from './yes_i_do_have_other_hobbies.js';
 import { checkDeliberatePracticeAchieved } from './deliberate_practice.js';
+import { SIGHT_MARK_CHECK_FUNCTIONS } from './sight_mark.js';
 import { 
   checkOlympianEffortBronzeAchieved,
   checkOlympianEffortSilverAchieved,
@@ -158,6 +159,11 @@ export function calculateAchievements(context: AchievementContext): AchievementD
           const checkFunction = CUSHTY_POMPEY_CHECK_FUNCTIONS[achievement.id as keyof typeof CUSHTY_POMPEY_CHECK_FUNCTIONS];
           progress = checkFunction(context);
           progressPercentage = progress.isUnlocked ? 100 : Math.min((progress.currentScore! / progress.targetScore!) * 100, 100);
+        } else if (achievement.id in SIGHT_MARK_CHECK_FUNCTIONS) {
+          // Check if it's a Sight Mark achievement
+          const checkFunction = SIGHT_MARK_CHECK_FUNCTIONS[achievement.id as keyof typeof SIGHT_MARK_CHECK_FUNCTIONS];
+          progress = checkFunction(context);
+          progressPercentage = progress.isUnlocked ? 100 : 0; // Sight Mark is binary - either achieved or not
         } else {
           // Default fallback for unknown achievements
           progress = { 

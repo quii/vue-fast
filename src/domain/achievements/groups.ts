@@ -96,3 +96,10 @@ export const CUSHTY_POMPEY_GROUP: AchievementGroup = {
   description: 'Score specific thresholds on Portsmouth rounds - based on UK badge scheme',
   order: 13
 };
+
+export const YES_I_DO_HAVE_A_SIGHT_MARK_GROUP: AchievementGroup = {
+  id: 'yes_i_do_have_a_sight_mark',
+  name: 'Yes, I do have a sight mark',
+  description: 'Score over 40 in an end at all imperial distances (10, 20, 30, 40, 50, 60, 80, 100 yards)',
+  order: 14
+};
