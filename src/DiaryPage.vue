@@ -9,55 +9,74 @@
     
     <div v-if="filteredTimelineItems.length > 0" class="diary-view">
       <div class="timeline-container">
-        <!-- Enhanced timeline items (notes, achievements, venues, and PBs) -->
-        <template v-for="item in filteredTimelineItems" :key="`${item.type}-${item.shootId || item.achievement?.id || item.date}`">
+        <!-- Grouped timeline items by date -->
+        <template v-for="dateGroup in groupedTimelineItems" :key="dateGroup.date">
           
-          <!-- Achievement entries -->
-          <AchievementDiaryEntry
-            v-if="item.type === 'achievement' && item.achievement && item.achievement.name && item.achievement.tier && item.achievement.achievedDate"
-            :title="item.achievement.name"
-            :description="item.achievement.description || ''"
-            :tier="item.achievement.tier"
-            :achieved-date="item.achievement.achievedDate"
-            :achieving-shoot-id="item.achievement.achievingShootId"
-          />
-          
-          <!-- New venue entries -->
-          <VenueDiaryEntry
-            v-else-if="item.type === 'new-venue' && item.location && item.shoot"
-            :date="item.date"
-            :location="item.location"
-            :shoot="item.shoot"
-            :is-first-ever="item.isFirstEver"
-            :show-map="true"
-          />
-          
-          <!-- Personal best entries -->
-          <PersonalBestDiaryEntry
-            v-else-if="(item.type === 'personal-best' || item.type === 'first-time-round') && item.shoot"
-            :date="item.date"
-            :game-type="item.gameType"
-            :score="item.score"
-            :previous-best="item.previousBest"
-            :is-first-time-round="item.type === 'first-time-round'"
-            :shoot="item.shoot"
-          />
-          
-          <!-- Note entries -->
-          <article
-            v-else-if="item.type === 'note' && item.shoot"
-            class="diary-entry"
-            @click="view(item.shoot.id)"
-          >
-            <div class="note-content">
-              <div class="note-header">
-                <h4 class="note-title">Session Notes</h4>
-                <time class="note-date">{{ formatShootDate(item.shoot.date) }}</time>
-              </div>
-              <HistoryCard :item="item.shoot" />
-              <UserNotes :shoot-id="item.shoot.id" />
+          <!-- Date card containing all events for this date -->
+          <div class="date-card">
+            <div class="date-card-header">
+              <time class="date-card-title">{{ formatShootDate(dateGroup.date + 'T00:00:00') }}</time>
             </div>
-          </article>
+            
+            <!-- Shoots for this date -->
+            <div class="date-card-events">
+              <template v-for="shootGroup in dateGroup.shoots" :key="shootGroup.shoot?.id || 'no-shoot'">
+                  
+                <!-- Show HistoryCard once per shoot -->
+                <HistoryCard v-if="shootGroup.shoot" :item="shootGroup.shoot" @click="view(shootGroup.shoot.id)" />
+                
+                <!-- Events that happened during this shoot -->
+                <template v-if="shootGroup.events.length > 0" v-for="item in shootGroup.events" :key="`${item.type}-${item.shootId || item.achievement?.id || item.date}`">
+                  
+                  <!-- Achievement entries -->
+                  <div v-if="item.type === 'achievement' && item.achievement" class="event-item achievement-event">
+                    <AchievementBadge
+                      :title="item.achievement.name"
+                      :description="item.achievement.description"
+                      :tier="item.achievement.tier"
+                      :is-earned="true"
+                      :achieving-shoot-id="item.achievement.achievingShootId"
+                      :achieved-date="item.achievement.achievedDate"
+                      class="compact-badge"
+                    />
+                  </div>
+                  
+                  <!-- Personal best entries -->
+                  <div v-else-if="item.type === 'personal-best' || item.type === 'first-time-round'" class="event-item pb-event">
+                    <div class="event-icon">☆</div>
+                    <div class="event-content">
+                      <div class="event-title">
+                        {{ item.type === 'first-time-round' ? 'First time shooting this round!' : `New personal best (+${item.score - (item.previousBest || 0)})` }}
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- New venue entries -->
+                  <div v-else-if="item.type === 'new-venue'" class="event-item venue-event">
+                    <div class="venue-header">
+                      <h4 class="venue-title">
+                        <MapIcon class="venue-icon" />
+                        {{ item.isFirstEver ? 'First location recorded!' : 'Shot at new location!' }}
+                      </h4>
+                    </div>
+                    <div class="venue-details">
+                      <div class="coordinate-badge">{{ item.location.latitude.toFixed(4) }}°N</div>
+                      <div class="coordinate-badge">{{ item.location.longitude.toFixed(4) }}°W</div>
+                      <div class="map-link" @click="openMap(item.location)">
+                        <MapIcon />
+                        <span>Map</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- Session notes -->
+                  <UserNotes v-else-if="item.type === 'note'" :shoot-id="item.shoot.id" class="note-event" />
+                  
+                </template>
+                
+              </template>
+            </div>
+          </div>
           
         </template>
       </div>
@@ -100,10 +119,9 @@
 <script setup>
 import HistoryCard from '@/components/HistoryCard.vue'
 import UserNotes from '@/components/UserNotes.vue'
-import AchievementDiaryEntry from '@/components/AchievementDiaryEntry.vue'
-import VenueDiaryEntry from '@/components/VenueDiaryEntry.vue'
-import PersonalBestDiaryEntry from '@/components/PersonalBestDiaryEntry.vue'
+import AchievementBadge from '@/components/AchievementBadge.vue'
 import BaseTopBar from '@/components/ui/BaseTopBar.vue'
+import MapIcon from '@/components/icons/MapIcon.vue'
 import { useHistoryStore } from '@/stores/history'
 import { useNotesStore } from '@/stores/user_notes'
 import { useAchievementStore } from '@/stores/achievements'
@@ -115,7 +133,6 @@ import { createEnhancedDiaryTimeline } from '@/domain/diary/enhanced_diary_timel
 // Import icons for filter buttons
 import NoteIcon from '@/components/icons/NoteIcon.vue'
 import ClassificationIcon from '@/components/icons/ClassificationIcon.vue'
-import MapIcon from '@/components/icons/MapIcon.vue'
 import PersonalBestIcon from '@/components/icons/PersonalBestIcon.vue'
 import ResetIcon from '@/components/icons/ResetIcon.vue'
 
@@ -211,6 +228,86 @@ const filteredTimelineItems = computed(() => {
   })
 })
 
+// Group timeline items by date, then by shoot within each date
+const groupedTimelineItems = computed(() => {
+  const dateGroups = new Map()
+  const allShoots = historyStore.sortedHistory()
+  
+  filteredTimelineItems.value.forEach(item => {
+    // Extract date only (YYYY-MM-DD format)
+    const date = item.date.split('T')[0]
+    
+    if (!dateGroups.has(date)) {
+      dateGroups.set(date, new Map())
+    }
+    
+    const shootGroups = dateGroups.get(date)
+    
+    // Determine shootId for grouping
+    let shootId = null
+    let shoot = null
+    
+    if (item.shoot) {
+      // Notes, PBs, venues have direct shoot reference
+      shootId = item.shoot.id
+      shoot = item.shoot
+    } else if (item.achievement?.achievingShootId) {
+      // Achievements reference shoot by ID
+      shootId = item.achievement.achievingShootId
+      shoot = allShoots.find(s => s.id === shootId)
+    }
+    
+    if (shootId && shoot) {
+      if (!shootGroups.has(shootId)) {
+        shootGroups.set(shootId, {
+          shoot: shoot,
+          events: []
+        })
+      }
+      shootGroups.get(shootId).events.push(item)
+    } else {
+      // Handle events without associated shoots (shouldn't happen, but fallback)
+      const fallbackKey = 'no-shoot'
+      if (!shootGroups.has(fallbackKey)) {
+        shootGroups.set(fallbackKey, {
+          shoot: null,
+          events: []
+        })
+      }
+      shootGroups.get(fallbackKey).events.push(item)
+    }
+  })
+  
+  // Convert to array and sort by date (most recent first)
+  return Array.from(dateGroups.entries())
+    .sort(([dateA], [dateB]) => new Date(dateB).getTime() - new Date(dateA).getTime())
+    .map(([date, shootGroups]) => ({
+      date,
+      shoots: Array.from(shootGroups.values())
+        .sort((a, b) => {
+          // Sort shoots within the same date by time
+          if (a.shoot && b.shoot) {
+            return new Date(b.shoot.date).getTime() - new Date(a.shoot.date).getTime()
+          }
+          return 0
+        })
+        .map(shootGroup => ({
+          ...shootGroup,
+          events: shootGroup.events.sort((a, b) => {
+            // Sort events within the same shoot by type priority
+            const typePriority = {
+              'achievement': 1,
+              'personal-best': 2, 
+              'first-time-round': 3,
+              'new-venue': 4,
+              'note': 5
+            }
+            return (typePriority[a.type] || 999) - (typePriority[b.type] || 999)
+          })
+        }))
+    }))
+})
+
 function view(id) {
   router.push({ name: 'viewHistory', params: { id } })
 }
@@ -223,6 +320,11 @@ function formatShootDate(dateString) {
     month: 'long', 
     day: 'numeric'
   })
+}
+
+function openMap(location) {
+  const url = `https://maps.apple.com/?q=${location.latitude},${location.longitude}`
+  window.open(url, '_blank')
 }
 
 function handleFilterAction({ action }) {
@@ -283,23 +385,191 @@ h1 {
   text-align: center;
 }
 
-/* Note entries */
-.diary-entry {
-  margin-bottom: 1rem;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.diary-entry:hover {
-  transform: translateY(-1px);
-}
-
-.note-content {
-  background: color-mix(in srgb, var(--color-background-soft) 90%, #9E9E9E 10%);
+/* Date card grouping */
+.date-card {
+  background-color: var(--color-background-soft);
   border-radius: 8px;
-  padding: 1rem;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
+
+.date-card:first-child {
+  margin-top: 0;
+}
+
+.date-card-header {
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.date-card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text);
+  display: block;
+}
+
+.date-card-events {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Removed shoot session wrapper - components display directly */
+
+/* Event items */
+.event-item {
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  background: var(--color-background-soft);
+  border-radius: 4px;
+}
+
+.event-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Achievement events use full width for badge */
+.achievement-event {
+  padding: 0;
+  background: none;
+}
+
+.achievement-event .compact-badge {
+  margin: 0;
+}
+
+.achievement-event :deep(.achievement-badge) {
+  margin: 0;
+  box-shadow: none;
+}
+
+/* Non-achievement events use flex layout */
+.pb-event {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.venue-event {
+  display: block;
+}
+
+/* Event type specific backgrounds */
+.pb-event {
+  background: color-mix(in srgb, var(--color-background-soft) 85%, #FF9800 15%);
+}
+
+.venue-event {
+  background: color-mix(in srgb, var(--color-background-soft) 85%, #2196F3 15%);
+  padding: 0.75rem;
+}
+
+.venue-header {
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-border, rgba(0, 0, 0, 0.1));
+}
+
+.venue-title {
+  color: var(--color-text);
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.venue-icon {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.venue-details {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.coordinate-badge {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  background: var(--color-background-mute);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary, #888);
+  font-family: monospace;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.map-link {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--color-background-mute);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary, #888);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.map-link:hover {
+  background: var(--color-border-hover);
+}
+
+.map-link svg {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.note-event {
+  display: block;
+  margin-top: -0.25rem;
+}
+
+.event-icon {
+  font-size: 1.1rem;
+  width: 1.5rem;
+  text-align: center;
+  flex-shrink: 0;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.event-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.event-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-text);
+  line-height: 1.3;
+}
+
+.event-description {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  line-height: 1.2;
+  margin-top: 0.2rem;
+}
+
+/* Event type specific styling - removed left borders */
+
+/* Removed old shoot-session CSS references */
 
 .note-header {
   display: flex;

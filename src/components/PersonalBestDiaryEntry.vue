@@ -6,7 +6,7 @@
           <PersonalBestIcon class="pb-icon" />
           {{ getMilestoneTitle() }}
         </h3>
-        <time class="pb-date">{{ formatDate(date) }}</time>
+        <time v-if="!hideDate" class="pb-date">{{ formatDate(date) }}</time>
       </div>
       
       <!-- Just show the associated shoot card -->
@@ -43,6 +43,10 @@ const props = defineProps({
   shoot: {
     type: Object,
     required: true
+  },
+  hideDate: {
+    type: Boolean,
+    default: false
   }
 })
 

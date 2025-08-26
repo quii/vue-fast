@@ -6,7 +6,7 @@
           <MapIcon class="venue-icon" />
           {{ isFirstEver ? 'First Location Recorded!' : 'New Venue Discovered!' }}
         </h3>
-        <time class="venue-date">{{ formatDate(date) }}</time>
+        <time v-if="!hideDate" class="venue-date">{{ formatDate(date) }}</time>
       </div>
       
       <div class="venue-details">
@@ -49,6 +49,10 @@ const props = defineProps({
     default: false
   },
   showMap: {
+    type: Boolean,
+    default: false
+  },
+  hideDate: {
     type: Boolean,
     default: false
   }

@@ -3,7 +3,7 @@
     <div class="achievement-content">
       <div class="achievement-header">
         <h3 class="achievement-milestone">Achievement Unlocked!</h3>
-        <time class="achievement-date">{{ formatDate(achievedDate) }}</time>
+        <time v-if="!hideDate" class="achievement-date">{{ formatDate(achievedDate) }}</time>
       </div>
       
       <!-- Reuse the existing AchievementBadge component -->
@@ -43,6 +43,10 @@ const props = defineProps({
   achievingShootId: {
     type: [Number, String],
     default: null
+  },
+  hideDate: {
+    type: Boolean,
+    default: false
   }
 })
 
