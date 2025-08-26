@@ -5,11 +5,35 @@
       @action="handleFilterAction"
     />
     
+    <!-- Achievement Progress Summary -->
+    <div class="priority-section priority-section-first">
+      <h2 class="priority-title">Achievement Progress</h2>
+      <div class="achievement-summary-card">
+        <div 
+          v-for="(stat, tier) in tierStats" 
+          :key="tier"
+          class="tier-summary"
+          :class="`tier-${tier}`"
+        >
+          <div class="tier-label">{{ tier }}</div>
+          <div class="tier-progress">
+            <span class="tier-count">{{ stat.earned }}/{{ stat.total }}</span>
+            <div class="tier-bar">
+              <div 
+                class="tier-fill" 
+                :style="{ width: `${stat.total > 0 ? (stat.earned / stat.total) * 100 : 0}%` }"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
     <div class="content">
       <!-- Priority Sections -->
       
       <!-- Close to Completion Section -->
-      <div v-if="closeToCompletionAchievements.length > 0" class="priority-section">
+      <div v-if="closeToCompletionAchievements.length > 0" class="priority-section priority-section-secondary">
         <h2 class="priority-title">Nearly achieved</h2>
         <div class="priority-achievements">
           <CompactAchievementBadge
@@ -186,6 +210,28 @@ const ungroupedAchievements = computed(() => {
   return filteredAchievements.value.filter(achievement => !achievement.group)
 })
 
+// Tier statistics summary
+const tierStats = computed(() => {
+  const stats = {
+    bronze: { total: 0, earned: 0 },
+    silver: { total: 0, earned: 0 },
+    gold: { total: 0, earned: 0 },
+    diamond: { total: 0, earned: 0 }
+  }
+  
+  achievements.value.forEach(achievement => {
+    const tier = achievement.tier.toLowerCase()
+    if (stats[tier]) {
+      stats[tier].total++
+      if (achievement.progress.isUnlocked) {
+        stats[tier].earned++
+      }
+    }
+  })
+  
+  return stats
+})
+
 // Priority Section: Close to Completion
 const closeToCompletionAchievements = computed(() => {
   if (currentFilter.value !== 'all') return []
@@ -234,8 +280,82 @@ function getUnitType(achievementId) {
   margin-top: 0.5rem;
 }
 
+/* Achievement Progress Summary */
+.achievement-summary-card {
+  display: flex;
+  gap: 0.75rem;
+  background-color: var(--color-background-soft);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.tier-summary {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tier-label {
+  font-weight: 600;
+  text-transform: capitalize;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+
+.tier-progress {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.tier-count {
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: var(--color-text);
+}
+
+.tier-bar {
+  width: 100%;
+  height: 0.5rem;
+  background-color: var(--color-background-mute);
+  border-radius: 0.25rem;
+  overflow: hidden;
+}
+
+.tier-fill {
+  height: 100%;
+  border-radius: 0.25rem;
+  transition: width 0.3s ease;
+}
+
+/* Tier-specific colors */
+.tier-bronze .tier-fill {
+  background-color: #CD7F32;
+}
+
+.tier-silver .tier-fill {
+  background-color: #C0C0C0;
+}
+
+.tier-gold .tier-fill {
+  background-color: #FFD700;
+}
+
+.tier-diamond .tier-fill {
+  background-color: #B9F2FF;
+}
+
 .priority-section {
   margin-bottom: 2.5rem;
+}
+
+.priority-section-first {
+  margin-top: 1rem;
 }
 
 .priority-section-secondary {
