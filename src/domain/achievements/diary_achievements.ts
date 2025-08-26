@@ -3,8 +3,7 @@
  */
 
 import type { AchievementContext } from './types.js';
-import { ensureChronologicalContext } from './types.js';
-import { calculateAchievements, type AchievementData } from './calculator.js';
+import type { AchievementData } from './calculator.js';
 import type { HistoryItem } from '../repositories/player_history.js';
 
 export interface DiaryAchievement {
@@ -20,25 +19,10 @@ export interface DiaryAchievement {
 /**
  * Get all achievements that have been unlocked, with their achievement dates
  * This is used to create the diary timeline
+ * 
+ * @param allAchievements - Pre-calculated achievements from the centralized store
  */
-export function getDiaryAchievements(shootHistory: HistoryItem[]): DiaryAchievement[] {
-  if (shootHistory.length === 0) return [];
-
-  // Create context with all shoots to get current achievement state
-  const context = ensureChronologicalContext({
-    currentShoot: {
-      // Use the most recent shoot as current
-      id: shootHistory[0]?.id,
-      date: shootHistory[0]?.date,
-      scores: shootHistory[0]?.scores || [],
-      score: shootHistory[0]?.score,
-      gameType: shootHistory[0]?.gameType,
-      userProfile: shootHistory[0]?.userProfile
-    },
-    shootHistory
-  });
-
-  const allAchievements = calculateAchievements(context);
+export function getDiaryAchievements(allAchievements: AchievementData[]): DiaryAchievement[] {
   
   return allAchievements
     .filter((achievement): achievement is AchievementData & { 

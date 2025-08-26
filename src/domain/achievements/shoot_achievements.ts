@@ -2,17 +2,15 @@
  * Achievement service for shoot-specific achievement queries
  */
 
-import type { AchievementContext } from './types.js';
-import { calculateAchievements } from './calculator.js';
+import type { AchievementData } from './calculator.js';
 
 /**
  * Get achievements that were earned by a specific shoot
- * @param achievementContext - The context containing shoot and history data
+ * @param allAchievements - Pre-calculated achievements from centralized service
  * @param shootId - The ID of the shoot to get achievements for
  * @returns Array of achievements earned by this specific shoot, sorted by achieved date (newest first)
  */
-export function getAchievementsForShoot(achievementContext: AchievementContext, shootId: number | string) {
-  const allAchievements = calculateAchievements(achievementContext);
+export function getAchievementsForShoot(allAchievements: AchievementData[], shootId: number | string) {
   
   // Filter to only achievements earned by this specific shoot
   return allAchievements

@@ -203,4 +203,43 @@ describe('Sight mark Achievement - Current shoot', () => {
     
     expect(progress.isUnlocked).toBe(false);
   });
+
+  test('returns first qualifying shoot when multiple shoots achieve the same distance', () => {
+    // Multiple shoots at same distance - should return the first one found (order will be handled by ensureChronologicalContext)
+    const shoots = [
+      createMockShoot('2024-01-15', 'practice 20yd', [8, 8, 8, 8, 8, 8], 2), // First in chronological order  
+      createMockShoot('2024-02-10', 'practice 20yd', [9, 8, 8, 7, 7, 7], 1), // Second in chronological order
+      createMockShoot('2024-03-01', 'practice 20yd', [9, 9, 9, 9, 7, 7], 3), // Third in chronological order
+    ];
+    
+    const context = createContext(shoots);
+    const progress = checkSightMarkAt20ydAchieved(context);
+    
+    expect(progress.isUnlocked).toBe(true);
+    expect(progress.unlockedAt).toBe('2024-01-15'); // Should be the first qualifying shoot
+    expect(progress.achievingShootId).toBe(2); // Should be the first qualifying shoot
+    expect(progress.achievedDate).toBe('2024-01-15');
+  });
+
+  test('current shoot takes priority over history', () => {
+    // Current shoot qualifies - should return current shoot even if history also qualifies
+    const context: AchievementContext = {
+      currentShoot: {
+        scores: [9, 9, 9, 9, 7, 7], // Total: 50 > 40
+        gameType: 'practice 30yd',
+        id: 999,
+        date: '2024-03-01'
+      },
+      shootHistory: [
+        createMockShoot('2024-01-15', 'practice 30yd', [8, 8, 8, 8, 8, 8], 2) // Earlier date but in history
+      ]
+    };
+    
+    const progress = checkSightMarkAt30ydAchieved(context);
+    
+    expect(progress.isUnlocked).toBe(true);
+    expect(progress.unlockedAt).toBe('2024-03-01'); // Should be the current shoot
+    expect(progress.achievingShootId).toBe(999); // Should be the current shoot
+    expect(progress.achievedDate).toBe('2024-03-01');
+  });
 });

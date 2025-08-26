@@ -7,7 +7,8 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
 import type { AchievementContext } from '@/domain/achievements/types.js';
-import { calculateAchievements } from '@/domain/achievements/calculator.js';
+import { ensureChronologicalContext } from '@/domain/achievements/types.js';
+import { calculateAchievements, type AchievementData } from '@/domain/achievements/calculator.js';
 
 interface UnreadAchievement {
   id: string;
@@ -67,8 +68,18 @@ export const useAchievementStore = defineStore('achievement', () => {
   const hasUnreadAchievements = computed(() => unreadCount.value > 0);
 
   // Actions
+  
+  /**
+   * Single source of truth for all achievement calculations
+   * Always ensures chronological context and consistent ordering
+   */
+  function getAllAchievements(context: AchievementContext): AchievementData[] {
+    const chronologicalContext = ensureChronologicalContext(context);
+    return calculateAchievements(chronologicalContext);
+  }
+
   function updateAchievements(context: AchievementContext): UnreadAchievement[] {
-    const currentAchievements = calculateAchievements(context);
+    const currentAchievements = getAllAchievements(context);
     const currentTime = new Date().toISOString();
     const newlyUnlocked: UnreadAchievement[] = [];
 
@@ -139,6 +150,7 @@ export const useAchievementStore = defineStore('achievement', () => {
     hasUnreadAchievements,
     
     // Actions
+    getAllAchievements, // Single source of truth for achievement calculations
     updateAchievements,
     markAsRead,
     markAllAsRead,

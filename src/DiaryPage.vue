@@ -106,6 +106,7 @@ import PersonalBestDiaryEntry from '@/components/PersonalBestDiaryEntry.vue'
 import BaseTopBar from '@/components/ui/BaseTopBar.vue'
 import { useHistoryStore } from '@/stores/history'
 import { useNotesStore } from '@/stores/user_notes'
+import { useAchievementStore } from '@/stores/achievements'
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { getDiaryAchievements } from '@/domain/achievements/diary_achievements'
@@ -121,6 +122,7 @@ import ResetIcon from '@/components/icons/ResetIcon.vue'
 const router = useRouter()
 const historyStore = useHistoryStore()
 const notesStore = useNotesStore()
+const achievementStore = useAchievementStore()
 
 // Get all shoots that have notes
 const shootsWithNotes = computed(() =>
@@ -129,10 +131,17 @@ const shootsWithNotes = computed(() =>
   )
 )
 
-// Get all earned achievements for diary display
-const diaryAchievements = computed(() =>
-  getDiaryAchievements(historyStore.sortedHistory())
-)
+// Get all earned achievements for diary display using centralized service
+const diaryAchievements = computed(() => {
+  const history = historyStore.sortedHistory()
+  const context = {
+    currentShoot: { scores: [], id: '', date: '', gameType: '', userProfile: {} }, // Empty current shoot (same as AchievementsPage)
+    shootHistory: history
+  }
+  
+  const allAchievements = achievementStore.getAllAchievements(context)
+  return getDiaryAchievements(allAchievements)
+})
 
 // Create enhanced timeline of notes, achievements, venues, and personal bests
 const timelineItems = computed(() =>

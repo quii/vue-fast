@@ -81,8 +81,6 @@ import AchievementGroup from '@/components/AchievementGroup.vue'
 import CollapsibleAchievementGroup from '@/components/CollapsibleAchievementGroup.vue'
 import { useHistoryStore } from '@/stores/history.js'
 import { useAchievementStore } from '@/stores/achievements.js'
-import { calculateAchievements } from '@/domain/achievements/calculator.js'
-import { ensureChronologicalContext } from '@/domain/achievements/types.js'
 
 const historyStore = useHistoryStore()
 const achievementStore = useAchievementStore()
@@ -100,12 +98,12 @@ onMounted(() => {
 
 const achievements = computed(() => {
   const history = historyStore.sortedHistory()
-  const context = ensureChronologicalContext({
+  const context = {
     currentShoot: { scores: [], id: '', date: '', gameType: '', userProfile: {} }, // Empty current shoot
     shootHistory: history // Use full HistoryItem objects directly
-  })
+  }
 
-  return calculateAchievements(context)
+  return achievementStore.getAllAchievements(context)
 })
 
 const filterButtons = computed(() => {

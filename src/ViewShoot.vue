@@ -28,14 +28,14 @@ import DeleteConfirmationModal from "@/components/modals/DeleteConfirmationModal
 import EndTotalChart from "@/components/EndTotalChart.vue";
 import ScoreDistributionChart from "@/components/ScoreDistributionChart.vue";
 import { useAchievementNotifications } from '@/composables/useAchievementNotifications.js';
-import { calculateAchievements } from '@/domain/achievements/calculator.js';
 import { getAchievementsForShoot } from '@/domain/achievements/shoot_achievements.js';
-import { ensureChronologicalContext } from '@/domain/achievements/types.js';
+import { useAchievementStore } from '@/stores/achievements.js';
 import AchievementCelebrationModal from '@/components/modals/AchievementCelebrationModal.vue';
 import AchievementBadge from '@/components/AchievementBadge.vue';
 
 const preferences = usePreferencesStore();
 const arrowHistoryStore = useArrowHistoryStore();
+const achievementStore = useAchievementStore();
 const route = useRoute()
 const router = useRouter()
 const history = useHistoryStore()
@@ -68,7 +68,7 @@ const earnedAchievements = computed(() => {
   if (!shoot.value) return [];
   
   try {
-    const achievementContext = ensureChronologicalContext({
+    const achievementContext = {
       currentShoot: {
         id: parseInt(route.params.id),
         date: shoot.value.date,
@@ -78,10 +78,11 @@ const earnedAchievements = computed(() => {
         userProfile: shoot.value.userProfile
       },
       shootHistory: history.sortedHistory()
-    });
+    };
     
     const shootId = parseInt(route.params.id);
-    return getAchievementsForShoot(achievementContext, shootId);
+    const allAchievements = achievementStore.getAllAchievements(achievementContext);
+    return getAchievementsForShoot(allAchievements, shootId);
   } catch (error) {
     console.error('Error calculating achievements for display:', error);
     return [];
@@ -154,7 +155,7 @@ async function checkAchievementsOnce() {
       // Calculate achievements and show those earned by this specific shoot
       setTimeout(async () => {
         try {
-          const achievementContext = ensureChronologicalContext({
+          const achievementContext = {
             currentShoot: {
               id: shootId,
               date: shoot.value.date,
@@ -164,10 +165,11 @@ async function checkAchievementsOnce() {
               userProfile: shoot.value.userProfile
             },
             shootHistory: history.sortedHistory()
-          });
+          };
           
           // Get achievements earned by this specific shoot
-          const achievementsForThisShoot = getAchievementsForShoot(achievementContext, shootId);
+          const allAchievements = achievementStore.getAllAchievements(achievementContext);
+          const achievementsForThisShoot = getAchievementsForShoot(allAchievements, shootId);
 
           // Show achievements earned by this shoot
           if (achievementsForThisShoot.length > 0) {
