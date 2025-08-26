@@ -64,7 +64,7 @@
     "@vue/cli-service": "^5.0.9",
     "@vue/eslint-config-prettier": "^10.2.0",
     "@vue/test-utils": "^2.4.6",
-    "concurrently": "^9.2.0",
+    "concurrently": "^9.2.1",
     "cypress": "15.0.0",
     "eslint": "^9.34.0",
     "eslint-plugin-cypress": "^5.1.1",
