@@ -26,51 +26,67 @@
                 <HistoryCard v-if="shootGroup.shoot" :item="shootGroup.shoot" @click="view(shootGroup.shoot.id)" />
                 
                 <!-- Events that happened during this shoot -->
-                <template v-if="shootGroup.events.length > 0" v-for="item in shootGroup.events" :key="`${item.type}-${item.shootId || item.achievement?.id || item.date}`">
+                <template v-if="shootGroup.events.length > 0">
                   
-                  <!-- Achievement entries -->
-                  <div v-if="item.type === 'achievement' && item.achievement" class="event-item achievement-event">
-                    <AchievementBadge
-                      :title="item.achievement.name"
-                      :description="item.achievement.description"
-                      :tier="item.achievement.tier"
-                      :is-earned="true"
-                      :achieving-shoot-id="item.achievement.achievingShootId"
-                      :achieved-date="item.achievement.achievedDate"
-                      class="compact-badge"
-                    />
-                  </div>
-                  
-                  <!-- Personal best entries -->
-                  <div v-else-if="item.type === 'personal-best' || item.type === 'first-time-round'" class="event-item pb-event">
-                    <div class="event-icon">☆</div>
-                    <div class="event-content">
-                      <div class="event-title">
-                        {{ item.type === 'first-time-round' ? 'First time shooting this round!' : `New personal best (+${item.score - (item.previousBest || 0)})` }}
+                  <!-- Personal best entries first -->
+                  <template v-for="item in shootGroup.events" :key="`pb-${item.type}-${item.shootId || item.achievement?.id || item.date}`">
+                    <div v-if="item.type === 'personal-best' || item.type === 'first-time-round'" class="event-item pb-event">
+                      <div class="event-icon">☆</div>
+                      <div class="event-content">
+                        <div class="event-title">
+                          {{ item.type === 'first-time-round' ? 'First time shooting this round!' : `New personal best (+${item.score - (item.previousBest || 0)})` }}
+                        </div>
                       </div>
                     </div>
+                  </template>
+                  
+                  <!-- Achievement section with wrapper -->
+                  <div v-if="shootGroup.events.some(item => item.type === 'achievement')" class="achievements-section">
+                    <div class="achievements-header">
+                      <h4 class="achievements-title">
+                        <span class="achievement-icon">🏆</span>
+                        {{ shootGroup.events.filter(item => item.type === 'achievement').length }} achievement{{ shootGroup.events.filter(item => item.type === 'achievement').length === 1 ? '' : 's' }} earned
+                      </h4>
+                    </div>
+                    <template v-for="item in shootGroup.events" :key="`achievement-${item.achievement?.id || item.date}`">
+                      <div v-if="item.type === 'achievement' && item.achievement" class="event-item achievement-event">
+                        <AchievementBadge
+                          :title="item.achievement.name"
+                          :description="item.achievement.description"
+                          :tier="item.achievement.tier"
+                          :is-earned="true"
+                          :achieving-shoot-id="item.achievement.achievingShootId"
+                          :achieved-date="item.achievement.achievedDate"
+                          class="compact-badge"
+                        />
+                      </div>
+                    </template>
                   </div>
                   
                   <!-- New venue entries -->
-                  <div v-else-if="item.type === 'new-venue'" class="event-item venue-event">
-                    <div class="venue-header">
-                      <h4 class="venue-title">
-                        <MapIcon class="venue-icon" />
-                        {{ item.isFirstEver ? 'First location recorded!' : 'Shot at new location!' }}
-                      </h4>
-                    </div>
-                    <div class="venue-details">
-                      <div class="coordinate-badge">{{ item.location.latitude.toFixed(4) }}°N</div>
-                      <div class="coordinate-badge">{{ item.location.longitude.toFixed(4) }}°W</div>
-                      <div class="map-link" @click="openMap(item.location)">
-                        <MapIcon />
-                        <span>Map</span>
+                  <template v-for="item in shootGroup.events" :key="`venue-${item.shootId || item.date}`">
+                    <div v-if="item.type === 'new-venue'" class="event-item venue-event">
+                      <div class="venue-header">
+                        <h4 class="venue-title">
+                          <MapIcon class="venue-icon" />
+                          {{ item.isFirstEver ? 'First location recorded!' : 'Shot at new location!' }}
+                        </h4>
+                      </div>
+                      <div class="venue-details">
+                        <div class="coordinate-badge">{{ item.location.latitude.toFixed(4) }}°N</div>
+                        <div class="coordinate-badge">{{ item.location.longitude.toFixed(4) }}°W</div>
+                        <div class="map-link" @click="openMap(item.location)">
+                          <MapIcon />
+                          <span>Map</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </template>
                   
                   <!-- Session notes -->
-                  <UserNotes v-else-if="item.type === 'note'" :shoot-id="item.shoot.id" class="note-event" />
+                  <template v-for="item in shootGroup.events" :key="`note-${item.shootId}`">
+                    <UserNotes v-if="item.type === 'note'" :shoot-id="item.shoot.id" class="note-event" />
+                  </template>
                   
                 </template>
                 
@@ -296,9 +312,9 @@ const groupedTimelineItems = computed(() => {
           events: shootGroup.events.sort((a, b) => {
             // Sort events within the same shoot by type priority
             const typePriority = {
-              'achievement': 1,
-              'personal-best': 2, 
-              'first-time-round': 3,
+              'personal-best': 1, 
+              'first-time-round': 2,
+              'achievement': 3,
               'new-venue': 4,
               'note': 5
             }
@@ -414,7 +430,7 @@ h1 {
 .date-card-events {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.5rem;
 }
 
 /* Removed shoot session wrapper - components display directly */
@@ -431,10 +447,44 @@ h1 {
   margin-bottom: 0;
 }
 
+/* Achievement section wrapper */
+.achievements-section {
+  background: color-mix(in srgb, var(--color-background-soft) 90%, #4CAF50 10%);
+  border-radius: 6px;
+  padding: 0.75rem;
+  margin: 0;
+}
+
+.achievements-header {
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-border, rgba(0, 0, 0, 0.1));
+}
+
+.achievements-title {
+  color: var(--color-text);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.achievement-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
 /* Achievement events use full width for badge */
 .achievement-event {
   padding: 0;
   background: none;
+  margin-bottom: 0.5rem;
+}
+
+.achievement-event:last-child {
+  margin-bottom: 0;
 }
 
 .achievement-event .compact-badge {
@@ -534,7 +584,7 @@ h1 {
 
 .note-event {
   display: block;
-  margin-top: -0.25rem;
+  margin-top: 0.25rem;
 }
 
 .event-icon {
