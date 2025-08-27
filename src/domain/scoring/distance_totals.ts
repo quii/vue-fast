@@ -133,3 +133,36 @@ export function calculateAverageScorePerEnd(scores, endSize, gameType) {
   const avg = calculateTotal(wholeChunks.map(end => calculateTotal(convertToValues(end, gameType)))) / wholeChunks.length;
   return Math.ceil(avg);
 }
+
+export function calculateAverageArrowScorePerDistance(scores: any[], gameType: string = "national", endSize: number = 6): Array<{ distance: number | null, unit: string, averageArrowScore: number }> {
+  const distanceTotals = calculateDistanceTotals(scores, gameType, endSize);
+  
+  return distanceTotals.map(distanceData => {
+    // Extract all arrow scores for this distance
+    const distanceScores: any[] = [];
+    distanceData.roundBreakdown.forEach(endPair => {
+      distanceScores.push(...endPair.firstEnd, ...endPair.secondEnd);
+    });
+    
+    // Filter out null/undefined scores and convert to numeric values
+    const validScores = distanceScores.filter(score => score !== null && score !== undefined);
+    if (validScores.length === 0) {
+      return {
+        distance: distanceData.distance,
+        unit: distanceData.unit || '',
+        averageArrowScore: 0
+      };
+    }
+    
+    // Convert scores to numeric values
+    const numericScores = convertToValues(validScores, gameType);
+    const total = calculateTotal(numericScores);
+    const average = total / validScores.length;
+    
+    return {
+      distance: distanceData.distance,
+      unit: distanceData.unit || '',
+      averageArrowScore: Math.round(average * 10) / 10 // Round to 1 decimal place
+    };
+  });
+}

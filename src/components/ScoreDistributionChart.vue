@@ -1,92 +1,98 @@
 <template>
-  <div v-if="hasData" class="score-distribution-container">
-
+  <div v-if="hasData">
     <!-- Show multiple distance charts for multi-distance rounds -->
     <div v-if="distanceCharts.length > 1" class="multi-distance-charts">
-      <div 
+      <BaseCard 
         v-for="(distanceData, index) in distanceCharts" 
         :key="`distance-${index}`"
-        class="distance-chart"
+        class="distance-chart-card"
       >
-        <h4 class="distance-title">{{ distanceData.title }}</h4>
-        
-        <!-- Chart view -->
-        <div v-if="!distanceLegendToggles.get(index)" class="chart-container">
-          <div class="chart-wrapper" @click="toggleDistanceView(index)">
-            <canvas :ref="el => distanceCanvases[index] = el"></canvas>
+        <div class="distance-chart">
+          <h4 class="distance-title">{{ distanceData.title }}</h4>
+          <div class="distance-subtitle">{{ distanceData.subtitle }}</div>
+          
+          <!-- Chart view -->
+          <div v-if="!distanceLegendToggles.get(index)" class="chart-container">
+            <div class="chart-wrapper" @click="toggleDistanceView(index)">
+              <canvas :ref="el => distanceCanvases[index] = el"></canvas>
+            </div>
+            <div v-if="distanceData.distribution.length > 0" class="chart-toggle-hint">
+              Tap chart to view score details
+            </div>
           </div>
-          <div v-if="distanceData.distribution.length > 0" class="chart-toggle-hint">
+          
+          <!-- Legend table view -->
+          <div v-else class="legend-table-view" @click="toggleDistanceView(index)">
+            <div v-if="distanceData.distribution.length > 0" class="custom-legend">
+              <div class="legend-items">
+                <div 
+                  v-for="item in distanceData.distribution" 
+                  :key="item.score"
+                  class="legend-item"
+                >
+                  <div 
+                    class="legend-color" 
+                    :style="{ 
+                      backgroundColor: item.color.backgroundColor,
+                      borderColor: item.color.borderColor,
+                    }"
+                  ></div>
+                  <span class="legend-text">{{ item.score }}</span>
+                  <span class="legend-count">{{ item.count }}</span>
+                  <span class="legend-percentage">({{ (item.percentage || 0).toFixed(1) }}%)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </BaseCard>
+    </div>
+    
+    <!-- Show single chart for single-distance rounds -->
+    <BaseCard v-else class="single-distance-chart-card">
+      <div class="single-distance-chart">
+        <h4 v-if="distanceCharts.length > 0 && distanceCharts[0].title" class="distance-title">{{ distanceCharts[0].title }}</h4>
+        <div v-if="distanceCharts.length > 0 && distanceCharts[0].subtitle" class="distance-subtitle">{{ distanceCharts[0].subtitle }}</div>
+        <!-- Chart view -->
+        <div v-if="!showLegendTable" class="chart-container">
+          <div class="chart-wrapper" @click="toggleView">
+            <canvas ref="chartCanvas"></canvas>
+          </div>
+          <div v-if="singleChartLegend.length > 0" class="chart-toggle-hint">
             Tap chart to view score details
           </div>
         </div>
         
         <!-- Legend table view -->
-        <div v-else class="legend-table-view" @click="toggleDistanceView(index)">
-          <div v-if="distanceData.distribution.length > 0" class="custom-legend">
+        <div v-else class="legend-table-view" @click="toggleView">
+          <div class="legend-table-header">
+            <div class="legend-title">Score Distribution</div>
+            <div class="back-to-chart-hint">Tap anywhere to return to chart</div>
+          </div>
+          <div v-if="singleChartLegend.length > 0" class="custom-legend">
             <div class="legend-items">
               <div 
-                v-for="item in distanceData.distribution" 
-                :key="item.score"
+                v-for="legendItem in singleChartLegend" 
+                :key="legendItem.score"
                 class="legend-item"
               >
                 <div 
                   class="legend-color" 
                   :style="{ 
-                    backgroundColor: item.color.backgroundColor,
-                    borderColor: item.color.borderColor,
+                    backgroundColor: legendItem.backgroundColor,
                   }"
                 ></div>
-                <span class="legend-text">{{ item.score }}</span>
-                <span class="legend-count">{{ item.count }}</span>
-                <span class="legend-percentage">({{ (item.percentage || 0).toFixed(1) }}%)</span>
+                <span class="legend-text">{{ legendItem.score }}</span>
+                <span class="legend-count">{{ legendItem.count }}</span>
+                <span class="legend-percentage">({{ legendItem.percentage }}%)</span>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    
-    <!-- Show single chart for single-distance rounds -->
-    <div v-else class="single-distance-chart">
-      <!-- Chart view -->
-      <div v-if="!showLegendTable" class="chart-container">
-        <div class="chart-wrapper" @click="toggleView">
-          <canvas ref="chartCanvas"></canvas>
-        </div>
-        <div v-if="singleChartLegend.length > 0" class="chart-toggle-hint">
-          Tap chart to view score details
-        </div>
-      </div>
-      
-      <!-- Legend table view -->
-      <div v-else class="legend-table-view" @click="toggleView">
-        <div class="legend-table-header">
-          <div class="legend-title">Score Distribution</div>
-          <div class="back-to-chart-hint">Tap anywhere to return to chart</div>
-        </div>
-        <div v-if="singleChartLegend.length > 0" class="custom-legend">
-          <div class="legend-items">
-            <div 
-              v-for="legendItem in singleChartLegend" 
-              :key="legendItem.score"
-              class="legend-item"
-            >
-              <div 
-                class="legend-color" 
-                :style="{ 
-                  backgroundColor: legendItem.backgroundColor,
-                }"
-              ></div>
-              <span class="legend-text">{{ legendItem.score }}</span>
-              <span class="legend-count">{{ legendItem.count }}</span>
-              <span class="legend-percentage">({{ legendItem.percentage }}%)</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    </BaseCard>
   </div>
-  <div v-else class="score-distribution-container no-data">
+  <div v-else class="no-data-container">
     <p class="no-data-message">No score data available for distribution chart.</p>
   </div>
 </template>
@@ -103,7 +109,8 @@ import {
 // Chart.js components are now registered globally in createApp.ts
 // No need to register them here
 import { gameTypeConfig } from "@/domain/scoring/game_types"
-import { calculateDistanceTotals } from "@/domain/scoring/distance_totals"
+import { calculateDistanceTotals, calculateAverageArrowScorePerDistance } from "@/domain/scoring/distance_totals"
+import BaseCard from "@/components/BaseCard.vue"
 
 const props = defineProps({
   scores: {
@@ -204,6 +211,16 @@ const calculateScoreDistribution = (scores, gameType) => {
     })
 }
 
+// Calculate average arrow scores per distance
+const averageArrowScores = computed(() => {
+  if (!props.scores || props.scores.length === 0) return []
+  
+  const config = gameTypeConfig[props.gameType]
+  const endSize = config?.endSize || 6
+  
+  return calculateAverageArrowScorePerDistance(props.scores, props.gameType, endSize)
+})
+
 // Calculate distance-specific chart data
 const distanceChartData = computed(() => {
   if (!props.scores || props.scores.length === 0) return []
@@ -213,12 +230,15 @@ const distanceChartData = computed(() => {
   
   // Use calculateDistanceTotals to split scores by distance
   const distanceTotals = calculateDistanceTotals(props.scores, props.gameType, endSize)
+  const averageScores = averageArrowScores.value
   
   if (distanceTotals.length <= 1) {
     // Single distance - use all scores
     const distribution = calculateScoreDistribution(props.scores, props.gameType)
+    const averageScore = averageScores.length > 0 ? averageScores[0].averageArrowScore : 0
     return distribution.length > 0 ? [{
       title: 'Score Distribution',
+      subtitle: `Average score of ${averageScore} per arrow`,
       distribution,
       hasData: true
     }] : []
@@ -234,9 +254,12 @@ const distanceChartData = computed(() => {
     
     const distribution = calculateScoreDistribution(distanceScores, props.gameType)
     const title = `${distanceData.distance}${distanceData.unit}`
+    const averageScore = averageScores[index]?.averageArrowScore || 0
+    const subtitle = `Average score of ${averageScore} per arrow`
     
     return {
       title,
+      subtitle,
       distribution,
       hasData: distribution.length > 0
     }
@@ -489,16 +512,12 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.score-distribution-container {
-  margin: 1rem 0;
-  padding: 1rem;
-  background-color: var(--color-background-soft);
-  border-radius: 8px;
-}
-
-.score-distribution-container.no-data {
+.no-data-container {
   text-align: center;
   padding: 2rem 1rem;
+  margin: 1rem 0;
+  background-color: var(--color-background-soft);
+  border-radius: 8px;
 }
 
 /* Removed shared-legend styles - now using custom legends only */
@@ -561,27 +580,42 @@ onUnmounted(() => {
 }
 
 .multi-distance-charts {
-  display: grid;
-  gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.distance-chart {
+.distance-chart-card,
+.single-distance-chart-card {
+  margin-bottom: 0;
+}
+
+.distance-chart,
+.single-distance-chart {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .distance-title {
-  margin: 0 0 1rem 0;
+  margin: 0 0 0.5rem 0;
   color: var(--color-text);
   font-size: 1.1rem;
   font-weight: 600;
   text-align: center;
 }
 
-.single-distance-chart .chart-wrapper,
-.distance-chart .chart-wrapper {
+.distance-subtitle {
+  margin: 0 0 1rem 0;
+  color: var(--color-text-secondary, #666);
+  font-size: 0.9rem;
+  font-weight: 400;
+  text-align: center;
+  font-style: italic;
+}
+
+.distance-chart .chart-wrapper,
+.single-distance-chart .chart-wrapper {
   height: 400px;
   width: 100%;
   max-width: 700px;
@@ -591,8 +625,8 @@ onUnmounted(() => {
   transition: opacity 0.2s ease;
 }
 
-.single-distance-chart .chart-wrapper:hover,
-.distance-chart .chart-wrapper:hover {
+.distance-chart .chart-wrapper:hover,
+.single-distance-chart .chart-wrapper:hover {
   opacity: 0.9;
 }
 
@@ -667,12 +701,11 @@ onUnmounted(() => {
   }
   
   .multi-distance-charts {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1rem;
   }
   
-  .single-distance-chart .chart-wrapper,
-  .distance-chart .chart-wrapper {
+  .distance-chart .chart-wrapper,
+  .single-distance-chart .chart-wrapper {
     height: 350px;
     max-width: 600px;
   }
@@ -720,8 +753,8 @@ onUnmounted(() => {
     gap: 1rem;
   }
   
-  .single-distance-chart .chart-wrapper,
-  .distance-chart .chart-wrapper {
+  .distance-chart .chart-wrapper,
+  .single-distance-chart .chart-wrapper {
     height: 300px;
     max-width: 100%;
   }

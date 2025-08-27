@@ -151,7 +151,7 @@ describe('ScoreDistributionChart', () => {
       })
 
       expect(wrapper.find('.no-data-message').exists()).toBe(true)
-      expect(wrapper.find('.score-distribution-container').classes()).toContain('no-data')
+      expect(wrapper.find('.no-data-container').exists()).toBe(true)
     })
 
     test('shows chart when meaningful data exists', () => {

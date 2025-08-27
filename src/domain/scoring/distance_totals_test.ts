@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { calculateDistanceTotals } from "@/domain/scoring/distance_totals";
+import { calculateDistanceTotals, calculateAverageArrowScorePerDistance } from "@/domain/scoring/distance_totals";
 import { justStartedANational, ruthsFrostbiteGame, ruthsGame } from "@/domain/test_data";
 
 describe("calculateRounds", () => {
@@ -113,4 +113,42 @@ describe("calculateRounds", () => {
     expect(result[0].roundBreakdown[0].firstEnd).toHaveLength(4);
     expect(result[0].subTotals.totalScore).toBe(34);
   });
+});
+
+describe('calculateAverageArrowScorePerDistance', () => {
+  test('calculates average arrow score for single distance round', () => {
+    const scores = [10, 9, 8, 7, 6, 5] // Average: 7.5
+    
+    const result = calculateAverageArrowScorePerDistance(scores, 'national', 6)
+    
+    expect(result).toHaveLength(1)
+    expect(result[0].averageArrowScore).toBe(7.5)
+    expect(result[0].unit).toBe('yd')
+  })
+
+  test('handles MISS scores correctly', () => {
+    const scores = [10, 'MISS', 8, 7] // 10+0+8+7 = 25, avg: 6.25 -> 6.3
+    
+    const result = calculateAverageArrowScorePerDistance(scores, 'national', 6)
+    
+    expect(result).toHaveLength(1)
+    expect(result[0].averageArrowScore).toBe(6.3)
+  })
+
+  test('handles X scores correctly', () => {
+    const scores = ['X', 9, 8, 7] // X=10, so 10+9+8+7 = 34, avg: 8.5
+    
+    const result = calculateAverageArrowScorePerDistance(scores, 'national', 6)
+    
+    expect(result).toHaveLength(1)
+    expect(result[0].averageArrowScore).toBe(8.5)
+  })
+
+  test('handles empty scores array', () => {
+    const scores: any[] = []
+    
+    const result = calculateAverageArrowScorePerDistance(scores, 'national', 6)
+    
+    expect(result).toHaveLength(0)
+  })
 });
