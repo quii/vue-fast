@@ -15,6 +15,7 @@ import BaseButton from "@/components/ui/BaseButton.vue";
 import ThemeToggle from '@/components/ui/ThemeToggle.vue'
 import WebSocketStats from '@/components/debug/WebSocketStats.vue'
 import DataIcon from '@/components/icons/DataIcon.vue'
+import AchievementsIcon from '@/components/icons/AchievementsIcon.vue'
 import { useRouter } from 'vue-router'
 
 const userStore = useUserStore();
@@ -56,6 +57,11 @@ const actionButtons = computed(() => [
     iconComponent: DataIcon,
     label: 'Data Management',
     action: 'data-management'
+  },
+  {
+    iconComponent: AchievementsIcon,
+    label: 'Awards',
+    action: 'achievements'
   }
 ])
 
@@ -102,13 +108,16 @@ function toggleDevTools(value) {
   installationStore.toggleDevTools(value)
 }
 
-function navigateToDataManagement() {
+function navigateToDataManagement() { // INFO: Why does this need to be a function when on other pages the topBar handler function has router.push for cases like this?
   router.push('/data')
 }
 
 function handleTopBarAction(actionData) {
   if (actionData.action === 'data-management') {
     navigateToDataManagement()
+  }
+  if (actionData.action === 'achievements') {
+    router.push('/achievements')
   }
 }
 

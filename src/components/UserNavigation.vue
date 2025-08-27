@@ -62,13 +62,6 @@ const showNotificationBadge = computed(() => {
       <span class="nav-label">Sight</span>
     </router-link>
 
-    <router-link to="/achievements" class="nav-item" :class="{ active: isActive('/achievements') }" data-cy="nav-achievements">
-      <div class="icon-container">
-        <AchievementsIcon class="nav-icon" />
-        <div v-if="showNotificationBadge" class="notification-badge"></div>
-      </div>
-      <span class="nav-label">Awards</span>
-    </router-link>
 
     <router-link to="/you" class="nav-item" :class="{ active: isActive('/you') }">
       <div class="icon-container">
