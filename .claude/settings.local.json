@@ -44,7 +44,8 @@
       "Bash(gh issue comment:*)",
       "Bash(timeout 30 npm run test:e2e:headless -- --spec \"cypress/e2e/achievements.cy.ts\")",
       "Bash(sed:*)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "WebSearch"
     ],
     "deny": [
       "Bash(git push*)",

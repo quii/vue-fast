@@ -11,6 +11,17 @@
           <h4 class="distance-title">{{ distanceData.title }}</h4>
           <div class="distance-subtitle">{{ distanceData.subtitle }}</div>
           
+          <!-- Distance stats button -->
+          <div class="distance-stats-button-container">
+            <button 
+              @click="navigateToDistanceStats" 
+              class="distance-stats-button"
+              type="button"
+            >
+              View Distance Stats
+            </button>
+          </div>
+          
           <!-- Chart view -->
           <div v-if="!distanceLegendToggles.get(index)" class="chart-container">
             <div class="chart-wrapper" @click="toggleDistanceView(index)">
@@ -53,6 +64,18 @@
       <div class="single-distance-chart">
         <h4 v-if="distanceCharts.length > 0 && distanceCharts[0].title" class="distance-title">{{ distanceCharts[0].title }}</h4>
         <div v-if="distanceCharts.length > 0 && distanceCharts[0].subtitle" class="distance-subtitle">{{ distanceCharts[0].subtitle }}</div>
+        
+        <!-- Distance stats button -->
+        <div class="distance-stats-button-container">
+          <button 
+            @click="navigateToDistanceStats" 
+            class="distance-stats-button"
+            type="button"
+          >
+            View Distance Stats
+          </button>
+        </div>
+        
         <!-- Chart view -->
         <div v-if="!showLegendTable" class="chart-container">
           <div class="chart-wrapper" @click="toggleView">
@@ -99,12 +122,15 @@
 
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
+import { useRouter } from 'vue-router'
 import {
   Chart,
   PieController,
   ArcElement,
   Legend
 } from 'chart.js';
+
+const router = useRouter()
 
 // Chart.js components are now registered globally in createApp.ts
 // No need to register them here
@@ -473,6 +499,11 @@ const toggleDistanceView = async (index) => {
   }
 }
 
+// Navigate to distance performance page
+const navigateToDistanceStats = () => {
+  router.push('/distance-performance')
+}
+
 // Handle window resize
 const handleResize = () => {
   if (chart.value) {
@@ -612,6 +643,34 @@ onUnmounted(() => {
   font-weight: 400;
   text-align: center;
   font-style: italic;
+}
+
+.distance-stats-button-container {
+  margin: 0 0 1.5rem 0;
+  text-align: center;
+}
+
+.distance-stats-button {
+  padding: 0.6rem 1.2rem;
+  background-color: var(--color-highlight);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.distance-stats-button:hover {
+  background-color: var(--color-highlight);
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.distance-stats-button:active {
+  transform: translateY(0);
 }
 
 .distance-chart .chart-wrapper,

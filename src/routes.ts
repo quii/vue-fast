@@ -50,6 +50,11 @@ export const routes = [
     component: () => import('./components/sight_marks/SightMarksPage.vue')
   },
   {
+    path: '/distance-performance',
+    name: 'distance-performance', 
+    component: () => import('./DistancePerformance.vue')
+  },
+  {
     path: '/select-round',
     name: 'selectRound',
     component: () => import('./views/RoundSelectionPage.vue'),
