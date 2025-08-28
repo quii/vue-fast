@@ -67,12 +67,7 @@ export class ScorePage extends BasePage {
   }
 
   // Add a helper method to get all current scores
-  async getAllScores(): Promise<string[]> {
-    const scoreElements = await this.wrapper.findAll('.score')
-    return scoreElements.map(el => el.text())
-  }
-
-  // Score multiple arrows of the same value
+// Score multiple arrows of the same value
   times(n: number) {
     return {
       score: async (value: number | string) => {
@@ -179,40 +174,12 @@ export class ScorePage extends BasePage {
   }
 
   // Check if a classification is achieved
-  async isClassificationAchieved(classification: string): Promise<boolean> {
-    const classificationBadge = await this.findByText(classification, '.classification-table-container .classification-badge')
-    if (!classificationBadge.exists()) {
-      return false
-    }
-
-    const row = classificationBadge.closest('.table-row')
-    return row.classes().includes('achieved')
-  }
-
-  // Add this method to the ScorePage class
-  async saveInModal() {
-    // Find the save button in the ShootEditModal
-    const saveButton = await this.wrapper.find('.modal-content .save-button')
-    if (!saveButton.exists()) {
-      throw new Error('Save button in modal not found')
-    }
-
-    await saveButton.trigger('click')
-    await this.waitForUpdate()
-
-    // Wait a bit longer for the navigation to complete
-    await new Promise(resolve => setTimeout(resolve, 100))
-  }
-
-  // Get the current game type
+// Add this method to the ScorePage class
+// Get the current game type
   async getCurrentGameType(): Promise<string> {
     const roundSelector = await this.wrapper.find('.round-card-wrapper')
     return roundSelector.text()
   }
 
   // Get valid scores for the current game
-  async getValidScores(): Promise<string[]> {
-    const scoreButtons = await this.wrapper.findAll('.score-button:not([disabled])')
-    return scoreButtons.map(el => el.text())
-  }
 }

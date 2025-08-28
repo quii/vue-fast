@@ -27,6 +27,8 @@ import ShootEditModal from "@/components/modals/ShootEditModal.vue";
 import DeleteConfirmationModal from "@/components/modals/DeleteConfirmationModal.vue";
 import EndTotalChart from "@/components/EndTotalChart.vue";
 import ScoreDistributionChart from "@/components/ScoreDistributionChart.vue";
+import HistoricalComparison from "@/components/HistoricalComparison.vue";
+import { compareShootWithHistory } from '@/domain/scoring/shoot_comparison';
 import { useAchievementNotifications } from '@/composables/useAchievementNotifications.js';
 import { getAchievementsForShoot } from '@/domain/achievements/shoot_achievements.js';
 import { useAchievementStore } from '@/stores/achievements.js';
@@ -112,6 +114,23 @@ const averageScoresPerEnd = computed(() =>
 // Since this is a completed shoot, arrows remaining is 0
 const arrowsRemaining = 0
 const maxPossibleScore = computed(() => totals.value?.totalScore || 0);
+
+// Calculate historical comparison
+const historicalComparison = computed(() => {
+  if (!shoot.value) return null;
+  
+  // Get filtered history for the same round type
+  const filteredHistory = history.getFilteredHistory({
+    round: shoot.value.gameType
+  }, userStore.user);
+  
+  // Filter out the current shoot and take up to 5 recent shoots
+  const recentShoots = filteredHistory
+    .filter(s => s.id !== shoot.value.id)
+    .slice(0, 5);
+  
+  return compareShootWithHistory(shoot.value, recentShoots);
+});
 
 // Initialize classification calculator
 async function initClassificationCalculator() {
@@ -448,6 +467,10 @@ onMounted(async () => {
         />
       </div>
     </BaseCard>
+
+    <HistoricalComparison
+      :comparison="historicalComparison"
+    />
 
     <EndTotalChart
         :scores="scores"
