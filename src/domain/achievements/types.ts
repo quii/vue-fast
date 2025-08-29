@@ -42,21 +42,7 @@ export interface AchievementProgress {
 
 // Context for checking achievements
 export interface AchievementContext {
-  currentShoot: {
-    id?: number | string; // ID of the current shoot
-    date?: string; // Date of the current shoot
-    scores: any[];
-    score?: number; // Total score of the shoot
-    gameType?: string; // Type of round
-    userProfile?: {
-      gender?: string;
-      ageGroup?: string;
-      bowType?: string;
-      classification?: string;
-    };
-  };
-  
-  // Use the existing HistoryItem type - we'll need the full data later
+  // Use the existing HistoryItem type - all shoots come from history
   shootHistory: HistoryItem[];
 }
 

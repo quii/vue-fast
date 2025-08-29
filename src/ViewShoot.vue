@@ -71,14 +71,6 @@ const earnedAchievements = computed(() => {
   
   try {
     const achievementContext = {
-      currentShoot: {
-        id: parseInt(route.params.id),
-        date: shoot.value.date,
-        scores: shoot.value.scores,
-        score: shoot.value.score,
-        gameType: shoot.value.gameType,
-        userProfile: shoot.value.userProfile
-      },
       shootHistory: history.sortedHistory()
     };
     
@@ -175,14 +167,6 @@ async function checkAchievementsOnce() {
       setTimeout(async () => {
         try {
           const achievementContext = {
-            currentShoot: {
-              id: shootId,
-              date: shoot.value.date,
-              scores: shoot.value.scores,
-              score: shoot.value.score,
-              gameType: shoot.value.gameType,
-              userProfile: shoot.value.userProfile
-            },
             shootHistory: history.sortedHistory()
           };
           

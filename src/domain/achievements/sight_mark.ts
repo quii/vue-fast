@@ -130,13 +130,7 @@ function hasHighScoringEndAtDistance(scores: any[], gameType: string, targetDist
  */
 function createSightMarkCheckFunction(distance: ImperialDistance) {
   return function checkSightMarkAtDistanceAchieved(context: AchievementContext): AchievementProgress {
-    // Check current shoot first
-    const currentShootProgress = checkSightMarkInCurrentShoot(context, distance);
-    if (currentShootProgress.isUnlocked) {
-      return currentShootProgress;
-    }
-
-    // Check historical shoots
+    // Check historical shoots only - achievements are only awarded from completed shoots
     const historicalProgress = checkSightMarkInHistory(context, distance);
     if (historicalProgress.isUnlocked) {
       return historicalProgress;
@@ -149,29 +143,6 @@ function createSightMarkCheckFunction(distance: ImperialDistance) {
   };
 }
 
-/**
- * Check current shoot for sight mark achievement
- */
-function checkSightMarkInCurrentShoot(
-  context: AchievementContext, 
-  distance: ImperialDistance
-): AchievementProgress {
-  const { currentShoot } = context;
-  
-  // Check if current shoot has high scoring end at this distance
-  if (!currentShoot.gameType || !hasHighScoringEndAtDistance(currentShoot.scores, currentShoot.gameType, distance)) {
-    return {
-      isUnlocked: false
-    };
-  }
-
-  return {
-    isUnlocked: true,
-    unlockedAt: currentShoot.date || new Date().toISOString(),
-    achievingShootId: currentShoot.id,
-    achievedDate: currentShoot.date
-  };
-}
 
 /**
  * Check history for sight mark achievement

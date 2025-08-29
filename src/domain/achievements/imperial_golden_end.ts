@@ -59,21 +59,15 @@ function createGoldenEndCheckFunction(distance: ImperialDistance) {
       return existingAchievement;
     }
 
-    // Check current shoot if it's an imperial round
-    const currentShootProgress = checkGoldenEndInCurrentShoot(context, distance);
-    if (currentShootProgress.isUnlocked) {
-      return currentShootProgress;
-    }
-
-    // Check historical shoots
+    // Check historical shoots only - achievements are only awarded from completed shoots
     const historicalProgress = checkGoldenEndInHistory(context, distance);
     if (historicalProgress.isUnlocked) {
       return historicalProgress;
     }
 
-    // Not achieved yet - return current best attempt
+    // Not achieved yet - return best historical attempt
     return {
-      currentScore: Math.max(currentShootProgress.currentScore || 0, historicalProgress.currentScore || 0),
+      currentScore: historicalProgress.currentScore || 0,
       targetScore: 54,
       isUnlocked: false
     };
@@ -168,51 +162,33 @@ function findExistingGoldenEndAchievement(context: AchievementContext, distance:
   return null;
 }
 
-/**
- * Check current shoot for golden end achievement
- */
-function checkGoldenEndInCurrentShoot(context: AchievementContext, distance: ImperialDistance): AchievementProgress {
-  const { currentShoot } = context;
-  
-  // Check if current shoot is imperial and has our target distance
-  if (!currentShoot.gameType || !canAwardGoldenEndAtDistance(currentShoot.gameType, distance)) {
-    return {
-      currentScore: 0,
-      targetScore: 54,
-      isUnlocked: false
-    };
-  }
-
-  // Get best end score for this distance
-  const bestEndScore = findBestEndAtDistance(currentShoot.scores, currentShoot.gameType, distance);
-
-  return {
-    currentScore: bestEndScore,
-    targetScore: 54,
-    isUnlocked: bestEndScore >= 54,
-    unlockedAt: bestEndScore >= 54 ? new Date().toISOString() : undefined,
-    achievingShootId: bestEndScore >= 54 ? currentShoot.id : undefined,
-    achievedDate: bestEndScore >= 54 ? currentShoot.date : undefined
-  };
-}
 
 /**
  * Check history for best golden end attempt
  */
 function checkGoldenEndInHistory(context: AchievementContext, distance: ImperialDistance): AchievementProgress {
   let bestEndScore = 0;
+  let achievingShoot = null;
 
   for (const historyItem of context.shootHistory) {
     if (historyItem.gameType && canAwardGoldenEndAtDistance(historyItem.gameType, distance)) {
       const endScore = findBestEndAtDistance(historyItem.scores, historyItem.gameType, distance);
-      bestEndScore = Math.max(bestEndScore, endScore);
+      if (endScore > bestEndScore) {
+        bestEndScore = endScore;
+        if (endScore >= 54) {
+          achievingShoot = historyItem;
+        }
+      }
     }
   }
 
   return {
     currentScore: bestEndScore,
     targetScore: 54,
-    isUnlocked: false
+    isUnlocked: bestEndScore >= 54,
+    unlockedAt: achievingShoot?.date,
+    achievingShootId: achievingShoot?.id,
+    achievedDate: achievingShoot?.date
   };
 }
 
