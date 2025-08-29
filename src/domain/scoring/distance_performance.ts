@@ -76,7 +76,7 @@ export function analyzeDistancePerformance(shootHistory: any[]): DistancePerform
     const stats: DistancePerformanceStats = {
       distance: distance === 'null' ? null : Number(distance),
       unit: unit || '',
-      bestEndTotal: Math.max(...shoots.map(s => s.averageEndTotal)),
+      bestEndTotal: calculateBestEndTotal(shoots),
       roundsShot: shoots.length,
       arrowsShot: shoots.reduce((total, s) => total + s.arrowCount, 0),
       averageEndTotalsOverTime: recentShoots.reverse().map(s => ({
@@ -102,4 +102,40 @@ function extractDistanceScores(distanceData: any): any[] {
     scores.push(...endPair.firstEnd, ...endPair.secondEnd);
   });
   return scores;
+}
+
+function calculateBestEndTotal(shoots: any[]): number {
+  let bestEndTotal = 0;
+  
+  shoots.forEach(shoot => {
+    const distanceData = shoot.distanceData;
+    if (!distanceData || !distanceData.roundBreakdown) {
+      return;
+    }
+    
+    // Check each individual end (both firstEnd and secondEnd in each endPair)
+    distanceData.roundBreakdown.forEach((endPair: any) => {
+      // Calculate firstEnd total
+      if (endPair.firstEnd && endPair.firstEnd.length > 0) {
+        const firstEndTotal = calculateEndTotal(endPair.firstEnd);
+        bestEndTotal = Math.max(bestEndTotal, firstEndTotal);
+      }
+      
+      // Calculate secondEnd total
+      if (endPair.secondEnd && endPair.secondEnd.length > 0) {
+        const secondEndTotal = calculateEndTotal(endPair.secondEnd);
+        bestEndTotal = Math.max(bestEndTotal, secondEndTotal);
+      }
+    });
+  });
+  
+  return bestEndTotal;
+}
+
+function calculateEndTotal(endScores: any[]): number {
+  return endScores.reduce((total, score) => {
+    if (score === 'X') return total + 10;
+    if (score === 'M' || score === null || score === undefined) return total;
+    return total + Number(score);
+  }, 0);
 }

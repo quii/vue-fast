@@ -66,7 +66,7 @@ const userStore = useUserStore()
 
 // Distance filtering state
 const minDistance = ref(0)
-const maxDistance = ref(200)
+const maxDistance = ref(100)
 const distanceUnit = ref('yards')
 
 // Unit filtering state (separate from display unit)

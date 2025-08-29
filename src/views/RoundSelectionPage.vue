@@ -14,6 +14,7 @@ import SectionCard from '@/components/ui/SectionCard.vue'
 import FormGroup from '@/components/ui/FormGroup.vue'
 import BaseSelect from '@/components/ui/BaseSelect.vue'
 import UserProfileForm from '@/components/forms/UserProfileForm.vue'
+import DistanceSliders from '@/components/DistanceSliders.vue'
 import { meters, toMeters, toYards, yards } from "@/domain/distance/distance.js";
 import { classificationList } from "@/domain/scoring/classificationList.js";
 import { gameTypes } from "@/domain/scoring/game_types";
@@ -494,50 +495,15 @@ function handleProfileSubmit(profileData) {
         </div>
       </div>
 
-      <!-- Max Distance Slider -->
-      <div class="distance-sliders-container">
-        <div class="distance-unit-toggle">
-          <div class="unit-toggle-buttons">
-            <button
-              class="unit-button"
-              :class="{ 'active': distanceUnit === 'yards' }"
-              @click="distanceUnit = 'yards'"
-            >
-              Yards
-            </button>
-            <button
-              class="unit-button"
-              :class="{ 'active': distanceUnit === 'meters' }"
-              @click="distanceUnit = 'meters'"
-            >
-              Meters
-            </button>
-          </div>
-        </div>
-        <!-- Min Distance Slider -->
-        <div class="distance-slider">
-          <label for="min-distance">Minimum Distance: {{ displayedMinDistance }} {{ distanceUnit }}</label>
-          <input
-            type="range"
-            id="min-distance"
-            v-model="displayedMinDistance"
-            min="0"
-            max="100"
-          />
-        </div>
-
-        <!-- Max Distance Slider -->
-        <div class="distance-slider">
-          <label for="max-distance">Maximum Distance: {{ displayedMaxDistance }} {{ distanceUnit }}</label>
-          <input
-            type="range"
-            id="max-distance"
-            v-model="displayedMaxDistance"
-            min="0"
-            max="100"
-          />
-        </div>
-      </div>
+      <!-- Distance Sliders -->
+      <DistanceSliders
+        :model-min-distance="displayedMinDistance"
+        :model-max-distance="displayedMaxDistance"
+        :model-unit="distanceUnit"
+        @update:min-distance="displayedMinDistance = $event"
+        @update:max-distance="displayedMaxDistance = $event"
+        @update:unit="distanceUnit = $event"
+      />
 
       <!-- Search bar -->
       <div class="search-container">
@@ -732,82 +698,6 @@ function handleProfileSubmit(profileData) {
   gap: 0.5em;
 }
 
-.distance-unit-toggle {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.unit-toggle-buttons {
-  display: flex;
-  border-radius: 6px;
-  overflow: hidden;
-  border: 1px solid var(--color-border);
-}
-
-.unit-button {
-  padding: 0.3em 0.8em;
-  background: var(--color-background);
-  border: none;
-  cursor: pointer;
-  font-size: 0.85em;
-  transition: all 0.2s ease;
-}
-
-.unit-button.active {
-  background-color: var(--color-highlight, #4CAF50);
-  color: white;
-}
-
-.unit-button:first-child {
-  border-right: 1px solid var(--color-border);
-}
-
-.distance-sliders-container {
-  background-color: var(--color-background-soft);
-  border-radius: 8px;
-  padding: 1em 1em 0.25em 1em;
-  margin-bottom: 1em;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.distance-slider {
-  margin-bottom: 1em;
-}
-
-.distance-slider label {
-  display: block;
-  margin-bottom: 0.5em;
-  font-weight: 500;
-}
-
-.distance-slider input[type="range"] {
-  width: 100%;
-  margin: 0.5em 0;
-  height: 8px;
-  background: var(--color-background-mute);
-  border-radius: 4px;
-  outline: none;
-}
-
-.distance-slider input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: var(--color-highlight, #4CAF50);
-  cursor: pointer;
-}
-
-.distance-slider input[type="range"]::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: var(--color-highlight, #4CAF50);
-  cursor: pointer;
-  border: none;
-}
 
 
 @media (min-width: 768px) {

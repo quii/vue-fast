@@ -26,7 +26,7 @@
         :value="modelMinDistance"
         @input="$emit('update:minDistance', parseInt($event.target.value))"
         min="0"
-        max="200"
+        max="100"
         step="1"
       />
     </div>
@@ -40,7 +40,7 @@
         :value="modelMaxDistance"
         @input="$emit('update:maxDistance', parseInt($event.target.value))"
         min="0"
-        max="200"
+        max="100"
         step="1"
       />
     </div>
@@ -71,13 +71,16 @@ defineEmits(['update:minDistance', 'update:maxDistance', 'update:unit'])
 .distance-sliders-container {
   background-color: var(--color-background-soft);
   border-radius: 8px;
-  padding: 1em 1em 0.25em 1em;
-  margin: 1rem;
+  padding: 1em 1em 0.5em 1em;
+  margin: 0.5rem 0.5rem 1.5rem 0.5rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .distance-unit-toggle {
-  margin-bottom: 1em;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 0.5em;
 }
 
 .unit-toggle-buttons {
@@ -88,14 +91,13 @@ defineEmits(['update:minDistance', 'update:maxDistance', 'update:unit'])
 }
 
 .unit-toggle-buttons button {
-  flex: 1;
-  padding: 8px 16px;
-  background-color: var(--color-background);
-  color: var(--color-text);
+  padding: 0.3em 0.8em;
+  background: var(--color-background);
   border: none;
   cursor: pointer;
+  font-size: 0.85em;
   transition: all 0.2s ease;
-  font-size: 14px;
+  color: var(--color-text);
   border-right: 1px solid var(--color-border);
 }
 
@@ -108,12 +110,16 @@ defineEmits(['update:minDistance', 'update:maxDistance', 'update:unit'])
   color: white;
 }
 
+.unit-toggle-buttons button:first-child {
+  border-right: 1px solid var(--color-border);
+}
+
 .unit-toggle-buttons button:hover:not(.active) {
   background-color: var(--color-background-mute);
 }
 
 .distance-slider {
-  margin-bottom: 1em;
+  margin-bottom: 0.75em;
 }
 
 .distance-slider label {
@@ -153,7 +159,7 @@ defineEmits(['update:minDistance', 'update:maxDistance', 'update:unit'])
 /* Mobile responsive */
 @media (max-width: 768px) {
   .distance-sliders-container {
-    margin: 0.5rem;
+    margin: 0.25rem 0.25rem 1rem 0.25rem;
   }
 }
 </style>
