@@ -86,6 +86,14 @@ if (!isNaN(queryMax)) {
 }
 if (queryUnit === 'meters' || queryUnit === 'yards') {
   distanceUnit.value = queryUnit
+  // When navigating with a specific unit, filter to show only that unit type
+  if (queryUnit === 'meters') {
+    showImperialStats.value = false
+    showMetricStats.value = true
+  } else if (queryUnit === 'yards') {
+    showImperialStats.value = true
+    showMetricStats.value = false
+  }
 }
 
 // Action buttons for the top bar (filtering, not display unit)
@@ -117,7 +125,7 @@ function handleTopBarAction(actionData) {
 const displayedMinDistance = computed({
   get: () => {
     if (distanceUnit.value === "meters") {
-      return Math.round(toMeters(yards(minDistance.value))) + 1;
+      return Math.round(toMeters(yards(minDistance.value)));
     }
     return minDistance.value;
   },
@@ -163,7 +171,7 @@ const distanceStats = computed(() => {
     if (isMetric && !showMetricStats.value) return false
     
     // Distance range filtering
-    const distanceInYards = isMetric ? toYards(meters(distance.distance)) : distance.distance
+    const distanceInYards = isMetric ? Math.round(toYards(meters(distance.distance))) : distance.distance
     return distanceInYards >= minDistance.value && distanceInYards <= maxDistance.value
   })
   

@@ -132,7 +132,7 @@ const distanceUnit = computed({
 const displayedMinDistance = computed({
   get: () => {
     if (distanceUnit.value === "meters") {
-      return Math.round(toMeters(yards(minDistance.value))) + 1; //+1 is a bit of a hack to get around rounding issues
+      return Math.round(toMeters(yards(minDistance.value)));
     }
     return minDistance.value;
   },
