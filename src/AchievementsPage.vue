@@ -1,6 +1,12 @@
 <template>
   <div class="page">
     <BaseTopBar
+      :infoDisplays="actionButtons"
+      alignment="right"
+      @action="handleTopBarAction"
+    />
+
+    <BaseTopBar
       :infoDisplays="filterButtons"
       @action="handleFilterAction"
     />
@@ -105,9 +111,12 @@ import AchievementGroup from '@/components/AchievementGroup.vue'
 import CollapsibleAchievementGroup from '@/components/CollapsibleAchievementGroup.vue'
 import { useHistoryStore } from '@/stores/history.js'
 import { useAchievementStore } from '@/stores/achievements.js'
+import BackIcon from '@/components/icons/BackIcon.vue'
+import { useRouter } from 'vue-router'
 
 const historyStore = useHistoryStore()
 const achievementStore = useAchievementStore()
+const router = useRouter();
 
 const currentFilter = ref('all')
 
@@ -130,6 +139,25 @@ const achievements = computed(() => {
   return achievementStore.getAllAchievements(context)
 })
 
+
+
+// Back & Other TopBar 
+const actionButtons = computed(() => [
+  {
+    iconComponent: BackIcon,
+    label: 'Back',
+    action: 'back'
+  }
+])
+
+function handleTopBarAction(actionData) {
+  if (actionData.action === 'back') {
+    router.push('/you')
+  }
+}
+
+
+// Achievements Filtering TopBar 
 const filterButtons = computed(() => {
   const allAchievements = achievements.value
   const achievedCount = allAchievements.filter(a => a.progress.isUnlocked).length
