@@ -31,6 +31,7 @@ import { calculateAverageScorePerEnd } from "@/domain/scoring/distance_totals";
 import { useRoute, useRouter } from "vue-router";
 import { DEFAULT_SHOOT_STATUS } from '@/domain/shoot/shoot_status.js'
 import { useAchievementStore } from '@/stores/achievements.js';
+import DistanceAnalysisCard from '@/components/DistanceAnalysisCard.vue';
 
 const synth = window.speechSynthesis;
 const router = useRouter();
@@ -355,6 +356,7 @@ function handleTakeNote() {
 function closeTutorial() {
   showTutorial.value = false
 }
+
 </script>
 
 <template>
@@ -434,6 +436,9 @@ function closeTutorial() {
           @changeGameType="gameTypeStore.setGameType"
         />
       </div>
+      
+      <!-- Distance Performance Analysis Card -->
+      <DistanceAnalysisCard :round-name="gameTypeStore.type" />
     </div>
 
     <!-- Tutorial Component -->
@@ -471,6 +476,10 @@ function closeTutorial() {
 .interactive-target-face,
 .game-type-selector {
   margin-bottom: 1rem;
+}
+
+.scrollable-content > :last-child {
+  margin-bottom: 2rem;
 }
 
 </style>

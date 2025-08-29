@@ -1,5 +1,5 @@
 <template>
-  <BaseCard @click="$emit('click')" class="distance-analysis-card">
+  <BaseCard v-if="distanceRange" @click="viewDistanceStats" class="distance-analysis-card">
     <div class="analysis-content">
       <GraphIcon class="analysis-icon" />
       <div class="analysis-text">
@@ -15,33 +15,81 @@
 
 <script setup>
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 import BaseCard from '@/components/BaseCard.vue'
 import GraphIcon from '@/components/icons/GraphIcon.vue'
+import { roundConfigManager } from '@/domain/scoring/game_types'
+import { yards, meters, toYards } from '@/domain/distance/distance'
 
 const props = defineProps({
-  minDistance: {
-    type: Number,
-    required: true
-  },
-  maxDistance: {
-    type: Number,
-    required: true
-  },
-  unit: {
+  roundName: {
     type: String,
-    default: 'yards',
-    validator: (value) => ['yards', 'meters'].includes(value)
+    required: true
   }
 })
 
-defineEmits(['click'])
+const router = useRouter()
+
+// Calculate distance range for the round
+const distanceRange = computed(() => {
+  const round = roundConfigManager.getRound(props.roundName)
+  if (!round) return null
+  
+  const distances = []
+  const isImperial = round.isImperial
+  
+  // Add max distance
+  if (isImperial && round.maxDistanceYards > 0) {
+    distances.push(round.maxDistanceYards)
+  } else if (!isImperial && round.maxDistanceMetres > 0) {
+    distances.push(round.maxDistanceMetres)
+  }
+  
+  // Add other distances
+  if (isImperial && round.otherDistancesYards) {
+    distances.push(...round.otherDistancesYards)
+  } else if (!isImperial && round.otherDistancesMetres) {
+    distances.push(...round.otherDistancesMetres)
+  }
+  
+  if (distances.length === 0) return null
+  
+  return {
+    min: Math.min(...distances),
+    max: Math.max(...distances),
+    unit: isImperial ? 'yards' : 'meters'
+  }
+})
 
 const distanceRangeText = computed(() => {
-  if (props.minDistance === props.maxDistance) {
-    return `${props.minDistance} ${props.unit}`
+  if (!distanceRange.value) return 'distance'
+  
+  if (distanceRange.value.min === distanceRange.value.max) {
+    return `${distanceRange.value.min} ${distanceRange.value.unit}`
   }
-  return `${props.minDistance}-${props.maxDistance} ${props.unit}`
+  return `${distanceRange.value.min}-${distanceRange.value.max} ${distanceRange.value.unit}`
 })
+
+function viewDistanceStats() {
+  if (!distanceRange.value) return
+  
+  // Convert distances to yards for the filtering system (which always works in yards internally)
+  let minDistanceYards = distanceRange.value.min
+  let maxDistanceYards = distanceRange.value.max
+  
+  if (distanceRange.value.unit === 'meters') {
+    minDistanceYards = toYards(meters(distanceRange.value.min))
+    maxDistanceYards = toYards(meters(distanceRange.value.max))
+  }
+  
+  const queryParams = new URLSearchParams({
+    minDistance: Math.round(minDistanceYards).toString(),
+    maxDistance: Math.round(maxDistanceYards).toString(),
+    unit: distanceRange.value.unit
+  })
+  
+  router.push(`/distance-performance?${queryParams.toString()}`)
+}
 </script>
 
 <style scoped>
