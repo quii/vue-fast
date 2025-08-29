@@ -442,7 +442,7 @@ onMounted(async () => {
       />
 
     <!-- Achievements Section -->
-    <BaseCard v-if="earnedAchievements.length > 0">
+    <BaseCard v-if="earnedAchievements.length > 0" class="achievements-section">
       <div class="achievements-list">
         <AchievementBadge
           v-for="achievement in earnedAchievements"
@@ -459,6 +459,7 @@ onMounted(async () => {
 
     <HistoricalComparison
       :comparison="historicalComparison"
+      class="historical-comparison"
     />
 
     <EndTotalChart
@@ -568,5 +569,14 @@ onMounted(async () => {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+}
+
+.achievements-section {
+  margin-top: 1rem;
+  padding-bottom: 0;
+}
+
+.historical-comparison {
+  margin-top: 1rem;
 }
 </style>
