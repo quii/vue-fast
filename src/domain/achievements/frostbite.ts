@@ -55,12 +55,6 @@ function createFrostbiteCheckFunction(targetScore: number) {
       return existingAchievement;
     }
 
-    // Check current shoot if it's Frostbite
-    const currentShootProgress = checkFrostbiteInCurrentShoot(context, targetScore, requiredGameType);
-    if (currentShootProgress.isUnlocked) {
-      return currentShootProgress;
-    }
-
     // Check historical shoots
     const historicalProgress = checkFrostbiteInHistory(context, targetScore, requiredGameType);
     if (historicalProgress.isUnlocked) {
@@ -69,7 +63,7 @@ function createFrostbiteCheckFunction(targetScore: number) {
 
     // Not achieved yet - return current best attempt
     return {
-      currentScore: Math.max(currentShootProgress.currentScore || 0, historicalProgress.currentScore || 0),
+      currentScore: Math.max(historicalProgress.currentScore || 0),
       targetScore: targetScore,
       isUnlocked: false
     };
@@ -98,40 +92,6 @@ function findExistingFrostbiteAchievement(
     }
   }
   return null;
-}
-
-/**
- * Check current shoot for Frostbite achievement
- */
-function checkFrostbiteInCurrentShoot(
-  context: AchievementContext, 
-  targetScore: number, 
-  requiredGameType: string
-): AchievementProgress {
-  const { currentShoot } = context;
-  
-  // Check if current shoot is Frostbite and has the required score
-  if (!currentShoot.gameType || 
-      currentShoot.gameType.toLowerCase() !== requiredGameType ||
-      !currentShoot.score) {
-    return {
-      currentScore: 0,
-      targetScore: targetScore,
-      isUnlocked: false
-    };
-  }
-
-  const currentScore = currentShoot.score;
-  const hasAchieved = currentScore >= targetScore;
-
-  return {
-    currentScore: currentScore,
-    targetScore: targetScore,
-    isUnlocked: hasAchieved,
-    unlockedAt: hasAchieved ? new Date().toISOString() : undefined,
-    achievingShootId: hasAchieved ? currentShoot.id : undefined,
-    achievedDate: hasAchieved ? currentShoot.date : undefined
-  };
 }
 
 /**

@@ -1,6 +1,20 @@
 <template>
   <div class="page">
-    <BaseTopBar title="Distance Performance" />
+    <BaseTopBar 
+      title="Distance Performance" 
+      :action-buttons="actionButtons"
+      @action="handleTopBarAction"
+    />
+    
+    <!-- Distance Filter Controls -->
+    <DistanceSliders
+      :model-min-distance="displayedMinDistance"
+      :model-max-distance="displayedMaxDistance"
+      :model-unit="distanceUnit"
+      @update:min-distance="displayedMinDistance = $event"
+      @update:max-distance="displayedMaxDistance = $event"
+      @update:unit="distanceUnit = $event"
+    />
     
     <div class="distance-performance-content">
       <div v-if="distanceStats.distances.length === 0" class="no-data">
@@ -14,7 +28,7 @@
           </h3>
           
           <!-- Key Statistics -->
-          <StatisticsTable :statistics="getDistanceStatistics(distance)" />
+          <StatisticsTable :statistics="getDistanceStatistics(distance)" :show-header="false" />
           
           <!-- Performance Over Time Chart -->
           <div class="chart-section">
@@ -29,7 +43,7 @@
 </template>
 
 <script setup>
-import { computed, onMounted, nextTick } from 'vue'
+import { computed, onMounted, nextTick, ref, watch, onBeforeUnmount } from 'vue'
 import { useRoute } from 'vue-router'
 import { useHistoryStore } from '@/stores/history'
 import { useUserStore } from '@/stores/user'
@@ -37,7 +51,11 @@ import { analyzeDistancePerformance } from '@/domain/scoring/distance_performanc
 import BaseTopBar from '@/components/ui/BaseTopBar.vue'
 import BaseCard from '@/components/BaseCard.vue'
 import StatisticsTable from '@/components/StatisticsTable.vue'
+import DistanceSliders from '@/components/DistanceSliders.vue'
+import MetricIcon from '@/components/icons/MetricIcon.vue'
+import ImperialIcon from '@/components/icons/ImperialIcon.vue'
 import { Chart, registerables } from 'chart.js'
+import { yards, meters, toYards, toMeters } from '@/domain/distance/distance'
 
 // Register Chart.js components
 Chart.register(...registerables)
@@ -46,10 +64,113 @@ const route = useRoute()
 const historyStore = useHistoryStore()
 const userStore = useUserStore()
 
-// Get distance performance data
+// Distance filtering state
+const minDistance = ref(0)
+const maxDistance = ref(200)
+const distanceUnit = ref('yards')
+
+// Unit filtering state (separate from display unit)
+const showImperialStats = ref(true)
+const showMetricStats = ref(true)
+
+// Initialize from query parameters
+const queryMin = parseInt(route.query.minDistance)
+const queryMax = parseInt(route.query.maxDistance)
+const queryUnit = route.query.unit
+
+if (!isNaN(queryMin)) {
+  minDistance.value = queryMin
+}
+if (!isNaN(queryMax)) {
+  maxDistance.value = queryMax  
+}
+if (queryUnit === 'meters' || queryUnit === 'yards') {
+  distanceUnit.value = queryUnit
+}
+
+// Action buttons for the top bar (filtering, not display unit)
+const actionButtons = computed(() => [
+  {
+    iconComponent: ImperialIcon,
+    label: "Imperial",
+    action: "toggle-imperial",
+    active: showImperialStats.value
+  },
+  {
+    iconComponent: MetricIcon, 
+    label: "Metric",
+    action: "toggle-metric",
+    active: showMetricStats.value
+  }
+])
+
+// Handle top bar actions
+function handleTopBarAction(actionData) {
+  if (actionData.action === 'toggle-imperial') {
+    showImperialStats.value = !showImperialStats.value
+  } else if (actionData.action === 'toggle-metric') {
+    showMetricStats.value = !showMetricStats.value
+  }
+}
+
+// Display distance computeds for unit conversion
+const displayedMinDistance = computed({
+  get: () => {
+    if (distanceUnit.value === "meters") {
+      return Math.round(toMeters(yards(minDistance.value))) + 1;
+    }
+    return minDistance.value;
+  },
+  set: (value) => {
+    if (distanceUnit.value === "meters") {
+      minDistance.value = Math.round(toYards(meters(value)));
+    } else {
+      minDistance.value = value;
+    }
+  }
+});
+
+const displayedMaxDistance = computed({
+  get: () => {
+    if (distanceUnit.value === "meters") {
+      return Math.round(toMeters(yards(maxDistance.value)));
+    }
+    return maxDistance.value;
+  },
+  set: (value) => {
+    if (distanceUnit.value === "meters") {
+      maxDistance.value = Math.round(toYards(meters(value)));
+    } else {
+      maxDistance.value = value;
+    }
+  }
+});
+
+// Get distance performance data with filtering
 const distanceStats = computed(() => {
   const allHistory = historyStore.getFilteredHistory({}, userStore.user)
-  return analyzeDistancePerformance(allHistory)
+  const stats = analyzeDistancePerformance(allHistory)
+  
+  // Filter distances based on unit type and slider range
+  const filteredDistances = stats.distances.filter(distance => {
+    if (distance.distance === null) return true // Always show "Fixed Distance"
+    
+    // Unit type filtering
+    const isImperial = distance.unit === 'yd'
+    const isMetric = distance.unit === 'm'
+    
+    if (isImperial && !showImperialStats.value) return false
+    if (isMetric && !showMetricStats.value) return false
+    
+    // Distance range filtering
+    const distanceInYards = isMetric ? toYards(meters(distance.distance)) : distance.distance
+    return distanceInYards >= minDistance.value && distanceInYards <= maxDistance.value
+  })
+  
+  return {
+    ...stats,
+    distances: filteredDistances
+  }
 })
 
 function formatDistanceName(distance, unit) {
@@ -189,7 +310,12 @@ function createChart(distance, canvasElement) {
   charts.push(chart)
 }
 
-onMounted(async () => {
+function destroyAllCharts() {
+  charts.forEach(chart => chart.destroy())
+  charts = []
+}
+
+async function createAllCharts() {
   await nextTick()
   
   // Create charts for each distance
@@ -200,13 +326,25 @@ onMounted(async () => {
       createChart(distance, canvasElement)
     }
   })
+}
+
+async function recreateCharts() {
+  destroyAllCharts()
+  await createAllCharts()
+}
+
+onMounted(() => {
+  createAllCharts()
 })
 
-// Cleanup charts on unmount  
-import { onBeforeUnmount } from 'vue'
+// Watch for changes in distance stats and recreate charts
+watch(distanceStats, () => {
+  recreateCharts()
+}, { flush: 'post' })
+
+// Cleanup charts on unmount
 onBeforeUnmount(() => {
-  charts.forEach(chart => chart.destroy())
-  charts = []
+  destroyAllCharts()
 })
 </script>
 
@@ -235,11 +373,11 @@ onBeforeUnmount(() => {
 }
 
 .distance-card {
-  padding: 0.75rem;
+  padding: 0.5rem 0.5rem 0.75rem 0.5rem;
 }
 
 .distance-title {
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 0.25rem 0;
   color: var(--color-text);
   font-size: 1.2rem;
   font-weight: 600;

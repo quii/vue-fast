@@ -139,10 +139,6 @@ describe('Red Alert Achievement System', () => {
 
   test('checkRedAlertAt50ydAchieved - achievement with end of all 7s in imperial round', () => {
     const context: AchievementContext = {
-      currentShoot: {
-        scores: [],
-        gameType: 'windsor 50'
-      },
       shootHistory: [{
         id: 'test-shoot',
         date: '2023-01-01',
@@ -173,10 +169,6 @@ describe('Red Alert Achievement System', () => {
 
   test('checkRedAlertAt50ydAchieved - no achievement with end of mixed scores in imperial round', () => {
     const context: AchievementContext = {
-      currentShoot: {
-        scores: [],
-        gameType: 'windsor 50'
-      },
       shootHistory: [{
         id: 'test-shoot',
         date: '2023-01-01',
@@ -203,10 +195,6 @@ describe('Red Alert Achievement System', () => {
 
   test('checkRedAlertAt70mAchieved - achievement with end of all 7s in metric round', () => {
     const context: AchievementContext = {
-      currentShoot: {
-        scores: [],
-        gameType: 'wa 70m'
-      },
       shootHistory: [{
         id: 'test-shoot',
         date: '2023-01-01',
@@ -236,10 +224,6 @@ describe('Red Alert Achievement System', () => {
 
   test('checkRedAlertAt70mAchieved - achievement with end of all 8s in metric round', () => {
     const context: AchievementContext = {
-      currentShoot: {
-        scores: [],
-        gameType: 'wa 70m'
-      },
       shootHistory: [{
         id: 'test-shoot',
         date: '2023-01-01',
@@ -269,10 +253,6 @@ describe('Red Alert Achievement System', () => {
 
   test('checkRedAlertAt70mAchieved - achievement with mixed 7s and 8s in metric round', () => {
     const context: AchievementContext = {
-      currentShoot: {
-        scores: [],
-        gameType: 'wa 70m'
-      },
       shootHistory: [{
         id: 'test-shoot',
         date: '2023-01-01',
@@ -302,10 +282,6 @@ describe('Red Alert Achievement System', () => {
 
   test('checkRedAlertAt70mAchieved - no achievement with scores other than 7s/8s in metric round', () => {
     const context: AchievementContext = {
-      currentShoot: {
-        scores: [],
-        gameType: 'wa 70m'
-      },
       shootHistory: [{
         id: 'test-shoot',
         date: '2023-01-01',
@@ -332,10 +308,6 @@ describe('Red Alert Achievement System', () => {
 
   test('checkRedAlertAt50ydAchieved - no achievement when distance not in round', () => {
     const context: AchievementContext = {
-      currentShoot: {
-        scores: [],
-        gameType: 'wa 70m' // Metric round, doesn't include 50yd
-      },
       shootHistory: [{
         id: 'test-shoot',
         date: '2023-01-01',
@@ -358,39 +330,8 @@ describe('Red Alert Achievement System', () => {
     expect(result.isUnlocked).toBe(false);
   });
 
-  test('checkRedAlertAt50ydAchieved - achievement found in current shoot', () => {
+    test('handles empty scores gracefully', () => {
     const context: AchievementContext = {
-      currentShoot: {
-        id: 'current-shoot',
-        date: '2023-06-01',
-        gameType: 'windsor 50',
-        scores: [
-          // Red Alert end at 50yd
-          7, 7, 7, 7, 7, 7,
-          // Rest of the round
-          9, 8, 7, 6, 5, 4,
-          9, 9, 9, 8, 8, 8,
-          8, 8, 7, 7, 6, 6,
-          9, 8, 7, 6, 5, 4,
-          8, 7, 6, 5, 4, 3
-        ]
-      },
-      shootHistory: []
-    };
-
-    const result = checkRedAlertAt50ydAchieved(context);
-    
-    expect(result.isUnlocked).toBe(true);
-    expect(result.achievingShootId).toBe('current-shoot');
-    expect(result.achievedDate).toBe('2023-06-01');
-  });
-
-  test('handles empty scores gracefully', () => {
-    const context: AchievementContext = {
-      currentShoot: {
-        scores: [],
-        gameType: 'windsor 50'
-      },
       shootHistory: [{
         id: 'test-shoot',
         date: '2023-01-01',
@@ -429,10 +370,6 @@ describe('Red Alert Achievement System', () => {
 
   test('checkRedAlertAt80ydAchieved - should NOT unlock with end containing misses (bug reproduction)', () => {
     const context: AchievementContext = {
-      currentShoot: {
-        scores: [],
-        gameType: 'hereford'
-      },
       shootHistory: [{
         id: 'test-shoot',
         date: '2023-01-01',
@@ -466,10 +403,6 @@ describe('Red Alert Achievement System', () => {
 
   test('checkRedAlertAt80ydAchieved - ACTUAL BUG: Long Western 80yd scores should NOT unlock', () => {
     const context: AchievementContext = {
-      currentShoot: {
-        scores: [],
-        gameType: 'long western'
-      },
       shootHistory: [{
         id: 'bug-shoot',
         date: '2023-01-01',
@@ -509,10 +442,6 @@ describe('Red Alert Achievement System', () => {
 
   test('checkRedAlertAt50ydAchieved - handles M and X scores correctly using convertToValues', () => {
     const context: AchievementContext = {
-      currentShoot: {
-        scores: [],
-        gameType: 'windsor 50'
-      },
       shootHistory: [{
         id: 'test-shoot',
         date: '2023-01-01',

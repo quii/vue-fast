@@ -30,15 +30,7 @@ export function checkArrowsAchievement(context: AchievementContext, targetArrows
     }
   }
   
-  // Check current shoot if achievement not yet unlocked
-  const currentShootArrows = Array.isArray(context.currentShoot.scores) ? context.currentShoot.scores.length : 0;
-  const totalArrows = runningTotal + currentShootArrows;
-  
-  if (!achievingShootId && runningTotal < targetArrows && totalArrows >= targetArrows) {
-    achievingShootId = context.currentShoot.id;
-    achievedDate = context.currentShoot.date;
-  }
-  
+  const totalArrows = runningTotal;
   const isUnlocked = totalArrows >= targetArrows;
   
   return {

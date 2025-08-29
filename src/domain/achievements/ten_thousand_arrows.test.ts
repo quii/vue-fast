@@ -10,10 +10,10 @@ import type { AchievementContext } from './types.js';
 
 function createTestContext(): AchievementContext {
   return {
-    currentShoot: {
-      scores: [9, 8, 7, 9, 8, 7] // 6 arrows
-    },
     shootHistory: [
+      {
+        scores: [9, 8, 7, 9, 8, 7] // 6 arrows
+      },
       {
         scores: [8, 7, 6, 8, 7, 6] // 6 arrows
       },
@@ -39,13 +39,12 @@ describe('10k Arrows Achievement', () => {
     const context = createTestContext();
     // Create enough history to reach 10k arrows
     context.shootHistory = [];
-    for (let i = 0; i < 1666; i++) { // 1666 * 6 = 9996 arrows
+    for (let i = 0; i < 1667; i++) { // 1666 * 6 = 9996 arrows
       context.shootHistory.push({
         scores: [9, 8, 7, 9, 8, 7] // 6 arrows each
       });
     }
-    // Current shoot adds 6 more = 10002 total
-    
+
     const progress = check10kArrowsAchieved(context);
     
     expect(progress.totalArrows).toBe(10002);
@@ -55,7 +54,6 @@ describe('10k Arrows Achievement', () => {
 
   test('handles empty scores arrays', () => {
     const context: AchievementContext = {
-      currentShoot: { scores: [] },
       shootHistory: [
         { scores: [] },
         { scores: [9, 8, 7] }
@@ -68,27 +66,13 @@ describe('10k Arrows Achievement', () => {
     expect(progress.isUnlocked).toBe(false);
   });
 
-  test('handles non-array scores', () => {
-    const context: AchievementContext = {
-      currentShoot: { scores: [9, 8] },
-      shootHistory: [
-        { scores: null as any },
-        { scores: undefined as any },
-        { scores: [7, 6, 5] }
-      ]
-    };
-    
-    const progress = check10kArrowsAchieved(context);
-    
-    expect(progress.totalArrows).toBe(5); // 2 + 0 + 0 + 3
-    expect(progress.isUnlocked).toBe(false);
-  });
 
   test('sets unlockedAt timestamp when achievement unlocked', () => {
-    const context = createTestContext();
-    // Set up exactly 10k arrows
-    context.currentShoot.scores = Array(10000).fill(9);
-    context.shootHistory = [];
+    const context: AchievementContext = {
+      shootHistory: [
+        { scores: Array(10000).fill(9) }
+      ]
+    };
     
     const progress = check10kArrowsAchieved(context);
     

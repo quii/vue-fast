@@ -59,6 +59,7 @@ describe('isTwelveDozensImperialRound', () => {
 describe('checkGertLushBronzeAchieved', () => {
   it('should unlock bronze achievement when 1 twelve dozen imperial round completed', () => {
     const context: AchievementContext = {
+      currentShoot: { scores: [] },
       shootHistory: [
         { id: 1, gameType: 'York', scores: Array(144).fill(5), date: '2023-01-01' }
       ]
@@ -75,6 +76,7 @@ describe('checkGertLushBronzeAchieved', () => {
 
   it('should not unlock bronze achievement when no twelve dozen imperial rounds completed', () => {
     const context: AchievementContext = {
+      currentShoot: { scores: [] },
       shootHistory: []
     };
 
@@ -89,6 +91,7 @@ describe('checkGertLushBronzeAchieved', () => {
 
   it('should only count 12 dozen imperial rounds', () => {
     const context: AchievementContext = {
+      currentShoot: { scores: [] },
       shootHistory: [
         { id: 1, gameType: 'York', scores: Array(144).fill(5), date: '2023-01-01' },
         { id: 2, gameType: 'National', scores: Array(72).fill(5), date: '2023-01-02' }, // 6 dozen
@@ -107,6 +110,7 @@ describe('checkGertLushBronzeAchieved', () => {
 describe('checkGertLushSilverAchieved', () => {
   it('should unlock silver achievement when 5 twelve dozen imperial rounds completed', () => {
     const context: AchievementContext = {
+      currentShoot: { scores: [] },
       shootHistory: Array.from({ length: 5 }, (_, i) => ({
         id: i + 1,
         gameType: 'York',
@@ -126,6 +130,7 @@ describe('checkGertLushSilverAchieved', () => {
 
   it('should not unlock silver achievement when only 4 twelve dozen imperial rounds completed', () => {
     const context: AchievementContext = {
+      currentShoot: { scores: [] },
       shootHistory: Array.from({ length: 4 }, (_, i) => ({
         id: i + 1,
         gameType: 'York',
@@ -145,6 +150,7 @@ describe('checkGertLushSilverAchieved', () => {
 describe('checkGertLushGoldAchieved', () => {
   it('should unlock gold achievement when 25 twelve dozen imperial rounds completed', () => {
     const context: AchievementContext = {
+      currentShoot: { scores: [] },
       shootHistory: Array.from({ length: 25 }, (_, i) => ({
         id: i + 1,
         gameType: 'York',
@@ -164,6 +170,7 @@ describe('checkGertLushGoldAchieved', () => {
 
   it('should not unlock gold achievement when only 24 twelve dozen imperial rounds completed', () => {
     const context: AchievementContext = {
+      currentShoot: { scores: [] },
       shootHistory: Array.from({ length: 24 }, (_, i) => ({
         id: i + 1,
         gameType: 'York',
@@ -183,6 +190,7 @@ describe('checkGertLushGoldAchieved', () => {
 describe('checkGertLushDiamondAchieved', () => {
   it('should unlock diamond achievement when 50 twelve dozen imperial rounds completed', () => {
     const context: AchievementContext = {
+      currentShoot: { scores: [] },
       shootHistory: Array.from({ length: 50 }, (_, i) => ({
         id: i + 1,
         gameType: 'York',
@@ -202,6 +210,7 @@ describe('checkGertLushDiamondAchieved', () => {
 
   it('should not unlock diamond achievement when only 49 twelve dozen imperial rounds completed', () => {
     const context: AchievementContext = {
+      currentShoot: { scores: [] },
       shootHistory: Array.from({ length: 49 }, (_, i) => ({
         id: i + 1,
         gameType: 'York',

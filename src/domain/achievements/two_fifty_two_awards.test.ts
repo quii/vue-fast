@@ -70,10 +70,6 @@ describe('252 Achievement System', () => {
 
   test('check252At50ydAchieved - achievement in Windsor 50 round', () => {
     const context: AchievementContext = {
-      currentShoot: {
-        scores: [],
-        gameType: 'windsor 50'
-      },
       shootHistory: [{
         id: 'test-shoot',
         date: '2023-01-01',
@@ -108,10 +104,6 @@ describe('252 Achievement System', () => {
 
   test('check252At60ydAchieved - achievement in National round', () => {
     const context: AchievementContext = {
-      currentShoot: {
-        scores: [],
-        gameType: 'national'
-      },
       shootHistory: [{
         id: 'test-shoot',
         date: '2023-01-01',
@@ -149,10 +141,6 @@ describe('252 Achievement System', () => {
 
   test('check252At50ydAchieved - cannot achieve in National round (only 2 dozen at 50yd)', () => {
     const context: AchievementContext = {
-      currentShoot: {
-        scores: [],
-        gameType: 'national'
-      },
       shootHistory: [{
         id: 'test-shoot',
         date: '2023-01-01',
@@ -182,10 +170,6 @@ describe('252 Achievement System', () => {
 
   test('check252At50ydAchieved - not imperial round', () => {
     const context: AchievementContext = {
-      currentShoot: {
-        scores: [],
-        gameType: 'wa 70m'
-      },
       shootHistory: [{
         id: 'test-shoot',
         date: '2023-01-01',
@@ -204,34 +188,9 @@ describe('252 Achievement System', () => {
     expect(result.targetScore).toBe(252);
   });
 
-  test('check252At50ydAchieved - current shoot in progress', () => {
-    const context: AchievementContext = {
-      currentShoot: {
-        scores: [
-          // Current shoot: first 2 dozen at 50yd in Windsor 50
-          9, 9, 8, 8, 7, 7,  // End 1: 48
-          9, 9, 8, 8, 7, 7,  // End 2: 48
-          9, 9, 8, 8, 7, 7,  // End 3: 48
-          9, 9, 8, 8, 7, 7,  // End 4: 48 (Total so far: 192 in 24 arrows)
-        ],
-        gameType: 'windsor 50'
-      },
-      shootHistory: []
-    };
-
-    const result = check252At50ydAchieved(context);
-    
-    expect(result.isUnlocked).toBe(false);
-    expect(result.currentScore).toBe(192); // Current progress
-    expect(result.targetScore).toBe(252);
-  });
 
   test('handles missing scores and invalid scores', () => {
     const context: AchievementContext = {
-      currentShoot: {
-        scores: [],
-        gameType: 'windsor 50'
-      },
       shootHistory: [{
         id: 'test-shoot',
         date: '2023-01-01',

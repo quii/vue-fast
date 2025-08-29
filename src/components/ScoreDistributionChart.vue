@@ -12,15 +12,6 @@
           <div class="distance-subtitle">{{ distanceData.subtitle }}</div>
           
           <!-- Distance stats button -->
-          <div class="distance-stats-button-container">
-            <button 
-              @click="navigateToDistanceStats" 
-              class="distance-stats-button"
-              type="button"
-            >
-              View Distance Stats
-            </button>
-          </div>
           
           <!-- Chart view -->
           <div v-if="!distanceLegendToggles.get(index)" class="chart-container">
@@ -65,16 +56,6 @@
         <h4 v-if="distanceCharts.length > 0 && distanceCharts[0].title" class="distance-title">{{ distanceCharts[0].title }}</h4>
         <div v-if="distanceCharts.length > 0 && distanceCharts[0].subtitle" class="distance-subtitle">{{ distanceCharts[0].subtitle }}</div>
         
-        <!-- Distance stats button -->
-        <div class="distance-stats-button-container">
-          <button 
-            @click="navigateToDistanceStats" 
-            class="distance-stats-button"
-            type="button"
-          >
-            View Distance Stats
-          </button>
-        </div>
         
         <!-- Chart view -->
         <div v-if="!showLegendTable" class="chart-container">
@@ -499,10 +480,6 @@ const toggleDistanceView = async (index) => {
   }
 }
 
-// Navigate to distance performance page
-const navigateToDistanceStats = () => {
-  router.push('/distance-performance')
-}
 
 // Handle window resize
 const handleResize = () => {

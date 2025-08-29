@@ -60,12 +60,6 @@ function create252CheckFunction(distance: ImperialDistance) {
       return existingAchievement;
     }
 
-    // Check current shoot if it's an imperial round
-    const currentShootProgress = check252InCurrentShoot(context, distance);
-    if (currentShootProgress.isUnlocked) {
-      return currentShootProgress;
-    }
-
     // Check historical shoots
     const historicalProgress = check252InHistory(context, distance);
     if (historicalProgress.isUnlocked) {
@@ -74,7 +68,7 @@ function create252CheckFunction(distance: ImperialDistance) {
 
     // Not achieved yet - return current best attempt
     return {
-      currentScore: Math.max(currentShootProgress.currentScore || 0, historicalProgress.currentScore || 0),
+      currentScore: historicalProgress.currentScore || 0,
       targetScore: 252,
       isUnlocked: false
     };
@@ -173,43 +167,6 @@ function findExisting252Achievement(context: AchievementContext, distance: Imper
   return null;
 }
 
-/**
- * Check current shoot for 252 achievement
- */
-function check252InCurrentShoot(context: AchievementContext, distance: ImperialDistance): AchievementProgress {
-  const { currentShoot } = context;
-  
-  // Check if current shoot is imperial and has our target distance
-  if (!currentShoot.gameType || !canAward252AtDistance(currentShoot.gameType, distance)) {
-    return {
-      currentScore: 0,
-      targetScore: 252,
-      isUnlocked: false
-    };
-  }
-
-  const arrowRange = getArrowsAtDistance(currentShoot.gameType, distance);
-  if (!arrowRange) {
-    return {
-      currentScore: 0,
-      targetScore: 252,
-      isUnlocked: false
-    };
-  }
-
-  // Get scores for the first 3 dozen arrows at this distance
-  const relevantScores = currentShoot.scores.slice(arrowRange.startArrow, arrowRange.endArrow + 1);
-  const currentScore = calculateScore(relevantScores, currentShoot.gameType);
-
-  return {
-    currentScore,
-    targetScore: 252,
-    isUnlocked: currentScore >= 252,
-    unlockedAt: currentScore >= 252 ? new Date().toISOString() : undefined,
-    achievingShootId: currentScore >= 252 ? currentShoot.id : undefined,
-    achievedDate: currentScore >= 252 ? currentShoot.date : undefined
-  };
-}
 
 /**
  * Check history for best attempt at 252 achievement

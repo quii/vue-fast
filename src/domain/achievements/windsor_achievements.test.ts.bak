@@ -59,6 +59,7 @@ describe('isNineDozensImperialRound', () => {
 describe('checkForTheWindsorBronzeAchieved', () => {
   it('should unlock bronze achievement when 5 nine dozen imperial rounds completed', () => {
     const context: AchievementContext = {
+      currentShoot: { scores: [] },
       shootHistory: [
         { id: 1, gameType: 'Windsor', scores: Array(108).fill(5), date: '2023-01-01' },
         { id: 2, gameType: 'Windsor 50', scores: Array(108).fill(5), date: '2023-01-02' },
@@ -79,6 +80,7 @@ describe('checkForTheWindsorBronzeAchieved', () => {
 
   it('should not unlock bronze achievement when only 4 nine dozen imperial rounds completed', () => {
     const context: AchievementContext = {
+      currentShoot: { scores: [] },
       shootHistory: [
         { id: 1, gameType: 'Windsor', scores: Array(108).fill(5), date: '2023-01-01' },
         { id: 2, gameType: 'Windsor 50', scores: Array(108).fill(5), date: '2023-01-02' },
@@ -98,6 +100,7 @@ describe('checkForTheWindsorBronzeAchieved', () => {
 
   it('should only count 9 dozen imperial rounds', () => {
     const context: AchievementContext = {
+      currentShoot: { scores: [] },
       shootHistory: [
         { id: 1, gameType: 'Windsor', scores: Array(108).fill(5), date: '2023-01-01' },
         { id: 2, gameType: 'Windsor 50', scores: Array(108).fill(5), date: '2023-01-02' },
@@ -114,6 +117,7 @@ describe('checkForTheWindsorBronzeAchieved', () => {
 
   it('should not count non-nine dozen imperial rounds', () => {
     const context: AchievementContext = {
+      currentShoot: { scores: [] },
       shootHistory: [
         { id: 1, gameType: 'Windsor', scores: Array(108).fill(5), date: '2023-01-01' },
         { id: 2, gameType: 'National', scores: Array(72).fill(5), date: '2023-01-02' }, // 6 dozen
@@ -133,6 +137,7 @@ describe('checkForTheWindsorBronzeAchieved', () => {
 describe('checkForTheWindsorSilverAchieved', () => {
   it('should unlock silver achievement when 10 nine dozen imperial rounds completed', () => {
     const context: AchievementContext = {
+      currentShoot: { scores: [] },
       shootHistory: Array.from({ length: 10 }, (_, i) => ({
         id: i + 1,
         gameType: 'Windsor',
@@ -152,6 +157,7 @@ describe('checkForTheWindsorSilverAchieved', () => {
 
   it('should not unlock silver achievement when only 9 nine dozen imperial rounds completed', () => {
     const context: AchievementContext = {
+      currentShoot: { scores: [] },
       shootHistory: Array.from({ length: 9 }, (_, i) => ({
         id: i + 1,
         gameType: 'Windsor',
@@ -171,6 +177,7 @@ describe('checkForTheWindsorSilverAchieved', () => {
 describe('checkForTheWindsorGoldAchieved', () => {
   it('should unlock gold achievement when 25 nine dozen imperial rounds completed', () => {
     const context: AchievementContext = {
+      currentShoot: { scores: [] },
       shootHistory: Array.from({ length: 25 }, (_, i) => ({
         id: i + 1,
         gameType: 'Windsor',
@@ -190,6 +197,7 @@ describe('checkForTheWindsorGoldAchieved', () => {
 
   it('should not unlock gold achievement when only 24 nine dozen imperial rounds completed', () => {
     const context: AchievementContext = {
+      currentShoot: { scores: [] },
       shootHistory: Array.from({ length: 24 }, (_, i) => ({
         id: i + 1,
         gameType: 'Windsor',
@@ -209,6 +217,7 @@ describe('checkForTheWindsorGoldAchieved', () => {
 describe('checkForTheWindsorDiamondAchieved', () => {
   it('should unlock diamond achievement when 50 nine dozen imperial rounds completed', () => {
     const context: AchievementContext = {
+      currentShoot: { scores: [] },
       shootHistory: Array.from({ length: 50 }, (_, i) => ({
         id: i + 1,
         gameType: 'Windsor',
@@ -228,6 +237,7 @@ describe('checkForTheWindsorDiamondAchieved', () => {
 
   it('should not unlock diamond achievement when only 49 nine dozen imperial rounds completed', () => {
     const context: AchievementContext = {
+      currentShoot: { scores: [] },
       shootHistory: Array.from({ length: 49 }, (_, i) => ({
         id: i + 1,
         gameType: 'Windsor',

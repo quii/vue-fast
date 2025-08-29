@@ -34,11 +34,19 @@ function createTestContext(): AchievementContext {
   ];
 
   return {
-    currentShoot: {
-      scores: [9, 8, 7, 9, 8, 7], // 6 arrows
-      userProfile: { bowType: 'recurve' }
-    },
-    shootHistory: historyItems
+    shootHistory: [
+      ...historyItems,
+      {
+        id: 3,
+        date: '2023-01-03',
+        gameType: 'test',
+        score: 50,
+        scores: [9, 8, 7, 9, 8, 7], // 6 arrows
+        unit: 'yd',
+        topScore: false,
+        userProfile: { bowType: 'recurve' }
+      }
+    ]
   };
 }
 

@@ -1,6 +1,6 @@
 <template>
   <div class="statistics-table">
-    <div class="table-header">
+    <div v-if="showHeader" class="table-header">
       <span class="metric-label">Statistic</span>
       <span class="value-header">Value</span>
     </div>
@@ -17,6 +17,10 @@ defineProps({
   statistics: {
     type: Array,
     required: true
+  },
+  showHeader: {
+    type: Boolean,
+    default: true
   }
 })
 </script>

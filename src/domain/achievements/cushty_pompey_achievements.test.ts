@@ -60,13 +60,12 @@ describe('Cushty Pompey! Achievement Group', () => {
 describe('checkCushtyPompey300Achieved', () => {
   it('should unlock achievement when current shoot scores 300+ on Portsmouth', () => {
     const context: AchievementContext = {
-      currentShoot: {
+      shootHistory: [{
         id: 'current',
         date: '2023-01-15',
-        scores: Array(60).fill(5), // 60 arrows scoring 5 each = 300
-        gameType: 'portsmouth'
-      },
-      shootHistory: []
+        gameType: 'portsmouth',
+        score: 300
+      }]
     };
 
     const result = checkCushtyPompey300Achieved(context);
@@ -80,13 +79,12 @@ describe('checkCushtyPompey300Achieved', () => {
 
   it('should not unlock achievement when current shoot scores less than 300', () => {
     const context: AchievementContext = {
-      currentShoot: {
+      shootHistory: [{
         id: 'current',
         date: '2023-01-15',
-        scores: Array(60).fill(4), // 60 arrows scoring 4 each = 240
+        score: 240,
         gameType: 'portsmouth'
-      },
-      shootHistory: []
+      }]
     };
 
     const result = checkCushtyPompey300Achieved(context);
@@ -94,59 +92,6 @@ describe('checkCushtyPompey300Achieved', () => {
     expect(result.isUnlocked).toBe(false);
     expect(result.currentScore).toBe(240);
     expect(result.targetScore).toBe(300);
-  });
-
-  it('should detect achievement from history when current shoot is not Portsmouth', () => {
-    const context: AchievementContext = {
-      currentShoot: {
-        id: 'current',
-        date: '2023-01-15',
-        scores: Array(60).fill(10), // Different round
-        gameType: 'bray i'
-      },
-      shootHistory: [
-        {
-          id: 1,
-          date: '2023-01-01',
-          scores: Array(60).fill(6), // 60 arrows scoring 6 each = 360
-          gameType: 'portsmouth'
-        }
-      ]
-    };
-
-    const result = checkCushtyPompey300Achieved(context);
-
-    expect(result.isUnlocked).toBe(true);
-    expect(result.currentScore).toBe(360);
-    expect(result.targetScore).toBe(300);
-    expect(result.achievingShootId).toBe(1);
-    expect(result.achievedDate).toBe('2023-01-01');
-  });
-
-  it('should prioritize current shoot over history for achieving shoot', () => {
-    const context: AchievementContext = {
-      currentShoot: {
-        id: 'current',
-        date: '2023-01-15',
-        scores: Array(60).fill(5), // 300 points
-        gameType: 'portsmouth'
-      },
-      shootHistory: [
-        {
-          id: 1,
-          date: '2023-01-01',
-          scores: Array(60).fill(6), // 360 points (better score but earlier)
-          gameType: 'portsmouth'
-        }
-      ]
-    };
-
-    const result = checkCushtyPompey300Achieved(context);
-
-    expect(result.isUnlocked).toBe(true);
-    expect(result.currentScore).toBe(300);
-    expect(result.achievingShootId).toBe('current'); // Current shoot takes priority
-    expect(result.achievedDate).toBe('2023-01-15');
   });
 
   it('should ignore non-Portsmouth rounds', () => {
@@ -175,13 +120,12 @@ describe('checkCushtyPompey300Achieved', () => {
 
   it('should handle mixed numeric and string scores correctly', () => {
     const context: AchievementContext = {
-      currentShoot: {
+      shootHistory: [{
         id: 'current',
         date: '2023-01-15',
-        scores: [10, 9, 8, 'M', 7, 6, ...Array(54).fill(5)], // Mix of scores with miss
+        score: 310,
         gameType: 'portsmouth'
-      },
-      shootHistory: []
+      }]
     };
 
     const result = checkCushtyPompey300Achieved(context);
@@ -195,13 +139,12 @@ describe('checkCushtyPompey300Achieved', () => {
 describe('checkCushtyPompey400Achieved', () => {
   it('should unlock silver achievement when scoring 400+', () => {
     const context: AchievementContext = {
-      currentShoot: {
+      shootHistory: [{
         id: 'current',
         date: '2023-01-15',
-        scores: Array(40).fill(10).concat(Array(20).fill(0)), // 40*10 = 400
+        score: 400,
         gameType: 'portsmouth'
-      },
-      shootHistory: []
+      }]
     };
 
     const result = checkCushtyPompey400Achieved(context);
@@ -213,13 +156,12 @@ describe('checkCushtyPompey400Achieved', () => {
 
   it('should show progress toward 400 when scoring less', () => {
     const context: AchievementContext = {
-      currentShoot: {
+      shootHistory: [{
         id: 'current',
         date: '2023-01-15',
-        scores: Array(60).fill(6), // 60*6 = 360
+        score: 360,
         gameType: 'portsmouth'
-      },
-      shootHistory: []
+      }]
     };
 
     const result = checkCushtyPompey400Achieved(context);
@@ -233,13 +175,12 @@ describe('checkCushtyPompey400Achieved', () => {
 describe('checkCushtyPompey600Achieved', () => {
   it('should unlock diamond achievement when scoring perfect 600', () => {
     const context: AchievementContext = {
-      currentShoot: {
+      shootHistory: [{
         id: 'current',
         date: '2023-01-15',
-        scores: Array(60).fill(10), // Perfect score: 60*10 = 600
+        score: 600,
         gameType: 'portsmouth'
-      },
-      shootHistory: []
+      }]
     };
 
     const result = checkCushtyPompey600Achieved(context);
@@ -251,13 +192,12 @@ describe('checkCushtyPompey600Achieved', () => {
 
   it('should not unlock when just short of perfect', () => {
     const context: AchievementContext = {
-      currentShoot: {
+      shootHistory: [{
         id: 'current',
         date: '2023-01-15',
-        scores: [...Array(59).fill(10), 9], // 59*10 + 9 = 599
+        score: 599,
         gameType: 'portsmouth'
-      },
-      shootHistory: []
+      }]
     };
 
     const result = checkCushtyPompey600Achieved(context);
@@ -271,24 +211,18 @@ describe('checkCushtyPompey600Achieved', () => {
 describe('Portsmouth achievements progress tracking', () => {
   it('should track best score across current shoot and history', () => {
     const context: AchievementContext = {
-      currentShoot: {
-        id: 'current',
-        date: '2023-01-15',
-        scores: Array(60).fill(7), // 420 points
-        gameType: 'portsmouth'
-      },
       shootHistory: [
         {
           id: 1,
           date: '2023-01-01',
-          scores: Array(60).fill(6), // 360 points
-          gameType: 'portsmouth'
+          gameType: 'portsmouth',
+          score: 360
         },
         {
           id: 2,
           date: '2023-01-10',
-          scores: Array(60).fill(8), // 480 points (best)
-          gameType: 'portsmouth'
+          gameType: 'portsmouth',
+          score: 480
         }
       ]
     };

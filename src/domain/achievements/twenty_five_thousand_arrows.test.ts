@@ -10,10 +10,10 @@ import type { AchievementContext } from './types.js';
 
 function createTestContext(): AchievementContext {
   return {
-    currentShoot: {
-      scores: [9, 8, 7, 9, 8, 7] // 6 arrows
-    },
     shootHistory: [
+      {
+        scores: [9, 8, 7, 9, 8, 7] // 6 arrows
+      },
       {
         scores: [8, 7, 6, 8, 7, 6] // 6 arrows
       },
@@ -39,13 +39,12 @@ describe('25k Arrows Achievement', () => {
     const context = createTestContext();
     // Create enough history to reach 25k arrows
     context.shootHistory = [];
-    for (let i = 0; i < 4166; i++) { // 4166 * 6 = 24996 arrows
+    for (let i = 0; i < 4167; i++) {
       context.shootHistory.push({
         scores: [9, 8, 7, 9, 8, 7] // 6 arrows each
       });
     }
-    // Current shoot adds 6 more = 25002 total
-    
+
     const progress = check25kArrowsAchieved(context);
     
     expect(progress.totalArrows).toBe(25002);
@@ -55,7 +54,6 @@ describe('25k Arrows Achievement', () => {
 
   test('handles empty scores arrays', () => {
     const context: AchievementContext = {
-      currentShoot: { scores: [] },
       shootHistory: [
         { scores: [] },
         { scores: [9, 8, 7] }
@@ -69,10 +67,11 @@ describe('25k Arrows Achievement', () => {
   });
 
   test('sets unlockedAt timestamp when achievement unlocked', () => {
-    const context = createTestContext();
-    // Set up exactly 25k arrows
-    context.currentShoot.scores = Array(25000).fill(9);
-    context.shootHistory = [];
+    const context: AchievementContext = {
+      shootHistory: [
+        { scores: Array(25000).fill(9) }
+      ]
+    };
     
     const progress = check25kArrowsAchieved(context);
     

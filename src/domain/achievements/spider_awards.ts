@@ -48,13 +48,7 @@ export const SPIDER_ACHIEVEMENTS: Achievement[] = SPIDER_DISTANCES.map(createSpi
  */
 function createSpiderCheckFunction(distance: SpiderDistance) {
   return function checkSpiderAtDistanceAchieved(context: AchievementContext): AchievementProgress {
-    // Check current shoot first - it takes priority if it has an X
-    const currentShootProgress = checkSpiderInCurrentShoot(context, distance);
-    if (currentShootProgress.isUnlocked) {
-      return currentShootProgress;
-    }
-
-    // Then check if we've already achieved this in history
+    // Check if we've already achieved this in history
     const existingAchievement = findExistingSpiderAchievement(context, distance);
     if (existingAchievement) {
       return existingAchievement;
@@ -177,43 +171,6 @@ function findExistingSpiderAchievement(context: AchievementContext, distance: Sp
   return null;
 }
 
-/**
- * Check current shoot for spider achievement
- */
-function checkSpiderInCurrentShoot(context: AchievementContext, distance: SpiderDistance): AchievementProgress {
-  const { currentShoot } = context;
-  
-  // Check if current shoot is outdoor metric and has our target distance
-  if (!currentShoot.gameType || !canAwardSpiderAtDistance(currentShoot.gameType, distance)) {
-    return {
-      isUnlocked: false
-    };
-  }
-
-  const arrowRange = getArrowsAtDistance(currentShoot.gameType, distance);
-  if (!arrowRange) {
-    return {
-      isUnlocked: false
-    };
-  }
-
-  // Get scores for this distance
-  const relevantScores = currentShoot.scores.slice(arrowRange.startArrow, arrowRange.endArrow + 1);
-  const xCount = countXScores(relevantScores);
-
-  if (xCount > 0) {
-    return {
-      isUnlocked: true,
-      unlockedAt: new Date().toISOString(),
-      achievingShootId: currentShoot.id,
-      achievedDate: currentShoot.date
-    };
-  }
-
-  return {
-    isUnlocked: false
-  };
-}
 
 
 /**

@@ -57,12 +57,6 @@ function create720MasteryCheckFunction(tier: keyof typeof SCORE_THRESHOLDS) {
       return existingAchievement;
     }
 
-    // Check current shoot if it's WA 70m with recurve
-    const currentShootProgress = check720MasteryInCurrentShoot(context, targetScore, requiredGameType, requiredBowType);
-    if (currentShootProgress.isUnlocked) {
-      return currentShootProgress;
-    }
-
     // Check historical shoots
     const historicalProgress = check720MasteryInHistory(context, targetScore, requiredGameType, requiredBowType);
     if (historicalProgress.isUnlocked) {
@@ -71,7 +65,7 @@ function create720MasteryCheckFunction(tier: keyof typeof SCORE_THRESHOLDS) {
 
     // Not achieved yet - return current best attempt
     return {
-      currentScore: Math.max(currentShootProgress.currentScore || 0, historicalProgress.currentScore || 0),
+      currentScore: historicalProgress.currentScore || 0,
       targetScore: targetScore,
       isUnlocked: false
     };
@@ -104,42 +98,6 @@ function findExisting720MasteryAchievement(
   return null;
 }
 
-/**
- * Check current shoot for 720 mastery achievement
- */
-function check720MasteryInCurrentShoot(
-  context: AchievementContext, 
-  targetScore: number, 
-  requiredGameType: string, 
-  requiredBowType: string
-): AchievementProgress {
-  const { currentShoot } = context;
-  
-  // Check if current shoot is WA 70m with recurve and has the required score
-  if (!currentShoot.gameType || 
-      currentShoot.gameType.toLowerCase() !== requiredGameType ||
-      !currentShoot.userProfile?.bowType ||
-      currentShoot.userProfile.bowType !== requiredBowType ||
-      !currentShoot.score) {
-    return {
-      currentScore: 0,
-      targetScore: targetScore,
-      isUnlocked: false
-    };
-  }
-
-  const currentScore = currentShoot.score;
-  const hasAchieved = currentScore >= targetScore;
-
-  return {
-    currentScore: currentScore,
-    targetScore: targetScore,
-    isUnlocked: hasAchieved,
-    unlockedAt: hasAchieved ? new Date().toISOString() : undefined,
-    achievingShootId: hasAchieved ? currentShoot.id : undefined,
-    achievedDate: hasAchieved ? currentShoot.date : undefined
-  };
-}
 
 /**
  * Check history for best 720 mastery attempt

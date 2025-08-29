@@ -34,6 +34,9 @@ import { getAchievementsForShoot } from '@/domain/achievements/shoot_achievement
 import { useAchievementStore } from '@/stores/achievements.js';
 import AchievementCelebrationModal from '@/components/modals/AchievementCelebrationModal.vue';
 import AchievementBadge from '@/components/AchievementBadge.vue';
+import BaseButton from '@/components/ui/BaseButton.vue';
+import DistanceAnalysisCard from '@/components/DistanceAnalysisCard.vue';
+import { yards, meters, toYards } from '@/domain/distance/distance';
 
 const preferences = usePreferencesStore();
 const arrowHistoryStore = useArrowHistoryStore();
@@ -387,6 +390,58 @@ onMounted(async () => {
   loadNavigationInfo();
   await checkAchievementsOnce();
 });
+
+// Calculate distance range for this shoot
+const distanceRange = computed(() => {
+  if (!round.value) return null;
+  
+  const distances = [];
+  const isImperial = round.value.isImperial;
+  
+  // Add max distance
+  if (isImperial && round.value.maxDistanceYards > 0) {
+    distances.push(round.value.maxDistanceYards);
+  } else if (!isImperial && round.value.maxDistanceMetres > 0) {
+    distances.push(round.value.maxDistanceMetres);
+  }
+  
+  // Add other distances
+  if (isImperial && round.value.otherDistancesYards) {
+    distances.push(...round.value.otherDistancesYards);
+  } else if (!isImperial && round.value.otherDistancesMetres) {
+    distances.push(...round.value.otherDistancesMetres);
+  }
+  
+  if (distances.length === 0) return null;
+  
+  return {
+    min: Math.min(...distances),
+    max: Math.max(...distances),
+    unit: isImperial ? 'yards' : 'meters'
+  };
+});
+
+
+function viewDistanceStats() {
+  if (!distanceRange.value) return;
+  
+  // Convert distances to yards for the filtering system (which always works in yards internally)
+  let minDistanceYards = distanceRange.value.min;
+  let maxDistanceYards = distanceRange.value.max;
+  
+  if (distanceRange.value.unit === 'meters') {
+    minDistanceYards = toYards(meters(distanceRange.value.min));
+    maxDistanceYards = toYards(meters(distanceRange.value.max));
+  }
+  
+  const queryParams = new URLSearchParams({
+    minDistance: Math.round(minDistanceYards).toString(),
+    maxDistance: Math.round(maxDistanceYards).toString(),
+    unit: distanceRange.value.unit
+  });
+  
+  router.push(`/distance-performance?${queryParams.toString()}`);
+}
 </script>
 
 <template>
@@ -459,6 +514,15 @@ onMounted(async () => {
     <EndTotalChart
         :scores="scores"
         :game-type="roundName"
+    />
+
+    <!-- Distance Performance Analysis Card -->
+    <DistanceAnalysisCard 
+      v-if="distanceRange" 
+      :min-distance="distanceRange.min"
+      :max-distance="distanceRange.max"
+      :unit="distanceRange.unit"
+      @click="viewDistanceStats" 
     />
 
     <ScoreDistributionChart
@@ -548,6 +612,7 @@ onMounted(async () => {
 .nav-label {
   display: none;
 }
+
 
 @media (min-width: 768px) {
   .nav-label {

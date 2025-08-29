@@ -138,10 +138,6 @@ describe('Don\'t Be Blue Achievement System', () => {
 
   test('checkDontBeBlueAt50ydAchieved - achievement with end of all 5s in imperial round', () => {
     const context: AchievementContext = {
-      currentShoot: {
-        scores: [],
-        gameType: 'windsor 50'
-      },
       shootHistory: [{
         id: 'test-shoot',
         date: '2023-01-01',
@@ -355,33 +351,6 @@ describe('Don\'t Be Blue Achievement System', () => {
     const result = checkDontBeBlueAt50ydAchieved(context);
     
     expect(result.isUnlocked).toBe(false);
-  });
-
-  test('checkDontBeBlueAt50ydAchieved - achievement found in current shoot', () => {
-    const context: AchievementContext = {
-      currentShoot: {
-        id: 'current-shoot',
-        date: '2023-06-01',
-        gameType: 'windsor 50',
-        scores: [
-          // Don't Be Blue end at 50yd
-          5, 5, 5, 5, 5, 5,
-          // Rest of the round
-          9, 8, 7, 6, 5, 4,
-          9, 9, 9, 8, 8, 8,
-          8, 8, 7, 7, 6, 6,
-          9, 8, 7, 6, 5, 4,
-          8, 7, 6, 5, 4, 3
-        ]
-      },
-      shootHistory: []
-    };
-
-    const result = checkDontBeBlueAt50ydAchieved(context);
-    
-    expect(result.isUnlocked).toBe(true);
-    expect(result.achievingShootId).toBe('current-shoot');
-    expect(result.achievedDate).toBe('2023-06-01');
   });
 
   test('handles empty scores gracefully', () => {

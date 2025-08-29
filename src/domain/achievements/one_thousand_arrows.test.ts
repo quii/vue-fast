@@ -10,10 +10,10 @@ import type { AchievementContext } from './types.js';
 
 function createTestContext(): AchievementContext {
   return {
-    currentShoot: {
-      scores: [9, 8, 7, 9, 8, 7] // 6 arrows
-    },
     shootHistory: [
+      {
+        scores: [9, 8, 7, 9, 8, 7] // 6 arrows
+      },
       {
         scores: [8, 7, 6, 8, 7, 6] // 6 arrows
       },
@@ -44,7 +44,10 @@ describe('1k Arrows Achievement', () => {
         scores: [9, 8, 7, 9, 8, 7] // 6 arrows each
       });
     }
-    context.currentShoot.scores = Array(16).fill(9); // 16 more = 1006 total
+    // Add one more with 16 arrows to reach 1006 total
+    context.shootHistory.push({
+      scores: Array(16).fill(9)
+    });
     
     const progress = check1kArrowsAchieved(context);
     
@@ -56,8 +59,9 @@ describe('1k Arrows Achievement', () => {
   test('sets unlockedAt timestamp when achievement unlocked', () => {
     const context = createTestContext();
     // Set up exactly 1k arrows
-    context.currentShoot.scores = Array(1000).fill(9);
-    context.shootHistory = [];
+    context.shootHistory = [{
+      scores: Array(1000).fill(9)
+    }];
     
     const progress = check1kArrowsAchieved(context);
     

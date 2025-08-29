@@ -201,12 +201,6 @@ function createRedAlertCheckFunction(distance: Distance, isImperial: boolean) {
       return existingAchievement;
     }
 
-    // Check current shoot
-    const currentShootProgress = checkRedAlertInCurrentShoot(context, distance, isImperial);
-    if (currentShootProgress.isUnlocked) {
-      return currentShootProgress;
-    }
-
     // Check historical shoots
     const historicalProgress = checkRedAlertInHistory(context, distance, isImperial);
     if (historicalProgress.isUnlocked) {

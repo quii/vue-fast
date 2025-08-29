@@ -200,12 +200,6 @@ function createDontBeBlueCheckFunction(distance: Distance, isImperial: boolean) 
       return existingAchievement;
     }
 
-    // Check current shoot
-    const currentShootProgress = checkDontBeBlueInCurrentShoot(context, distance, isImperial);
-    if (currentShootProgress.isUnlocked) {
-      return currentShootProgress;
-    }
-
     // Check historical shoots
     const historicalProgress = checkDontBeBlueInHistory(context, distance, isImperial);
     if (historicalProgress.isUnlocked) {
@@ -245,39 +239,6 @@ function findExistingDontBeBlueAchievement(
   return null;
 }
 
-/**
- * Check current shoot for Don't Be Blue achievement
- */
-function checkDontBeBlueInCurrentShoot(
-  context: AchievementContext, 
-  distance: Distance, 
-  isImperial: boolean
-): AchievementProgress {
-  const { currentShoot } = context;
-  
-  // Check if current shoot has Don't Be Blue end at this distance
-  if (!currentShoot.gameType || !hasDontBeBlueEndAtDistance(currentShoot.scores, currentShoot.gameType, distance)) {
-    return {
-      isUnlocked: false
-    };
-  }
-
-  const { canAward, isImperial: roundIsImperial } = canAwardDontBeBlueAtDistance(currentShoot.gameType, distance);
-  
-  // Make sure the round type matches what we're looking for
-  if (!canAward || roundIsImperial !== isImperial) {
-    return {
-      isUnlocked: false
-    };
-  }
-
-  return {
-    isUnlocked: true,
-    unlockedAt: new Date().toISOString(),
-    achievingShootId: currentShoot.id,
-    achievedDate: currentShoot.date
-  };
-}
 
 /**
  * Check history for Don't Be Blue achievement

@@ -107,16 +107,19 @@ describe('Imperial Golden End Achievement System', () => {
 
   test('checkGoldenEndAt50ydAchieved - not achieved, shows best attempt', () => {
     const context: AchievementContext = {
-      currentShoot: {
-        scores: [
-          // Current shoot: getting close but not quite there
-          8, 8, 8, 8, 8, 8,  // End 1: 48
-          9, 9, 9, 9, 8, 8,  // End 2: 52 (close!)
-          7, 7, 7, 7, 7, 7,  // End 3: 42
-        ],
-        gameType: 'windsor 50'
-      },
-      shootHistory: []
+      shootHistory: [
+        {
+          id: 1,
+          date: '2024-01-01',
+          scores: [
+            // Historic shoot: getting close but not quite there
+            8, 8, 8, 8, 8, 8,  // End 1: 48
+            9, 9, 9, 9, 8, 8,  // End 2: 52 (close!)
+            7, 7, 7, 7, 7, 7,  // End 3: 42
+          ],
+          gameType: 'windsor 50'
+        }
+      ]
     };
 
     const result = checkGoldenEndAt50ydAchieved(context);
@@ -150,15 +153,18 @@ describe('Imperial Golden End Achievement System', () => {
 
   test('handles X scores and misses correctly', () => {
     const context: AchievementContext = {
-      currentShoot: {
-        scores: [
-          // End with mixed scores including X and miss
-          9, 9, 9, 9, 9, 'X',  // End 1: 9*5 + 10 = 55 (counts as golden end since X=10)
-          8, 8, 8, 'M', 8, 8,  // End 2: 8*5 + 0 = 40
-        ],
-        gameType: 'windsor 50'
-      },
-      shootHistory: []
+      shootHistory: [
+        {
+          id: 1,
+          date: '2024-01-01',
+          scores: [
+            // End with mixed scores including X and miss
+            9, 9, 9, 9, 9, 'X',  // End 1: 9*5 + 10 = 55 (counts as golden end since X=10)
+            8, 8, 8, 'M', 8, 8,  // End 2: 8*5 + 0 = 40
+          ],
+          gameType: 'windsor 50'
+        }
+      ]
     };
 
     const result = checkGoldenEndAt50ydAchieved(context);

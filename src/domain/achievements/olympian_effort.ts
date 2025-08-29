@@ -195,7 +195,7 @@ function findBestThreeDayTotal(history: HistoryItem[]): { total: number; dates: 
  * Check if current shoot contributes to a new 3-day total
  */
 function checkCurrentShootContribution(context: AchievementContext): { total: number; dates: Date[] } {
-  if (!context.currentShoot.scores?.length) {
+  if (!context.currentShoot || !context.currentShoot.scores?.length) {
     return { total: 0, dates: [] };
   }
   
@@ -230,7 +230,7 @@ function getBestThreeDayTotal(context: AchievementContext): { total: number; dat
   const historyBest = findBestThreeDayTotal(context.shootHistory);
   
   // If current shoot has arrows and might add to today's total, check that too
-  if (context.currentShoot.scores?.length) {
+  if (context.currentShoot && context.currentShoot.scores?.length) {
     const currentBest = checkCurrentShootContribution(context);
     // Return the higher total
     return currentBest.total > historyBest.total ? currentBest : historyBest;

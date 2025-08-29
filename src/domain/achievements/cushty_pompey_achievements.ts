@@ -5,8 +5,8 @@
  * Based on the UK Portsmouth badge scheme
  */
 
-import type { AchievementContext, AchievementProgress, Achievement } from './types.js';
-import { CUSHTY_POMPEY_GROUP } from './groups.js';
+import type { Achievement, AchievementContext, AchievementProgress } from './types.js'
+import { CUSHTY_POMPEY_GROUP } from './groups.js'
 
 // Portsmouth score thresholds based on UK badge scheme
 const PORTSMOUTH_THRESHOLDS = [300, 325, 350, 375, 400, 425, 450, 475, 500, 525, 550, 575, 580, 585, 590, 595, 600] as const;
@@ -47,13 +47,7 @@ export const CUSHTY_POMPEY_ACHIEVEMENTS: Achievement[] = PORTSMOUTH_THRESHOLDS.m
  */
 function createPortsmouthCheckFunction(targetScore: PortsmouthThreshold) {
   return function checkPortsmouthScoreAchieved(context: AchievementContext): AchievementProgress {
-    // Check current shoot first - it takes priority if it has the target score
-    const currentShootProgress = checkPortsmouthInCurrentShoot(context, targetScore);
-    if (currentShootProgress.isUnlocked) {
-      return currentShootProgress;
-    }
-
-    // Then check if we've already achieved this in history
+    // Check if we've already achieved this in history
     const existingAchievement = findExistingPortsmouthAchievement(context, targetScore);
     if (existingAchievement) {
       return existingAchievement;
@@ -70,42 +64,6 @@ function createPortsmouthCheckFunction(targetScore: PortsmouthThreshold) {
   };
 }
 
-/**
- * Check if current shoot achieves the Portsmouth score threshold
- */
-function checkPortsmouthInCurrentShoot(context: AchievementContext, targetScore: PortsmouthThreshold): AchievementProgress {
-  const { currentShoot } = context;
-  
-  // Check if current shoot is a Portsmouth round
-  if (!currentShoot.gameType || currentShoot.gameType.toLowerCase() !== 'portsmouth') {
-    return {
-      isUnlocked: false
-    };
-  }
-
-  // Calculate total score
-  const totalScore = currentShoot.scores.reduce((sum, score) => {
-    const numericScore = typeof score === 'number' ? score : 0;
-    return sum + numericScore;
-  }, 0);
-
-  if (totalScore >= targetScore) {
-    return {
-      currentScore: totalScore,
-      targetScore: targetScore,
-      isUnlocked: true,
-      unlockedAt: new Date().toISOString(),
-      achievingShootId: currentShoot.id,
-      achievedDate: currentShoot.date
-    };
-  }
-
-  return {
-    currentScore: totalScore,
-    targetScore: targetScore,
-    isUnlocked: false
-  };
-}
 
 /**
  * Check for existing Portsmouth achievement in history
@@ -114,20 +72,17 @@ function findExistingPortsmouthAchievement(context: AchievementContext, targetSc
   for (const historyItem of context.shootHistory) {
     if (historyItem.gameType && historyItem.gameType.toLowerCase() === 'portsmouth') {
       // Calculate total score
-      const totalScore = historyItem.scores.reduce((sum, score) => {
-        const numericScore = typeof score === 'number' ? score : 0;
-        return sum + numericScore;
-      }, 0);
 
-      if (totalScore >= targetScore) {
+
+      if (historyItem.score >= targetScore) {
         return {
-          currentScore: totalScore,
+          currentScore: historyItem.score,
           targetScore: targetScore,
           isUnlocked: true,
           unlockedAt: historyItem.date,
           achievingShootId: historyItem.id,
           achievedDate: historyItem.date
-        };
+        }
       }
     }
   }
@@ -135,28 +90,16 @@ function findExistingPortsmouthAchievement(context: AchievementContext, targetSc
 }
 
 /**
- * Get the best Portsmouth score from current shoot and history for progress tracking
+ * Get the best Portsmouth score from history for progress tracking
  */
 function getBestPortsmouthScore(context: AchievementContext): number {
   let bestScore = 0;
 
-  // Check current shoot if it's Portsmouth
-  if (context.currentShoot.gameType && context.currentShoot.gameType.toLowerCase() === 'portsmouth') {
-    const currentScore = context.currentShoot.scores.reduce((sum, score) => {
-      const numericScore = typeof score === 'number' ? score : 0;
-      return sum + numericScore;
-    }, 0);
-    bestScore = Math.max(bestScore, currentScore);
-  }
-
   // Check history
   for (const historyItem of context.shootHistory) {
     if (historyItem.gameType && historyItem.gameType.toLowerCase() === 'portsmouth') {
-      const totalScore = historyItem.scores.reduce((sum, score) => {
-        const numericScore = typeof score === 'number' ? score : 0;
-        return sum + numericScore;
-      }, 0);
-      bestScore = Math.max(bestScore, totalScore);
+
+      bestScore = Math.max(bestScore, historyItem.score);
     }
   }
 
