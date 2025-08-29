@@ -36,6 +36,7 @@ import AchievementCelebrationModal from '@/components/modals/AchievementCelebrat
 import AchievementBadge from '@/components/AchievementBadge.vue';
 import BaseButton from '@/components/ui/BaseButton.vue';
 import DistanceAnalysisCard from '@/components/DistanceAnalysisCard.vue';
+import GraphIcon from '@/components/icons/GraphIcon.vue';
 
 const preferences = usePreferencesStore();
 const arrowHistoryStore = useArrowHistoryStore();
@@ -108,6 +109,16 @@ const averageScoresPerEnd = computed(() =>
 // Since this is a completed shoot, arrows remaining is 0
 const arrowsRemaining = 0
 const maxPossibleScore = computed(() => totals.value?.totalScore || 0);
+
+// Calculate overall average score per arrow for the whole shoot
+const overallAveragePerArrow = computed(() => {
+  if (!scores.value || scores.value.length === 0) return 0;
+  
+  const totalScore = totals.value?.totalScore || 0;
+  const totalArrows = scores.value.length;
+  
+  return (totalScore / totalArrows).toFixed(1);
+});
 
 // Calculate historical comparison
 const historicalComparison = computed(() => {
@@ -467,6 +478,18 @@ onMounted(async () => {
         :game-type="roundName"
     />
 
+    <!-- Overall Average Summary -->
+    <BaseCard class="average-summary">
+      <div class="summary-content">
+        <GraphIcon class="summary-icon" />
+        <div class="summary-details">
+          <h3 class="summary-title">Overall Average</h3>
+          <p class="summary-value">{{ overallAveragePerArrow }} per arrow</p>
+          <p class="summary-subtitle">{{ scores.length }} arrows total</p>
+        </div>
+      </div>
+    </BaseCard>
+
     <!-- Distance Performance Analysis Card -->
     <DistanceAnalysisCard :round-name="roundName" />
 
@@ -578,5 +601,51 @@ onMounted(async () => {
 
 .historical-comparison {
   margin-top: 1rem;
+}
+
+.average-summary {
+  margin-top: 1rem;
+}
+
+.summary-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+}
+
+.summary-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--color-highlight, #4CAF50);
+  flex-shrink: 0;
+}
+
+.summary-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.summary-title {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+.summary-value {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-highlight, #4CAF50);
+  line-height: 1.2;
+}
+
+.summary-subtitle {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  line-height: 1.2;
 }
 </style>
