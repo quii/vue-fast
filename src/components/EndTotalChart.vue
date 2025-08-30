@@ -37,6 +37,10 @@ const props = defineProps({
   gameType: {
     type: String,
     required: true
+  },
+  historicalShoots: {
+    type: Array,
+    default: () => []
   }
 })
 
@@ -132,7 +136,7 @@ const hasData = computed(() => {
   return endTotals.value.length > 1 // Need at least 2 ends to show a meaningful graph
 })
 
-// Chart data
+// Chart data - BACK TO ORIGINAL WORKING VERSION
 const chartData = computed(() => {
   if (!hasData.value) return { 
     labels: [], 
@@ -144,22 +148,79 @@ const chartData = computed(() => {
   
   const completeEnds = endTotals.value.filter(end => end.isComplete)
   
+  const datasets = [{
+    label: 'Current Shoot',
+    data: completeEnds.map(end => end.total || 0),
+    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+    borderColor: 'rgba(75, 192, 192, 1)',
+    borderWidth: 4,
+    fill: false,
+    tension: 0.4,
+    pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+    pointBorderColor: '#fff',
+    pointBorderWidth: 2,
+    pointRadius: 6,
+    pointHoverRadius: 8
+  }]
+  
+  // Add multiple historical shoots
+  if (props.historicalShoots && props.historicalShoots.length > 0 && completeEnds.length > 0) {
+    const colors = [
+      'rgba(156, 163, 175, 0.8)', // Gray
+      'rgba(107, 114, 128, 0.8)', // Darker gray
+      'rgba(75, 85, 99, 0.8)',    // Even darker gray
+    ]
+    
+    props.historicalShoots.forEach((shoot, index) => {
+      if (shoot && shoot.scores && Array.isArray(shoot.scores)) {
+        try {
+          // Calculate end totals for this historical shoot
+          const scoreValues = convertToValues(shoot.scores, props.gameType)
+          const ends = splitIntoChunks(scoreValues, endSize.value)
+          
+          // Create data array with EXACTLY the same length as current shoot
+          const historicalData = []
+          for (let i = 0; i < completeEnds.length; i++) {
+            if (ends[i] && ends[i].length === endSize.value) {
+              const total = calculateTotal(ends[i])
+              historicalData.push(typeof total === 'number' && !isNaN(total) ? total : 0)
+            } else {
+              historicalData.push(0) // Fill missing data with 0
+            }
+          }
+          
+          // Only add if array length matches exactly
+          if (historicalData.length === completeEnds.length) {
+            const color = colors[index % colors.length]
+            const date = new Date(shoot.date)
+            const formattedDate = `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getFullYear().toString().slice(-2)}`
+            
+            datasets.push({
+              label: formattedDate,
+              data: historicalData,
+              backgroundColor: color.replace('0.8', '0.1'),
+              borderColor: color,
+              borderWidth: 2,
+              fill: false,
+              tension: 0.4,
+              pointBackgroundColor: color,
+              pointBorderColor: '#fff',
+              pointBorderWidth: 1,
+              pointRadius: 3,
+              pointHoverRadius: 5
+            })
+          }
+        } catch (error) {
+          console.warn('Error processing historical shoot data:', error)
+          // Don't add the dataset if there's an error
+        }
+      }
+    })
+  }
+  
   return {
     labels: completeEnds.map(end => `End ${end.endNumber}`),
-    datasets: [{
-      label: 'End Total',
-      data: completeEnds.map(end => end.total || 0),
-      backgroundColor: 'rgba(75, 192, 192, 0.2)',
-      borderColor: 'rgba(75, 192, 192, 1)',
-      borderWidth: 2,
-      fill: false,
-      tension: 0.4,
-      pointBackgroundColor: 'rgba(75, 192, 192, 1)',
-      pointBorderColor: '#fff',
-      pointBorderWidth: 2,
-      pointRadius: 4,
-      pointHoverRadius: 6
-    }]
+    datasets
   }
 })
 
@@ -167,7 +228,34 @@ const chartData = computed(() => {
 const chartOptions = computed(() => {
   if (!hasData.value) return {}
   
+  // Collect ALL totals from both current and historical data for Y-axis scaling
   const allTotals = endTotals.value.filter(end => end.isComplete).map(end => end.total)
+  
+  // Add historical data totals to the mix for proper Y-axis scaling
+  if (props.historicalShoots && props.historicalShoots.length > 0) {
+    const completeEnds = endTotals.value.filter(end => end.isComplete)
+    
+    props.historicalShoots.forEach(shoot => {
+      if (shoot && shoot.scores && Array.isArray(shoot.scores)) {
+        try {
+          const scoreValues = convertToValues(shoot.scores, props.gameType)
+          const ends = splitIntoChunks(scoreValues, endSize.value)
+          
+          ends.forEach((end, index) => {
+            if (end.length === endSize.value && index < completeEnds.length) {
+              const total = calculateTotal(end)
+              if (typeof total === 'number' && !isNaN(total)) {
+                allTotals.push(total)
+              }
+            }
+          })
+        } catch (error) {
+          // Ignore errors for Y-axis calculation
+        }
+      }
+    })
+  }
+  
   const minTotal = Math.min(...allTotals)
   const maxTotal = Math.max(...allTotals)
   
@@ -192,7 +280,16 @@ const chartOptions = computed(() => {
     },
     plugins: {
       legend: {
-        display: false // Hide legend since we only have one dataset
+        display: props.historicalShoots && props.historicalShoots.length > 0,
+        position: 'bottom',
+        labels: {
+          usePointStyle: true,
+          padding: 15,
+          color: textColor,
+          font: {
+            size: 12
+          }
+        }
       },
       tooltip: {
         backgroundColor: 'rgba(0, 0, 0, 0.8)',
@@ -237,7 +334,7 @@ const chartOptions = computed(() => {
           font: {
             size: 12
           },
-          stepSize: 1
+          stepSize: Math.max(1, Math.ceil((yMax - yMin) / 10)) // Adaptive step size for better spacing
         },
         title: {
           display: true,
@@ -297,101 +394,8 @@ const updateChart = async () => {
       plugins: [
         // Register Legend and Tooltip plugins per-chart to avoid global interference
         Legend,
-        Tooltip,
-        {
-        id: 'distanceAnnotations',
-        afterDraw: (chart) => {
-          if (!chart || !chart.ctx || !chart.chartArea) return
-          
-          const ctx = chart.ctx
-          const chartArea = chart.chartArea
-          
-          // Get distance changes from the current computed values
-          const currentDistanceChanges = []
-          const currentCompleteEnds = endTotals.value.filter(end => end.isComplete)
-          
-          // Add first distance at start of chart
-          if (currentCompleteEnds.length > 0 && currentCompleteEnds[0].distance) {
-            currentDistanceChanges.push({
-              endIndex: 0,
-              distance: currentCompleteEnds[0].distance,
-              distanceUnit: currentCompleteEnds[0].distanceUnit,
-              color: 'rgba(75, 192, 192, 0.8)',
-              isFirstDistance: true
-            })
-          }
-          
-          // Add distance changes
-          currentCompleteEnds.forEach((end, index) => {
-            if (end.isDistanceChange) {
-              currentDistanceChanges.push({
-                endIndex: index,
-                distance: end.distance,
-                distanceUnit: end.distanceUnit,
-                color: 'rgba(255, 99, 132, 0.8)',
-                isFirstDistance: false
-              })
-            }
-          })
-          
-          // Draw distance change lines and labels
-          currentDistanceChanges.forEach(change => {
-            const x = chart.scales.x.getPixelForValue(change.endIndex)
-            
-            // Set up line style
-            ctx.save()
-            ctx.strokeStyle = change.color
-            ctx.lineWidth = 2
-            ctx.setLineDash(change.isFirstDistance ? [3, 3] : [5, 5])
-            
-            // Draw vertical line
-            ctx.beginPath()
-            ctx.moveTo(x, chartArea.top)
-            ctx.lineTo(x, chartArea.bottom)
-            ctx.stroke()
-            
-            // Draw label in a rectangle halfway up the line
-            const roundedDistance = Math.round(change.distance || 0)
-            const labelText = `${roundedDistance}${change.distanceUnit}`
-            ctx.font = 'bold 12px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
-            ctx.textAlign = 'center'
-            ctx.textBaseline = 'middle'
-            
-            // Calculate text dimensions for rectangle size
-            const textMetrics = ctx.measureText(labelText)
-            const textWidth = textMetrics.width
-            const padding = 8
-            const rectWidth = textWidth + (padding * 2)
-            const rectHeight = 20
-            
-            // Position the label halfway up the line
-            const lineHeight = chartArea.bottom - chartArea.top
-            const labelY = chartArea.top + (lineHeight / 2)
-            const labelX = x - (rectWidth / 2)
-            const labelBoxY = labelY - (rectHeight / 2)
-            
-            // Draw shadow
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.2)'
-            ctx.fillRect(labelX + 1, labelBoxY + 1, rectWidth, rectHeight)
-            
-            // Draw background rectangle (same color for all labels)
-            ctx.fillStyle = 'rgba(255, 99, 132, 0.95)'
-            ctx.fillRect(labelX, labelBoxY, rectWidth, rectHeight)
-            
-            // Draw border
-            ctx.strokeStyle = 'white'
-            ctx.lineWidth = 2
-            ctx.setLineDash([])
-            ctx.strokeRect(labelX, labelBoxY, rectWidth, rectHeight)
-            
-            // Draw text
-            ctx.fillStyle = 'white'
-            ctx.fillText(labelText, x, labelY)
-            
-            ctx.restore()
-          })
-        }
-      }]
+        Tooltip
+      ]
     })
   } catch (error) {
     console.error('End Total chart creation failed:', error)
@@ -458,7 +462,7 @@ onUnmounted(() => {
 
 
 .chart-wrapper {
-  height: 250px;
+  height: 400px; /* Increased from 250px to accommodate legend with multiple historical shoots */
   width: 100%;
   position: relative;
 }
@@ -476,7 +480,7 @@ onUnmounted(() => {
   }
   
   .chart-wrapper {
-    height: 200px;
+    height: 350px; /* Increased from 200px for mobile */
   }
 }
 </style>

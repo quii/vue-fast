@@ -132,7 +132,7 @@ describe('EndTotalChart Configuration Tests', () => {
 
       const dataset = chartData.datasets[0]
       expect(dataset).toEqual(expect.objectContaining({
-        label: 'End Total',
+        label: 'Current Shoot',
         data: expect.any(Array),
         backgroundColor: expect.any(String),
         borderColor: expect.any(String),

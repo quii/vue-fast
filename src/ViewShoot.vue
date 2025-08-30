@@ -120,9 +120,9 @@ const overallAveragePerArrow = computed(() => {
   return (totalScore / totalArrows).toFixed(1);
 });
 
-// Calculate historical comparison
-const historicalComparison = computed(() => {
-  if (!shoot.value) return null;
+// Get recent shoots for historical comparison and chart data
+const recentShoots = computed(() => {
+  if (!shoot.value) return [];
   
   // Get filtered history for the same round type
   const filteredHistory = history.getFilteredHistory({
@@ -130,11 +130,16 @@ const historicalComparison = computed(() => {
   }, userStore.user);
   
   // Filter out the current shoot and take up to 5 recent shoots
-  const recentShoots = filteredHistory
+  return filteredHistory
     .filter(s => s.id !== shoot.value.id)
     .slice(0, 5);
+});
+
+// Calculate historical comparison
+const historicalComparison = computed(() => {
+  if (!shoot.value || recentShoots.value.length === 0) return null;
   
-  return compareShootWithHistory(shoot.value, recentShoots);
+  return compareShootWithHistory(shoot.value, recentShoots.value);
 });
 
 // Initialize classification calculator
@@ -476,6 +481,7 @@ onMounted(async () => {
     <EndTotalChart
         :scores="scores"
         :game-type="roundName"
+        :historical-shoots="recentShoots"
     />
 
     <!-- Overall Average Summary -->
