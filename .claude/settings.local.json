@@ -47,7 +47,9 @@
       "Bash(node:*)",
       "WebSearch",
       "Bash(git log:*)",
-      "Bash(git stash push:*)"
+      "Bash(git stash push:*)",
+      "Bash(git stash pop:*)",
+      "Bash(gh issue create:*)"
     ],
     "deny": [
       "Bash(git push*)",

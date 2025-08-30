@@ -21,7 +21,7 @@ import { useUserStore } from "@/stores/user";
 import { useNotesStore } from "@/stores/user_notes";
 import { usePreferencesStore } from '@/stores/preferences'
 import { useShootStore } from '@/stores/shoot'
-import { computed, ref, onMounted, onUnmounted, watch, nextTick } from 'vue'
+import { computed, ref, onMounted, onUnmounted, watch, nextTick, inject } from 'vue'
 import { useToast } from "vue-toastification";
 import {
   createClassificationCalculator, getHighestPossibleClassification
@@ -36,16 +36,17 @@ import DistanceAnalysisCard from '@/components/DistanceAnalysisCard.vue';
 const synth = window.speechSynthesis;
 const router = useRouter();
 
-const scoresStore = useScoresStore();
-const gameTypeStore = useGameTypeStore();
-const arrowHistoryStore = useArrowHistoryStore();
-const userStore = useUserStore();
-const notesStore = useNotesStore();
-const history = useHistoryStore();
-const preferencesStore = usePreferencesStore()
-const shootStore = useShootStore()
-const shootTimingStore = useShootTimingStore()
-const achievementStore = useAchievementStore()
+// Inject dependencies with fallbacks for production
+const scoresStore = inject('scoresStore') || useScoresStore();
+const gameTypeStore = inject('gameTypeStore') || useGameTypeStore();
+const arrowHistoryStore = inject('arrowHistoryStore') || useArrowHistoryStore();
+const userStore = inject('userStore') || useUserStore();
+const notesStore = inject('notesStore') || useNotesStore();
+const history = inject('historyStore') || useHistoryStore();
+const preferencesStore = inject('preferencesStore') || usePreferencesStore();
+const shootStore = inject('shootStore') || useShootStore();
+const shootTimingStore = inject('shootTimingStore') || useShootTimingStore();
+const achievementStore = inject('achievementStore') || useAchievementStore();
 
 const route = useRoute();
 const showTutorial = ref(false)
