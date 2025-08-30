@@ -22,7 +22,7 @@
       </div>
       
       <div v-else class="distances-list">
-        <BaseCard v-for="distance in distanceStats.distances" :key="`${distance.distance}-${distance.unit}`" class="distance-card">
+        <BaseCard v-for="(distance, index) in distanceStats.distances" :key="`distance-${distance.distance || 'fixed'}-${distance.unit}-${index}`" class="distance-card">
           <h3 class="distance-title">
             {{ formatDistanceName(distance.distance, distance.unit) }}
           </h3>
@@ -54,11 +54,10 @@ import StatisticsTable from '@/components/StatisticsTable.vue'
 import DistanceSliders from '@/components/DistanceSliders.vue'
 import MetricIcon from '@/components/icons/MetricIcon.vue'
 import ImperialIcon from '@/components/icons/ImperialIcon.vue'
-import { Chart, registerables } from 'chart.js'
+import { Chart } from 'chart.js'
 import { yards, meters, toYards, toMeters } from '@/domain/distance/distance'
 
-// Register Chart.js components
-Chart.register(...registerables)
+// Chart.js components are registered globally in createApp.ts
 
 const route = useRoute()
 const historyStore = useHistoryStore()
@@ -175,9 +174,20 @@ const distanceStats = computed(() => {
     return distanceInYards >= minDistance.value && distanceInYards <= maxDistance.value
   })
   
+  // Deduplicate distances to prevent Vue key warnings during reactive updates
+  const seen = new Set()
+  const deduplicatedDistances = filteredDistances.filter(distance => {
+    const key = `${distance.distance}-${distance.unit}`
+    if (seen.has(key)) {
+      return false
+    }
+    seen.add(key)
+    return true
+  })
+  
   return {
     ...stats,
-    distances: filteredDistances
+    distances: deduplicatedDistances
   }
 })
 
@@ -400,6 +410,15 @@ onBeforeUnmount(() => {
 .chart-container {
   height: 350px;
   position: relative;
+  /* Isolate chart touch handling from page scrolling */
+  touch-action: manipulation;
+  /* Improve performance during chart interactions */
+  will-change: contents;
+}
+
+.chart-container canvas {
+  /* Ensure canvas doesn't interfere with vertical scrolling */
+  touch-action: manipulation;
 }
 
 /* Mobile responsive */
@@ -410,6 +429,8 @@ onBeforeUnmount(() => {
   
   .chart-container {
     height: 280px;
+    /* Extra scrolling reliability on mobile */
+    touch-action: manipulation;
   }
 }
 </style>
