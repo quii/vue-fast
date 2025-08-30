@@ -22,24 +22,6 @@ th {
 html {
   width: 100vw;
   touch-action: manipulation;
-  /* Ensure reliable scrolling on mobile */
-  height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  /* iOS-specific fixes */
-  -webkit-text-size-adjust: 100%;
-}
-
-body {
-  /* Enhanced mobile scrolling support */
-  height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  /* iOS scroll fix - use 'none' instead of 'contain' to prevent freezes */
-  overscroll-behavior: none;
-  /* Remove -webkit-overflow-scrolling: touch as it causes iOS freezes */
-  /* iOS-specific scroll stability */
-  -webkit-transform: translate3d(0, 0, 0);
 }
 
 nav {

@@ -83,8 +83,8 @@
 
       <div class="history-cards">
         <HistoryCard
-          v-for="(item, index) in filteredHistory"
-          :key="`history-${item.id}-${index}`"
+          v-for="item in filteredHistory"
+          :key="item.id"
           :item="item"
           @click="view(item.id)"
           @delete="promptDelete"
@@ -563,23 +563,13 @@ const deleteItemName = computed(() => {
 
 
 const filteredHistory = computed(() => {
-  const history = store.getFilteredHistory({
+  return store.getFilteredHistory({
     pbOnly: pbFilterActive.value,
     round: roundFilter.value,
     dateRange: dateFilter.value,
     classification: classificationFilter.value,
     shootStatus: statusFilter.value
   }, user.user)
-  
-  // Deduplicate by ID to prevent Vue key warnings during reactive updates
-  const seen = new Set()
-  return history.filter(item => {
-    if (seen.has(item.id)) {
-      return false
-    }
-    seen.add(item.id)
-    return true
-  })
 })
 
 // Get bow types used by the archer

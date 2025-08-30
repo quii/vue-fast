@@ -49,18 +49,10 @@ onMounted(() => {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  /* Use padding instead of margin to avoid layout shifts */
-  padding-top: 60px;
-  padding-bottom: env(safe-area-inset-bottom, 80px); /* Account for navigation bar */
-  min-height: 100vh;
-  box-sizing: border-box;
-  /* iOS scroll stability - force hardware acceleration */
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
+  margin-top: 60px;
 }
 
 #app.viewer-mode {
-  padding-top: 0;
-  padding-bottom: 0;
+  margin-top: 0;
 }
 </style>
